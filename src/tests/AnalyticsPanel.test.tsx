@@ -109,10 +109,10 @@ describe('AnalyticsPanel', () => {
     render(<AnalyticsPanel data={data} />)
     const row = screen.getAllByRole('row').find(r => within(r).queryByText('Rutherford'))!
     const cells = [...row.querySelectorAll('td')].map(c => c.textContent)
-    expect(cells[2]).toBe('80')   // 60 + 20 views
-    expect(cells[3]).toBe('40')   // 30 + 10 applies
-    expect(cells[4]).toBe('50%')
-    expect(cells[7]).toBe('8')    // its own July signups; item 99 holds the other 4
+    expect(cells[1]).toBe('80')   // 60 + 20 views
+    expect(cells[2]).toBe('40')   // 30 + 10 applies
+    expect(cells[3]).toBe('50%')
+    expect(cells[6]).toBe('8')    // its own July signups; item 99 holds the other 4
   })
 
   it('narrows every section to the selected month', () => {
@@ -121,8 +121,8 @@ describe('AnalyticsPanel', () => {
 
     const row = screen.getAllByRole('row').find(r => within(r).queryByText('Rutherford'))!
     const cells = [...row.querySelectorAll('td')].map(c => c.textContent)
-    expect(cells[2]).toBe('20')
-    expect(cells[3]).toBe('10')
+    expect(cells[1]).toBe('20')
+    expect(cells[2]).toBe('10')
 
     // July's program and July's search drop out of view
     expect(screen.queryByText('TRIUMF Fellowship')).toBeNull()
@@ -135,9 +135,9 @@ describe('AnalyticsPanel', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Sep 2026' }))
     const row = screen.getAllByRole('row').find(r => within(r).queryByText('Quiet Bursary'))!
     const cells = [...row.querySelectorAll('td')].map(c => c.textContent)
-    expect(cells[2]).toBe('0')   // no views
-    expect(cells[4]).toBe('·')   // no rate to show
-    expect(cells[7]).toBe('4')   // but four people are waiting on it
+    expect(cells[1]).toBe('0')   // no views
+    expect(cells[3]).toBe('·')   // no rate to show
+    expect(cells[6]).toBe('4')   // but four people are waiting on it
   })
 
   // The application-step ticker was deleted with /app; its tile could only
@@ -191,7 +191,7 @@ describe('AnalyticsPanel', () => {
     render(<AnalyticsPanel data={{ ...data, monthly: [], perItem: [], monthlySubs: [], perItemSubs: [], daily: [], emptySearches: [], search: [] }} />)
     expect(screen.getByText(/No events yet/)).toBeTruthy()
   })
-  it('shows How it works as a funnel: where it opened, how far people got, how it ended', () => {
+  it('shows How it works as a funnel: where it opened and how far people got', () => {
     const withTour = { ...data,
       monthly: [...data.monthly,
         { month: '2026-09', event: 'tour_open', n: 10 },
@@ -208,12 +208,13 @@ describe('AnalyticsPanel', () => {
     const cells = (label: string) =>
       [...screen.getByText(label).closest('tr')!.querySelectorAll('td')].map(c => c.textContent)
     expect(cells('Opened on its own (before Sep 27 2026)')).toEqual(['Opened on its own (before Sep 27 2026)', '6', '60%'])
-    expect(cells('Explore menu')).toEqual(['Explore menu', '0', '0%'])
+    expect(cells('Phone menu')).toEqual(['Phone menu', '0', '0%'])
+    expect(screen.queryByText(/Explore menu/)).toBeNull()
     expect(cells('Step 1: Find')).toEqual(['Step 1: Find', '10', '100%'])
     expect(cells('Step 2: Shortlist')).toEqual(['Step 2: Shortlist', '8', '80%'])
     expect(cells('Step 5: Guides')).toEqual(['Step 5: Guides', '4', '40%'])
     expect(cells('Went on to the quiz')).toEqual(['Went on to the quiz', '3', '30%'])
-    expect(cells('Closed on step 1: Find')).toEqual(['Closed on step 1: Find', '2', '20%'])
+    expect(screen.queryByText(/Closed on step/)).toBeNull()
     // The pre-split 'button' row only appears when there is something in it
     expect(screen.queryByText(/before Sep 26/)).toBeNull()
   })
@@ -240,7 +241,6 @@ describe('AnalyticsPanel', () => {
     expect(cells('Step 1: Find')).toEqual(['Step 1: Find', '29', '100%'])
     expect(cells('Step 2: Shortlist')).toEqual(['Step 2: Shortlist', '5', '17%'])
     expect(cells('Went on to the quiz')).toEqual(['Went on to the quiz', '5', '17%'])
-    expect(cells('Closed on step 1: Find')).toEqual(['Closed on step 1: Find', '5', '17%'])
   })
 
   it('splits saves by the button used, with the rate per 100 views', () => {

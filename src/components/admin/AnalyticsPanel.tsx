@@ -38,11 +38,11 @@ const SAVE_PLACES: [string, string][] = [
 ]
 
 const TOUR_FROM_LABELS: [string, string][] = [
-  ['strip', 'First-visit strip'],
-  ['auto', 'Opened on its own (before Sep 27 2026)'],
   ['bar', 'Bar button'],
-  ['menu', 'Explore menu'],
   ['sheet', 'Phone menu'],
+  ['strip', 'First-visit strip (to Sep 29 2026)'],
+  ['auto', 'Opened on its own (before Sep 27 2026)'],
+  ['menu', 'Explore menu (to Sep 29 2026)'],
   ['button', 'A button (before Sep 26 2026)'],
   ['none', 'Not recorded'],
 ]
@@ -56,13 +56,8 @@ const EVENT_LABELS: Record<string, string> = {
   detail_view: 'Detail views',
   apply_click: 'Apply clicks',
   save: 'Saves',
-  quiz_start: 'Quiz starts',
   quiz_complete: 'Quiz completions',
-  search_empty: 'Empty searches',
   alert_subscribe: 'Alert signups',
-  tour_open: 'How it works opened',
-  tour_finish: 'How it works read to the end',
-  tour_cta: 'How it works to the quiz',
   app_status: 'Saved awards marked (working, submitted, won)',
 }
 
@@ -97,9 +92,6 @@ const EVENT_COVERED_FROM: Record<string, string> = {
   search_empty: '2026-07',
   save: '2026-08',
   alert_subscribe: '2026-08',
-  tour_open: '2026-09',
-  tour_finish: '2026-09',
-  tour_cta: '2026-09',
   app_status: '2026-10',
 }
 
@@ -154,7 +146,6 @@ type SortKey = keyof Pick<ItemRow, 'title' | 'itemType' | 'views' | 'applies' | 
 
 const COLUMNS: { key: SortKey; label: string; numeric: boolean }[] = [
   { key: 'title',    label: 'Item',       numeric: false },
-  { key: 'itemType', label: 'Type',       numeric: false },
   { key: 'views',    label: 'Views',      numeric: true },
   { key: 'applies',  label: 'Applies',    numeric: true },
   { key: 'rate',     label: 'Apply rate', numeric: true },
@@ -384,13 +375,12 @@ export default function AnalyticsPanel({ data }: Props) {
     const inScope = (m: string) => month === ALL || m === month
     const from: Record<string, number> = {}
     const step: Record<string, number> = {}
-    const closed: Record<string, number> = {}
     let untracked = 0
     for (const t of data.tourMeta ?? []) {
       if (!inScope(t.month)) continue
       if (t.event === 'tour_open' && t.tracked === false) untracked += t.n
       const key = t.meta ?? 'none'
-      const into = t.event === 'tour_open' ? from : t.event === 'tour_step' ? step : t.event === 'tour_close' ? closed : null
+      const into = t.event === 'tour_open' ? from : t.event === 'tour_step' ? step : null
       if (into) into[key] = (into[key] ?? 0) + t.n
     }
     let opens = 0, cta = 0
@@ -406,16 +396,12 @@ export default function AnalyticsPanel({ data }: Props) {
       opens,
       untracked,
       from: TOUR_FROM_LABELS.map(([k, label]) => ({ k, label, n: from[k] ?? 0 }))
-        .filter(r => r.n > 0 || ['strip', 'bar', 'menu', 'sheet'].includes(r.k)),
+        .filter(r => r.n > 0 || ['bar', 'sheet'].includes(r.k)),
       steps: TOUR_STEP_NAMES.map((name, i) => {
         const n = i === 0 ? base : step[String(i + 1)] ?? 0
         return { label: `Step ${i + 1}: ${name}`, n, pct: funnelPct(n) }
       }),
       cta: { n: cta, pct: funnelPct(cta) },
-      closed: TOUR_STEP_NAMES.map((name, i) => {
-        const n = closed[String(i + 1)] ?? 0
-        return { label: `Closed on step ${i + 1}: ${name}`, n, pct: funnelPct(n) }
-      }),
       pct,
     }
   }, [data.tourMeta, data.monthly, month])
@@ -438,7 +424,7 @@ export default function AnalyticsPanel({ data }: Props) {
     else { setSortKey(key); setSortDesc(numeric) } // numeric cols start desc, text cols asc
   }
 
-  const visible = showAll ? rows : rows.slice(0, 25)
+  const visible = showAll ? rows : rows.slice(0, 15)
   const maxDaily = Math.max(1, ...dailyRows.map(d => d.n))
   const periodLabel = month === ALL ? 'all time' : monthLabel(month)
 
@@ -448,9 +434,7 @@ export default function AnalyticsPanel({ data }: Props) {
         <div>
           <h1 className="text-xl font-semibold">Analytics</h1>
           <p className="text-sm text-white/40">
-            Anonymous event counts by Alberta calendar month. Counted once per item per tab
-            session, so one student shortlisting 26 awards is 26 saves, not 26 students, and
-            the same student on wifi then cellular counts twice. No cookies, no IPs, no user ids.
+            Anonymous counts by Alberta month. One count per item per tab session; no cookies, IPs or user ids.
           </p>
         </div>
       </div>
@@ -464,7 +448,7 @@ export default function AnalyticsPanel({ data }: Props) {
       </div>
 
       {/* Totals for the selected period */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-8">
         {Object.entries(EVENT_LABELS).map(([event, label]) => {
           const from = EVENT_COVERED_FROM[event]
           // A month that predates the counter reads "not counted", never 0.
@@ -498,7 +482,7 @@ export default function AnalyticsPanel({ data }: Props) {
         {/* Search Console, not the events table. These four are the only
             measured numbers that exist for the months before Jul 17 2026,
             which is why they get tiles of their own rather than a footnote. */}
-        {SEARCH_COLUMNS.map(col => {
+        {SEARCH_COLUMNS.filter(col => col.key === 'clicks' || col.key === 'impressions').map(col => {
           const value = search[col.key]
           const prev = prevSearch ? prevSearch[col.key] : null
           return (
@@ -607,7 +591,9 @@ export default function AnalyticsPanel({ data }: Props) {
           </tbody>
         </table>
       </div>
-      <p className="text-xs text-white/30 mb-8">
+      <details className="mb-8">
+        <summary className="text-xs text-white/40 cursor-pointer">How to read this table</summary>
+      <p className="text-xs text-white/30 mt-2">
         On email counts signups from that month that are still active, read from the list itself, so the Total is
         the list as it stands today rather than the sum of the months above it. n/a is a month before that
         column existed, which is not the same as a zero: the events table starts Jul 17 2026, Saves only
@@ -621,6 +607,7 @@ export default function AnalyticsPanel({ data }: Props) {
         slipping. Mar 2026 covers 10 days, the property's first.{' '}
         {data.searchGenerated ? `Search figures last pulled ${data.searchGenerated}.` : null}
       </p>
+      </details>
 
       {/* Per-item engagement */}
       <div className="flex items-center justify-between mb-2 gap-3 flex-wrap">
@@ -671,8 +658,7 @@ export default function AnalyticsPanel({ data }: Props) {
             )}
             {visible.map(row => (
               <tr key={row.key} className="border-b border-white/4">
-                <td className="px-4 py-2.5">{row.title}</td>
-                <td className="px-4 py-2.5 text-white/40">{row.itemType}</td>
+                <td className="px-4 py-2.5">{row.title}{row.itemType === 'program' && <span className="text-white/30"> · program</span>}</td>
                 <td className="px-4 py-2.5 text-right">{row.views}</td>
                 <td className="px-4 py-2.5 text-right">{row.applies}</td>
                 <td className="px-4 py-2.5 text-right text-white/60">
@@ -691,14 +677,39 @@ export default function AnalyticsPanel({ data }: Props) {
           Applies include clicks from list cards, which skip the detail page, so rates above 100% are possible.
           On list counts reminders signed up in this period and still active.
         </p>
-        {rows.length > 25 && (
+        {rows.length > 15 && (
           <button onClick={() => setShowAll(s => !s)} className="text-xs text-white/40 hover:text-white transition cursor-pointer whitespace-nowrap">
-            {showAll ? 'Show top 25' : `Show all ${rows.length}`}
+            {showAll ? 'Show top 15' : `Show all ${rows.length}`}
           </button>
         )}
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {/* Content gaps */}
+        <div>
+          <h2 className="text-sm font-semibold mb-2 text-white/70">Searches with no results · {periodLabel}</h2>
+          <div className="border border-white/6 rounded-xl overflow-hidden">
+            <table className="w-full text-sm">
+              <tbody>
+                {searches.length === 0 && (
+                  <tr><td className="px-4 py-6 text-white/30 text-center">Nothing yet. These are scholarships students looked for and didn&apos;t find.</td></tr>
+                )}
+                {searches.map(({ q, n, paths }) => (
+                  <tr key={q} className="border-b border-white/4">
+                    <td className="px-4 py-2.5">
+                      {q}
+                      {paths.length > 0 && (
+                        <div className="text-xs text-white/30 mt-0.5">{paths.slice(0, 3).join('  ')}</div>
+                      )}
+                    </td>
+                    <td className="px-4 py-2.5 text-right text-white/40 align-top">{n}×</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
         {/* Daily activity */}
         <div>
           <h2 className="text-sm font-semibold mb-2 text-white/70">
@@ -774,39 +785,6 @@ export default function AnalyticsPanel({ data }: Props) {
                   <td className="px-4 py-2.5 text-right text-white/60 tabular-nums">{tour.cta.n}</td>
                   <td className="px-4 py-2.5 text-right text-white/30 tabular-nums w-16">{tour.cta.pct}</td>
                 </tr>
-                <tr><td colSpan={3} className="px-4 pt-3 pb-1 text-xs text-white/40">Where it was closed</td></tr>
-                {tour.closed.map(r => (
-                  <tr key={r.label} className="border-b border-white/4">
-                    <td className="px-4 py-2.5">{r.label}</td>
-                    <td className="px-4 py-2.5 text-right text-white/60 tabular-nums">{r.n}</td>
-                    <td className="px-4 py-2.5 text-right text-white/30 tabular-nums w-16">{r.pct}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        {/* Content gaps */}
-        <div>
-          <h2 className="text-sm font-semibold mb-2 text-white/70">Searches with zero results · {periodLabel}</h2>
-          <div className="border border-white/6 rounded-xl overflow-hidden">
-            <table className="w-full text-sm">
-              <tbody>
-                {searches.length === 0 && (
-                  <tr><td className="px-4 py-6 text-white/30 text-center">Nothing yet. These are scholarships students looked for and didn&apos;t find.</td></tr>
-                )}
-                {searches.map(({ q, n, paths }) => (
-                  <tr key={q} className="border-b border-white/4">
-                    <td className="px-4 py-2.5">
-                      {q}
-                      {paths.length > 0 && (
-                        <div className="text-xs text-white/30 mt-0.5">{paths.slice(0, 3).join('  ')}</div>
-                      )}
-                    </td>
-                    <td className="px-4 py-2.5 text-right text-white/40 align-top">{n}×</td>
-                  </tr>
-                ))}
               </tbody>
             </table>
           </div>

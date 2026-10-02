@@ -1,0 +1,380 @@
+---
+// "How it works": a five-step walkthrough of what the site does. Opt in only:
+// opened from the header's button (desktop) or the phone menu's row, never by
+// itself and never as a banner (Ilia, 2026-10-02, bringing it back after the
+// 2026-09-29 removal). One native <dialog>, closed until asked for, so it
+// costs no layout until the button is used.
+//
+// The illustrations are small copies of the site's own parts, drawn from the
+// real data at build time: the example row is a real listing, the counts are
+// the directory's.
+import { BOOKMARK } from '../../lib/icons';
+
+interface Props {
+  scholarships: number | null;
+  programs: number | null;
+  example: { title: string; amount: string; deadline: string | null } | null;
+}
+const { scholarships, programs, example } = Astro.props;
+
+const fmt = (n: number | null) => (n === null ? null : n.toLocaleString('en-CA'));
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+const shortDate = (iso: string | null) => {
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso ?? '');
+  return m ? `${MONTHS[Number(m[2]) - 1]} ${Number(m[3])}` : null;
+};
+const row = example && {
+  title: example.title,
+  amount: example.amount,
+  when: shortDate(example.deadline),
+};
+const findCopy = scholarships !== null && programs !== null
+  ? `${fmt(scholarships)} scholarships and ${fmt(programs)} programs for Alberta high school students, in one place.`
+  : 'Scholarships and programs for Alberta high school students, in one place.';
+
+const STEPS = 5;
+---
+
+<dialog class="sabt" data-tour aria-labelledby="sabt-title-1">
+  <button type="button" class="sabt-close" data-tour-close aria-label="Close">
+    <svg viewBox="0 0 14 14" width="14" height="14" aria-hidden="true"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" /></svg>
+  </button>
+
+  <div class="sabt-steps">
+  <section class="sabt-step" data-tour-step="1">
+    <div class="sabt-art" aria-hidden="true">
+      <div class="sabt-search"><span class="sabt-search-ico"></span>Search, e.g. nursing</div>
+      <div class="sabt-card sabt-tilt-l">
+        <div class="sabt-row-name">{row?.title ?? 'Loran Scholarship'}</div>
+        <div class="sabt-row-amt">{row?.amount ?? '~$150,000'}</div>
+        <div class="sabt-row-when">
+          {row?.when && <span class="sabt-rust">{row.when}</span>}
+        </div>
+        <div class="sabt-row-acts"><span class="sabt-save"><Fragment set:html={BOOKMARK} />Save</span><span class="sabt-apply">Apply ↗</span></div>
+      </div>
+    </div>
+    <div class="sabt-body">
+      <p class="sabt-count">1 of {STEPS}</p>
+      <h2 class="sabt-title" id="sabt-title-1">Find scholarships</h2>
+      <p class="sabt-text">{findCopy} Search by name or keyword, filter by where you live, and open any listing to see when it was last checked against the provider's own page.</p>
+    </div>
+  </section>
+
+  <section class="sabt-step" data-tour-step="2" data-off inert>
+    <div class="sabt-art" aria-hidden="true">
+      <div class="sabt-card sabt-quiz sabt-tilt-r">
+        <div class="sabt-bar"><span class="on"></span><span class="on"></span><span></span><span></span><span></span></div>
+        <div class="sabt-q">What grade are you in?</div>
+        <div class="sabt-chips"><span>Grade 10</span><span>Grade 11</span><span class="on">Grade 12</span></div>
+      </div>
+    </div>
+    <div class="sabt-body">
+      <p class="sabt-count">2 of {STEPS}</p>
+      <h2 class="sabt-title" id="sabt-title-2">Get a shortlist</h2>
+      <p class="sabt-text">Not sure where to start? Answer a few questions about your grade, where you live, what you want to study and your average, and get the awards you fit, with the ones closing soonest up top. No email needed, and your answers never leave your device.</p>
+    </div>
+  </section>
+
+  <section class="sabt-step" data-tour-step="3" data-off inert>
+    <div class="sabt-art" aria-hidden="true">
+      <div class="sabt-card sabt-cal sabt-tilt-l">
+        <div class="sabt-cal-head"><span>October</span><span class="sabt-quiet">Saved · 3</span></div>
+        <div class="sabt-cal-grid">
+          {Array.from({ length: 35 }, (_, i) => {
+            const day = i - 3;
+            const mark = day === 1 || day === 15 || day === 31;
+            return <span class:list={[{ 'is-off': day < 1 || day > 31, 'is-mark': mark }]}>{day >= 1 && day <= 31 ? day : ''}</span>;
+          })}
+        </div>
+      </div>
+    </div>
+    <div class="sabt-body">
+      <p class="sabt-count">3 of {STEPS}</p>
+      <h2 class="sabt-title" id="sabt-title-3">Save the ones you want</h2>
+      <p class="sabt-text">Tap Save on any listing. Your shortlist lives on the Saved page, as a list or a calendar of deadlines, so you can come back to it. No account: it stays on this device.</p>
+    </div>
+  </section>
+
+  <section class="sabt-step" data-tour-step="4" data-off inert>
+    <div class="sabt-art" aria-hidden="true">
+      <div class="sabt-card sabt-mail sabt-tilt-r">
+        <div class="sabt-mail-from"><span class="sabt-dot"></span>ScholarAB reminder</div>
+        <div class="sabt-mail-subj">{row?.title ?? 'Loran Scholarship'} closes in 3 days</div>
+        <div class="sabt-chips sabt-chips-sm"><span>30 days</span><span>14 days</span><span class="on">3 days</span></div>
+      </div>
+    </div>
+    <div class="sabt-body">
+      <p class="sabt-count">4 of {STEPS}</p>
+      <h2 class="sabt-title" id="sabt-title-4">Never miss a deadline</h2>
+      <p class="sabt-text">The Deadlines page lays out every closing date, month by month. On any listing, leave your email and get a reminder 30, 14 and 3 days before it closes. That email is the only personal information we ever hold, and one click deletes it.</p>
+    </div>
+  </section>
+
+  <section class="sabt-step" data-tour-step="5" data-off inert>
+    <div class="sabt-art" aria-hidden="true">
+      <div class="sabt-guides">
+        <div class="sabt-card sabt-guide sabt-tilt-l">How to write a scholarship essay that gets read</div>
+        <div class="sabt-card sabt-guide">How to ask for a scholarship reference letter</div>
+        <div class="sabt-card sabt-guide sabt-tilt-r">Local scholarships: smaller awards, much better odds</div>
+      </div>
+    </div>
+    <div class="sabt-body">
+      <p class="sabt-count">5 of {STEPS}</p>
+      <h2 class="sabt-title" id="sabt-title-5">Apply with a plan</h2>
+      <p class="sabt-text">Guides cover the essay, reference letters, the Rutherford and Loran, and the scholarships near you. It is all free, with no ads and no login, built by a high school student in Medicine Hat.</p>
+    </div>
+  </section>
+
+  </div>
+
+  <div class="sabt-foot">
+    <div class="sabt-dots" aria-hidden="true">
+      {Array.from({ length: STEPS }, (_, i) => <span class:list={[{ on: i === 0 }]}></span>)}
+    </div>
+    <div class="sabt-btns">
+      <button type="button" class="sabt-back" data-tour-back hidden>Back</button>
+      <button type="button" class="sabt-next" data-tour-next>Next</button>
+      <a href="/match/" class="sabt-next" data-tour-done hidden>Find my scholarships</a>
+    </div>
+  </div>
+</dialog>
+
+{/* What a first visit gets instead of the dialog opening by itself: one
+    line at the foot of the screen, over nothing the student came for
+    (critique 2026-09-27). Hidden until the script decides to show it. */}
+<style>
+  .sabt {
+    width: min(460px, calc(100vw - 32px)); max-height: calc(100dvh - 32px);
+    /* The global reset zeroes every margin, which pins a modal dialog to the
+       top-left corner; auto is what centres it. */
+    margin: auto; padding: 0; border: 0; border-radius: 22px; overflow: hidden;
+    background: #FFFFFF; color: #141915; font-family: var(--font-body);
+    box-shadow: 0 30px 80px -20px rgba(5, 10, 8, 0.55);
+  }
+  .sabt[open] { display: flex; flex-direction: column; }
+  .sabt::backdrop { background: rgba(5, 10, 8, 0.62); backdrop-filter: blur(3px); }
+  .sabt-close {
+    position: absolute; top: 12px; right: 12px; z-index: 2; width: 36px; height: 36px;
+    display: inline-flex; align-items: center; justify-content: center; border: 0; border-radius: 50%;
+    background: rgba(238, 241, 236, 0.12); color: #EEF1EC; cursor: pointer;
+  }
+  .sabt-close:hover { background: rgba(238, 241, 236, 0.22); }
+  /* Every step sits in the same grid cell and the dialog takes the tallest,
+     so Next stays under the thumb instead of jumping as the text changes
+     length. The steps not showing keep their space but leave the page and
+     the accessibility tree through visibility, and inert keeps them out of
+     the tab order. (Not the hidden attribute: Tailwind's base forces
+     display:none !important on it, which would drop the space too.) */
+  .sabt-steps { display: grid; min-height: 0; overflow-y: auto; }
+  .sabt-step { grid-area: 1 / 1; display: flex; flex-direction: column; }
+  .sabt-step[data-off] { visibility: hidden; }
+
+  /* ── The picture: the site's own parts on the header's ink ── */
+  .sabt-art {
+    position: relative; height: 230px; flex: none; overflow: hidden;
+    background: radial-gradient(120% 90% at 50% 0%, #16302A 0%, #0A1310 70%);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .sabt-card {
+    background: #FFFFFF; color: #141915; border-radius: 14px; padding: 16px 18px;
+    box-shadow: 0 18px 40px -12px rgba(0, 0, 0, 0.55);
+  }
+  .sabt-tilt-l { transform: rotate(-3deg); }
+  .sabt-tilt-r { transform: rotate(3deg); }
+  .sabt-quiet { color: var(--ink-faint); font-weight: 500; }
+  .sabt-rust { color: #A0491A; font-weight: 700; }
+
+  .sabt-search {
+    position: absolute; top: 22px; left: 50%; transform: translateX(-50%);
+    display: flex; align-items: center; gap: 8px; width: 250px; padding: 9px 14px;
+    border-radius: 100px; background: rgba(238, 241, 236, 0.1); color: rgba(238, 241, 236, 0.6); font-size: 13px;
+  }
+  .sabt-search-ico { width: 11px; height: 11px; border: 1.6px solid currentColor; border-radius: 50%; }
+  .sabt-step[data-tour-step='1'] .sabt-card { width: 260px; margin-top: 44px; }
+  .sabt-row-name { font-weight: 700; font-size: 15px; }
+  .sabt-row-amt { font-family: var(--font-display); font-weight: 700; font-size: 30px; line-height: 1.1; margin: 6px 0 4px; }
+  .sabt-row-when { display: flex; gap: 8px; font-size: 12px; }
+  .sabt-row-acts { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; font-size: 13px; font-weight: 700; }
+  .sabt-save { display: inline-flex; align-items: center; gap: 5px; }
+  .sabt-save :global(svg) { width: 11px; height: 13px; fill: none; }
+  .sabt-apply { border-bottom: 2px solid #2FD3A0; padding-bottom: 2px; }
+
+  .sabt-quiz { width: 270px; }
+  .sabt-bar { display: flex; gap: 4px; margin-bottom: 14px; }
+  .sabt-bar span { flex: 1; height: 4px; border-radius: 4px; background: rgba(20, 25, 21, 0.1); }
+  .sabt-bar span.on { background: #0E8C64; }
+  .sabt-q { font-family: var(--font-display); font-weight: 700; font-size: 24px; line-height: 1.1; margin-bottom: 14px; }
+  .sabt-chips { display: flex; gap: 6px; flex-wrap: wrap; }
+  .sabt-chips span {
+    padding: 7px 12px; border-radius: 100px; font-size: 13px; font-weight: 600;
+    border: 1.5px solid rgba(20, 25, 21, 0.18);
+  }
+  .sabt-chips span.on { background: #2FD3A0; border-color: #2FD3A0; color: #08120E; }
+  .sabt-chips-sm span { padding: 5px 10px; font-size: 12px; }
+
+  .sabt-cal { width: 250px; padding: 14px 16px; }
+  .sabt-cal-head { display: flex; justify-content: space-between; font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+  .sabt-cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; font-size: 11px; text-align: center; }
+  .sabt-cal-grid span { height: 22px; line-height: 22px; border-radius: 6px; color: var(--ink-muted); }
+  .sabt-cal-grid span.is-off { visibility: hidden; }
+  .sabt-cal-grid span.is-mark { background: #2FD3A0; color: #08120E; font-weight: 700; }
+
+  .sabt-mail { width: 280px; }
+  .sabt-mail-from { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--ink-faint); font-weight: 600; }
+  .sabt-dot { width: 8px; height: 8px; border-radius: 50%; background: #2FD3A0; }
+  .sabt-mail-subj { font-weight: 700; font-size: 16px; line-height: 1.3; margin: 8px 0 12px; }
+
+  .sabt-guides { display: flex; flex-direction: column; gap: 8px; width: 280px; }
+  .sabt-guide { padding: 11px 14px; font-size: 13px; font-weight: 700; line-height: 1.3; }
+  .sabt-guide.sabt-tilt-l { transform: rotate(-2deg) translateX(-10px); }
+  .sabt-guide.sabt-tilt-r { transform: rotate(2deg) translateX(10px); }
+
+  /* ── Words ── */
+  .sabt-body { padding: 22px 26px 4px; }
+  .sabt-count {
+    margin: 0 0 6px; font-family: var(--font-label); font-size: 12px; letter-spacing: 0.08em;
+    text-transform: uppercase; color: #0A6B4D;
+  }
+  .sabt-title { margin: 0 0 10px; font-family: var(--font-display); font-weight: 800; font-size: 32px; line-height: 1.02; letter-spacing: -0.005em; }
+  .sabt-text { margin: 0; font-size: 15px; line-height: 1.55; color: var(--ink-soft); }
+
+  .sabt-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 20px 26px 24px; flex: none; }
+  .sabt-dots { display: flex; gap: 6px; }
+  .sabt-dots span { width: 6px; height: 6px; border-radius: 6px; background: rgba(20, 25, 21, 0.18); transition: background-color 0.2s ease; }
+  .sabt-dots span.on { width: 20px; background: #0E8C64; }
+  .sabt-btns { display: flex; align-items: center; gap: 6px; }
+  .sabt-back {
+    min-height: 44px; padding: 0 14px; border: 0; background: none; cursor: pointer;
+    font: inherit; font-size: 15px; font-weight: 600; color: var(--ink-muted);
+  }
+  .sabt-back:hover { color: #141915; }
+  .sabt-next {
+    display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 26px;
+    border: 0; border-radius: 100px; background: #2FD3A0; color: #08120E; cursor: pointer;
+    font: inherit; font-size: 15px; font-weight: 700; text-decoration: none; white-space: nowrap;
+    transition: background-color 0.15s ease;
+  }
+  .sabt-next:hover { background: #5CE3BB; }
+  .sabt-next[hidden], .sabt-back[hidden] { display: none; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .sabt[open] { animation: sabt-in 0.22s cubic-bezier(0.2, 0.8, 0.3, 1); }
+    .sabt-step:not([data-off]) .sabt-card, .sabt-step:not([data-off]) .sabt-guides { animation: sabt-card 0.35s cubic-bezier(0.2, 0.8, 0.3, 1); }
+  }
+  @keyframes sabt-in { from { opacity: 0; transform: translateY(10px) scale(0.98); } }
+  @keyframes sabt-card { from { opacity: 0; translate: 0 14px; } }
+
+  @media (max-width: 480px) {
+    .sabt-art { height: 210px; }
+    .sabt-step[data-tour-step='1'] .sabt-card { margin-top: 64px; }
+    .sabt-body { padding: 18px 20px 2px; }
+    .sabt-title { font-size: 28px; }
+    .sabt-text { font-size: 15px; }
+    /* Dots, Back and "Find my scholarships" need about 350px in one row and
+       a 375px phone gives the foot 297: the button ran off the dialog's edge
+       (critique 2026-09-27). The dots take their own line on every step, so
+       the dialog keeps one height from step to step. */
+    .sabt-foot { padding: 14px 20px 20px; flex-wrap: wrap; row-gap: 6px; }
+    .sabt-dots { flex: 1 0 100%; }
+    .sabt-btns { margin-left: auto; }
+    .sabt-next { padding: 0 20px; }
+  }
+</style>
+
+<script>
+  import { sendEvent } from '../../lib/events.ts';
+
+  // Delegated on document: the header is swapped on every view transition,
+  // and a listener on the old button would die with it.
+  function show(dialog: HTMLDialogElement, n: number) {
+    const steps = [...dialog.querySelectorAll<HTMLElement>('[data-tour-step]')];
+    const last = steps.length;
+    steps.forEach((s, i) => {
+      const off = i + 1 !== n;
+      s.toggleAttribute('data-off', off);
+      s.inert = off;
+    });
+    dialog.querySelectorAll('.sabt-dots span').forEach((d, i) => d.classList.toggle('on', i + 1 === n));
+    dialog.querySelector<HTMLElement>('[data-tour-back]')!.hidden = n === 1;
+    dialog.querySelector<HTMLElement>('[data-tour-next]')!.hidden = n === last;
+    dialog.querySelector<HTMLElement>('[data-tour-done]')!.hidden = n !== last;
+    dialog.setAttribute('aria-labelledby', `sabt-title-${n}`);
+    dialog.dataset.step = String(n);
+    // Each step reached counts once per tab session (sendEvent dedupes on the
+    // meta), so the admin panel reads as a funnel: of those who opened it,
+    // how many saw step 2, 3, 4 and 5.
+    if (n > 1) sendEvent('tour_step', undefined, undefined, String(n));
+    if (n === last) sendEvent('tour_finish');
+  }
+
+  const current = (d: HTMLDialogElement) => Number(d.dataset.step || '1');
+
+  // Where it was opened: the bar's button or the phone menu's row (the value
+  // of data-tour-open).
+  type From = 'bar' | 'sheet';
+  // Set when the closing link is followed, so that ending is not also counted
+  // as a close. Reset on every opening, since the link navigates away and the
+  // swapped-out dialog may never fire its close event.
+  let viaCta = false;
+  const FROM = new Set<string>(['bar', 'sheet']);
+
+  function open(dialog: HTMLDialogElement, from: From) {
+    // The phone menu is a full-screen sheet; close it under the dialog.
+    document.querySelector<HTMLElement>('#sabh-burger[aria-expanded="true"]')?.click();
+    viaCta = false;
+    show(dialog, 1);
+    dialog.showModal();
+    dialog.querySelector<HTMLElement>('[data-tour-next]')?.focus();
+    sendEvent('tour_open', undefined, undefined, from);
+  }
+
+  // The step it was left on, however it was closed (the X, the backdrop,
+  // Escape). Following the closing link is a different ending, counted as
+  // tour_cta, so it is kept out of this.
+  function onClose(this: HTMLDialogElement) {
+    if (!viaCta) sendEvent('tour_close', undefined, undefined, String(current(this)));
+    viaCta = false;
+  }
+  document.addEventListener('astro:page-load', () => {
+    const dialog = document.querySelector<HTMLDialogElement>('[data-tour]');
+    if (dialog && !dialog.dataset.closeWired) {
+      dialog.dataset.closeWired = '';
+      dialog.addEventListener('close', onClose);
+    }
+  });
+
+  document.addEventListener('click', e => {
+    const t = e.target as Element;
+    const dialog = document.querySelector<HTMLDialogElement>('[data-tour]');
+    if (!dialog) return;
+    const opener = t.closest<HTMLElement>('[data-tour-open]');
+    if (opener) {
+      e.preventDefault();
+      const from = opener.dataset.tourOpen ?? '';
+      open(dialog, (FROM.has(from) ? from : 'bar') as From);
+      return;
+    }
+    if (!dialog.open) return;
+    if (t.closest('[data-tour-done]')) {
+      viaCta = true;
+      sendEvent('tour_cta');
+      return;
+    }
+    if (t.closest('[data-tour-next]')) show(dialog, current(dialog) + 1);
+    else if (t.closest('[data-tour-back]')) show(dialog, current(dialog) - 1);
+    else if (t.closest('[data-tour-close]') || t === dialog) dialog.close();
+    else return;
+    // Keep focus on a control that is still visible after the swap.
+    const next = dialog.querySelector<HTMLElement>('[data-tour-next]:not([hidden]), [data-tour-done]:not([hidden])');
+    if (!t.closest('[data-tour-close]') && t !== dialog) next?.focus();
+  });
+
+  document.addEventListener('keydown', e => {
+    const dialog = document.querySelector<HTMLDialogElement>('[data-tour][open]');
+    if (!dialog) return;
+    const n = current(dialog);
+    const last = dialog.querySelectorAll('[data-tour-step]').length;
+    if (e.key === 'ArrowRight' && n < last) show(dialog, n + 1);
+    else if (e.key === 'ArrowLeft' && n > 1) show(dialog, n - 1);
+  });
+</script>

@@ -14,6 +14,7 @@ import { todayDate as albertaToday } from '../../lib/calendar';
 // layouts, so there is no second link list to keep in sync.
 
 import SabLogoMark from './SabLogoMark.astro';
+import SabTour from './SabTour.astro';
 import { loadScholarships, loadPrograms } from '../../lib/data-loader';
 import { programIsListed } from '../../lib/status';
 import { guides } from '../../lib/guides';
@@ -32,6 +33,8 @@ const { currentPath } = Astro.props;
 // do not render.
 let scholarshipCount: number | null = null;
 let programCount: number | null = null;
+// The real listing the How it works walkthrough draws as its example row.
+let tourExample: { title: string; amount: string; deadline: string | null } | null = null;
 
 // The Scholarships and Programs dropdowns (Tesla-style, Ilia 2026-09-13,
 // Programs added 2026-09-15): tiles for the hubs, a text list beside them.
@@ -63,6 +66,8 @@ try {
   const today = albertaToday();
   const listedPrograms = programs.filter(p => programIsListed(p, today));
   scholarshipCount = scholarships.length;
+  const loran = scholarships.find(s => s.title === 'Loran Scholarship');
+  if (loran) tourExample = { title: loran.title, amount: loran.amount ?? '', deadline: loran.deadline ?? null };
   programCount = listedPrograms.length;
   // Biggest scope first. Array sort is stable, so a tie keeps the source order.
   scopeTiles = scopeFacets
@@ -256,11 +261,19 @@ const isActive = (href: string, also: string[] = []) =>
             )}
           </div>
         ))}
+        <div class="sabh-item sabh-how-row">
+          <button type="button" class="sabh-link" data-tour-open="sheet"><span class="sabh-link-label">How it works</span></button>
+        </div>
       </nav>
       {/* Same destinations and link treatment as the footer's CONTACT column:
           outside links open a new tab, and the mailto sits inside email_off so
           Cloudflare's email obfuscation does not rewrite the anchor. */}
       <div class="sabh-right">
+      {/* Opt-in: a quiet button, never opened for anyone (SabTour). Text from
+          1101px, where the bar has room; the "i" alone from 901 to 1100. */}
+      <button type="button" class="sabh-how" data-tour-open="bar" aria-label="How it works">
+        <span class="sabh-how-i" aria-hidden="true">i</span><span class="sabh-how-text">How it works</span>
+      </button>
       <div class="sabh-social">
         <a href="https://www.instagram.com/scholarab.ca" target="_blank" rel="noopener noreferrer" aria-label="ScholarAB on Instagram">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none" /></svg>
@@ -286,6 +299,7 @@ const isActive = (href: string, also: string[] = []) =>
     </div>
   </div>
 </header>
+<SabTour scholarships={scholarshipCount} programs={programCount} example={tourExample} />
 </div>
 
 <style>
@@ -506,6 +520,24 @@ const isActive = (href: string, also: string[] = []) =>
      attribute and a scoped `a` selector would miss it. */
   .sabh-right { justify-self: end; display: flex; align-items: center; gap: 6px; }
   .sabh-social { display: flex; align-items: center; gap: 2px; }
+  .sabh-how {
+    display: inline-flex; align-items: center; gap: 8px; height: 36px; padding: 0 10px 0 6px;
+    border: 0; border-radius: 6px; background: transparent; cursor: pointer; white-space: nowrap;
+    font-family: var(--font-body); font-size: 14px; font-weight: 600; color: rgba(238, 241, 236, 0.78);
+    transition: color 0.15s ease, background-color 0.15s ease;
+  }
+  .sabh-how:hover { color: #EEF1EC; background: rgba(238, 241, 236,0.08); }
+  .sabh-how-i {
+    width: 18px; height: 18px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+    background: rgba(238, 241, 236, 0.14); font-family: Georgia, serif; font-style: italic; font-size: 12px; font-weight: 700;
+  }
+  /* The sheet row only exists on phones; desktop has the button above. */
+  .sabh-how-row { display: none; }
+  .sabh-how-row .sabh-link { border: 0; background: none; font: inherit; cursor: pointer; text-align: left; width: 100%; }
+  @media (min-width: 901px) and (max-width: 1100px) {
+    .sabh-right .sabh-how { padding: 0; width: 36px; justify-content: center; }
+    .sabh-right .sabh-how-text { display: none; }
+  }
   /* The footer carries the social links when the header has less room. */
   @media (min-width: 901px) and (max-width: 1359px) {
     .sabh-right .sabh-social { display: none; }
@@ -548,6 +580,7 @@ const isActive = (href: string, also: string[] = []) =>
        empty flex box still takes the grid's auto column and pushes the
        burger onto a second row. */
     .sabh-right { display: none; }
+    .sabh-how-row { display: block; }
     /* Tapping Scholarships in the sheet swaps the link list for the same
        panel the desktop dropdown shows (Ilia, 2026-09-15): photo tiles two
        across, the topic list under them, and a Back button above. */
