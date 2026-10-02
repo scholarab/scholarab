@@ -1559,3 +1559,14 @@ Outcome: a student sees what an application takes before clicking Apply, so they
 | "Who can apply" box on desktop | Folded into the line under the title, as on phones since 2026-09-27, so the list can lead the column without the eligibility sentence printing twice. The box keeps the "Worth knowing" note. |
 
 Add-back fraction: 0/1 of the one cut made.
+
+## Saved view switch on the ink board, October 1, 2026
+
+Outcome: a student on /saved can see both views and switch between them. The 2026-09-30 promo trim made every `.sabl-title-row` an ink panel, and /saved shares that row, so the List / Calendar switch kept its ink border and ink "Calendar" on ink: only the active "List" showed, as a stray word (Ilia's screenshot).
+
+| Candidate | Result and retained requirement |
+| --- | --- |
+| Drop the switch, keep List only | Not cut. Calendar is the saved deadlines view and the switch is its only door. |
+| Switch colours inside the board | Inverted (white border and text, white active button), 14px above it on phones where the board stacks with no gap. |
+
+Add-back fraction: 0/0. Local only: built /saved checked on phone and desktop, both views.

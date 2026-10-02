@@ -1801,6 +1801,12 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
    stacked read as a double line. */
 .sabl-title-row + .sabl-toolbar { border-top: 0; }
 .sabl-title-row .sabl-desc { color: rgba(255, 255, 255, 0.8); }
+/* /saved's List / Calendar switch sits on the same board. Its ink borders and
+   ink "Calendar" vanished there, leaving a stray "List" (2026-10-01). */
+.sabl-title-row .sabs-toggle { border-color: rgba(255, 255, 255, 0.85); margin-bottom: 0; }
+.sabl-title-row .sabs-toggle-btn { color: #fff; }
+.sabl-title-row .sabs-toggle-btn + .sabs-toggle-btn { border-left-color: rgba(255, 255, 255, 0.85); }
+.sabl-title-row .sabs-toggle-btn.on { background: #fff; color: var(--text-primary); }
 /* City hubs: where the rest of the reader's awards are (critique 2026-10-01). */
 .sabl-also { margin: 0 0 18px; max-width: 75ch; font-size: 15px; line-height: 1.5; color: rgba(20, 25, 21, 0.78); }
 .sabl-also a { color: #0A6B4D; font-weight: 700; text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
@@ -1840,6 +1846,7 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
   .sabl-title-row > div:first-child { padding-right: 0; }
   .sabl-promo { display: none; }
   .sabl-title-row .sabl-h1 { font-size: 36px; }
+  .sabl-title-row .sabs-toggle { margin-top: 14px; }
   .sabl-toolbar { margin-top: 14px; }
   .sabl-group-count { min-width: 36px; height: 36px; font-size: 18px; }
 }
