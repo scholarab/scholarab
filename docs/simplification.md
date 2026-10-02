@@ -1697,3 +1697,16 @@ Outcome: on program pages the biggest text is the real cost, the facts take a th
 | Combo rows | Carry the route label, like the other lists. |
 
 Add-back fraction: 1/7 (the suggested awards, removed after two attempts). Local only: built AAPT PhysicsBowl, /programs, empty /saved and Calgary combos checked on a phone and compared with www.
+
+## Programs: Worth knowing, first nine, October 2, 2026
+
+Outcome: the most-searched program pages say something only ScholarAB says, the catch the provider buries, and their dates and costs are right.
+
+| Candidate | Result and retained requirement |
+| --- | --- |
+| Notes for every program | Not done: hand-checked only, starting with the 10 program pages with the most Search Console impressions (Sept 3 to 30): CCO 828, SHAD 618, AHSMC 564, HOSA 424, COMC 275, FIRST Canadian Rockies 226, ISSYP 168, CYSF 166, TELUS Spark volunteering 147, PhysicsBowl 136. Nine got a note (`notes` on the program, shown in the same ink box); ISSYP did not, since Perimeter posts nothing current and the description already says so. |
+| Errors found while checking | Fixed from the provider pages: the Chemistry Contest is January 19, 2027 with teacher registration by December 29 (the data said April and March 31); AHSMC registration closes November 12 (was TBA) and costs $2 a student; COMC closes October 21 and 14 for shipped papers (was 22 and 15) and costs $30 or $35; SHAD's final deadline is January 6, 2027 (was TBA) and its fees are the 2027 ones; HOSA's $150 fee was missing. |
+| A forum post's "first time since 2019" for the Canadian Rockies Regional | Left out: FIRST's own event system confirms March 31 to April 3, 2027 at STEMIA in Calgary with 22 team places, but FIRST Canada lists a 2022 regional, and not every year between was checked. |
+| Meta descriptions | Three shortened (SHAD, CCO, AHSMC): the new closing dates pushed them past the snippet cut. |
+
+Add-back fraction: 0/0. Local only: built CCO page checked on a phone; all nine pages render the note.

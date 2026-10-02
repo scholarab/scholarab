@@ -135,13 +135,14 @@
     "stipend": "Financial aid available",
     "location": "Various Canadian campuses including Alberta",
     "eligibility": "Grades 10–11, strong academics, leadership",
-    "deadline": "TBA",
+    "deadline": "2027-01-06",
     "url": "https://www.shad.ca/apply/",
     "description": "Applications for SHAD 2027 open in mid-September and close in early January. Month-long STEAM program on a Canadian university campus: solve real-world problems in teams, live in residence, and build a cross-country network.",
-    "metaDescription": "A month-long STEAM program on a Canadian university campus: solve real-world problems in teams, live in residence, and build a cross-country network.",
-    "lastVerified": "2026-08",
+    "notes": "Apply by November 8 for the early deadline; the final one is January 6, 2027. It is free to apply, and about one in three students gets help with the fee: a household earning under $40,000 can have the whole $7,875 live-in fee covered, and $40,000 to $90,000 brings $3,000 to $6,000 off.",
+    "metaDescription": "A month on a university campus solving real problems in teams; one in three students gets help with the fee.",
+    "lastVerified": "2026-10",
     "cost": "varies",
-    "costNote": "SHAD publishes 2026 fees of $7,495 live-in and $3,955 virtual; financial assistance available. 2027 fees not yet confirmed."
+    "costNote": "2027 fees are $7,875 live-in and $3,975 virtual; households under $40,000 can have the full live-in fee covered."
   },
   {
     "id": 11,
@@ -592,7 +593,10 @@
     "deadline": "2027-01-21",
     "url": "https://hosacanada.org/home/",
     "description": "Canada's largest health science competition for high school students, run by a chartered HOSA association since 2014. Members enter one of about 30 events, from medical terminology to veterinary science and medical law, and the top three in each earn a place at the International Leadership Conference. You join through a chapter at your own school, or start one: five students, a president and a teacher advisor. The online Fall Leadership Conference runs November 15–22, 2026; SLC 2027 is in Toronto, March 1–3, and is high-school only.",
-    "lastVerified": "2026-08"
+    "notes": "Membership is $150 a student for 2026-27, plus GST, and that one fee covers competing at both the online fall conference and the spring one in Toronto. If your school has no chapter, five students and a teacher advisor are enough to start one.",
+    "lastVerified": "2026-10",
+    "cost": "fee",
+    "costNote": "$150 per student for 2026-27, plus GST; conference competition included"
   },
   {
     "id": 41,
@@ -609,7 +613,8 @@
     "deadline": "Ongoing",
     "url": "https://www.firstinspires.org/programs/frc/",
     "description": "Rigorous engineering challenge where high school teams design, program, and build industrial-size robots in a 6-week build season. Requires applied research in mechanics, CAD, and control systems. Many Alberta teams compete in the Canadian Rockies regional event.",
-    "lastVerified": "2026-08"
+    "notes": "The Canadian Rockies Regional is back in Calgary for 2027: March 31 to April 3 at the STEM Innovation Academy on Research Road NW. FIRST lists room for 22 teams, so an Alberta team that wants a home event should register early.",
+    "lastVerified": "2026-10"
   },
   {
     "id": 42,
@@ -1131,16 +1136,17 @@
     "format": "olympiads",
     "provider": "Canadian Society for Chemistry (CSC)",
     "grades": "Grades 11–12",
-    "duration": "Self-study + Canadian Chemistry Contest (April) + national camp for finalists",
+    "duration": "Self-study + Canadian Chemistry Contest (January) + national camp for finalists",
     "paid": false,
     "stipend": null,
     "location": "Province-wide (school-based); national training camp for finalists",
     "eligibility": "Canadian high school students; grades 11–12 recommended",
-    "deadline": "2027-03-31",
+    "deadline": "2026-12-29",
     "url": "https://www.cheminst.ca/discover/canadian-chemistry-contest/",
-    "description": "Highest level of chemistry competition for Canadian youth. You enter through the Canadian Chemistry Contest in April, which the Chemical Institute of Canada runs and uses to select for the Olympiad; national-team candidates then work through online problem sets, a take-home exam and a national camp. Preparation goes far beyond the high school curriculum, into organic, inorganic and physical chemistry. Top students represent Canada at the International Chemistry Olympiad.",
-    "metaDescription": "Enter through the Canadian Chemistry Contest in April; top students go on to the International Chemistry Olympiad.",
-    "lastVerified": "2026-08"
+    "description": "Highest level of chemistry competition for Canadian youth. You enter through the Canadian Chemistry Contest, written January 19, 2027, which the Chemical Institute of Canada runs and uses to select for the Olympiad; national-team candidates then work through online problem sets, a take-home exam and a national camp. Preparation goes far beyond the high school curriculum, into organic, inorganic and physical chemistry. Top students represent Canada at the International Chemistry Olympiad.",
+    "notes": "It is written on Tuesday, January 19, 2027, and your teacher has to register you by noon Eastern on December 29, 2026, which falls in winter break, so ask before school lets out. You write it online at school under your teacher's supervision, so there is no way to enter on your own. It is aimed at students with two years of advanced chemistry, and you must be under 20.",
+    "metaDescription": "Written January 19, 2027 at school under a teacher; top students go on to the International Chemistry Olympiad.",
+    "lastVerified": "2026-10"
   },
   {
     "id": 72,
@@ -1356,7 +1362,8 @@
     "deadline": "Ongoing",
     "url": "https://www.sparkscience.ca/get-involved/volunteer",
     "description": "Volunteer alongside science communicators at Calgary's science centre, running workshops, staffing exhibits and supporting summer camps. A steady way into science outreach experience, and one of the few STEM volunteer roles in Calgary open at 14 through the camp stream.",
-    "lastVerified": "2026-08"
+    "notes": "Expect a process, not a sign-up sheet: an online application, an interview, a reference check, a weekend orientation and a three-month trial. At 100 hours you can ask Spark for a reference letter, the part worth planning for if you want one for scholarship applications. Volunteers 18 and over need a police information check, and Spark explains how to get one free.",
+    "lastVerified": "2026-10"
   },
   {
     "id": 89,
@@ -1584,11 +1591,14 @@
     "stipend": null,
     "location": "School-based across Alberta (national competition)",
     "eligibility": "Canadian high school students; administered through participating schools",
-    "deadline": "2026-10-22",
+    "deadline": "2026-10-21",
     "url": "https://cms.math.ca/competitions/comc/",
-    "description": "Your teacher registers the school by October 22 (October 15 for shipped exams); the contest is written October 29, 2026. Independent registration opens around September 16 only if your school is not participating. Top scorers are invited to the Canadian Mathematical Olympiad.",
+    "description": "Your teacher registers the school by October 21 (October 14 for shipped exams); the contest is written October 29, 2026. Independent registration opens around September 16 only if your school is not participating. Top scorers are invited to the Canadian Mathematical Olympiad.",
+    "notes": "Schools register by October 21, or October 14 if the papers are shipped, and pay $30 a student for PDF exams or $35 shipped. If your school is not writing it, you can still enter on your own through a host university by October 21. About 100 to 120 top scorers are invited to the Canadian Mathematical Olympiad or its junior version.",
     "metaDescription": "Your teacher registers the school; the contest is written October 29, 2026. Top scorers reach the national Olympiad.",
-    "lastVerified": "2026-08"
+    "lastVerified": "2026-10",
+    "cost": "fee",
+    "costNote": "$30 per student (PDF exams) or $35 (shipped), through a school; independent fees set by each host university"
   },
   {
     "id": 106,
@@ -2025,13 +2035,14 @@
     "stipend": "Fellowships awarded on Part II results",
     "location": "School-based across Alberta (written at your own school); $5 per extra Second Round nomination",
     "eligibility": "Alberta and Northwest Territories students. Part I is open to every eligible student; the top 50 scorers, plus the top five Grade 10 students, are invited to Part II. Schools register students with the A.H.S.M.C. Board.",
-    "deadline": "TBA",
+    "deadline": "2026-11-12",
     "url": "https://www.ualberta.ca/en/mathematical-and-statistical-sciences/outreach/alberta-high-school-math-competition/index.html",
     "description": "Part I is written in November and Part II in early February; your school registers you. The Alberta High School Mathematics Competition is the province's longest-running math contest, run by the U of A.",
-    "metaDescription": "The province's longest-running math contest, run by the U of A. Part I is written in November and Part II in early February.",
-    "lastVerified": "2026-08",
+    "notes": "Your school has to register you by November 12 for the first round on November 24, at $2 a student. No calculators in either round. The second round on February 3 pays real money: $1,500 for first, $750 for second, $500 for third, and $150 each to the best Grade 10 and Grade 11 students outside the top three.",
+    "metaDescription": "Alberta's longest-running math contest, run by the U of A: Part I on November 24, Part II on February 3.",
+    "lastVerified": "2026-10",
     "cost": "fee",
-    "costNote": "$5 per extra Second Round nomination"
+    "costNote": "$2 per student for a school's first 30, $1 after that; $5 per extra Second Round nomination"
   },
   {
     "id": 132,
@@ -2102,7 +2113,8 @@
     "deadline": "TBA",
     "url": "https://www.aapt.org/Programs/PhysicsBowl/index.cfm",
     "description": "Your teacher registers the school by late February; the exam is written between mid-March and early April. A 40-question multiple-choice physics contest run by the American Association of Physics Teachers, open to schools worldwide.",
-    "lastVerified": "2026-08",
+    "notes": "Registration for 2027 opens in December, and the 2026 deadline was February 23, so ask your physics teacher before winter break. A school's team score is its top five students added together, which is why five is the number to aim for.",
+    "lastVerified": "2026-10",
     "cost": "fee",
     "costNote": "$10 per student"
   },
@@ -2340,8 +2352,9 @@
     "deadline": "2027-02-04",
     "url": "https://www.cysf.org/registration/",
     "description": "Canada's largest regional science fair. Schools register October 1 to December 4 and independent entrants from December 10; every project must be registered with its ethics forms by February 4. Winning here is the route to the Canada-Wide Science Fair for Calgary students.",
+    "notes": "About 700 projects from more than 100 schools. Register through your school between October 1 and December 4; entering on your own only opens December 10, and every project, with its ethics forms, has to be in by February 4. Public viewing on April 10 is free.",
     "metaDescription": "Canada's largest regional science fair, at the Olympic Oval April 8-10, 2027. Projects and ethics forms must be registered by February 4.",
-    "lastVerified": "2026-09"
+    "lastVerified": "2026-10"
   },
   {
     "id": 149,

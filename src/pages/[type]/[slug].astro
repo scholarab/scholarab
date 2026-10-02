@@ -532,7 +532,9 @@ if (kind === 'scholarship') {
     ],
     eligibility: p.eligibility,
     about: p.description,
-    notes: undefined,
+    // Hand-checked against the provider since 2026-10-02, starting with the
+    // most-searched programs; absent on the rest, never filled from the description.
+    notes: p.notes ?? undefined,
     // No generic steps: the data has none per program, and "review the
     // details, prepare materials, apply" restated the button.
     steps: [],

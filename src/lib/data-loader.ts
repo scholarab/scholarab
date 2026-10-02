@@ -109,6 +109,8 @@ export type Program = {
   /** The fee in the provider's own words, e.g. "~$1,700 per module". Shown
    * beside the cost; required by validate-data whenever cost is fee/varies. */
   costNote: string | null
+  /** The catch the provider page buries, checked by hand (the "Worth knowing" note). JSON-only. */
+  notes?: string | null
   location: string | null
   eligibility: string | null
   deadline: string | null
