@@ -9,6 +9,7 @@ import SabFonts from '../../components/sab/SabFonts.astro';
 import Layout from '../../layouts/Layout.astro';
 import { scholarshipMetas, programMeta, brandedTitle, listingTitle, formatListingDate as formatDate } from '../../lib/meta';
 import { balancedRelated, balancedCross, openAlternatives } from '../../lib/related';
+import { whatsNext, workKey, workLabel } from '../../lib/whats-next';
 import { scoreProgramForScholarship, scoreScholarshipForProgram } from '../../lib/cross-links';
 import { audienceFields, quizField } from '../../lib/eligibility-matcher';
 import SabHeader from '../../components/sab/SabHeader.astro';
@@ -25,7 +26,7 @@ import type { Scholarship, Program } from '../../lib/data-loader';
 
 // A related listing as a row: name, where/what, amount, deadline. The cards
 // these replaced left out the deadline, the one thing a student compares on.
-type RelatedItem = { href: string; title: string; value: string; tag: string; when: string; money?: boolean; open?: boolean };
+type RelatedItem = { href: string; title: string; value: string; tag: string; when: string; money?: boolean; open?: boolean; why?: string };
 
 export async function getStaticPaths() {
   // Neighbor order matches each directory's default sort: earliest deadline
@@ -196,6 +197,106 @@ export async function getStaticPaths() {
       prefer: (a, b) => ms(a.deadline) - ms(b.deadline),
     }));
 
+  // What's next: an open page's own pick of where to go after it, under its
+  // What you'll need (lib/whats-next.ts). A closed page has its "Open now
+  // instead" in the card, so it gets none. Never one already in More like this.
+  const BROAD = new Set(['Alberta', 'Alberta-wide', 'National', 'International']);
+  const FIELD_WHY: Record<string, string> = { STEM: 'Also for STEM', health: 'Also for health careers', business: 'Also for business', arts: 'Also for the arts', trades: 'Also for the trades' };
+  const CATEGORY_WHY: Record<string, string> = {
+    Community: 'Also for community service', Indigenous: 'Also for Indigenous students',
+    Trades: 'Also for the trades', STEM: 'Also for STEM', Arts: 'Also for the arts', Sports: 'Also for athletes',
+  };
+  const workOf = new Map(scholarships.map(s => [s, workKey(s.toApply)]));
+  // A next step has to be one the same student can take: Loran's page offered
+  // a county agricultural award at Olds College, and Kin Canada's an
+  // oil-and-gas one. The other listing is never narrower than this one in
+  // place, field, school or group.
+  const narrower = (a: string[] = [], b: string[] = []) => b.length > 0 && !b.some(x => a.includes(x));
+  // Every field a listing names, raw as well as the quiz's five: Peace River's
+  // "Agriculture" maps to none of those, and Seed Smart says it only in prose.
+  const anyFieldsOf = new Map(scholarships.map(s => [s, [
+    ...(s.eligibility?.fields ?? []).map(f => f.toLowerCase()),
+    ...fieldsOf.get(s)!,
+    ...(/agricultur/i.test(s.audience ?? '') ? ['agriculture'] : []),
+  ]]));
+  const isBroad = (s: Scholarship) => { const p = placeOf(s); return !s.localArea && (!p || BROAD.has(p)); };
+  const fitsAfter = (a: Scholarship, b: Scholarship) => {
+    const pb = placeOf(b);
+    if (pb && !BROAD.has(pb) && pb !== placeOf(a)) return false;
+    // A county or district inside a broad region (Woodlands County is filed under Alberta).
+    if (b.localArea && b.localArea !== a.localArea) return false;
+    const fa = fieldsOf.get(a)!, fb = fieldsOf.get(b)!;
+    if (fb.size && ![...fb].some(f => fa.has(f))) return false;
+    if (narrower(anyFieldsOf.get(a), anyFieldsOf.get(b))) return false;
+    const ea = a.eligibility, eb = b.eligibility;
+    if (!eb) return true;
+    if (eb.indigenousRequired && !ea?.indigenousRequired) return false;
+    if (eb.bipocRequired && !ea?.bipocRequired) return false;
+    if (eb.genderRequired && eb.genderRequired !== ea?.genderRequired) return false;
+    if (eb.fosterCare && !ea?.fosterCare) return false;
+    if (eb.apprenticeship && !ea?.apprenticeship) return false;
+    if (narrower(ea?.schoolBoards, eb.schoolBoards) || narrower(ea?.specificSchools, eb.specificSchools)) return false;
+    if (narrower(ea?.targetInstitutions, eb.targetInstitutions.filter(t => t !== 'any'))) return false;
+    return true;
+  };
+  // A week left at least: a next step due tomorrow is not one.
+  const WEEK_MS = 7 * 86400000;
+  const nextForScholarship = (s: Scholarship, i: number): RelatedItem[] => {
+    if (scholarshipStatusOf(s, metaToday) === 'closed') return [];
+    const picks = whatsNext(s, scholarships, {
+      isOpen: o => canApplyNow(scholarshipStatusOf(o, metaToday)) && ms(o.deadline) >= buildTime + WEEK_MS,
+      fits: fitsAfter,
+      // Within a month of each other counts as the same time; then open to
+      // the whole province or country (those get 3 to 6 times the Apply
+      // clicks of local ones, 2026-09-30 scope tagging), then the bigger award.
+      bucketMs: 30 * 86400000,
+      prefer: (a, b) => Number(isBroad(b)) - Number(isBroad(a)) || amountOf.get(b)! - amountOf.get(a)!,
+      deadlineMs: o => ms(o.deadline),
+      exclude: new Set(relatedScholarshipsFor[i]!),
+      reasons: [
+        (a, b) => {
+          const place = placeOf(a);
+          if (!place || BROAD.has(place) || place !== placeOf(b)) return null;
+          return a.region === b.region && a.region !== place ? `Also at ${place}` : `Also in ${place}`;
+        },
+        (a, b) => { const k = workOf.get(a); return k && k === workOf.get(b) ? workLabel(k) : null; },
+        (a, b) => { const f = [...fieldsOf.get(a)!].find(x => fieldsOf.get(b)!.has(x)); return f ? FIELD_WHY[f] ?? null : null; },
+        (a, b) => (a.category && a.category === b.category ? CATEGORY_WHY[a.category] ?? null : null),
+      ],
+      fallback: ms(s.deadline) === Infinity ? 'Open now' : 'Due around the same time',
+      // Sharing only a season, a pick has to stand on its own: the awards
+      // researched for What you'll need, which are the most-used ones. Open to
+      // the same student by `fits`, they are the ones worth a second click;
+      // the season alone offered a bleeding-disorder award to every woman's one.
+      fallbackOk: o => !!o.toApply,
+      fallbackMax: 1,
+      atLeast: 2,
+    });
+    const cards = asScholarshipCards(picks.map(p => p.item));
+    return cards.map((c, j) => ({ ...c, why: picks[j]!.why }));
+  };
+  const FORMAT_WHY: Record<string, string> = {
+    summer: 'Also a summer program', competitions: 'Also a competition', olympiads: 'Also an olympiad',
+    'science-fairs': 'Also a science fair', research: 'Also research', 'dual-credit': 'Also dual credit',
+    clubs: 'Also year-round', conferences: 'Also a conference',
+  };
+  const nextForProgram = (p: Program, i: number): RelatedItem[] => {
+    if (programStatusOf(p, metaToday) === 'closed' || !programIsListed(p, metaToday)) return [];
+    const picks = whatsNext(p, programs, {
+      isOpen: o => programIsListed(o, metaToday) && canApplyNow(programStatusOf(o, metaToday)),
+      deadlineMs: o => ms(o.deadline),
+      exclude: new Set(relatedProgramsFor[i]!),
+      reasons: [
+        (a, b) => (a.format && a.format === b.format ? FORMAT_WHY[a.format] ?? null : null),
+        (a, b) => (a.category && a.category === b.category ? `Also ${a.category.toLowerCase()}` : null),
+      ],
+      // No timing-only pick: across formats it offered the AMC math contest on
+      // 217 pages, the Alberta Youth Choir's among them.
+    });
+    const cards = asProgramCards(picks.map(x => x.item));
+    return cards.map((c, j) => ({ ...c, why: picks[j]!.why }));
+  };
+
   return [
     ...scholarships.map((s, i) => ({
       params: { type: 'scholarships', slug: generateSlug(s.title) },
@@ -206,6 +307,7 @@ export async function getStaticPaths() {
         related: asScholarshipCards(relatedScholarshipsFor[i]!),
         crossRelated: asProgramCards(crossProgramsFor[i]!),
         alternatives: alternativesForScholarship(s),
+        next: nextForScholarship(s, i),
         metaDescription: descriptions[i]!,
       },
     })),
@@ -218,13 +320,14 @@ export async function getStaticPaths() {
         related: asProgramCards(relatedProgramsFor[i]!),
         crossRelated: asScholarshipCards(crossScholarshipsFor[i]!),
         alternatives: alternativesForProgram(p),
+        next: nextForProgram(p, i),
         metaDescription: undefined as string | undefined,
       },
     })),
   ];
 }
 
-const { kind, scholarship, program, related, alternatives, metaDescription } = Astro.props;
+const { kind, scholarship, program, related, alternatives, next, metaDescription } = Astro.props;
 // A programs block of nothing but "Date not confirmed" rows offers nothing to
 // do (critique 2026-09-24): it shows only when one of them is open, open first.
 const crossRelated = Astro.props.crossRelated.some(r => r.open !== false)
@@ -566,6 +669,7 @@ const breadcrumbJson = {
       guideHref={guideSlug ? `/guides/${guideSlug.slug}/` : undefined}
       guideTitle={guideSlug?.title}
       alternatives={alternatives}
+      next={next}
       alternativesHref={facetHref ?? d.currentPath}
     />
 

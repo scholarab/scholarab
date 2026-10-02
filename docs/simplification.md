@@ -1600,3 +1600,17 @@ Outcome: a student who saved awards comes back to a next step, not a second copy
 | The plan's sentences on a phone | Cut at Ilia's call: with them the first phone row started at 648px of 812. Phones get the totals as one line in short words (3 letters, 5 essays, 1 transcript); desktop keeps the lead and the note. First phone row now at 454px. |
 
 Add-back fraction: 0/1. Cost: each saved row is about 42px taller for its status. Local only: `npm run ci` passed (1,181), `npm run test:e2e` passed, built /saved checked on phone and desktop.
+
+## What's next on listing pages, October 1, 2026
+
+Outcome: a student who lands on one listing from Google has a next step on the screen that ends this one. 50-58% of arrivals land on a single listing, average 2.2 pages, and 1-9% reach "More like this" at the foot (private/flow-plan).
+
+| Candidate | Result and retained requirement |
+| --- | --- |
+| Move "More like this" up | Not done: its picks are loose on purpose (`related.ts` balances inbound links across the corpus), so they are no next step. It stays at the foot for that job. |
+| A pick per page with a reason | Added under What you'll need (`lib/whats-next.ts`): one pick per reason in order (same place, same work from `toApply`, same field, same kind of award), never one already in More like this, open with a week left. Scholarships 2 or 3 picks on all 848 open pages, programs 2 on 258; closed pages keep "Open now instead". |
+| Picks a student can't take | Cut by `fits`: Loran's page offered a county agricultural award at Olds College and Kin Canada's an oil-and-gas one. A pick is never narrower in place (`localArea` too), field, school or group. |
+| Timing-only picks | Capped at one a page (two when nothing else qualifies), and only from the 45 hand-researched awards: by season alone, a woman's award was offered a bleeding-disorder one. None on program pages, where it put the AMC math contest on 217, the youth choir's among them. |
+| "Also for marks" (Academic category) | Dropped as a reason: it matched Loran to a county bursary on nothing a student would recognise. |
+
+Add-back fraction: 0/0. Local only: built pages sampled (Loran, Kin, Ted Rogers, Chick-fil-A, Empowered Young Woman, Conrad, Alberta Youth Choir) and checked on phone and desktop.
