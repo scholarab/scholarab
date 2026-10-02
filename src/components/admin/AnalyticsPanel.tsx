@@ -63,6 +63,7 @@ const EVENT_LABELS: Record<string, string> = {
   tour_open: 'How it works opened',
   tour_finish: 'How it works read to the end',
   tour_cta: 'How it works to the quiz',
+  app_status: 'Saved awards marked (working, submitted, won)',
 }
 
 /** Compact column headers for the by-month table; the tile labels are too long. */
@@ -99,6 +100,7 @@ const EVENT_COVERED_FROM: Record<string, string> = {
   tour_open: '2026-09',
   tour_finish: '2026-09',
   tour_cta: '2026-09',
+  app_status: '2026-10',
 }
 
 interface SearchTotals {

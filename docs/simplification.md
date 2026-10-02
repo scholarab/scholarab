@@ -1584,3 +1584,19 @@ Outcome: a student acts on what the provider says today. Reading the top 50 prov
 | Canada's Luckiest Student as a scholarship | Kept: the description calls it a giveaway and its kit says prize draw. |
 
 Add-back fraction: 0/0 (corrections, nothing cut). Local only: validate-data OK.
+
+## /saved as a plan, October 1, 2026
+
+Outcome: a student who saved awards comes back to a next step, not a second copy of the directory. Measured: 262 saves in 30 days against /saved at 0.8% of page views (private/flow-plan).
+
+| Candidate | Result and retained requirement |
+| --- | --- |
+| A separate "Start here" list above the rows | Not built: it would repeat three rows and add a screen of scrolling. The first three open awards that take an application are numbered in place instead, with the combo trays' sticker. |
+| Moving a row as soon as its status changes | Not done: the row stayed under the pointer that set it. Submitted and Won sink below the work still to do on the next visit. |
+| A per-award checklist | Not built: one status per award (Not started, Working on it, Submitted, Won) carries the plan; the award page already lists the items. |
+| Totals of what the list asks for | Added from `toApply` kinds and letter counts only (the text stays on the award page), over open awards not yet submitted, with how many lists are partial or missing. |
+| An event per status | One event, `app_status`, meta fixed to working, submitted or won and only with an item; statuses themselves stay in localStorage (`scholarab_status`). |
+
+| The plan's sentences on a phone | Cut at Ilia's call: with them the first phone row started at 648px of 812. Phones get the totals as one line in short words (3 letters, 5 essays, 1 transcript); desktop keeps the lead and the note. First phone row now at 454px. |
+
+Add-back fraction: 0/1. Cost: each saved row is about 42px taller for its status. Local only: `npm run ci` passed (1,181), `npm run test:e2e` passed, built /saved checked on phone and desktop.

@@ -8,7 +8,7 @@ import { getClientIp, hitRateLimit } from '../../lib/rate-limit'
 
 // Client-sendable events only. alert_subscribe is recorded server-side in /api/alert.
 // app_step left with the application-step ticker (deleted with /app, Aug 2026).
-const ALLOWED_EVENTS = new Set(['detail_view', 'apply_click', 'save', 'quiz_start', 'quiz_complete', 'search_empty', 'source_visit', 'tour_open', 'tour_step', 'tour_finish', 'tour_close', 'tour_cta', 'combo_open'])
+const ALLOWED_EVENTS = new Set(['detail_view', 'apply_click', 'save', 'quiz_start', 'quiz_complete', 'search_empty', 'source_visit', 'tour_open', 'tour_step', 'tour_finish', 'tour_close', 'tour_cta', 'combo_open', 'app_status'])
 // Campaign sources, mirroring SOURCES in src/lib/events.ts. Anyone can type
 // `?s=` into the address bar, so the server keeps its own copy of the list
 // rather than trusting whatever the client sends.
@@ -25,6 +25,8 @@ const TOUR_FROM = new Set(['auto', 'strip', 'bar', 'menu', 'sheet', 'button'])
 // tour_close: the step the dialog was closed on.
 const TOUR_STEPS = new Set(['2', '3', '4', '5'])
 const TOUR_CLOSED_ON = new Set(['1', '2', '3', '4', '5'])
+// app_status: what a student marked a saved award on /saved (2026-10-01).
+const APP_STATUSES = new Set(['working', 'submitted', 'won'])
 // Real browser UAs never contain a URL, a script-runtime name, or an HTTP
 // library name; bots and fetch libraries almost always do. JS-executing
 // crawlers (Googlebot, Bytespider) all match one of the generic terms.
@@ -93,9 +95,10 @@ export const POST: APIRoute = async ({ request }) => {
   if ((itemType === undefined) !== (itemId === undefined))
     return jsonError('itemType and itemId must be sent together', 400)
   // meta carries the query text for search_empty, the source code for
-  // source_visit, the place for save, how tour_open was opened and the step
-  // for tour_step and tour_close; nothing else takes a meta at all
-  const META_EVENTS = new Set(['search_empty', 'source_visit', 'save', 'tour_open', 'tour_step', 'tour_close'])
+  // source_visit, the place for save, how tour_open was opened, the step
+  // for tour_step and tour_close, and the status for app_status; nothing else
+  // takes a meta at all
+  const META_EVENTS = new Set(['search_empty', 'source_visit', 'save', 'tour_open', 'tour_step', 'tour_close', 'app_status'])
   if (meta !== undefined && (!META_EVENTS.has(event) || typeof meta !== 'string'))
     return jsonError('meta not allowed for this event', 400)
 
@@ -115,6 +118,10 @@ export const POST: APIRoute = async ({ request }) => {
     // Required: a step event without its step says nothing
     if (!(event === 'tour_step' ? TOUR_STEPS : TOUR_CLOSED_ON).has(meta as string))
       return jsonError('unknown tour step', 400)
+    cleanMeta = meta as string
+  } else if (event === 'app_status') {
+    // Required, and only for an item: a status without its award says nothing
+    if (!APP_STATUSES.has(meta as string) || itemId === undefined) return jsonError('unknown status', 400)
     cleanMeta = meta as string
   } else if (event === 'save') {
     // Optional, since pages cached before the field existed send none

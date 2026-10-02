@@ -30,12 +30,13 @@ vi.mock('./ics.ts', () => ({ buildICS: vi.fn(() => ''), downloadICS: vi.fn() }))
 
 import { showToast } from './utils.ts'
 import { downloadICS } from './ics.ts'
+import { sendEvent } from './events.ts'
 
 function mount() {
   document.body.innerHTML = `
     <div id="sab-saved">
       <script type="application/json" data-sv-items>${JSON.stringify([
-        { type: 'scholarship', id: 1, name: 'Big Award', deadline: '2026-05-01', amount: '$1,000', url: 'https://x.example', href: '/scholarships/big-award/' },
+        { type: 'scholarship', id: 1, name: 'Big Award', deadline: '2026-05-01', amount: '$1,000', url: 'https://x.example', href: '/scholarships/big-award/', kit: { k: ['essay', 'reference'], r: 2, c: true } },
         { type: 'scholarship', id: 2, name: 'Closed Award', deadline: '2026-01-01', amount: '$1,000', url: 'https://x.example', href: '/scholarships/closed-award/' },
         { type: 'program', id: 7, name: 'Summer Lab', audience: 'Students in grades 10–12', cost: 'fee', deadline: '2026-06-15', url: 'https://y.example', href: '/programs/summer-lab/' },
         { type: 'program', id: 63, name: 'Retired teen program', audience: 'Historical eligibility', active: false, deadline: 'Ongoing', url: 'https://retired.example', href: '/programs/retired-teen-program/' },
@@ -49,6 +50,9 @@ function mount() {
         </div>
         <div data-sv-empty hidden>empty</div>
         <div data-sv-list hidden>
+          <section data-sv-plan hidden>
+            <p data-sv-plan-lead></p><ul data-sv-plan-needs></ul><p data-sv-plan-note></p>
+          </section>
           <div data-sv-sh-section hidden>
             <span data-sv-sh-label></span>
             <div class="sabl-grid"></div>
@@ -77,6 +81,7 @@ const click = (el: Element) => el.dispatchEvent(new Event('click', { bubbles: tr
 beforeEach(() => {
   savedSch = []
   savedPrg = []
+  localStorage.clear()
   vi.clearAllMocks()
 })
 
@@ -256,5 +261,29 @@ describe('savedOrder', () => {
   it('puts the soonest deadline first, undated next, passed last', () => {
     const order = savedOrder([item(1, null), item(2, '2000-01-01'), item(3, '2099-06-01'), item(4, '2099-01-01')])
     expect(order.map(s => s.id)).toEqual([4, 3, 1, 2])
+  })
+
+  it('numbers the open award, adds up what it asks for, and keeps a status', () => {
+    savedSch = [1, 2]
+    setup()
+    const start = $$('[data-sv-start]').filter(e => !e.hidden)
+    expect(start.map(e => e.closest<HTMLElement>('[data-sv-wrap]')!.dataset.id)).toEqual(['1'])
+    expect($('[data-sv-plan]').hidden).toBe(false)
+    expect([...$$('[data-sv-plan-needs] .sabs-need-long')].map(e => e.textContent)).toEqual(['reference letters', 'award with essays'])
+    expect($('[data-sv-plan-note]').textContent).toContain('Ask your referees once')
+
+    const select = $('[data-id="1"] [data-sv-status]') as HTMLSelectElement
+    select.value = 'submitted'
+    select.dispatchEvent(new Event('change', { bubbles: true }))
+    expect(localStorage.getItem('scholarab_status')).toBe('{"s:1":"submitted"}')
+    expect(sendEvent).toHaveBeenCalledWith('app_status', 'scholarship', 1, 'submitted')
+    // Done: no number, nothing left to add up, and the row stays put until the next visit.
+    expect($$('[data-sv-start]').every(e => e.hidden)).toBe(true)
+    expect($('[data-sv-plan]').hidden).toBe(true)
+    expect($$('[data-sv-wrap]').map(w => w.dataset.id)[0]).toBe('1')
+
+    setup()
+    expect(($('[data-id="1"] [data-sv-status]') as HTMLSelectElement).value).toBe('submitted')
+    expect($$('[data-sv-wrap]').map(w => w.dataset.id)).toEqual(['2', '1'])
   })
 })

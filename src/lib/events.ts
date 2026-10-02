@@ -12,6 +12,9 @@ export type AppEvent =
   /** "See the combo" on a /match result's combo tray. No meta: which combo
    *  is not worth an open field in the events table. */
   | 'combo_open'
+  /** A status set on /saved. Meta is the status (working, submitted, won):
+   *  the first count of whether a saved award gets applied for or won. */
+  | 'app_status'
 
 const OPT_OUT_KEY = 'sa_no_track'
 /** `?nt=1` opts this browser out, `?nt=0` opts back in. */

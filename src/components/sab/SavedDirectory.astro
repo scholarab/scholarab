@@ -2,6 +2,7 @@
 import type { SavedItem } from '../../lib/saved-client.ts';
 import { generateSlug } from '../../lib/utils.ts';
 import type { Scholarship, Program } from '../../lib/data-loader.ts';
+import type { PlanKit } from '../../lib/saved-plan.ts';
 
 interface Props {
   initialScholarships: Scholarship[];
@@ -9,9 +10,16 @@ interface Props {
 }
 const { initialScholarships, initialPrograms } = Astro.props;
 // Keep the card fields inline so every bookmark works with the cached page.
+// toApply travels as kinds and a letter count only: the plan adds them up,
+// and the full text is one click away on the award's page.
+const kitOf = (t: Scholarship['toApply']): PlanKit | undefined => t ? {
+  k: t.items.map(i => i.kind),
+  r: t.items.reduce((n, i) => n + (i.kind === 'reference' ? i.count ?? 1 : 0), 0),
+  c: t.complete,
+} : undefined;
 const items: SavedItem[] = [
-  ...initialScholarships.map(({ id, title: name, amount, audience, deadline, openDate, active, concluded, deadlineEstimated, rolling, url }) =>
-    ({ type: 'scholarship' as const, id, name, amount, audience, deadline, openDate, active, concluded, deadlineEstimated, rolling, url, href: `/scholarships/${generateSlug(name)}/` })),
+  ...initialScholarships.map(({ id, title: name, amount, audience, deadline, openDate, active, concluded, deadlineEstimated, rolling, url, toApply }) =>
+    ({ type: 'scholarship' as const, id, name, amount, audience, deadline, openDate, active, concluded, deadlineEstimated, rolling, url, href: `/scholarships/${generateSlug(name)}/`, ...(toApply ? { kit: kitOf(toApply) } : {}) })),
   ...initialPrograms.map(({ id, name, eligibility: audience, paid, cost, deadline, active, url }) =>
     ({ type: 'program' as const, id, name, audience, paid, cost, deadline, ...(active === false ? { active: false } : {}), url, href: `/programs/${generateSlug(name)}/` })),
 ];
@@ -56,6 +64,15 @@ const items: SavedItem[] = [
   </div>
 
   <div style="margin-top:48px" data-sv-list hidden>
+    <section class="sabs-plan" aria-labelledby="sabs-plan-h" data-sv-plan hidden>
+      <h2 id="sabs-plan-h" class="sabs-section-head sabl-mono">
+        <span class="sabs-dot" style="background:#FFC700" aria-hidden="true"></span>
+        <span>YOUR PLAN</span>
+      </h2>
+      <p class="sabs-plan-lead" data-sv-plan-lead></p>
+      <ul class="sabs-plan-needs" data-sv-plan-needs></ul>
+      <p class="sabs-plan-note" data-sv-plan-note></p>
+    </section>
     <div data-sv-sh-section hidden>
       <h2 class="sabs-section-head sabl-mono">
         <span class="sabs-dot" style="background:#2FD3A0" aria-hidden="true"></span>

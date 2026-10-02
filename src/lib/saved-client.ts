@@ -9,6 +9,7 @@ import { downloadICS } from './ics.ts';
 import { BOOKMARK, ARROW, EXT } from './icons.ts';
 import type { ICSScholarship, ICSProgram } from './ics.ts';
 import type { Program } from './data-loader';
+import { PLAN_STATUSES, STATUS_LABEL, getStatus, setStatus, planOrder, startWith, planNeeds, type PlanKit, type PlanStatus } from './saved-plan.ts';
 
 // ── Chip/label helpers ───────────────────────────────────────────────────────
 
@@ -43,6 +44,8 @@ export type SavedItem = {
   openDate?: string | null; active?: boolean; concluded?: boolean;
   deadlineEstimated?: boolean;
   rolling?: boolean;
+  /** From toApply, on the scholarships that have one. */
+  kit?: PlanKit;
 };
 
 function savedCard(s: SavedItem): string {
@@ -51,8 +54,9 @@ function savedCard(s: SavedItem): string {
   return `<div class="h-full" data-sv-wrap data-type="${s.type}" data-id="${s.id}">
     <div class="sabl-card h-full" data-id="${s.id}" data-name="${esc(s.name)}"${attr('deadline', s.deadline)}${attr('inactive', s.active === false ? '' : undefined)}${sh ? attr('open-date', s.openDate) + attr('concluded', s.concluded ? '' : undefined) + attr('estimated', s.deadlineEstimated ? '' : undefined) + attr('rolling', s.rolling ? '' : undefined) + attr('amount', s.amount) : ''} data-url="${esc(s.url)}">
       <div class="sabl-row-main">
-        <h3 class="sabl-name-h"><a href="${esc(s.href)}" class="sabl-name">${esc(s.name)}</a></h3>
+        <h3 class="sabl-name-h"><span class="sabs-start" data-sv-start hidden></span><a href="${esc(s.href)}" class="sabl-name">${esc(s.name)}</a></h3>
         ${s.audience ? `<div class="sabl-blurb">${esc(s.audience)}</div>` : ''}
+        <label class="sabs-status"><span class="sr-only">Where ${esc(s.name)} stands</span><select data-sv-status>${PLAN_STATUSES.map(v => `<option value="${v}">${STATUS_LABEL[v]}</option>`).join('')}</select></label>
       </div>
       ${sh ? (() => { const a = amountCell(s.amount); return `<div class="${a.cls}">${esc(a.text)}</div>`; })()
         : `<span class="sabl-card-top-left">${s.paid ? '<span class="sabl-paid">Pays you</span>'
@@ -190,10 +194,75 @@ export function initSaved() {
     for (const type of ['scholarship', 'program'] as const) {
       const ids = new Set(type === 'scholarship' ? getSaved() : getSavedPrograms());
       const grid = root.querySelector(`[data-sv-${type === 'scholarship' ? 'sh' : 'pr'}-section] .sabl-grid`);
-      if (grid) grid.innerHTML = savedOrder(items.filter(s => s.type === type && ids.has(s.id))).map(savedCard).join('');
+      if (grid) grid.innerHTML = planOrder(savedOrder(items.filter(s => s.type === type && ids.has(s.id))), statusOf).map(savedCard).join('');
     }
     repaintChips();
+    paintPlan();
     updateVisibility();
+  }
+
+  // ── The plan: statuses, the numbered start, what the list asks for ──────────
+
+  const statusOf = (s: SavedItem): PlanStatus => getStatus(s.type, s.id);
+
+  function isClosed(s: SavedItem): boolean {
+    if (s.type === 'program') return s.active === false;
+    return getScholarshipStatus({ id: 0, deadline: s.deadline, openDate: s.openDate ?? null, active: s.active ?? true, concluded: s.concluded, deadlineEstimated: s.deadlineEstimated, rolling: s.rolling } as Parameters<typeof getScholarshipStatus>[0]) === 'closed';
+  }
+
+  /** The saved items still on the page, in the order their rows read. */
+  function liveItems(): (SavedItem & { closed: boolean })[] {
+    const byKey = new Map(items.map(s => [`${s.type}:${s.id}`, s]));
+    return [...savedWraps('scholarship'), ...savedWraps('program')]
+      .filter(w => !w.hidden)
+      .map(w => byKey.get(`${w.dataset.type}:${w.dataset.id}`))
+      .filter((s): s is SavedItem => !!s)
+      .map(s => ({ ...s, closed: isClosed(s) }));
+  }
+
+  function paintPlan() {
+    if (!root) return;
+    const live = liveItems();
+    const first = startWith(live, statusOf);
+    const rank = new Map(first.map((s, n) => [s.id, n + 1]));
+    for (const w of wraps()) {
+      const type = w.dataset.type as SavedItem['type'];
+      const id = Number(w.dataset.id);
+      const status = getStatus(type, id);
+      w.dataset.status = status;
+      const select = w.querySelector<HTMLSelectElement>('[data-sv-status]');
+      if (select) select.value = status;
+      const start = w.querySelector<HTMLElement>('[data-sv-start]');
+      const n = type === 'scholarship' ? rank.get(id) : undefined;
+      if (start) { start.hidden = !n; start.textContent = n ? String(n) : ''; }
+    }
+
+    const plan = root.querySelector<HTMLElement>('[data-sv-plan]');
+    if (!plan) return;
+    const { needs, todo, listed, partial, nothing } = planNeeds(live, statusOf);
+    const lead = plan.querySelector<HTMLElement>('[data-sv-plan-lead]')!;
+    const words = ['', 'one', 'two', 'three'];
+    lead.textContent = first.length === 0 ? ''
+      : first.length === 1 ? 'Start with the numbered award: it is the next one still open.'
+      : `Start with the ${words[first.length]} numbered awards: they close soonest of the ones still open.`;
+    lead.hidden = first.length === 0;
+    const list = plan.querySelector<HTMLElement>('[data-sv-plan-needs]')!;
+    list.innerHTML = needs.map(d => `<li><span class="sabl-group-count">${d.n}</span><span class="sabs-need-long">${esc(d.label)}</span><span class="sabs-need-short" aria-hidden="true">${esc(d.short)}</span></li>`).join('');
+    list.hidden = needs.length === 0;
+    const note = plan.querySelector<HTMLElement>('[data-sv-plan-note]')!;
+    const parts: string[] = [];
+    if (needs.length > 0) {
+      const missing = todo - listed;
+      parts.push(missing === 0
+        ? `What your ${todo === 1 ? 'open award asks' : `${todo} open awards ask`} for, from the providers' own pages.`
+        : `Counted from ${listed} of your ${todo} open awards; ${missing === 1 ? "the other one doesn't say what it asks" : "the others don't say what they ask"} for yet.`);
+      if (partial > 0) parts.push(`${partial === 1 ? 'One form' : `${partial} forms`} may ask for more than ${partial === 1 ? 'its page lists' : 'their pages list'}.`);
+      if (needs.some(d => /reference/.test(d.label))) parts.push('Ask your referees once, for all of them.');
+    }
+    if (nothing > 0) parts.push(`${nothing === 1 ? 'One award needs' : `${nothing} awards need`} no application at all.`);
+    note.textContent = parts.join(' ');
+    note.hidden = parts.length === 0;
+    plan.hidden = first.length === 0 && needs.length === 0 && nothing === 0;
   }
 
   // ── Calendar (vanilla port of the old DeadlineCalendar island) ──────────────
@@ -364,6 +433,7 @@ export function initSaved() {
         wrap.hidden = false;
         wrap.removeAttribute('style');
         delete card.dataset.removing;
+        paintPlan();
         updateVisibility();
       },
     });
@@ -375,6 +445,7 @@ export function initSaved() {
       wrap.hidden = true;
       wrap.removeAttribute('style');
       delete card.dataset.removing;
+      paintPlan();
       updateVisibility();
     };
     const collapse = () => {
@@ -448,7 +519,22 @@ export function initSaved() {
     }
   });
 
+  document.addEventListener('change', e => {
+    const select = (e.target as Element | null)?.closest?.<HTMLSelectElement>('[data-sv-status]');
+    const wrap = select?.closest<HTMLElement>('[data-sv-wrap]');
+    if (!root || !select || !wrap || !root.contains(select)) return;
+    const type = wrap.dataset.type as SavedItem['type'];
+    const id = Number(wrap.dataset.id);
+    const status = select.value as PlanStatus;
+    setStatus(type, id, status);
+    if (status !== 'todo') sendEvent('app_status', type, id, status);
+    // The row stays where it is until the next visit: moving it from under
+    // the pointer that just set it reads as losing it.
+    paintPlan();
+  });
+
   window.addEventListener('storage', e => {
+    if (e.key === 'scholarab_status') paintPlan();
     if (e.key === 'scholarab_saved' || e.key === 'scholarab_saved_programs') repaint();
   });
 

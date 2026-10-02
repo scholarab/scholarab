@@ -1613,6 +1613,62 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
 .sabs-toggle-btn:hover { opacity: 0.85; }
 .sabs-toggle-btn.on { background: var(--text-primary); color: var(--paper); }
 
+/* /saved as a plan (2026-10-01): a status on each row, the first three to
+   start numbered with the combo trays' sticker, and what the list asks for. */
+.sabs-plan { margin-bottom: 44px; }
+.sabs-plan-lead { font-size: 16px; line-height: 1.5; margin: 2px 0 16px; max-width: 64ch; }
+.sabs-plan-needs { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 14px 30px; }
+.sabs-plan-needs[hidden], .sabs-plan [hidden] { display: none; }
+.sabs-plan-needs li {
+  display: flex; align-items: center; gap: 10px;
+  font: 800 20px/1.05 var(--font-display); text-transform: uppercase;
+}
+.sabs-plan-note { font-size: 14px; line-height: 1.5; color: rgba(20, 25, 21, 0.74); margin: 16px 0 0; max-width: 70ch; }
+.sabs-need-short { display: none; }
+.sabs-start {
+  display: inline-grid; place-items: center; flex: none;
+  width: 30px; height: 30px; margin-right: 10px; border-radius: 50%;
+  background: var(--text-primary); color: #FFC700;
+  font: 800 17px/1 var(--font-display); transform: rotate(-6deg); vertical-align: 2px;
+}
+.sabs-start[hidden] { display: none; }
+/* Above the row's stretched title link, like Save and Apply. */
+.sabs-status { position: relative; z-index: 1; display: inline-block; margin-top: 8px; }
+.sabs-status select {
+  appearance: none; -webkit-appearance: none; cursor: pointer;
+  font: 700 13px/1 var(--font-body); color: var(--text-primary);
+  min-height: 34px; padding: 8px 30px 8px 13px;
+  border: 1.5px solid rgba(20, 25, 21, 0.3); border-radius: 100px;
+  background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23141915' stroke-width='1.6'/%3E%3C/svg%3E") no-repeat right 12px center;
+}
+.sabs-status select:hover { border-color: var(--text-primary); }
+[data-status="working"] .sabs-status select { border-color: var(--text-primary); }
+[data-status="submitted"] .sabs-status select { background-color: #E3F3EC; border-color: #0A6B4D; color: #0A6B4D; }
+[data-status="won"] .sabs-status select {
+  background-color: var(--text-primary); border-color: var(--text-primary); color: #FFC700;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23FFC700' stroke-width='1.6'/%3E%3C/svg%3E");
+}
+@media (max-width: 900px) {
+  /* iOS zooms into a select under 16px on focus. */
+  .sabs-status select { font-size: 16px; }
+  /* The number sat on a line of its own above a phone title. */
+  .sabl-card .sabl-name-h:has(> .sabs-start:not([hidden])) { display: flex; align-items: flex-start; }
+  .sabs-start { margin-top: -2px; }
+  /* One line on a phone (Ilia, 2026-10-01): the totals in short words beside
+     the heading, the sentences left to desktop, so the plan costs the first
+     row as little as it can. The numbered stickers explain themselves. */
+  .sabs-plan { margin-bottom: 20px; }
+  .sabs-plan .sabs-section-head { padding-bottom: 8px; }
+  .sabs-plan-lead, .sabs-plan-note { display: none; }
+  /* With no totals the phone strip would be a bare heading. */
+  .sabs-plan:has(> .sabs-plan-needs[hidden]) { display: none; }
+  .sabs-plan-needs { flex-wrap: wrap; gap: 6px 14px; }
+  .sabs-plan-needs li { font-size: 15px; gap: 6px; }
+  .sabs-plan-needs .sabl-group-count { min-width: 26px; height: 26px; font-size: 15px; padding: 0 6px; }
+  .sabs-need-long { display: none; }
+  .sabs-need-short { display: inline; }
+}
+
 
 .sabs-section-head {
   display: flex; align-items: center; gap: 10px; padding: 14px 0;

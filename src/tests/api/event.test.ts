@@ -301,6 +301,19 @@ describe('POST /api/event', () => {
     expect(mockValues).toHaveBeenCalledWith({ event: 'save', itemType: 'program', itemId: 3, meta: null })
   })
 
+  it('records a status set on /saved, with the status as meta', async () => {
+    const res = await call({ event: 'app_status', itemType: 'scholarship', itemId: 57, meta: 'submitted' })
+    expect(res.status).toBe(204)
+    expect(mockValues).toHaveBeenCalledWith({ event: 'app_status', itemType: 'scholarship', itemId: 57, meta: 'submitted' })
+  })
+
+  it('rejects an app_status without a known status or without its award', async () => {
+    expect((await call({ event: 'app_status', itemType: 'scholarship', itemId: 57, meta: 'lost' })).status).toBe(400)
+    expect((await call({ event: 'app_status', itemType: 'scholarship', itemId: 57 })).status).toBe(400)
+    expect((await call({ event: 'app_status', meta: 'won' })).status).toBe(400)
+    expect(mockValues).not.toHaveBeenCalled()
+  })
+
   it('rejects a save place outside the fixed list', async () => {
     const res = await call({ event: 'save', itemType: 'scholarship', itemId: 5, meta: 'my name is' })
     expect(res.status).toBe(400)
