@@ -51,6 +51,9 @@ interface Props {
   schoolFilter?: boolean;
   /** City hubs: the broad lists the reader can also apply from. */
   alsoOpen?: { place: string; lists: Array<{ slug: string; label: string; count: number }> };
+  /** Rows before "Show more". City hubs take 12: a phone page ran 8 screens and
+      4-7% of readers reached its end (private/flow-plan, 2026-10-01). */
+  step?: number;
 }
 const {
   items,
@@ -62,6 +65,7 @@ const {
   railFilters = false,
   schoolFilter = false,
   alsoOpen,
+  step = DIRECTORY_PAGE_SIZE,
 } = Astro.props;
 
 // SCOPE, not REGION: these are how far an award reaches, not where the student
@@ -173,7 +177,7 @@ const openNow = openNowCount(initial);
 ---
 
 <Fragment set:html={ICON_SPRITE} />
-<div class:list={['sabl-page', { 'sabl-railed': railFilters }]}>
+<div class:list={['sabl-page', { 'sabl-railed': railFilters }]} data-dir-step={step}>
   {/* Everything above the cards. Unstyled by default; a hub with a photo
       backdrop turns it into one frosted panel so no text sits on the photo. */}
   <div class="sabl-head">
@@ -320,7 +324,7 @@ const openNow = openNowCount(initial);
       return (
         <>
         {head && (
-          <h2 class="sabl-group-h" data-dir-group={head.key} data-dir-later={i >= DIRECTORY_PAGE_SIZE ? '' : undefined}>
+          <h2 class="sabl-group-h" data-dir-group={head.key} data-dir-later={i >= step ? '' : undefined}>
           <button
             type="button"
             class="sabl-group"
@@ -348,7 +352,7 @@ const openNow = openNowCount(initial);
         <div
           class="sabl-card"
           data-dir-card
-          data-dir-later={i >= DIRECTORY_PAGE_SIZE ? '' : undefined}
+          data-dir-later={i >= step ? '' : undefined}
           data-dir-shut={SHUT_GROUPS.has(scholarshipGroupKey(s)) ? '' : undefined}
           data-after={isAfterHighSchool(s) ? '' : undefined}
           data-id={s.id}
@@ -409,12 +413,12 @@ const openNow = openNowCount(initial);
       A list that fits in one step can never need the block (the cards on the
       page are the most any filter can show), so it is left out rather than
       shipped hidden with "Show -3 more" in the markup. */}
-  {initial.length > DIRECTORY_PAGE_SIZE && (
+  {initial.length > step && (
     <div class="sabl-more" data-dir-more>
-      <p class="sabl-more-line" data-dir-more-line>{showingLine(initial.slice(0, DIRECTORY_PAGE_SIZE), initial.filter(s => !SHUT_GROUPS.has(scholarshipGroupKey(s))), scholarshipGroupKey, k => SCHOLARSHIP_GROUP_LABELS[k] ?? k.toUpperCase())}</p>
+      <p class="sabl-more-line" data-dir-more-line>{showingLine(initial.slice(0, step), initial.filter(s => !SHUT_GROUPS.has(scholarshipGroupKey(s))), scholarshipGroupKey, k => SCHOLARSHIP_GROUP_LABELS[k] ?? k.toUpperCase())}</p>
       <div class="sabl-more-actions">
-        <button type="button" class="sabl-more-btn" data-dir-more-btn>Show {Math.min(DIRECTORY_PAGE_SIZE, initial.length - DIRECTORY_PAGE_SIZE)} more</button>
-        <button type="button" class="sabl-more-all" data-dir-all hidden={initial.length - DIRECTORY_PAGE_SIZE <= DIRECTORY_PAGE_SIZE}>Show all</button>
+        <button type="button" class="sabl-more-btn" data-dir-more-btn>Show {Math.min(step, initial.length - step)} more</button>
+        <button type="button" class="sabl-more-all" data-dir-all hidden={initial.length - step <= step}>Show all</button>
       </div>
     </div>
   )}

@@ -171,7 +171,8 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
   // counted, searched, summed and handed to the detail arrows (`visible`), but
   // only the first `shown` are on screen. Any change to what matches starts the
   // count over; only the buttons raise it.
-  const pageSize = config.pageSize ?? DIRECTORY_PAGE_SIZE;
+  // Per page: a city hub's list asks for a shorter first step (data-dir-step).
+  let pageSize = config.pageSize ?? DIRECTORY_PAGE_SIZE;
   let shown = pageSize;
   let pool: T[] = [];
   // Every word on this page's listings, built on the first search that finds
@@ -657,6 +658,7 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
   document.addEventListener('astro:page-load', () => {
     root = document.querySelector<HTMLElement>(rootSelector);
     if (!root) return;
+    pageSize = Number(root.querySelector<HTMLElement>('[data-dir-step]')?.dataset.dirStep) || config.pageSize || DIRECTORY_PAGE_SIZE;
     // The layout sets this in <head>; repeated here so a page built on another
     // layout still gets its "Show more" block (global.css hides it without).
     document.documentElement.classList.add('js');

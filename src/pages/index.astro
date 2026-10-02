@@ -173,6 +173,17 @@ const tallSet = (b: string) => `/photos/backdrops/${b}-tall-1000.webp 1000w, /ph
 const wideSrc = (b: string) => `/photos/backdrops/${b}-wide-1672.webp`;
 const wideSet = (b: string) => `${wideSrc(b)} 1672w, /photos/backdrops/${b}-wide-3344.webp 3344w`;
 
+// Every city with its own list, for "Back to Calgary" under the hero buttons
+// (lib/my-city.ts). Open counts as the carousel counts them, at build time.
+const myCityHubs = Object.fromEntries(SCHOLARSHIP_FACETS
+  .filter(f => f.kind === 'region' && !f.broad && !f.bySchool)
+  .map(f => ({ f, items: facetItems(f, scholarships) }))
+  .filter(({ items }) => items.length >= MIN_FACET_ITEMS)
+  .map(({ f, items }) => [f.slug, {
+    label: f.label,
+    open: openCounts(items.filter(s => !isAfterHighSchool(s)), s => scholarshipStatusOf(s, today)).open,
+  }]));
+
 const carousels = [
   // `none` is the line under a hub with nothing open, in the directory's own
   // status words (lib/status.ts) so the slide and the hub describe it alike.
@@ -283,6 +294,29 @@ const carousels = [
                 Explore programs
               </a>
             </div>
+            {/* A returning student's own city, from the last city list they
+                opened (lib/my-city.ts). Filled in the browser; hidden until then. */}
+            <p class="sab-hero-quiz sab-hero-city" data-my-city={JSON.stringify(myCityHubs)} hidden>
+              <a href="/scholarships/" data-my-city-link></a>
+            </p>
+            {/* Inline, right here, so the line is in place before first paint:
+                painted later, it would push the quiz line down under the reader. */}
+            <script is:inline>(function () {
+              const line = document.querySelector('[data-my-city]');
+              const link = line && line.querySelector('[data-my-city-link]');
+              if (!link) return;
+              try {
+                const hubs = JSON.parse(line.getAttribute('data-my-city') || '{}');
+                const slug = localStorage.getItem('sa_city'); // lib/my-city.ts
+                const hub = slug && Object.prototype.hasOwnProperty.call(hubs, slug) ? hubs[slug] : null;
+                if (!hub) return;
+                link.href = '/scholarships/' + slug + '/';
+                link.textContent = hub.open > 0
+                  ? 'Back to ' + hub.label + ': ' + hub.open.toLocaleString('en-CA') + ' open now'
+                  : 'Back to ' + hub.label + "'s list";
+                line.hidden = false;
+              } catch { /* storage blocked: no line */ }
+            })();</script>
             {/* The home page's only road to the quiz went with the mini-quiz
                 (critique 2026-09-23). One quiet line, not a third button. */}
             <p class="sab-hero-quiz">Not sure where to start? <a href="/match/">Answer a few questions</a> and get a shortlist. No email needed.</p>
@@ -858,6 +892,11 @@ const carousels = [
     display: inline-block; padding-top: 10px; margin-top: -10px;
   }
   .sab-hero-quiz a:hover { color: #2FD3A0; border-bottom-color: #2FD3A0; }
+  /* The remembered city reads as the first thing to press, not a footnote. */
+  .sab-hero .sab-hero-city { margin-top: 16px; }
+  .sab-hero-city a { font-weight: 700; }
+  .sab-hero-city a::after { content: ' →'; }
+  .sab-hero-city + .sab-hero-quiz { margin-top: 8px; }
   /* One pair, one size, one motion: hover only changes colour. The lift onto a
      hard shadow and the press snap were three effects on two buttons, and the
      outline button's thick tinted border made it look like a second, heavier

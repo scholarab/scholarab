@@ -1614,3 +1614,16 @@ Outcome: a student who lands on one listing from Google has a next step on the s
 | "Also for marks" (Academic category) | Dropped as a reason: it matched Loran to a county bursary on nothing a student would recognise. |
 
 Add-back fraction: 0/0. Local only: built pages sampled (Loran, Kin, Ted Rogers, Chick-fil-A, Empowered Young Woman, Conrad, Alberta Youth Choir) and checked on phone and desktop.
+
+## City pages: remembered city and a shorter first step, October 2, 2026
+
+Outcome: a returning student gets back to their city's list in one tap, and a city page ends sooner. A Calgary phone page ran 8 screens with 24 rows before "Show more", and 4-7% of readers reached its end (private/flow-plan).
+
+| Candidate | Result and retained requirement |
+| --- | --- |
+| Point "Browse 880 scholarships" at the remembered city | Not done: the home page's buttons are the part readers praised, and the whole directory stays one press away. One line under them instead, "Back to Calgary: 10 open now", only when a city list was opened on this device (`sa_city`, lib/my-city.ts), painted inline before first paint so it shifts nothing. |
+| A city picker or "change city" control | Not built: opening another city's list replaces the remembered one. |
+| 24 rows before "Show more" on city pages | 12 on city hubs (`step`, read by directory-client from `data-dir-step`): Calgary's ten open awards all show, the 62 opening later sit behind "Show 12 more". Phone page 8.0 to 5.5 screens. Province-wide, national, school and topic hubs and /scholarships keep 24. |
+| Privacy page | Updated: the counts list now names the /saved status event shipped 2026-10-01 (it had been missed), and the device-storage line names statuses and the remembered city. |
+
+Add-back fraction: 0/0. Local only: built Calgary, Edmonton and home pages checked on phone and desktop.

@@ -8,7 +8,7 @@ import { webPageJson } from '../lib/ld';
 // Shown in the page and used as the "last updated" line. Bump this whenever
 // what the site actually collects changes; the date is the only thing telling
 // a reader whether this document still describes the code.
-const LAST_UPDATED = 'September 29, 2026';
+const LAST_UPDATED = 'October 2, 2026';
 
 // One row per thing the site stores. Kept as data rather than prose so it is
 // obvious when a new table or endpoint has no row here yet.
@@ -57,7 +57,7 @@ const collected = [
   },
   {
     what: 'Anonymous counts of what gets used',
-    when: 'When you open a listing, click through to apply, save something, run the match quiz, and once per visit if you arrived from one of our own tagged links, such as the one in an Instagram or TikTok bio, which records only which of those it was.',
+    when: 'When you open a listing, click through to apply, save something, mark a saved scholarship as started, submitted or won (which records the listing and that one word), run the match quiz, and once per visit if you arrived from one of our own tagged links, such as the one in an Instagram or TikTok bio, which records only which of those it was.',
     why: 'To know which listings matter and which way of telling people about the site actually works, so the directory gets better. What was searched for is the row above; this row is counts.',
     kept: '180 days, including previously recorded walkthrough counts. These rows carry no IP address, no cookie, no account and no session. There is nothing in them that points back to a person, which also means they cannot be traced to you in order to delete them.',
   },
@@ -65,7 +65,7 @@ const collected = [
 
 const notCollected = [
   'No name, school, or grades. Every answer you give the match quiz, including the questions about family income, Indigenous or BIPOC identity, foster care and gender, stays in your browser and is never sent to us. We are told only that a quiz was started and that one was finished, and nothing whatsoever about what was in it.',
-  'No saved listings: those live in your browser’s local storage, on your device. Your browser also keeps a small note of which counts it has already sent, so one visit is not counted twice; that note stays on your device and is never sent anywhere.',
+  'No saved listings, and nothing about what you mark them as or which city’s list you last opened: those live in your browser’s local storage, on your device. Your browser also keeps a small note of which counts it has already sent, so one visit is not counted twice; that note stays on your device and is never sent anywhere.',
   'No accounts, no passwords, no logins for students.',
   'No advertising cookies, no tracking pixels, no data brokers. Nothing on this site is a data broker and nothing here advertises to you. Two counting scripts can run: Cloudflare’s, which is cookieless and identifier-free and needs no permission because it identifies nobody, and Google Analytics, which does set a cookie and does identify your browser, and therefore runs only if you press Allow. If you have not answered, or said no, Google Analytics is not on the page.',
   'Nothing is ever sold, rented, or shared for marketing. There is no business model here that would want it.',

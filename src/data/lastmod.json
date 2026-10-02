@@ -4,8 +4,8 @@
     "date": "2026-09-30"
   },
   "/privacy/": {
-    "hash": "33a52924aa6266bb",
-    "date": "2026-09-29"
+    "hash": "7338aa47a817d88c",
+    "date": "2026-10-02"
   },
   "/programs/4-h-alberta-senior-program/": {
     "hash": "c2b4cae0d14974cf",
@@ -1083,10 +1083,6 @@
     "hash": "d9a439f55a1a27b6",
     "date": "2026-10-01"
   },
-  "/scholarships/advancing-futures-bursary/": {
-    "hash": "cd5f8b16b6fb5743",
-    "date": "2026-10-01"
-  },
   "/scholarships/aebc-and-allyant-scholarship-program/": {
     "hash": "7d69357a2b99b8e9",
     "date": "2026-09-07"
@@ -1458,10 +1454,6 @@
   "/scholarships/black-knight-inn-university-transfer-scholarship/": {
     "hash": "d1476a98fb5d50e5",
     "date": "2026-10-01"
-  },
-  "/scholarships/bob-neufeld-scholarship/": {
-    "hash": "7caabd31107b4054",
-    "date": "2026-09-04"
   },
   "/scholarships/bonnyville-agriculture-society-scholarship/": {
     "hash": "54e4eac85679bc77",
@@ -2039,10 +2031,6 @@
     "hash": "279f2a8d7e8ccee0",
     "date": "2026-09-27"
   },
-  "/scholarships/county-of-wetaskiwin-agricultural-bursary/": {
-    "hash": "c15bc8009d3f66f3",
-    "date": "2026-09-26"
-  },
   "/scholarships/cpa-alberta-young-emerging-professional-award/": {
     "hash": "1ff1ef41a8eb4d5a",
     "date": "2026-10-01"
@@ -2327,10 +2315,6 @@
     "hash": "ec46498d25ade406",
     "date": "2026-09-27"
   },
-  "/scholarships/federation-of-alberta-gas-co-ops-achievement-award/": {
-    "hash": "0c7084c7a6c79180",
-    "date": "2026-10-01"
-  },
   "/scholarships/feth-family-award/": {
     "hash": "aa6160084d0eb1ad",
     "date": "2026-10-01"
@@ -2574,10 +2558,6 @@
   "/scholarships/grande-prairie-and-district-chamber-of-commerce-legacy-fund/": {
     "hash": "d8a40df4e0d7fdb9",
     "date": "2026-09-07"
-  },
-  "/scholarships/grande-prairie-and-district-oldtimers-association-scholarship/": {
-    "hash": "de3328b28ec1e46f",
-    "date": "2026-09-04"
   },
   "/scholarships/grande-prairie-auto-group-student-award/": {
     "hash": "b01fe7f50674b590",
@@ -3619,10 +3599,6 @@
     "hash": "4ce15a2ba08a4dd6",
     "date": "2026-10-01"
   },
-  "/scholarships/perky-mccullough-international-excellence-scholarship/": {
-    "hash": "8f583acef36eabb5",
-    "date": "2026-09-04"
-  },
   "/scholarships/persons-case-scholarship/": {
     "hash": "97bc382b8afbfe9e",
     "date": "2026-09-08"
@@ -3634,10 +3610,6 @@
   "/scholarships/petro-canada-fund-scholarship/": {
     "hash": "84deb951767a88c0",
     "date": "2026-09-27"
-  },
-  "/scholarships/pioneer-gas-co-op-achievement-award/": {
-    "hash": "f203e78859607f87",
-    "date": "2026-09-19"
   },
   "/scholarships/pioneer-homestead-bursary/": {
     "hash": "fc0aa0b7b77984e2",
@@ -3709,10 +3681,6 @@
   },
   "/scholarships/rbc-elevate-scholarship/": {
     "hash": "bfd0ec0cbd42a635",
-    "date": "2026-10-01"
-  },
-  "/scholarships/rbc-ignite-scholarship/": {
-    "hash": "9ed5ba37471b96fe",
     "date": "2026-10-01"
   },
   "/scholarships/reading-university-alumni-student-award/": {

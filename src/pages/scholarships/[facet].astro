@@ -70,6 +70,9 @@ const indexable = items.some(s => scholarshipIsIndexable(s, today));
 
 const guide = facet.guide ? getGuide(facet.guide) : null;
 
+// A city's own list, as opposed to a province-wide, national or school one.
+const isCity = facet.kind === 'region' && !facet.broad && !facet.bySchool;
+
 // A city hub lists only its own city's awards, and read as the whole list: a
 // Calgary student from Google saw 89 rows, the first open one 212 days out,
 // and nothing said the province-wide and national lists were theirs too
@@ -125,6 +128,7 @@ const breadcrumbJson = {
 
   <div
     id="sab-scholarships"
+    data-remember-city={isCity ? facet.slug : undefined}
     class:list={['sabp', 'sabp-wide', { 'sabl-has-backdrop': backdrop }]}
     style={backdrop
       ? `--sabl-wide: url(/photos/backdrops/${backdrop}-wide-1672.webp); --sabl-wide-2x: url(/photos/backdrops/${backdrop}-wide-3344.webp); --sabl-tall: url(/photos/backdrops/${backdrop}-tall-1000.webp); --sabl-tall-2x: url(/photos/backdrops/${backdrop}-tall-2000.webp)`
@@ -146,6 +150,7 @@ const breadcrumbJson = {
         railFilters
         schoolFilter={facet.bySchool}
         alsoOpen={broadCounts.length === 2 ? { place: facet.label, lists: broadCounts } : undefined}
+        step={isCity ? 12 : undefined}
       />
 
       <div class="sabl-hubfoot">
@@ -178,6 +183,14 @@ const breadcrumbJson = {
 </Layout>
 
 <script>
+  import { rememberCity } from '../../lib/my-city.ts';
+  // The city a student last opened, so the home page can offer it back
+  // (lib/my-city.ts). On every hub load, view transitions included.
+  document.addEventListener('astro:page-load', () => {
+    const slug = document.querySelector<HTMLElement>('[data-remember-city]')?.dataset.rememberCity;
+    if (slug) rememberCity(slug);
+  });
+
   // Drives the backdrop's scroll fade: 0 while the header panel is on screen,
   // 1 once the reader is a screen's height into the listings. A custom property
   // on one element, written at most once a frame, so scrolling stays cheap.
