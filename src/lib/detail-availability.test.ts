@@ -147,7 +147,7 @@ describe('detail availability', () => {
 
   it('preserves all no-separate-application routes and provider links', async () => {
     const records = scholarships.filter(s => saysNoApplication(s.notes, s.metaDetail, s.description))
-    expect(records).toHaveLength(16)
+    expect(records).toHaveLength(21)
     for (const s of records) {
       await render(data('scholarship', s))
       expect(text('.sabd-cta'), s.title).not.toMatch(/^Apply\b/)

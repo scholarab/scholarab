@@ -128,15 +128,20 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
     q: 'Where are you planning to study?',
     // Every school here is one the listings name as a requirement, so picking
     // it changes the results. Lethbridge, Northwestern Polytechnic, Keyano and
-    // Medicine Hat College left on 2026-09-30 with the colleges' own awards.
+    // Medicine Hat College left on 2026-09-30 with the colleges' own awards and
+    // came back on 2026-10-01 with their entrance awards.
     opts: [
       { label: 'University of Alberta', value: 'University of Alberta', hint: 'Edmonton' },
       { label: 'University of Calgary', value: 'University of Calgary', hint: 'Calgary' },
+      { label: 'University of Lethbridge', value: 'University of Lethbridge', hint: 'Lethbridge' },
       { label: 'MacEwan University', value: 'MacEwan University', hint: 'Edmonton' },
       { label: 'Mount Royal University', value: 'Mount Royal University', hint: 'Calgary' },
       { label: 'NAIT', value: 'Northern Alberta Institute of Technology', hint: 'Edmonton' },
       { label: 'SAIT', value: 'SAIT', hint: 'Calgary' },
       { label: 'Red Deer Polytechnic', value: 'Red Deer Polytechnic', hint: 'Red Deer' },
+      { label: 'Northwestern Polytechnic', value: 'Northwestern Polytechnic', hint: 'Grande Prairie' },
+      { label: 'Keyano College', value: 'Keyano College', hint: 'Fort McMurray' },
+      { label: 'Medicine Hat College', value: 'Medicine Hat College', hint: 'Medicine Hat' },
       { label: 'Trades / Apprenticeship', value: 'Trades / Apprenticeship program', hint: 'Any apprenticeship' },
       { label: 'Somewhere else, or not sure', value: '' },
     ],

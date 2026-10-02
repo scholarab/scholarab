@@ -1515,3 +1515,18 @@ Outcome: a student filtering for what they can apply to today gets all of it wit
 | "DUE WITHIN 2 WEEKS" run above OPEN NOW | Removed, with its sort rule and rust count style. Under the default "Earliest deadline" sort it was the top of OPEN NOW with a second heading; each row's date already turns rust inside 14 days. Under "Highest $" a close deadline now sits where its amount puts it (the trade-off). The quiz's own due-soon results group is separate and unchanged. |
 
 Add-back fraction: 0/5. Local only: `npm run ci` passed (1,163), `npm run test:e2e` passed (153, 19 skipped); no "open any time" or "within 2 weeks" text left in `dist/`.
+
+## Entrance awards back, October 1, 2026
+
+Outcome: a Grade 12 student choosing a college or university sees the money that school gives new students. Ilia asked for the 92 entrance awards cut the day before to come back; the 113 awards for students already enrolled and the 67 outside post-secondary-only awards stay out.
+
+| Candidate | Result and retained requirement |
+| --- | --- |
+| 92 college and university entrance awards (tagged E in `private/city-demand/scope.json`) | 91 restored from 7619a59 in their original order, unchanged: Red Deer Polytechnic 27, Keyano 22, Northwestern Polytechnic 14, Burman 11, U of Lethbridge 4, The King's 4, Augustana 3, Medicine Hat College 3, UCalgary, Lethbridge Polytechnic and CBTS 1 each. 29 open now, 9 open later, 32 date not posted. The 21 that are applied for after starting (Keyano's December first-year awards, Red Deer's upgrading and re-entry bursaries) sit in the FOR AFTER HIGH SCHOOL run, as before the cut. |
+| U of Lethbridge Grade 11 Merit Award | Not restored: Grade 11 only, which the Grade 12 focus removed by choice. |
+| Their 182 slug 301s | Removed, and 2 older rename rules point at the restored listings again. `_redirects` 1,660 to 1,470 rules. |
+| College combo pages 301 (Lethbridge, Lacombe, Fort McMurray, Camrose) | Removed: the restored awards rebuild those combos, so the pages exist again. |
+| Quiz answers U of Lethbridge, Northwestern Polytechnic, Keyano, Medicine Hat College | Back, each named by a restored listing again. |
+| Hub and combo copy rewritten for the cut | Kept: still true, it just does not mention entrance awards. |
+
+Add-back fraction: 91/92 of the entrance cut. Local only: `npm run ci` passed (1,163), `npm run test:e2e` passed (153, 19 skipped); the no-separate-application count test moved 16 to 21, all five restored admission-automatic awards. The database republishes them on the next CI mirror (sync-db upserts published JSON).
