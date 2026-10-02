@@ -1640,3 +1640,16 @@ Outcome: a city page says something only it can, from its own data and its own p
 | The city photo inside the board | Desktop only, the right 30% at full strength under the sticker, meeting the ink as the home carousel's slides do; the text keeps its usual column (holding it to half the board wrapped it and moved the toolbar), with a shadow where a long name (Fort Saskatchewan) reaches the photo's dark edge. The CC BY photos carry their credit on the board. Phones get a 1px placeholder, so no download and no added height. |
 
 Add-back fraction: 0/0. Local only: every city board measured at 1440, 1180 and 1000 wide (toolbar height and text-to-photo overlap); Calgary, Airdrie and Fort Saskatchewan checked by eye; no backdrop request at 375.
+
+## Listing page: Worth knowing first, card without the template labels, October 2, 2026
+
+Outcome: the note that only ScholarAB has (Loran closes at noon ET, finalists still get $6,000) is the first thing under Apply, and the card reads as words rather than a form.
+
+| Candidate | Result and retained requirement |
+| --- | --- |
+| The "Who can apply" box around the note | Deleted: its heading and text had been hidden since 2026-10-01 (the same sentence sits under the title), so it was a wrapper for the note alone. The note stands on its own. |
+| Ruled notebook paper (two gradients, red margin, pitch maths, three breakpoints) | Replaced by the list boards' ink with a mustard heading, the one look already marking the site's own voice. First in the left column: on a Loran phone page it moved from 1660px to 800px down, 451 to 337px tall. What's next moves down 370px (1341 to 1710). |
+| All-caps card labels ("AWARD VALUE", "DEADLINE", "NEEDS", "PROGRAM COST", the program facts) | Sentence case in the body face: "Award", "Deadline", "Needs", "Cost", "Format". The cost colour now keys on the item type instead of the label string. |
+| The filled status pill | Coloured words above the title, by tone (quiet, go, soon, urgent) instead of inline background and colour pairs, in the build and the client repaint. "Open now instead" lost its uppercase too. |
+
+Add-back fraction: 0/0. Local only: built Loran page checked on phone and desktop, compared with www.

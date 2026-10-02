@@ -452,7 +452,7 @@ if (kind === 'scholarship') {
           'Ask for the school deadline too. It is often earlier than the one listed here.',
         ]
       : [],
-    valueLabel: 'AWARD VALUE',
+    valueLabel: 'Award',
     valueBig: s.amount,
     // A multi-year total says so beside the figure; Knowlton's "$30,000" is
     // $5,000 a year at first (critique 2026-09-24).
@@ -522,11 +522,11 @@ if (kind === 'scholarship') {
     // apart until they read the duration and guess.
     facts: [
       ...(PROGRAM_FORMATS.find(f => f.value === p.format)
-        ? [{ label: 'FORMAT', value: PROGRAM_FORMATS.find(f => f.value === p.format)!.h1 }]
+        ? [{ label: 'Format', value: PROGRAM_FORMATS.find(f => f.value === p.format)!.h1 }]
         : []),
-      { label: 'DURATION', value: p.duration || 'Varies' },
-      { label: 'GRADES', value: p.grades || 'High school' },
-      { label: 'LOCATION', value: p.location || 'Alberta' },
+      { label: 'Duration', value: p.duration || 'Varies' },
+      { label: 'Grades', value: p.grades || 'High school' },
+      { label: 'Location', value: p.location || 'Alberta' },
     ],
     eligibility: p.eligibility,
     about: p.description,
@@ -563,14 +563,14 @@ function programValue(p: Program) {
   }
   if (p.cost === 'fee' || p.cost === 'varies') {
     return {
-      valueLabel: 'PROGRAM COST',
+      valueLabel: 'Cost',
       valueBig: p.cost === 'fee' ? 'Has a fee' : 'Varies',
       valueNote: p.costNote,
     };
   }
   // Not a figure, so not set as one: "See provider" in the 52px money type was
   // the largest text on the page and answered nothing.
-  return { valueLabel: 'PROGRAM COST', valueBig: 'Not listed', valueNote: "Check the provider's page for any fee.", valueQuiet: true };
+  return { valueLabel: 'Cost', valueBig: 'Not listed', valueNote: "Check the provider's page for any fee.", valueQuiet: true };
 }
 
 // The explainer for this listing, when one exists. The link is reciprocal on
