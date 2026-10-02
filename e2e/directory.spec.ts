@@ -240,8 +240,10 @@ test('the list reveals 24 at a time and Back returns to the same card', async ({
 });
 
 test('detail arrows walk the filtered search in both directions', async ({ page }) => {
+  // Counted among the runs that load open: on 2026-10-02 "ATCO" matched three
+  // awards, two of them in the shut after-high-school run, so the walk had one.
   const term = unique.title.split(' ').find(word => {
-    const n = items.filter(s => scholarshipSearchBlob(s).includes(normalizeSearchQuery(word))).length;
+    const n = open.filter(s => scholarshipSearchBlob(s).includes(normalizeSearchQuery(word))).length;
     return n >= 3 && n < items.length;
   })!;
   await page.goto(`/scholarships/?sort=highest_pay&q=${encodeURIComponent(term)}`);
