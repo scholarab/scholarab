@@ -1545,7 +1545,7 @@
         }
       ]
     },
-    "active": true,
+    "active": false,
     "description": "Alberta pays up to $40,000 toward post-secondary for youth aged 18 to 24 who have been in government care. If you've been in foster care, this is the largest source of funding available to you in the province.",
     "eligibility": {
       "grades": [],
@@ -3658,7 +3658,7 @@
         }
       ]
     },
-    "active": true,
+    "active": false,
     "description": "RBC Ignite pays $1,500 toward job-ready skills and certifications for Canadians aged 16 to 20: lifeguarding, first aid, coding, language training, graphic design, coaching certification, and more. Current high school students can apply.",
     "eligibility": {
       "grades": [
@@ -10941,7 +10941,7 @@
     "audience": "Descendants of Grande Prairie district pioneers",
     "category": "Community",
     "region": "Grande Prairie",
-    "active": true,
+    "active": false,
     "lastVerified": "2026-08",
     "url": "https://scholarships.pwpsd.ca/",
     "notes": "The eligibility line here is genuinely unusual and it is worth asking your family about before you rule yourself out: you have to be descended from a Grande Prairie district pioneer family. Many students in the Peace Country qualify and never check. The academic bar is a 70 per cent average, which is low by scholarship standards, and the association does not publish a fixed amount.",
@@ -10978,7 +10978,7 @@
     "audience": "Grande Prairie athletes competing at the international level",
     "category": "Sports",
     "region": "Grande Prairie",
-    "active": true,
+    "active": false,
     "lastVerified": "2026-08",
     "url": "https://cityofgp.com/perkymccullough",
     "notes": "The bar is real: this is for athletes with a credible path to international competition, and you need confirmation of membership in a national sport association to apply. Two awards a year. One catch that disqualifies people every cycle is that an application submitted after the event has already happened is not eligible, so apply ahead of the competition you are funding.",
@@ -11019,7 +11019,7 @@
     "audience": "Grande Prairie athletes, volunteer coaches and sport officials",
     "category": "Sports",
     "region": "Grande Prairie",
-    "active": true,
+    "active": false,
     "lastVerified": "2026-08",
     "url": "https://cityofgp.com/culture-community/grants-funding-awards/pursuit-excellence-bob-neufeld-scholarship",
     "notes": "Four awards, and this is one of the few sport scholarships anywhere that treats volunteer coaches and officials as equals with athletes, so a Grade 12 student who referees or coaches a younger division can apply on that alone. Clubs are limited to one applicant per deadline, so ask early rather than assuming your club has a spot. As with the other City award, you have to apply before the event happens.",
@@ -15222,7 +15222,7 @@
     "id": 635,
     "region": "Alberta",
     "lastVerified": "2026-09",
-    "active": true,
+    "active": false,
     "title": "Federation of Alberta Gas Co-ops Achievement Award",
     "amount": "$1,000",
     "deadline": "2026-10-01",
@@ -17054,7 +17054,7 @@
     "id": 748,
     "region": "Wetaskiwin",
     "lastVerified": "2026-09",
-    "active": true,
+    "active": false,
     "url": "https://www.county.wetaskiwin.ab.ca/847/Agricultural-Bursary",
     "notes": "The three year residency window is unusually generous: a student who moved away for work or a first year of study still qualifies. County policy allows you to receive this bursary only once. Participation in 4-H or agricultural fairs is described as desirable rather than required. Applications go to the Director of Agricultural Services and are reviewed by the Agricultural Service Board at its first meeting after the deadline; the county's page still shows the previous year's October 1 date.",
     "applyViaGuidance": false,
@@ -27902,7 +27902,7 @@
     "lastVerified": "2026-09",
     "region": "Brooks",
     "notes": "The membership has to be a year old, so check with whoever holds it before you count on this one. The deadline falls the October after you graduate, not in the spring.",
-    "active": true,
+    "active": false,
     "description": "Pioneer Gas Co-op gives $500 to the child of a member in good standing who is starting a degree, diploma or apprenticeship. You need at least 75 percent in your core subjects.",
     "metaDetail": "Needs a parent's Co-op membership.",
     "eligibility": {
