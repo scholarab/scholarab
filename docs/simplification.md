@@ -1544,3 +1544,18 @@ Outcome: a student applying to a college or university finds that school's entra
 | Menu | A text link under Scholarships, not a photo tile: the tiles are places. |
 
 Add-back fraction: 0/5. Local only: `npm run ci` passed (1,167), `npm run test:e2e` passed (153, 19 skipped); built page checked in the browser (School picker narrows and deep-links with `?school=`).
+
+## What you'll need on award pages, October 1, 2026
+
+Outcome: a student sees what an application takes before clicking Apply, so they can pick what they have time for. The flow plan (private/flow-plan/PLAN.md) measured the drop-off: 262 saves in 30 days against /saved at 0.8% of page views, and provider pages that range from no application at all (New Beginnings) to a portal, essays, a one-take video, a referee and a transcript (Loran). Three of the eight most-clicked providers do not say until you are inside their form.
+
+| Candidate | Result and retained requirement |
+| --- | --- |
+| Phase 1 cuts in the plan: tour strip, "FREE NO SIGN-UP" sticker, run-count stickers | Not cut. The tour was already removed in 4fa6f93 (the few tour events since are cached pages); the sticker and count stickers are the 2026-09-30 promo trim Ilia asked for. The plan was wrong to list them. |
+| "Copy link" button under Apply | Removed with its handler and style. A third full-width button in the card; phones share natively and desktops have the address bar. |
+| "Program cost: Not listed" | Kept. Saying a fee is unknown is honest (`programValue`); the fix is filling the 101 missing costs, which is data work. |
+| "More like this" picks | Kept. Its loose matches are the corpus-wide inbound-link balancing in `related.ts`, which keeps every listing reachable for indexing. |
+| `toApply` on 45 of the 50 most-used scholarships | Added: each item from the provider's own page, read 2026-10-01, never derived from notes. `complete` marks the 29 whose page lists the whole application; the other 16 say the form may ask for more. Grant MacEwan UWC, Ted Rogers (provider URL 404), editing.services (403), Ambassador (PDF only) and LaDue (aggregator page only) have none. Validated in `validate-data.ts` (`lib/to-apply.ts`). |
+| "Who can apply" box on desktop | Folded into the line under the title, as on phones since 2026-09-27, so the list can lead the column without the eligibility sentence printing twice. The box keeps the "Worth knowing" note. |
+
+Add-back fraction: 0/1 of the one cut made.

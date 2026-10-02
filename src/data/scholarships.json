@@ -125,6 +125,24 @@
     "lastVerified": "2026-09",
     "region": "National",
     "notes": "Dates and terms confirmed against RE/MAX's own Official Rules on 2026-09-08: the program opens August 24, 2026 and closes March 15, 2027, and forty applicants each receive $1,000. Two things the rules make plain that the marketing does not. Winners are picked by random drawing among entries that clear the essay bar, not ranked on merit, so a strong essay improves nothing beyond eligibility. And residents of Quebec are excluded, as are students finishing through high school equivalency courses. The essay must be at least 500 words on one of three themes: what home means to you, leadership or charity in your community, or a dream you hope to achieve. The /quest-for-excellence/ landing page carries the submission form while a cycle is open and 404s between cycles, so this points at the rules page, which stays up year-round.",
+    "toApply": {
+      "checked": "2026-10-01",
+      "complete": true,
+      "items": [
+        {
+          "kind": "form",
+          "text": "An online submission form"
+        },
+        {
+          "kind": "essay",
+          "text": "An essay of at least 500 words on one of three themes, as a PDF or DOCX"
+        },
+        {
+          "kind": "other",
+          "text": "The 40 winners are drawn at random from eligible entries"
+        }
+      ]
+    },
     "active": true,
     "description": "RE/MAX awards forty $1,000 scholarships to Grade 12 students across Canada who submit an essay on one of three set themes. Recipients are drawn at random from all eligible entries.",
     "eligibility": {
@@ -190,6 +208,24 @@
       "Lloydminster"
     ],
     "notes": "Alberta Student Aid names Lloydminster as a border community: all students living there are eligible, whether the Alberta side or the Saskatchewan side, provided they attend Holy Rosary High School or Lloydminster Comprehensive High School. Your courses still have to line up with the Alberta curriculum, so ask about your transcript early.",
+    "toApply": {
+      "checked": "2026-10-01",
+      "complete": true,
+      "items": [
+        {
+          "kind": "account",
+          "text": "A verified Alberta Student Aid account, which asks for your SIN"
+        },
+        {
+          "kind": "other",
+          "text": "Your Alberta Student Number, from your transcript"
+        },
+        {
+          "kind": "other",
+          "text": "You apply once your final marks are in and you are enrolled full-time after high school. No essay or references."
+        }
+      ]
+    },
     "matching": {
       "root": "requirements",
       "groups": [
@@ -304,6 +340,16 @@
     "lastVerified": "2026-09",
     "region": "Medicine Hat",
     "notes": "The residency rule is wider than the County's name suggests: the application form counts residents of urban areas inside the County's outer boundaries, and names the City of Medicine Hat and the Town of Redcliff outright, so a student living in the city qualifies. That is the opposite of the County Council scholarship that closes the same day, which turns on living in the County itself. Environmental programmes count alongside agriculture, which widens this well past farm kids. You can win it only once, and you need last year's marks plus a letter of acceptance.",
+    "toApply": {
+      "checked": "2026-10-01",
+      "complete": false,
+      "items": [
+        {
+          "kind": "form",
+          "text": "The county's online application form"
+        }
+      ]
+    },
     "active": false,
     "description": "Cypress County awards two $1,000 bursaries a year to students continuing at a college or university in an in-depth agricultural, agri-tech or environmental programme. Applications and supporting documents go to the County's agricultural fieldman, and the board decides on scholastic standing alongside social and community involvement.",
     "eligibility": {
@@ -383,6 +429,16 @@
     "lastVerified": "2026-08",
     "region": "Alberta",
     "notes": "Part of Indspire's Building Brighter Futures. One application covers every Indspire award you qualify for, and it stays in the running for all three cutoffs: August 1, November 1 and February 1 at 11:59 p.m. EST. Apply at indspire.microsoftcrmportals.com and use one account only.",
+    "toApply": {
+      "checked": "2026-10-01",
+      "complete": false,
+      "items": [
+        {
+          "kind": "account",
+          "text": "One Indspire application covers all of Indspire's bursaries"
+        }
+      ]
+    },
     "active": true,
     "description": "ATB Financial funds Indigenous students at colleges, universities, technical colleges and apprenticeship programs across Canada. Demonstrated financial need is the main thing they weigh, then community involvement and academic record. First preference goes to Alberta students entering finance, commerce, technology or Indigenous studies, but other programs are eligible. Indspire does not publish a set dollar amount for this one.",
     "eligibility": {
@@ -539,6 +595,28 @@
     "lastVerified": "2026-09",
     "region": "Calgary",
     "notes": "Administered by EducationMatters through one application for all CBE and Calgary Catholic awards. Applications open March 1; most close May 30, a few May 1. Confirm this award's own deadline in the portal before you rely on the date here. Three rules apply to every EducationMatters award and are easy to miss: you must be 20 or younger as of September 1, you must not already be attending a post-secondary institution, and you must apply in your Grade 12 year. Once you leave high school you can no longer apply, so a gap year is fine only if you applied before you graduated.",
+    "toApply": {
+      "checked": "2026-10-01",
+      "complete": true,
+      "items": [
+        {
+          "kind": "account",
+          "text": "An account on the EducationMatters award portal"
+        },
+        {
+          "kind": "essay",
+          "text": "An essay of about 500 words on what the funding would change and your goals"
+        },
+        {
+          "kind": "financial",
+          "text": "Proof of financial need"
+        },
+        {
+          "kind": "other",
+          "text": "Reference letters are welcome but not required"
+        }
+      ]
+    },
     "active": false,
     "description": "$10,000 in year one, renewable up to three more years at $6,500, for hard sciences, engineering, geology, biology, veterinary medicine or health sciences. A trades and vocational stream is worth $15,000 in total. Financial need and a 500-word essay required.",
     "eligibility": {
@@ -867,6 +945,25 @@
     "lastVerified": "2026-08",
     "region": "Alberta",
     "notes": "Apply through the online form on the CPA Education Foundation site, one form per award. CPA has not published the 2027 dates yet. May 1 has been the deadline in recent years, so confirm with cpaef@cpaalberta.ca before you count on it.",
+    "toApply": {
+      "checked": "2026-10-01",
+      "complete": true,
+      "items": [
+        {
+          "kind": "essay",
+          "text": "A letter, or a 2 to 3 minute video, on the qualities a business leader needs"
+        },
+        {
+          "kind": "transcript",
+          "text": "Recent transcripts"
+        },
+        {
+          "kind": "reference",
+          "text": "A teacher support letter and one more non-family reference",
+          "count": 2
+        }
+      ]
+    },
     "active": true,
     "description": "Two $1,500 awards for Alberta high school students, judged on professionalism, integrity, ethics and leadership on top of satisfactory academic standing. You submit a letter or a two to three minute video on the qualities that make a successful business leader, recent transcripts, a letter from a teacher and a second letter from someone who is not a teacher or family member. Preference goes to students interested in the CPA designation.",
     "eligibility": {
@@ -904,6 +1001,33 @@
     "lastVerified": "2026-08",
     "region": "Alberta",
     "notes": "Apply through the online form on the CPA Education Foundation site, one form per award. CPA has not published the 2027 dates yet. May 1 has been the deadline in recent years, so confirm with cpaef@cpaalberta.ca before you count on it.",
+    "toApply": {
+      "checked": "2026-10-01",
+      "complete": true,
+      "items": [
+        {
+          "kind": "essay",
+          "text": "A letter on your financial need and your interest in accounting"
+        },
+        {
+          "kind": "other",
+          "text": "Proof you completed Grades 10 to 12 in Alberta and are enrolled in high school"
+        },
+        {
+          "kind": "acceptance",
+          "text": "Proof of post-secondary acceptance"
+        },
+        {
+          "kind": "transcript",
+          "text": "Transcripts"
+        },
+        {
+          "kind": "reference",
+          "text": "At least one nomination letter about your volunteering",
+          "count": 1
+        }
+      ]
+    },
     "active": true,
     "description": "One $2,500 award for a Grade 12 student at any Alberta high school, based on volunteer involvement, satisfactory academic achievement and a stated interest in a professional accounting designation. Your application letter needs to indicate financial need. You must have finished Grades 10 and 11 in Alberta and provide proof of acceptance at an Alberta post-secondary. Preference goes to applicants who have to relocate within Alberta to attend, and to those living outside the major cities.",
     "eligibility": {
@@ -944,6 +1068,25 @@
     "lastVerified": "2026-08",
     "region": "Alberta",
     "notes": "Apply through the online form on the CPA Education Foundation site, one form per award. CPA has not published the 2027 dates yet. May 1 has been the deadline in recent years, so confirm with cpaef@cpaalberta.ca before you count on it.",
+    "toApply": {
+      "checked": "2026-10-01",
+      "complete": true,
+      "items": [
+        {
+          "kind": "essay",
+          "text": "A letter, or a 2 to 3 minute video, on what being an empowered young woman means to you"
+        },
+        {
+          "kind": "acceptance",
+          "text": "Your acceptance letter from an Alberta post-secondary school"
+        },
+        {
+          "kind": "reference",
+          "text": "One support letter from a teacher or community leader",
+          "count": 1
+        }
+      ]
+    },
     "active": true,
     "description": "One $2,000 award from the CPA Education Foundation for a Grade 12 Alberta student who identifies as a girl or woman, judged on good character and leadership rather than marks. You submit a letter or a two to three minute video on what being an empowered young woman means to you, your post-secondary acceptance letter, and one letter of support that speaks to your character and any obstacles you have had to get past. Preference goes to students interested in the CPA designation.",
     "metaDetail": "Judged on character and leadership rather than marks.",
@@ -983,6 +1126,25 @@
     "lastVerified": "2026-08",
     "region": "Alberta",
     "notes": "Apply through the online form on the CPA Education Foundation site, one form per award. CPA has not published the 2027 dates yet. May 1 has been the deadline in recent years, so confirm with cpaef@cpaalberta.ca before you count on it.",
+    "toApply": {
+      "checked": "2026-10-01",
+      "complete": true,
+      "items": [
+        {
+          "kind": "essay",
+          "text": "A letter, or a 2 to 3 minute video, about your volunteer work"
+        },
+        {
+          "kind": "acceptance",
+          "text": "Your acceptance letter from an Alberta post-secondary school"
+        },
+        {
+          "kind": "reference",
+          "text": "One support letter from a teacher or community leader",
+          "count": 1
+        }
+      ]
+    },
     "active": true,
     "description": "One $2,000 award for a Grade 12 Albertan with a real volunteer record at school or in the community. You submit a letter or a two to three minute video on a volunteer activity you actually do and what giving back has done for you, your post-secondary acceptance letter, and one letter of support. Preference goes to students interested in the CPA designation.",
     "eligibility": {
@@ -1138,6 +1300,16 @@
     "lastVerified": "2026-08",
     "region": "Alberta",
     "notes": "There is no separate application. Recipients are picked from full-time Alberta Student Aid applications on a first come, first served basis, so apply for student aid as early as you can. Lifetime maximum of two bursaries.",
+    "toApply": {
+      "checked": "2026-10-01",
+      "complete": true,
+      "items": [
+        {
+          "kind": "none",
+          "text": "No separate application. You are considered when you apply for a full-time student loan."
+        }
+      ]
+    },
     "active": true,
     "description": "A $5,000 bursary for students from low-income families who qualify for full-time Alberta Student Aid and enrol in an approved high-demand program. Alberta expanded it for 2026-27: 2,400 bursaries instead of 1,000, a $12 million budget, and more eligible programs in technology, health and energy. You do not apply separately, so get your student aid application in early.",
     "eligibility": {
@@ -1201,7 +1373,38 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "notes": "You apply directly at apply.loranscholar.ca; the 88% is calculated from Grade 10, 11 and 12 courses only. Applicants must be born between January 1, 2005 and September 1, 2011. Even if you do not make the final class, up to 54 finalists receive $6,000 and up to 70 provincial and territorial recipients receive $3,000. Applications close at noon ET on the deadline day, not at midnight."
+    "notes": "You apply directly at apply.loranscholar.ca; the 88% is calculated from Grade 10, 11 and 12 courses only. Applicants must be born between January 1, 2005 and September 1, 2011. Even if you do not make the final class, up to 54 finalists receive $6,000 and up to 70 provincial and territorial recipients receive $3,000. Applications close at noon ET on the deadline day, not at midnight.",
+    "toApply": {
+      "checked": "2026-10-01",
+      "complete": true,
+      "items": [
+        {
+          "kind": "account",
+          "text": "An account at apply.loranscholar.ca"
+        },
+        {
+          "kind": "essay",
+          "text": "Short answers and several short essays"
+        },
+        {
+          "kind": "video",
+          "text": "Timed video answers, opened after the written part, with no second take"
+        },
+        {
+          "kind": "reference",
+          "text": "One referee (not family or friends) who fills in a short online form",
+          "count": 1
+        },
+        {
+          "kind": "transcript",
+          "text": "A transcript PDF from your guidance office or school board. Report cards are not accepted."
+        },
+        {
+          "kind": "interview",
+          "text": "Interviews if you are shortlisted"
+        }
+      ]
+    }
   },
   {
     "id": 58,
@@ -1332,6 +1535,16 @@
     "lastVerified": "2026-08",
     "region": "Alberta",
     "notes": "Three deadlines a year, tied to when you start school: apply by June 1 to start September to December, October 1 to start January to April, February 1 to start May to August. The next one is October 1, 2026. You reapply every year.",
+    "toApply": {
+      "checked": "2026-10-01",
+      "complete": false,
+      "items": [
+        {
+          "kind": "form",
+          "text": "The Advancing Futures application form, every year you want funding"
+        }
+      ]
+    },
     "active": true,
     "description": "Alberta pays up to $40,000 toward post-secondary for youth aged 18 to 24 who have been in government care. If you've been in foster care, this is the largest source of funding available to you in the province.",
     "eligibility": {
@@ -1366,6 +1579,29 @@
     "lastVerified": "2026-08",
     "region": "Alberta",
     "notes": "Applications open October 1, 2026 and close December 1. Shortlisted applicants get a preliminary application in early December, due early January, with decisions in February.",
+    "toApply": {
+      "checked": "2026-10-01",
+      "complete": false,
+      "items": [
+        {
+          "kind": "other",
+          "text": "Apply to the University of Calgary and its high school entrance awards by December 1"
+        },
+        {
+          "kind": "reference",
+          "text": "A nomination letter from someone in your community, such as a teacher, coach or Indigenous leader",
+          "count": 1
+        },
+        {
+          "kind": "financial",
+          "text": "Proof of low household income"
+        },
+        {
+          "kind": "interview",
+          "text": "Two more application rounds if shortlisted, then a Multiple Mini Interview in March"
+        }
+      ]
+    },
     "active": true,
     "description": "UCalgary's renewable award for low-income, rural, and Indigenous students entering its undergraduate programs: up to $5,000 a year, to a maximum of $20,000 over four years, with an eye toward students headed for medicine.",
     "eligibility": {
@@ -1406,6 +1642,20 @@
     "lastVerified": "2026-08",
     "region": "Alberta",
     "notes": "Open August 1 to October 31 each year. Two awards of $3,000. Preference goes to the previous year's recipients if they hold a 3.0 GPA. You submit an essay on your community service, work, leadership and marks, and how your field connects to the energy sector.",
+    "toApply": {
+      "checked": "2026-10-01",
+      "complete": true,
+      "items": [
+        {
+          "kind": "account",
+          "text": "An Alberta Student Aid account (or the paper form), between August 1 and October 31"
+        },
+        {
+          "kind": "essay",
+          "text": "An essay on your service, work, leadership, marks, how your studies connect to energy, and your plans"
+        }
+      ]
+    },
     "active": true,
     "description": "Keyera's $6,000 scholarship, in memory of Peter J. Renton, goes to a graduating Albertan starting an oil and gas related degree or diploma at an Alberta institution.",
     "eligibility": {
@@ -1739,7 +1989,17 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "metaDetail": "Tied to your Rutherford form."
+    "metaDetail": "Tied to your Rutherford form.",
+    "toApply": {
+      "checked": "2026-10-01",
+      "complete": true,
+      "items": [
+        {
+          "kind": "none",
+          "text": "No separate application. You are considered through your Alexander Rutherford Scholarship application."
+        }
+      ]
+    }
   },
   {
     "id": 77,
@@ -1754,6 +2014,33 @@
     "lastVerified": "2026-08",
     "region": "Edmonton",
     "notes": "Edmonton Public Schools Foundation says applications for the 2026-27 award open in February 2027. It has not posted the closing date yet, so the date shown is last cycle rolled forward. Recipients are contacted in June.",
+    "toApply": {
+      "checked": "2026-10-01",
+      "complete": true,
+      "items": [
+        {
+          "kind": "form",
+          "text": "The Edmonton Public Schools application form, which opens in February"
+        },
+        {
+          "kind": "reference",
+          "text": "A signed reference from a current Edmonton Public Schools staff member",
+          "count": 1
+        },
+        {
+          "kind": "essay",
+          "text": "A letter of up to 500 words on how your activities affect others"
+        },
+        {
+          "kind": "acceptance",
+          "text": "Your conditional acceptance to the University of Alberta"
+        },
+        {
+          "kind": "other",
+          "text": "Your principal confirms your marks"
+        }
+      ]
+    },
     "active": false,
     "description": "$1,500 for an Edmonton Public Schools Grade 12 student with honours standing and conditional acceptance to the University of Alberta.",
     "eligibility": {
@@ -3271,6 +3558,16 @@
     "lastVerified": "2026-08",
     "region": "National",
     "notes": "Closes October 2 at 6:00 p.m. MST. One of the few merit awards open to students who are still in high school (Grades 10 to 12). You have to reapply each year, and children of ATCO employees are not eligible. Preference goes to students from Indigenous communities where ATCO operates.",
+    "toApply": {
+      "checked": "2026-10-01",
+      "complete": false,
+      "items": [
+        {
+          "kind": "account",
+          "text": "An account on the ATCO awards portal (SurveyMonkey Apply)"
+        }
+      ]
+    },
     "active": true,
     "description": "ATCO's $750 merit award for self-identified First Nations, Inuit, or Métis students in Grades 10 to 12 anywhere in Canada, based on marks. You can win it in more than one year, but you have to reapply each time. Children of ATCO employees can't enter.",
     "eligibility": {
@@ -3351,6 +3648,16 @@
     "lastVerified": "2026-08",
     "region": "National",
     "notes": "Cycle 2 runs June 23 to 1 p.m. on October 1, 2026, but RBC closes the portal early once the 500 awards are gone, so treat the date as a ceiling and apply early.",
+    "toApply": {
+      "checked": "2026-10-01",
+      "complete": false,
+      "items": [
+        {
+          "kind": "account",
+          "text": "An account on the RBC scholarship portal"
+        }
+      ]
+    },
     "active": true,
     "description": "RBC Ignite pays $1,500 toward job-ready skills and certifications for Canadians aged 16 to 20: lifeguarding, first aid, coding, language training, graphic design, coaching certification, and more. Current high school students can apply.",
     "eligibility": {
@@ -3549,6 +3856,16 @@
     "lastVerified": "2026-08",
     "region": "National",
     "notes": "The link points at the 2026 contest page and will break when the 2027 contest launches. Search Student Life Network for the current Canada's Luckiest Student if it 404s.",
+    "toApply": {
+      "checked": "2026-10-01",
+      "complete": true,
+      "items": [
+        {
+          "kind": "form",
+          "text": "A free sign-up that takes about a minute. It is a prize draw, with extra entries for sharing and referrals."
+        }
+      ]
+    },
     "active": false,
     "description": "Canada's Luckiest Student is an annual giveaway open to all students in Canada, with no essay or grades required to enter. The prize bundle includes a year of rent, $2,000 in groceries, a trip for two to the Galapagos, and a $20,000 cheque. Entries are free and take about 2 minutes to complete, with earlier submissions receiving more chances to win.",
     "metaDetail": "A free two-minute entry, no essay or grades; earlier entries get more chances.",
@@ -3585,6 +3902,24 @@
     "lastVerified": "2026-08",
     "region": "National",
     "notes": "Open to 400+ Arts & Science programs. Applications open September 11, 2026 and close November 2, 2026.",
+    "toApply": {
+      "checked": "2026-10-01",
+      "complete": false,
+      "items": [
+        {
+          "kind": "account",
+          "text": "The online Wolf Scholars application"
+        },
+        {
+          "kind": "other",
+          "text": "A separate application to U of T Arts & Science or Applied Science & Engineering through OUAC"
+        },
+        {
+          "kind": "interview",
+          "text": "An online interview in January, then a selection weekend in Toronto, if invited"
+        }
+      ]
+    },
     "active": true,
     "openDate": "2026-09-01",
     "description": "A fully funded route through U of T's Faculty of Arts & Science on the St. George campus: tuition, fees, living stipend, travel, internships, mentorship, and seminars. Up to 16 scholars a year, drawn from Canadian citizens and permanent residents with a 90 to 100% average. Commerce is excluded.",
@@ -3622,6 +3957,16 @@
     "lastVerified": "2026-08",
     "region": "National",
     "notes": null,
+    "toApply": {
+      "checked": "2026-10-01",
+      "complete": true,
+      "items": [
+        {
+          "kind": "other",
+          "text": "Register, then plan and run a community e-waste collection and report what you gathered. No essay."
+        }
+      ]
+    },
     "active": true,
     "description": "Not an application form: you plan and run an e-waste collection drive, then submit a report on it. Winners receive cash plus refurbished technology. Open to full- and part-time students anywhere in Canada.",
     "eligibility": {
@@ -3697,6 +4042,28 @@
     "lastVerified": "2026-08",
     "region": "Alberta",
     "notes": "Your team coach nominates you, you do not apply on your own, so the person to talk to is the coach and not a guidance counsellor. Coaches submit nominations to Alberta Student Aid by January 15 and pick their nominees on academic standing, community involvement and athletic achievement, so ask your coach for their own internal deadline because it falls earlier. You send the coach a current official transcript and an essay on your extracurriculars and goals. Seventy awards are shared out each year: 30 through Alberta Junior Football, 30 through the Prairie Baseball Academy and 10 through the Friends of Alberta Junior Hockey Society.",
+    "toApply": {
+      "checked": "2026-10-01",
+      "complete": true,
+      "items": [
+        {
+          "kind": "other",
+          "text": "Your team coach nominates you. Ask them for the deadline."
+        },
+        {
+          "kind": "form",
+          "text": "The application form"
+        },
+        {
+          "kind": "transcript",
+          "text": "An official transcript"
+        },
+        {
+          "kind": "essay",
+          "text": "An essay on your activities and goals"
+        }
+      ]
+    },
     "applyViaGuidance": true,
     "active": true,
     "description": "An award of $1,000 to $2,000 for Alberta residents playing on a designated provincial junior team, allocated across Alberta Junior Football, the Friends of Alberta Junior Hockey Society and the Prairie Baseball Academy.",
@@ -3948,6 +4315,25 @@
     "lastVerified": "2026-09",
     "region": "Calgary",
     "notes": "The provider had not posted a date for the new cycle when this was checked in August 2026, so this is last cycle's deadline rolled forward. Confirm before you plan around it.",
+    "toApply": {
+      "checked": "2026-10-01",
+      "complete": false,
+      "items": [
+        {
+          "kind": "account",
+          "text": "An application on the Calgary Foundation portal"
+        },
+        {
+          "kind": "reference",
+          "text": "One letter of reference",
+          "count": 1
+        },
+        {
+          "kind": "financial",
+          "text": "Evidence of financial need"
+        }
+      ]
+    },
     "applyViaGuidance": false,
     "active": false,
     "description": "The Aufricht Family Fund provides $4,000 to $5,000 awards to graduating Calgary high school students entering post-secondary studies with demonstrated financial need. This renewable award supports students for up to 3 years if they maintain a 2.0+ cumulative GPA and remain enrolled full-time. Applicants from Calgary CBE or CCSD schools who plan to attend UCalgary or SAIT are encouraged to apply, provided they do not already hold an equal or greater award from EducationMatters or the Calgary Foundation.",
@@ -4034,6 +4420,16 @@
     "lastVerified": "2026-08",
     "applyViaGuidance": false,
     "notes": null,
+    "toApply": {
+      "checked": "2026-10-01",
+      "complete": false,
+      "items": [
+        {
+          "kind": "form",
+          "text": "The application form, sent to an Agricultural Fieldman by September 1"
+        }
+      ]
+    },
     "url": "https://aaaf.ab.ca/AAAF-Bursary",
     "description": "The Association of Alberta Agricultural Fieldmen offers this $1,000 bursary to Alberta residents entering agriculture or environmental science programs at post-secondary institutions. Applicants must submit high school marks and a letter of acceptance from their chosen college or university. Apply through your local County agricultural office.",
     "eligibility": {
@@ -4191,6 +4587,29 @@
     "lastVerified": "2026-09",
     "applyViaGuidance": false,
     "notes": "Verified on 2026-09-09 against the P.E.O. Alberta-Saskatchewan page, which is the fund's real home; this listing previously pointed at peointernational.org, where the fund is named nowhere. The award was $1,000 from 1997 and rose to $2,000 in 2025. Entering first year counts, so a Grade 12 graduate can apply, but the real gate is sponsorship: a local P.E.O. chapter must submit a recommendation by August 15, and the foundation says to start one or two months earlier because the chapter has to complete its own paperwork. You also need two years of Alberta or Saskatchewan residency, a letter of reference and an official transcript. The foundation is a separate entity from P.E.O. despite the name. Contact the nearest chapter through peoab-sk.ca well before the August cutoff.",
+    "toApply": {
+      "checked": "2026-10-01",
+      "complete": true,
+      "items": [
+        {
+          "kind": "other",
+          "text": "You apply through a local P.E.O. chapter, which sends its recommendation"
+        },
+        {
+          "kind": "form",
+          "text": "The application form"
+        },
+        {
+          "kind": "reference",
+          "text": "One letter of reference",
+          "count": 1
+        },
+        {
+          "kind": "transcript",
+          "text": "An official transcript"
+        }
+      ]
+    },
     "url": "https://www.peoab-sk.ca/florence-e-taylor-charitable-foundation-scholarship-fund/",
     "description": "The Florence E. Taylor Charitable Foundation funds women entering first or second year of a first degree or diploma at an Alberta or Saskatchewan institution. Selection weighs financial need and commitment to the educational goal.",
     "eligibility": {
@@ -4307,6 +4726,37 @@
     "lastVerified": "2026-08",
     "applyViaGuidance": false,
     "notes": null,
+    "toApply": {
+      "checked": "2026-10-01",
+      "complete": true,
+      "items": [
+        {
+          "kind": "account",
+          "text": "An application on the Edmonton Community Foundation portal"
+        },
+        {
+          "kind": "reference",
+          "text": "Two reference letters from people who have known you at least 6 months",
+          "count": 2
+        },
+        {
+          "kind": "essay",
+          "text": "A personal letter on how you meet the award criteria"
+        },
+        {
+          "kind": "other",
+          "text": "An audiogram or medical documentation of hearing loss"
+        },
+        {
+          "kind": "transcript",
+          "text": "A statement of grades (unofficial is fine; myPass for high school)"
+        },
+        {
+          "kind": "interview",
+          "text": "You may be invited to an interview, with ASL or an interpreter"
+        }
+      ]
+    },
     "url": "https://ecf.ca/student-awards/charmaine-letourneau-scholarships/",
     "description": "The Edmonton Community Foundation awards the Charmaine Letourneau Scholarship to Alberta residents who are deaf or hard of hearing as they enter a post-secondary or vocational program. Applicants must demonstrate financial need and knowledge of sign language, with school and community leadership also considered in selection.",
     "eligibility": {
@@ -4388,6 +4838,16 @@
     "lastVerified": "2026-08",
     "applyViaGuidance": false,
     "notes": "18 scholarships of $1,000 allocated nationally by region. Apply online at ufcw.ca.",
+    "toApply": {
+      "checked": "2026-10-01",
+      "complete": true,
+      "items": [
+        {
+          "kind": "form",
+          "text": "An online form with the member's UFCW local and workplace. No essay or references."
+        }
+      ]
+    },
     "url": "https://www.ufcw.ca/index.php?option=com_scholarship&view=sform&id=2&Itemid=138&lang=en",
     "description": "UFCW Canada offers this $1,000 scholarship to members in good standing or their dependents and spouses who are entering full-time post-secondary studies in Canada. The scholarship recognizes enrollment and passion for learning rather than top grades. Applicants must have a parent or guardian who is an active UFCW Canada member to be eligible.",
     "eligibility": {
@@ -4464,6 +4924,20 @@
     "lastVerified": "2026-08",
     "region": "National",
     "notes": null,
+    "toApply": {
+      "checked": "2026-10-01",
+      "complete": false,
+      "items": [
+        {
+          "kind": "essay",
+          "text": "Phase 1: written answers about your financial wellness goals"
+        },
+        {
+          "kind": "video",
+          "text": "Phase 2: a short video, only if you are invited"
+        }
+      ]
+    },
     "applyViaGuidance": false,
     "active": false,
     "description": "Scotiabank offers four scholarship streams (Diversity, Financial Wellness, Future Women Leaders, and STEM) through myBlueprint for Grade 12 students across Canada. One winner per stream is guaranteed per region (Alberta grouped with MB, SK, NT, NU), with 16 national winners at $3,750 each. Eligible students apply through a two-phase process: an initial short application followed by a video submission for selected finalists, accessed via their school's myBlueprint account.",
@@ -4714,6 +5188,24 @@
     "lastVerified": "2026-08",
     "region": "National",
     "notes": "Applications run October 1 to February 1 at 11:59pm Pacific, and Kin Canada calls that date firm. You cannot win this twice, so it is worth timing against your other February deadlines.",
+    "toApply": {
+      "checked": "2026-10-01",
+      "complete": true,
+      "items": [
+        {
+          "kind": "form",
+          "text": "An online form. A question left blank scores 0, so answer them all."
+        },
+        {
+          "kind": "essay",
+          "text": "Questions on your community involvement and what you know about Kin"
+        },
+        {
+          "kind": "other",
+          "text": "Winners show proof of citizenship and registration before the money is paid"
+        }
+      ]
+    },
     "applyViaGuidance": false,
     "active": true,
     "description": "Kin Canada awards $1,000 bursaries from the Hal Rogers Endowment Fund. You apply once through Kin Canada's national form, then your nearest Kinsmen, Kinette or Kin Club endorses one applicant and forwards it to the Board of Trustees. Selection weighs community and school involvement, what you know about Kin Canada, and financial need.",
@@ -5784,6 +6276,16 @@
     "lastVerified": "2026-09",
     "region": "Calgary",
     "notes": "Administered by EducationMatters through one application for all CBE and Calgary Catholic awards. Applications open March 1; most close May 30, a few May 1. Confirm this award's own deadline in the portal before you rely on the date here. Three rules apply to every EducationMatters award and are easy to miss: you must be 20 or younger as of September 1, you must not already be attending a post-secondary institution, and you must apply in your Grade 12 year. Once you leave high school you can no longer apply, so a gap year is fine only if you applied before you graduated.",
+    "toApply": {
+      "checked": "2026-10-01",
+      "complete": false,
+      "items": [
+        {
+          "kind": "account",
+          "text": "An account on the EducationMatters award portal"
+        }
+      ]
+    },
     "applyViaGuidance": false,
     "active": true,
     "description": "For students continuing to a bachelor's degree, with a 75 percent minimum average.",
@@ -8459,6 +8961,37 @@
     "lastVerified": "2026-08",
     "region": "Edmonton",
     "notes": "Two awards, and only five schools are eligible, so the field is small if you are at one of them. A previous recipient cannot win it twice.",
+    "toApply": {
+      "checked": "2026-10-01",
+      "complete": true,
+      "items": [
+        {
+          "kind": "form",
+          "text": "The district application form, emailed to the club"
+        },
+        {
+          "kind": "transcript",
+          "text": "Your most recent transcript"
+        },
+        {
+          "kind": "acceptance",
+          "text": "Your acceptance and enrolment details"
+        },
+        {
+          "kind": "reference",
+          "text": "Two to four reference letters, one ideally from your principal or school staff",
+          "count": 2
+        },
+        {
+          "kind": "essay",
+          "text": "A one-page personal letter, or a video of up to 4 minutes"
+        },
+        {
+          "kind": "other",
+          "text": "A parental consent form if you are under 18"
+        }
+      ]
+    },
     "active": false,
     "description": "The Edmonton Host Lions Club gives two $500 scholarships to Grade 12 graduates of Eastglen, Queen Elizabeth, amiskwaciy Academy, St. Joseph Catholic High School or Austin O'Brien Catholic High School who have been accepted into a post-secondary program of a year or more. Send the application form, a recent transcript, proof of acceptance, two to four reference letters and either a one-page letter or a video of up to four minutes to the club by email.",
     "eligibility": {
@@ -14700,6 +15233,16 @@
     "audience": "Children of rural Alberta gas co-op members entering post-secondary",
     "url": "https://www.fedgas.com/community-programs?mid=947",
     "notes": "The date is not a submission deadline in the usual sense: the form has to be signed by your local gas co-op, band, town, village or county office no later than October 1 following graduation, so the office you need is a third party with its own hours.",
+    "toApply": {
+      "checked": "2026-10-01",
+      "complete": false,
+      "items": [
+        {
+          "kind": "form",
+          "text": "A PDF application form, with proof of gas co-op membership and your marks"
+        }
+      ]
+    },
     "description": "Four awards of $1,000 handed out at the FedGas annual general meeting to children of co-operative members of gas utilities in the federation, and to children of landowners serviced by member towns, villages, counties or First Nations. The membership must have been in place a full year, and at least 75% in core subjects is required rather than preferred. Preference goes to fields that apply to the natural gas industry, such as gas utility operator, gasfitter, pipefitter, power engineering and heavy equipment technician, or to rural-based programs.",
     "metaDetail": "75 per cent in core subjects is a floor.",
     "eligibility": {
@@ -20016,6 +20559,24 @@
     "lastVerified": "2026-09",
     "region": "Calgary",
     "notes": "Unusually, the money is paid while you are still in high school rather than after it, and attendance and marks are checked every month. You need a referral from your school counsellor and an interview with the Grants Manager, so start with Student Services rather than the form. Applications close April 30 each year.",
+    "toApply": {
+      "checked": "2026-10-01",
+      "complete": true,
+      "items": [
+        {
+          "kind": "other",
+          "text": "A referral from your high school counsellor, on their own form"
+        },
+        {
+          "kind": "form",
+          "text": "The application form"
+        },
+        {
+          "kind": "interview",
+          "text": "An interview with the Grants Manager"
+        }
+      ]
+    },
     "description": "A living allowance for Calgary grade 12 students whose finances are getting in the way of finishing, covering everyday costs like rent, food and transportation rather than tuition.",
     "metaDetail": "Paid during grade 12, not after it.",
     "eligibility": {
@@ -20199,6 +20760,16 @@
     "lastVerified": "2026-09",
     "region": "Calgary",
     "notes": "It pays for the things other awards will not touch: application fees, upgrading courses to qualify for a program, supplies, short training tickets such as security or food handling, and even work boots for a first job. Anyone already attending post-secondary is excluded, which is what makes it useful in the gap year. One exclusion the page states plainly and this listing was missing: applicants who have attended or are attending a post-secondary program are not eligible.",
+    "toApply": {
+      "checked": "2026-10-01",
+      "complete": false,
+      "items": [
+        {
+          "kind": "form",
+          "text": "A fillable PDF application from Burns Memorial Fund"
+        }
+      ]
+    },
     "description": "A Burns Memorial Fund bursary for Calgary youth who do not meet the criteria of any other bursary, aimed at getting them into education, training or work.",
     "metaDetail": "For students other bursaries turn away.",
     "eligibility": {
@@ -20437,6 +21008,16 @@
     "lastVerified": "2026-09",
     "region": "Alberta",
     "notes": "A September deadline is unusual and it works in a graduate's favour: you apply after you have your acceptance, with a confirmation of enrolment letter attached. Open to First Nations status and non-status, Métis and Inuit applicants alike. The society posts only the previous cycle's form, so email ccspe.scholarship@calgary.ca to confirm this year's date.",
+    "toApply": {
+      "checked": "2026-10-01",
+      "complete": false,
+      "items": [
+        {
+          "kind": "form",
+          "text": "A PDF application form, with proof of Indigenous identity"
+        }
+      ]
+    },
     "description": "One award from the City of Calgary Society of Professional Engineers, decided on a 500-word essay about why STEM interests you and how your actions have affected your community.",
     "metaDetail": "Decided on a 500-word essay.",
     "eligibility": {
@@ -20553,6 +21134,20 @@
     "lastVerified": "2026-09",
     "region": "Alberta",
     "notes": "Three awards, and the window is the unusual part: it opens August 1 and closes October 31, so you apply after you have started, not during grade 12. Preference goes to a graduate of Sexsmith Secondary School, but it is a preference and every Alberta graduate can apply. Judged on grade 12 standing.",
+    "toApply": {
+      "checked": "2026-10-01",
+      "complete": true,
+      "items": [
+        {
+          "kind": "account",
+          "text": "An Alberta Student Aid account (or the paper form), between August 1 and October 31"
+        },
+        {
+          "kind": "other",
+          "text": "Selection uses your Grade 12 marks on your official Alberta transcript"
+        }
+      ]
+    },
     "description": "One of the few provincial scholarships written specifically for students who graduated from an Alberta high school in the current year and enrolled full-time in the fall.",
     "eligibility": {
       "grades": [
@@ -20595,6 +21190,16 @@
     "lastVerified": "2026-09",
     "region": "Alberta",
     "notes": "The word science is in the title and in the government summary, which names accomplishments in the sciences, but the published eligibility list itself asks only that you graduated from an Alberta high school this year and are enrolled full-time. Preference goes to a graduate of Crowsnest Consolidated High School. One award, autumn window.",
+    "toApply": {
+      "checked": "2026-10-01",
+      "complete": true,
+      "items": [
+        {
+          "kind": "account",
+          "text": "An Alberta Student Aid account (or the paper form), between August 1 and October 31"
+        }
+      ]
+    },
     "description": "A provincial scholarship of $1,500 for a student who finished an Alberta high school this year, with the Crowsnest Pass at the front of the queue.",
     "eligibility": {
       "grades": [
@@ -23152,6 +23757,20 @@
     "region": "National",
     "description": "A $500 writing award from the same company as the Pretty Lightroom Presets scholarship but on a different annual date, October 15, so a student can enter both in the same school year.",
     "notes": "The winner is notified about four weeks after the deadline and the entry is published on the company blog. Same eligibility as its April sibling: final-year high school, transitioning, or enrolled, in Canada or the United States.",
+    "toApply": {
+      "checked": "2026-10-01",
+      "complete": true,
+      "items": [
+        {
+          "kind": "essay",
+          "text": "An emailed tutorial essay of at least 800 words, with your own screenshots and photos, on one of five topics"
+        },
+        {
+          "kind": "other",
+          "text": "A headshot photo and the mailing address of your school's financial aid office"
+        }
+      ]
+    },
     "metaDetail": "Winner published.",
     "eligibility": {
       "grades": [
@@ -23623,6 +24242,20 @@
     "region": "National",
     "description": "Forty awards a year of up to $15,000 from RBC, administered by Universities Canada, for students aged 17 to 29 who are accepted into a Canadian degree, diploma or certificate program and need the money.",
     "notes": "The largest of the three RBC Next Step scholarships, and the one a graduating Grade 12 student can actually use: you qualify once you are accepted, not only once enrolled. The value tracks your program: up to $15,000 a year for a bachelor's degree, $8,000 for a diploma, $2,000 for CEGEP technical training. Ages 17 to 29, Canadian citizen or permanent resident, financial need required. Apply EARLY. Universities Canada caps the round at 500 submitted applications and closes the portal once it fills, so the posted deadline is a ceiling, not a plan. The 2026 window ran February 2 to March 26. The companion RBC Ignite Scholarship is listed separately here; the third, RBC Reimagine, is for people 25 and over who have been out of school three years or more. Verified against rbc.com on 2026-09-08.",
+    "toApply": {
+      "checked": "2026-10-01",
+      "complete": false,
+      "items": [
+        {
+          "kind": "account",
+          "text": "An account on the RBC scholarship portal"
+        },
+        {
+          "kind": "financial",
+          "text": "A financial need self-assessment inside the form"
+        }
+      ]
+    },
     "metaDetail": "The round closes at 500 applications, so apply early.",
     "eligibility": {
       "grades": [
@@ -26031,6 +26664,24 @@
     "active": false,
     "description": "Cornerstone Co-op gives five $1,000 scholarships: two for Buffalo Trail Public Schools students, one for East Central Alberta Catholic Schools and two in memory of Liane Plante for St. Paul Education students. Home-educated students apply in the Buffalo Trail stream.",
     "notes": "Marks count for 40% and community involvement for 60%. Apply online through the form for your school division or mail a paper form to the Vermilion office, with an official transcript. Ties go to students who support the co-op or have worked there. Questions go to marketing@cornerstone.crs.",
+    "toApply": {
+      "checked": "2026-10-01",
+      "complete": true,
+      "items": [
+        {
+          "kind": "form",
+          "text": "An online form for your school division, or a paper form by mail"
+        },
+        {
+          "kind": "transcript",
+          "text": "An official transcript"
+        },
+        {
+          "kind": "essay",
+          "text": "An essay on your community involvement"
+        }
+      ]
+    },
     "applyViaGuidance": false,
     "lastVerified": "2026-09",
     "eligibility": {
@@ -26305,6 +26956,20 @@
     "active": false,
     "description": "The Justice Centre for Constitutional Freedoms runs a yearly essay contest in memory of lawyer Brandon Langhjelm, with prizes of $3,000, $2,000 and $1,000 for essays on Canadian freedom issues.",
     "notes": "The 2026 topics are social media restrictions for youth, or safety and privacy in AI chatbots. Essays run 1,200 to 1,500 words and are uploaded through the online form by 11:59 p.m. on September 27, 2026. Strong entries engage with thinkers and theories and end with practical policy proposals. You must be 15 to 25 on the deadline.",
+    "toApply": {
+      "checked": "2026-10-01",
+      "complete": true,
+      "items": [
+        {
+          "kind": "form",
+          "text": "An entry form on the contest site"
+        },
+        {
+          "kind": "essay",
+          "text": "An essay of 1,200 to 1,500 words on one of two topics"
+        }
+      ]
+    },
     "applyViaGuidance": false,
     "lastVerified": "2026-09",
     "eligibility": {
@@ -26347,6 +27012,33 @@
     "active": false,
     "description": "Book-summary app Headway gives one $1,500 scholarship a year for the best vision of a non-fiction book that could become a timeless handbook for humanity.",
     "notes": "Write up to 500 words or record a two-minute video, and add short paragraphs on your leadership and goals, a transcript showing at least a 3.0 GPA, and a recommendation letter from a teacher or community supervisor. It closes at 3 p.m. Central on September 15, 2026, and only one student wins worldwide, so treat it as a long shot.",
+    "toApply": {
+      "checked": "2026-10-01",
+      "complete": true,
+      "items": [
+        {
+          "kind": "form",
+          "text": "A Google Form"
+        },
+        {
+          "kind": "essay",
+          "text": "Two short paragraphs, on your leadership and your goals"
+        },
+        {
+          "kind": "transcript",
+          "text": "A current transcript"
+        },
+        {
+          "kind": "essay",
+          "text": "An essay of up to 500 words, or a video of up to 2 minutes, on a non-fiction book"
+        },
+        {
+          "kind": "reference",
+          "text": "One recommendation letter from a teacher or supervisor",
+          "count": 1
+        }
+      ]
+    },
     "applyViaGuidance": false,
     "lastVerified": "2026-09",
     "eligibility": {
@@ -26386,6 +27078,29 @@
     "active": true,
     "description": "Chick-fil-A gives up to 13 scholarships of up to $25,000 to students who lead in their communities, with a year-long leadership development program for the $25,000 winners. Canadian residents can apply.",
     "notes": "Apply on the Scholarship America portal by 3 p.m. Central on November 3, 2026, for study starting in 2027-28. You need at least a 3.0 GPA, community service, extracurriculars or leadership in the last 12 months, your transcript, and the first two pages of your parents’ T-1 tax return. At least one online recommendation must arrive within three business days of the deadline.",
+    "toApply": {
+      "checked": "2026-10-01",
+      "complete": true,
+      "items": [
+        {
+          "kind": "transcript",
+          "text": "A transcript, official or unofficial"
+        },
+        {
+          "kind": "financial",
+          "text": "The first two pages of a parent's T1 tax return, with SIN and bank details blacked out"
+        },
+        {
+          "kind": "reference",
+          "text": "At least one online recommendation, up to three, due within three business days after the deadline",
+          "count": 1
+        },
+        {
+          "kind": "other",
+          "text": "No essay. You must be 18 by July 15, 2027."
+        }
+      ]
+    },
     "applyViaGuidance": false,
     "lastVerified": "2026-09",
     "eligibility": {
@@ -26504,6 +27219,29 @@
     "active": false,
     "description": "Three scholarships from Men's Health Foundation in memory of Rick Blight, for Canadian student athletes who show leadership in their sport and look after their own mental wellbeing or their team's. Two awards of $2,000 and one of $1,000.",
     "notes": "Closes at 11:59 p.m. on September 15, 2026. You send in the questionnaire from the downloadable PDF, a high school or college transcript, a signed reference letter from a teacher or community leader, and a three to five minute video or audio recording about your involvement in sport and your volunteering. Everything goes to the foundation by email. The award has given out more than $55,000 since 2012, and current high school students qualify.",
+    "toApply": {
+      "checked": "2026-10-01",
+      "complete": true,
+      "items": [
+        {
+          "kind": "form",
+          "text": "A questionnaire, emailed with the rest"
+        },
+        {
+          "kind": "transcript",
+          "text": "Transcripts"
+        },
+        {
+          "kind": "reference",
+          "text": "A signed reference letter from a teacher or community leader",
+          "count": 1
+        },
+        {
+          "kind": "video",
+          "text": "A 3 to 5 minute video or audio story about your sport, volunteering and mental wellness"
+        }
+      ]
+    },
     "applyViaGuidance": false,
     "lastVerified": "2026-09",
     "eligibility": {
@@ -26587,6 +27325,16 @@
     "active": true,
     "description": "An essay contest run by Niagara Region Right to Life, open to grade 11 and 12 students across Canada. Three prizes are awarded each year: $2,000, $1,500 and $1,000.",
     "notes": "You submit a personal profile, a letter of recommendation and a 1,500 word essay by email, using the address printed on the official poster and brochure, by Friday October 16, 2026. Winners are announced by December 18, 2026. The 2026/2027 topic asks whether artificial intelligence is a force for good or a technology that undermines human dignity, and whether it changes how human beings are defined, reproduced and die, naming IVF, surrogacy, gene editing and embryo screening. The sponsor is an advocacy organisation and the essay is judged on how well you engage its questions, so read the brochure topic in full before you start. Students educated in Canada outside a high school may also enter.",
+    "toApply": {
+      "checked": "2026-10-01",
+      "complete": false,
+      "items": [
+        {
+          "kind": "essay",
+          "text": "An essay on the set topic (for 2026-27: AI and human dignity)"
+        }
+      ]
+    },
     "applyViaGuidance": false,
     "lastVerified": "2026-09",
     "eligibility": {

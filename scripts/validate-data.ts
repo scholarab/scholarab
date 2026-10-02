@@ -6,6 +6,7 @@ import { generateSlug } from '../src/lib/utils.ts';
 import { programMeta, scholarshipMetas, formatListingDate, META_MAX } from '../src/lib/meta.ts';
 import { scholarshipStatusOf } from '../src/lib/status.ts';
 import { eligibilitySchema } from '../src/lib/eligibility-types.ts';
+import { toApplyProblems } from '../src/lib/to-apply.ts';
 import {
   RESERVED_SCHOLARSHIP_SLUGS,
   RESERVED_PROGRAM_SLUGS,
@@ -273,6 +274,11 @@ for (const s of scholarships) {
   // dropping the openDate, never by inventing a new one.
   if (s.openDate && s.deadline && isValidDate(s.openDate) && isValidDate(s.deadline) && s.openDate > s.deadline) {
     console.error(`${tag}: openDate ${s.openDate} is after deadline ${s.deadline}`);
+    failed = true;
+  }
+
+  for (const problem of toApplyProblems(s.toApply)) {
+    console.error(`${tag}: toApply ${problem}`);
     failed = true;
   }
 }

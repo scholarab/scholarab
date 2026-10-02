@@ -360,6 +360,7 @@ if (kind === 'scholarship') {
         : s.applyViaGuidance ? 'Applications go through your school.' : null,
     ].filter(Boolean).join(' ') || null,
     checkedLabel: formatVerifiedMonth(s.lastVerified),
+    toApply: s.toApply ?? null,
     ctaLabel: noApplication ? 'How it is awarded' : s.applyViaGuidance ? 'How to apply' : 'Apply',
     url: s.url,
     canRemind: status === 'active' && daysLeft !== null && daysLeft > 0,
@@ -553,6 +554,7 @@ const breadcrumbJson = {
       about={d.about}
       notes={d.notes}
       steps={d.steps}
+      toApply={"toApply" in d ? d.toApply : null}
       valueLabel={d.valueLabel}
       valueBig={d.valueBig}
       valueNote={d.valueNote}
@@ -561,7 +563,6 @@ const breadcrumbJson = {
       ctaLabel={d.ctaLabel}
       url={d.url}
       canRemind={d.canRemind}
-      canonical={d.canonical}
       guideHref={guideSlug ? `/guides/${guideSlug.slug}/` : undefined}
       guideTitle={guideSlug?.title}
       alternatives={alternatives}

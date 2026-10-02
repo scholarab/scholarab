@@ -1,5 +1,6 @@
 import type { EligibilityCriteria } from './eligibility-types'
 import { eligibilitySchema } from './eligibility-types'
+import type { ToApply } from './to-apply'
 
 export { eligibilitySchema } from './eligibility-types'
 
@@ -69,6 +70,8 @@ export type Scholarship = {
    * bursary (critique 2026-09-27). Phrased to follow "Only for". JSON-only.
    */
   localArea?: string | null
+  /** What applying takes, from the provider's page. JSON-only. See lib/to-apply.ts. */
+  toApply?: ToApply | null
 }
 
 export type Program = {
