@@ -251,9 +251,9 @@ const carousels = [
   <link rel="preload" as="image" href="/video/hero/poster.m.webp" media="(max-width: 900px)" fetchpriority="high" slot="head" />
 
   {/* The header is the page's banner and cannot sit inside <main>; it used to
-      be the hero's first flex child. Same dark background either side, so the
-      band still reads as one, but the hero no longer contains the height it
-      has to subtract, hence the calc below. */}
+      be the hero's first flex child. The hero now pulls itself up under it so
+      the film is the header's background (Ilia, 2026-10-02); the bar turns
+      solid once the hero has scrolled out from under it. */}
   <div class="sab-hero-band" slot="header">
     <SabHeader currentPath="/" />
   </div>
@@ -262,8 +262,8 @@ const carousels = [
 
     <!-- ============ DARK HERO ============ -->
     <div class="sab-hero">
-      {/* Background film: twelve Pexels clips crossfading in a loop, under
-          the solid header. The still is the first clip's first frame and is
+      {/* Background film: twelve Pexels clips crossfading in a loop, behind
+          the see-through header. The still is the first clip's first frame and is
           all that shows on phones, with reduced motion, or with Save-Data on. */}
       <div class="sab-hero-media" aria-hidden="true">
         <video class="sab-hero-vid" muted playsinline preload="none"></video>
@@ -728,11 +728,35 @@ const carousels = [
   }
   startHeroFilmLater();
   document.addEventListener('astro:page-load', startHeroFilmLater);
+
+  // The header is clear while the hero is behind it. The root's top is inset
+  // by the bar's height, so the hero stops intersecting the moment its bottom
+  // edge passes under the bar.
+  function initHeroHeader() {
+    const band = document.querySelector<HTMLElement>('.sab-hero-band');
+    const hero = document.querySelector<HTMLElement>('.sab-hero');
+    if (!band || !hero || band.dataset.init) return;
+    band.dataset.init = '1';
+    const nav = band.getBoundingClientRect().height;
+    new IntersectionObserver(([e]) => {
+      band.toggleAttribute('data-past', !e?.isIntersecting);
+    }, { rootMargin: `-${Math.round(nav)}px 0px 0px 0px` }).observe(hero);
+  }
+  document.addEventListener('astro:page-load', initHeroHeader);
 </script>
 
 <style is:global>
   /* The home design is fixed light regardless of site theme */
   body:has(#sab-home) { background: var(--bg-page); }
+  /* The header is see-through over the film and solid everywhere else: once
+     the hero has scrolled out from under it (data-past, set in the script),
+     while a dropdown or the phone menu is open, and without scripts. */
+  .sab-hero-band { transition: background-color 0.25s ease; }
+  html.js .sab-hero-band:not([data-past]):not(:has(.sabh-drop[data-on], .sabh[data-open])) {
+    background-color: transparent;
+    box-shadow: none;
+    border-bottom-color: transparent;
+  }
 </style>
 
 <style>
@@ -769,18 +793,20 @@ const carousels = [
   /* Solid, the same #0A1310 as the Scholarships and Programs dropdowns, so
      an open menu sits on one continuous black panel instead of on the film. */
   /* No position or z-index here: global.css makes this band sticky like every
-     other page's header. `position: relative; z-index: 2` (5382481) let a
-     hero film show through a transparent bar; the bar has been solid since,
-     and the leftover rule was the only thing unsticking the home header. */
+     other page's header. `position: relative; z-index: 2` (5382481) once
+     unstuck it; the hero slides under the sticky bar instead (below).
+     The see-through state lives in the is:global block, because it keys off
+     the header component's own attributes. */
   .sab-hero-band { background: #0A1310; color: #EEF1EC; }
   .sab-hero {
     background: #0A1310; color: #EEF1EC; position: relative; isolation: isolate;
     overflow: hidden;
     display: flex; flex-direction: column;
-    /* The header used to be inside this box and counted toward the fold. Now
-       it sits above, so its height comes off the target instead. */
-    min-height: calc(100vh - var(--sab-nav-h));
-    min-height: calc(100svh - var(--sab-nav-h));
+    /* Starts behind the header (the bar plus its 1px rule from global.css),
+       so the film fills the bar too, and still ends at the fold. */
+    margin-top: calc(-1 * var(--sab-nav-h) - 1px);
+    min-height: 100vh;
+    min-height: 100svh;
   }
 
   .sab-hero-media {
@@ -807,7 +833,7 @@ const carousels = [
   .sab-hero-media::after {
     content: ''; position: absolute; inset: 0;
     background:
-      linear-gradient(180deg, rgba(10,19,16,0.45) 0, rgba(10,19,16,0) 160px),
+      linear-gradient(180deg, rgba(10,19,16,0.5) 0, rgba(10,19,16,0) calc(160px + var(--sab-nav-h))),
       linear-gradient(180deg, rgba(10,19,16,0) 40%, rgba(10,19,16,0.6) 72%, rgba(10,19,16,0.92) 94%, #0A1310 100%),
       /* The byline and headline sit on the left; on a bright frame the byline
          fell to 3.3:1 (critique 2026-09-23). Darken that side only. */
@@ -825,7 +851,7 @@ const carousels = [
   .sab-kicker-link { color: #EEF1EC; font-weight: 400; text-decoration: none; border-bottom: 1px solid rgba(92,227,187,0.6); padding-top: 12px; margin-top: -12px; display: inline-block; }
   .sab-kicker-link:hover { border-bottom-color: #2FD3A0; color: #2FD3A0; }
   .sab-hero-body {
-    padding-top: 76px; position: relative;
+    padding-top: calc(76px + var(--sab-nav-h)); position: relative;
     /* Center the copy in the space left under the header */
     flex: 1; display: flex; flex-direction: column; justify-content: center;
     width: 100%; box-sizing: border-box;
@@ -1139,8 +1165,8 @@ const carousels = [
        toolbars, which left a strip of the next section under the hero on an
        iPhone. The copy is then spread evenly down the screen, with room at the
        foot for the floating toolbar. */
-    .sab-hero { min-height: calc(100dvh - var(--sab-nav-h)); }
-    .sab-hero-body { padding-top: 28px; padding-bottom: calc(76px + env(safe-area-inset-bottom, 0px)); justify-content: flex-start; }
+    .sab-hero { min-height: 100dvh; }
+    .sab-hero-body { padding-top: calc(28px + var(--sab-nav-h)); padding-bottom: calc(76px + env(safe-area-inset-bottom, 0px)); justify-content: flex-start; }
     .sab-hero-bottom { flex: 1; margin-top: 0; padding-bottom: 0; }
     .sab-hero-copy { flex: 1; display: flex; flex-direction: column; justify-content: space-evenly; }
     .sab-hero-copy > .sab-hero-quiz, .sab-hero .sab-hero-quiz { margin: 0; }
