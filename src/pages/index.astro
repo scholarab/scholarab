@@ -1050,36 +1050,40 @@ const carousels = [
      in the next one. The track scrolls natively and snaps a slide at a time. */
   .sab-scopes { position: relative; }
   .sab-scopes-track {
-    display: flex; overflow-x: auto; overscroll-behavior-x: contain;
+    display: flex; overflow-x: auto; overscroll-behavior-x: contain; background: #0A1310;
     scroll-snap-type: x mandatory; scrollbar-width: none; outline: none;
   }
   .sab-scopes-track::-webkit-scrollbar { display: none; }
   .sab-scope {
     position: relative; flex: 0 0 100%; height: 100svh; min-height: 520px;
-    /* clip, not hidden: hidden makes the slide a scroll container, and the
-       photo's swipe fade below would follow it instead of the track. */
-    overflow: hidden; overflow: clip; scroll-snap-align: start; scroll-snap-stop: always; background: #0A1310;
+    overflow: hidden; scroll-snap-align: start; scroll-snap-stop: always;
+    view-timeline: --sab-scope inline;
   }
   .sab-scope picture, .sab-scope-img { position: absolute; inset: 0; width: 100%; height: 100%; }
   .sab-scope-img { object-fit: cover; }
   /* A photo that arrives after its slide is on screen fades in from the
      slide's ink instead of popping in (the script sets is-loading). */
-  .sab-scope picture.is-loading { opacity: 0; }
+  .sab-scope picture.is-loading .sab-scope-img { opacity: 0; }
   @media (prefers-reduced-motion: no-preference) {
-    .sab-scope picture { transition: opacity 0.45s ease; }
-    /* Mid-swipe, the photo leaving and the one arriving dim toward the ink
-       and the one coming to rest brightens, so two pictures do not meet at a
-       hard vertical cut (Ilia, 2026-10-03: "the transition between the
-       photos is not smooth"). Resting, every photo is at full strength.
-       Browsers without scroll-driven animations keep the plain slide. */
-    @supports (animation-timeline: view(inline)) {
-      .sab-scope-img { animation: sab-scope-pass linear both; animation-timeline: view(inline); }
-    }
+    .sab-scope-img { transition: opacity 0.45s ease; }
   }
-  @keyframes sab-scope-pass {
-    0% { opacity: 0.35; }
-    50% { opacity: 1; }
-    100% { opacity: 0.35; }
+  /* The photos hold still and dissolve into each other while the words and
+     buttons slide (Ilia, 2026-10-03: a slow drag showed two photos meeting
+     at a sharp edge, and dimming them only softened it). Each photo is
+     pinned to the window by moving it against its slide's travel, and the
+     arriving one fades in over the one leaving, which sits under it in page
+     order. Resting, the slide's own photo is the only one showing, at full
+     strength. Photos that do not move are less motion, not more, so this
+     holds under reduced motion too. Browsers without scroll-driven
+     animations keep the plain slide. */
+  @supports (view-timeline: --sab-scope inline) {
+    .sab-scope { overflow: visible; }
+    .sab-scope picture { animation: sab-scope-hold linear both; animation-timeline: --sab-scope; }
+  }
+  @keyframes sab-scope-hold {
+    0% { transform: translateX(-100%); opacity: 0; }
+    50% { transform: none; opacity: 1; }
+    100% { transform: translateX(100%); opacity: 1; }
   }
   html:not(.js) .sab-scope picture[data-defer] { display: none; }
   /* Every slide fades to the hero's ink (#0A1310) at its top and bottom
@@ -1088,7 +1092,9 @@ const carousels = [
      photos disappears instead of cutting one picture off against the next.
      The same shade carries the kicker at the top and the name and buttons at
      the bottom; the photo stays untouched in the middle. */
-  .sab-scope::after {
+  /* On the photo, not the slide: a photo pinned over the next slide carries
+     its own shade, so two shades never stack and none goes missing. */
+  .sab-scope picture::after {
     content: ''; position: absolute; inset: 0; pointer-events: none;
     background: linear-gradient(#0A1310, rgba(10,19,16,0.8) 12%, rgba(10,19,16,0) 32%, rgba(10,19,16,0) 48%, rgba(10,19,16,0.7) 80%, #0A1310);
   }
