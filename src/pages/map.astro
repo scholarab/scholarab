@@ -1,0 +1,681 @@
+---
+import SabFooter from '../components/sab/SabFooter.astro';
+import SabFonts from '../components/sab/SabFonts.astro';
+import Layout from '../layouts/Layout.astro';
+import SabHeader from '../components/sab/SabHeader.astro';
+import { loadScholarships } from '../lib/data-loader';
+import { enrichScholarships } from '../lib/enrich';
+import { SCHOLARSHIP_FACETS, facetItems } from '../lib/facets';
+import { schoolOf } from '../lib/school-awards';
+import {
+  MAP_W, MAP_H, BORDER_PATH, dotField, edgeTicks, mapPlaces, project,
+  SCHOOLS, FROM_TOWNS, KIND_WORDS, type SchoolKind,
+} from '../lib/alberta-map';
+
+// Every university, polytechnic and college in Alberta on one map
+// (lib/alberta-map.ts has the sources). Built at build time from the
+// province's border; the page script only moves state around. Without
+// scripts every place and every school is still listed, with its links.
+//
+// After the map products students already use (Google Maps, Revolut's ATM
+// finder, PamPam): a list panel beside the map on a wide screen, a sheet
+// over it on a phone, and a place's details replacing the list when it is
+// chosen. The town picker answers the question a Grade 12 student actually
+// has about a school: how far is it from home.
+
+const all = enrichScholarships(await loadScholarships());
+const awardsFacet = SCHOLARSHIP_FACETS.find(f => f.bySchool)!;
+const awardCounts = new Map<string, number>();
+for (const s of facetItems(awardsFacet, all)) {
+  const k = schoolOf(s);
+  if (k) awardCounts.set(k, (awardCounts.get(k) ?? 0) + 1);
+}
+const awardsOf = (name?: string) => (name ? awardCounts.get(name) ?? 0 : 0);
+const awardsHref = (name: string) => `/scholarships/${awardsFacet.slug}/?school=${encodeURIComponent(name)}`;
+
+const places = mapPlaces();
+const dots = dotField();
+const ticks = edgeTicks();
+const kinds: SchoolKind[] = ['university', 'polytechnic', 'college'];
+const kindCount = (k: SchoolKind) => SCHOOLS.filter(s => s.kind === k).length;
+const withAwards = SCHOOLS.filter(s => awardsOf(s.awardsName) > 0).length;
+const pct = (v: number, of: number) => `${(v / of * 100).toFixed(3)}%`;
+// Dot size by how many schools a place has: one school is a point, eight
+// is a city. Square root, so area tracks the count.
+const pinSize = (n: number) => Math.round(12 + 6 * Math.sqrt(n - 1));
+const schoolsWord = (n: number) => `${n} ${n === 1 ? 'school' : 'schools'}`;
+const host = (url: string) => new URL(url).hostname.replace(/^www\./, '');
+
+const fromTowns = FROM_TOWNS.map(t => {
+  const [x, y] = project(t.lat, t.lon);
+  return { ...t, x, y };
+});
+const data = {
+  w: MAP_W, h: MAP_H,
+  places: places.map(p => ({ id: p.id, name: p.name, lat: p.lat, lon: p.lon, x: p.x, y: p.y })),
+  from: fromTowns,
+};
+
+const title = "Map of Alberta's Universities and Colleges | ScholarAB";
+const description = `All ${SCHOOLS.length} universities, polytechnics and colleges in Alberta on one map, with how far each is from your town and the entrance awards ScholarAB lists for them.`;
+const canonical = 'https://www.scholarab.ca/map/';
+---
+
+<Layout
+  title={title}
+  description={description}
+  ogTitle={title}
+  ogDescription={description}
+  ogUrl={canonical}
+  canonical={canonical}
+>
+  <SabFonts slot="head" />
+
+  <div class="sabp-header" slot="header">
+    <SabHeader currentPath="/map" />
+  </div>
+
+  <div id="sab-map" class="am" data-sheet="peek">
+    <div class="am-stage" data-stage>
+      <div class="am-map" style={`aspect-ratio: ${MAP_W} / ${MAP_H}`} data-map>
+        <svg class="am-svg" viewBox={`0 0 ${MAP_W} ${MAP_H}`} aria-hidden="true" focusable="false">
+          <path class="am-land" d={BORDER_PATH} />
+          <path class="am-dots am-dots-plain" d={dots.plain} />
+          <path class="am-dots am-dots-foothills" d={dots.foothills} />
+          <path class="am-dots am-dots-peaks" d={dots.peaks} />
+          <path class="am-border" d={BORDER_PATH} />
+          {ticks.map(t => <text class="am-tick" x={t.x} y={t.y} text-anchor={t.anchor}>{t.text}</text>)}
+          <text class="am-range" transform={`translate(${project(51.6, -116.25).join(' ')}) rotate(-58)`}>Rocky Mountains</text>
+          <path class="am-arc" d="" data-arc />
+        </svg>
+        <div class="am-glow" data-glow aria-hidden="true"></div>
+        <div class="am-home" data-home hidden aria-hidden="true"><span class="am-home-dot"></span><span class="am-home-label" data-home-label></span></div>
+        <div class="am-arc-km" data-arc-km hidden aria-hidden="true"></div>
+        <div class="am-legend" aria-hidden="true">
+          <span><i class="am-lg-dot"></i>One school</span>
+          <span><i class="am-lg-dot am-lg-big">8</i>Several schools</span>
+          <span><i class="am-lg-home"></i>Your town</span>
+        </div>
+        <nav class="am-pins" aria-label="Places on the map">
+          {places.map((p, i) => (
+            <a
+              class:list={['am-pin', { 'am-pin-big': p.schools.length > 1 }, p.label && `am-pin-${p.label}`]}
+              href={`#${p.id}`}
+              data-pin={p.id}
+              style={`left: ${pct(p.x, MAP_W)}; top: ${pct(p.y, MAP_H)}; --s: ${pinSize(p.schools.length)}px; --i: ${i}`}
+              aria-label={`${p.name}, ${schoolsWord(p.schools.length)}`}
+            >
+              <span class="am-pin-dot" data-pin-count>{p.schools.length > 1 ? p.schools.length : ''}</span>
+              <span class="am-pin-label">{p.name}</span>
+            </a>
+          ))}
+        </nav>
+      </div>
+    </div>
+
+    <section class="am-panel" aria-labelledby="am-h1" data-panel>
+      <button type="button" class="am-grab" data-grab aria-expanded="false" aria-controls="am-scroll">
+        <span class="am-grab-bar" aria-hidden="true"></span>
+        <span class="sr-only" data-grab-label>Show the list</span>
+      </button>
+      <div class="am-scroll" id="am-scroll" data-scroll>
+        <div class="am-head">
+          <h1 id="am-h1" class="am-h1">Alberta's universities and colleges</h1>
+          <p class="am-lede">
+            {SCHOOLS.length} schools in {places.length} places. Choose a place to see who is there, how far it is
+            from you, and the entrance awards we list for {withAwards} of them.
+          </p>
+          <div class="am-controls">
+            <label class="am-from">
+              <span class="am-from-label">From</span>
+              <select data-from aria-label="Your town, to measure distances from">
+                <option value="">Pick your town</option>
+                {fromTowns.map(t => <option value={t.slug}>{t.name}</option>)}
+              </select>
+            </label>
+            <div class="am-kinds" role="group" aria-label="Show">
+              <button type="button" class="am-kind" data-kind="" aria-pressed="true">All <span class="am-kind-n">{SCHOOLS.length}</span></button>
+              {kinds.map(k => (
+                <button type="button" class="am-kind" data-kind={k} aria-pressed="false">{KIND_WORDS[k].many} <span class="am-kind-n">{kindCount(k)}</span></button>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <ol class="am-list" data-list aria-label="Places">
+          {places.map(p => (
+            <li class="am-item" data-item={p.id}>
+              <a class="am-row" href={`#${p.id}`} data-row={p.id}>
+                <span class="am-row-top">
+                  <span class="am-row-name">{p.name}</span>
+                  <span class="am-row-km" data-km></span>
+                </span>
+                <span class="am-row-schools">
+                  {p.schools.map((s, i) => <span data-kind={s.kind}>{i > 0 ? ', ' : ''}{s.short ?? s.name}</span>)}
+                </span>
+              </a>
+            </li>
+          ))}
+        </ol>
+        <p class="am-empty" data-empty hidden>No schools of that kind. <button type="button" class="am-link" data-kind-reset>Show all</button></p>
+
+        <div class="am-details" data-details>
+          {places.map(p => (
+            <article class="am-place" id={p.id} data-detail={p.id} aria-labelledby={`am-place-${p.id}`}>
+              <button type="button" class="am-back" data-back>All places</button>
+              <h2 class="am-place-h" id={`am-place-${p.id}`}>{p.name}</h2>
+              <p class="am-place-meta"><span data-count>{schoolsWord(p.schools.length)}</span><span class="am-place-km" data-km-line></span></p>
+              <ul class="am-schools">
+                {p.schools.map(s => {
+                  const n = awardsOf(s.awardsName);
+                  return (
+                    <li class="am-school" data-kind={s.kind}>
+                      <h3 class="am-school-name">{s.short ?? s.name}</h3>
+                      <p class="am-school-about">{s.short ? `${s.name}. ` : ''}{s.about}{s.note ? `, ${s.note}` : ''}</p>
+                      <p class="am-school-links">
+                        {n > 0
+                          ? <a class="am-awards" href={awardsHref(s.awardsName!)}>{n} entrance {n === 1 ? 'award' : 'awards'}<span aria-hidden="true"> →</span></a>
+                          : <span class="am-noawards">No entrance awards listed yet</span>}
+                        <a class="am-site" href={s.site} target="_blank" rel="noopener noreferrer">{host(s.site)}<span aria-hidden="true"> ↗</span></a>
+                      </p>
+                    </li>
+                  );
+                })}
+              </ul>
+            </article>
+          ))}
+        </div>
+        <p class="am-source">
+          Schools from the Government of Alberta's lists of publicly funded institutions and First Nations
+          colleges, plus every school we list entrance awards for. Distances are in a straight line.
+        </p>
+      </div>
+    </section>
+  </div>
+
+  <script type="application/json" id="am-data" set:html={JSON.stringify(data)} />
+  <SabFooter slot="footer" />
+</Layout>
+
+<script>
+  import { kmBetween } from '../lib/alberta-map-client';
+
+  interface Data {
+    w: number; h: number;
+    places: Array<{ id: string; name: string; lat: number; lon: number; x: number; y: number }>;
+    from: Array<{ slug: string; name: string; lat: number; lon: number; x: number; y: number }>;
+  }
+  const FROM_KEY = 'sa_map_from';
+  const CITY_KEY = 'sa_city';
+
+  function init() {
+    const found = document.getElementById('sab-map');
+    const raw = document.getElementById('am-data');
+    if (!found || !raw || found.dataset.init) return;
+    const root: HTMLElement = found;
+    root.dataset.init = '';
+    const data = JSON.parse(raw.textContent ?? '{}') as Data;
+    const byId = new Map(data.places.map(p => [p.id, p]));
+    const $ = <T extends Element>(sel: string) => root.querySelector<T>(sel)!;
+    const $$ = <T extends Element>(sel: string) => [...root.querySelectorAll<T>(sel)];
+    const list = $<HTMLElement>('[data-list]');
+    const scroll = $<HTMLElement>('[data-scroll]');
+    const grab = $<HTMLButtonElement>('[data-grab]');
+    const from = $<HTMLSelectElement>('[data-from]');
+    const glow = $<HTMLElement>('[data-glow]');
+    const home = $<HTMLElement>('[data-home]');
+    const arc = $<SVGPathElement>('[data-arc]');
+    const arcKm = $<HTMLElement>('[data-arc-km]');
+    const pins = new Map($$<HTMLAnchorElement>('[data-pin]').map(a => [a.dataset.pin!, a]));
+    const items = new Map($$<HTMLElement>('[data-item]').map(li => [li.dataset.item!, li]));
+    const cards = new Map($$<HTMLElement>('[data-detail]').map(a => [a.dataset.detail!, a]));
+    const phone = matchMedia('(max-width: 899px)');
+    const pct = (v: number, of: number) => `${(v / of) * 100}%`;
+
+    let selected: string | null = null;
+    let kind = '';
+    let origin: Data['from'][number] | null = null;
+
+    const setSheet = (open: boolean) => {
+      root.dataset.sheet = open ? 'open' : 'peek';
+      grab.setAttribute('aria-expanded', String(open));
+      $('[data-grab-label]').textContent = open ? 'Hide the list' : 'Show the list';
+    };
+
+    // ── The kind filter: a place with no school of the kind dims and leaves the list.
+    function applyKind() {
+      let shown = 0;
+      for (const [id, li] of items) {
+        const names = [...li.querySelectorAll<HTMLElement>('[data-kind]')];
+        let first = true;
+        let n = 0;
+        for (const s of names) {
+          const on = !kind || s.dataset.kind === kind;
+          s.hidden = !on;
+          if (on) {
+            n++;
+            // The comma belongs to the second name on, so a hidden first name takes none along.
+            const t = s.textContent!.replace(/^, /, '');
+            s.textContent = first ? t : `, ${t}`;
+            first = false;
+          }
+        }
+        li.hidden = n === 0;
+        if (n) shown++;
+        const pin = pins.get(id)!;
+        pin.classList.toggle('is-off', n === 0);
+        pin.tabIndex = n === 0 ? -1 : 0;
+        pin.querySelector('[data-pin-count]')!.textContent = n > 1 ? String(n) : '';
+        pin.style.setProperty('--s', `${Math.round(12 + 6 * Math.sqrt(Math.max(1, n) - 1))}px`);
+        const card = cards.get(id)!;
+        for (const s of card.querySelectorAll<HTMLElement>('.am-school')) s.hidden = !!kind && s.dataset.kind !== kind;
+        card.querySelector('[data-count]')!.textContent = `${n} ${n === 1 ? 'school' : 'schools'}`;
+      }
+      $<HTMLElement>('[data-empty]').hidden = shown > 0;
+      for (const b of $$<HTMLButtonElement>('[data-kind]')) if (b.classList.contains('am-kind')) b.setAttribute('aria-pressed', String(b.dataset.kind === kind));
+      if (selected && pins.get(selected)!.classList.contains('is-off')) select(null);
+    }
+
+    // ── Distance from the student's town: each row, each place, and the arc to the chosen one.
+    function applyOrigin() {
+      home.hidden = !origin;
+      if (origin) {
+        home.style.left = pct(origin.x, data.w);
+        home.style.top = pct(origin.y, data.h);
+        // A town with a school already has its name on its pin.
+        $('[data-home-label]').textContent = byId.has(origin.slug) ? '' : origin.name;
+        // Near the east border the name goes on the left, or it runs off a phone.
+        home.classList.toggle('am-home-left', origin.x > data.w * 0.6);
+      }
+      const km = new Map(data.places.map(p => [p.id, origin ? kmBetween(origin, p) : 0]));
+      for (const [id, li] of items) {
+        const d = km.get(id)!;
+        li.querySelector('[data-km]')!.textContent = origin ? (d < 5 ? 'Here' : `${Math.round(d)} km`) : '';
+        const line = cards.get(id)!.querySelector('[data-km-line]')!;
+        line.textContent = !origin ? '' : d < 5 ? `In ${origin.name}` : `${Math.round(d).toLocaleString('en-CA')} km from ${origin.name}, in a straight line`;
+      }
+      // Nearest first once there is a town; biggest first, as built, without one.
+      const order = [...items.keys()];
+      if (origin) order.sort((a, b) => km.get(a)! - km.get(b)!);
+      for (const id of order) list.append(items.get(id)!);
+      drawArc();
+    }
+
+    function drawArc() {
+      const p = selected ? byId.get(selected) : null;
+      if (!origin || !p || kmBetween(origin, p) < 5) {
+        arc.setAttribute('d', '');
+        arcKm.hidden = true;
+        return;
+      }
+      // A gentle bow to one side, so the line reads as a journey, not a ruler.
+      const mx = (origin.x + p.x) / 2, my = (origin.y + p.y) / 2;
+      const dx = p.x - origin.x, dy = p.y - origin.y;
+      const len = Math.hypot(dx, dy);
+      const bow = Math.min(60, len * 0.22);
+      const cx = mx - (dy / len) * bow, cy = my + (dx / len) * bow;
+      arc.setAttribute('d', `M${origin.x} ${origin.y}Q${cx} ${cy} ${p.x} ${p.y}`);
+      arc.style.setProperty('--len', String(Math.ceil(arc.getTotalLength())));
+      arc.classList.remove('is-drawn');
+      void arc.getBoundingClientRect();
+      arc.classList.add('is-drawn');
+      arcKm.hidden = false;
+      arcKm.textContent = `${Math.round(kmBetween(origin, p)).toLocaleString('en-CA')} km`;
+      // The curve's own midpoint, half way between the chord and the control point.
+      arcKm.style.left = pct((mx + cx) / 2, data.w);
+      arcKm.style.top = pct((my + cy) / 2, data.h);
+    }
+
+    function select(id: string | null, opts: { focus?: boolean; push?: boolean } = {}) {
+      selected = id && byId.has(id) ? id : null;
+      root.toggleAttribute('data-picked', !!selected);
+      list.hidden = !!selected;
+      for (const [pid, card] of cards) card.hidden = pid !== selected;
+      for (const [pid, pin] of pins) {
+        pin.classList.toggle('is-on', pid === selected);
+        if (pid === selected) pin.setAttribute('aria-current', 'true');
+        else pin.removeAttribute('aria-current');
+      }
+      const p = selected ? byId.get(selected)! : null;
+      glow.classList.toggle('is-on', !!p);
+      if (p) {
+        glow.style.left = pct(p.x, data.w);
+        glow.style.top = pct(p.y, data.h);
+      }
+      const hash = selected ? `#${selected}` : location.pathname + location.search;
+      if (opts.push !== false) history.replaceState(null, '', hash);
+      if (selected) {
+        if (phone.matches) setSheet(true);
+        scroll.scrollTop = 0;
+        if (opts.focus) cards.get(selected)!.querySelector<HTMLElement>('.am-place-h')!.focus({ preventScroll: true });
+      }
+      drawArc();
+    }
+
+    // Pins and rows are links to the place's own article, so they work
+    // without scripts; with them, the panel shows that place instead.
+    root.addEventListener('click', e => {
+      const t = e.target as Element;
+      const link = t.closest<HTMLAnchorElement>('[data-pin], [data-row]');
+      if (link) {
+        e.preventDefault();
+        select(link.dataset.pin ?? link.dataset.row!, { focus: e.detail === 0 });
+        return;
+      }
+      if (t.closest('[data-back]')) {
+        const was = selected;
+        select(null);
+        if (was) items.get(was)?.querySelector<HTMLElement>('[data-row]')?.focus({ preventScroll: false });
+        return;
+      }
+      const k = t.closest<HTMLButtonElement>('.am-kind, [data-kind-reset]');
+      if (k) { kind = k.dataset.kind ?? ''; applyKind(); return; }
+      if (t.closest('[data-grab]')) { setSheet(root.dataset.sheet !== 'open'); return; }
+      // A tap on the empty map lowers the sheet, so the whole province shows.
+      if (phone.matches && t.closest('[data-stage]') && !t.closest('[data-pin]')) setSheet(false);
+    });
+    root.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && selected) {
+        const was = selected;
+        select(null);
+        pins.get(was)?.focus();
+      }
+    });
+    // A row and its pin light up together.
+    const hover = (id: string | undefined, on: boolean) => { if (id) pins.get(id)?.classList.toggle('is-hover', on); };
+    list.addEventListener('pointerover', e => hover((e.target as Element).closest<HTMLElement>('[data-row]')?.dataset.row, true));
+    list.addEventListener('pointerout', e => hover((e.target as Element).closest<HTMLElement>('[data-row]')?.dataset.row, false));
+    list.addEventListener('focusin', e => hover((e.target as HTMLElement).dataset.row, true));
+    list.addEventListener('focusout', e => hover((e.target as HTMLElement).dataset.row, false));
+
+    from.addEventListener('change', () => {
+      origin = data.from.find(t => t.slug === from.value) ?? null;
+      try { if (origin) localStorage.setItem(FROM_KEY, origin.slug); else localStorage.removeItem(FROM_KEY); } catch { /* storage blocked */ }
+      applyOrigin();
+    });
+    // The town picked here before, else the city list the student last opened.
+    let saved = '';
+    try { saved = localStorage.getItem(FROM_KEY) ?? localStorage.getItem(CITY_KEY) ?? ''; } catch { /* storage blocked */ }
+    if (data.from.some(t => t.slug === saved)) { from.value = saved; origin = data.from.find(t => t.slug === saved)!; }
+
+    applyKind();
+    applyOrigin();
+    select(location.hash.slice(1) || null, { push: false });
+    // A shared link (/map/#calgary) opens that place in the panel; the
+    // browser's own jump to the anchor would only push the map off the top.
+    // It jumps again at load, so the reset waits for that too.
+    if (selected) {
+      const top = () => scrollTo(0, 0);
+      setTimeout(top, 0);
+      if (document.readyState !== 'complete') addEventListener('load', () => setTimeout(top, 0), { once: true });
+    }
+    addEventListener('hashchange', () => select(location.hash.slice(1) || null, { push: false }));
+    root.classList.add('is-ready');
+  }
+
+  init();
+  document.addEventListener('astro:page-load', init);
+</script>
+
+<style is:global>
+  /* The canvas is the map's ink from the header down, as on the home page. */
+  html:has(#sab-map), body:has(#sab-map) { background: #0A1310; }
+
+  #sab-map {
+    --am-ink: #0A1310;
+    --am-panel: #0E1915;
+    --am-line: rgba(238, 241, 236, 0.12);
+    --am-text: #EEF1EC;
+    --am-soft: rgba(238, 241, 236, 0.78);
+    --am-faint: rgba(238, 241, 236, 0.6);
+    --am-mint: #2FD3A0;
+    --am-mint-hi: #5CE3BB;
+    --am-peek: 136px;
+    position: relative;
+    display: grid; grid-template-columns: minmax(340px, 420px) minmax(0, 1fr);
+    height: calc(100vh - var(--sab-nav-h)); height: calc(100svh - var(--sab-nav-h));
+    min-height: 560px;
+    background: var(--am-ink); color: var(--am-text);
+    font-family: var(--font-body);
+  }
+
+  /* ── The map ── */
+  .am-stage {
+    grid-column: 2; grid-row: 1; position: relative; min-height: 0;
+    display: grid; place-items: center; padding: 28px 32px;
+    background: radial-gradient(60% 55% at 50% 50%, rgba(47, 211, 160, 0.07), transparent 70%);
+    overflow: hidden;
+  }
+  .am-map {
+    position: relative;
+    height: 100%; max-height: 100%; max-width: 100%;
+  }
+  .am-svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .am-land { fill: rgba(238, 241, 236, 0.025); }
+  .am-border { fill: none; stroke: rgba(238, 241, 236, 0.32); stroke-width: 1; vector-effect: non-scaling-stroke; stroke-linejoin: round; }
+  .am-dots { fill: none; stroke-linecap: round; stroke-width: 2.4; }
+  .am-dots-plain { stroke: rgba(238, 241, 236, 0.22); }
+  .am-dots-foothills { stroke: rgba(238, 241, 236, 0.3); }
+  .am-dots-peaks { stroke: rgba(238, 241, 236, 0.5); stroke-width: 2.8; }
+  .am-tick, .am-range {
+    font-family: var(--font-label); font-size: 13px; letter-spacing: 0.08em; fill: rgba(238, 241, 236, 0.42);
+  }
+  .am-range { font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase; fill: rgba(238, 241, 236, 0.5); }
+
+  /* The line from the student's town to the chosen place draws itself in. */
+  .am-arc { fill: none; stroke: var(--am-mint); stroke-width: 2; vector-effect: non-scaling-stroke; stroke-linecap: round; }
+  .am-arc-km {
+    position: absolute; transform: translate(-50%, -50%); z-index: 3; pointer-events: none;
+    padding: 3px 7px; border-radius: var(--radius); background: var(--am-mint); color: #08120E;
+    font: 600 12px/1.2 var(--font-body); white-space: nowrap;
+  }
+
+  /* A soft light under the chosen place, gliding from place to place. */
+  .am-glow {
+    position: absolute; width: 180px; height: 180px; margin: -90px 0 0 -90px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(47, 211, 160, 0.28), rgba(47, 211, 160, 0) 65%);
+    opacity: 0; pointer-events: none;
+  }
+  .am-glow.is-on { opacity: 1; }
+
+  /* The student's own town: a white ring, so it never reads as a school. */
+  .am-home { position: absolute; z-index: 2; pointer-events: none; }
+  .am-home-dot {
+    position: absolute; left: -7px; top: -7px; width: 14px; height: 14px; border-radius: 50%;
+    border: 2px solid #FFFFFF; box-sizing: border-box; background: rgba(255,255,255,0.15);
+  }
+  .am-home-left .am-home-label { left: auto; right: 12px; }
+  .am-home-label:empty { display: none; }
+  .am-home-label {
+    position: absolute; left: 12px; top: 4px; white-space: nowrap;
+    font: 600 11px/1 var(--font-body); letter-spacing: 0.04em; text-transform: uppercase; color: #FFFFFF;
+  }
+
+  /* Pins: a mint dot sized by the number of schools, the count inside it,
+     the name beside it. Each is a 44px target, wider than it looks. */
+  .am-pins { position: absolute; inset: 0; }
+  .am-pin {
+    position: absolute; z-index: 1; display: flex; align-items: center; gap: 8px;
+    transform: translate(calc(var(--s) / -2), -50%);
+    color: var(--am-soft); text-decoration: none; white-space: nowrap;
+  }
+  .am-pin::before { content: ''; position: absolute; left: calc(var(--s) / 2 - 22px); top: 50%; width: 44px; height: 44px; margin-top: -22px; }
+  .am-pin-left { flex-direction: row-reverse; transform: translate(calc(-100% + var(--s) / 2), -50%); }
+  .am-pin-left::before { left: auto; right: calc(var(--s) / 2 - 22px); }
+  .am-pin-above, .am-pin-below { gap: 5px; }
+  .am-pin-above { flex-direction: column-reverse; transform: translate(-50%, calc(-100% + var(--s) / 2)); }
+  .am-pin-below { flex-direction: column; transform: translate(-50%, calc(var(--s) / -2)); }
+  /* Under the dot, ending at it: Cochrane, with Calgary's dot to its right. */
+  .am-pin-below-left { flex-direction: column; align-items: flex-end; gap: 5px; transform: translate(calc(-100% + var(--s) / 2), calc(var(--s) / -2)); }
+  .am-pin-below-left::before { left: auto; right: calc(var(--s) / 2 - 22px); top: calc(var(--s) / 2 - 22px); margin: 0; }
+  .am-pin-above::before, .am-pin-below::before { left: 50%; margin: 0 0 0 -22px; }
+  .am-pin-above::before { top: auto; bottom: calc(var(--s) / 2 - 22px); }
+  .am-pin-below::before { top: calc(var(--s) / 2 - 22px); }
+
+  /* The key, in the dark beside the province on a wide screen. */
+  .am-legend {
+    position: absolute; left: calc(100% + 48px); top: 8%; display: flex; flex-direction: column; gap: 10px;
+    font-size: 13px; color: var(--am-faint); white-space: nowrap;
+  }
+  .am-legend span { display: flex; align-items: center; gap: 10px; }
+  .am-legend i { flex: none; display: grid; place-items: center; font-style: normal; }
+  .am-lg-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--am-mint); }
+  .am-lg-big { width: 26px; height: 26px; margin-left: -7px; margin-right: -7px; color: #08120E; font: 700 11px/1 var(--font-body); }
+  .am-lg-home { width: 12px; height: 12px; border-radius: 50%; border: 2px solid #FFFFFF; box-sizing: border-box; }
+  @media (max-width: 1180px) { .am-legend { display: none; } }
+  .am-pin-dot {
+    flex: none; display: grid; place-items: center; width: var(--s); height: var(--s); border-radius: 50%;
+    background: var(--am-mint); color: #08120E; font: 700 12px/1 var(--font-body);
+    box-shadow: 0 0 0 3px rgba(10, 19, 16, 0.85), 0 0 18px rgba(47, 211, 160, 0.35);
+    transition: transform 0.2s ease, background-color 0.2s ease, width 0.2s ease, height 0.2s ease;
+  }
+  .am-pin-label {
+    font: 600 12px/1 var(--font-body); letter-spacing: 0.01em;
+    text-shadow: 0 1px 3px rgba(5, 10, 8, 0.9), 0 0 8px rgba(5, 10, 8, 0.8);
+    transition: color 0.2s ease;
+  }
+  .am-pin-big .am-pin-label { font: 400 22px/1 var(--font-display); letter-spacing: 0; color: var(--am-text); }
+  /* Where two tap areas overlap (Cochrane's beside Calgary's dot), the city wins. */
+  .am-pin-big { z-index: 2; }
+  .am-pin:hover, .am-pin.is-hover, .am-pin:focus-visible { z-index: 3; color: #FFFFFF; }
+  .am-pin:hover .am-pin-dot, .am-pin.is-hover .am-pin-dot, .am-pin:focus-visible .am-pin-dot { transform: scale(1.18); background: var(--am-mint-hi); }
+  .am-pin:focus-visible { outline: none; }
+  .am-pin:focus-visible .am-pin-dot { box-shadow: 0 0 0 3px var(--am-ink), 0 0 0 5px #FFFFFF; }
+  .am-pin.is-on { z-index: 4; color: #FFFFFF; }
+  .am-pin.is-on .am-pin-dot { background: #FFFFFF; transform: scale(1.22); }
+  .am-pin.is-on .am-pin-label { font-weight: 700; }
+  .am-pin.is-off { opacity: 0.22; pointer-events: none; }
+  .am-pin.is-off .am-pin-label { visibility: hidden; }
+  /* With a place chosen, the rest step back. */
+  #sab-map[data-picked] .am-pin:not(.is-on, :hover, .is-hover, :focus-visible) .am-pin-label { opacity: 0.45; }
+
+  /* ── The panel ── */
+  .am-panel {
+    grid-column: 1; grid-row: 1; position: relative; z-index: 5; min-height: 0;
+    display: flex; flex-direction: column;
+    background: var(--am-panel); border-right: 1px solid var(--am-line);
+  }
+  .am-grab { display: none; }
+  .am-scroll { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: 36px 28px 28px; scrollbar-width: thin; scrollbar-color: rgba(238,241,236,0.2) transparent; }
+  .am-h1 {
+    margin: 0; font-family: var(--font-display); font-weight: 400;
+    font-size: clamp(40px, 3.6vw, 56px); line-height: 0.98; letter-spacing: -0.01em; text-wrap: balance;
+  }
+  .am-lede { margin: 14px 0 0; font-size: 16px; line-height: 1.55; color: var(--am-soft); text-wrap: pretty; }
+  .am-controls { margin-top: 22px; display: flex; flex-direction: column; gap: 12px; }
+  .am-from {
+    display: flex; align-items: center; gap: 12px; min-height: 48px; padding: 0 0 0 14px;
+    border: 1px solid rgba(238, 241, 236, 0.28); border-radius: var(--radius); background: rgba(238,241,236,0.04);
+  }
+  .am-from:focus-within { border-color: var(--am-mint); }
+  .am-from-label { font: 600 13px var(--font-body); letter-spacing: 0.06em; text-transform: uppercase; color: var(--am-faint); }
+  .am-from select {
+    flex: 1; min-width: 0; height: 46px; border: 0; background: transparent; color: var(--am-text);
+    font: 600 16px var(--font-body); cursor: pointer; outline: none; padding-right: 12px;
+  }
+  .am-from option { color: #141915; }
+  .am-kinds { display: flex; flex-wrap: wrap; gap: 6px; }
+  .am-kind {
+    min-height: 40px; padding: 0 9px; border-radius: var(--radius); cursor: pointer;
+    border: 1px solid rgba(238, 241, 236, 0.22); background: transparent; color: var(--am-soft);
+    font: 600 13px var(--font-body); transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  }
+  .am-kind-n { font-weight: 500; color: var(--am-faint); margin-left: 2px; }
+  .am-kind[aria-pressed='true'] { background: var(--am-text); color: #08120E; border-color: var(--am-text); }
+  .am-kind[aria-pressed='true'] .am-kind-n { color: rgba(8, 18, 14, 0.6); }
+  @media (hover: hover) { .am-kind:not([aria-pressed='true']):hover { border-color: rgba(238,241,236,0.55); color: var(--am-text); } }
+
+  .am-list { list-style: none; margin: 24px 0 0; padding: 0; border-top: 1px solid var(--am-line); }
+  .am-item { border-bottom: 1px solid var(--am-line); }
+  .am-row { display: block; padding: 14px 4px; color: inherit; text-decoration: none; }
+  .am-row-top { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+  .am-row-name { font: 400 26px/1 var(--font-display); }
+  .am-row-km { font: 600 14px var(--font-body); color: var(--am-mint-hi); white-space: nowrap; }
+  .am-row-schools { display: block; margin-top: 6px; font-size: 14px; line-height: 1.45; color: var(--am-faint); }
+  @media (hover: hover) { .am-row:hover .am-row-name { color: var(--am-mint-hi); } }
+  .am-row:focus-visible { outline: 2px solid var(--am-mint); outline-offset: -2px; }
+  .am-empty { margin: 20px 0 0; color: var(--am-soft); }
+  .am-link { padding: 0; border: 0; background: none; color: var(--am-mint-hi); font: inherit; text-decoration: underline; cursor: pointer; }
+
+  /* A chosen place replaces the list in the panel. Without scripts, every
+     place is listed in full under the list instead. */
+  html.js .am-details .am-place[hidden] { display: none; }
+  html:not(.js) .am-back, html:not(.js) .am-grab { display: none; }
+  .am-place { padding-top: 6px; }
+  html:not(.js) .am-place { border-top: 1px solid var(--am-line); margin-top: 28px; padding-top: 22px; }
+  .am-back {
+    display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0; border: 0; background: none; cursor: pointer;
+    font: 600 14px var(--font-body); color: var(--am-soft);
+  }
+  .am-back::before { content: '←'; }
+  .am-back:hover { color: var(--am-text); }
+  .am-place-h { margin: 4px 0 0; font: 400 clamp(44px, 4vw, 60px)/0.95 var(--font-display); outline: none; }
+  .am-place-meta { display: flex; flex-wrap: wrap; gap: 4px 14px; margin: 10px 0 0; font-size: 15px; color: var(--am-soft); }
+  .am-place-km { color: var(--am-mint-hi); font-weight: 600; }
+  .am-place-km:empty { display: none; }
+  .am-schools { list-style: none; margin: 22px 0 0; padding: 0; border-top: 1px solid var(--am-line); }
+  .am-school { padding: 16px 0; border-bottom: 1px solid var(--am-line); }
+  .am-school-name { margin: 0; font-size: 19px; font-weight: 700; letter-spacing: -0.01em; line-height: 1.25; }
+  .am-school-about { margin: 4px 0 0; font-size: 14px; line-height: 1.45; color: var(--am-faint); }
+  .am-school-links { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 18px; margin: 10px 0 0; font-size: 15px; }
+  .am-awards { display: inline-flex; align-items: center; min-height: 36px; padding: 0 12px; border-radius: var(--radius); background: var(--am-mint); color: #08120E; font-weight: 700; text-decoration: none; }
+  .am-awards:hover { background: var(--am-mint-hi); }
+  .am-noawards { color: var(--am-faint); }
+  .am-site { color: var(--am-text); text-decoration: underline; text-decoration-color: rgba(238,241,236,0.4); text-underline-offset: 4px; }
+  .am-site:hover { text-decoration-color: var(--am-text); }
+  .am-source { margin: 28px 0 0; font-size: 13px; line-height: 1.5; color: var(--am-faint); }
+
+  /* ── Motion: the province fades up, then the places land one by one. ── */
+  @media (prefers-reduced-motion: no-preference) {
+    html.js #sab-map .am-svg .am-dots { opacity: 0; transition: opacity 0.9s ease; }
+    html.js #sab-map.is-ready .am-svg .am-dots { opacity: 1; }
+    html.js #sab-map .am-pin-dot { animation: am-land 0.5s cubic-bezier(0.2, 0.8, 0.2, 1.2) both; animation-delay: calc(0.25s + var(--i) * 0.035s); }
+    .am-panel, .am-stage { transition: height 0.35s cubic-bezier(0.3, 0.7, 0.2, 1), bottom 0.35s cubic-bezier(0.3, 0.7, 0.2, 1); }
+    .am-glow { transition: left 0.5s cubic-bezier(0.3, 0.7, 0.2, 1), top 0.5s cubic-bezier(0.3, 0.7, 0.2, 1), opacity 0.3s ease; }
+    .am-arc.is-drawn { stroke-dasharray: var(--len); stroke-dashoffset: var(--len); animation: am-draw 0.7s ease-out forwards; }
+    .am-pin.is-on .am-pin-dot { animation: am-pulse 2.4s ease-out infinite; }
+  }
+  @keyframes am-land { from { transform: scale(0); } }
+  @keyframes am-draw { to { stroke-dashoffset: 0; } }
+  @keyframes am-pulse {
+    0% { box-shadow: 0 0 0 3px rgba(10,19,16,0.85), 0 0 0 3px rgba(255,255,255,0.5); }
+    70%, 100% { box-shadow: 0 0 0 3px rgba(10,19,16,0.85), 0 0 0 18px rgba(255,255,255,0); }
+  }
+
+  /* ── Phones: the map above, the panel a sheet below it. Lowered, the sheet
+     shows its title and the map has the screen; raised (a place chosen, or
+     the handle tapped) the map shrinks to the space left, so the whole
+     province, Calgary and Lethbridge at its foot included, stays in view
+     beside the place being read about. ── */
+  @media (max-width: 899px) {
+    #sab-map { display: block; min-height: 520px; overflow: hidden; --am-sheet: var(--am-peek); }
+    #sab-map[data-sheet='open'] { --am-sheet: 60%; }
+    .am-stage { position: absolute; inset: 0 0 var(--am-sheet) 0; padding: 14px 12px 10px; }
+    .am-pin-label { font-size: 11px; }
+    .am-pin-big .am-pin-label { font-size: 18px; }
+    #sab-map[data-sheet='open'] .am-pin:not(.am-pin-big, .is-on, .is-hover) .am-pin-label { display: none; }
+    #sab-map[data-sheet='open'] .am-pin-big .am-pin-label { font-size: 14px; }
+    #sab-map[data-sheet='open'] .am-pin-dot { width: calc(var(--s) * 0.75); height: calc(var(--s) * 0.75); font-size: 10px; }
+    .am-panel {
+      position: absolute; left: 0; right: 0; bottom: 0; height: var(--am-sheet);
+      border-right: 0; border-top: 1px solid var(--am-line); border-radius: 12px 12px 0 0;
+      box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.45);
+    }
+    .am-grab { display: grid; place-items: center; width: 100%; height: 28px; padding: 0; border: 0; background: none; cursor: pointer; flex: none; }
+    .am-grab-bar { width: 40px; height: 4px; border-radius: 2px; background: rgba(238, 241, 236, 0.35); }
+    .am-scroll { padding: 2px 20px 28px; }
+    #sab-map[data-sheet='peek'] .am-scroll { overflow: hidden; }
+    .am-h1 { font-size: 34px; }
+    .am-lede { font-size: 15px; margin-top: 8px; }
+    .am-place-h { font-size: 44px; }
+    /* A chosen place takes the whole sheet; All places brings the rest back. */
+    html.js #sab-map[data-picked] .am-head { display: none; }
+    #sab-map[data-sheet='open'] .am-home-label { display: none; }
+  }
+  /* Without scripts a phone gets the map and then the whole list under it. */
+  @media (max-width: 899px) {
+    html:not(.js) #sab-map { height: auto; overflow: visible; }
+    html:not(.js) .am-stage { position: relative; height: 80svh; }
+    html:not(.js) .am-panel { position: static; height: auto; border-radius: 0; }
+  }
+</style>

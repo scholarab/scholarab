@@ -187,6 +187,12 @@ const breadcrumbJson = {
             work this list.
           </p>
         )}
+        {facet.bySchool && (
+          <p>
+            Where are these schools, and how far is each from you? See them on
+            the <a href="/map/">map of Alberta's universities and colleges</a>.
+          </p>
+        )}
         {comboPage && (
           <p>
             Know which group you're in? <a href={`/scholarships/${facet.slug}/combos/`}>{comboPage.h1}</a> sort

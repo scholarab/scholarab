@@ -139,6 +139,9 @@ const lines: string[] = [
   // rather than an explainer, and the one most likely to be linked from
   // outside by a counsellor sending it to a class.
   urlEntry(`${BASE}/templates/reference-letter/`, '0.7', modOf('/templates/reference-letter/')),
+  // Every university and college on one map, with each school's entrance
+  // awards: the awards move with the corpus, so the corpus date is its date.
+  urlEntry(`${BASE}/map/`, '0.7'),
   urlEntry(`${BASE}/updates/`, '0.5'),
   // Low priority, but listed: it is a real indexable page, and the sitemap is
   // supposed to be exactly the set of those.
@@ -253,6 +256,7 @@ const llms = [
   `- [Research programs](${BASE}/programs/): summer and year-round research placements open to high school students.`,
   `- [Deadlines by month](${BASE}/deadlines/): every dated deadline we track, in calendar order. Use this one for "what closes in <month>" questions.`,
   `- [Eligibility match](${BASE}/match/): three to seven questions, returns the listings a given student qualifies for.`,
+  `- [Universities and colleges map](${BASE}/map/): every university, polytechnic and college in Alberta by town, with straight-line distances and each school's entrance awards.`,
   '',
   '## Guides',
   '',

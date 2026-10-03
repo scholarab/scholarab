@@ -1782,3 +1782,20 @@ Outcome: a Grade 12 student who has applied to several schools sees every school
 Add-back fraction: 1/4 removal experiments (the no-match Enter fallback). The 10% target counts removals that hold; this set is mostly fixes, and no removals were invented to raise it.
 
 Local only, against `dist/`: `npm run ci` 1,206 tests; E2E 155 passed on Chromium and Pixel 7 (5 tests updated for the new institution step and the moved school escape; 1 new test, run on both projects); on a 375x812 emulated phone the carousel had 2 of 10 photos before a swipe and all 10 within 3 seconds after one, served from localhost, so this is not a network timing. Not measured: real-device Safari, the swipe fade on a phone, hosted timings, and how many students now pick their own school.
+
+## Universities and colleges map, October 3, 2026
+
+Outcome: a Grade 12 student sees every university, polytechnic and college in Alberta by town, how far each is from home, and which ones ScholarAB lists entrance awards for, one tap from those awards. Ilia asked for it to be "interactive, visionary, beautiful, modern, very easy to navigate", Alberta only. New page at `/map/`, linked from the University & college awards page.
+
+| Candidate | Result and retained requirement |
+| --- | --- |
+| A map library and hosted map tiles | Not added. The province is drawn at build time from its border (49°N, 110°W, 60°N, 120°W and the Continental Divide) in `src/lib/alberta-map.ts`: no third party sees a visitor, nothing new in the CSP, no dependency. The dot field is 40 KB of path data that gzips to about 600 bytes; the whole page is 19.7 KB gzipped. |
+| Street-level campus positions and zooming | Not done. One dot per town: at province scale an address adds nothing, and a town is the unit a student moves between. |
+| The map on the awards page itself | Not done. It would push the award list a screen down, and every hub keeps its toolbar at one height (E2E). The awards page links to the map; each school links back to its filtered awards. |
+| A separate place panel and list | One element: the same panel lists places, then shows the chosen one; on a phone it is a sheet over the map's foot, and the map shrinks above it so the whole province stays in view. |
+| A second copy of the distance code in the page | The page script imports one 10-line function (`alberta-map-client.ts`); the build module re-exports it. |
+| Hand-checking that each award school is on the map | Automated: a unit test fails when the entrance-awards list names a school the map does not place. |
+
+Sources for the school list: the Government of Alberta's types of publicly funded institutions page (28) and Indigenous learning providers page (5 First Nations colleges), read 2026-10-03, plus CBTS, which ScholarAB lists an award for. Every website was opened; four answer bots with 403 or 406 and are kept as known domains. Distances are straight lines, labelled as such.
+
+Add-back fraction: 0/3 removal experiments (map library, street positions, map on the awards page). Local only, against `dist/`: `npm run ci` 1,212 tests (6 new); E2E 163 passed on Chromium and Pixel 7 (4 new map tests, both projects); checked at 1440x900 and 375x812 in the built site. Not measured: real-device Safari, how many students use it, and the town coordinates beyond the few kilometres a dot can show.
