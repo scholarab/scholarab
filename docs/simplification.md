@@ -179,6 +179,21 @@ Re-encoded from the H.264 masters (the higher-bitrate copies) at 1080p: H.265 CR
 
 Local measurements. Playback, the 6 s prefetch and the crossfade were verified in Chrome; the H.264 files were checked by a full decode, not in a browser that needs them.
 
+## Hero clips 12 and 13 at 60 fps: October 2, 2026
+
+SpaceX's home film moved to 1080p H.265 at 59.94 fps (about 5 Mbps). Of our twelve takes only 12 (Moraine Lake sunrise) and 13 (Rocky peaks at sunset) were shot at 60, and the first encode halved them to 30. Both were re-cut from the Pexels 60 fps sources with the same start point and phone crop (PSNR 39 dB against the shipped first frames). The other ten were shot at 24 to 30 fps and stay as they are: interpolating them to 60 was rejected because it invents frames.
+
+CRF was first calibrated to reproduce the shipped 30 fps sizes, then lowered until SSIM against the source matched the shipped files: H.265 27.5 (desktop) and 30 (phone), H.264 27.5 and 28, keyframe every 96 frames.
+
+| File | Before (30 fps) | After (60 fps) | SSIM before / after |
+| --- | --- | --- | --- |
+| 12.hevc.mp4 | 939 KB | 1,325 KB | 0.973 / 0.972 |
+| 13.hevc.mp4 | 625 KB | 840 KB | 0.981 / 0.980 |
+| 12.m.hevc.mp4 | 276 KB | 427 KB | 0.961 / 0.961 |
+| 13.m.hevc.mp4 | 189 KB | 262 KB | 0.975 / 0.975 |
+
+The H.265 set grows by 0.6 MB (desktop) and 0.2 MB (phone) over a full loop. The first clip (01) is unchanged, so first-visit bytes and LCP are unaffected. Local measurements only.
+
 ## P2/P3 pass: September 19, 2026
 
 | Candidate | Outcome |

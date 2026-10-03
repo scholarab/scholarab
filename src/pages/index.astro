@@ -622,6 +622,9 @@ const carousels = [
   // pulled 13.2 MB on a desktop first visit (two 6-7 MB takes) for a film most
   // visitors scroll past before the first cut.
   // Twelve 12-second takes, no timelapses (they step, and read as stutter).
+  // Each plays at the rate it was shot: 12 and 13 at 60 fps (the only two
+  // shot at 60; they were halved to 30 until 2026-10-02), the rest 24 to 30.
+  // Nothing is interpolated up to 60.
   // Each clip ships as H.265 (what SpaceX serves: about half the bits of
   // H.264 for the same picture) and as H.264 for browsers without H.265.
   // Phones get a `.m` cut: the hero box is portrait there (375x563 on a 390pt
