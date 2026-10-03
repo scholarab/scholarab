@@ -48,10 +48,16 @@ test('Explore keeps every tool reachable by keyboard and phone menu', async ({ p
 // `position: relative` left over from a transparent hero bar beat the sticky
 // rule (audit 2026-09-27). Checked on a directory page too, so the test fails
 // on the rule, not on one page's layout.
+// Since 2026-10-02 the bar hides on the way down and comes back on the way
+// up, so stickiness is checked on the way back: a header that scrolled away
+// with the page would still be 700px above the window here.
 for (const path of ['/', '/scholarships/']) {
-  test(`the header stays pinned after scrolling ${path}`, async ({ page }) => {
+  test(`the header hides going down and comes back pinned going up ${path}`, async ({ page }) => {
     await page.goto(path);
+    const top = () => page.locator('[data-sab-header]').evaluate(h => Math.round(h.getBoundingClientRect().top));
     await page.evaluate(() => window.scrollTo(0, 800));
-    await expect.poll(() => page.locator('[data-sab-header]').evaluate(h => Math.round(h.getBoundingClientRect().top))).toBe(0);
+    await expect.poll(top).toBeLessThan(0);
+    await page.evaluate(() => window.scrollTo(0, 700));
+    await expect.poll(top).toBe(0);
   });
 }

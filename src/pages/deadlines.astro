@@ -496,7 +496,7 @@ const breadcrumbJson = {
   /* The jump nav is the page's table of contents and its main internal link
      block; it sticks because the months below it are long. */
   .sabcal-jump {
-    position: sticky; top: var(--sab-nav-h); z-index: 2;
+    position: sticky; top: var(--sab-nav-shown); z-index: 2; transition: top 0.3s ease;
     display: flex; flex-wrap: wrap; gap: 8px;
     margin: 28px 0 8px; padding: 12px 0;
     background: var(--bg-page); border-bottom: 1px solid rgba(20,25,21,0.12);

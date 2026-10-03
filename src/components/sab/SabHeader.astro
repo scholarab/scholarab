@@ -921,6 +921,16 @@ const isActive = (href: string, also: string[] = []) =>
   // fast scroll costs one class write, not one per frame.
   const STICK_DOWN = 116;
   const STICK_UP = 36;
+  // Hide on the way down, show on the way up. A move counts once it passes
+  // HIDE_STEP, so the jitter of a resting finger cannot flick the bar, and the
+  // bar never hides near the top of the page or while one of its menus is open
+  // or holds focus.
+  const HIDE_STEP = 8;
+  let lastY = window.scrollY;
+  const headerBusy = () => {
+    const h = document.querySelector('[data-sab-header]');
+    return !!h && (h.hasAttribute('data-open') || !!h.querySelector('[data-menu-open]') || !!h.querySelector(':focus-visible'));
+  };
   let stuckTicking = false;
   function readStuck(): void {
     stuckTicking = false;
@@ -929,6 +939,14 @@ const isActive = (href: string, also: string[] = []) =>
     const y = window.scrollY;
     if (!stuck && y > STICK_DOWN) root.setAttribute('data-sab-stuck', '');
     else if (stuck && y < STICK_UP) root.removeAttribute('data-sab-stuck');
+    const dy = y - lastY;
+    if (y <= STICK_UP || headerBusy()) {
+      root.removeAttribute('data-sab-hidden');
+      lastY = y;
+    } else if (Math.abs(dy) >= HIDE_STEP) {
+      root.toggleAttribute('data-sab-hidden', dy > 0 && y > STICK_DOWN);
+      lastY = y;
+    }
   }
   function onStickScroll(): void {
     if (stuckTicking) return;
@@ -938,8 +956,16 @@ const isActive = (href: string, also: string[] = []) =>
   window.addEventListener('scroll', onStickScroll, { passive: true });
   // A client-side navigation can land part-way down a page, and a reload
   // restores the old offset before any scroll event fires.
-  document.addEventListener('astro:page-load', readStuck);
+  document.addEventListener('astro:page-load', () => {
+    document.documentElement.removeAttribute('data-sab-hidden');
+    lastY = window.scrollY;
+    readStuck();
+  });
   readStuck();
+  // Tabbing back into a hidden bar brings it back.
+  document.addEventListener('focusin', e => {
+    if ((e.target as Element | null)?.closest?.('[data-sab-header]')) document.documentElement.removeAttribute('data-sab-hidden');
+  });
 
   initSabHeader();
   document.addEventListener('astro:page-load', initSabHeader);

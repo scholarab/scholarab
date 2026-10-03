@@ -271,7 +271,7 @@ body {
    is an inclusive max-width: 900px. */
 @media (min-width: 901px) and (prefers-reduced-motion: no-preference) {
   .sabp-header, .sab-hero-band {
-    transition: box-shadow 0.3s ease, border-bottom-color 0.3s ease;
+    transition: box-shadow 0.3s ease, border-bottom-color 0.3s ease, transform 0.3s ease;
   }
 
   html[data-sab-stuck] .sabp-header,
@@ -279,6 +279,22 @@ body {
     box-shadow: 0 10px 30px -12px rgba(0,0,0,0.75);
     border-bottom-color: rgba(92,227,187,0.18);
   }
+}
+
+/* Hides on the way down, comes back on the way up (Ilia, 2026-10-02, after
+   spacex.com). SabHeader's scroll reader sets data-sab-hidden on <html>.
+   Only the banner moves: title bands inside <main> reuse .sabp-header, and
+   they do not contain the nav. Bars that stick under the header read
+   --sab-nav-shown, so they move up with it instead of leaving a gap. */
+html { --sab-nav-shown: var(--sab-nav-h); }
+html[data-sab-hidden] { --sab-nav-shown: 0px; }
+@media (max-width: 900px) and (prefers-reduced-motion: no-preference) {
+  .sabp-header, .sab-hero-band { transition: transform 0.3s ease; }
+}
+html[data-sab-hidden] .sabp-header:has(.sabh),
+html[data-sab-hidden] .sab-hero-band {
+  transform: translateY(-100%);
+  box-shadow: none;
 }
 
 /* ── Button press language ─────────────────────────────────── */
@@ -692,7 +708,7 @@ html.js .sabl-rail .sabl-scope-select { border-radius: 6px; min-height: 44px; fo
      max-height plus its own scroller so a taller set of rows than the window
      holds cannot strand its last chips where sticky will not reach them. */
   .sabl-railed .sabl-rail {
-    position: sticky; top: calc(var(--sab-nav-h) + 24px);
+    position: sticky; top: calc(var(--sab-nav-shown) + 24px); transition: top 0.3s ease;
     max-height: calc(100vh - var(--sab-nav-h) - 48px);
     max-height: calc(100svh - var(--sab-nav-h) - 48px);
     display: flex; flex-direction: column;

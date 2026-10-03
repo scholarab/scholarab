@@ -191,7 +191,7 @@ const keepReading = [...others.slice(start), ...others.slice(0, start)].slice(0,
       column-gap: clamp(40px, 6vw, 96px); align-items: start;
     }
     .sabg-body.has-aside > :not(.sabg-local) { grid-column: 1; }
-    .sabg-local { grid-column: 2; grid-row: 1 / span 3; position: sticky; top: calc(var(--sab-nav-h) + 24px); }
+    .sabg-local { grid-column: 2; grid-row: 1 / span 3; position: sticky; top: calc(var(--sab-nav-shown) + 24px); transition: top 0.3s ease; }
   }
   .sabg-local { margin-top: 32px; }
   @media (min-width: 1100px) { .sabg-local { margin-top: 0; } }
