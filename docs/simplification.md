@@ -179,6 +179,18 @@ Re-encoded from the H.264 masters (the higher-bitrate copies) at 1080p: H.265 CR
 
 Local measurements. Playback, the 6 s prefetch and the crossfade were verified in Chrome; the H.264 files were checked by a full decode, not in a browser that needs them.
 
+## Home sections on film: October 2, 2026
+
+After spacex.com: Next deadlines, Biggest awards and By type each fill the screen over one of the hero's own clips (07, 20, 12) under a veil that fades to the same ink as the hero and the carousel, so every seam is ink meeting ink. No new footage: the clips and their phone cuts were already shipped. Each panel adds one still (a lazy WebP of the clip's first frame) and plays its clip only while some of the panel is on screen.
+
+| Candidate | Outcome |
+| --- | --- |
+| Clip 08 (ravine) for By type | Replaced by 12: 08 is 4.55 MB desktop / 1.37 MB phone, 12 is 1.33 MB / 0.43 MB, and 12 reads better under the veil (worst pixel 4.73:1 against 4.11:1). |
+| Clip 13 (Rocky peaks) | Rejected: muted text fell to 4.43:1 on 1% of pixels. |
+| A separate dark row style | Not needed: the rows already read their colours from tokens, so the panel redefines six tokens and five hairline/stripe colours. |
+
+Muted row text (80% cream) against the composited film at the veil's thinnest point, sampled every second of both cuts: 5.0:1 or better on 99% of pixels for 07, 20 and 12; worst single pixel 4.1:1 (the sun in 20). Added bytes for a visitor who scrolls the whole page: stills 65 KB desktop / 47 KB phone; clips 2.39 MB desktop / 0.75 MB phone, less whatever the hero already cached. Local measurements only.
+
 ## Hero clips 12 and 13 at 60 fps: October 2, 2026
 
 SpaceX's home film moved to 1080p H.265 at 59.94 fps (about 5 Mbps). Of our twelve takes only 12 (Moraine Lake sunrise) and 13 (Rocky peaks at sunset) were shot at 60, and the first encode halved them to 30. Both were re-cut from the Pexels 60 fps sources with the same start point and phone crop (PSNR 39 dB against the shipped first frames). The other ten were shot at 24 to 30 fps and stay as they are: interpolating them to 60 was rejected because it invents frames.
