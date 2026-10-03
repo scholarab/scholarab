@@ -217,10 +217,11 @@ describe('school question', () => {
     expect(schoolsForCity(wide, 'Edmonton')).toEqual([]);
   });
 
-  it('offers an escape hatch first, and it stores an empty value', () => {
+  it('offers an escape hatch last, and it stores an empty value', () => {
     const q = schoolQuestion(['Bowness High School']);
     expect(q.key).toBe(SCHOOL_QUESTION_KEY);
-    expect(q.opts[0]!.value).toBe('');
+    expect(q.opts[0]!.value).toBe('Bowness High School');
+    expect(q.opts.at(-1)).toEqual({ label: "My school isn't listed", value: '' });
     expect(q.opts).toHaveLength(2);
   });
 

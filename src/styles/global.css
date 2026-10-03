@@ -990,7 +990,10 @@ html.js .sabl-group-toggle { display: inline-flex; }
     --row-bg: rgba(20,25,21,0.04);
   }
 }
-.sabl-card:hover { background-color: rgba(20,25,21,0.07); }
+/* Pointers only, like the quiz tiles: on a phone the tint lit whichever row
+   the finger landed on to scroll, and jumped from row to row (Ilia,
+   2026-10-03). */
+@media (hover: hover) { .sabl-card:hover { background-color: rgba(20,25,21,0.07); } }
 /* The 01/02 row numbers (2026-09-22) were removed on 2026-09-23 (Ilia, after
    the critique): section numbers carry no information a sort does not. */
 [data-dir-grid] .sabl-card { position: relative; }
@@ -1109,7 +1112,7 @@ html.js .sabl-group-toggle { display: inline-flex; }
    Save and Apply sit above the stretch and keep their own targets. */
 .sabl-card .sabl-name::after { content: ''; position: absolute; inset: 0; }
 .sabl-card :is(.sabl-save, .sabl-apply) { z-index: 1; }
-.sabl-card:hover .sabl-name { color: var(--green); }
+@media (hover: hover) { .sabl-card:hover .sabl-name { color: var(--green); } }
 /* A program's description is its detail page's first paragraph. On the row
    it was two more lines of grey under two lines of facts, and the reason the
    page read as busy with nothing leading (reader feedback, 2026-09-29). The
@@ -1494,6 +1497,26 @@ html:not(.js) .sabm-ph { display: none; }
 .sabm-options-nav { display: flex; align-items: center; justify-content: space-between; gap: 8px 20px; flex-wrap: wrap; margin-top: 8px; }
 .sabm-options-nav .sabm-prev { margin-top: 0; }
 .sabm-options-count { font-size: 14px; color: var(--ink-muted); margin: 0; min-height: 44px; display: flex; align-items: center; }
+/* The institution question takes several answers (EligibilityQuiz.tsx), and
+   a long school list keeps its "not listed" answer under the tiles, as a
+   quiet text button rather than a tile among the schools. */
+.sabm-pick-note { font-size: 16px; line-height: 1.5; color: var(--ink-soft); margin: 10px 0 0; }
+/* Once a school is picked, Continue rides the bottom of the screen: four
+   tiles down, a phone had it below the fold, and a tap that changed nothing
+   visible read as broken. */
+.sabm-pick-bar {
+  position: sticky; bottom: 0; z-index: 2; margin: 16px -20px 0;
+  padding: 12px 20px calc(12px + env(safe-area-inset-bottom, 0px));
+  background: var(--bg-page); box-shadow: 0 -1px 0 rgba(20,25,21,0.12);
+}
+button.sabm-pick-go { min-height: 48px; }
+.sabm-escape {
+  align-self: flex-start; min-height: 44px; margin-top: 12px; padding: 0; border: 0; background: none; cursor: pointer;
+  font-family: var(--font-body); text-align: left;
+}
+.sabm-escape .sabm-opt-label { font-size: 16px; font-weight: 600; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
+.sabm-escape[aria-pressed='true'] .sabm-opt-label { text-decoration-thickness: 2px; text-decoration-color: var(--green); }
+.sabm-escape:disabled { cursor: default; }
 .sabm-results-count { font-size: 17px; line-height: 1.5; margin: 12px 0 0; color: var(--text-primary); }
 
 .sabm-results-h1 {
@@ -2030,7 +2053,7 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
    two weeks (rust is the deadline colour everywhere), mint for open now. */
 [data-dir-group='active'] .sabl-group-count { background: var(--brand); color: var(--text-primary); }
 /* A row lights up mint under the pointer instead of going grey. */
-.sabl-card:hover { background-color: rgba(47, 211, 160, 0.14); }
+@media (hover: hover) { .sabl-card:hover { background-color: rgba(47, 211, 160, 0.14); } }
 /* The pickers were 6px boxes with a hairline, the most default-looking thing
    on the page; they take the sort picker's pill and an ink outline. */
 .sabl-filter-select, html.js .sabl-rail .sabl-scope-select {

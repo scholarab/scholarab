@@ -1763,3 +1763,22 @@ Outcome: a student meets one row layout on the directories, /match, the home lis
 | Confetti in Tailwind purple and pink | The site's colours. |
 
 Add-back fraction: 1/18 (the focus target, restored to the first picker after E2E caught Clear filters taking it). Local only: built site measured with a scripted Playwright pass at 375x667, 375x812 and 1280x900 before and after; `npm run ci` 1,204 tests; E2E 153 passed on Chromium and Pixel 7; detector clean on the changed files. Not measured: hosted timings, real-device Safari.
+
+## Quiz schools, row tint and carousel, October 3, 2026
+
+Outcome: a Grade 12 student who has applied to several schools sees every school's entrance awards; a student whose high school is on the list finds it before giving up on it; a phone row lights only when tapped, not when scrolled past; the home carousel lands on a loaded photo however fast it is swiped. From Ilia's notes and phone screenshots of 2026-10-03.
+
+| Candidate | Result and retained requirement |
+| --- | --- |
+| "Another school" as the first tile of the school question | Removed from the tiles. It read as the way past the list, so students took it before paging to their own school. The answer itself is retained (a student at an unlisted school must pass without claiming one): last on short lists, and under the tiles on every page of a long one as a text button, renamed "My school isn't listed". |
+| One answer to "Where are you planning to study?" | Replaced: several schools can be picked, then Continue. Stored as one `A\|B` string, so saved progress keeps its shape and an old single answer reads as before. The matcher takes the union: University of Alberta, University of Calgary and Red Deer Polytechnic together add 27 school-only awards for a Calgary profile, the sum of 3, 1 and 23 alone. No new state library or component. |
+| Enter on a search with no match | Removed by accident for the institution question when Enter became "pick and clear". E2E caught it; restored: with nothing picked, Enter still takes "Somewhere else, or not sure". |
+| Row hover tint on touch screens (home lists and directory rows) | Removed. Touch browsers apply `:hover` to the row under a finger, so the mint tint jumped from row to row while scrolling. Pointer hover is unchanged. New E2E guard, checked to fail on the old rule. |
+| Mint underline on the home "View all" links | Removed over the film panels: on a phone it sat just above the carousel's mint tab line and mint buttons. The link keeps an ink-light underline and turns mint on hover. |
+| Fetching every carousel photo with the page | Not done. Still two photos until someone swipes; after the first swipe the rest of the set follows, nearest first and one at a time. |
+| A JavaScript crossfade for the slide change | Not added. A CSS scroll-driven fade dims the photo leaving and the one arriving mid-swipe; resting photos are at full strength, and browsers without the feature keep the plain slide. Late photos fade in rather than pop. |
+| Smaller photo files for 3x phones | Not done, as on 2026-09-30: the photos stay at full strength. |
+
+Add-back fraction: 1/4 removal experiments (the no-match Enter fallback). The 10% target counts removals that hold; this set is mostly fixes, and no removals were invented to raise it.
+
+Local only, against `dist/`: `npm run ci` 1,206 tests; E2E 155 passed on Chromium and Pixel 7 (5 tests updated for the new institution step and the moved school escape; 1 new test, run on both projects); on a 375x812 emulated phone the carousel had 2 of 10 photos before a swipe and all 10 within 3 seconds after one, served from localhost, so this is not a network timing. Not measured: real-device Safari, the swipe fade on a phone, hosted timings, and how many students now pick their own school.

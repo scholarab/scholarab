@@ -5,6 +5,8 @@
 // each combo's key and core award ids into quiz-payload.json, and the results
 // screen picks the ones this student's answers put them in.
 
+import { institutionsOf } from './quiz';
+
 /** A combo needs two awards everyone in it can apply to (combos.ts). */
 export const MIN_COMBO_CORE = 2;
 
@@ -47,7 +49,7 @@ export const AUDIENCE_SCHOOLS: { page: string; quizCity: string; name: string; p
 function keyMatches(on: ComboKey, answers: Record<string, string>): boolean {
   if ('board' in on) return answers.board === on.board;
   if ('school' in on) return answers.school === on.school;
-  if ('institution' in on) return answers.institution === on.institution;
+  if ('institution' in on) return institutionsOf(answers.institution).includes(on.institution);
   return true;
 }
 

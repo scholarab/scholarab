@@ -179,7 +179,7 @@ describe('combos on /match, against the published catalogue', () => {
       const on = e.on as { board?: string; school?: string; institution?: string };
       const got = new Set(matchAll({
         grade: '12', city: e.quizCity, schoolBoard: on.board ?? null, specificSchool: on.school ?? null,
-        targetInstitution: on.institution ?? null, fields: [], averagePercent: null, averageTop: null, town: null,
+        targetInstitutions: on.institution ? [on.institution] : [], fields: [], averagePercent: null, averageTop: null, town: null,
         identifiesAsFemale: null, identifiesAsIndigenous: null, identifiesAsBIPOC: null, hasFinancialNeed: null,
         familyIncome: null, inFosterCare: null, inApprenticeship: null, extracurriculars: [], citizenship: null,
       }, open).map(m => m.id));

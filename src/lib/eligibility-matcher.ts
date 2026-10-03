@@ -172,7 +172,7 @@ export function matchScholarship(
   // every student, a Calgary student bound for SAIT included; "Somewhere else,
   // or not sure" leaves them on the University & college awards page.
   if (isSchoolAward(scholarship) && eligibility.targetInstitutions.length > 0
-      && !(profile.targetInstitution && eligibility.targetInstitutions.includes(profile.targetInstitution))) {
+      && !profile.targetInstitutions.some(t => eligibility.targetInstitutions.includes(t))) {
     reasons.push(`For students going to ${eligibility.targetInstitutions.join(' or ')}`)
     return { match: false, confidence: 0, reasons, signals: [], checks: [] }
   }
@@ -333,10 +333,11 @@ export function matchScholarship(
 
   // Target institution
   if (eligibility.targetInstitutions.length > 0 && !eligibility.targetInstitutions.includes('any')) {
-    if (profile.targetInstitution) {
-      if (eligibility.targetInstitutions.includes(profile.targetInstitution)) {
+    if (profile.targetInstitutions.length > 0) {
+      const hit = profile.targetInstitutions.find(t => eligibility.targetInstitutions.includes(t))
+      if (hit) {
         confidence += INSTITUTION_MATCH_BOOST
-        signals.push(`Tied to ${profile.targetInstitution}`)
+        signals.push(`Tied to ${hit}`)
       } else {
         // Said, not only scored: Knowlton (Western University only) read as a
         // "Good match" for a Mount Royal student (critique 2026-09-25).

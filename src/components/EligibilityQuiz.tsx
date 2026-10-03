@@ -18,6 +18,7 @@ import {
   BOARD_QUESTION_KEY, boardQuestion, boardsForCity, RESULT_LIMIT,
   quizQuestionCeiling, quizTotalLabel, AVERAGE_BAND_TOP, QUIZ_PROGRAM_QUESTIONS,
   quizOptionBatch, quizOptionPage,
+  INSTITUTION_QUESTION_KEY, institutionsOf, joinInstitutions,
 } from '../lib/quiz.ts'
 
 // ── Types ─────────────────────────────────────────────────────────────────────
@@ -375,7 +376,7 @@ export default function EligibilityQuiz({ scholarships, programs, combos = [] }:
       // rules out the board-only and school-only awards the question listed.
       schoolBoard: answers[BOARD_QUESTION_KEY] ?? null,
       specificSchool: answers[SCHOOL_QUESTION_KEY] ?? null,
-      targetInstitution: answers.institution && answers.institution !== '' ? answers.institution : null,
+      targetInstitutions: institutionsOf(answers[INSTITUTION_QUESTION_KEY]),
       fields: fieldVal ? [fieldVal] : [],
       averagePercent: avgVal ? parseInt(avgVal) : null,
       averageTop: avgVal ? AVERAGE_BAND_TOP[avgVal] ?? null : null,
@@ -535,24 +536,45 @@ export default function EligibilityQuiz({ scholarships, programs, combos = [] }:
 
   const current = QUESTIONS[step]
   const previousAnswer = current ? answers[current.key] : undefined
+  // Several schools can be picked here; the rest of the quiz is one tap.
+  const multi = current?.key === INSTITUTION_QUESTION_KEY
+  const [picked, setPicked] = useState<string[]>([])
   const [placeFilter, setPlaceFilter] = useState('')
   useLayoutEffect(() => {
     setPlaceFilter('')
-    setOptionPage(quizOptionPage(current?.opts ?? [], previousAnswer))
-  }, [step, current, previousAnswer])
+    setPicked(multi ? institutionsOf(previousAnswer) : [])
+    setOptionPage(quizOptionPage(current?.opts ?? [], multi ? institutionsOf(previousAnswer)[0] ?? previousAnswer : previousAnswer))
+  }, [step, current, previousAnswer, multi])
 
   const q = placeFilter.trim().toLowerCase()
   const filterable = !!current && (current.key === 'city'
-    || ((current.key === SCHOOL_QUESTION_KEY || current.key === 'institution') && current.opts.length > 4))
-  const filteredOpts = current && filterable && q
-    ? current.opts.filter(o => o.label.toLowerCase().includes(q)
+    || ((current.key === SCHOOL_QUESTION_KEY || current.key === INSTITUTION_QUESTION_KEY) && current.opts.length > 4))
+  // On a long school list the "not listed" answer sits under the tiles on
+  // every page instead of among them: as a tile it read as the way past the
+  // list, and students took it before paging to their own school (Ilia,
+  // 2026-10-03).
+  const escape = filterable && current.key !== 'city' ? current.opts.find(o => o.value === '') : undefined
+  const tileOpts = (escape ? current?.opts.filter(o => o !== escape) : current?.opts) ?? []
+  const filteredOpts = filterable && q
+    ? tileOpts.filter(o => o.label.toLowerCase().includes(q)
       || (o.hint ?? '').toLowerCase().includes(q)
       || o.value === 'Other Alberta' || o.value === '')
-    : current?.opts ?? []
+    : tileOpts
   const batch = quizOptionBatch(filteredOpts, optionPage)
   const shownOpts = batch.options
   const unlistedTown = current?.key === 'city' && q.length >= 3
     && !filteredOpts.some(o => o.value !== 'Other Alberta')
+
+  function togglePicked(value: string) {
+    if (pendingTile !== null) return
+    setPicked(p => p.includes(value) ? p.filter(v => v !== value) : [...p, value])
+  }
+  function continueWithPicked() {
+    if (!current || picked.length === 0) return
+    // In the list's order, so the summary reads the same however they were tapped.
+    const order = current.opts.map(o => o.value)
+    answer(current.key, joinInstitutions([...picked].sort((a, b) => order.indexOf(a) - order.indexOf(b))), -1)
+  }
 
   function showOptionPage(page: number) {
     if (pendingTile !== null) return
@@ -639,7 +661,8 @@ export default function EligibilityQuiz({ scholarships, programs, combos = [] }:
             {QUESTIONS.map((q, i) => {
               const v = answers[q.key]
               if (v === undefined) return null
-              const picked = q.opts.find(o => o.value === v)?.label ?? v
+              const labelOf = (x: string) => q.opts.find(o => o.value === x)?.label ?? x
+              const picked = q.key === INSTITUTION_QUESTION_KEY && v ? institutionsOf(v).map(labelOf).join(', ') : labelOf(v)
               const label = q.key === 'city' && answers.town ? `${answers.town} (${picked})` : picked
               return (
                 <li key={q.key}>
@@ -866,6 +889,7 @@ export default function EligibilityQuiz({ scholarships, programs, combos = [] }:
         <h2 ref={questionHeadingRef} tabIndex={-1} className="sabm-question">
           {current.q}
         </h2>
+        {multi && <p className="sabm-pick-note">Pick every school you might go to, then continue.</p>}
 
         {filterable && (
           <input
@@ -876,12 +900,17 @@ export default function EligibilityQuiz({ scholarships, programs, combos = [] }:
             value={placeFilter}
             onInput={e => { setPlaceFilter(e.currentTarget.value); setOptionPage(0) }}
             onKeyDown={e => {
-              if (e.key !== 'Enter') return
-              // The first real match, not the "Another school" or "Other
-              // Alberta" tile ahead of it; that one only when nothing matched.
-              const i = Math.max(0, shownOpts.findIndex(o => o.value !== '' && o.value !== 'Other Alberta'))
-              const first = shownOpts[i]
-              if (first && placeFilter.trim()) { e.preventDefault(); answer(current.key, first.value, i) }
+              if (e.key !== 'Enter' || !placeFilter.trim()) return
+              // The first real match, not the "Other Alberta" tile; that, or
+              // the "not listed" answer, only when nothing matched.
+              const i = shownOpts.findIndex(o => o.value !== '' && o.value !== 'Other Alberta')
+              const first = shownOpts[Math.max(0, i)]
+              e.preventDefault()
+              // Picking several: Enter adds the match and clears the box for the next.
+              if (multi && i >= 0) { togglePicked(first!.value); setPlaceFilter(''); return }
+              if (multi && picked.length > 0) return
+              if (i < 0 && escape) answer(current.key, escape.value, -1)
+              else if (first) answer(current.key, first.value, Math.max(0, i))
             }}
           />
         )}
@@ -893,9 +922,11 @@ export default function EligibilityQuiz({ scholarships, programs, combos = [] }:
                 <MatchTile
                   label={opt.label}
                   hint={opt.value === 'Other Alberta' && unlistedTown ? `Includes ${placeFilter.trim()}` : opt.hint}
-                  state={pendingTile === i ? 'selected' : pendingTile !== null ? 'dim' : previousAnswer === opt.value ? 'selected' : 'idle'}
+                  state={multi
+                    ? picked.includes(opt.value) ? 'selected' : pendingTile !== null ? 'dim' : 'idle'
+                    : pendingTile === i ? 'selected' : pendingTile !== null ? 'dim' : previousAnswer === opt.value ? 'selected' : 'idle'}
                   disabled={pendingTile !== null}
-                  onClick={() => answer(current.key, opt.value, i)}
+                  onClick={() => multi && opt.value !== '' ? togglePicked(opt.value) : answer(current.key, opt.value, i)}
                 />
               </div>
             );
@@ -906,6 +937,20 @@ export default function EligibilityQuiz({ scholarships, programs, combos = [] }:
               onClick={() => showOptionPage(batch.page + 1)} />
           )}
         </div>
+        {multi && picked.length > 0 && (
+          <div className="sabm-pick-bar">
+            <button type="button" className="sabm-btn-accent sabm-pick-go" disabled={pendingTile !== null} onClick={continueWithPicked}>
+              Continue with {picked.length === 1 ? '1 school' : `${picked.length} schools`}
+            </button>
+          </div>
+        )}
+        {escape && (
+          <button type="button" data-quiz-answer="" className="sabm-escape" disabled={pendingTile !== null}
+            aria-pressed={!multi && previousAnswer === ''}
+            onClick={() => answer(current.key, escape.value, -1)}>
+            <span className="sabm-opt-label">{escape.label}</span>
+          </button>
+        )}
         {filteredOpts.length > 4 && (
           <div className="sabm-options-nav">
             {batch.page > 0 && <button type="button" className="sabm-prev" disabled={pendingTile !== null}

@@ -280,8 +280,27 @@ describe('Question 5; Institution', () => {
   it('renders institution options', () => {
     expect(screen.getByText('University of Calgary')).toBeTruthy()
     expect(screen.getByText('University of Alberta')).toBeTruthy()
-    expect(screen.queryByText('Somewhere else, or not sure')).toBeNull()
-    expect(revealTile('Somewhere else, or not sure')).toBeTruthy()
+    // Under the tiles on every page, not a tile among the schools.
+    expect(document.querySelector('.sabm-opts')!.textContent).not.toContain('Somewhere else')
+    expect(document.querySelector('.sabm-escape')?.textContent).toBe('Somewhere else, or not sure')
+  })
+
+  it('takes several schools and passes them all to the matcher', () => {
+    fireEvent.click(revealTile('University of Calgary'))
+    act(() => { vi.runAllTimers() })
+    // A tap picks; it does not advance.
+    expect(screen.getByText('Where are you planning to study?')).toBeTruthy()
+    fireEvent.click(revealTile('SAIT'))
+    fireEvent.click(revealTile('University of Calgary'))
+    fireEvent.click(revealTile('Mount Royal University'))
+    fireEvent.click(screen.getByRole('button', { name: 'Continue with 2 schools' }))
+    act(() => { vi.runAllTimers() })
+    expect(screen.getByRole('heading', { name: 'Your matches' })).toBeTruthy()
+    // List order, not tap order.
+    expect(JSON.parse(sessionStorage.getItem(QUIZ_STORAGE_KEY)!).answers.institution).toBe('Mount Royal University|SAIT')
+    const profile = (mockMatchAll.mock.calls.at(-1) as unknown as any[])?.[0]
+    expect(profile.targetInstitutions).toEqual(['Mount Royal University', 'SAIT'])
+    expect(screen.getByRole('button', { name: /^Mount Royal University, SAIT\. Change your answer/ })).toBeTruthy()
   })
 
   it('shows Question 5 of 5', () => {
@@ -757,7 +776,7 @@ describe('School question', () => {
     answerFive('Calgary')
     expect(screen.getByText('Western Canada High School')).toBeTruthy()
     expect(screen.getByText('Bowness High School')).toBeTruthy()
-    expect(screen.getByText('Another school')).toBeTruthy()
+    expect(screen.getByText("My school isn't listed")).toBeTruthy()
   })
 
   it('passes the chosen school to the matcher', () => {
@@ -798,12 +817,12 @@ describe('School question', () => {
     expect(profile.schoolBoard).toBeNull()
   })
 
-  // "Another school" is an answer: the matcher reads '' as "none of the
+  // "My school isn't listed" is an answer: the matcher reads '' as "none of the
   // listed schools" and drops the school-only awards.
   it('passes the escape hatch as an empty answer, not a skip', () => {
     render(<EligibilityQuiz scholarships={calgarySchools as any} programs={[]} />)
     answerFive('Calgary')
-    clickTile('Another school')
+    clickTile("My school isn't listed")
     const profile = (mockMatchAll.mock.calls.at(-1) as unknown as any[])?.[0]
     expect(profile.specificSchool).toBe('')
   })
@@ -993,7 +1012,11 @@ describe('Batch navigation', () => {
     expect(visibleAnswerTiles().some(t => t.textContent?.includes('Somewhere else, or not sure'))).toBe(true)
     const input = typeQuery('Red Deer')
     expect(visibleLabels()).toEqual(['Red Deer Polytechnic', 'Somewhere else, or not sure'])
-    act(() => { dispatch.keyDown(input, { key: 'Enter' }); vi.runAllTimers() })
+    // Enter picks the match and clears the box for the next school.
+    act(() => { dispatch.keyDown(input, { key: 'Enter' }) })
+    expect(input.value).toBe('')
+    fireEvent.click(screen.getByRole('button', { name: 'Continue with 1 school' }))
+    act(() => { vi.runAllTimers() })
     expect(screen.getByRole('heading', { name: 'Your matches' })).toBeTruthy()
     expect(stored().answers.institution).toBe('Red Deer Polytechnic')
   })
@@ -1003,10 +1026,11 @@ describe('Batch navigation', () => {
       .map((name, i) => schoolRestricted(i + 1, name))
     render(<EligibilityQuiz scholarships={schools as any} programs={[]} />)
     for (const label of ['Scholarships', 'Calgary', 'Still figuring it out', "I'd rather not say", 'Somewhere else, or not sure']) clickTile(label)
-    expect(visibleLabels()).toEqual(['Another school', 'Alpha School', 'Beta School', 'Other'])
+    // The empty answer sits under the tiles, after every school.
+    expect(visibleLabels()).toEqual(['Alpha School', 'Beta School', 'Delta School', 'Omega School', "My school isn't listed"])
     typeQuery('Omega')
-    expect(visibleLabels()).toEqual(['Another school', 'Omega School'])
-    clickTile('Another school')
+    expect(visibleLabels()).toEqual(['Omega School', "My school isn't listed"])
+    clickTile("My school isn't listed")
     expect(stored().answers.school).toBe('')
     expect((mockMatchAll.mock.calls.at(-1) as unknown as any[])?.[0].specificSchool).toBe('')
   })
@@ -1026,7 +1050,7 @@ describe('Batch navigation', () => {
     fireEvent.click(screen.getByText('← Previous'))
     clickTile('Calgary Catholic School District')
     expect(stored().answers.school).toBeUndefined()
-    expect(visibleLabels()).toEqual(['Another school', 'Catholic School'])
+    expect(visibleLabels()).toEqual(['Catholic School', "My school isn't listed"])
     expect(screen.queryByRole('button', { name: /Previous options$/i })).toBeNull()
     clickTile('Catholic School')
     const profile = (mockMatchAll.mock.calls.at(-1) as unknown as any[])?.[0]

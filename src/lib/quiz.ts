@@ -45,6 +45,23 @@ export function quizOptionPage(opts: QuizOption[], value: string | undefined): n
   return quizOptionBatch(opts, Math.floor(Math.max(0, index) / 3)).page;
 }
 
+/** The key the institution question stores under. */
+export const INSTITUTION_QUESTION_KEY = 'institution'
+
+/**
+ * The institution question takes several answers: a Grade 12 student applies
+ * to more than one school and does not know yet which will take them (Ilia,
+ * 2026-10-03). Stored as one string, joined by this, so the saved answers keep
+ * their Record<string, string> shape and a single answer reads as before.
+ */
+const INSTITUTION_SEP = '|'
+export function institutionsOf(answer: string | undefined): string[] {
+  return answer ? answer.split(INSTITUTION_SEP).filter(Boolean) : []
+}
+export function joinInstitutions(values: string[]): string {
+  return values.join(INSTITUTION_SEP)
+}
+
 /**
  * Hints only where they tell the student something: what an option covers
  * ("Science, tech, math"). The reassurance lines
@@ -124,7 +141,7 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
     ],
   },
   {
-    key: 'institution',
+    key: INSTITUTION_QUESTION_KEY,
     q: 'Where are you planning to study?',
     // Every school here is one the listings name as a requirement, so picking
     // it changes the results. Lethbridge, Northwestern Polytechnic, Keyano and
@@ -204,14 +221,17 @@ export function schoolQuestion(schools: string[]): QuizQuestion {
     key: SCHOOL_QUESTION_KEY,
     q: 'Which school do you go to?',
     opts: [
-      // Always present, and first: a student at a school with no awards of its
-      // own must be able to pass without claiming one that isn't theirs, and
-      // at the end of 64 tiles it sat 3,000px down a phone (critique 2026-09-27).
-      { label: 'Another school', value: '' },
       // No hint on these: the same "Has school-only awards" under each of up
       // to 67 tiles said nothing that told one from another (critique
       // 2026-09-23). Being on this list is what it meant.
       ...schools.map(name => ({ label: name, value: name })),
+      // Always present: a student at a school with no awards of its own must
+      // be able to pass without claiming one that isn't theirs. It was the
+      // first tile, and "Another school" ahead of the list read as the way
+      // past it, so students took it before paging to their own school
+      // (Ilia, 2026-10-03). Last here; on a long list the quiz draws it under
+      // every page of tiles, as the quieter way out (EligibilityQuiz.tsx).
+      { label: "My school isn't listed", value: '' },
     ],
   };
 }

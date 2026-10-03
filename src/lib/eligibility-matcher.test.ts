@@ -12,7 +12,7 @@ const baseProfile: StudentProfile = {
   city: 'Medicine Hat',
   schoolBoard: null,
   specificSchool: null,
-  targetInstitution: null,
+  targetInstitutions: [],
   fields: [],
   averagePercent: null,
   identifiesAsFemale: null,
@@ -65,10 +65,10 @@ describe('matchScholarship', () => {
     })
 
     it('says when the award is tied to a different school than the one the student chose', () => {
-      const r = matchScholarship({ ...baseProfile, targetInstitution: 'Mount Royal University' }, sch({ targetInstitutions: ['Western University'] }))
+      const r = matchScholarship({ ...baseProfile, targetInstitutions: ['Mount Royal University'] }, sch({ targetInstitutions: ['Western University'] }))
       expect(r.match).toBe(true)
       expect(r.checks).toContain('For Western University students')
-      expect(matchScholarship({ ...baseProfile, targetInstitution: 'Western University' }, sch({ targetInstitutions: ['Western University'] })).checks).toEqual([])
+      expect(matchScholarship({ ...baseProfile, targetInstitutions: ['Western University'] }, sch({ targetInstitutions: ['Western University'] })).checks).toEqual([])
     })
 
     it('reads "None of these" and "Another school" as ruling out board and school awards', () => {
@@ -490,14 +490,14 @@ describe('matchScholarship', () => {
     })
 
     it('+0.15 for institution match', () => {
-      const p = { ...baseProfile, targetInstitution: 'University of Calgary' }
+      const p = { ...baseProfile, targetInstitutions: ['University of Calgary'] }
       const result = matchScholarship(p, sch({ fields: [], targetInstitutions: ['University of Calgary'] }))
       // 0.35 + 0.15 (institution match) = 0.50
       expect(result.confidence).toBeCloseTo(0.50)
     })
 
     it('-0.10 for institution mismatch', () => {
-      const p = { ...baseProfile, targetInstitution: 'University of Alberta' }
+      const p = { ...baseProfile, targetInstitutions: ['University of Alberta'] }
       const result = matchScholarship(p, sch({ fields: [], targetInstitutions: ['University of Calgary'] }))
       // 0.35 - 0.10 (institution mismatch) = 0.25
       expect(result.confidence).toBeCloseTo(0.25)
@@ -544,7 +544,7 @@ describe('matchScholarship', () => {
     })
 
     it('confidence clamped to max 1.0', () => {
-      const p = { ...baseProfile, schoolBoard: 'MHPSD', fields: ['STEM'], targetInstitution: 'U of C', averagePercent: 90 }
+      const p = { ...baseProfile, schoolBoard: 'MHPSD', fields: ['STEM'], targetInstitutions: ['U of C'], averagePercent: 90 }
       const result = matchScholarship(p, sch({
         grades: ['12'],
         fields: ['STEM'],
@@ -556,7 +556,7 @@ describe('matchScholarship', () => {
     })
 
     it('confidence clamped to min 0.1', () => {
-      const p = { ...baseProfile, fields: ['arts'], targetInstitution: 'UBC' }
+      const p = { ...baseProfile, fields: ['arts'], targetInstitutions: ['UBC'] }
       const result = matchScholarship(p, sch({
         fields: ['STEM'],
         targetInstitutions: ['University of Calgary'],
@@ -961,19 +961,25 @@ describe('University & college awards', () => {
     eligibility: { ...EMPTY_ELIGIBILITY, targetInstitutions: ['Red Deer Polytechnic'] }, ...over,
   })
   it('reach a student anywhere who is going to that school', () => {
-    expect(matchScholarship({ ...baseProfile, city: 'Calgary', targetInstitution: 'Red Deer Polytechnic' }, award()).match).toBe(true)
+    expect(matchScholarship({ ...baseProfile, city: 'Calgary', targetInstitutions: ['Red Deer Polytechnic'] }, award()).match).toBe(true)
   })
   it('do not reach a student going elsewhere or not sure', () => {
-    expect(matchScholarship({ ...baseProfile, city: 'Red Deer', targetInstitution: 'SAIT' }, award()).match).toBe(false)
-    expect(matchScholarship({ ...baseProfile, city: 'Red Deer', targetInstitution: null }, award()).match).toBe(false)
+    expect(matchScholarship({ ...baseProfile, city: 'Red Deer', targetInstitutions: ['SAIT'] }, award()).match).toBe(false)
+    expect(matchScholarship({ ...baseProfile, city: 'Red Deer', targetInstitutions: [] }, award()).match).toBe(false)
+  })
+  it('reach a student weighing several schools when one of them is it', () => {
+    const r = matchScholarship({ ...baseProfile, city: 'Calgary', targetInstitutions: ['SAIT', 'Red Deer Polytechnic'] }, award())
+    expect(r.match).toBe(true)
+    expect(r.signals).toContain('Tied to Red Deer Polytechnic')
+    expect(r.checks).toEqual([])
   })
   it('keep the city rule on a local one filed under its city', () => {
     const local = award({ region: 'Red Deer', alsoOpenTo: ['University & college'] })
-    expect(matchScholarship({ ...baseProfile, city: 'Red Deer', targetInstitution: 'Red Deer Polytechnic' }, local).match).toBe(true)
-    expect(matchScholarship({ ...baseProfile, city: 'Calgary', targetInstitution: 'Red Deer Polytechnic' }, local).match).toBe(false)
+    expect(matchScholarship({ ...baseProfile, city: 'Red Deer', targetInstitutions: ['Red Deer Polytechnic'] }, local).match).toBe(true)
+    expect(matchScholarship({ ...baseProfile, city: 'Calgary', targetInstitutions: ['Red Deer Polytechnic'] }, local).match).toBe(false)
   })
   it('do not count as local to a city', () => {
-    const r = matchScholarship({ ...baseProfile, city: 'Calgary', targetInstitution: 'Red Deer Polytechnic' }, award())
+    const r = matchScholarship({ ...baseProfile, city: 'Calgary', targetInstitutions: ['Red Deer Polytechnic'] }, award())
     expect(r.signals.some(x => x.startsWith('Local to'))).toBe(false)
   })
 })
@@ -1015,7 +1021,7 @@ describe('the corpus the quiz matches against', () => {
       for (const city of cities) {
         for (const grade of grades) {
           for (const targetInstitution of institutions) {
-            const profile = { ...baseProfile, city, grade, targetInstitution }
+            const profile = { ...baseProfile, city, grade, targetInstitutions: targetInstitution ? [targetInstitution] : [] }
             if (matchScholarship(profile, s as never).match) return false
           }
         }

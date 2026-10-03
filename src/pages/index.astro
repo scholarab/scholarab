@@ -564,19 +564,47 @@ const carousels = [
       if (c) track.scrollTo({ left: c.offsetLeft - track.offsetLeft, behavior: smooth });
     };
     // Photos for the card in view and its neighbours, so a swipe lands on a
-    // loaded picture; nothing until the carousel is near the screen.
+    // loaded picture; nothing until the carousel is near the screen. Each one
+    // fades in from the slide's ink as it arrives rather than popping in.
     let near = false;
+    const fetchPhoto = (c: HTMLElement): HTMLImageElement | null => {
+      const pic = c.querySelector<HTMLElement>('picture[data-defer]');
+      if (!pic) return null;
+      pic.removeAttribute('data-defer');
+      const img = pic.querySelector('img')!;
+      pic.classList.add('is-loading');
+      const shown = () => pic.classList.remove('is-loading');
+      img.addEventListener('load', shown, { once: true });
+      img.addEventListener('error', shown, { once: true });
+      pic.querySelectorAll<HTMLSourceElement | HTMLImageElement>('[data-srcset]').forEach(el => {
+        el.srcset = el.dataset.srcset!;
+        if (el instanceof HTMLImageElement && el.dataset.src) el.src = el.dataset.src;
+      });
+      return img;
+    };
     const wake = (i: number) => {
       if (!near) return;
-      for (const c of cards.slice(Math.max(0, i - 1), i + 2)) {
-        const pic = c.querySelector<HTMLElement>('picture[data-defer]');
-        if (!pic) continue;
-        pic.removeAttribute('data-defer');
-        pic.querySelectorAll<HTMLSourceElement | HTMLImageElement>('[data-srcset]').forEach(el => {
-          el.srcset = el.dataset.srcset!;
-          if (el instanceof HTMLImageElement && el.dataset.src) el.src = el.dataset.src;
-        });
-      }
+      for (const c of cards.slice(Math.max(0, i - 1), i + 2)) fetchPhoto(c);
+    };
+    // Someone swiping fast outran the neighbours (Ilia, 2026-10-03: "if you go
+    // fast they don't download fast enough"). Once they move past the first
+    // slide, the rest of the set follows, nearest first and one at a time so
+    // the next photo never shares the line with one five slides away. A
+    // visitor who never swipes still fetches only the first two.
+    let queued = false;
+    const fetchRest = () => {
+      if (queued) return;
+      queued = true;
+      const step = () => {
+        const i = current();
+        const c = [...cards].sort((a, b) => Math.abs(cards.indexOf(a) - i) - Math.abs(cards.indexOf(b) - i))
+          .find(x => x.querySelector('picture[data-defer]'));
+        const img = c && fetchPhoto(c);
+        if (!img) return;
+        if (img.complete) setTimeout(step, 0);
+        else { img.addEventListener('load', step, { once: true }); img.addEventListener('error', step, { once: true }); }
+      };
+      step();
     };
     new IntersectionObserver((entries, io) => {
       if (!entries.some(e => e.isIntersecting)) return;
@@ -587,6 +615,7 @@ const carousels = [
     const sync = () => {
       const i = current();
       wake(i);
+      if (near && track.scrollLeft > 4) fetchRest();
       dots.forEach((d, j) => (j === i ? d.setAttribute('aria-current', 'true') : d.removeAttribute('aria-current')));
       prev.hidden = track.scrollLeft < 4;
       next.hidden = track.scrollLeft + track.clientWidth >= track.scrollWidth - 4;
@@ -1027,10 +1056,31 @@ const carousels = [
   .sab-scopes-track::-webkit-scrollbar { display: none; }
   .sab-scope {
     position: relative; flex: 0 0 100%; height: 100svh; min-height: 520px;
-    overflow: hidden; scroll-snap-align: start; scroll-snap-stop: always; background: #0A1310;
+    /* clip, not hidden: hidden makes the slide a scroll container, and the
+       photo's swipe fade below would follow it instead of the track. */
+    overflow: hidden; overflow: clip; scroll-snap-align: start; scroll-snap-stop: always; background: #0A1310;
   }
   .sab-scope picture, .sab-scope-img { position: absolute; inset: 0; width: 100%; height: 100%; }
   .sab-scope-img { object-fit: cover; }
+  /* A photo that arrives after its slide is on screen fades in from the
+     slide's ink instead of popping in (the script sets is-loading). */
+  .sab-scope picture.is-loading { opacity: 0; }
+  @media (prefers-reduced-motion: no-preference) {
+    .sab-scope picture { transition: opacity 0.45s ease; }
+    /* Mid-swipe, the photo leaving and the one arriving dim toward the ink
+       and the one coming to rest brightens, so two pictures do not meet at a
+       hard vertical cut (Ilia, 2026-10-03: "the transition between the
+       photos is not smooth"). Resting, every photo is at full strength.
+       Browsers without scroll-driven animations keep the plain slide. */
+    @supports (animation-timeline: view(inline)) {
+      .sab-scope-img { animation: sab-scope-pass linear both; animation-timeline: view(inline); }
+    }
+  }
+  @keyframes sab-scope-pass {
+    0% { opacity: 0.35; }
+    50% { opacity: 1; }
+    100% { opacity: 0.35; }
+  }
   html:not(.js) .sab-scope picture[data-defer] { display: none; }
   /* Every slide fades to the hero's ink (#0A1310) at its top and bottom
      edges, after spacex.com (Ilia, 2026-09-23): hero to carousel and carousel
@@ -1176,8 +1226,14 @@ const carousels = [
      to (critique 2026-10-02). */
   .sab-closing-row:nth-child(even) { background: rgba(20,25,21,0.04); }
   .sab-closing-row:last-child { border-bottom: 1px solid rgba(20,25,21,0.14); }
-  .sab-closing-row:hover { background: rgba(47,211,160,0.14); color: inherit; }
-  .sab-closing-row:hover .sab-row-name { color: var(--green); }
+  /* Pointers only: on a phone the tint lit whichever row the finger landed
+     on to scroll, and jumped from row to row (Ilia, 2026-10-03). */
+  @media (hover: hover) {
+    .sab-closing-row:hover { background: rgba(47,211,160,0.14); color: inherit; }
+    .sab-closing-row:hover .sab-row-name { color: var(--green); }
+    .sab-type-row:hover { background: rgba(47,211,160,0.07); }
+    .sab-type-row:hover .sab-row-name { color: var(--green); }
+  }
   .sab-row-name { font-weight: 700; font-size: 19px; letter-spacing: -0.01em; }
   .sab-row-blurb {
     font-size: var(--fs-small); color: var(--ink-muted); margin-top: 5px;
@@ -1205,8 +1261,6 @@ const carousels = [
     padding: 20px 8px; border-bottom: 1px solid rgba(20,25,21,0.14);
     color: inherit; text-decoration: none;
   }
-  .sab-type-row:hover { background: rgba(47,211,160,0.07); }
-  .sab-type-row:hover .sab-row-name { color: var(--green); }
   .sab-type-open { font-size: 15px; font-weight: 700; text-align: right; }
   .sab-type-total { font-weight: 500; color: var(--ink-muted); }
   .sab-type-next { font-size: 15px; color: var(--ink-soft); text-align: right; }
@@ -1232,14 +1286,19 @@ const carousels = [
   /* The film, still and veil are styled in HomePanelMedia.astro. */
   .sab-panel > .sab-container { padding-top: clamp(88px, 12vh, 136px); padding-bottom: clamp(72px, 10vh, 120px); }
   .sab-panel .sab-h2, .sab-panel .sab-row-name, .sab-panel .sab-row-amount, .sab-panel [data-when-main] { text-shadow: 0 1px 2px rgba(5,10,8,0.5); }
-  .sab-panel .sab-view-all { color: #EEF1EC; }
-  .sab-panel .sab-view-all:hover { color: #5CE3BB; }
+  /* Ink-light underline, not mint: on a phone it sat just above the
+     carousel's mint tab line and mint buttons, three mint lines in one
+     screen (Ilia, 2026-10-03: "saturation of green lines in one section"). */
+  .sab-panel .sab-view-all { color: #EEF1EC; border-bottom-color: rgba(238, 241, 236, 0.55); }
+  .sab-panel .sab-view-all:hover { color: #5CE3BB; border-bottom-color: #5CE3BB; }
   .sab-panel .sab-closing-table { border-top-color: rgba(238, 241, 236, 0.85); }
   .sab-panel .sab-closing-row:nth-child(even) { background: rgba(238, 241, 236, 0.06); }
   .sab-panel .sab-closing-row:last-child { border-bottom-color: rgba(238, 241, 236, 0.2); }
-  .sab-panel .sab-closing-row:hover { background: rgba(47, 211, 160, 0.16); }
   .sab-panel .sab-type-row { border-bottom-color: rgba(238, 241, 236, 0.2); }
-  .sab-panel .sab-type-row:hover { background: rgba(47, 211, 160, 0.12); }
+  @media (hover: hover) {
+    .sab-panel .sab-closing-row:hover { background: rgba(47, 211, 160, 0.16); }
+    .sab-panel .sab-type-row:hover { background: rgba(47, 211, 160, 0.12); }
+  }
   /* The words rise in as their panel arrives. Scripts only, so a page
      without them never hides its content. */
   @media (prefers-reduced-motion: no-preference) {

@@ -46,6 +46,11 @@ test('match quiz reaches results', async ({ page }) => {
       await expect(tiles.first()).toBeVisible({ timeout: 10_000 });
       expect(await page.locator('.sabm-opt').count()).toBeLessThanOrEqual(4);
       await tiles.first().click();
+      // The institution question takes several answers; Continue commits them.
+      const go = page.locator('.sabm-pick-go');
+      const moved = page.locator(`text=/Question ${Number(step) + 1} of (up to )?\\d+/`).or(page.locator('.sabm-results-h1'));
+      await expect(moved.or(go).first()).toBeVisible({ timeout: 10_000 });
+      if (await go.isVisible()) await go.click();
 
       if (step === total) break;
       // Deterministic step advance; no fixed sleep racing the transition window.
@@ -449,6 +454,24 @@ test('rows lead with a date figure left of the title, money on the title line', 
       // Desktop directory rows carry the money on the title's line.
       if (testInfo.project.name !== 'mobile' && path !== '/' && r.moneyH > 0) expect(Math.abs(r.moneyTop - r.titleTop)).toBeLessThan(14);
     }
+  }
+});
+
+// A finger landing on a row to scroll is not a pointer resting on it: the
+// mint hover tint lit whichever row it touched and jumped from row to row as
+// the list moved (Ilia, 2026-10-03). Rows tint under a mouse only.
+test('rows tint under a pointer, never under a finger', async ({ page }, testInfo) => {
+  for (const [path, row] of [['/', '#closing .sab-closing-row'], ['/scholarships/', '[data-dir-card]:visible']] as const) {
+    await page.goto(path);
+    const first = page.locator(row).first();
+    await first.scrollIntoViewIfNeeded();
+    const touch = await page.evaluate(() => matchMedia('(hover: none)').matches);
+    expect(touch, 'the mobile project emulates a touch screen').toBe(testInfo.project.name === 'mobile');
+    const bg = () => first.evaluate(e => getComputedStyle(e).backgroundColor);
+    const resting = await bg();
+    await first.hover();
+    await expect.poll(bg).not.toBe(touch ? '' : resting);
+    if (touch) expect(await bg()).toBe(resting);
   }
 });
 

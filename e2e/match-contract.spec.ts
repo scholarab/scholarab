@@ -17,6 +17,12 @@ const moreTile = (page: Page) => page.locator('.sabm-opt[data-quiz-more]');
 const previousOptions = (page: Page) => page.getByRole('button', { name: 'Previous options', exact: true });
 const previousQuestion = (page: Page) => page.getByRole('button', { name: '← Previous', exact: true });
 const tileFor = (page: Page, label: string) => realTiles(page).filter({ has: page.getByText(label, { exact: true }) });
+// A long school or institution list draws its empty answer under the tiles,
+// on every batch, instead of as a tile (EligibilityQuiz.tsx).
+const escapeOf = (q: QuizQuestion) => (q.key === 'school' || q.key === 'institution') && q.opts.length > 4
+  ? q.opts.find(o => o.value === '') : undefined;
+const escapeButton = (page: Page) => page.locator('.sabm-escape');
+const continueButton = (page: Page) => page.locator('.sabm-pick-go');
 
 
 async function progress(page: Page) {
@@ -51,11 +57,14 @@ async function inspectAllBatches(page: Page, question: QuizQuestion) {
   const progressText = await page.getByRole('progressbar', { name: 'Quiz progress' }).getAttribute('aria-valuetext');
   for (let guard = 0; guard < 100; guard++) {
     await expectBatchLimit(page);
+    const escape = escapeOf(question);
+    if (escape) await expect(escapeButton(page)).toHaveText(escape.label);
+    else await expect(escapeButton(page)).toHaveCount(0);
     const labels = await realTiles(page).locator('.sabm-opt-label').allTextContents();
     seen.push(...labels);
     seenHints.push(...await realTiles(page).locator('.sabm-opt-hint').allTextContents());
     if (!await moreTile(page).count()) {
-      const expected = question.opts;
+      const expected = question.opts.filter(o => o !== escapeOf(question));
       expect(seen).toEqual(expected.map(o => o.label));
       expect(seenHints).toEqual(expected.flatMap(o => o.hint ? [o.hint] : []));
       expect(new Set(seen).size).toBe(seen.length);
@@ -110,6 +119,13 @@ test('every question has at most four tiles and keeps keyboard navigation, priva
     await tile.focus();
     if (i === questions.length - 1) await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
     await page.keyboard.press(i % 2 ? 'Space' : 'Enter');
+    // The institution question takes several answers: a key picks, Continue commits.
+    if (q.key === 'institution') {
+      await expect(tile).toHaveAttribute('aria-pressed', 'true');
+      await expect(page.locator('.sabm-question')).toHaveText(q.q);
+      await continueButton(page).focus();
+      await page.keyboard.press('Enter');
+    }
     if (i < questions.length - 1) {
       await expect(page.locator('.sabm-question')).toHaveText(questions[i + 1]!.q);
       await expect(page.locator('.sabm-question')).toBeFocused();
@@ -193,6 +209,8 @@ test('the next question opens below the header after answering from the final ba
     await expectBatchLimit(page);
     await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
     await realTiles(page).last().click();
+    await expect(results.or(heading.filter({ hasNotText: q })).or(continueButton(page))).toBeVisible();
+    if (await continueButton(page).isVisible()) await continueButton(page).click();
     await expect(results.or(heading.filter({ hasNotText: q }))).toBeVisible();
     if (await results.isVisible()) break;
     await expect(heading).toBeFocused();
@@ -213,10 +231,13 @@ for (const key of ['city', 'institution', 'school'] as const) {
     await expect(page.locator('.sabm-question')).toHaveText(question.q);
     await page.locator('.sabm-find').fill(target.label);
     await expect(tileFor(page, target.label)).toBeVisible();
-    await expect(tileFor(page, fallback.label)).toBeVisible();
+    const fallbackControl = key === 'city' ? tileFor(page, fallback.label) : escapeButton(page);
+    await expect(fallbackControl).toBeVisible();
+    await expect(fallbackControl).toContainText(fallback.label);
     await expectBatchLimit(page);
     await page.locator('.sabm-find').fill(`zzzz-unlisted-${key}`);
-    await expect(realTiles(page).locator('.sabm-opt-label')).toHaveText([fallback.label]);
+    if (key === 'city') await expect(realTiles(page).locator('.sabm-opt-label')).toHaveText([fallback.label]);
+    else { await expect(realTiles(page)).toHaveCount(0); await expect(fallbackControl).toBeVisible(); }
     await expect(moreTile(page)).toHaveCount(0);
     // Enter chooses the real fallback when the full pool has no match.
     await page.locator('.sabm-find').press('Enter');

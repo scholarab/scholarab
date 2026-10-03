@@ -74,7 +74,9 @@ export type StudentProfile = {
   city: string                     // "Medicine Hat" | "Calgary" | "Edmonton" | "Lethbridge" | "Red Deer" | "Airdrie" | "Beaumont" | "Brooks" | "Camrose" | "Chestermere" | "Cold Lake" | "St. Albert" | "Spruce Grove" | "Lacombe" | "Leduc" | "Lloydminster" | "Fort Saskatchewan" | "Fort McMurray" | "Grande Prairie" | "Sherwood Park" | "Wetaskiwin" | "Okotoks" | "Cochrane" | "Other Alberta"
   schoolBoard: string | null
   specificSchool: string | null
-  targetInstitution: string | null
+  /** Every school the student might go to: most apply to several before
+   *  knowing which will take them. Empty is "somewhere else, or not sure". */
+  targetInstitutions: string[]
   fields: string[]
   averagePercent: number | null
   /** The top of the band the quiz asked about (80 to 89% is 85 here and 89
