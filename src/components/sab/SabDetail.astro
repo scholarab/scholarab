@@ -493,7 +493,7 @@ const chip: { text: string; tone: Tone } =
   .sabd-switcher { display: flex; align-items: center; gap: 14px; font-size: 12px; letter-spacing: 0.05em; color: var(--ink-muted); }
   .sabd-arrow {
     font-size: 13px; border: 1.5px solid rgba(20,25,21,0.3); color: #141915;
-    border-radius: 100px; width: 30px; height: 30px; text-decoration: none;
+    border-radius: var(--radius); width: 30px; height: 30px; text-decoration: none;
     display: inline-flex; align-items: center; justify-content: center;
   }
   .sabd-arrow:hover { border-color: #141915; color: #141915; }
@@ -549,7 +549,7 @@ const chip: { text: string; tone: Tone } =
 
   .sabd-note {
     max-width: 640px; box-sizing: border-box;
-    background: #141915; color: #FFFFFF; border-radius: 16px; padding: 24px 28px 26px;
+    background: #141915; color: #FFFFFF; border-radius: var(--radius); padding: 24px 28px 26px;
   }
   .sabd-note-h {
     font-family: var(--font-display); font-size: 26px; font-weight: 400; line-height: 1.1;
@@ -596,7 +596,7 @@ const chip: { text: string; tone: Tone } =
 
   .sabd-rail { grid-column: 2; grid-row: 2; display: flex; flex-direction: column; gap: 16px; }
   .sabd-card {
-    background: #FFFFFF; border: 1.5px solid rgba(20,25,21,0.85); border-radius: 16px;
+    background: #FFFFFF; border: 1.5px solid rgba(20,25,21,0.85); border-radius: var(--radius);
     padding: 28px 26px;
   }
   .sabd-value { font-family: var(--font-display); font-size: 52px; line-height: 1.05; color: #0A6B4D; margin: 8px 0 4px; }
@@ -640,7 +640,7 @@ const chip: { text: string; tone: Tone } =
     flex: 1; text-align: center; font-size: var(--fs-body); font-weight: 700;
     /* The site's one Apply fill, the mint of the home and hero buttons; it was
        dark green here alone (critique 2026-09-23). */
-    background: #2FD3A0; color: #08120E; padding: 15px 18px; border-radius: 100px; line-height: 1.25; text-decoration: none;
+    background: #2FD3A0; color: #08120E; padding: 15px 18px; border-radius: var(--radius); line-height: 1.25; text-decoration: none;
     transition: background-color 0.15s ease;
   }
   .sabd-cta:hover { background: #5CE3BB; color: #08120E; }
@@ -649,7 +649,7 @@ const chip: { text: string; tone: Tone } =
   .sabd-save {
     display: inline-flex; align-items: center; justify-content: center;
     font-family: var(--font-body); border: 1.5px solid rgba(20,25,21,0.3);
-    border-radius: 100px; height: 50px; padding: 0 20px; gap: 8px; cursor: pointer;
+    border-radius: var(--radius); height: 50px; padding: 0 20px; gap: 8px; cursor: pointer;
     font-size: var(--fs-body); font-weight: 700; color: #141915; background: transparent; flex: none;
   }
   .sabd-save:hover { border-color: #141915; }
@@ -690,7 +690,7 @@ const chip: { text: string; tone: Tone } =
   .sabd-visit {
     display: block; text-align: center; text-decoration: none;
     font-size: 14px; font-weight: 600; width: 100%; margin-top: 12px;
-    border: 1.5px solid rgba(20,25,21,0.25); border-radius: 100px;
+    border: 1.5px solid rgba(20,25,21,0.25); border-radius: var(--radius);
     padding: 11px 18px; color: var(--ink-soft);
   }
   .sabd-visit:hover { border-color: #0E8C64; color: #0A6B4D; }
@@ -704,7 +704,7 @@ const chip: { text: string; tone: Tone } =
   .sabd-remind-input {
     font-family: var(--font-body); font-size: 14px; flex: 1; min-width: 0;
     background: #FFFFFF; border: 1.5px solid rgba(20,25,21,0.3);
-    border-radius: 100px; padding: 11px 16px; color: var(--text-primary);
+    border-radius: var(--radius); padding: 11px 16px; color: var(--text-primary);
   }
   /* Bare `outline: none` here outranked the global :focus-visible rule, so the
      reminder field had no focus indicator on any of the detail pages. Keeping
@@ -718,7 +718,7 @@ const chip: { text: string; tone: Tone } =
   .sabd-remind-input::placeholder { color: var(--ink-faint); }
   .sabd-remind-btn {
     font-family: var(--font-body); font-size: var(--fs-ui); font-weight: 700;
-    background: #2FD3A0; color: #08120E; border: none; border-radius: 100px;
+    background: #2FD3A0; color: #08120E; border: none; border-radius: var(--radius);
     padding: 11px 18px; cursor: pointer; flex: none;
   }
   .sabd-remind-btn:hover { background: #5CE3BB; }

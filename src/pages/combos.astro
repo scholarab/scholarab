@@ -90,14 +90,14 @@ const description = 'Alberta scholarships grouped into combos by who can apply: 
      as the sticker. */
   .sabx-combo {
     display: inline-flex; align-items: center; gap: 12px; min-height: 48px;
-    padding: 6px 6px 6px 18px; border: 2px solid var(--sabc-ink); border-radius: 999px;
+    padding: 6px 6px 6px 18px; border: 2px solid var(--sabc-ink); border-radius: var(--radius);
     background: var(--sabc-tray); color: var(--sabc-ink); text-decoration: none;
     font-weight: 700; font-size: var(--fs-body);
   }
   .sabx-combo:hover { background: var(--sabc-ink); color: #fff; }
   .sabx-count {
     display: grid; place-items: center; min-width: 34px; height: 34px; padding: 0 8px; box-sizing: border-box;
-    border-radius: 999px; background: var(--sabc-ink); color: var(--sabc-mustard);
+    border-radius: var(--radius); background: var(--sabc-ink); color: var(--sabc-mustard);
     font: 800 18px/1 var(--font-display);
   }
   .sabx-combo:hover .sabx-count { background: var(--sabc-mustard); color: var(--sabc-ink); }

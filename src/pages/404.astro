@@ -70,7 +70,7 @@ const scopeMap = scopeSearchMap(SCHOLARSHIP_FACETS.filter(f => facetItems(f, enr
   .sab404-search { display: flex; gap: 10px; margin-top: 28px; max-width: 560px; }
   .sab404-input {
     flex: 1; min-width: 0; font: 16px var(--font-body); color: var(--text-primary);
-    border: 1.5px solid rgba(20,25,21,0.3); border-radius: 100px; padding: 12px 18px; background: #FFFFFF;
+    border: 1.5px solid rgba(20,25,21,0.3); border-radius: var(--radius); padding: 12px 18px; background: #FFFFFF;
   }
   .sab404-input:focus { outline: none; border-color: var(--green); }
   .sab404-input:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
@@ -79,7 +79,7 @@ const scopeMap = scopeSearchMap(SCHOLARSHIP_FACETS.filter(f => facetItems(f, enr
   .sab404-hubs span { color: var(--ink-muted); }
   .sab404-btn-accent {
     display: inline-flex; align-items: center; font-weight: 600; font-size: 15px;
-    background: #2FD3A0; color: #08120E; padding: 13px 24px; border-radius: 100px; text-decoration: none;
+    background: #2FD3A0; color: #08120E; padding: 13px 24px; border-radius: var(--radius); text-decoration: none;
     border: 0; cursor: pointer; font-family: var(--font-body);
   }
   .sab404-btn-accent:hover { background: #4FE0B4; color: #08120E; }

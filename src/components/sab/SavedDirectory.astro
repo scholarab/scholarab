@@ -45,12 +45,12 @@ const openNow = initialScholarships.filter(s => {
 <!-- Same skeleton the React island used to show before hydration -->
 <div class="sabl-page" data-sv-skeleton>
   <div>
-    <div style="height:16px;width:130px;border-radius:6px;background:rgba(20,25,21,0.08);margin-bottom:16px" class="animate-pulse"></div>
-    <div style="height:64px;width:220px;border-radius:10px;background:rgba(20,25,21,0.08);margin-bottom:20px" class="animate-pulse"></div>
-    <div style="height:16px;width:260px;border-radius:6px;background:rgba(20,25,21,0.08);margin-bottom:40px" class="animate-pulse"></div>
+    <div style="height:16px;width:130px;border-radius:var(--radius);background:rgba(20,25,21,0.08);margin-bottom:16px" class="animate-pulse"></div>
+    <div style="height:64px;width:220px;border-radius:var(--radius);background:rgba(20,25,21,0.08);margin-bottom:20px" class="animate-pulse"></div>
+    <div style="height:16px;width:260px;border-radius:var(--radius);background:rgba(20,25,21,0.08);margin-bottom:40px" class="animate-pulse"></div>
     <div class="sabl-grid">
       {[0, 1, 2].map(() => (
-        <div class="animate-pulse" style="height:220px;border-radius:16px;background:rgba(20,25,21,0.06)"></div>
+        <div class="animate-pulse" style="height:220px;border-radius:var(--radius);background:rgba(20,25,21,0.06)"></div>
       ))}
     </div>
   </div>

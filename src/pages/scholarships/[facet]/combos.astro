@@ -281,7 +281,7 @@ const breadcrumbJson = {
   #sab-combos .sabp-body { max-width: 1080px; margin: 0 auto; }
   /* ── A combo: one tray ── */
   .sabc-combo {
-    margin-top: 44px; border: var(--sabc-line); border-radius: 30px; overflow: hidden;
+    margin-top: 44px; border: var(--sabc-line); border-radius: var(--radius); overflow: hidden;
     scroll-margin-top: 80px; background: #fff;
   }
   .sabc-top {
@@ -297,11 +297,11 @@ const breadcrumbJson = {
   .sabc-who { margin: 10px 0 0; font-size: var(--fs-lead); line-height: 1.45; color: var(--sabc-ink); max-width: 52ch; }
   .sabc-who strong { font-weight: 800; }
   .sabc-tip {
-    display: inline-block; margin: 12px 0 0; padding: 6px 12px; border-radius: 999px;
+    display: inline-block; margin: 12px 0 0; padding: 6px 12px; border-radius: var(--radius);
     background: var(--sabc-ink); color: #fff; font-size: var(--fs-ui); font-weight: 700;
   }
   .sabc-sticker {
-    width: 118px; height: 118px; border-radius: 50%; background: var(--sabc-ink); color: var(--sabc-mustard);
+    width: 118px; height: 118px; border-radius: var(--radius); background: var(--sabc-ink); color: var(--sabc-mustard);
     display: flex; flex-direction: column; align-items: center; justify-content: center;
     transform: rotate(-10deg); transition: transform 0.25s ease; text-align: center;
   }
@@ -331,7 +331,7 @@ const breadcrumbJson = {
 
   .sabc-rest > summary {
     display: flex; align-items: center; gap: 10px; min-height: 48px; margin: 0 30px 14px;
-    padding: 0 18px; width: fit-content; border: 2px solid var(--sabc-ink); border-radius: 999px;
+    padding: 0 18px; width: fit-content; border: 2px solid var(--sabc-ink); border-radius: var(--radius);
     font: 800 17px/1 var(--font-display); letter-spacing: 0.06em; text-transform: uppercase;
     cursor: pointer; list-style: none;
   }
@@ -343,7 +343,7 @@ const breadcrumbJson = {
   .sabc-sides { border-top: 3px dashed var(--sabc-ink); background: #FAFBF9; }
   .sabc-sides-h { margin: 0; padding: 20px 30px 0; font-size: var(--fs-small); color: var(--ink-muted); }
   .sabc-sides-h strong {
-    display: inline-block; margin-right: 8px; padding: 5px 12px; border-radius: 999px;
+    display: inline-block; margin-right: 8px; padding: 5px 12px; border-radius: var(--radius);
     background: var(--sabc-mustard); color: var(--sabc-ink);
     font: 800 15px/1 var(--font-display); letter-spacing: 0.08em; text-transform: uppercase;
   }
@@ -354,7 +354,7 @@ const breadcrumbJson = {
     padding: 20px 30px; border-top: var(--sabc-line);
   }
   .sabc-save-all {
-    min-height: 52px; padding: 0 30px; border: 0; border-radius: 999px; cursor: pointer;
+    min-height: 52px; padding: 0 30px; border: 0; border-radius: var(--radius); cursor: pointer;
     background: var(--sabc-ink); color: #fff;
     font: 800 22px/1 var(--font-display); letter-spacing: 0.04em; text-transform: uppercase;
     transition: background-color 0.15s ease, color 0.15s ease;
@@ -370,7 +370,7 @@ const breadcrumbJson = {
   }
 
   @media (max-width: 760px) {
-    .sabc-combo { margin-top: 30px; border-radius: 22px; }
+    .sabc-combo { margin-top: 30px; border-radius: var(--radius); }
     .sabc-top { grid-template-columns: auto 1fr; gap: 14px 18px; padding: 20px 18px; }
     .sabc-no { font-size: 72px; }
     .sabc-no span { font-size: 12px; }

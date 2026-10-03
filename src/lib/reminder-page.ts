@@ -17,7 +17,7 @@ export function reminderPage(title: string, body: string, status = 200): Respons
       h1{font-size:1.5rem;margin:0 0 .5rem}
       p{color:#5A605B;font-size:.95rem;line-height:1.5}
       a{color:#141915}
-      button{font:inherit;font-weight:600;background:#2FD3A0;color:#08120E;border:0;border-radius:100px;
+      button{font:inherit;font-weight:600;background:#2FD3A0;color:#08120E;border:0;border-radius:4px;
         padding:12px 28px;cursor:pointer;margin-top:1.25rem}
       button:hover{background:#28BC8E}
       button.secondary{background:transparent;color:#5A605B;border:1px solid #d8d4c8;font-weight:500;

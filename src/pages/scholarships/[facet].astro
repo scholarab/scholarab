@@ -324,10 +324,10 @@ const breadcrumbJson = {
      sum against the plain hubs before turning BACKDROPS_OFF back to false. */
   .sabl-has-backdrop .sabp-body { padding-top: 32px; }
   .sabl-has-backdrop .sabl-head {
-    margin-top: 11px; padding: 36px 40px 6px; border-radius: 22px;
+    margin-top: 11px; padding: 36px 40px 6px; border-radius: var(--radius);
   }
   .sabl-has-backdrop .sabl-group {
-    padding: 10px 16px; border-radius: 12px; margin-top: 10px;
+    padding: 10px 16px; border-radius: var(--radius); margin-top: 10px;
   }
   /* The rail left .sabl-head when the filters moved into a column
      (2026-09-15), so it needs its own glass: chips straight on a photographed
@@ -335,27 +335,27 @@ const breadcrumbJson = {
      from the page entirely. */
   @media (min-width: 1100px) {
     .sabl-has-backdrop .sabl-railed .sabl-rail {
-      padding: 18px 16px; border-radius: 18px;
+      padding: 18px 16px; border-radius: var(--radius);
     }
   }
   .sabl-has-backdrop .sabl-group:first-child { padding-top: 10px; margin-top: 0; }
   .sabl-has-backdrop .sabl-hubfoot {
-    padding: 28px 32px; border-radius: 22px; margin-bottom: 8px;
+    padding: 28px 32px; border-radius: var(--radius); margin-bottom: 8px;
   }
   .sabl-has-backdrop .sabl-empty { border-style: solid; }
-  .sabl-has-backdrop .sabl-more { border-radius: 22px; }
+  .sabl-has-backdrop .sabl-more { border-radius: var(--radius); }
   @media (max-width: 900px) {
     .sabl-has-backdrop .sabp-body { padding-top: 20px; }
     /* Nearly edge to edge on a phone: 8px of photo each side is enough to
        read as a panel without costing the chips their width. */
     .sabl-has-backdrop .sabl-head {
-      margin-left: -12px; margin-right: -12px; padding: 24px 16px 4px; border-radius: 18px;
+      margin-left: -12px; margin-right: -12px; padding: 24px 16px 4px; border-radius: var(--radius);
       overflow: clip;
     }
     /* Under 1100px the rail is not a column; it is the chip rows again, in
        their own panel under the title one. */
     .sabl-has-backdrop .sabl-rail {
-      margin: 10px -12px 0; padding: 4px 16px 16px; border-radius: 18px; overflow: clip;
+      margin: 10px -12px 0; padding: 4px 16px 16px; border-radius: var(--radius); overflow: clip;
     }
     /* The chip rows bleed to the edge they scroll under, which is now the
        panel's edge rather than the screen's. */
