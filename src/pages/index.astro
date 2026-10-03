@@ -253,8 +253,8 @@ const carousels = [
 
   {/* The header is the page's banner and cannot sit inside <main>; it used to
       be the hero's first flex child. The hero now pulls itself up under it so
-      the film is the header's background (Ilia, 2026-10-02); the bar turns
-      solid once the hero has scrolled out from under it. */}
+      the film is the header's background (Ilia, 2026-10-02), and the bar
+      stays see-through over every section below it too. */}
   <div class="sab-hero-band" slot="header">
     <SabHeader currentPath="/" />
   </div>
@@ -803,37 +803,22 @@ const carousels = [
   }
   initPanels();
   document.addEventListener('astro:page-load', initPanels);
-
-  // The header is clear while the hero is behind it. The root's top is inset
-  // by the bar's height, so the hero stops intersecting the moment its bottom
-  // edge passes under the bar.
-  function initHeroHeader() {
-    const band = document.querySelector<HTMLElement>('.sab-hero-band');
-    const hero = document.querySelector<HTMLElement>('.sab-hero');
-    if (!band || !hero || band.dataset.init) return;
-    band.dataset.init = '1';
-    const nav = band.getBoundingClientRect().height;
-    new IntersectionObserver(([e]) => {
-      band.toggleAttribute('data-past', !e?.isIntersecting);
-    }, { rootMargin: `-${Math.round(nav)}px 0px 0px 0px` }).observe(hero);
-  }
-  document.addEventListener('astro:page-load', initHeroHeader);
 </script>
 
 <style is:global>
-  /* The home design is fixed light regardless of site theme. The canvas
-     itself is dark: iPhone Safari paints the strip behind the status bar from
-     a solid header, or else from the page, and the header here is see-through
-     over the film, which left a white strip above it. #sab-home keeps its
-     own light background, and the footer is the same dark. */
+  /* The canvas is the same ink as the film sections and the footer. iPhone
+     Safari paints the strip behind the status bar from a solid header, or
+     else from the page, and the header here is see-through, so a white page
+     showed as a white strip above it. */
   html:has(#sab-home), body:has(#sab-home) { background: #0A1310; }
-  /* The header is see-through over the film and solid everywhere else: once
-     the hero has scrolled out from under it (data-past, set in the script),
-     while a dropdown or the phone menu is open, and without scripts. */
+  /* The header is see-through the whole way down the home page, after
+     spacex.com (Ilia, 2026-10-02): every section here is dark film, so the
+     bar never needs its own ground. It goes solid only while a dropdown or
+     the phone menu is open, so the bar and the open panel are one surface. */
   @media (prefers-reduced-motion: no-preference) {
     .sab-hero-band { transition: background-color 0.25s ease, transform 0.3s ease, box-shadow 0.3s ease, border-bottom-color 0.3s ease; }
   }
-  html.js .sab-hero-band:not([data-past]):not(:has(.sabh-drop[data-on], .sabh[data-open])) {
+  .sab-hero-band:not(:has(.sabh-drop[data-on], .sabh[data-open])) {
     background-color: transparent;
     box-shadow: none;
     border-bottom-color: transparent;
