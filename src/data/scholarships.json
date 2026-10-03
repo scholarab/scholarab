@@ -3573,7 +3573,7 @@
         }
       ]
     },
-    "active": true,
+    "active": false,
     "description": "ATCO's $750 merit award for self-identified First Nations, Inuit, or Métis students in Grades 10 to 12 anywhere in Canada, based on marks. You can win it in more than one year, but you have to reapply each time. Children of ATCO employees can't enter.",
     "eligibility": {
       "grades": [
