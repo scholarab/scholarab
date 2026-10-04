@@ -1799,3 +1799,19 @@ Outcome: a Grade 12 student sees every university, polytechnic and college in Al
 Sources for the school list: the Government of Alberta's types of publicly funded institutions page (28) and Indigenous learning providers page (5 First Nations colleges), read 2026-10-03, plus CBTS, which ScholarAB lists an award for. Every website was opened; four answer bots with 403 or 406 and are kept as known domains. Distances are straight lines, labelled as such.
 
 Add-back fraction: 0/3 removal experiments (map library, street positions, map on the awards page). Local only, against `dist/`: `npm run ci` 1,212 tests (6 new); E2E 163 passed on Chromium and Pixel 7 (4 new map tests, both projects); checked at 1440x900 and 375x812 in the built site. Not measured: real-device Safari, how many students use it, and the town coordinates beyond the few kilometres a dot can show.
+
+## SpaceX desktop header, October 3, 2026
+
+Outcome: on a computer, a student scans one short uppercase list per menu and sees the next deadlines from any page, in the spacex.com bar Ilia pointed at ("web ONLY", six rows at most per menu). The phone sheet is unchanged: its tiles and full lists stay, and only the desktop shows the new lists.
+
+| Candidate | Result and retained requirement |
+| --- | --- |
+| Gliding hover pill (markup, CSS, `initGlide`) | Removed. SpaceX marks hover with brighter text only. |
+| Blur scrim under an open menu | Removed. The menu is a short list on the bar's own dark band. The home film still pauses while a menu is open (`sab:menu`), so that E2E stays as it was. |
+| Photo tiles and 11 to 13 link lists in the desktop panels | Hidden on desktop and replaced with a list of at most six rows. They are still in the DOM for the phone sheet, so the hub cross-link tests still find every link. |
+| "How it works" button and the Instagram, TikTok and email icons on the right | Removed from the bar. The footer carries the social links; How it works is now the sixth row under Explore. |
+| Right-hand column | Replaced by SpaceX's outlined box, "Upcoming deadlines": the next five awards open today (the home closing list's rule) plus All deadlines. Rows whose date has passed since the build are hidden in the client. |
+
+Repair attempts: the deadlines box closed as soon as it was clicked, because leaving the nav links started the nav's 140 ms close-all timer, which also caught the box. Fixed on the first try by limiting that timer to the nav's own menus. A new E2E test covers it.
+
+Add-back fraction: 0/4. Local only, against `dist/`: `npm run ci` 1,212 tests; E2E 164 passed on Chromium and Pixel 7 (two header tests rewritten for the new layout, one added); checked at 1440, 1180, 910 and 901 px (the row fits with 0 px overflow at 901 after the box label shortens to "Deadlines" below 1041 px) and in the 375 px sheet. Not measured: real-device Safari.

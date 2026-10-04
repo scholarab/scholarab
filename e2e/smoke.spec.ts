@@ -232,29 +232,51 @@ test('every field hub links to every other field', async ({ page }, testInfo) =>
   }
 });
 
-// The header dropdowns hang from the whole bar. When the link row became their
-// containing block (for the hover glide), each panel shrank to the row's width
-// and its photo tiles piled on top of one another.
-test('header dropdowns span the bar and keep their tiles apart', async ({ page }, testInfo) => {
+// The desktop header is the spacex.com bar (2026-10-03): each menu is a list
+// of at most six rows hanging under its own label, on a dark band that spans
+// the window.
+test('header dropdowns hang under their label, six rows at most', async ({ page }, testInfo) => {
   test.skip(testInfo.project.name === 'mobile', 'desktop layout');
   await page.goto('/');
   const width = page.viewportSize()!.width;
-  for (const label of ['Scholarships', 'Programs']) {
+  for (const label of ['Scholarships', 'Programs', 'Explore']) {
     // By what it controls: its accessible name flips to "Hide" once open.
     const toggle = page.locator(`[aria-controls="sabh-menu-${label.toLowerCase()}"]`);
     await toggle.focus();
     await toggle.press('Enter');
     const menu = page.locator(`#sabh-menu-${label.toLowerCase()}`);
     await expect(menu).toBeVisible();
-    expect((await menu.boundingBox())!.width).toBeGreaterThan(width * 0.9);
-    const lefts = await menu.locator('.sabh-tile').evaluateAll(els => els.slice(0, 5).map(e => Math.round(e.getBoundingClientRect().left)));
-    lefts.slice(1).forEach((left, i) => expect(left - lefts[i]!).toBeGreaterThan(100));
+    const rows = menu.locator('.sabh-menu-desk li');
+    expect(await rows.count()).toBeGreaterThan(1);
+    expect(await rows.count()).toBeLessThanOrEqual(6);
+    const labelLeft = (await page.locator('.sabh-has-menu .sabh-link', { hasText: label }).boundingBox())!.x;
+    expect(Math.abs((await rows.first().boundingBox())!.x - labelLeft)).toBeLessThan(2);
+    await expect(page.locator('.sabh-drop')).toHaveAttribute('data-on', '');
+    expect((await page.locator('.sabh-drop').boundingBox())!.width).toBeGreaterThan(width * 0.9);
     await toggle.press('Enter');
   }
 });
 
+// SpaceX's "Upcoming launches" box, as the next deadlines: a click opens it
+// (also straight after the pointer leaves the nav links), a click away closes it.
+test('header deadlines box opens on click and closes on a click away', async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name === 'mobile', 'desktop layout');
+  await page.goto('/about/');
+  const box = page.locator('.sabh-upcoming-btn');
+  const menu = page.locator('#sabh-menu-upcoming');
+  await page.locator('.sabh-has-menu .sabh-link').first().hover();
+  await box.click();
+  await expect(menu).toBeVisible();
+  await expect(box).toHaveAttribute('aria-expanded', 'true');
+  const rows = menu.locator('li:not([hidden])');
+  expect(await rows.count()).toBeLessThanOrEqual(6);
+  await expect(rows.last().locator('a')).toHaveAttribute('href', '/deadlines/');
+  await page.mouse.click(700, 600);
+  await expect(menu).toBeHidden();
+});
+
 // Moving from Scholarships to Programs switches the panel in place: the shared
-// background stays open and only the contents change, as on tesla.com.
+// background stays open and only the contents change.
 test('header dropdown switches without closing', async ({ page }, testInfo) => {
   test.skip(testInfo.project.name === 'mobile', 'desktop layout');
   await page.goto('/');
@@ -262,8 +284,6 @@ test('header dropdown switches without closing', async ({ page }, testInfo) => {
   await page.locator('.sabh-has-menu .sabh-link').first().hover();
   await expect(drop).toHaveAttribute('data-on', '');
   await expect(page.locator('#sabh-menu-scholarships')).toBeVisible();
-  // The page under the panel is blurred while it is open.
-  await expect(page.locator('.sabh-scrim')).toBeVisible();
   // Record every time the background turns off during the move.
   await drop.evaluate(el => {
     (window as unknown as { dropOff: number }).dropOff = 0;
@@ -276,7 +296,6 @@ test('header dropdown switches without closing', async ({ page }, testInfo) => {
   expect(await page.evaluate(() => (window as unknown as { dropOff: number }).dropOff)).toBe(0);
   await page.mouse.move(5, 600);
   await expect(drop).not.toHaveAttribute('data-on', '');
-  await expect(page.locator('.sabh-scrim')).toBeHidden();
 });
 
 // The scope carousel under the hero: one photo card per scope with a hub
