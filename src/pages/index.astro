@@ -857,6 +857,13 @@ const carousels = [
       background: linear-gradient(180deg, rgba(0, 0, 0, 0.88) 0, rgba(0, 0, 0, 0.72) 40%, rgba(0, 0, 0, 0) 100%);
     }
     .sab-hero-band:has(.sabh-has-menu[data-menu-open])::after { opacity: 1; }
+    /* On a short window the open list lands on the headline, which is
+       centred in the fold; it fades back while a menu is open so the list
+       reads on its own. */
+    /* On the lines, not the h1: its entrance animation holds the h1's own
+       opacity at 1. */
+    #sab-home .sab-hero .sab-h1-l { transition: opacity 0.25s ease; }
+    html:has(.sab-hero-band .sabh-has-menu[data-menu-open]) #sab-home .sab-hero .sab-h1-l { opacity: 0.18; }
     /* The bar slides up out of view on the way down; its smoke goes with it. */
     html[data-sab-hidden] .sab-hero-band::before,
     html[data-sab-hidden] .sab-hero-band::after { opacity: 0; }
@@ -954,13 +961,17 @@ const carousels = [
   .sab-kicker-sep { opacity: 0.45; }
   .sab-kicker-link { color: #EEF1EC; font-weight: 400; text-decoration: none; border-bottom: 1px solid rgba(92,227,187,0.6); padding-top: 12px; margin-top: -12px; display: inline-block; }
   .sab-kicker-link:hover { border-bottom-color: #2FD3A0; color: #2FD3A0; }
-  /* The copy sits at the foot of the film, as on spacex.com, and starts at
-     least 180px under the bar, so an open header menu (about 160px of words
-     with no background) never lands on the byline or the headline (Ilia,
-     2026-10-03). On a short window the hero grows past the fold instead. */
+  /* The copy is centred in the fold under the bar, with gaps that scale
+     with the window's height, so it neither floats under a band of empty
+     film nor runs past the fold on a laptop (Ilia, 2026-10-03: "move it up
+     and spread things in a natural way"). The 180px clearance for an open
+     menu left a hole on a short window; an open menu now sits on the
+     header's dark smoke instead, which dims whatever is under it.
+     --hero-foot is shared with the byline, which is placed from the foot. */
   .sab-hero-body {
-    padding-top: calc(clamp(180px, 22vh, 200px) + var(--sab-nav-h)); position: relative;
-    flex: 1; display: flex; flex-direction: column; justify-content: flex-end;
+    --hero-foot: clamp(28px, 6vh, 64px);
+    padding-top: calc(clamp(32px, 7vh, 88px) + var(--sab-nav-h)); position: relative;
+    flex: 1; display: flex; flex-direction: column; justify-content: center;
     width: 100%; box-sizing: border-box;
   }
 
@@ -990,7 +1001,7 @@ const carousels = [
 
   .sab-hero-bottom {
     display: flex; align-items: flex-end; justify-content: space-between;
-    gap: 40px; margin-top: clamp(24px, 5vh, 48px); padding-bottom: clamp(32px, 8vh, 72px);
+    gap: 40px; margin-top: clamp(24px, 5vh, 48px); padding-bottom: var(--hero-foot);
   }
   /* Two lines, one sentence each (Ilia, 2026-09-23): the first holds its
      line, the second starts under it. The stats wrap under the copy on a
@@ -1035,13 +1046,21 @@ const carousels = [
   /* Desktop only (Ilia, 2026-10-03): the headline opens the hero, the
      byline moves to the foot of it as a credit on the right, level with the
      buttons (the quiz line under them is too long to share a row with it at
-     960px), and the "Back to <city>" line is gone. Phones keep both. */
+     960px), and the "Back to <city>" line is gone. Phones keep both.
+     A grid, not absolute positioning: the block is centred in the fold, so
+     an offset from the hero's bottom left the credit below the buttons on a
+     tall window. Here it shares the copy's row and rides with it. */
   @media (min-width: 901px) {
+    .sab-hero-body {
+      display: grid; grid-template-columns: minmax(0, 1fr) auto; align-content: center; column-gap: 40px;
+    }
+    .sab-hero .sab-h1 { grid-column: 1 / -1; grid-row: 1; }
+    .sab-hero-bottom { grid-column: 1; grid-row: 2; }
     .sab-hero .sab-byline {
+      grid-column: 2; grid-row: 2; align-self: end;
       /* The hero's foot padding, plus the quiz line (18px gap, 24px line)
          and half the 52px buttons less half this line. */
-      position: absolute; right: clamp(20px, 4vw, 56px); bottom: calc(clamp(32px, 8vh, 72px) + 55px);
-      margin: 0; font-size: 16px; justify-content: flex-end;
+      margin: 0 0 calc(var(--hero-foot) + 55px); font-size: 16px; justify-content: flex-end;
     }
     .sab-hero .sab-hero-city { display: none; }
   }
@@ -1050,7 +1069,7 @@ const carousels = [
   @media (min-width: 901px) and (max-width: 1100px) {
     .sab-hero .sab-byline {
       font-size: 14px; flex-direction: column; align-items: flex-end; gap: 2px;
-      bottom: calc(clamp(32px, 8vh, 72px) + 46px);
+      margin-bottom: calc(var(--hero-foot) + 46px);
     }
     .sab-hero .sab-kicker-sep { display: none; }
   }
