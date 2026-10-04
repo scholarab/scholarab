@@ -693,9 +693,6 @@ const carousels = [
     let ext = a.canPlayType('video/mp4; codecs="hvc1.1.6.L120.90"') ? '.hevc.mp4' : '.mp4';
     const src = (n: number) => `/video/hero/${HERO_CLIPS[n % HERO_CLIPS.length]}${cut}${ext}`;
     const load = (v: HTMLVideoElement, n: number) => { v.preload = 'auto'; v.src = src(n); v.load(); };
-    // Held while a header dropdown is open: the blur over the page would
-    // otherwise be recomputed for every frame of the film (see SabHeader).
-    let held = false;
     // A rejected play() leaves the poster up and the film reads as stopped
     // rather than absent, so a refusal is retried once the clip is decodable
     // and again on the visitor's first touch. iOS refuses the first call while
@@ -703,13 +700,10 @@ const carousels = [
     // where the poster is the honest end state.
     const start = (v: HTMLVideoElement) => {
       if (v.currentTime) v.currentTime = 0;
-      if (held) return;
       v.play().then(() => v.classList.add('is-on')).catch(() => {
         if (v !== vids[cur]) return;
-        // An open dropdown pausing a play() still in flight rejects it too, so
-        // the retry has to respect the hold or it restarts the film under the blur.
         const again = () => {
-          if (held || v !== vids[cur] || !v.paused) return;
+          if (v !== vids[cur] || !v.paused) return;
           v.play().then(() => v.classList.add('is-on')).catch(() => {});
         };
         v.addEventListener('canplay', again, { once: true });
@@ -747,14 +741,8 @@ const carousels = [
     // constantly, since every app switch hides the page.
     // Both listeners live on the document, which outlasts this page under the
     // ClientRouter; once the film is swapped out they must not touch it.
-    document.addEventListener('sab:menu', e => {
-      if (!media.isConnected) return;
-      held = (e as CustomEvent<{ open: boolean }>).detail.open;
-      if (held) vids.forEach(v => v.pause());
-      else if (vids[cur]!.src) vids[cur]!.play().then(() => vids[cur]!.classList.add('is-on')).catch(() => {});
-    });
     document.addEventListener('visibilitychange', () => {
-      if (document.hidden || held || !media.isConnected) return;
+      if (document.hidden || !media.isConnected) return;
       const v = vids[cur]!;
       if (v.paused && v.src) v.play().then(() => v.classList.add('is-on')).catch(() => {});
     });
@@ -793,8 +781,6 @@ const carousels = [
     const cut = matchMedia('(max-width: 900px)').matches ? '.m' : '';
     const probe = document.createElement('video');
     const ext = probe.canPlayType('video/mp4; codecs="hvc1.1.6.L120.90"') ? '.hevc.mp4' : '.mp4';
-    let held = false;
-    const onScreen = new Set<HTMLVideoElement>();
     // Either observer can run first in a frame, so both go through this.
     const fetchClip = (v: HTMLVideoElement) => {
       if (v.src) return;
@@ -802,7 +788,7 @@ const carousels = [
       v.preload = 'auto';
       v.src = `/video/hero/${v.dataset.panelClip}${cut}${ext}`;
     };
-    const play = (v: HTMLVideoElement) => { fetchClip(v); if (!held) v.play().catch(() => {}); };
+    const play = (v: HTMLVideoElement) => { fetchClip(v); v.play().catch(() => {}); };
     // Fetched a quarter screen early so the clip is ready, but decoded only
     // while some of the panel is actually in the window.
     const clipOf = (el: Element) => el.querySelector<HTMLVideoElement>('video[data-panel-clip]');
@@ -820,15 +806,11 @@ const carousels = [
         if (!v) continue;
         // A panel touching the window's edge reports as intersecting with
         // nothing showing; the hero ends exactly where the first one starts.
-        if (e.isIntersecting && e.intersectionRect.height > 0) { onScreen.add(v); play(v); }
-        else { onScreen.delete(v); v.pause(); }
+        if (e.isIntersecting && e.intersectionRect.height > 0) play(v);
+        else v.pause();
       }
     }, { threshold: [0, 0.02] });
     panels.forEach(p => { fetcher.observe(p); film.observe(p); });
-    document.addEventListener('sab:menu', e => {
-      held = !!(e as CustomEvent<{ open: boolean }>).detail?.open;
-      onScreen.forEach(v => (held ? v.pause() : play(v)));
-    });
   }
   initPanels();
   document.addEventListener('astro:page-load', initPanels);
@@ -842,16 +824,20 @@ const carousels = [
   html:has(#sab-home), body:has(#sab-home) { background: #0A1310; }
   /* The header is see-through the whole way down the home page, after
      spacex.com (Ilia, 2026-10-02): every section here is dark film, so the
-     bar never needs its own ground. It goes solid only while a dropdown or
-     the phone menu is open, so the bar and the open panel are one surface. */
+     bar never needs its own ground. Not even under an open dropdown (Ilia,
+     2026-10-03: "no background at all, forever"): the menu is words over the
+     film, as on spacex.com. Only the phone sheet, which covers the page,
+     goes solid. */
   @media (prefers-reduced-motion: no-preference) {
     .sab-hero-band { transition: background-color 0.25s ease, transform 0.3s ease, box-shadow 0.3s ease, border-bottom-color 0.3s ease; }
   }
-  .sab-hero-band:not(:has(.sabh-drop[data-on], .sabh[data-open])) {
+  .sab-hero-band:not(:has(.sabh[data-open])) {
     background-color: transparent;
     box-shadow: none;
     border-bottom-color: transparent;
   }
+  .sab-hero-band .sabh-drop { display: none; }
+  .sab-hero-band .sabh-menu-desk a { text-shadow: 0 1px 8px rgba(0, 0, 0, 0.55); }
 </style>
 
 <style>

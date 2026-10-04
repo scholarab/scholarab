@@ -18,15 +18,15 @@ test('Explore keeps every tool reachable by keyboard and phone menu', async ({ p
   await expect(menu).toBeVisible();
   const links = menu.getByRole('link');
   const hrefs = await links.evaluateAll(all => all.map(a => a.getAttribute('href')));
-  // Desktop is the spacex.com list, six rows at most (the sixth opens the
-  // tour); the phone sheet keeps every tool.
+  // Desktop is the spacex.com list, six rows at most; the phone sheet keeps
+  // every tool.
   expect(hrefs).toEqual(mobile ? [
     '/match/', '/#closing', '/deadlines/', '/combos/', '/guides/',
     '/guides/alexander-rutherford-scholarship-guide/',
     '/guides/how-to-write-a-scholarship-essay/',
     '/guides/grade-11-scholarship-timeline/',
     '/templates/reference-letter/', '/educators/', '/updates/',
-  ] : ['/match/', '/deadlines/', '/combos/', '/guides/', '/educators/']);
+  ] : ['/match/', '/deadlines/', '/combos/', '/guides/', '/educators/', '/updates/']);
   for (const link of await links.all()) await expect(link).toBeVisible();
 
   await page.keyboard.press('Tab');

@@ -16,8 +16,7 @@ import { todayDate as albertaToday } from '../../lib/calendar';
 import SabLogoMark from './SabLogoMark.astro';
 import SabTour from './SabTour.astro';
 import { loadScholarships, loadPrograms } from '../../lib/data-loader';
-import { programIsListed, scholarshipStatusOf } from '../../lib/status';
-import { generateSlug } from '../../lib/utils';
+import { programIsListed } from '../../lib/status';
 import { guides } from '../../lib/guides';
 import { SCHOLARSHIP_FACETS, PROGRAM_FACETS, PROGRAM_FORMATS, MENU_SCOPES, facetItems, MIN_FACET_ITEMS } from '../../lib/facets';
 import { comboCities } from '../../lib/combos';
@@ -61,10 +60,6 @@ let fieldLinks: { label: string; href: string }[] = [];
 // One Explore link to the combo index, present only while some city has a
 // combo page (comboCities applies the routes' own floor).
 let comboLinks: MenuLink[] = [];
-// The desktop bar's right-hand box, SpaceX's "Upcoming launches" (Ilia,
-// 2026-10-03): the next deadlines of awards open today, the same rule as the
-// home page's closing list.
-let upcoming: { title: string; href: string; deadline: string; date: string }[] = [];
 
 try {
   const [scholarships, programs] = await Promise.all([loadScholarships(), loadPrograms()]);
@@ -74,16 +69,6 @@ try {
   const loran = scholarships.find(s => s.title === 'Loran Scholarship');
   if (loran) tourExample = { title: loran.title, amount: loran.amount ?? '', deadline: loran.deadline ?? null };
   programCount = listedPrograms.length;
-  upcoming = scholarships
-    .filter(s => s.deadline && scholarshipStatusOf(s, today) === 'active')
-    .sort((a, b) => a.deadline!.localeCompare(b.deadline!))
-    .slice(0, 5)
-    .map(s => ({
-      title: s.title,
-      href: `/scholarships/${generateSlug(s.title)}/`,
-      deadline: s.deadline!,
-      date: new Date(`${s.deadline}T00:00:00Z`).toLocaleDateString('en-CA', { month: 'short', day: 'numeric', timeZone: 'UTC' }),
-    }));
   // Biggest scope first. Array sort is stable, so a tie keeps the source order.
   scopeTiles = scopeFacets
     .map(f => tileOf(f, '/scholarships/', facetItems(f, scholarships).length))
@@ -147,32 +132,29 @@ const exploreLinks: MenuLink[] = [
   { label: 'What changed', href: '/updates/' },
 ];
 
-// The desktop dropdowns are SpaceX's plain uppercase lists, six rows at most
+// The desktop dropdowns are SpaceX's plain lists, six rows at most
 // (Ilia, 2026-10-03). The phone sheet keeps the full tiles and lists below.
 const DESK_MAX = 6;
-type DeskLink = MenuLink & { tour?: boolean };
-const scholarshipDesk: DeskLink[] = [
+const scholarshipDesk: MenuLink[] = [
   { label: 'All scholarships', href: '/scholarships/' },
   ...scopeTiles.slice(0, DESK_MAX - 2),
   { label: 'University & college awards', href: '/scholarships/university-college-awards/' },
 ];
-const programDesk: DeskLink[] = [
+const programDesk: MenuLink[] = [
   { label: 'All programs', href: '/programs/' },
   ...formatTiles.slice(0, DESK_MAX - 1),
 ];
-const exploreDesk: DeskLink[] = [
+const exploreDesk: MenuLink[] = [
   { label: 'Find my scholarships', href: '/match/' },
   { label: 'Deadline calendar', href: '/deadlines/' },
   ...comboLinks,
   { label: 'Guides', href: '/guides/' },
   { label: 'For educators', href: '/educators/' },
-  // The tour's opener; the bar's own "How it works" button went with the
-  // SpaceX layout, which has nothing on the right but the one box.
-  { label: 'How it works', href: '', tour: true },
+  { label: 'What changed', href: '/updates/' },
 ];
 
 // Which nav rows carry a panel, and what goes in it.
-const MENUS: Record<string, { label: string; tiles: Tile[]; links: MenuLink[]; desk: DeskLink[] }> = {
+const MENUS: Record<string, { label: string; tiles: Tile[]; links: MenuLink[]; desk: MenuLink[] }> = {
   '/scholarships/': { label: 'Scholarships by location and topic', tiles: scopeTiles, links: topicLinks, desk: scholarshipDesk },
   '/programs/': { label: 'Programs by format and field', tiles: formatTiles, links: programLinks, desk: programDesk },
   '/match/': { label: 'Explore: the quiz, deadlines, guides and more', tiles: [], links: exploreLinks, desk: exploreDesk },
@@ -219,9 +201,10 @@ const isActive = (href: string, also: string[] = []) =>
       <nav class="sabh-links" id="sabh-links" aria-label="Main">
         <div class="sabh-sheet-label" aria-hidden="true"></div>
         {/* The dropdown's background, shared by every panel (desktop): the
-            bar grows down into one dark band, as on spacex.com, and stays
-            open from one menu to the next while only the list changes. The
-            script sets its height. */}
+            dark bar grows down into one band and stays open from one menu to
+            the next while only the list changes. Not drawn on the home page,
+            whose bar has no background at all (spacex.com). The script sets
+            its height. */}
         <span class="sabh-drop" aria-hidden="true"></span>
         {navItems.map(n => (
           <div class={`sabh-item${MENUS[n.href] ? ' sabh-has-menu' : ''}`}>
@@ -259,9 +242,7 @@ const isActive = (href: string, also: string[] = []) =>
                 </button>
                 <ul class="sabh-menu-desk">
                   {MENUS[n.href]!.desk.map(l => (
-                    <li>{l.tour
-                      ? <button type="button" data-tour-open="bar">{l.label}</button>
-                      : <a href={l.href}>{l.label}</a>}</li>
+                    <li><a href={l.href}>{l.label}</a></li>
                   ))}
                 </ul>
                 <div class:list={['sabh-menu-inner', { 'sabh-menu-inner-compact': MENUS[n.href]!.tiles.length === 0 }]}>
@@ -304,26 +285,24 @@ const isActive = (href: string, also: string[] = []) =>
           <button type="button" class="sabh-link" data-tour-open="sheet"><span class="sabh-link-label">How it works</span></button>
         </div>
       </nav>
-      {/* SpaceX's outlined "Upcoming launches" box, as the next deadlines.
-          Desktop only: the phone sheet has Explore's deadline calendar. */}
+      {/* Same destinations and link treatment as the footer's CONTACT column:
+          outside links open a new tab, and the mailto sits inside email_off so
+          Cloudflare's email obfuscation does not rewrite the anchor. */}
       <div class="sabh-right">
-        {upcoming.length > 0 && (
-          <div class="sabh-item sabh-has-menu sabh-upcoming">
-            <button type="button" class="sabh-upcoming-btn" data-sabh-toggle
-              aria-expanded="false" aria-controls="sabh-menu-upcoming">
-              <span><span class="sabh-up-pre">Upcoming </span>deadlines</span>
-              <svg viewBox="0 0 10 6" width="10" height="6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </button>
-            <div class="sabh-menu" id="sabh-menu-upcoming" role="group" aria-label="Upcoming deadlines">
-              <ul class="sabh-menu-desk">
-                {upcoming.map(u => (
-                  <li data-deadline={u.deadline}><a href={u.href}><span class="sabh-up-name">{u.title}</span><span class="sabh-up-date">{u.date}</span></a></li>
-                ))}
-                <li><a href="/deadlines/">All deadlines</a></li>
-              </ul>
-            </div>
-          </div>
-        )}
+      {/* Opt-in: a quiet button, never opened for anyone (SabTour). Text from
+          1101px, where the bar has room; the "i" alone from 901 to 1100. */}
+      <button type="button" class="sabh-how" data-tour-open="bar" aria-label="How it works">
+        <span class="sabh-how-i" aria-hidden="true">i</span><span class="sabh-how-text">How it works</span>
+      </button>
+      <div class="sabh-social">
+        <a href="https://www.instagram.com/scholarab.ca" target="_blank" rel="noopener noreferrer" aria-label="ScholarAB on Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none" /></svg>
+        </a>
+        <a href="https://www.tiktok.com/@scholarab" target="_blank" rel="noopener noreferrer" aria-label="ScholarAB on TikTok">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 1 1-2.59-2.59c.27 0 .53.04.77.11V9.77a5.7 5.7 0 0 0-.77-.05 5.68 5.68 0 1 0 5.68 5.68V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3a4.28 4.28 0 0 1-3.24-1.48z" /></svg>
+        </a>
+        <Fragment set:html={`<!--email_off--><a href="mailto:contact.scholarab@gmail.com" aria-label="Email ScholarAB"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 6.5 8.5 6.5 8.5-6.5"/></svg></a><!--/email_off-->`} />
+      </div>
       </div>
       <button
         type="button"
@@ -516,10 +495,42 @@ const isActive = (href: string, also: string[] = []) =>
     display: inline-flex; align-items: center; justify-content: center; border-radius: var(--radius);
   }
   .sabh-has-menu[data-menu-open] .sabh-menu-toggle svg { transform: rotate(180deg); }
-  /* The sheet's "How it works" row only exists on phones; desktop opens the
-     tour from the Explore menu. */
+  /* The right-hand column, balancing the logo: the same three destinations
+     the footer carries, as quiet glyphs in the links' colour. */
+  /* :global on the children: the email link is injected with set:html (for
+     the email_off comments), so it never receives this component's scope
+     attribute and a scoped `a` selector would miss it. */
+  .sabh-right { justify-self: end; display: flex; align-items: center; gap: 6px; }
+  .sabh-social { display: flex; align-items: center; gap: 2px; }
+  .sabh-how {
+    display: inline-flex; align-items: center; gap: 8px; height: 36px; padding: 0 10px 0 6px;
+    border: 0; border-radius: var(--radius); background: transparent; cursor: pointer; white-space: nowrap;
+    font-family: var(--font-body); font-size: 14px; font-weight: 600; color: rgba(238, 241, 236, 0.78);
+    transition: color 0.15s ease, background-color 0.15s ease;
+  }
+  .sabh-how:hover { color: #EEF1EC; background: rgba(238, 241, 236,0.08); }
+  .sabh-how-i {
+    width: 18px; height: 18px; border-radius: var(--radius); display: inline-flex; align-items: center; justify-content: center;
+    background: rgba(238, 241, 236, 0.14); font-family: Georgia, serif; font-style: italic; font-size: 12px; font-weight: 700;
+  }
+  /* The sheet row only exists on phones; desktop has the button above. */
   .sabh-how-row { display: none; }
   .sabh-how-row .sabh-link { border: 0; background: none; font: inherit; cursor: pointer; text-align: left; width: 100%; }
+  @media (min-width: 901px) and (max-width: 1100px) {
+    .sabh-right .sabh-how { padding: 0; width: 36px; justify-content: center; }
+    .sabh-right .sabh-how-text { display: none; }
+  }
+  /* The footer carries the social links when the header has less room. */
+  @media (min-width: 901px) and (max-width: 1359px) {
+    .sabh-right .sabh-social { display: none; }
+  }
+  .sabh-social :global(a) {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 36px; height: 36px; border-radius: var(--radius); color: rgba(238, 241, 236, 0.7);
+    transition: color 0.15s ease, background-color 0.15s ease;
+  }
+  .sabh-social :global(a:hover) { color: #EEF1EC; background: rgba(238, 241, 236,0.08); }
+  .sabh-social :global(svg) { width: 18px; height: 18px; display: block; }
 
   /* ── Menu button: three bars that fold into an ✕ while the sheet is open ── */
   .sabh-burger {
@@ -633,81 +644,38 @@ const isActive = (href: string, also: string[] = []) =>
     }
     .sabh-link-hint { display: inline-block; font-size: 14px; font-weight: 500; letter-spacing: 0; color: rgba(238, 241, 236, 0.72); }
   }
-  /* ══ Desktop: the spacex.com bar (Ilia, 2026-10-03) ══
-     Logo, then the links left-aligned beside it in tracked uppercase, a
-     chevron on each row with a menu, and one outlined box on the right. A
-     menu is a plain list hanging straight under its own label, on a dark band
-     the full width of the window. */
+  /* ══ Desktop menus: the spacex.com list (Ilia, 2026-10-03) ══
+     The bar keeps its own words, position and font; each menu is a plain
+     list of at most six rows hanging straight under its label, with a
+     chevron beside the label and no pill behind it. */
   @media (min-width: 901px) {
-    .sabh-nav { grid-template-columns: auto 1fr auto; column-gap: clamp(28px, 4vw, 64px); }
-    .sabh-links { gap: clamp(18px, 2.4vw, 40px); }
     .sabh-item { position: relative; }
-    .sabh-link {
-      padding: 8px 0; border-radius: 0; background: none;
-      font-family: var(--font-body); font-size: 13px; font-weight: 700;
-      letter-spacing: 0.1em; text-transform: uppercase; color: rgba(238, 241, 236, 0.86);
-    }
-    .sabh-link:hover, .sabh-has-menu:hover .sabh-link, .sabh-link-active { color: #fff; background: none; }
-    /* The chevron is the keyboard toggle, now shown to everyone. */
+    .sabh-link:hover, .sabh-has-menu:hover .sabh-link { background: none; }
+    /* The chevron is the keyboard toggle, now shown to everyone, tucked into
+       the link's own right padding. */
     .sabh-menu-toggle, .sabh-menu-toggle:focus-visible, .sabh-has-menu[data-menu-open] .sabh-menu-toggle:focus {
       position: static; display: inline-flex; align-items: center; justify-content: center;
-      width: 18px; height: 24px; margin-left: 3px; overflow: visible; clip-path: none;
-      border-radius: var(--radius); color: #EEF1EC;
+      width: 18px; height: 24px; margin: 0 6px 0 -12px; overflow: visible; clip-path: none;
+      border-radius: var(--radius); color: rgba(238, 241, 236, 0.7);
     }
     .sabh-menu-toggle svg { transition: transform 0.16s ease; }
     .sabh-menu {
-      left: 0; right: auto; width: max-content; min-width: 200px;
+      left: 15px; right: auto; width: max-content; min-width: 200px;
       border-top: 0; box-shadow: none;
     }
     .sabh-menu-inner { display: none; }
-    .sabh-menu .sabh-menu-desk { display: flex; flex-direction: column; padding: 4px 0 26px; }
-    .sabh-menu-desk :is(a, button) {
-      display: block; width: 100%; padding: 8px 0; border: 0; background: none; cursor: pointer;
-      text-align: left; text-decoration: none; white-space: nowrap;
-      font-family: var(--font-body); font-size: 13px; font-weight: 700;
-      letter-spacing: 0.1em; text-transform: uppercase; color: rgba(238, 241, 236, 0.86);
+    .sabh-menu .sabh-menu-desk { display: flex; flex-direction: column; padding: 2px 0 24px; }
+    .sabh-menu-desk a {
+      display: block; padding: 7px 0; white-space: nowrap; text-decoration: none;
+      font-size: 14px; font-weight: 500; color: rgba(238, 241, 236, 0.78);
       transition: color 0.15s ease;
     }
-    .sabh-menu-desk :is(a, button):hover { color: #fff; }
-
-    .sabh-right { justify-self: end; align-self: stretch; display: flex; }
-    .sabh-upcoming { align-items: center; }
-    .sabh-upcoming-btn {
-      display: flex; align-items: center; justify-content: space-between; gap: 20px;
-      width: clamp(200px, 22vw, 380px); height: 40px; padding: 0 14px; box-sizing: border-box;
-      border: 1px solid rgba(238, 241, 236, 0.4); border-radius: var(--radius);
-      background: transparent; color: #EEF1EC; cursor: pointer; white-space: nowrap;
-      font-family: var(--font-body); font-size: 12px; font-weight: 600;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      transition: border-color 0.15s ease;
-    }
-    .sabh-upcoming-btn:hover, .sabh-upcoming[data-menu-open] .sabh-upcoming-btn { border-color: #EEF1EC; }
-    .sabh-upcoming-btn svg { flex: none; transition: transform 0.16s ease; }
-    .sabh-upcoming[data-menu-open] .sabh-upcoming-btn svg { transform: rotate(180deg); }
-    .sabh-upcoming .sabh-menu { left: auto; right: 0; width: 100%; min-width: 320px; }
-    /* Rows start where the box's own words do. */
-    .sabh-upcoming .sabh-menu .sabh-menu-desk { padding-inline: 15px; }
-    .sabh-upcoming .sabh-menu-desk a { display: flex; gap: 16px; justify-content: space-between; }
-    .sabh-up-name {
-      overflow: hidden; text-overflow: ellipsis;
-      text-transform: none; letter-spacing: 0; font-size: 14px; font-weight: 600;
-    }
-    .sabh-up-date { flex: none; color: rgba(238, 241, 236, 0.6); }
-  }
-  /* Narrow laptops: tighter tracking and a box sized to its words, so the
-     row never wraps before the phone sheet takes over. */
-  @media (min-width: 901px) and (max-width: 1180px) {
-    .sabh-link, .sabh-menu-desk :is(a, button) { letter-spacing: 0.06em; font-size: 12px; }
-    .sabh-upcoming-btn { width: auto; }
-  }
-  @media (min-width: 901px) and (max-width: 1040px) {
-    .sabh-up-pre { display: none; }
+    .sabh-menu-desk a:hover { color: #EEF1EC; }
   }
 </style>
 
 <script>
   import { getSaved, getSavedPrograms } from '../../lib/tracker.ts';
-  import { albertaDate } from '../../lib/calendar';
   // The ClientRouter swaps in fresh header markup on every navigation, so the
   // element handles are re-resolved per page while the document-level
   // listeners below are bound exactly once.
@@ -764,19 +732,9 @@ const isActive = (href: string, also: string[] = []) =>
     item.toggleAttribute('data-menu-open', open);
     const toggle = item.querySelector<HTMLElement>('[data-sabh-toggle]');
     toggle?.setAttribute('aria-expanded', String(open));
-    // The deadlines box has visible words and no label to rewrite.
     const label = item.querySelector('.sabh-link-label')?.textContent;
     if (label) toggle?.setAttribute('aria-label', `${open ? 'Hide' : 'Show'} ${label} menu`);
     syncDrop();
-  }
-
-  // Tells the page a dropdown opened or closed. The blur under an open panel
-  // is recomputed for every frame of whatever moves beneath it, and the home
-  // film is 30 frames a second of exactly that: measured in Chrome, 8 to 10
-  // times the GPU work of the closed menu, against none at all over a still
-  // page. The film listens and holds while a panel covers it.
-  function announceMenu(open: boolean) {
-    document.dispatchEvent(new CustomEvent('sab:menu', { detail: { open } }));
   }
 
   // Sizes the shared background to whichever panel is open. Opening from
@@ -788,12 +746,10 @@ const isActive = (href: string, also: string[] = []) =>
     if (!drop) return;
     const panel = header!.querySelector<HTMLElement>('.sabh-has-menu[data-menu-open] .sabh-menu');
     if (!panel) {
-      if (drop.hasAttribute('data-on')) announceMenu(false);
       drop.removeAttribute('data-on');
       return;
     }
     const first = !drop.hasAttribute('data-on');
-    if (first) announceMenu(true);
     drop.toggleAttribute('data-snap', first);
     drop.style.transform = `scaleY(${panel.offsetHeight / DROP_BASE})`;
     if (first) void drop.offsetHeight;
@@ -809,8 +765,6 @@ const isActive = (href: string, also: string[] = []) =>
     if (!header || !matchMedia('(hover: hover)').matches) return;
     header.dataset.drop = '';
     let timer = 0;
-    // The nav's own menus only: leaving the links on the way to the deadlines
-    // box must not close the box the pointer is about to click.
     const openItemNow = () => nav.querySelector<HTMLElement>('.sabh-has-menu[data-menu-open]');
     const closeAll = () => nav.querySelectorAll<HTMLElement>('.sabh-has-menu[data-menu-open]').forEach(o => setDropdown(o, false));
     nav.addEventListener('pointerover', e => {
@@ -854,13 +808,6 @@ const isActive = (href: string, also: string[] = []) =>
       item.addEventListener('focusout', e => {
         if (!item.contains(e.relatedTarget as Node | null)) setDropdown(item, false);
       });
-    });
-
-    // A deadline that has passed since the build drops out of the box, as on
-    // the home page's closing list.
-    const todayIso = albertaDate();
-    header.querySelectorAll<HTMLElement>('#sabh-menu-upcoming [data-deadline]').forEach(li => {
-      if (li.dataset.deadline! < todayIso) li.hidden = true;
     });
 
     // Tapping a destination closes the sheet. The ClientRouter swaps the page

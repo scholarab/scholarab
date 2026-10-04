@@ -232,12 +232,11 @@ test('every field hub links to every other field', async ({ page }, testInfo) =>
   }
 });
 
-// The desktop header is the spacex.com bar (2026-10-03): each menu is a list
-// of at most six rows hanging under its own label, on a dark band that spans
-// the window.
+// Desktop menus are spacex.com lists (2026-10-03): at most six rows hanging
+// under their own label. Off the home page the dark band spans the window.
 test('header dropdowns hang under their label, six rows at most', async ({ page }, testInfo) => {
   test.skip(testInfo.project.name === 'mobile', 'desktop layout');
-  await page.goto('/');
+  await page.goto('/about/');
   const width = page.viewportSize()!.width;
   for (const label of ['Scholarships', 'Programs', 'Explore']) {
     // By what it controls: its accessible name flips to "Hide" once open.
@@ -249,7 +248,7 @@ test('header dropdowns hang under their label, six rows at most', async ({ page 
     const rows = menu.locator('.sabh-menu-desk li');
     expect(await rows.count()).toBeGreaterThan(1);
     expect(await rows.count()).toBeLessThanOrEqual(6);
-    const labelLeft = (await page.locator('.sabh-has-menu .sabh-link', { hasText: label }).boundingBox())!.x;
+    const labelLeft = (await page.locator('.sabh-has-menu .sabh-link-label', { hasText: label }).boundingBox())!.x;
     expect(Math.abs((await rows.first().boundingBox())!.x - labelLeft)).toBeLessThan(2);
     await expect(page.locator('.sabh-drop')).toHaveAttribute('data-on', '');
     expect((await page.locator('.sabh-drop').boundingBox())!.width).toBeGreaterThan(width * 0.9);
@@ -257,29 +256,23 @@ test('header dropdowns hang under their label, six rows at most', async ({ page 
   }
 });
 
-// SpaceX's "Upcoming launches" box, as the next deadlines: a click opens it
-// (also straight after the pointer leaves the nav links), a click away closes it.
-test('header deadlines box opens on click and closes on a click away', async ({ page }, testInfo) => {
-  test.skip(testInfo.project.name === 'mobile', 'desktop layout');
-  await page.goto('/about/');
-  const box = page.locator('.sabh-upcoming-btn');
-  const menu = page.locator('#sabh-menu-upcoming');
-  await page.locator('.sabh-has-menu .sabh-link').first().hover();
-  await box.click();
-  await expect(menu).toBeVisible();
-  await expect(box).toHaveAttribute('aria-expanded', 'true');
-  const rows = menu.locator('li:not([hidden])');
-  expect(await rows.count()).toBeLessThanOrEqual(6);
-  await expect(rows.last().locator('a')).toHaveAttribute('href', '/deadlines/');
-  await page.mouse.click(700, 600);
-  await expect(menu).toBeHidden();
-});
-
 // Moving from Scholarships to Programs switches the panel in place: the shared
 // background stays open and only the contents change.
-test('header dropdown switches without closing', async ({ page }, testInfo) => {
+// The home bar has no background at all, even with a menu open (Ilia,
+// 2026-10-03): the open menu is words over the film, as on spacex.com.
+test('home header stays see-through with a menu open', async ({ page }, testInfo) => {
   test.skip(testInfo.project.name === 'mobile', 'desktop layout');
   await page.goto('/');
+  await page.locator('.sabh-has-menu .sabh-link').first().hover();
+  await expect(page.locator('#sabh-menu-scholarships')).toBeVisible();
+  await expect(page.locator('.sabh-drop')).toBeHidden();
+  const ground = await page.locator('.sab-hero-band').evaluate(el => getComputedStyle(el).backgroundColor);
+  expect(ground).toBe('rgba(0, 0, 0, 0)');
+});
+
+test('header dropdown switches without closing', async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name === 'mobile', 'desktop layout');
+  await page.goto('/about/');
   const drop = page.locator('.sabh-drop');
   await page.locator('.sabh-has-menu .sabh-link').first().hover();
   await expect(drop).toHaveAttribute('data-on', '');
@@ -364,25 +357,6 @@ test('home program carousel links every card to its format hub', async ({ page }
   await expect(root.locator('.sab-scopes-dot').nth(1)).toHaveAttribute('aria-current', 'true');
   await expect.poll(() => root.locator('[data-scopes-track]').evaluate(el => el.scrollLeft)).toBeGreaterThan(0);
   expect(await other.evaluate(el => el.scrollLeft)).toBe(0);
-});
-
-// The blur under an open dropdown is recomputed for every frame of whatever
-// moves beneath it, so the home film holds while a panel is open (measured:
-// 8 to 10 times the GPU work of the closed menu with the film running, none
-// with it held) and resumes when the panel closes.
-test('home film holds while a header dropdown is open', async ({ page }, testInfo) => {
-  test.skip(testInfo.project.name === 'mobile', 'the film is behind the desktop dropdown');
-  await page.goto('/');
-  const playing = () => page.evaluate(() => [...document.querySelectorAll('video')].filter(v => !v.paused).length);
-  await expect.poll(playing, { timeout: 15000 }).toBeGreaterThan(0);
-  await page.locator('.sabh-has-menu .sabh-link').first().hover();
-  await expect(page.locator('.sabh-drop')).toHaveAttribute('data-on', '');
-  await expect.poll(playing).toBe(0);
-  await page.locator('.sabh-has-menu .sabh-link').nth(1).hover();
-  await expect.poll(playing).toBe(0);
-  await page.mouse.move(700, 850);
-  await expect(page.locator('.sabh-drop')).not.toHaveAttribute('data-on', '');
-  await expect.poll(playing).toBe(1);
 });
 
 // Safari zooms the page into any field under 16px that takes focus, and sizes
