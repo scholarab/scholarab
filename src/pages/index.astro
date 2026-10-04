@@ -838,6 +838,29 @@ const carousels = [
   }
   .sab-hero-band .sabh-drop { display: none; }
   .sab-hero-band .sabh-menu-desk a { text-shadow: 0 1px 8px rgba(0, 0, 0, 0.55); }
+  /* Desktop: the smoke behind spacex.com's bar (Ilia, 2026-10-03). A soft
+     black fall-off under the see-through header, and a deeper, taller one
+     while a menu is open so its words read over any frame of the film.
+     Behind the bar's contents (z-index -1 inside the sticky band's own
+     stacking context) and never in the pointer's way. */
+  @media (min-width: 901px) {
+    .sab-hero-band::before, .sab-hero-band::after {
+      content: ''; position: absolute; left: 0; right: 0; top: 0; z-index: -1;
+      pointer-events: none; transition: opacity 0.25s ease;
+    }
+    .sab-hero-band::before {
+      height: 200px;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0, rgba(0, 0, 0, 0.28) 45%, rgba(0, 0, 0, 0) 100%);
+    }
+    .sab-hero-band::after {
+      height: 330px; opacity: 0;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.88) 0, rgba(0, 0, 0, 0.72) 40%, rgba(0, 0, 0, 0) 100%);
+    }
+    .sab-hero-band:has(.sabh-has-menu[data-menu-open])::after { opacity: 1; }
+    /* The bar slides up out of view on the way down; its smoke goes with it. */
+    html[data-sab-hidden] .sab-hero-band::before,
+    html[data-sab-hidden] .sab-hero-band::after { opacity: 0; }
+  }
 </style>
 
 <style>
@@ -1009,6 +1032,28 @@ const carousels = [
   .sab-hero-city a { font-weight: 700; }
   .sab-hero-city a::after { content: ' →'; }
   .sab-hero-city + .sab-hero-quiz { margin-top: 8px; }
+  /* Desktop only (Ilia, 2026-10-03): the headline opens the hero, the
+     byline moves to the foot of it as a credit on the right, level with the
+     buttons (the quiz line under them is too long to share a row with it at
+     960px), and the "Back to <city>" line is gone. Phones keep both. */
+  @media (min-width: 901px) {
+    .sab-hero .sab-byline {
+      /* The hero's foot padding, plus the quiz line (18px gap, 24px line)
+         and half the 52px buttons less half this line. */
+      position: absolute; right: clamp(20px, 4vw, 56px); bottom: calc(clamp(32px, 8vh, 72px) + 55px);
+      margin: 0; font-size: 16px; justify-content: flex-end;
+    }
+    .sab-hero .sab-hero-city { display: none; }
+  }
+  /* Narrow laptops: two right-aligned lines, so the credit clears the
+     buttons (one line ran 41px into them at 901px). */
+  @media (min-width: 901px) and (max-width: 1100px) {
+    .sab-hero .sab-byline {
+      font-size: 14px; flex-direction: column; align-items: flex-end; gap: 2px;
+      bottom: calc(clamp(32px, 8vh, 72px) + 46px);
+    }
+    .sab-hero .sab-kicker-sep { display: none; }
+  }
   /* One pair, one size, one motion: hover only changes colour. The lift onto a
      hard shadow and the press snap were three effects on two buttons, and the
      outline button's thick tinted border made it look like a second, heavier
