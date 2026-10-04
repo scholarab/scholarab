@@ -138,7 +138,8 @@ const DESK_MAX = 6;
 const scholarshipDesk: MenuLink[] = [
   { label: 'All scholarships', href: '/scholarships/' },
   ...scopeTiles.slice(0, DESK_MAX - 2),
-  { label: 'University & college awards', href: '/scholarships/university-college-awards/' },
+  // Short on the desktop list (Ilia, 2026-10-03); the phone sheet keeps the full name.
+  { label: 'Entrance awards', href: '/scholarships/university-college-awards/' },
 ];
 const programDesk: MenuLink[] = [
   { label: 'All programs', href: '/programs/' },
@@ -659,14 +660,17 @@ const isActive = (href: string, also: string[] = []) =>
       border-radius: var(--radius); color: rgba(238, 241, 236, 0.7);
     }
     .sabh-menu-toggle svg { transition: transform 0.16s ease; }
+    /* Compact, as on spacex.com: the list starts just under its label (inside
+       the bar, which the item fills, so the pointer never crosses a gap) and
+       the rows sit 26px apart. */
     .sabh-menu {
-      left: 15px; right: auto; width: max-content; min-width: 200px;
+      top: calc(100% - 12px); left: 15px; right: auto; width: max-content; min-width: 160px;
       border-top: 0; box-shadow: none;
     }
     .sabh-menu-inner { display: none; }
-    .sabh-menu .sabh-menu-desk { display: flex; flex-direction: column; padding: 2px 0 24px; }
+    .sabh-menu .sabh-menu-desk { display: flex; flex-direction: column; padding: 0 0 18px; }
     .sabh-menu-desk a {
-      display: block; padding: 7px 0; white-space: nowrap; text-decoration: none;
+      display: block; padding: 3px 0; line-height: 20px; white-space: nowrap; text-decoration: none;
       font-size: 14px; font-weight: 500; color: rgba(238, 241, 236, 0.78);
       transition: color 0.15s ease;
     }
