@@ -931,10 +931,13 @@ const carousels = [
   .sab-kicker-sep { opacity: 0.45; }
   .sab-kicker-link { color: #EEF1EC; font-weight: 400; text-decoration: none; border-bottom: 1px solid rgba(92,227,187,0.6); padding-top: 12px; margin-top: -12px; display: inline-block; }
   .sab-kicker-link:hover { border-bottom-color: #2FD3A0; color: #2FD3A0; }
+  /* The copy sits at the foot of the film, as on spacex.com, and starts at
+     least 180px under the bar, so an open header menu (about 160px of words
+     with no background) never lands on the byline or the headline (Ilia,
+     2026-10-03). On a short window the hero grows past the fold instead. */
   .sab-hero-body {
-    padding-top: calc(76px + var(--sab-nav-h)); position: relative;
-    /* Center the copy in the space left under the header */
-    flex: 1; display: flex; flex-direction: column; justify-content: center;
+    padding-top: calc(clamp(180px, 22vh, 200px) + var(--sab-nav-h)); position: relative;
+    flex: 1; display: flex; flex-direction: column; justify-content: flex-end;
     width: 100%; box-sizing: border-box;
   }
 
@@ -964,7 +967,7 @@ const carousels = [
 
   .sab-hero-bottom {
     display: flex; align-items: flex-end; justify-content: space-between;
-    gap: 40px; margin-top: 52px; padding-bottom: 64px;
+    gap: 40px; margin-top: clamp(24px, 5vh, 48px); padding-bottom: clamp(32px, 8vh, 72px);
   }
   /* Two lines, one sentence each (Ilia, 2026-09-23): the first holds its
      line, the second starts under it. The stats wrap under the copy on a
@@ -972,7 +975,7 @@ const carousels = [
   .sab-hero-bottom { flex-wrap: wrap; }
   .sab-hero-p-l1 { display: block; }
   .sab-hero-p-l1 { white-space: nowrap; }
-  .sab-hero-copy p { font-size: 18px; line-height: 1.55; color: rgba(238, 241, 236, 0.8); margin: 0 0 30px; }
+  .sab-hero-copy p { font-size: 18px; line-height: 1.55; color: rgba(238, 241, 236, 0.8); margin: 0 0 clamp(16px, 3.4vh, 30px); }
   .sab-hero-search {
     position: relative; display: flex; align-items: center; max-width: 480px; margin: 0 0 16px;
     border: 1px solid rgba(238, 241, 236, 0.32); border-radius: var(--radius);
