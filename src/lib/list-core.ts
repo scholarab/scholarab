@@ -219,7 +219,7 @@ export const SCHOLARSHIP_SHUT_GROUPS = ['closed', 'after'];
 
 export const PROGRAM_GROUP_LABELS: Record<string, string> = {
   active: STATUS_WORDS.open.toUpperCase(),
-  tba: STATUS_WORDS.unconfirmed.toUpperCase(),
+  tba: STATUS_WORDS.future.toUpperCase(),
   closed: 'CLOSED',
 };
 
@@ -368,7 +368,7 @@ export function programWhen(p: ProgramWithMeta): { main: string; sub: string; cl
   const status = getProgramStatus(p);
   if (status === 'closed') return { main: STATUS_WORDS.closed, sub: '', cls: 'sabl-when is-quiet' };
   if (status === 'ongoing') return { main: STATUS_WORDS.open, sub: NO_DEADLINE, cls: 'sabl-when is-quiet' };
-  if (status === 'tba') return { main: STATUS_WORDS.unconfirmed, sub: '', cls: 'sabl-when is-quiet' };
+  if (status === 'tba') return { main: STATUS_WORDS.future, sub: 'date not posted', cls: 'sabl-when is-quiet' };
   const deadMs = p._deadline_ms ?? new Date(p.deadline! + 'T00:00:00').getTime();
   const days = Math.max(0, Math.round((deadMs - getToday().getTime()) / 86400000));
   const main = new Date(deadMs).toLocaleDateString('en-CA', { month: 'short', day: 'numeric' });

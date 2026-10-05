@@ -330,7 +330,7 @@ describe('programWhen', () => {
     expect(programWhen(makeProgram({ id: 1, deadline: '2026-04-08', _deadline_ms: new Date('2026-04-08T00:00:00').getTime() })))
       .toEqual({ main: 'Apr 8', sub: '3 days left', cls: 'sabl-when is-urgent' })
     expect(programWhen(makeProgram({ id: 2, deadline: 'Ongoing' }))).toMatchObject({ main: 'Open now', sub: 'no deadline' })
-    expect(programWhen(makeProgram({ id: 3, deadline: 'TBA' })).main).toBe('Opens later, date not posted')
+    expect(programWhen(makeProgram({ id: 3, deadline: 'TBA' }))).toMatchObject({ main: 'Opens later', sub: 'date not posted' })
     expect(programWhen(makeProgram({ id: 4, deadline: '2026-01-01', _deadline_ms: new Date('2026-01-01T00:00:00').getTime() })).main).toBe('Closed')
   })
 })
