@@ -1843,3 +1843,17 @@ Outcome: a student scanning the list sees three answers to "can I apply today": 
 | The status itself (listing pages, reminders, meta, /match) | Kept: only the directory grouping and filter changed. |
 
 Add-back fraction: 0/2. Local only, against `dist/`: `npm run ci` 1,212 tests; E2E 163 passed; built /scholarships shows OPEN NOW 283, OPENS LATER 535, CLOSED 41, FOR AFTER HIGH SCHOOL 21.
+
+## All scholarships restored, October 4, 2026
+
+Outcome: Ilia asked for every cut scholarship back ("return all scholarships ... I have a plan"). The 2026-09-30 single-school cut (7619a59) and Grade 12 focus cut (feee965) are reversed; the 91 entrance awards were already back (a23cdea).
+
+| Candidate | Result and retained requirement |
+| --- | --- |
+| The 661 listings still out | Restored from `private/scholarship-archive/` (4d4b5c6), in their original order. The 880 live listings are byte-identical; the JSON diff is additions only. Catalogue 880 to 1,541. |
+| Their 1,322 slug 301s | Removed, so each restored page serves again. `_redirects` 1,508 to 186 rules, plus three comment headers that described the cuts. |
+| Code the cuts removed | Restored: the MHPSD board name, the eight audience-school combos (now pointing at the area pages), and the guide links unlinked in nine guides. |
+| Combo pages for the zones | Added: Northern, Central and Southern Alberta now hold school combos (LCHS, Wetaskiwin Composite, Bassano and others), so they got combo copy; Calgary and Edmonton area combo copy rewritten for their school lists. |
+| Zone intros | Central and Southern rewritten: Camrose now out-lists Lacombe, and most Brooks-area awards are no longer Grasslands-wide. |
+
+This is an add-back of both 2026-09-30 removals, at the user's request, not a failure found by a test. Local only, against `dist/`: `npm run ci` 1,212 tests; E2E 163 passed (page budgets included); /scholarships shows OPEN NOW 447, OPENS LATER 878, CLOSED 45, FOR AFTER HIGH SCHOOL 171. Not done: rechecking each restored listing's date and link (data as of 2026-09-30); the database publishes them on the next sync.

@@ -40,11 +40,20 @@ export interface PickedCombo {
  * High schools the listings name only in their audience line. combos.ts builds
  * a combo from each, and the quiz offers each as a school answer so the combo
  * can be reached; picking one filters nothing else, because these awards carry
- * no specificSchools. Empty since 2026-09-30: the single-school removal left
- * none of the eight with a combo, and a school answer that leads nowhere is
- * dead weight in the quiz.
+ * no specificSchools. Emptied with the single-school cut on 2026-09-30 and
+ * restored with those awards on 2026-10-04; `page` is now the area page the
+ * town rolls into (facets.ts `members`).
  */
-export const AUDIENCE_SCHOOLS: { page: string; quizCity: string; name: string; pattern: RegExp }[] = [];
+export const AUDIENCE_SCHOOLS: { page: string; quizCity: string; name: string; pattern: RegExp }[] = [
+  { page: 'edmonton', quizCity: 'St. Albert', name: 'Paul Kane High School', pattern: /\bPaul Kane\b/ },
+  { page: 'edmonton', quizCity: 'St. Albert', name: 'Bellerose Composite High School', pattern: /\bBellerose\b/ },
+  { page: 'edmonton', quizCity: 'Spruce Grove', name: 'Memorial Composite High School', pattern: /\bMemorial Composite\b/ },
+  { page: 'edmonton', quizCity: 'Spruce Grove', name: 'Spruce Grove Composite High School', pattern: /\bSpruce Grove Composite\b/ },
+  { page: 'edmonton', quizCity: 'Fort Saskatchewan', name: 'Fort Saskatchewan High School', pattern: /\bFort High\b|\bFort Saskatchewan High School\b/ },
+  { page: 'northern-alberta', quizCity: 'Lloydminster', name: 'Lloydminster Comprehensive (LCHS)', pattern: /\bLCHS\b/ },
+  { page: 'northern-alberta', quizCity: 'Cold Lake', name: 'Cold Lake High School', pattern: /\bCold Lake High\b/ },
+  { page: 'calgary', quizCity: 'Chestermere', name: 'Chestermere High School', pattern: /\bChestermere High\b/ },
+];
 
 function keyMatches(on: ComboKey, answers: Record<string, string>): boolean {
   if ('board' in on) return answers.board === on.board;

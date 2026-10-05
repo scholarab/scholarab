@@ -116,21 +116,21 @@ export const CITY_COMBOS: CityCombos[] = [
   },
   {
     city: 'edmonton',
-    h1: 'Edmonton scholarship combos',
-    title: 'Edmonton Scholarship Combos',
+    h1: 'Edmonton area scholarship combos',
+    title: 'Edmonton Area Scholarship Combos',
     description:
-      "Edmonton scholarships grouped by who can apply: Edmonton Public Schools students and Edmonton Catholic Schools students, each with add-ons.",
+      'Edmonton area scholarships grouped by who can apply: Edmonton Public and Catholic students, and the award lists of Paul Kane, Fort High and more.',
     intro:
-      "Edmonton's awards split by school board. If the first line of a combo describes you, every award in it is open to you; the conditions on each award still apply.",
+      "Edmonton's awards split by school board, and the suburbs' by high school. If the first line of a combo describes you, every award in it is open to you; the conditions on each award still apply.",
   },
   {
     city: 'calgary',
-    h1: 'Calgary scholarship combos',
-    title: 'Calgary Scholarship Combos',
+    h1: 'Calgary area scholarship combos',
+    title: 'Calgary Area Scholarship Combos',
     description:
-      "Calgary scholarships grouped by who can apply: Calgary Board of Education students and Calgary Catholic students, each set with its own add-ons.",
+      'Calgary area scholarships grouped by who can apply: CBE and Calgary Catholic students, and the award lists of Foothills Composite, Cochrane High and more.',
     intro:
-      "Most Calgary awards here are open to one school board, so the combo you are in says more than the whole city list does. If the first line of a combo describes you, every award in it is open to you; the conditions on each award still apply.",
+      'Most awards here are open to one school board or one high school, so the combo you are in says more than the whole area list does. If the first line of a combo describes you, every award in it is open to you; the conditions on each award still apply.',
   },
   {
     city: 'red-deer',
@@ -167,6 +167,33 @@ export const CITY_COMBOS: CityCombos[] = [
       "Fort McMurray scholarships grouped by who can apply: Keyano College's awards for local students starting there right after Grade 12, in one set.",
     intro:
       'Keyano College ties several of its awards to local students arriving straight from high school. If the first line of a combo describes you, every award in it is open to you; the conditions on each award still apply.',
+  },
+  {
+    city: 'northern-alberta',
+    h1: 'Northern Alberta scholarship combos',
+    title: 'Northern Alberta Scholarship Combos',
+    description:
+      'Northern Alberta scholarships grouped by who can apply: the award lists Lloydminster Comprehensive (LCHS) and Cold Lake High School run for their students.',
+    intro:
+      'Most awards here belong to one high school, so the combo you are in is the school you go to. If the first line of a combo describes you, every award in it is open to you; the conditions on each award still apply.',
+  },
+  {
+    city: 'central-alberta',
+    h1: 'Central Alberta scholarship combos',
+    title: 'Central Alberta Scholarship Combos',
+    description:
+      'Central Alberta scholarships grouped by who can apply: Augustana students and the award lists of Wetaskiwin Composite, Forestburg, Alix-MAC and Iron Ridge.',
+    intro:
+      "Camrose awards gather around the University of Alberta's Augustana campus, and most of the rest belong to one high school each. If the first line of a combo describes you, every award in it is open to you; the conditions on each award still apply.",
+  },
+  {
+    city: 'southern-alberta',
+    h1: 'Southern Alberta scholarship combos',
+    title: 'Southern Alberta Scholarship Combos',
+    description:
+      "Southern Alberta scholarships grouped by who can apply: Bassano School's own graduation awards, open to the students in the building and no one else.",
+    intro:
+      'Bassano School runs its own list of graduation awards, several of them for students going into one field. If the first line of a combo describes you, every award in it is open to you; the conditions on each award still apply.',
   },
   {
     city: 'alberta',

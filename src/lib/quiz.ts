@@ -253,6 +253,7 @@ export const SCHOOL_BOARD_NAMES: Record<string, string> = {
   EPS: 'Edmonton Public Schools',
   ECSD: 'Edmonton Catholic Schools',
   MHCBE: 'Medicine Hat Catholic Board of Education',
+  MHPSD: 'Medicine Hat Public School Division',
   RDPSD: 'Red Deer Public Schools',
   RDCSD: 'Red Deer Catholic Regional Schools',
   CESD: "Chinook's Edge School Division",

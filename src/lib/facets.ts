@@ -237,7 +237,7 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     description:
       'Scholarships for Lacombe, Camrose and Wetaskiwin students: Wolf Creek and Battle River division awards, Legion and service club money, and county bursaries.',
     intro:
-      'Most of these belong to one town, so read the town on each row first; Lacombe has the most, from the Legion and Chamber awards to the Wolf Creek division scholarships.',
+      'Most of these belong to one town, so read the town on each row first; Camrose and Lacombe have the most, from the Augustana campus awards to the Wolf Creek division scholarships.',
   },
   {
     slug: 'southern-alberta',
@@ -251,7 +251,7 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     description:
       'Scholarships for Brooks and County of Newell students: Grasslands division awards, service club money, trades scholarships and health bursaries.',
     intro:
-      'Most of these are open to any Grasslands or County of Newell graduate, and many print no closing date, so ask your school office which date applies before you count on one.',
+      'Most of these print no closing date, so ask your school office which date applies before you count on one, and note that the Bassano School awards are for its own graduates.',
   },
   {
     slug: 'alberta',
