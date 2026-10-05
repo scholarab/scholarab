@@ -112,7 +112,7 @@ for (const path of ['/', '/scholarships/', '/programs/', '/saved/', '/match/',
 const HUBS = [
   '/scholarships/', '/scholarships/medicine-hat/', '/scholarships/edmonton/',
   '/scholarships/calgary/', '/scholarships/red-deer/', '/scholarships/lethbridge/',
-  '/scholarships/airdrie/', '/scholarships/alberta/', '/scholarships/national/',
+  '/scholarships/central-alberta/', '/scholarships/alberta/', '/scholarships/national/',
   '/scholarships/indigenous/', '/scholarships/trades/', '/scholarships/arts/',
   '/scholarships/stem/', '/scholarships/community/', '/scholarships/sports/',
   '/programs/', '/programs/research/', '/programs/computing/',
@@ -157,7 +157,7 @@ test('every scholarship hub links to every other hub of its kind', async ({ page
   test.skip(testInfo.project.name === 'mobile', 'desktop layout');
   const kinds = [
     ['/scholarships/medicine-hat/', '/scholarships/edmonton/', '/scholarships/calgary/',
-     '/scholarships/red-deer/', '/scholarships/lethbridge/', '/scholarships/airdrie/',
+     '/scholarships/red-deer/', '/scholarships/lethbridge/', '/scholarships/central-alberta/',
      '/scholarships/alberta/', '/scholarships/national/'],
     ['/scholarships/indigenous/', '/scholarships/trades/', '/scholarships/arts/',
      '/scholarships/stem/', '/scholarships/community/', '/scholarships/sports/'],
@@ -299,7 +299,7 @@ test('home scope carousel links every card to its hub and steps with the arrows'
   const root = page.locator('[data-scopes="scholarships"]');
   const cards = root.locator('[data-scope-card]');
   // One card per header-menu scope (MENU_SCOPES), not one per photo.
-  await expect(cards).toHaveCount(10);
+  await expect(cards).toHaveCount(9);
   // CC BY and CC BY-SA photos carry their credit, linked to the source page.
   for (const href of await root.locator('.sab-scope-credit').evaluateAll(els => els.map(e => e.getAttribute('href')))) {
     expect(href).toMatch(/^https:\/\/commons\.wikimedia\.org\/wiki\/File:/);

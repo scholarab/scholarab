@@ -8,7 +8,9 @@ describe('scopeHubForQuery', () => {
   it('sends a city, a broad scope or its alias to the hub', () => {
     expect(scopeHubForQuery('Calgary', map)).toBe('/scholarships/calgary/');
     expect(scopeHubForQuery('  red deer ', map)).toBe('/scholarships/red-deer/');
-    expect(scopeHubForQuery('St Albert', map)).toBe('/scholarships/st-albert/');
+    expect(scopeHubForQuery('St Albert', map)).toBe('/scholarships/edmonton/');
+    expect(scopeHubForQuery('Airdrie', map)).toBe('/scholarships/calgary/');
+    expect(scopeHubForQuery('Brooks', map)).toBe('/scholarships/southern-alberta/');
     expect(scopeHubForQuery('Alberta', map)).toBe('/scholarships/alberta/');
     expect(scopeHubForQuery('province-wide', map)).toBe('/scholarships/alberta/');
     expect(scopeHubForQuery('National', map)).toBe('/scholarships/national/');

@@ -1817,3 +1817,17 @@ Repair attempts: the deadlines box closed as soon as it was clicked, because lea
 Add-back fraction: 0/4. Local only, against `dist/`: `npm run ci` 1,212 tests; E2E 164 passed on Chromium and Pixel 7 (two header tests rewritten for the new layout, one added); checked at 1440, 1180, 910 and 901 px (the row fits with 0 px overflow at 901 after the box label shortens to "Deadlines" below 1041 px) and in the 375 px sheet. Not measured: real-device Safari.
 
 Follow-up the same day (Ilia: "no background at all, forever", keep the old position and font, no all-caps, no deadlines box, bring back the social icons and How it works). The bar's links went back to their centred position, font and normal case. The deadlines box was deleted and the right-hand column restored. On the home page the bar no longer goes solid under an open menu: the shared band is not drawn there and the list sits over the film. That removed the last reason for the home film pausing while a menu is open, which began with the blur scrim, so the `sab:menu` event, both listeners, the `held` flags and that E2E test were removed too. Off the home page the dark bar and its band stay, because light text on the white pages has nothing else to sit on. Local only: `npm run ci` 1,212 tests; E2E 163 passed (the deadlines box and film-hold tests are gone, one home transparency test was added); the row fits at 901 px with 0 px overflow. One known cost: on the home hero the open Scholarships list overlaps the "Read the story" line.
+
+## Region hubs by population, October 4, 2026
+
+Outcome: a student lands on the area most of them live in. Ilia: "8/10 visitors are from Calgary or Edmonton areas", and the 30k towns bring almost none. Pages now go by population; eligibility still goes by town, so no student is shown an award as theirs when it is not.
+
+| Candidate | Result and retained requirement |
+| --- | --- |
+| 15 town hubs (Airdrie, Cochrane, Okotoks, St. Albert, Sherwood Park, Spruce Grove, Leduc, Fort Saskatchewan, Beaumont, Cold Lake, Lloydminster, Lacombe, Camrose, Wetaskiwin, Brooks) | Removed. The suburbs roll into Calgary area and Edmonton area at the old `/calgary/` and `/edmonton/` URLs; the rest into Northern, Central and Southern Alberta. Each old URL 301s in both slash forms, and the 658 older rules that pointed at them were retargeted so nothing chains. |
+| Town-level eligibility (listing `region`, `alsoOpenTo`, the quiz's town answer) | Kept. Area pages label each row with the towns it is open to ("Airdrie only", "Calgary, Airdrie, Cochrane"); province-wide awards pinned to a town get no label. |
+| 12 town photos (60 files) and their credits | Removed with their hubs. Cold Lake, Lacombe and Brooks photos stay as the zone pages' board photos. |
+| 13 combo page copy entries for folded towns | Removed. All 13 already built no page (their single-school awards were cut 2026-09-30); Calgary and Edmonton build the same four combos as before. On /match a metro combo is offered only to a town its core awards reach. |
+| St. Albert in the header menu and home carousel | Removed: `MENU_SCOPES` is the two broad scopes plus seven cities. |
+
+Region hubs: 25 to 13. Add-back fraction: 0/15. Local only, against `dist/`: `npm run ci` 1,212 tests; E2E 163 passed (two hard-coded carousel counts moved from 10 to 9 cards); row labels counted on all five area pages. Not measured: Search Console impact of the 301s (re-measure in 4 to 6 weeks), and the 107 county bursaries with `localArea` are not yet tagged to a zone.

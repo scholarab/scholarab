@@ -12,6 +12,8 @@ import type { Facet } from './facets';
 const SCOPE_ALIASES: Record<string, string[]> = {
   alberta: ['alberta', 'ab', 'provincial', 'province wide', 'all of alberta'],
   national: ['canada', 'canada wide', 'canadian', 'nationwide', 'across canada', 'international'],
+  edmonton: ['strathcona county'],
+  'fort-mcmurray': ['wood buffalo', 'fort mac'],
 };
 
 /** Words that say nothing about the place: "scholarships in Red Deer" is "red deer". */
@@ -27,7 +29,7 @@ export function scopeSearchMap(facets: Facet[]): Record<string, string> {
   for (const f of facets) {
     if (f.kind !== 'region') continue;
     const href = `/scholarships/${f.slug}/`;
-    for (const name of [f.label, f.value, f.slug.replace(/-/g, ' '), ...(SCOPE_ALIASES[f.slug] ?? [])]) {
+    for (const name of [f.label, f.value, f.slug.replace(/-/g, ' '), ...(f.members ?? []), ...(SCOPE_ALIASES[f.slug] ?? [])]) {
       const key = scopeKey(name);
       if (key) map[key] = href;
     }

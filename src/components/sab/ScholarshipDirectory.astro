@@ -54,6 +54,10 @@ interface Props {
   /** Rows before "Show more". City hubs take 12: a phone page ran 8 screens and
       4-7% of readers reached its end (private/flow-plan, 2026-10-01). */
   step?: number;
+  /** Area hubs (facets.ts `members`): the towns the page rolls up. Each row
+      names the ones it is open to, so a Calgary-only award never reads as an
+      Airdrie student's. */
+  towns?: string[];
   /** City hubs: the board's specials, from lib/city-specials.ts. */
   specials?: Array<{ label: string; href: string; title: string; meta: string }>;
   /** City hubs: the city's photo on the board, desktop only. */
@@ -72,7 +76,21 @@ const {
   step = DIRECTORY_PAGE_SIZE,
   specials = [],
   photo,
+  towns,
 } = Astro.props;
+
+// "Airdrie only", or "Calgary, Airdrie" for an award several of the page's
+// towns share. Nothing on a single-town page, or for a province-wide or
+// national award a town list also carries (the Rutherford is pinned to
+// Lloydminster; it is not a Lloydminster award).
+const townFact = (s: ScholarshipWithMeta): string | null => {
+  const notTowns = ['Alberta', 'Alberta-wide', 'National', 'International', 'University & college'];
+  if (!towns?.length || !s.region || notTowns.includes(s.region)) return null;
+  const reach = [s.region, ...(s.alsoOpenTo ?? [])].filter(x => !notTowns.includes(x));
+  const here = towns.filter(t => reach.includes(t));
+  if (!here.length) return null;
+  return reach.length === 1 ? `${here[0]} only` : [...here, ...reach.filter(t => !towns.includes(t))].join(', ');
+};
 
 // SCOPE, not REGION: these are how far an award reaches, not where the student
 // lives. Labelled REGION, "Alberta" read as "I live in Alberta", which is true
@@ -357,6 +375,8 @@ import { needsCredit, type PhotoCredit } from '../../lib/photo-credits';
       const status = getScholarshipStatus(s);
       const when = scholarshipWhen(s);
       const facts = eligibilityFacts(s.eligibility);
+      const town = townFact(s);
+      if (town) facts.unshift(town);
       const amount = amountCell(s.amount);
       const head = headerAt.get(i);
       // Nominated, school-selected or automatic: "Apply" would send a student

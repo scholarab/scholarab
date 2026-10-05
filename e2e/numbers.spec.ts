@@ -26,7 +26,7 @@ test('home photo slides state the same counts as the hubs they link to', async (
       open: subs.find(t => /open right now/.test(t)) ?? '',
     };
   }));
-  expect(slides.length).toBeGreaterThanOrEqual(18);
+  expect(slides.length).toBeGreaterThanOrEqual(17);
   for (const s of slides) {
     await page.goto(s.href);
     const hub = { total: await chip(page, 'all'), open: await chip(page, 'active') };

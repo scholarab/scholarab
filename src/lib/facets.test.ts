@@ -33,8 +33,16 @@ describe('facet registry', () => {
     // silently drops; the page just never appears. Catch it here instead.
     const regions = new Set(allScholarships.map(s => s.region));
     const sCategories = new Set(allScholarships.map(s => s.category));
+    const reached = new Set(allScholarships.flatMap(s => [s.region, ...(s.alsoOpenTo ?? [])]));
     for (const f of SCHOLARSHIP_FACETS) {
       const pool = f.kind === 'region' ? regions : sCategories;
+      // An area page (members) may be named for a region no listing carries
+      // ("Southern Alberta"); its towns must still be real ones.
+      if (f.members) {
+        for (const m of f.members) expect(reached, `"${f.slug}" member "${m}"`).toContain(m);
+        expect([f.value, ...f.members].some(v => regions.has(v)), f.slug).toBe(true);
+        continue;
+      }
       expect(pool, `scholarship facet "${f.slug}" matches value "${f.value}"`).toContain(f.value);
     }
     const pCategories = new Set(listedPrograms.map(p => p.category));
@@ -88,23 +96,25 @@ describe('facet registry', () => {
     // `region`; alsoOpenTo is how the other eight hubs reach it. It must not
     // change where the listing itself lives, or a Calgary award would start
     // rendering an Airdrie breadcrumb.
-    const airdrie = SCHOLARSHIP_FACETS.find(f => f.slug === 'airdrie')!;
     const calgary = SCHOLARSHIP_FACETS.find(f => f.slug === 'calgary')!;
-    const listing = { region: 'Calgary', category: 'Academic', alsoOpenTo: ['Airdrie'] };
-    expect(facetMatches(airdrie, listing)).toBe(true);
-    expect(facetMatches(airdrie, listing, { primaryOnly: true })).toBe(false);
-    expect(facetForListing(listing, SCHOLARSHIP_FACETS)).toBe(calgary);
+    const redDeer = SCHOLARSHIP_FACETS.find(f => f.slug === 'red-deer')!;
+    const listing = { region: 'Red Deer', category: 'Academic', alsoOpenTo: ['Airdrie'] };
+    expect(facetMatches(calgary, listing)).toBe(true);
+    expect(facetMatches(calgary, listing, { primaryOnly: true })).toBe(false);
+    expect(facetForListing(listing, SCHOLARSHIP_FACETS)).toBe(redDeer);
   });
 
-  it('counts the Airdrie hub as its own region plus what is also open to it', () => {
-    const airdrie = SCHOLARSHIP_FACETS.find(f => f.slug === 'airdrie')!;
-    const items = facetItems(airdrie, allScholarships);
+  it('counts the Calgary area as its towns plus what is also open to them', () => {
+    const calgary = SCHOLARSHIP_FACETS.find(f => f.slug === 'calgary')!;
+    const towns = ['Calgary', ...calgary.members!];
+    const items = facetItems(calgary, allScholarships);
     expect(items.length).toBe(
       allScholarships.filter(
-        s => s.region === 'Airdrie' || (s.alsoOpenTo ?? []).includes('Airdrie'),
+        s => towns.includes(s.region ?? '') || (s.alsoOpenTo ?? []).some(t => towns.includes(t)),
       ).length,
     );
-    expect(items.some(s => s.region !== 'Airdrie')).toBe(true);
+    expect(items.some(s => s.region === 'Airdrie')).toBe(true);
+    expect(items.some(s => !towns.includes(s.region ?? ''))).toBe(true);
   });
 
   it('keeps a broad scope out of a listing breadcrumb but still gives it a hub', () => {
@@ -121,7 +131,7 @@ describe('facet registry', () => {
     expect(facetForListing({ region: 'Alberta', category: 'Trades' }, SCHOLARSHIP_FACETS)?.slug).toBe('trades');
     expect(facetForListing({ region: 'National', category: 'STEM' }, SCHOLARSHIP_FACETS)?.slug).toBe('stem');
     // A city is not broad and still wins over its category.
-    expect(facetForListing({ region: 'Airdrie', category: 'Trades' }, SCHOLARSHIP_FACETS)?.slug).toBe('airdrie');
+    expect(facetForListing({ region: 'Airdrie', category: 'Trades' }, SCHOLARSHIP_FACETS)?.slug).toBe('calgary');
   });
 
   it('claims International awards for the National hub', () => {

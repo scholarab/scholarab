@@ -20,7 +20,6 @@ import { facetItems, SCHOLARSHIP_FACETS, type FacetTarget } from './facets.ts';
 import { scholarshipStatusOf, type StatusInput } from './status.ts';
 import { AUDIENCE_SCHOOLS, MIN_COMBO_CORE, type ComboEntry, type ComboKey } from './combo-pick.ts';
 import { QUIZ_QUESTIONS } from './quiz.ts';
-import { generateSlug } from './utils.ts';
 
 export interface ComboTarget extends FacetTarget, StatusInput {
   id: number;
@@ -152,51 +151,6 @@ export const CITY_COMBOS: CityCombos[] = [
       'The University of Lethbridge ties several of its awards to students arriving straight from high school. If the first line of a combo describes you, every award in it is open to you; the conditions on each award still apply.',
   },
   {
-    city: 'brooks',
-    h1: 'Brooks scholarship combos',
-    title: 'Brooks Scholarship Combos',
-    description:
-      "Brooks-area scholarships grouped by who can apply: Bassano School's own graduation awards, with the ones for a named field listed as add-ons.",
-    intro:
-      'Bassano School runs its own list of graduation awards, several of them for students going into one field. If the first line of a combo describes you, every award in it is open to you; the conditions on each award still apply.',
-  },
-  {
-    city: 'lacombe',
-    h1: 'Lacombe scholarship combos',
-    title: 'Lacombe Scholarship Combos',
-    description:
-      "Lacombe-area scholarships grouped by who can apply: students starting at Burman University, whose entrance awards make up a set of their own.",
-    intro:
-      "Lacombe's awards cluster around Burman University, the university in town. If the first line of a combo describes you, every award in it is open to you; the conditions on each award still apply.",
-  },
-  {
-    city: 'cochrane',
-    h1: 'Cochrane scholarship combos',
-    title: 'Cochrane Scholarship Combos',
-    description:
-      'Cochrane scholarships grouped by who can apply: Cochrane High, Bow Valley High and St. Timothy students, plus the Calgary Catholic awards open here.',
-    intro:
-      'Almost every Cochrane award belongs to one school, so the right combo is simply the school you go to. If the first line of a combo describes you, every award in it is open to you; the conditions on each award still apply.',
-  },
-  {
-    city: 'okotoks',
-    h1: 'Okotoks scholarship combos',
-    title: 'Okotoks Scholarship Combos',
-    description:
-      "Okotoks-area scholarships grouped by who can apply: Foothills Composite's long award list, Holy Trinity Academy and the Alberta High School of Fine Arts.",
-    intro:
-      'Foothills Composite publishes a long list of school awards, and two smaller schools here run their own. If the first line of a combo describes you, every award in it is open to you; the conditions on each award still apply.',
-  },
-  {
-    city: 'sherwood-park',
-    h1: 'Sherwood Park scholarship combos',
-    title: 'Sherwood Park Scholarship Combos',
-    description:
-      "Sherwood Park scholarships grouped by who can apply: Bev Facey Community High School's own awards, with field-specific ones listed as add-ons.",
-    intro:
-      'Bev Facey Community High School runs its own award list, and much of it is for students heading into one field. If the first line of a combo describes you, every award in it is open to you; the conditions on each award still apply.',
-  },
-  {
     city: 'grande-prairie',
     h1: 'Grande Prairie scholarship combos',
     title: 'Grande Prairie Scholarship Combos',
@@ -215,24 +169,6 @@ export const CITY_COMBOS: CityCombos[] = [
       'Keyano College ties several of its awards to local students arriving straight from high school. If the first line of a combo describes you, every award in it is open to you; the conditions on each award still apply.',
   },
   {
-    city: 'wetaskiwin',
-    h1: 'Wetaskiwin scholarship combos',
-    title: 'Wetaskiwin Scholarship Combos',
-    description:
-      "Wetaskiwin scholarships grouped by who can apply: Wetaskiwin Composite High School's award list, with the field-specific ones listed as add-ons.",
-    intro:
-      'Wetaskiwin Composite publishes a long list of its own awards, many of them for students going into one field. If the first line of a combo describes you, every award in it is open to you; the conditions on each award still apply.',
-  },
-  {
-    city: 'camrose',
-    h1: 'Camrose scholarship combos',
-    title: 'Camrose Scholarship Combos',
-    description:
-      "Camrose-area scholarships grouped by who can apply: students starting at the University of Alberta's Augustana campus, which sits in Camrose.",
-    intro:
-      "Camrose awards gather around the University of Alberta, whose Augustana campus is here. If the first line of a combo describes you, every award in it is open to you; the conditions on each award still apply.",
-  },
-  {
     city: 'alberta',
     h1: 'Small-town Alberta scholarship combos',
     title: 'Small-Town Alberta Scholarship Combos',
@@ -240,60 +176,6 @@ export const CITY_COMBOS: CityCombos[] = [
       "Scholarship combos for Alberta's small towns: the award lists of County Central, Boyle, Willow Creek, Bonnyville and other rural high schools.",
     intro:
       'Rural schools often run their own award lists, and the students who can apply to them are the ones in the building. If the first line of a combo describes you, every award in it is open to you; the conditions on each award still apply.',
-  },
-  {
-    city: 'st-albert',
-    h1: 'St. Albert scholarship combos',
-    title: 'St. Albert Scholarship Combos',
-    description:
-      'St. Albert scholarships grouped by who can apply: the award lists Paul Kane High School and Bellerose Composite run for their own students.',
-    intro:
-      "St. Albert's awards mostly belong to one high school, so the combo you are in is the school you go to. If the first line of a combo describes you, every award in it is open to you; the conditions on each award still apply.",
-  },
-  {
-    city: 'spruce-grove',
-    h1: 'Spruce Grove scholarship combos',
-    title: 'Spruce Grove Scholarship Combos',
-    description:
-      "Spruce Grove-area scholarships grouped by who can apply: Memorial Composite and Spruce Grove Composite High School's own award lists.",
-    intro:
-      "Memorial Composite and Spruce Grove Composite each publish their own awards, and each list is open only to that school's students. If the first line of a combo describes you, every award in it is open to you; the conditions on each award still apply.",
-  },
-  {
-    city: 'fort-saskatchewan',
-    h1: 'Fort Saskatchewan scholarship combos',
-    title: 'Fort Saskatchewan Scholarship Combos',
-    description:
-      "Fort Saskatchewan scholarships grouped by who can apply: Fort Saskatchewan High School's own award list, with the narrower ones as add-ons.",
-    intro:
-      'Fort High runs its own list of awards for its students, a few of them for one field or one kind of student. If the first line of a combo describes you, every award in it is open to you; the conditions on each award still apply.',
-  },
-  {
-    city: 'lloydminster',
-    h1: 'Lloydminster scholarship combos',
-    title: 'Lloydminster Scholarship Combos',
-    description:
-      'Lloydminster scholarships grouped by who can apply: the award list for LCHS graduates, all of it reached through one Lloydminster Public form.',
-    intro:
-      "Lloydminster Comprehensive's awards come through one division awards form, so one sitting covers the whole combo. If the first line of a combo describes you, every award in it is open to you; the conditions on each award still apply.",
-  },
-  {
-    city: 'cold-lake',
-    h1: 'Cold Lake scholarship combos',
-    title: 'Cold Lake Scholarship Combos',
-    description:
-      "Cold Lake scholarships grouped by who can apply: Cold Lake High School's own graduation awards, open to the school's own students.",
-    intro:
-      'Cold Lake High School hands out its own graduation awards, and the students who can apply are the ones in the building. If the first line of a combo describes you, every award in it is open to you; the conditions on each award still apply.',
-  },
-  {
-    city: 'chestermere',
-    h1: 'Chestermere scholarship combos',
-    title: 'Chestermere Scholarship Combos',
-    description:
-      "Chestermere scholarships grouped by who can apply: Chestermere High School's own awards, with the ones for athletes listed as add-ons.",
-    intro:
-      'Chestermere High School runs a short list of its own awards for its graduates. If the first line of a combo describes you, every award in it is open to you; the conditions on each award still apply.',
   },
 ];
 
@@ -490,10 +372,18 @@ export function comboCities<T extends ComboTarget>(items: T[], today: Date): Cit
 export function comboIndex<T extends ComboTarget>(items: T[], today: Date): ComboEntry[] {
   const cities = QUIZ_QUESTIONS.find(q => q.key === 'city')?.opts.map(o => o.value) ?? [];
   return CITY_COMBOS.flatMap(({ city }) => {
-    const quizCity = city === 'alberta' ? 'Other Alberta' : cities.find(c => generateSlug(c) === city);
-    if (!quizCity) return [];
+    const facet = SCHOLARSHIP_FACETS.find(f => f.slug === city);
+    // An area page (facets.ts `members`) spans several quiz towns. A combo is
+    // named to a town only when its core reaches that town, so a Calgary
+    // board's set is never offered to an Airdrie student.
+    const towns = city === 'alberta'
+      ? ['Other Alberta']
+      : [facet?.value, ...(facet?.members ?? [])].filter((c): c is string => !!c && cities.includes(c));
+    const reaches = (town: string, core: T[]) => towns.length === 1
+      || core.filter(s => s.region === town || s.alsoOpenTo?.includes(town)).length >= MIN_COMBO_CORE;
     return combosForCity(city, items, today).flatMap(({ combo, core }) => combo.matchOn
-      ? [{ quizCity, page: city, slug: combo.slug, name: combo.name, who: combo.who, on: combo.matchOn, core: core.map(s => s.id) }]
+      ? towns.filter(town => reaches(town, core)).map(quizCity =>
+        ({ quizCity, page: city, slug: combo.slug, name: combo.name, who: combo.who, on: combo.matchOn!, core: core.map(s => s.id) }))
       : []);
   });
 }
