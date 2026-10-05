@@ -39229,7 +39229,7 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "active": true
+    "active": false
   },
   {
     "id": 1005,
@@ -50546,7 +50546,7 @@
     "region": "Alberta",
     "localArea": "Carbon School graduates",
     "notes": "You need a 65 percent Grade 12 average, references, a personal letter and a resume built around service. The package goes to any Carbon Lions member or to the club's box number.",
-    "active": true,
+    "active": false,
     "description": "The Carbon Lions Club gives $1,000 to a graduating student who spent at least three years at Carbon School and has been accepted into a program of a year or more.",
     "metaDetail": "Hand it to a Lions member or mail it.",
     "eligibility": {
@@ -51340,7 +51340,7 @@
     "lastVerified": "2026-09",
     "region": "Edmonton",
     "notes": "You show how the studies will benefit public service and demonstrate financial need. University, hospital and school board employees are excluded, as are direct reports to elected officials.",
-    "active": true,
+    "active": false,
     "description": "The Edmonton Community Foundation funds awards for permanent federal, provincial or municipal employees working inside Edmonton who are working toward a credential or professional designation at an Edmonton institution.",
     "metaDetail": "For employees, not students entering work.",
     "eligibility": {
@@ -51796,7 +51796,7 @@
     "lastVerified": "2026-09",
     "region": "Fort McMurray",
     "notes": "Applications open August 15 and close September 30. You send five things to the Education Coordinator: the form, a resume, an essay on your need and goals, proof of studies, your status card and your transcript.",
-    "active": true,
+    "active": false,
     "description": "The Athabasca Chipewyan First Nation's Department of Lands and Resource Management funds two $1,500 scholarships for members studying full time in Canada, with preference for science, natural resources and biology.",
     "metaDetail": "The window opens August 15.",
     "eligibility": {
@@ -52663,7 +52663,7 @@
     "region": "Alberta",
     "localArea": "Dewberry-area students",
     "notes": "You apply after finishing a year of a two to four year Lakeland program. A farming background near Landonville is preferred, and you need an academic and community record plus a reference.",
-    "active": true,
+    "active": false,
     "description": "For students at Lakeland College who graduated from Dewberry, J.R. Robson, Marwayne, Kitscoty or E.H. Walter and can explain how their program connects to a career in agriculture.",
     "metaDetail": "Apply after your first year.",
     "eligibility": {
