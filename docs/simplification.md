@@ -1831,3 +1831,15 @@ Outcome: a student lands on the area most of them live in. Ilia: "8/10 visitors 
 | St. Albert in the header menu and home carousel | Removed: `MENU_SCOPES` is the two broad scopes plus seven cities. |
 
 Region hubs: 25 to 13. Add-back fraction: 0/15. Local only, against `dist/`: `npm run ci` 1,212 tests; E2E 163 passed (two hard-coded carousel counts moved from 10 to 9 cards); row labels counted on all five area pages. Not measured: Search Console impact of the 301s (re-measure in 4 to 6 weeks), and the 107 county bursaries with `localArea` are not yet tagged to a zone.
+
+## One "Opens later" run, October 4, 2026
+
+Outcome: a student scanning the list sees three answers to "can I apply today": open now, opens later, closed. Ilia: "why do we need opens later, date not posted ... just put it in opens later and write somewhere that the date is not posted".
+
+| Candidate | Result and retained requirement |
+| --- | --- |
+| The "OPENS LATER, DATE NOT POSTED" run (292 on /scholarships) | Removed. It joins the "Opens later" run (243 + 292 = 535), dated rows first. Each undated row still reads "Opens later" with "date not posted" (or "date not posted yet, likely around ...") under it, as before. |
+| The matching "Opens later, date not posted" Status option | Removed; "Opens later" now counts both. |
+| The status itself (listing pages, reminders, meta, /match) | Kept: only the directory grouping and filter changed. |
+
+Add-back fraction: 0/2. Local only, against `dist/`: `npm run ci` 1,212 tests; E2E 163 passed; built /scholarships shows OPEN NOW 283, OPENS LATER 535, CLOSED 41, FOR AFTER HIGH SCHOOL 21.

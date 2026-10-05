@@ -25,7 +25,13 @@ export type { ScholarshipStatus };
 // 'active' is every listing a student can apply to today, dated or not. A
 // separate "Open any time" chip split that set in two for one fact a row
 // already states, and held 2 scholarships beside 249 (2026-10-01).
-export type StatusFilter = 'all' | 'active' | 'opening' | 'unconfirmed' | 'closed';
+export type StatusFilter = 'all' | 'active' | 'opening' | 'closed';
+
+// One "Opens later" run, dated first (the sort ranks future above
+// unconfirmed): a separate "OPENS LATER, DATE NOT POSTED" run split one answer
+// to "can I apply today" in two (Ilia, 2026-10-04). Each undated row still
+// says "date not posted" under its Opens later.
+const isOpensLater = (status: ScholarshipStatus | undefined) => status === 'future' || status === 'unconfirmed';
 
 /** Only for students already past high school (every listed grade is
  *  post-secondary). They stay listed, since a Grade 12 student applies to
@@ -113,12 +119,10 @@ export function selectScholarships(
   const pool = statusFilter === 'closed'
     ? initialScholarships.filter(s => statusCache.get(s.id) === 'closed')
     : statusFilter === 'opening'
-      ? initialScholarships.filter(s => statusCache.get(s.id) === 'future')
+      ? initialScholarships.filter(s => isOpensLater(statusCache.get(s.id)))
       : statusFilter === 'active'
         ? initialScholarships.filter(s => canApplyNow(statusCache.get(s.id) ?? 'active'))
-        : statusFilter === 'unconfirmed'
-          ? initialScholarships.filter(s => statusCache.get(s.id) === 'unconfirmed')
-          : initialScholarships;
+        : initialScholarships;
 
   const afterSchool = selectedSchool === 'all'
     ? pool
@@ -203,7 +207,6 @@ export function whenTier(days: number): '' | ' is-soon' | ' is-urgent' {
 export const SCHOLARSHIP_GROUP_LABELS: Record<string, string> = {
   active: STATUS_WORDS.open.toUpperCase(),
   future: STATUS_WORDS.future.toUpperCase(),
-  unconfirmed: STATUS_WORDS.unconfirmed.toUpperCase(),
   closed: 'CLOSED',
   after: 'FOR AFTER HIGH SCHOOL',
 };
@@ -212,7 +215,7 @@ export const SCHOLARSHIP_GROUP_LABELS: Record<string, string> = {
  *  showing: the list leads with what can still be applied to (critique
  *  2026-09-25). Programs keep theirs open, since 86 of 121 have no confirmed
  *  date yet. */
-export const SCHOLARSHIP_SHUT_GROUPS = ['unconfirmed', 'closed', 'after'];
+export const SCHOLARSHIP_SHUT_GROUPS = ['closed', 'after'];
 
 export const PROGRAM_GROUP_LABELS: Record<string, string> = {
   active: STATUS_WORDS.open.toUpperCase(),
@@ -223,7 +226,7 @@ export const PROGRAM_GROUP_LABELS: Record<string, string> = {
 export function scholarshipGroupKey(s: ScholarshipWithMeta): string {
   if (isAfterHighSchool(s)) return 'after';
   const status = getScholarshipStatus(s);
-  return status === 'ongoing' ? 'active' : status;
+  return status === 'ongoing' ? 'active' : isOpensLater(status) ? 'future' : status;
 }
 
 export function programGroupKey(p: ProgramWithMeta): string {
