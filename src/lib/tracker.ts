@@ -1,3 +1,5 @@
+import { STARTER_PACK_IDS, STARTER_PACK_KEY } from './starter-pack.ts';
+
 /** Coerce legacy string ids to numbers, dedupe, drop garbage (matches numeric ids in JSON). */
 function normalizeIdList(raw: unknown[]): number[] {
   if (!Array.isArray(raw)) return [];
@@ -59,7 +61,21 @@ function makeTracker(key: string) {
     return [...saved];
   }
 
-  return { get, toggle };
+  /** Add ids once per device, marked by `flag`: a student who removes one
+   *  later does not get it back. Sends no save event, since nobody chose it. */
+  function seed(ids: readonly number[], flag: string): void {
+    try {
+      if (localStorage.getItem(flag)) return;
+      const saved = read();
+      const fresh = ids.filter(id => !saved.includes(id));
+      saved.push(...fresh);
+      localStorage.setItem(key, JSON.stringify(saved));
+      localStorage.setItem(flag, '1');
+      if (fresh.length) window.dispatchEvent(new CustomEvent('sab:saved'));
+    } catch { /* storage blocked: nothing to keep it in */ }
+  }
+
+  return { get, toggle, seed };
 }
 
 const scholarshipTracker = makeTracker('scholarab_saved');
@@ -69,3 +85,5 @@ export const getSaved           = (): number[] => scholarshipTracker.get();
 export const toggleSaved        = (id: number): number[] => scholarshipTracker.toggle(id);
 export const getSavedPrograms   = (): number[] => programTracker.get();
 export const toggleSavedProgram = (id: number): number[] => programTracker.toggle(id);
+/** The starter pack (starter-pack.ts), into My combo once per device. */
+export const seedStarterPack    = (): void => scholarshipTracker.seed(STARTER_PACK_IDS, STARTER_PACK_KEY);

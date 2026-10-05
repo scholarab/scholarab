@@ -13,6 +13,10 @@ export default defineConfig({
   use: {
     baseURL: `http://localhost:${port}`,
     trace: 'on-first-retry',
+    // Every test starts as a visitor whose starter pack was already added
+    // (lib/starter-pack.ts), so the saved list is theirs alone. starter-pack.spec
+    // clears this to test a first visit.
+    storageState: { cookies: [], origins: [{ origin: `http://localhost:${port}`, localStorage: [{ name: 'scholarab_starter_pack', value: '1' }] }] },
   },
   projects: [
     { name: 'chromium', use: { ...devices['Desktop Chrome'] } },

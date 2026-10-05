@@ -670,7 +670,9 @@ const isActive = (href: string, also: string[] = []) =>
 </style>
 
 <script>
-  import { getSaved, getSavedPrograms } from '../../lib/tracker.ts';
+  import { getSaved, getSavedPrograms, seedStarterPack } from '../../lib/tracker.ts';
+  // Before anything reads the list: every page has this header.
+  seedStarterPack();
   // The ClientRouter swaps in fresh header markup on every navigation, so the
   // element handles are re-resolved per page while the document-level
   // listeners below are bound exactly once.
@@ -948,7 +950,7 @@ const isActive = (href: string, also: string[] = []) =>
     for (const el of document.querySelectorAll<HTMLElement>('[data-saved-n]')) {
       el.textContent = n > 99 ? '99+' : String(n);
       el.hidden = n === 0;
-      el.closest('a')?.setAttribute('aria-label', n ? `Saved, ${n} ${n === 1 ? 'listing' : 'listings'}` : 'Saved');
+      el.closest('a')?.setAttribute('aria-label', n ? `My combo, ${n} ${n === 1 ? 'listing' : 'listings'}` : 'My combo');
     }
   }
   document.addEventListener('astro:page-load', paintSavedCount);

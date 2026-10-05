@@ -1,5 +1,6 @@
 // Render only bookmarked cards from the published page snapshot.
 import { getSaved, toggleSaved, getSavedPrograms, toggleSavedProgram } from './tracker.ts';
+import { STARTER_PACK_IDS } from './starter-pack.ts';
 import { showToast, getToday, prefersReducedMotion } from './utils.ts';
 import { amountCell, getScholarshipStatus, paintRowAction, rowAction, scholarshipWhen, programWhen } from './list-core.ts';
 import { canApplyNow } from './status.ts';
@@ -164,9 +165,12 @@ export function initSaved() {
       // twice, which is where a mismatch would eventually come from.
       // At zero the count would repeat the empty state's "Nothing saved yet"
       // right under it (critique 2026-09-23), so it keeps only the device note.
+      // The starter pack says why three awards are here that nobody saved.
+      const starter = getSaved().some(id => (STARTER_PACK_IDS as readonly number[]).includes(id));
       countEl.textContent = empty
         ? 'Your shortlist is saved on this device.'
-        : `${total} ${total === 1 ? 'item' : 'items'} saved. Your shortlist stays on this device.`;
+        : `${total} ${total === 1 ? 'item' : 'items'} saved. Your shortlist stays on this device.`
+          + (starter ? ' It starts with a starter pack of awards almost every Alberta Grade 12 can enter; remove any you do not want.' : '');
     }
 
     const toggle = root.querySelector<HTMLElement>('[data-sv-toggle]');

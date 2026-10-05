@@ -1869,3 +1869,11 @@ Outcome: one place for a student to get the set of awards they can apply to. Ili
 | Separate names for the quiz and the shortlist | "Find my scholarships" and "Find your match" are now Build my combo; Saved is My combo in the header and on its page. Row buttons keep Save. |
 
 Add-back fraction: 0/2. Local only, against `dist/`: `npm run ci` 1,212 tests; E2E 163 passed (heading and menu expectations renamed); a Calgary Catholic profile checked in the built /match (Calgary Catholic combo, 19 of 68 matches, first). Not measured: whether students save more; `combo_open` and `save` events will tell.
+
+## Starter pack, October 4, 2026
+
+Outcome: every student starts with something worth applying to. Ilia: "pick 2 or 3 awards that anybody can apply to ... like Rutherford ... that will preload for all users".
+
+Picked from the 95 province-wide and national listings with no average, need, field, board, school or identity requirement: Alexander Rutherford (14; its application also considers the student for the $3,500 Mehl), Canada's Luckiest Student (126; free random draw) and RE/MAX Quest for Excellence (8; 500-word essay, winners drawn at random). The header script adds them to My combo once per device, marked by `scholarab_starter_pack`, so a removed award stays out; no save event is sent for them. My combo's count line says a starter pack is in it.
+
+Add-back fraction: not applicable (an addition the user asked for). Local only, against `dist/`: `npm run ci` 1,215 tests (3 new: the ids are live and unrestricted, seeding once, removal sticks); E2E 165 passed, with the existing tests starting from a device that already had its pack and one new first-visit test. Not measured: whether students apply to them; the existing apply_click events will tell.
