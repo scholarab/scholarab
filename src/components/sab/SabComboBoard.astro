@@ -18,6 +18,9 @@ const { h1, intro, menuLabel, items, burst } = Astro.props;
 <header class="sabc-board">
   <h1 class="sabc-h1">{h1}</h1>
   <p class="sabc-intro">{intro}</p>
+  {/* The quiz finds the combos a student is in, with everything else they
+      fit (Build my combo, 2026-10-04). */}
+  <p class="sabc-build"><a href="/match/" class="sabm-btn-accent">Build my combo</a><span>A few questions, and the combos you are in come first.</span></p>
   <ol class="sabc-menu" aria-label={menuLabel}>
     {items.map((item, n) => (
       <li>
@@ -52,6 +55,8 @@ const { h1, intro, menuLabel, items, burst } = Astro.props;
     letter-spacing: -0.015em; text-transform: uppercase; text-wrap: balance;
   }
   .sabc-intro { margin: 20px 0 0; max-width: 56ch; font-size: 17px; line-height: 1.55; color: rgba(255,255,255,0.8); }
+  .sabc-build { margin: 22px 0 0; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; }
+  .sabc-build span { font-size: 15px; color: rgba(255,255,255,0.8); }
   .sabc-menu { list-style: none; margin: 30px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px; }
   .sabc-menu-link {
     display: inline-flex; align-items: center; gap: 12px; min-height: 48px;

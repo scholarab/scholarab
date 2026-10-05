@@ -135,7 +135,7 @@ test('every question has at most four tiles and keeps keyboard navigation, priva
       await expect(page.locator('.sabm-question')).toHaveText(questions[i + 1]!.q);
     }
   }
-  await expect(page.locator('.sabm-results-h1')).toHaveText('Your matches');
+  await expect(page.locator('.sabm-results-h1')).toHaveText('Your combo');
   await expect(page.locator('.sabm-results-h1')).toBeFocused();
   await expect(page.locator('.sabm-results-count')).toContainText(/\d/);
   await expect(page.locator('.sabm-row-num, .sabm-count-chips')).toHaveCount(0);
@@ -166,7 +166,7 @@ test('320px results wrap long waiting dates without horizontal overflow', async 
   };
   await page.addInitScript(({ key, profile }) => sessionStorage.setItem(key, JSON.stringify({ version: 3, step: 7, answers: profile, savedAt: Date.now() })), { key: QUIZ_STORAGE_KEY, profile });
   await page.goto('/match/');
-  await expect(page.locator('.sabm-results-h1')).toHaveText('Your matches');
+  await expect(page.locator('.sabm-results-h1')).toHaveText('Your combo');
   await page.evaluate(() => document.fonts.ready);
   const longDates = page.locator('.sabm-due').filter({ hasText: /date not posted yet, likely around/ });
   // A page with no long date is not a useful regression case for the nowrap bug.
@@ -217,7 +217,7 @@ test('the next question opens below the header after answering from the final ba
     const room = await heading.evaluate(h => h.getBoundingClientRect().top - parseFloat(getComputedStyle(h).scrollMarginTop));
     expect(room, `heading after answering "${q}"`).toBeGreaterThanOrEqual(-1);
   }
-  await expect(results).toHaveText('Your matches');
+  await expect(results).toHaveText('Your combo');
 });
 
 for (const key of ['city', 'institution', 'school'] as const) {
@@ -298,12 +298,12 @@ test('programs asks only search type, grade and field before results', async ({ 
   await expect(page.locator('.sabm-step-label')).toHaveText('Question 3 of 3');
   await inspectAllBatches(page, field);
   await (await revealAnswer(page, 'Still figuring it out')).click();
-  await expect(page.locator('.sabm-results-h1')).toHaveText('Your matches');
+  await expect(page.locator('.sabm-results-h1')).toHaveText('Your combo');
   await expect(page.locator('.sabm-results-h1')).toBeFocused();
   await expect(page.locator('.sabm-results-count')).toContainText(/program/);
   expect(await progress(page)).toEqual({ step: 3, answers: { searchType: 'programs', grade: '12', field: '' } });
   await page.reload();
-  await expect(page.locator('.sabm-results-h1')).toHaveText('Your matches');
+  await expect(page.locator('.sabm-results-h1')).toHaveText('Your combo');
   await expect(page.locator('.sabm-answers button')).toHaveCount(3);
 });
 
@@ -315,7 +315,7 @@ test('results keep Save above the list and, on a phone, the rest below it', asyn
   await page.addInitScript(key => sessionStorage.setItem(key, JSON.stringify({ version: 3, step: 99, savedAt: Date.now(),
     answers: { searchType: 'scholarships', city: 'Medicine Hat', board: 'MHCBE', school: '', field: '', average: '', institution: '' } })), QUIZ_STORAGE_KEY);
   await page.goto('/match/');
-  await expect(page.locator('.sabm-results-h1')).toHaveText('Your matches');
+  await expect(page.locator('.sabm-results-h1')).toHaveText('Your combo');
   const top = (selector: string) => page.locator(selector).first().evaluate(el => el.getBoundingClientRect().top);
   const list = await top('.sabm-table');
   expect(await top('.sabm-results-actions')).toBeLessThan(list);
@@ -352,7 +352,7 @@ for (const step of [2, 3, 4, 8]) {
       await expect(page.locator('.sabm-step-label')).toHaveText('Question 3 of 3');
       await expectBatchLimit(page);
     } else {
-      await expect(page.locator('.sabm-results-h1')).toHaveText('Your matches');
+      await expect(page.locator('.sabm-results-h1')).toHaveText('Your combo');
     }
     expect((await progress(page))?.step).toBe(step < 4 ? 2 : 3);
   });

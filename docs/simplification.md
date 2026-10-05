@@ -1857,3 +1857,15 @@ Outcome: Ilia asked for every cut scholarship back ("return all scholarships ...
 | Zone intros | Central and Southern rewritten: Camrose now out-lists Lacombe, and most Brooks-area awards are no longer Grasslands-wide. |
 
 This is an add-back of both 2026-09-30 removals, at the user's request, not a failure found by a test. Local only, against `dist/`: `npm run ci` 1,212 tests; E2E 163 passed (page budgets included); /scholarships shows OPEN NOW 447, OPENS LATER 878, CLOSED 45, FOR AFTER HIGH SCHOOL 171. Not done: rechecking each restored listing's date and link (data as of 2026-09-30); the database publishes them on the next sync.
+
+## Build my combo, October 4, 2026
+
+Outcome: one place for a student to get the set of awards they can apply to. Ilia: "unite the quiz and combos into one, calling it build my combo". The quiz already knew which combos a student was in; it showed them as a box after the third result.
+
+| Candidate | Result and retained requirement |
+| --- | --- |
+| The combo box after the third result | Replaced: results open on "Your combo", the combos the student is in first (each tray with its first five rows, Save all, See the combo), then "More you match" with the old groups. Each award shows once. |
+| "Scholarship combos" in the Explore menu | Removed. The combo pages stay as search landing pages, each with a Build my combo button into the quiz. |
+| Separate names for the quiz and the shortlist | "Find my scholarships" and "Find your match" are now Build my combo; Saved is My combo in the header and on its page. Row buttons keep Save. |
+
+Add-back fraction: 0/2. Local only, against `dist/`: `npm run ci` 1,212 tests; E2E 163 passed (heading and menu expectations renamed); a Calgary Catholic profile checked in the built /match (Calgary Catholic combo, 19 of 68 matches, first). Not measured: whether students save more; `combo_open` and `save` events will tell.

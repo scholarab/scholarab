@@ -19,7 +19,6 @@ import { loadScholarships, loadPrograms } from '../../lib/data-loader';
 import { programIsListed } from '../../lib/status';
 import { guides } from '../../lib/guides';
 import { SCHOLARSHIP_FACETS, PROGRAM_FACETS, PROGRAM_FORMATS, MENU_SCOPES, facetItems, MIN_FACET_ITEMS } from '../../lib/facets';
-import { comboCities } from '../../lib/combos';
 
 interface Props {
   currentPath: string;
@@ -57,9 +56,6 @@ let scopeTiles: Tile[] = scopeFacets.map(f => tileOf(f, '/scholarships/', null))
 // A hub below the floor has no page, so it gets no tile and no link either.
 let formatTiles: Tile[] = [];
 let fieldLinks: { label: string; href: string }[] = [];
-// One Explore link to the combo index, present only while some city has a
-// combo page (comboCities applies the routes' own floor).
-let comboLinks: MenuLink[] = [];
 
 try {
   const [scholarships, programs] = await Promise.all([loadScholarships(), loadPrograms()]);
@@ -80,9 +76,6 @@ try {
     .filter(({ items }) => items >= MIN_FACET_ITEMS)
     .map(({ facet, items }) => tileOf(facet, '/programs/', items))
     .sort((a, b) => b.count! - a.count!);
-  comboLinks = comboCities(scholarships, today).length
-    ? [{ label: 'Scholarship combos', href: '/combos/' }]
-    : [];
   fieldLinks = PROGRAM_FACETS
     .filter(f => liveHub(f) >= MIN_FACET_ITEMS)
     .map(f => ({ label: f.label, href: `/programs/${f.slug}/` }));
@@ -119,10 +112,9 @@ const EXPLORE_GUIDES: [string, string][] = [
   ['grade-11-scholarship-timeline', 'Grade 11 timeline'],
 ];
 const exploreLinks: MenuLink[] = [
-  { label: 'Find my scholarships', href: '/match/' },
+  { label: 'Build my combo', href: '/match/' },
   { label: 'Closing soon', href: '/#closing' },
   { label: 'Deadline calendar', href: '/deadlines/' },
-  ...comboLinks,
   { label: 'All guides', href: '/guides/' },
   ...EXPLORE_GUIDES
     .filter(([slug]) => guides.some(g => g.slug === slug))
@@ -146,9 +138,8 @@ const programDesk: MenuLink[] = [
   ...formatTiles.slice(0, DESK_MAX - 1),
 ];
 const exploreDesk: MenuLink[] = [
-  { label: 'Find my scholarships', href: '/match/' },
+  { label: 'Build my combo', href: '/match/' },
   { label: 'Deadline calendar', href: '/deadlines/' },
-  ...comboLinks,
   { label: 'Guides', href: '/guides/' },
   { label: 'For educators', href: '/educators/' },
   { label: 'What changed', href: '/updates/' },
@@ -170,8 +161,8 @@ const navItems: { label: string; href: string; count: number | null; also?: stri
   { label: 'Programs', href: '/programs/', count: programCount },
   // The hint is for the phone sheet, where "Explore" alone did not say the
   // quiz and the deadline calendar were inside (critique 2026-10-01).
-  { label: 'Explore', href: '/match/', count: null, also: ['/deadlines/', '/guides/', '/combos/'], hint: 'Quiz, deadlines, guides' },
-  { label: 'Saved', href: '/saved/', count: null },
+  { label: 'Explore', href: '/match/', count: null, also: ['/deadlines/', '/guides/', '/combos/'], hint: 'Build my combo, deadlines, guides' },
+  { label: 'My combo', href: '/saved/', count: null },
   { label: 'About', href: '/about/', count: null },
 ];
 

@@ -62,7 +62,7 @@ export const PHOTO_CREDITS: Record<string, PhotoCredit> = {
  * they ship only the tile crop and name their place here for /credits/.
  */
 export const EXPLORE_PHOTOS: Record<string, string> = {
-  'explore-quiz': 'Explore: Find my scholarships',
+  'explore-quiz': 'Explore: Build my combo',
   'explore-closing': 'Explore: Closing soon',
   'explore-deadlines': 'Explore: Deadlines',
   'explore-guides': 'Explore: Guides',

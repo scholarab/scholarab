@@ -21,16 +21,16 @@ test('Explore keeps every tool reachable by keyboard and phone menu', async ({ p
   // Desktop is the spacex.com list, six rows at most; the phone sheet keeps
   // every tool.
   expect(hrefs).toEqual(mobile ? [
-    '/match/', '/#closing', '/deadlines/', '/combos/', '/guides/',
+    '/match/', '/#closing', '/deadlines/', '/guides/',
     '/guides/alexander-rutherford-scholarship-guide/',
     '/guides/how-to-write-a-scholarship-essay/',
     '/guides/grade-11-scholarship-timeline/',
     '/templates/reference-letter/', '/educators/', '/updates/',
-  ] : ['/match/', '/deadlines/', '/combos/', '/guides/', '/educators/', '/updates/']);
+  ] : ['/match/', '/deadlines/', '/guides/', '/educators/', '/updates/']);
   for (const link of await links.all()) await expect(link).toBeVisible();
 
   await page.keyboard.press('Tab');
-  await expect(menu.getByRole('link', { name: 'Find my scholarships', exact: true })).toBeFocused();
+  await expect(menu.getByRole('link', { name: 'Build my combo', exact: true })).toBeFocused();
   await page.keyboard.press('Escape');
   await expect(menu).toBeHidden();
   if (mobile) {

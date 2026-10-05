@@ -60,15 +60,14 @@ test('match quiz reaches results', async ({ page }) => {
         .toBeVisible({ timeout: 10_000 });
     }
 
-    await expect(page.locator('.sabm-results-h1')).toHaveText('Your matches', { timeout: 10_000 });
+    await expect(page.locator('.sabm-results-h1')).toHaveText('Your combo', { timeout: 10_000 });
     await expect(page.locator('.sabm-results-count')).toContainText(/\d/);
 });
 
 test('saved page - hydrates and shows item count', async ({ page }) => {
   await page.goto('/saved');
-  // Exact: the empty state's own heading ("Nothing saved yet") also contains
-  // "saved", and this line is asserting the page title.
-  await expect(page.getByRole('heading', { name: 'Saved', exact: true })).toBeVisible({ timeout: 10_000 });
+  // The page title, "My combo" since Build my combo (2026-10-04).
+  await expect(page.getByRole('heading', { name: 'My combo', exact: true })).toBeVisible({ timeout: 10_000 });
   // Skeleton clears and the count line is shown (only the device note at zero)
   await expect(page.locator('text=/saved on this device/').first()).toBeVisible({ timeout: 10_000 });
 });

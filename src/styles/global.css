@@ -1560,8 +1560,15 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
   background: var(--brand); color: var(--text-primary);
   border: 3px solid var(--text-primary); border-radius: var(--radius);
 }
-/* A second tray takes the combo pages' next tone, as their menu does. */
-.sabm-combo + .sabm-combo { background: #FFD84D; }
+/* A second combo takes the combo pages' next tone, as their menu does. */
+.sabm-combo-set + .sabm-combo-set .sabm-combo { background: #FFD84D; }
+/* Build my combo: each combo is its tray with its own rows under it. */
+.sabm-combo-set { margin: 28px 0 40px; }
+.sabm-combo-set .sabm-combo { margin: 0 0 4px; }
+.sabm-more-h {
+  font: 800 clamp(26px, 3vw, 34px)/1 var(--font-display); text-transform: uppercase;
+  letter-spacing: 0.01em; margin: 8px 0 14px;
+}
 .sabm-combo-tag {
   display: inline-block; background: var(--text-primary); color: #FFC700;
   font: 800 13px/1 var(--font-display); letter-spacing: 0.14em; text-transform: uppercase;

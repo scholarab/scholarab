@@ -295,7 +295,7 @@ describe('Question 5; Institution', () => {
     fireEvent.click(revealTile('Mount Royal University'))
     fireEvent.click(screen.getByRole('button', { name: 'Continue with 2 schools' }))
     act(() => { vi.runAllTimers() })
-    expect(screen.getByRole('heading', { name: 'Your matches' })).toBeTruthy()
+    expect(screen.getByRole('heading', { name: 'Your combo' })).toBeTruthy()
     // List order, not tap order.
     expect(JSON.parse(sessionStorage.getItem(QUIZ_STORAGE_KEY)!).answers.institution).toBe('Mount Royal University|SAIT')
     const profile = (mockMatchAll.mock.calls.at(-1) as unknown as any[])?.[0]
@@ -309,7 +309,7 @@ describe('Question 5; Institution', () => {
 
   it('clicking an institution advances to results', () => {
     clickTile('Somewhere else, or not sure')
-    expect(screen.getByRole('heading', { name: 'Your matches' })).toBeTruthy()
+    expect(screen.getByRole('heading', { name: 'Your combo' })).toBeTruthy()
   })
 })
 
@@ -319,7 +319,7 @@ describe('Results', () => {
   it('shows "0 scholarships found" when matchAll returns empty', () => {
     render(<EligibilityQuiz scholarships={[]} programs={[]} />)
     advanceToResults()
-    expect(screen.getByRole('heading', { name: 'Your matches' })).toBeTruthy()
+    expect(screen.getByRole('heading', { name: 'Your combo' })).toBeTruthy()
     expect(screen.getByText(/^Showing 0 scholarships/i)).toBeTruthy()
   })
 
@@ -602,7 +602,7 @@ describe('Results', () => {
     expect(screen.getByText(/no matches found for your profile/i)).toBeTruthy()
     fireEvent.click(screen.getByRole('button', { name: /^Still figuring it out\. Change your answer/ }))
     clickTile('STEM & Engineering')
-    expect(screen.getByRole('heading', { name: 'Your matches' })).toBeTruthy()
+    expect(screen.getByRole('heading', { name: 'Your combo' })).toBeTruthy()
     expect((mockMatchAll.mock.calls.at(-1) as unknown as any[])?.[0].fields).toEqual(['STEM'])
     expect(screen.queryByRole('button', { name: /try again/i })).toBeNull()
   })
@@ -1017,7 +1017,7 @@ describe('Batch navigation', () => {
     expect(input.value).toBe('')
     fireEvent.click(screen.getByRole('button', { name: 'Continue with 1 school' }))
     act(() => { vi.runAllTimers() })
-    expect(screen.getByRole('heading', { name: 'Your matches' })).toBeTruthy()
+    expect(screen.getByRole('heading', { name: 'Your combo' })).toBeTruthy()
     expect(stored().answers.institution).toBe('Red Deer Polytechnic')
   })
 
@@ -1068,7 +1068,7 @@ describe('Programs-only questions and session migration', () => {
     expect(screen.getByText("What are you interested in?")).toBeTruthy()
     expect(screen.getByText('Question 3 of 3')).toBeTruthy()
     clickTile('Trades')
-    expect(screen.getByRole('heading', { name: 'Your matches' })).toBeTruthy()
+    expect(screen.getByRole('heading', { name: 'Your combo' })).toBeTruthy()
     const saved = JSON.parse(sessionStorage.getItem(QUIZ_STORAGE_KEY)!)
     expect(saved).toMatchObject({ version: 3, step: 3, answers: { searchType: 'programs', grade: '11', field: 'trades' } })
     expect(Object.keys(saved.answers).sort()).toEqual(['field', 'grade', 'searchType'])
@@ -1080,7 +1080,7 @@ describe('Programs-only questions and session migration', () => {
   it.each([
     [0, 'What are you looking for?'], [1, 'What grade are you in?'],
     [2, "What are you interested in?"], [3, "What are you interested in?"],
-    [4, 'Your matches'], [6, 'Your matches'], [8, 'Your matches'],
+    [4, 'Your combo'], [6, 'Your combo'], [8, 'Your combo'],
   ] as const)('maps legacy programs step %i to the same remaining matching inputs', (step, heading) => {
     const answers = { searchType: 'programs', grade: '11', city: 'Calgary', field: 'STEM' }
     sessionStorage.setItem(QUIZ_STORAGE_KEY, JSON.stringify({ step, answers, savedAt: Date.now() }))
@@ -1096,7 +1096,7 @@ describe('Programs-only questions and session migration', () => {
   it('does not remigrate completed version-2 programs results back to a question', () => {
     sessionStorage.setItem(QUIZ_STORAGE_KEY, JSON.stringify({ version: 2, step: 3, savedAt: Date.now(), answers: { searchType: 'programs', grade: '12', field: '' } }))
     render(<EligibilityQuiz scholarships={[]} programs={[]} />)
-    expect(screen.getByRole('heading', { name: 'Your matches' })).toBeTruthy()
+    expect(screen.getByRole('heading', { name: 'Your combo' })).toBeTruthy()
     expect(mockSendEvent).not.toHaveBeenCalled()
   })
 
@@ -1107,7 +1107,7 @@ describe('Programs-only questions and session migration', () => {
     clickTile('Both')
     expect(screen.getByText('Where are you based?')).toBeTruthy()
     for (const label of ['Medicine Hat', 'Still figuring it out', "I'd rather not say", 'Somewhere else, or not sure']) clickTile(label)
-    expect(screen.getByRole('heading', { name: 'Your matches' })).toBeTruthy()
+    expect(screen.getByRole('heading', { name: 'Your combo' })).toBeTruthy()
     const saved = JSON.parse(sessionStorage.getItem(QUIZ_STORAGE_KEY)!)
     expect(saved.step).toBe(5)
     expect(saved.answers.searchType).toBe('both')

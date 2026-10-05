@@ -48,6 +48,8 @@ const TIER_STYLES: Record<ConfidenceTier, { badge: string; label: string }> = {
 type ResultGroup = 'best' | 'soon' | 'now' | 'later'
 const SOON_DAYS = 30
 const SOON_SHOWN = 3
+// Rows a combo shows before Show all: its strongest few, under its button.
+const COMBO_SHOWN = 5
 // The strong matches lead, whatever their dates: a Calgary business student's
 // list opened on three possible matches due soon (an essay contest, a
 // right-to-life award, Loran) and the three strong fits sat last, under the
@@ -484,17 +486,37 @@ export default function EligibilityQuiz({ scholarships, programs, combos = [] }:
     return matchPrograms(programs, answers, Infinity, todayDate())
   }, [programs, answers, step, showPrograms, QUESTIONS.length])
 
+  // The combos this student is in (combo-pick.ts), checked against every
+  // match rather than the ten on screen.
+  const pickedCombos = useMemo(() => allScholarshipResults
+    ? pickCombos(combos, answers, new Set(allScholarshipResults.map(r => r.scholarship.id)))
+    : [], [combos, answers, allScholarshipResults])
+
+  // Build my combo (Ilia, 2026-10-04): the combos a student is in lead the
+  // results, each with its own rows, and every award shows once, under the
+  // first combo that holds it. The rest of the list is what is left.
+  const comboSections = useMemo(() => {
+    const taken = new Set<number>()
+    return pickedCombos.map(({ entry, hits }) => {
+      const rows = (allScholarshipResults ?? []).filter(r => hits.includes(r.scholarship.id) && !taken.has(r.scholarship.id))
+      for (const r of rows) taken.add(r.scholarship.id)
+      return { entry, hits, rows }
+    }).filter(c => c.rows.length > 0)
+  }, [pickedCombos, allScholarshipResults])
+  const inCombo = useMemo(() => new Set(comboSections.flatMap(c => c.rows.map(r => r.scholarship.id))), [comboSections])
+  const restResults = useMemo(() => allScholarshipResults?.filter(r => !inCombo.has(r.scholarship.id)) ?? null, [allScholarshipResults, inCombo])
+
   const [showAll, setShowAll] = useState(false)
   // The first screen keeps both groups in view: at least half the rows from
   // each when both have that many, so the best fits that open in spring are
   // not all pushed behind "Show all" by the ones open tonight.
   // The due-soon rows come first and take at most three of the ten.
-  const scholarshipResults = allScholarshipResults && (showAll ? allScholarshipResults : (() => {
-    const best = allScholarshipResults.filter(r => r.group === 'best')
-    const soon = allScholarshipResults.filter(r => r.group === 'soon').slice(0, SOON_SHOWN)
+  const scholarshipResults = restResults && (showAll ? restResults : (() => {
+    const best = restResults.filter(r => r.group === 'best')
+    const soon = restResults.filter(r => r.group === 'soon').slice(0, SOON_SHOWN)
     const limit = RESULT_LIMIT - best.length - soon.length
-    const now = allScholarshipResults.filter(r => r.group === 'now')
-    const later = allScholarshipResults.filter(r => r.group === 'later')
+    const now = restResults.filter(r => r.group === 'now')
+    const later = restResults.filter(r => r.group === 'later')
     const nowShown = now.slice(0, Math.max(Math.ceil(limit / 2), limit - later.length))
     return [...best, ...soon, ...nowShown, ...later.slice(0, limit - nowShown.length)]
   })())
@@ -519,11 +541,6 @@ export default function EligibilityQuiz({ scholarships, programs, combos = [] }:
     setSavedIds(new Set(getSaved()))
   }, [])
 
-  // The combos this student is in (combo-pick.ts), checked against every
-  // match rather than the ten on screen.
-  const pickedCombos = useMemo(() => allScholarshipResults
-    ? pickCombos(combos, answers, new Set(allScholarshipResults.map(r => r.scholarship.id)))
-    : [], [combos, answers, allScholarshipResults])
 
   // Programs have their own shortlist key, read by the /saved page
   const [savedProgramIds, setSavedProgramIds] = useState<Set<number>>(() => new Set(getSavedPrograms()))
@@ -595,7 +612,7 @@ export default function EligibilityQuiz({ scholarships, programs, combos = [] }:
     const best = scholarshipResults?.filter(r => r.group === 'best') ?? []
     const saveable = best.length > 0 ? best : strong.length > 0 ? strong : good
 
-    const scholarshipCount = scholarshipResults?.length ?? 0
+    const scholarshipCount = (scholarshipResults?.length ?? 0) + comboSections.reduce((n, c) => n + (showAll ? c.rows.length : Math.min(c.rows.length, COMBO_SHOWN)), 0)
     const programCount = programResults?.length ?? 0
     const scholarshipTotal = allScholarshipResults?.length ?? 0
     const programTotal = allProgramResults?.length ?? 0
@@ -615,36 +632,63 @@ export default function EligibilityQuiz({ scholarships, programs, combos = [] }:
     const tierCount = [strong, good, possible].filter(t => t.length > 0).length
     const showTiers = tierCount > 1
 
-    // A set the student can apply to as a whole: "pre-built combos, like fast
-    // food" (2026-09-30), from the combo pages. After the third row, never
-    // above the first: on a phone the first match is only just on screen.
-    // Under the first two groups (what to apply to now), not inside them: at
-    // row three it split the strongest fits from the ones due this month
-    // (critique 2026-10-02). One group: after its third row, as before.
-    const comboAfter = (() => {
-      const rows = scholarshipResults ?? []
-      const starts = rows.flatMap((r, i) => i === 0 || r.group !== rows[i - 1]!.group ? [i] : [])
-      if (starts.length >= 3) return starts[2]! - 1
-      if (starts.length === 2) return starts[1]! - 1
-      return Math.min(2, rows.length - 1)
-    })()
-    const comboTrays = pickedCombos.map(({ entry, hits }) => (
-      <aside key={entry.slug} className="sabm-combo" aria-labelledby={`sabm-combo-${entry.slug}`}>
-        <span className="sabm-combo-tag" aria-hidden="true">Combo</span>
-        <h3 id={`sabm-combo-${entry.slug}`} className="sabm-combo-name">{entry.name}</h3>
-        <p className="sabm-combo-who">{hits.length} of your matches are in this combo, for you if {entry.who}.</p>
-        <div className="sabm-combo-actions">
-          {hits.every(id => savedIds.has(id))
-            ? <span className="sabm-saved-all" role="status">All {hits.length} saved</span>
-            : <button type="button" className="sabm-btn-accent" onClick={() => handleSaveAll(hits)}>Save all {hits.length}</button>}
-          <a href={comboHref(entry)} className="sabm-text-link" onClick={() => sendEvent('combo_open')}>See the combo</a>
-        </div>
-      </aside>
-    ))
+    // A combo's first rows lead the page; Show all opens the rest of each.
+    const comboShown = comboSections.map(c => showAll ? c.rows : c.rows.slice(0, COMBO_SHOWN))
+
+    // One row, the same in a combo and in the rest of the list.
+    const scholarshipRow = ({ scholarship: s, tier, signals, checks }: NonNullable<typeof allScholarshipResults>[number]) => {
+      const style = TIER_STYLES[tier]
+      // Same ladder as the directory row this links to, so a match that
+      // is not open today never wears a bare "Apply".
+      const status = scholarshipStatusOf(s, today)
+      // The directory's words (lib/status.ts), so a result and the row
+      // it links to never describe one award two ways.
+      const amount = amountCell(s.amount)
+      return (
+        <ResultRow
+          when={rowWhen(status, s)}
+          title={s.title}
+          titleHref={`/scholarships/${generateSlug(s.title)}/`}
+          subtitle={s.audience}
+          tags={<>
+            {/* The tier stays beside its checks: "5 strong matches"
+                over two rows labelled Strong read as a miscount. */}
+            {showTiers && <span className={style.badge}>{style.label}</span>}
+            {checks.map(c => <span key={c} className="sabm-tier sabm-check">Check: {c}</span>)}
+          </>}
+          // Two at most. The point is to justify the rank at a glance,
+          // not to reprint the eligibility criteria.
+          why={signals.slice(0, 2)}
+          amount={amount.text}
+          amountClass={amount.cls}
+          actions={<>
+            <button
+              onClick={() => handleToggleSave(s.id)}
+              aria-label={`${savedIds.has(s.id) ? 'Remove from saved' : 'Save'}: ${s.title}`}
+              aria-pressed={savedIds.has(s.id)}
+              className={`sabl-save${savedIds.has(s.id) ? ' on' : ''}`}
+            >
+              <span className="sabm-save-ico" dangerouslySetInnerHTML={{ __html: BOOKMARK }} />
+              <span className="sabl-save-label">{savedIds.has(s.id) ? 'Saved' : 'Save'}</span>
+            </button>
+            {(() => {
+              // The directory row's rule (list-core rowAction): Apply to
+              // the provider when open today, otherwise Details here.
+              const act = rowAction(canApplyNow(status), s.url, `/scholarships/${generateSlug(s.title)}/`, s.title)
+              return act.external
+                ? <a href={act.href} target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer" className="sabl-apply"
+                    onClick={() => sendEvent('apply_click', 'scholarship', s.id)} aria-label={act.aria}
+                  >{act.label}<span className="sabl-ext" aria-hidden="true">↗</span></a>
+                : <a href={act.href} className="sabl-apply" aria-label={act.aria}>{act.label}<span className="sabl-ext" aria-hidden="true">→</span></a>
+            })()}
+          </>}
+        />
+      )
+    }
 
     return (
       <div className="quiz-results-in">
-        <h2 ref={resultsHeadingRef} tabIndex={-1} className="sabm-results-h1">Your matches</h2>
+        <h2 ref={resultsHeadingRef} tabIndex={-1} className="sabm-results-h1">Your combo</h2>
         <p className="sabm-results-count">{countLabel}</p>
         {/* Every match, not the ten on screen: the ten are split on purpose. */}
         {showScholarships && (() => {
@@ -708,67 +752,44 @@ export default function EligibilityQuiz({ scholarships, programs, combos = [] }:
           </div>
         </div>
 
-        {/* Scholarship rows */}
+        {/* The combos this student is in, first: a set of awards open to
+            the same students, which they can keep in one tap. */}
+        {showScholarships && comboSections.map(({ entry, hits }, n) => (
+          <section key={entry.slug} className="sabm-combo-set" aria-labelledby={`sabm-combo-${entry.slug}`}>
+            <div className="sabm-combo">
+              <span className="sabm-combo-tag" aria-hidden="true">Combo</span>
+              <h3 id={`sabm-combo-${entry.slug}`} className="sabm-combo-name">{entry.name}</h3>
+              <p className="sabm-combo-who">{hits.length} of your matches, for you if {entry.who}.</p>
+              <div className="sabm-combo-actions">
+                {hits.every(id => savedIds.has(id))
+                  ? <span className="sabm-saved-all" role="status">All {hits.length} saved</span>
+                  : <button type="button" className="sabm-btn-accent" onClick={() => handleSaveAll(hits)}>Save all {hits.length}</button>}
+                <a href={comboHref(entry)} className="sabm-text-link" onClick={() => sendEvent('combo_open')}>See the combo</a>
+              </div>
+            </div>
+            <div className="sabm-table">
+              {comboShown[n]!.map(r => <Fragment key={r.scholarship.id}>{scholarshipRow(r)}</Fragment>)}
+            </div>
+          </section>
+        ))}
+
+        {/* Everything else they match */}
         {showScholarships && scholarshipResults && scholarshipResults.length > 0 && (
           <div className="sabm-table">
-            {scholarshipResults.map(({ scholarship: s, tier, signals, checks, group }, index) => {
+            {comboSections.length > 0 && <h3 className="sabm-more-h">More you match</h3>}
+            {scholarshipResults.map((r, index) => {
               // A label at the top of each group, only when there are two;
               // one group keeps the single "best fit first" line.
-              const split = new Set(scholarshipResults.map(r => r.group)).size > 1
-              const label = index === 0 || group !== scholarshipResults[index - 1]!.group
+              const split = new Set(scholarshipResults.map(x => x.group)).size > 1
+              const label = index === 0 || r.group !== scholarshipResults[index - 1]!.group
                 ? !split
                   ? (showPrograms ? 'Scholarships, best fit first' : 'Best fit first')
-                  : GROUP_LABELS[group]
+                  : GROUP_LABELS[r.group]
                 : null
-              const style = TIER_STYLES[tier]
-              // Same ladder as the directory row this links to, so a match that
-              // is not open today never wears a bare "Apply".
-              const status = scholarshipStatusOf(s, today)
-              // The directory's words (lib/status.ts), so a result and the row
-              // it links to never describe one award two ways.
-              const amount = amountCell(s.amount)
               return (
-                <Fragment key={s.id}>
+                <Fragment key={r.scholarship.id}>
                 {label && <p className="sabm-table-label">{label}</p>}
-                <ResultRow
-                  when={rowWhen(status, s)}
-                  title={s.title}
-                  titleHref={`/scholarships/${generateSlug(s.title)}/`}
-                  subtitle={s.audience}
-                  tags={<>
-                    {/* The tier stays beside its checks: "5 strong matches"
-                        over two rows labelled Strong read as a miscount. */}
-                    {showTiers && <span className={style.badge}>{style.label}</span>}
-                    {checks.map(c => <span key={c} className="sabm-tier sabm-check">Check: {c}</span>)}
-                  </>}
-                  // Two at most. The point is to justify the rank at a glance,
-                  // not to reprint the eligibility criteria.
-                  why={signals.slice(0, 2)}
-                  amount={amount.text}
-                  amountClass={amount.cls}
-                  actions={<>
-                    <button
-                      onClick={() => handleToggleSave(s.id)}
-                      aria-label={`${savedIds.has(s.id) ? 'Remove from saved' : 'Save'}: ${s.title}`}
-                      aria-pressed={savedIds.has(s.id)}
-                      className={`sabl-save${savedIds.has(s.id) ? ' on' : ''}`}
-                    >
-                      <span className="sabm-save-ico" dangerouslySetInnerHTML={{ __html: BOOKMARK }} />
-                      <span className="sabl-save-label">{savedIds.has(s.id) ? 'Saved' : 'Save'}</span>
-                    </button>
-                    {(() => {
-                      // The directory row's rule (list-core rowAction): Apply to
-                      // the provider when open today, otherwise Details here.
-                      const act = rowAction(canApplyNow(status), s.url, `/scholarships/${generateSlug(s.title)}/`, s.title)
-                      return act.external
-                        ? <a href={act.href} target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer" className="sabl-apply"
-                            onClick={() => sendEvent('apply_click', 'scholarship', s.id)} aria-label={act.aria}
-                          >{act.label}<span className="sabl-ext" aria-hidden="true">↗</span></a>
-                        : <a href={act.href} className="sabl-apply" aria-label={act.aria}>{act.label}<span className="sabl-ext" aria-hidden="true">→</span></a>
-                    })()}
-                  </>}
-                />
-                {index === comboAfter && comboTrays}
+                {scholarshipRow(r)}
                 </Fragment>
               )
             })}

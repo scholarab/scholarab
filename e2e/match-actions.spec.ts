@@ -81,7 +81,7 @@ for (const width of [1440, 1024, 320]) {
     };
     await page.addInitScript(({ key, profile }) => sessionStorage.setItem(key, JSON.stringify({ version: 3, step: 7, answers: profile, savedAt: Date.now() })), { key: QUIZ_STORAGE_KEY, profile });
     await page.goto('/match/');
-    await expect(page.locator('.sabm-results-h1')).toHaveText('Your matches');
+    await expect(page.locator('.sabm-results-h1')).toHaveText('Your combo');
     await page.evaluate(() => document.fonts.ready);
     const showAll = page.getByRole('button', { name: /^Show all \d+ matches$/ });
     if (await showAll.isVisible()) await showAll.click();
