@@ -3488,7 +3488,7 @@
     "lastVerified": "2026-08",
     "region": "Alberta",
     "notes": "Applications open October 5, 2026.",
-    "active": false,
+    "active": true,
     "openDate": "2026-10-05",
     "description": "Alberta Blue Cross awards this $1,500 scholarship to Indigenous (First Nations, Métis, or Inuit) students who are enrolled full-time in post-secondary programs of at least 2 years in duration. Nine scholarships are awarded annually to recognize and support Indigenous learners pursuing their education. Applicants cannot have previously received this award.",
     "eligibility": {
