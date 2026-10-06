@@ -146,6 +146,18 @@ export async function getStaticPaths() {
     prefer: (a, b) => ms(a.deadline) - ms(b.deadline),
   });
 
+  // Shown only where the pair shares a field or a town. The balancer fills
+  // every page's three slots, and on General and Sports awards, which have no
+  // program counterpart, that meant three unrelated programs under a heading
+  // that called them a match (Loran showed a physics exam and a spaceflight
+  // program). Dropping the score-0 links empties the block on 182 scholarship
+  // and 14 program pages and leaves every program at least one scholarship
+  // page linking in (measured 2026-10-05), so the link graph stays connected.
+  const matchedPrograms = (s: Scholarship, i: number) =>
+    crossProgramsFor[i]!.filter(p => scoreProgramForScholarship(s, p) > 0);
+  const matchedScholarships = (p: Program, i: number) =>
+    crossScholarshipsFor[i]!.filter(s => scoreScholarshipForProgram(p, s) > 0);
+
   // The date figure down the left edge, as on every directory row (critique
   // 2026-10-02). No countdown: these rows are built once, and a day count
   // would go stale between builds. The year only when it is not this one.
@@ -316,7 +328,7 @@ export async function getStaticPaths() {
         scholarship: s,
         program: undefined as Program | undefined,
         related: asScholarshipCards(relatedScholarshipsFor[i]!),
-        crossRelated: asProgramCards(crossProgramsFor[i]!),
+        crossRelated: asProgramCards(matchedPrograms(s, i)),
         alternatives: alternativesForScholarship(s),
         next: nextForScholarship(s, i),
         metaDescription: descriptions[i]!,
@@ -329,7 +341,7 @@ export async function getStaticPaths() {
         scholarship: undefined as Scholarship | undefined,
         program: p,
         related: asProgramCards(relatedProgramsFor[i]!),
-        crossRelated: asScholarshipCards(crossScholarshipsFor[i]!),
+        crossRelated: asScholarshipCards(matchedScholarships(p, i)),
         alternatives: alternativesForProgram(p),
         next: nextForProgram(p, i),
         metaDescription: undefined as string | undefined,

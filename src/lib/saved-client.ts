@@ -192,9 +192,9 @@ export function initSaved() {
     if (shHead) shHead.hidden = sh.length === 0;
     if (prHead) prHead.hidden = pr.length === 0;
     const shLabel = root.querySelector('[data-sv-sh-label]');
-    if (shLabel) shLabel.textContent = `SCHOLARSHIPS · ${sh.length}`;
+    if (shLabel) shLabel.textContent = String(sh.length);
     const prLabel = root.querySelector('[data-sv-pr-label]');
-    if (prLabel) prLabel.textContent = `PROGRAMS · ${pr.length}`;
+    if (prLabel) prLabel.textContent = String(pr.length);
   }
 
   function repaint() {
@@ -384,9 +384,8 @@ export function initSaved() {
     calEl.innerHTML =
       '<div style="margin-top:48px">'
       + '<div class="sabs-cal-toolbar">'
-      + '<h2 class="sabs-section-head sabl-mono" style="border-top:none;padding:0">'
-      + '<span class="sabs-dot" style="background:#2FD3A0" aria-hidden="true"></span>'
-      + '<span>DEADLINE CALENDAR</span>'
+      + '<h2 class="sabs-section-head" style="border-top:none;padding:0">'
+      + '<span class="sabl-group-label">DEADLINE CALENDAR</span>'
       + '</h2>'
       // No dated item means buildICS emits zero VEVENTs, so the export offered
       // a 118-byte empty calendar and still reported success. Nothing to

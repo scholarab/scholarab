@@ -66,7 +66,7 @@ const faqJson = {
       'name': 'Is it too late to apply for scholarships in the spring?',
       'acceptedAnswer': {
         '@type': 'Answer',
-        'text': `No. Spring is where most of the calendar is. April, May and June together hold ${spring} of the ${st.total} dated deadlines, which is ${spring / st.total >= 0.6 ? 'roughly two out of every three' : 'more than half of all the'} awards in the year. They are smaller and more local than the fall awards, which is exactly why the applicant pools are small enough to win.`,
+        'text': `No. Spring is where most of the calendar is. April, May and June together hold ${spring} of the ${st.total} dated deadlines, which is ${spring / st.total >= 0.6 ? 'roughly two out of every three' : 'more than half of all the'} awards in the year. They are smaller and more local than the fall awards, so each one draws from a city or a school rather than the whole country.`,
       },
     },
     {
@@ -112,23 +112,23 @@ const faqJson = {
     </tbody>
   </table>
 
-  <h2>May is the whole ballgame, and nobody is looking</h2>
+  <h2>May has the most deadlines</h2>
   <p>
-    {m(5)} of {st.total} deadlines fall in May. April, May and June together hold {spring}, which is {spring / st.total >= 0.6 ? 'roughly two out of every three' : 'more than half of all the'} dated awards in the year. The spring is not the leftovers of the scholarship calendar. It is the calendar.
+    {m(5)} of {st.total} deadlines fall in May. April, May and June together hold {spring}, which is {spring / st.total >= 0.6 ? 'roughly two out of every three' : 'more than half of all the'} dated awards in the year.
   </p>
   <p>
-    It is also the stretch students sleepwalk through, and the reason is structural rather than lazy: by May a Grade 12 student has an acceptance letter, the urgency has drained out, and diploma exams are in the way. The awards still open are smaller, usually $500 to $2,000, and local. That combination is exactly what <a href="/guides/local-scholarships-better-odds/">makes them winnable</a>. A May award drawing thirty applicants from your own city is a far better use of an evening than a national award you were never going to place in.
+    By May you probably have an acceptance letter and diploma exams to study for, so these are easy to let slide. The awards still open are smaller, usually $500 to $2,000, and local, which <a href="/guides/local-scholarships-better-odds/">is why they are worth the evening</a>: a May award draws from one city or one school, a national award from the whole country.
   </p>
 
-  <h2>The money and the odds run in opposite directions</h2>
+  <h2>The largest awards close in the fall</h2>
   <p>
     October and November hold {st.sum(10, 11)} deadlines between them, the two thinnest months of the school year. They also hold almost every large award on the site: the <a href="/guides/loran-award-guide/">Loran Award</a> at roughly $150,000 on October 15, the Wolf Scholars Program at $80,000 on November 2, TD Scholarships for Community Leadership at $70,000 on November 15, and the Advancing Futures Bursary at $40,000 on October 1.
   </p>
   <p>
-    So the fall asks for the most work at the moment you have the least time, for the awards you are least likely to win, and it does it in the first ten weeks of Grade 12. That is not an argument for skipping it. The consolation tiers alone make Loran worth five weeks. It is an argument for knowing that the fall is a small number of expensive bets and the spring is a large number of cheap ones, and budgeting your year accordingly rather than treating every deadline as equally urgent.
+    So the fall asks for the most work in the first ten weeks of Grade 12, for the awards with the most applicants. Loran is still worth five weeks for its finalist awards alone. Plan the fall as a few expensive applications and the spring as many cheap ones.
   </p>
 
-  <h2>The spikes are administrators, not coincidence</h2>
+  <h2>Three dates with dozens of awards each</h2>
   <p>
     Three single days carry more awards than most whole months:
   </p>
@@ -138,14 +138,14 @@ const faqJson = {
     <li><strong>December 18, {st.onDay('12-18')} awards.</strong> {st.onDayFrom('12-18', 'keyano.ca')} of these are Keyano College awards, published together in one student award booklet.</li>
   </ul>
   <p>
-    This matters practically rather than as trivia. When you see dozens of awards sharing a date, you are usually looking at one institution's portfolio, which means one administering body, one set of rules, and often one application that considers you for everything you qualify for. A date that looks like {st.onDayFrom('12-18', 'keyano.ca')} deadlines can be an afternoon's work. Check the administrator before you assume the date is impossible.
+    When you see dozens of awards sharing a date, you are usually looking at one institution's portfolio, which means one administering body, one set of rules, and often one application that considers you for everything you qualify for. A date that looks like {st.onDayFrom('12-18', 'keyano.ca')} deadlines can be an afternoon's work. Check the administrator before you assume the date is impossible.
   </p>
 
   <h2>Month by month, and what to do in each</h2>
 
   <h3>September and October: the expensive ones</h3>
   <p>
-    September holds {m(9)} deadlines, and its own awards are some of the least competed on the site: the Charmaine Letourneau Scholarship, the two UFCW awards and the Cypress County Agricultural Service Board Bursary all close September 30. October holds {m(10)} and is the most valuable month of the year. If you are reading this in September of Grade 12, the Loran application is the thing to start this week, and the <a href="/guides/reference-letters-for-scholarships/">reference letters</a> are the thing to ask for before the November crush.
+    September holds {m(9)} deadlines, among them the Charmaine Letourneau Scholarship, the UFCW Canada Begg's-Dowling-Mathieu Scholarship and the Cypress County Agricultural Service Board Bursary, all closing September 30. October holds {m(10)} and is the most valuable month of the year. If you are reading this in September of Grade 12, the Loran application is the thing to start this week, and the <a href="/guides/reference-letters-for-scholarships/">reference letters</a> are the thing to ask for before the November crush.
   </p>
 
   <h3>November and December: leadership awards, then the institutions</h3>
@@ -166,20 +166,20 @@ const faqJson = {
     {spring} deadlines. This is the part of the year worth planning properly, and the plan is boring: one strong essay, one reference package, and apply to everything you plausibly qualify for. April 10 and April 1 both carry clusters, May 1 and May 30 are the two biggest days on the calendar, and June 1 carries {st.onDay('06-01')} more. Filter the directory to your own region and work down it.
   </p>
 
-  <h3>July and August: the ones nobody thinks to check</h3>
+  <h3>July and August: after graduation</h3>
   <p>
-    {st.sum(7, 8)} deadlines across the summer, after most students have stopped thinking about it entirely. August is mostly institutional entrance bursaries, and July holds union and community awards including the NUPGE Tommy Douglas and Terry Fox Memorial scholarships on July 15. If you graduated in June and assumed the year was over, it was not.
+    {st.sum(7, 8)} deadlines across the summer. August is mostly institutional entrance bursaries, and July holds union and community awards including the NUPGE Tommy Douglas and Terry Fox Memorial scholarships on July 15. If you graduated in June, check these before you stop looking.
   </p>
 
   <h2>The award that is in no month</h2>
   <p>
-    The <a href="/guides/alexander-rutherford-scholarship-guide/">Alexander Rutherford Scholarship</a> has no closing deadline, which is why it appears nowhere on this calendar and why students forget it exists. It opens August 1, you apply once you are enrolled in post-secondary with final transcripts available, and it pays up to $2,500 for marks you already earned. It is the one piece of the year with no date attached and no competition, and it is the most commonly missed money in Alberta.
+    The <a href="/guides/alexander-rutherford-scholarship-guide/">Alexander Rutherford Scholarship</a> has no closing deadline, which is why it appears nowhere on this calendar. It opens August 1, you apply once you are enrolled in post-secondary with final transcripts available, and it pays up to $2,500 for marks you already earned. It has no date attached and no competition.
   </p>
 
   <h2>How to use the calendar</h2>
   <ul>
     <li><strong>Read two months ahead, not twelve.</strong> The <a href="/deadlines/">deadline calendar</a> lists every dated deadline in order with live status. In September, the only rows that matter are September and October.</li>
-    <li><strong>Weight your effort toward spring.</strong> Two thirds of the awards are in April, May and June, and they are the ones with pools you can count.</li>
+    <li><strong>Weight your effort toward spring.</strong> Two thirds of the awards are in April, May and June.</li>
     <li><strong>Check the administrator on a crowded date.</strong> Dozens of awards on one day usually means one body and often one application.</li>
     <li><strong>Do the Rutherford regardless.</strong> It has no deadline to miss and no competition to lose.</li>
   </ul>

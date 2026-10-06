@@ -465,7 +465,7 @@ export const months: UpdateMonth[] = [
       },
       {
         kind: 'listings',
-        text: 'Provincial, national and city awards were all rolled forward to the 2026-27 cycle. As of August 2, nothing on the site reads closed.',
+        text: 'Provincial, national and city awards were all moved to the 2026-27 cycle. As of August 2, nothing on the site reads closed.',
       },
       {
         kind: 'listings',

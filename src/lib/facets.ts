@@ -126,7 +126,7 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     description:
       "Every scholarship a Medicine Hat high school student can apply for: Catholic board awards, Redcliff scholarships, county bursaries, service clubs and employers.",
     intro:
-      "A local award here might see a dozen applications in a good year, and they run from $500 health foundation and Catholic board awards up to the three Redcliff scholarships worth $6,000 each.",
+      "The three Redcliff scholarships, at up to $6,000 each, are the largest Medicine Hat awards, and the smallest are the $500 Chuck Love Memorial and Bow Island health foundation awards.",
     guide: 'scholarships-for-medicine-hat-students',
   },
   {
@@ -155,7 +155,7 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     description:
       "Scholarships for Calgary, Airdrie, Cochrane, Okotoks and Chestermere students: EducationMatters, Calgary Foundation, service club and school awards.",
     intro:
-      'Calgary-restricted awards run from a $314 scholarship up to an award worth $100,000 over four years, against a far smaller field than a national award.',
+      'Half of these close in May, most through the one EducationMatters application, and the largest is the $100,000 Investing in the Future Award, which closes March 31.',
   },
   {
     slug: 'red-deer',
@@ -169,7 +169,7 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     description:
       "Scholarships for Red Deer and central Alberta high school students: public and Catholic division awards, memorial funds, arts and community scholarships.",
     intro:
-      "Central Alberta awards are consistently under-applied, and the two largest here, the $10,000 Rising Futures and the $5,000 Bower memorial, both close in May.",
+      "Two in three of these close in May, among them the $10,000 Rising Futures Scholarship and the $5,000 William Arthur Bower Memorial.",
   },
   {
     slug: 'lethbridge',
@@ -183,7 +183,7 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     description:
       "Scholarships for Lethbridge and southern Alberta students: school division awards, county scholarships, Coaldale community money and arts awards.",
     intro:
-      "The county and division awards here have some of the thinnest applicant pools in the province, and the hospital volunteer award pays up to $4,000 to students heading into health care.",
+      "The largest is the Lethbridge East Rotary agricultural scholarship at $10,000, closing December 1, and the Chinook Regional Hospital volunteer award pays up to $4,000 toward health care study.",
   },
   {
     slug: 'grande-prairie',
@@ -278,7 +278,7 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     backdrop: 'national',
     title: 'National Scholarships for Canadian Students',
     description:
-      'The Canada-wide scholarships an Alberta student can enter, from the $100,000 Loran and Schulich awards down to essay contests that take an evening.',
+      'The Canada-wide scholarships an Alberta student can enter, from the $150,000 Loran and $100,000 Schulich awards to essay contests that take an evening.',
     intro:
       'The largest awards in Canada are here, and the first close this fall: Loran, worth about $150,000, closes October 15, and Schulich Leader and Ted Rogers each pay $100,000 or more.',
   },
@@ -320,7 +320,7 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     description:
       'Scholarships for Alberta students heading into the trades: RAP apprenticeship awards, Skills Canada scholarships, and industry-funded money.',
     intro:
-      'Scholarship advice here is written for university-bound students, so trades money goes under-applied, and several of these are for apprentices, including RAP students who start one in high school.',
+      'Several of these are for apprentices, including RAP students who start one in high school, and the largest is the Skills Canada Alberta Terry Cooke scholarship at up to $20,000.',
     guide: 'trades-scholarships-rap-alberta',
   },
   {
@@ -345,7 +345,7 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     description:
       'Science, technology, engineering, and math scholarships for Alberta high school students, including science fair and research-linked awards.',
     intro:
-      'Several of these are tied to something you do rather than something you write: a science fair placement, a competition result, or a research placement you can point at.',
+      'Schulich Leader and Ted Rogers each pay $100,000 or more and close December 1 and January 27, months before the local STEM awards that are due in May.',
   },
   {
     slug: 'community',
@@ -357,7 +357,7 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     description:
       'Alberta scholarships that reward volunteering, service, and community leadership, from local service club grants to national leadership awards.',
     intro:
-      'These reward sustained involvement rather than marks, and two years in one role with growing responsibility reads far better here than eight one-off activities.',
+      'These are judged on volunteering and leadership, and they include the $28,000 Terry Fox Humanitarian Award and dozens of local service club grants.',
     guide: 'local-scholarships-better-odds',
   },
   {
@@ -370,7 +370,7 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     description:
       'Scholarships for Alberta high school athletes, including junior athletic awards and scholarships that reward coaching and officiating.',
     intro:
-      'Canadian athletic awards are modest, merit-assessed, and open to athletes well outside the varsity tier, and coaching and officiating count on several of them.',
+      "The largest is the Edmonton Oilers Alumni's Al Hamilton award at up to $8,000, most pay $5,000 or less, and coaching and officiating count on several of them.",
   },
 ];
 
@@ -399,7 +399,7 @@ export const PROGRAM_FACETS: Facet[] = [
     description:
       'Computer science and computing programs, contests, and camps for Alberta high school students, from AI literacy to competitive programming.',
     intro:
-      'A mix of contests, summer camps, and structured programs, several of which feed directly into scholarship eligibility and cost nothing at all to enter.',
+      'Contests, hackathons, summer camps and year-long clubs, from the Beaver Computing Challenge to the Canadian Computing Competition.',
   },
   {
     slug: 'math-physics',
@@ -411,7 +411,7 @@ export const PROGRAM_FACETS: Facet[] = [
     description:
       'Math and physics competitions open to Alberta high school students, including Waterloo contests, olympiad qualifiers, and provincial exams.',
     intro:
-      'Most of these run through your school rather than around it, so the first step is asking a teacher whether yours is registered for the contest you want.',
+      'Most of these are written at school, from the Euclid contest to the CAP physics exam, so ask a teacher whether yours is registered for the one you want.',
   },
   {
     slug: 'social-sciences',
@@ -423,7 +423,7 @@ export const PROGRAM_FACETS: Facet[] = [
     description:
       'Model parliaments, debate, youth councils, and leadership programs for Alberta high school students. Several are free or fully funded.',
     intro:
-      'Debate, model parliament, youth councils, and civic programs are the activities scholarship committees are asking about when they ask about leadership, and a surprising number cover their own costs.',
+      'Debate, model parliament, youth councils and civic programs, from Model UN at the U of A and U of C to the Alberta Youth Parliament in the Legislature.',
   },
   {
     slug: 'health',
@@ -436,7 +436,7 @@ export const PROGRAM_FACETS: Facet[] = [
     description:
       'Health sciences programs, hospital volunteering, and medical discovery days for Alberta high school students considering a career in health.',
     intro:
-      'If you are considering medicine, nursing, or health sciences, these are the ways to find out before you commit a degree to it, and several involve real clinical settings rather than a classroom.',
+      'Hospital volunteering, Discovery Days on a medical campus and health science competitions, for students thinking about medicine, nursing or health sciences.',
   },
   {
     slug: 'engineering',
@@ -448,7 +448,7 @@ export const PROGRAM_FACETS: Facet[] = [
     description:
       'Engineering summer programs, design competitions, and faculty-run camps for Alberta high school students at U of A, U of C, and beyond.',
     intro:
-      'Faculty-run camps and design competitions, most of them at Alberta universities, and the simplest way to find out which discipline you like before applying to a five-year program.',
+      'Faculty-run camps and design competitions, most of them at Alberta universities, where you can try a discipline before you apply to one.',
   },
   {
     slug: 'trades',
@@ -506,7 +506,7 @@ export const PROGRAM_FORMATS: Facet[] = [
     description:
       'Summer camps, institutes and paid research placements open to Alberta high school students, from one-week campus camps to six-week labs.',
     intro:
-      'These run in July and August but close in February and March, so the summer you are planning for is the one you apply for in the winter before it.',
+      'These run in July and August, from one-week campus camps to six-week paid labs, and most of the ones with a posted deadline close between November and March.',
   },
   {
     slug: 'competitions',
@@ -519,7 +519,7 @@ export const PROGRAM_FORMATS: Facet[] = [
     description:
       'Team competitions for Alberta high school students: robotics, hackathons, cyber defence, innovation challenges and the Skills Canada trades events.',
     intro:
-      'These are built over a season rather than written in an afternoon, and most are entered as a school team that a teacher registers months before the event.',
+      'Robotics, hackathons and cyber defence, most of them entered as a school team that a teacher registers months before the event, and most run over a season.',
   },
   {
     slug: 'olympiads',
@@ -533,7 +533,7 @@ export const PROGRAM_FORMATS: Facet[] = [
     description:
       'Written contests and olympiad qualifiers Alberta students sit at their own school: Euclid, the CAP physics exam, and the biology and chemistry olympiads.',
     intro:
-      'Almost every one of these is written at your own school on a fixed date, which makes your teacher\'s registration the real deadline rather than the exam.',
+      'Almost every one of these is written at your own school on a fixed date, and your teacher has to register the school weeks before it.',
   },
   {
     slug: 'science-fairs',
@@ -559,7 +559,7 @@ export const PROGRAM_FORMATS: Facet[] = [
     description:
       'Year-round research and mentorship programs for Alberta high school students: one-to-one mentors, virtual cohorts and university placements.',
     intro:
-      'These run alongside school rather than instead of it, and what you finish with is a piece of work carrying your name rather than a certificate of attendance.',
+      "Mentorships, team experiments and student journals, from Youreka's ten-week teams to one-to-one work with a PhD mentor, and most end in a project or paper with your name on it.",
   },
   {
     slug: 'dual-credit',
@@ -585,7 +585,7 @@ export const PROGRAM_FORMATS: Facet[] = [
     description:
       'Clubs, councils, volunteering and self-paced programs Alberta students can join at any point in the year, from 4-H to youth councils and hospital shifts.',
     intro:
-      'Nothing here turns on a single application date, which makes these the easiest programs to start this week and the easiest to put off for a year.',
+      '4-H, youth councils, science centre and hospital volunteering, and self-paced programs, and none of them has a single application date, so you can join in any month.',
   },
   {
     slug: 'conferences',
@@ -598,7 +598,7 @@ export const PROGRAM_FORMATS: Facet[] = [
     description:
       'Short conferences, campus days and workshops for Alberta high school students: Forum for Young Canadians, Discovery Days and the regional summits.',
     intro:
-      'A few days each, several of them funded down to the flight, and the cheapest way to find out whether a field is worth four years before you commit them.',
+      'A few days each, on a campus, in Ottawa or overseas, and Youth Parliament of Canada and the Vimy Pilgrimage cover your travel and accommodation.',
   },
 ];
 

@@ -109,8 +109,8 @@ describe('initSaved', () => {
     expect($$('[data-sv-wrap]').filter(w => !w.hidden).map(w => w.dataset.id)).toEqual(['1', '7'])
     // The per-type split belongs to the section heads, not to this line too.
     expect($('[data-sv-count]').textContent).toBe('2 items saved. Your shortlist stays on this device.')
-    expect($('[data-sv-sh-label]').textContent).toBe('SCHOLARSHIPS · 1')
-    expect($('[data-sv-pr-label]').textContent).toBe('PROGRAMS · 1')
+    expect($('[data-sv-sh-label]').textContent).toBe('1')
+    expect($('[data-sv-pr-label]').textContent).toBe('1')
     expect($('[data-type=program] .sabl-blurb').textContent).toBe('Students in grades 10–12')
     expect($('[data-type=program] .sabl-card-top-left').textContent).toBe('Has a fee')
   })

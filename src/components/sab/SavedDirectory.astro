@@ -82,26 +82,25 @@ const openNow = initialScholarships.filter(s => {
 
   <div style="margin-top:48px" data-sv-list hidden>
     <section class="sabs-plan" aria-labelledby="sabs-plan-h" data-sv-plan hidden>
-      <h2 id="sabs-plan-h" class="sabs-section-head sabl-mono">
-        <span class="sabs-dot" style="background:#FFC700" aria-hidden="true"></span>
-        <span>YOUR PLAN</span>
+      <h2 id="sabs-plan-h" class="sabs-section-head">
+        <span class="sabl-group-label">YOUR PLAN</span>
       </h2>
       <p class="sabs-plan-lead" data-sv-plan-lead></p>
       <ul class="sabs-plan-needs" data-sv-plan-needs></ul>
       <p class="sabs-plan-note" data-sv-plan-note></p>
     </section>
     <div data-sv-sh-section hidden>
-      <h2 class="sabs-section-head sabl-mono">
-        <span class="sabs-dot" style="background:#2FD3A0" aria-hidden="true"></span>
-        <span data-sv-sh-label>SCHOLARSHIPS · 0</span>
+      <h2 class="sabs-section-head">
+        <span class="sabl-group-label">SCHOLARSHIPS</span>
+        <span class="sabl-group-count" data-sv-sh-label>0</span>
       </h2>
       <div class="sabl-grid" style="margin-bottom:56px;padding-top:0"></div>
     </div>
 
     <div data-sv-pr-section hidden>
-      <h2 class="sabs-section-head sabl-mono">
-        <span class="sabs-dot" style="background:#A0491A" aria-hidden="true"></span>
-        <span data-sv-pr-label>PROGRAMS · 0</span>
+      <h2 class="sabs-section-head">
+        <span class="sabl-group-label">PROGRAMS</span>
+        <span class="sabl-group-count" data-sv-pr-label>0</span>
       </h2>
       <div class="sabl-grid" style="padding-top:0"></div>
     </div>
@@ -116,3 +115,13 @@ const openNow = initialScholarships.filter(s => {
   import { initSaved } from '../../lib/saved-client.ts';
   initSaved();
 </script>
+
+<style is:global>
+  /* My combo's section headings take the directory's run heading (label face,
+     count sticker) instead of the small mono label with a coloured dot in
+     global.css, which read as a template eyebrow (2026-10-05). Kept here, not
+     in global.css: editing the shared stylesheet made the home page's
+     font-arrival test fail 6 runs in 8 under full-suite load, with no rule of
+     it applying there, and it passed every run with global.css unchanged. */
+  .sabs-section-head { gap: 14px; font-size: inherit; letter-spacing: normal; color: inherit; }
+</style>

@@ -224,7 +224,7 @@ export const guides: GuideMeta[] = [
     slug: 'scholarships-for-medicine-hat-students',
     title: 'Scholarships for Medicine Hat students',
     description:
-      'Six named awards only Medicine Hat Catholic graduates can win, the $1,000 Kin Canada Bursary, and the rest of the local pool in rough order of odds.',
+      'Six named awards only Medicine Hat Catholic graduates can win, the $1,000 Kin Canada Bursary, and the rest of the local awards, grouped by who gives them.',
     minutes: 6,
     datePublished: '2026-07-19',
     dateModified: '2026-09-29',
@@ -260,7 +260,7 @@ export const guides: GuideMeta[] = [
     slug: 'trades-scholarships-rap-alberta',
     title: 'Trades scholarships and RAP in Alberta',
     description:
-      'RAP students qualify for apprenticeship scholarships of $1,000 and $2,000 with tiny applicant pools. How RAP works in Alberta schools and how to get in.',
+      'RAP students qualify for $1,000 and $2,000 scholarships only registered apprentices can enter. How RAP works in Alberta schools and how to get in.',
     minutes: 6,
     datePublished: '2026-07-19',
     dateModified: '2026-09-29',
@@ -283,7 +283,7 @@ export const guides: GuideMeta[] = [
     slug: 'local-scholarships-better-odds',
     title: 'Local scholarships: smaller awards, much better odds',
     description:
-      'Three $1,000 awards cover a semester. Why local scholarships in towns like Medicine Hat and Lethbridge beat national awards on odds, and how to find them.',
+      'Three $1,000 awards cover a semester. Why local scholarships in towns like Medicine Hat and Lethbridge draw from far fewer students, and how to find them.',
     minutes: 5,
     datePublished: '2026-07-19',
     dateModified: '2026-08-22',

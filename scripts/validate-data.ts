@@ -726,6 +726,52 @@ if (fillerHits.length) {
   failed = true;
 }
 
+// -- No workshop talk or invented odds in what a student reads ---------------
+//
+// The 2026-10-05 second pass found the copy narrating its own checking ("which
+// this listing already had right", "last cycle's deadline rolled forward") and
+// claiming applicant pools nobody had counted ("consistently under-applied",
+// "almost nobody"). Each was rewritten as a fact or deleted. These phrases fail
+// the build like the filler adverbs: say what the student needs, or a number
+// the data backs.
+const WORKSHOP_PATTERN = /\b(?:rolled forward|carried forward|this listing (?:had|previously|already|understated|said)|previously listed here|Re-verified against|under-?applied|single digits|the real (?:gate|filter)|almost nobody|nobody is looking)\b|\bHeads up:/i;
+const workshopHits = sourceFiles(FILLER_ROOTS)
+  .filter((f) => /\.(?:astro|tsx?|json)$/.test(f.rel) && !FILLER_SKIP.test(f.rel))
+  .flatMap(({ rel, full }) => {
+    const text = readFileSync(full, 'utf-8');
+    return (rel.endsWith('.json') ? text : stripComments(text))
+      .split('\n')
+      .map((line, i) => ({ rel, line: i + 1, text: line }))
+      .filter((x) => WORKSHOP_PATTERN.test(x.text));
+  });
+if (workshopHits.length) {
+  console.error(
+    `validate-data: ${workshopHits.length} line(s) of workshop talk or unmeasured odds (rolled forward, under-applied, the real gate, almost nobody...); state the fact instead:\n  ${workshopHits
+      .map((h) => `${h.rel}:${h.line}`)
+      .join('\n  ')}`,
+  );
+  failed = true;
+}
+
+// A note that says the date is last year's while the listing is not marked
+// estimated tells the student one thing and the status line another: 17
+// listings did, one of them counted under Open now (2026-10-05).
+const unflaggedLastYear = scholarships.filter(
+  (s) =>
+    s.deadline &&
+    !s.deadlineEstimated &&
+    typeof s.notes === 'string' &&
+    /(?:date|dates|deadline) shown (?:is|are) last year's|date here (?:is last year's|repeats)/.test(s.notes),
+);
+if (unflaggedLastYear.length) {
+  console.error(
+    `validate-data: ${unflaggedLastYear.length} scholarship(s) say the date is last year's but lack deadlineEstimated: true: ${unflaggedLastYear
+      .map((s) => s.id)
+      .join(', ')}`,
+  );
+  failed = true;
+}
+
 // Legal rule: gender eligibility is 'female' or nothing, and no gender-identity
 // or sexual-orientation wording may appear in site copy or data. Nothing checked
 // the text until 2026-09-13, when a crawler report surfaced five live mentions in
