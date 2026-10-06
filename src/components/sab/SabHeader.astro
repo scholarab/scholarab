@@ -739,9 +739,14 @@ const isActive = (href: string, also: string[] = []) =>
   // animates the height, so the background itself never closes.
   const DROP_BASE = 400; // .sabh-drop's CSS height
   function syncDrop() {
+    const panel = header?.querySelector<HTMLElement>('.sabh-has-menu[data-menu-open] .sabh-menu') ?? null;
+    // What the home page dims and darkens under an open menu keys off this
+    // attribute. An `html:has([data-menu-open])` rule did the same, but
+    // Firefox then restyled the whole page on every pointer move over the
+    // open list, and the film and the page stalled (2026-10-06).
+    document.documentElement.toggleAttribute('data-sab-menu', !!panel);
     const drop = header?.querySelector<HTMLElement>('.sabh-drop');
     if (!drop) return;
-    const panel = header!.querySelector<HTMLElement>('.sabh-has-menu[data-menu-open] .sabh-menu');
     if (!panel) {
       drop.removeAttribute('data-on');
       return;
@@ -886,6 +891,7 @@ const isActive = (href: string, also: string[] = []) =>
   // Never leave the scroll lock behind on a client-side navigation.
   document.addEventListener('astro:before-swap', () => {
     document.documentElement.style.overflow = '';
+    document.documentElement.removeAttribute('data-sab-menu');
   });
 
   // ── Sticky header collapse ───────────────────────────────────────────────

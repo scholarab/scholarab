@@ -866,14 +866,15 @@ const carousels = [
       height: 330px; opacity: 0;
       background: linear-gradient(180deg, rgba(0, 0, 0, 0.88) 0, rgba(0, 0, 0, 0.72) 40%, rgba(0, 0, 0, 0) 100%);
     }
-    .sab-hero-band:has(.sabh-has-menu[data-menu-open])::after { opacity: 1; }
+    /* data-sab-menu is set by the header script, never by :has(): see syncDrop. */
+    html[data-sab-menu] .sab-hero-band::after { opacity: 1; }
     /* On a short window the open list lands on the headline, which is
        centred in the fold; it fades back while a menu is open so the list
        reads on its own. */
     /* On the lines, not the h1: its entrance animation holds the h1's own
        opacity at 1. */
     #sab-home .sab-hero .sab-h1-l { transition: opacity 0.25s ease; }
-    html:has(.sab-hero-band .sabh-has-menu[data-menu-open]) #sab-home .sab-hero .sab-h1-l { opacity: 0.18; }
+    html[data-sab-menu] #sab-home .sab-hero .sab-h1-l { opacity: 0.18; }
     /* The bar slides up out of view on the way down; its smoke goes with it. */
     html[data-sab-hidden] .sab-hero-band::before,
     html[data-sab-hidden] .sab-hero-band::after { opacity: 0; }
