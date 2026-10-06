@@ -460,10 +460,13 @@ const isActive = (href: string, also: string[] = []) =>
   @media (prefers-reduced-motion: reduce) {
     .sabh-menu { transform: none; transition: none; }
   }
+  /* The bar's links change colour on hover at once, never with a fade. Over
+     the home film every faded frame is a repaint, and moving across an open
+     menu in Firefox started a fade per row: 359 frames over 33ms in eight
+     passes, 56 without the fades (2026-10-06). */
   .sabh-link {
     font-size: var(--fs-ui); font-weight: 500; letter-spacing: 0.005em; color: rgba(238, 241, 236, 0.7);
     text-decoration: none; padding: 8px 15px; border-radius: var(--radius);
-    transition: color 0.15s ease, background-color 0.15s ease;
   }
   /* A soft pill on hover, as on tesla.com: the target is visible before the
      click without an underline or a colour accent. */
@@ -498,7 +501,6 @@ const isActive = (href: string, also: string[] = []) =>
     display: inline-flex; align-items: center; gap: 8px; height: 36px; padding: 0 10px 0 6px;
     border: 0; border-radius: var(--radius); background: transparent; cursor: pointer; white-space: nowrap;
     font-family: var(--font-body); font-size: 14px; font-weight: 600; color: rgba(238, 241, 236, 0.78);
-    transition: color 0.15s ease, background-color 0.15s ease;
   }
   .sabh-how:hover { color: #EEF1EC; background: rgba(238, 241, 236,0.08); }
   .sabh-how-i {
@@ -519,7 +521,6 @@ const isActive = (href: string, also: string[] = []) =>
   .sabh-social :global(a) {
     display: inline-flex; align-items: center; justify-content: center;
     width: 36px; height: 36px; border-radius: var(--radius); color: rgba(238, 241, 236, 0.7);
-    transition: color 0.15s ease, background-color 0.15s ease;
   }
   .sabh-social :global(a:hover) { color: #EEF1EC; background: rgba(238, 241, 236,0.08); }
   .sabh-social :global(svg) { width: 18px; height: 18px; display: block; }
@@ -663,7 +664,6 @@ const isActive = (href: string, also: string[] = []) =>
     .sabh-menu-desk a {
       display: block; padding: 3px 0; line-height: 20px; white-space: nowrap; text-decoration: none;
       font-size: 14px; font-weight: 500; color: rgba(238, 241, 236, 0.78);
-      transition: color 0.15s ease;
     }
     .sabh-menu-desk a:hover { color: #EEF1EC; }
   }
