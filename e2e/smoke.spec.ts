@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 test('homepage loads with hero content', async ({ page }) => {
   await page.goto('/');
   await expect(page).toHaveTitle(/ScholarAB/);
-  await expect(page.getByRole('heading', { level: 1, name: /easier to find for Alberta students/i })).toBeVisible();
+  await expect(page.getByRole('heading', { level: 1, name: /Scholarships for Alberta high school students/i })).toBeVisible();
   await expect(page.getByRole('link', { name: /Browse [\d,]+ scholarships/i })).toBeVisible();
 });
 

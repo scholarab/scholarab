@@ -14,8 +14,6 @@ export type GuideMeta = {
   title: string
   /** One-line summary used for meta description, cards, and JSON-LD. */
   description: string
-  /** Mono kicker label shown above the title. */
-  kicker: string
   minutes: number
   datePublished: string
   dateModified: string
@@ -49,7 +47,6 @@ export const guides: GuideMeta[] = [
     title: 'Research programs for Alberta students: who pays',
     description:
       'Which Alberta research programs pay, what marks they ask for, and the geography rule that decides which HYRS campus you apply to. Deadlines run March.',
-    kicker: 'GET INTO A LAB',
     minutes: 8,
     datePublished: '2026-08-23',
     dateModified: '2026-09-29',
@@ -70,8 +67,7 @@ export const guides: GuideMeta[] = [
     // research guide already owns.
     title: 'How to get medical experience in high school',
     description:
-      'Where an Alberta student can actually get clinical exposure: AHS volunteering from 15, Discovery Days, HOSA chapters, and the biology competitions.',
-    kicker: 'BEFORE MED SCHOOL',
+      'AHS takes volunteers from age 15. Where else an Alberta student can get clinical exposure: Discovery Days, HOSA chapters and the biology competitions.',
     minutes: 7,
     datePublished: '2026-08-23',
     dateModified: '2026-09-29',
@@ -91,8 +87,7 @@ export const guides: GuideMeta[] = [
     // the guide is organised by who does the registering rather than by topic.
     title: 'Computing contests and camps in Alberta',
     description:
-      'Coding contests, hackathons and camps open to Alberta high school students, nearly all free, and the ones only a teacher can register you for.',
-    kicker: 'BUILD SOMETHING',
+      'Nearly all free. Coding contests, hackathons and camps open to Alberta high school students, and which ones only a teacher can register you for.',
     minutes: 8,
     datePublished: '2026-08-23',
     dateModified: '2026-09-29',
@@ -133,7 +128,6 @@ export const guides: GuideMeta[] = [
     title: 'Alexander Rutherford Scholarship: amounts and how to apply',
     description:
       'Applications open August 1 with no closing deadline. What each grade pays (up to $2,500 total), the 75% five-course average you need, and how to apply.',
-    kicker: 'THE BIG ONE',
     minutes: 9,
     datePublished: '2026-07-19',
     dateModified: '2026-09-29',
@@ -150,7 +144,6 @@ export const guides: GuideMeta[] = [
     title: 'Volunteering for Alberta high school students',
     description:
       'Hospital placements through AHS, science centre shifts, youth councils, and the awards that pay for a volunteer record. What is open right now.',
-    kicker: 'SERVICE',
     minutes: 6,
     datePublished: '2026-09-01',
     dateModified: '2026-09-29',
@@ -170,7 +163,6 @@ export const guides: GuideMeta[] = [
     title: 'Chemistry competitions in Canada: the CCC and CCO ladder',
     description:
       'One entry point, one date. How the Canadian Chemistry Contest feeds the Olympiad, why there is no junior division, and when a teacher has to sign you up.',
-    kicker: 'COMPETITIONS',
     minutes: 6,
     datePublished: '2026-09-01',
     dateModified: '2026-09-29',
@@ -186,8 +178,7 @@ export const guides: GuideMeta[] = [
     // pairing every big award with a guide: nobody re-checks a listing.
     title: 'Loran Award: what it pays and how to apply',
     description:
-      'Applications open September 9 and close October 15 at noon ET. What the award actually pays, the 88% average bar, and the $6,000 finalists get.',
-    kicker: 'NATIONAL',
+      'Applications open September 9 and close October 15 at noon ET. What the award pays, the 88% average bar, and the $6,000 finalists get.',
     minutes: 7,
     datePublished: '2026-09-01',
     dateModified: '2026-09-29',
@@ -197,8 +188,7 @@ export const guides: GuideMeta[] = [
     slug: 'scholarships-for-grade-12-students-alberta',
     title: 'Grade 12 scholarship timeline for Alberta students',
     description:
-      'A month-by-month plan for Grade 12 students in Alberta: which scholarships open when, from Loran in the fall to local awards in the spring.',
-    kicker: 'SENIOR YEAR',
+      'Loran closes October 15; most local awards close April to June. A month-by-month plan for Alberta Grade 12 students.',
     minutes: 9,
     datePublished: '2026-07-19',
     dateModified: '2026-09-29',
@@ -207,8 +197,7 @@ export const guides: GuideMeta[] = [
     slug: 'how-to-write-a-scholarship-essay',
     title: 'How to write a scholarship essay that gets read',
     description:
-      'A practical structure for scholarship essays, what selection committees actually look for, and the mistakes that get applications skipped.',
-    kicker: 'WRITING',
+      'A 500-word scholarship essay is about four short sittings. How to structure it, what the committee is deciding, and what gets an essay skipped.',
     minutes: 10,
     datePublished: '2026-07-19',
     dateModified: '2026-09-29',
@@ -217,8 +206,7 @@ export const guides: GuideMeta[] = [
     slug: 'grade-11-scholarship-timeline',
     title: 'Why Grade 11 is the best time to start on scholarships',
     description:
-      'What Alberta students can do in Grade 11 to set up their scholarship applications: marks that count, activities that matter, and a simple prep list.',
-    kicker: 'START EARLY',
+      'Rutherford pays up to $800 for your Grade 11 marks alone. What else to set up in Grade 11, before scholarship season starts.',
     minutes: 5,
     datePublished: '2026-07-19',
     dateModified: '2026-09-29',
@@ -227,8 +215,7 @@ export const guides: GuideMeta[] = [
     slug: 'reference-letters-for-scholarships',
     title: 'How to ask for a scholarship reference letter',
     description:
-      'Who to ask for a reference letter, when to ask, and exactly what to give your teacher or counsellor so the letter is strong and on time.',
-    kicker: 'REFERENCES',
+      'Ask at least three weeks before the deadline. Who to ask for a scholarship reference letter, and what to hand them so it is strong and on time.',
     minutes: 5,
     datePublished: '2026-07-19',
     dateModified: '2026-09-29',
@@ -237,8 +224,7 @@ export const guides: GuideMeta[] = [
     slug: 'scholarships-for-medicine-hat-students',
     title: 'Scholarships for Medicine Hat students',
     description:
-      'Every scholarship pool a Medicine Hat student can draw from: local service clubs, city and county awards, school funds, and how to work through them.',
-    kicker: 'MEDICINE HAT',
+      'Six named awards only Medicine Hat Catholic graduates can win, the $1,000 Kin Canada Bursary, and the rest of the local pool in rough order of odds.',
     minutes: 6,
     datePublished: '2026-07-19',
     dateModified: '2026-09-29',
@@ -256,8 +242,7 @@ export const guides: GuideMeta[] = [
     slug: 'scholarships-for-red-deer-students',
     title: 'Scholarships for Red Deer students',
     description:
-      'Every scholarship pool a Red Deer student can draw from: single-school awards, the two your counsellor hands out, the Community Foundation, and the co-op.',
-    kicker: 'RED DEER',
+      'The two biggest Red Deer awards, Bower and Rotary, go through your counsellor. Every other local pool, from the Community Foundation to the co-op.',
     minutes: 6,
     datePublished: '2026-09-03',
     dateModified: '2026-09-29',
@@ -266,8 +251,7 @@ export const guides: GuideMeta[] = [
     slug: 'scholarships-for-lethbridge-students',
     title: 'Scholarships for Lethbridge students',
     description:
-      'Every scholarship pool a Lethbridge student can draw from: the ULethbridge award calendar, one Polytechnic form worth 400 awards, and the county funds.',
-    kicker: 'LETHBRIDGE',
+      'One Lethbridge Polytechnic form reaches 400 awards. The ULethbridge award calendar, the county funds, and the rest of the local pool.',
     minutes: 6,
     datePublished: '2026-09-03',
     dateModified: '2026-09-29',
@@ -276,8 +260,7 @@ export const guides: GuideMeta[] = [
     slug: 'trades-scholarships-rap-alberta',
     title: 'Trades scholarships and RAP in Alberta',
     description:
-      'How the Registered Apprenticeship Program works in Alberta schools, the scholarships attached to it, and the money nobody else applies for.',
-    kicker: 'TRADES',
+      'RAP students qualify for apprenticeship scholarships of $1,000 and $2,000 with tiny applicant pools. How RAP works in Alberta schools and how to get in.',
     minutes: 6,
     datePublished: '2026-07-19',
     dateModified: '2026-09-29',
@@ -292,7 +275,6 @@ export const guides: GuideMeta[] = [
     title: 'Nine dead scholarships still on Alberta counsellor lists',
     description:
       'We checked a national-awards list used by Alberta schools against each provider\'s own site. Nine awards no longer exist, and one charity folded in 2024.',
-    kicker: 'ORIGINAL RESEARCH',
     minutes: 7,
     datePublished: '2026-09-08',
     dateModified: '2026-09-29',
@@ -301,8 +283,7 @@ export const guides: GuideMeta[] = [
     slug: 'local-scholarships-better-odds',
     title: 'Local scholarships: smaller awards, much better odds',
     description:
-      'Why community scholarships in places like Medicine Hat and Lethbridge are easier to win than national awards, and where to find them.',
-    kicker: 'STRATEGY',
+      'Three $1,000 awards cover a semester. Why local scholarships in towns like Medicine Hat and Lethbridge beat national awards on odds, and how to find them.',
     minutes: 5,
     datePublished: '2026-07-19',
     dateModified: '2026-08-22',
@@ -319,7 +300,6 @@ export const guides: GuideMeta[] = [
     title: 'Alberta scholarship deadlines, month by month',
     description:
       `When Alberta scholarships close: a year of ${DL.total} dated deadlines by month, why May carries ${DL.byMonth[4]} of them, and the single dates that hide dozens of awards.`,
-    kicker: 'THE CALENDAR',
     minutes: 7,
     datePublished: '2026-09-07',
     dateModified: '2026-09-29',

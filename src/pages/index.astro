@@ -120,7 +120,8 @@ const scopeCards: PhotoCard[] = SCHOLARSHIP_FACETS
     return {
       label: f.label,
       backdrop: f.backdrop!,
-      kicker: SCOPE_KICKERS[f.slug] ?? `${f.label} students`,
+      // Only where it adds something: "Calgary area students" over "Calgary area" said it twice.
+      kicker: SCOPE_KICKERS[f.slug] ?? '',
       href,
       count: items.length,
       // After-high-school awards sit in their own run on the hub, so its OPEN
@@ -274,12 +275,12 @@ const carousels = [
       <div class="sab-container sab-hero-body">
         <p class="sab-byline">Built by a high school student from Medicine Hat<span class="sab-kicker-sep" aria-hidden="true">·</span><a href="/about/" class="sab-kicker-link">Read the story</a></p>
 
-        <h1 class="sab-h1"><span class="sab-h1-l sab-h1-l1">Making scholarships and programs</span> <span class="sab-h1-l sab-h1-l2">easier to find for Alberta students</span></h1>
+        <h1 class="sab-h1"><span class="sab-h1-l sab-h1-l1">Scholarships for Alberta</span> <span class="sab-h1-l sab-h1-l2">high school students</span></h1>
 
         <div class="sab-hero-bottom">
           <div class="sab-hero-copy">
             <p>
-              <span class="sab-hero-p-l1">ScholarAB tracks scholarships and programs for Alberta high school students.</span>
+              <span class="sab-hero-p-l1">Every listing is written from the provider's own page. Free, no ads, no account.</span>
             </p>
             {/* The home page had no search (critique 2026-09-24); the directory
                 reads ?q= the same way the 404 page's search uses it. */}
@@ -398,7 +399,7 @@ const carousels = [
                 </Fragment>
               )}
               <div class="sab-scope-body">
-                <div class="sab-scope-kicker">{c.kicker}</div>
+                {c.kicker && <div class="sab-scope-kicker">{c.kicker}</div>}
                 <div class="sab-scope-bottom">
                   <h3 class="sab-scope-name">{c.label}</h3>
                   {c.open > 0 && c.openHref
@@ -766,15 +767,11 @@ const carousels = [
   // screen and pauses when it leaves, so at most the one or two panels in
   // view are decoding. Nothing is fetched until a panel comes within a screen
   // of the window. The same gates as the hero film: reduced motion, Save-Data
-  // and 2G keep the still. The words rise in as a panel arrives.
+  // and 2G keep the still.
   function initPanels() {
     const panels = [...document.querySelectorAll<HTMLElement>('[data-panel]')].filter(p => !p.dataset.init);
     if (!panels.length) return;
     panels.forEach(p => { p.dataset.init = '1'; });
-    const reveal = new IntersectionObserver(entries => {
-      for (const e of entries) if (e.isIntersecting) { e.target.classList.add('is-in'); reveal.unobserve(e.target); }
-    }, { rootMargin: '0px 0px -15% 0px' });
-    panels.forEach(p => reveal.observe(p));
 
     const conn = (navigator as Navigator & { connection?: { saveData?: boolean; effectiveType?: string } }).connection;
     if (matchMedia('(prefers-reduced-motion: reduce)').matches || conn?.saveData || /2g/.test(conn?.effectiveType ?? '')) return;
@@ -895,8 +892,6 @@ const carousels = [
      either side (Ilia, 2026-09-18). */
   .sab-container { width: 100%; box-sizing: border-box; padding-left: clamp(20px, 4vw, 56px); padding-right: clamp(20px, 4vw, 56px); }
 
-  @keyframes sab-rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
-  @keyframes sab-pop { 0% { transform: scale(0.94); } 60% { transform: scale(1.05); } 100% { transform: scale(1); } }
 
   /* ── Dark hero ── */
   /* Fills the first viewport so no canvas sliver peeks below the fold on
@@ -985,15 +980,13 @@ const carousels = [
      Line height 1.1 leaves 0.08em between descenders and the ascenders
      below. Tracking 0 is the face's designed spacing, the word space trims
      0.03em because a condensed face's default space reads as a gap, and each
-     line is pulled left by its first letter's side-bearing (M 0.043em, e
-     0.0355em) so both stems sit exactly on the kicker's and paragraph's
+     line is pulled left by its first letter's side-bearing (S, h) so both stems sit exactly on the kicker's and paragraph's
      edge. */
   .sab-hero-body { container-type: inline-size; }
   .sab-h1 {
     font-family: var(--font-display); font-weight: 400;
-    font-size: min(168px, calc(100cqi / 13)); line-height: 1.1; letter-spacing: 0; word-spacing: -0.03em;
+    font-size: min(168px, calc(100cqi / 10)); line-height: 1.1; letter-spacing: 0; word-spacing: -0.03em;
     margin: 0;
-    animation: sab-rise 0.7s ease both;
   }
   .sab-h1-l { display: block; white-space: nowrap; }
   .sab-h1-l1 { margin-left: -0.043em; }
@@ -1159,6 +1152,7 @@ const carousels = [
   }
   /* The kicker measured 3.3 to 4.5 over the brighter skies (critique
      2026-09-23) on a 55% fade; the fade is 80% there now, plus a shadow. */
+  .sab-scope-bottom { margin-top: auto; }
   .sab-scope-kicker { font-size: 19px; font-weight: 600; letter-spacing: -0.005em; text-shadow: 0 1px 2px rgba(5,10,8,0.6), 0 0 12px rgba(5,10,8,0.5); }
   .sab-scopes-pair { position: relative; }
   html.js .sab-scopes[data-off] { display: none; }
@@ -1357,20 +1351,6 @@ const carousels = [
   @media (hover: hover) {
     .sab-panel .sab-closing-row:hover { background: rgba(47, 211, 160, 0.16); }
     .sab-panel .sab-type-row:hover { background: rgba(47, 211, 160, 0.12); }
-  }
-  /* The words rise in as their panel arrives. Scripts only, so a page
-     without them never hides its content. */
-  @media (prefers-reduced-motion: no-preference) {
-    html.js .sab-panel > .sab-container { opacity: 0; transform: translateY(32px); transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1); }
-    html.js .sab-panel.is-in > .sab-container { opacity: 1; transform: none; }
-  }
-  @media print {
-    html.js .sab-panel > .sab-container { opacity: 1; transform: none; }
-  }
-
-  /* ── Motion safety ── */
-  @media (prefers-reduced-motion: reduce) {
-    .sab-h1 { animation: none; }
   }
 
   /* ── Responsive (the design specifies ≥1080px; below is adapted) ── */

@@ -6,7 +6,7 @@ import { STATUS_WORDS, canApplyNow } from '../../lib/status.ts';
 import SabStatusHelp from './SabStatusHelp.astro';
 import { showingLine, DEFAULT_SCHOLARSHIP_STATE, DIRECTORY_PAGE_SIZE, SCHOLARSHIP_GROUP_LABELS, SCHOLARSHIP_SHUT_GROUPS, directoryCountLine, openNowCount, filterSortScholarships, getScholarshipStatus, amountCell, groupRuns, isAfterHighSchool, rowAction, scholarshipGroupKey, scholarshipWhen } from '../../lib/list-core.ts';
 import type { ScholarshipFilterState, ScholarshipWithMeta } from '../../lib/list-core.ts';
-import { generateSlug, formatVerifiedMonth, isCheckStale } from '../../lib/utils.ts';
+import { generateSlug, formatVerifiedMonth, isCheckStale, checkedSince } from '../../lib/utils.ts';
 import { scholarshipSearchBlob } from '../../lib/search-text.ts';
 import { SCHOLARSHIP_FACETS, MIN_FACET_ITEMS, facetItems, facetMatches } from '../../lib/facets.ts';
 import { saysNoApplication, rowRoute, routeTag } from '../../lib/apply-method.ts';
@@ -63,10 +63,13 @@ interface Props {
   /** City hubs: the city's photo on the board, desktop only. */
   photo?: { backdrop: string; credit?: PhotoCredit };
 }
+// The default standfirst says what a reader cannot see on any row: that the
+// listings are checked, and how recently.
+const checked = checkedSince(Astro.props.items.map(s => s.lastVerified));
 const {
   items,
   h1 = 'All scholarships',
-  intro = 'Scholarships for Alberta students. Check eligibility and deadlines.',
+  intro = `Every listing links to its provider; ${checked.count.toLocaleString('en-CA')} of ${Astro.props.items.length.toLocaleString('en-CA')} checked since ${checked.month}.`,
   allItems = items,
   hideCategories = false,
   hideScopes = false,

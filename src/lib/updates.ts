@@ -379,7 +379,7 @@ export const months: UpdateMonth[] = [
       },
       {
         kind: 'new',
-        text: 'A real 404 page. A mistyped address used to quietly serve the home page instead.',
+        text: 'A real 404 page. A mistyped address used to serve the home page instead.',
       },
       {
         kind: 'better',
@@ -473,7 +473,7 @@ export const months: UpdateMonth[] = [
       },
       {
         kind: 'listings',
-        text: 'All 86 program pages were read end to end. Programs that pointed at a provider home page now point at the page that actually describes them, and the verified stamp on 45 of them was re-checked by hand.',
+        text: 'All 86 program pages were read end to end. Programs that pointed at a provider home page now point at the page that describes them, and the verified stamp on 45 of them was re-checked by hand.',
       },
       {
         kind: 'listings',
@@ -521,7 +521,7 @@ export const months: UpdateMonth[] = [
       },
       {
         kind: 'better',
-        text: '112 scholarship pages had been quietly hidden from Google. They are indexable again, and the sitemap no longer lists pages it tells Google to skip.',
+        text: '112 scholarship pages had been hidden from Google by mistake. They are indexable again, and the sitemap no longer lists pages it tells Google to skip.',
       },
       {
         kind: 'better',
@@ -569,7 +569,7 @@ export const months: UpdateMonth[] = [
       },
       {
         kind: 'under-hood',
-        text: 'Changed pages are announced to search engines within minutes of a deploy, and a weekly check now reports which pages are actually indexed rather than assuming.',
+        text: 'Changed pages are announced to search engines within minutes of a deploy, and a weekly check now reports which pages are indexed.',
       },
     ],
   },
@@ -662,7 +662,7 @@ export const months: UpdateMonth[] = [
       },
       {
         kind: 'new',
-        text: 'Three new guides: the Loran Award, chemistry competitions across Canada, and how volunteering hours actually work in Alberta high schools.',
+        text: 'Three new guides: the Loran Award, chemistry competitions across Canada, and how volunteering hours work in Alberta high schools.',
       },
       {
         kind: 'new',
@@ -674,7 +674,7 @@ export const months: UpdateMonth[] = [
       },
       {
         kind: 'better',
-        text: 'Matches are ranked on what actually separates one award from another, not on how much detail a listing happens to carry.',
+        text: 'Matches are ranked on what separates one award from another, not on how much detail a listing carries.',
       },
       {
         kind: 'better',

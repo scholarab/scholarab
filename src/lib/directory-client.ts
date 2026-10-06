@@ -4,7 +4,6 @@
 import { sendEvent } from './events.ts';
 import { normalizeSearchQuery, tokenIndexMayMatch, correctQuery, searchTokens, searchRows } from './search-text.ts';
 import { writeListContext } from './list-context.ts';
-import { showConfetti } from './utils.ts';
 import { DIRECTORY_PAGE_SIZE, showingLine } from './list-core.ts';
 
 export interface DirectoryItem {
@@ -544,7 +543,7 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
       setSaveState(save, nowSaved);
       // Only the save counts, not the un-save: the metric is "people who
       // shortlisted this", and sendEvent dedupes it per item per tab session.
-      if (nowSaved) { showConfetti(save); sendEvent('save', config.itemType, id, 'row'); }
+      if (nowSaved) sendEvent('save', config.itemType, id, 'row');
       return;
     }
 

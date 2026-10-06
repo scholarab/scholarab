@@ -3,7 +3,6 @@ import { initDirectory } from './directory-client'
 import type { DirectoryItem } from './directory-client'
 
 vi.mock('./events.ts', () => ({ sendEvent: vi.fn() }))
-vi.mock('./utils.ts', () => ({ showConfetti: vi.fn() }))
 
 // The "Show more" step, at a page size of 2 so five cards cover every case:
 // a first step, a partial last step, a filter that fits in one step.

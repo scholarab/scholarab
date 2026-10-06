@@ -692,6 +692,40 @@ if (emDashHits.length) {
   failed = true;
 }
 
+// -- No filler adverbs in what a student reads ---------------------------------
+//
+// "actually", "genuinely", "quietly" and "honestly" were the commonest tells
+// that a page had been written by a model (2026-10-05: 32 in 18 guides, 25 in
+// listing text). Deleting the word never lost a meaning, so they are kept out
+// the same way as the em dash. Comments are stripped first: code comments are
+// not read by students. Admin and API code is not student copy.
+const FILLER_PATTERN = /\b(?:actually|genuinely|quietly|honestly)\b/i;
+const FILLER_ROOTS = ['src/pages', 'src/components', 'src/layouts', 'src/lib', 'src/data'];
+const FILLER_SKIP = /(?:^|\/)(?:admin|api)\/|\.test\.|\/tests\/|src\/lib\/search-text\.ts$|src\/data\/(?!scholarships\.json$|research-programs\.json$)/;
+function stripComments(text: string): string {
+  return text
+    .replace(/\/\*[\s\S]*?\*\//g, (m) => m.replace(/[^\n]/g, ''))
+    .replace(/<!--[\s\S]*?-->/g, (m) => m.replace(/[^\n]/g, ''))
+    .replace(/(^|[^:'"`\\])\/\/.*$/gm, '$1');
+}
+const fillerHits = sourceFiles(FILLER_ROOTS)
+  .filter((f) => /\.(?:astro|tsx?|json)$/.test(f.rel) && !FILLER_SKIP.test(f.rel))
+  .flatMap(({ rel, full }) => {
+    const text = readFileSync(full, 'utf-8');
+    return (rel.endsWith('.json') ? text : stripComments(text))
+      .split('\n')
+      .map((line, i) => ({ rel, line: i + 1, text: line }))
+      .filter((x) => FILLER_PATTERN.test(x.text));
+  });
+if (fillerHits.length) {
+  console.error(
+    `validate-data: ${fillerHits.length} filler adverb(s) (actually, genuinely, quietly, honestly); delete the word:\n  ${fillerHits
+      .map((h) => `${h.rel}:${h.line}`)
+      .join('\n  ')}`,
+  );
+  failed = true;
+}
+
 // Legal rule: gender eligibility is 'female' or nothing, and no gender-identity
 // or sexual-orientation wording may appear in site copy or data. Nothing checked
 // the text until 2026-09-13, when a crawler report surfaced five live mentions in

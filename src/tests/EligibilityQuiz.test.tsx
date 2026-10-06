@@ -21,14 +21,13 @@ import { albertaDate } from '../lib/calendar'
 // ── Mocks ─────────────────────────────────────────────────────────────────────
 
 const {
-  mockMatchAll, mockGetSaved, mockToggleSaved, mockShowConfetti,
+  mockMatchAll, mockGetSaved, mockToggleSaved,
   mockGetSavedPrograms, mockToggleSavedProgram, mockMatchPrograms, mockSendEvent,
 } = vi.hoisted(() => ({
   mockSendEvent: vi.fn(),
   mockMatchAll:     vi.fn(() => [] as ReturnType<typeof matchAll>),
   mockGetSaved:     vi.fn(() => [] as number[]),
   mockToggleSaved:  vi.fn(),
-  mockShowConfetti: vi.fn(),
   mockGetSavedPrograms:   vi.fn(() => [] as number[]),
   mockToggleSavedProgram: vi.fn(),
   mockMatchPrograms:      vi.fn(() => [] as Array<Record<string, unknown>>),
@@ -53,7 +52,6 @@ vi.mock('../lib/tracker.ts',          () => ({
 }))
 vi.mock('../lib/utils.ts',            async (importOriginal) => ({
   ...(await importOriginal<typeof import('../lib/utils')>()),
-  showConfetti: mockShowConfetti,
   generateSlug: (s: string) => s.toLowerCase().replace(/\s+/g, '-'),
 }))
 
@@ -657,7 +655,7 @@ describe('Results', () => {
     expect(actions.map(a => a.target)).toEqual(['_blank', '_blank', '', ''])
   })
 
-  it('saving keeps the save event and state without decorative confetti', () => {
+  it('saving keeps the save event and state', () => {
     const s1 = makeScholarship({ id: 1 })
     mockMatchAll.mockReturnValue([{ id: 1, tier: 'strong' as ConfidenceTier, confidence: 0.9, signals: [], checks: [] }])
     mockGetSaved.mockReturnValueOnce([]).mockReturnValue([1])
@@ -666,7 +664,6 @@ describe('Results', () => {
     fireEvent.click(screen.getByRole('button', { name: /^save: scholarship 1$/i }))
     expect(mockToggleSaved).toHaveBeenCalledWith(1)
     expect(mockSendEvent).toHaveBeenCalledWith('save', 'scholarship', 1, 'quiz')
-    expect(mockShowConfetti).not.toHaveBeenCalled()
     expect(screen.getByRole('button', { name: /^Remove from saved: scholarship 1$/i }).getAttribute('aria-pressed')).toBe('true')
   })
 

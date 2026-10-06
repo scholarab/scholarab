@@ -3,11 +3,9 @@ import { initDirectory } from './directory-client'
 import type { DirectoryItem } from './directory-client'
 
 vi.mock('./events.ts', () => ({ sendEvent: vi.fn() }))
-vi.mock('./utils.ts', () => ({ showConfetti: vi.fn() }))
 
 import { readListContext } from './list-context.ts'
 import { sendEvent } from './events.ts'
-import { showConfetti } from './utils.ts'
 
 // Minimal fixture mirroring the data-* contract the directory components emit.
 type Item = DirectoryItem & { category: string | null; paid: boolean }
@@ -262,7 +260,7 @@ describe('initDirectory', () => {
     expect(readListContext()!.filtered).toBe(false)
   })
 
-  it('save button toggles state, label, and fires confetti only on save', () => {
+  it('save button toggles state and label, and counts only the save', () => {
     setup()
     const btn = $$('[data-dir-save]')[0]!
     click(btn)
@@ -270,14 +268,12 @@ describe('initDirectory', () => {
     expect(btn.textContent).toBe('★')
     expect(btn.getAttribute('aria-pressed')).toBe('true')
     expect(btn.getAttribute('aria-label')).toBe('Remove Alpha Camp from saved')
-    expect(showConfetti).toHaveBeenCalledTimes(1)
     expect(sendEvent).toHaveBeenCalledWith('save', 'scholarship', 2, 'row')
 
     click(btn)
     expect(btn.classList.contains('on')).toBe(false)
     expect(btn.textContent).toBe('☆')
     expect(btn.getAttribute('aria-label')).toBe('Save Alpha Camp')
-    expect(showConfetti).toHaveBeenCalledTimes(1)
     // Un-saving is not an event: the metric counts people who shortlisted it
     expect(sendEvent).toHaveBeenCalledTimes(1)
   })

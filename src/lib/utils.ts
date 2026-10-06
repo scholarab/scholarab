@@ -57,6 +57,28 @@ export function isCheckStale(str: string | null | undefined, today: string = alb
   return months >= STALE_CHECK_MONTHS;
 }
 
+const FULL_MONTHS = ['January', 'February', 'March', 'April', 'May', 'June',
+                     'July', 'August', 'September', 'October', 'November', 'December'];
+
+/**
+ * How many listings were checked against the provider's page since the start
+ * of last month, and that month's name: "since September" on October 5. The
+ * directory says it once in its standfirst, because a checked line on every
+ * row was noise beside the deadline (reader feedback, 2026-09-29).
+ */
+export function checkedSince(
+  checks: Array<string | null | undefined>,
+  today: string = albertaDate(),
+): { count: number; month: string } {
+  const t = /^(\d{4})-(\d{2})/.exec(today)!;
+  const from = Number(t[1]) * 12 + Number(t[2]) - 2;
+  const count = checks.filter(c => {
+    const v = /^(\d{4})-(\d{2})/.exec(c ?? '');
+    return !!v && Number(v[1]) * 12 + Number(v[2]) - 1 >= from;
+  }).length;
+  return { count, month: FULL_MONTHS[((from % 12) + 12) % 12]! };
+}
+
 // First dollar figure in the string: "$2,500" → 2500, "up to $8,000" → 8000,
 // "$4,000–$5,000" → 4000, "Varies" → 0
 export function parseAmount(amount: string | null | undefined): number {
@@ -65,84 +87,8 @@ export function parseAmount(amount: string | null | undefined): number {
 }
 
 
-interface Particle {
-  x: number; y: number;
-  vx: number; vy: number;
-  w: number; h: number;
-  rot: number; rotV: number;
-  color: string;
-}
-
 export function prefersReducedMotion(): boolean {
   return typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches;
-}
-
-export function showConfetti(originEl?: Element | null): void {
-  if (prefersReducedMotion()) return;
-  document.getElementById('sa-confetti')?.remove();
-  const rect = originEl?.getBoundingClientRect();
-  const vw = window.innerWidth;
-  const vh = window.innerHeight;
-  const ox = rect ? rect.left + rect.width / 2 : vw / 2;
-  const oy = rect ? rect.top + rect.height / 2 : vh / 2;
-
-  const canvas = document.createElement('canvas');
-  canvas.id = 'sa-confetti';
-  canvas.style.cssText = 'position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:999999998;';
-  // Render at device resolution so particles stay sharp on HiDPI screens
-  const dpr = Math.min(window.devicePixelRatio || 1, 2);
-  canvas.width = vw * dpr;
-  canvas.height = vh * dpr;
-  const ctx = canvas.getContext('2d');
-  if (!ctx) return;
-  ctx.scale(dpr, dpr);
-  document.body.appendChild(canvas);
-
-  // The site's own colours: mint, green, the menu-board yellow, ink. The
-  // purple and pink were Tailwind defaults no page uses (critique 2026-10-02).
-  const COLORS = ['#2FD3A0', '#0A6B4D', '#FFC700', '#141915', '#5CE3BB'];
-  const particles: Particle[] = Array.from({ length: 30 }, () => {
-    const angle = Math.random() * Math.PI * 2;
-    const speed = Math.random() * 9 + 4;
-    return {
-      x: ox, y: oy,
-      vx: Math.cos(angle) * speed,
-      vy: Math.sin(angle) * speed - 5,
-      w: Math.random() * 7 + 3,
-      h: Math.random() * 4 + 2,
-      rot: Math.random() * Math.PI * 2,
-      rotV: (Math.random() - 0.5) * 0.26,
-      color: COLORS[Math.floor(Math.random() * COLORS.length)]!,
-    };
-  });
-
-  const start = performance.now();
-  let last = start;
-  function tick(now: number) {
-    const elapsed = now - start;
-    // Physics tuned at 60fps; dt scales them to the actual refresh rate
-    // (120Hz phones, throttled tabs). Capped so a background tab doesn't teleport particles.
-    const dt = Math.min((now - last) / 16.667, 3);
-    last = now;
-    ctx!.clearRect(0, 0, vw, vh);
-    let alive = false;
-    for (const p of particles) {
-      p.vy += 0.4 * dt; p.vx *= Math.pow(0.98, dt);
-      p.x += p.vx * dt; p.y += p.vy * dt;
-      p.rot += p.rotV * dt;
-      if (p.y < vh + 20) alive = true;
-      ctx!.save();
-      ctx!.globalAlpha = Math.max(0, 1 - elapsed / 1600);
-      ctx!.translate(p.x, p.y);
-      ctx!.rotate(p.rot);
-      ctx!.fillStyle = p.color;
-      ctx!.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
-      ctx!.restore();
-    }
-    if (alive && elapsed < 1800) requestAnimationFrame(tick);
-    else canvas.remove();
-  }
-  requestAnimationFrame(tick);
 }
 
 // Intentionally imperative DOM injection; works outside the React tree, zero bundle cost on public pages.

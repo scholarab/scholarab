@@ -764,7 +764,7 @@ const chip: { text: string; tone: Tone } =
   import { todayDate } from '../../lib/calendar';
   import { sendEvent, sendEventAfterDwell } from '../../lib/events.ts';
   import { getSaved, toggleSaved, getSavedPrograms, toggleSavedProgram } from '../../lib/tracker';
-  import { showToast, showConfetti, prefersReducedMotion, emailProblem } from '../../lib/utils';
+  import { showToast, prefersReducedMotion, emailProblem } from '../../lib/utils';
   import { URGENT_DAYS, SOON_DAYS } from '../../lib/list-core';
   import { LIKELY_DATE, STATUS_WORDS } from '../../lib/status';
   import { placeInList, readListContext } from '../../lib/list-context.ts';
@@ -850,9 +850,9 @@ const chip: { text: string; tone: Tone } =
       document.querySelectorAll<HTMLElement>(`[data-sabd-save][data-bookmark-id="${id}"][data-bookmark-type="${type}"]`)
         .forEach(btn => applySaveState(btn, nowSaved));
       // Saves count, un-saves don't; the metric is "people who shortlisted it"
-      if (nowSaved) { showConfetti(save); sendEvent('save', type, id, 'page'); }
+      if (nowSaved) sendEvent('save', type, id, 'page');
       // Say where it went: the Saved page was otherwise only a header link.
-      if (nowSaved) showToast('Saved ✓', { label: 'See your list', onClick: () => location.assign('/saved/') });
+      if (nowSaved) showToast('Saved', { label: 'See your list', onClick: () => location.assign('/saved/') });
       else showToast('Removed from saved');
     }
   });

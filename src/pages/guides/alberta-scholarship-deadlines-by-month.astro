@@ -1,7 +1,6 @@
 ---
 import SabGuide from '../../components/sab/SabGuide.astro';
 import { getGuide } from '../../lib/guides';
-import { QUIZ_DURATION } from '../../lib/quiz';
 import { deadlineStats } from '../../lib/deadline-stats';
 import { getToday } from '../../lib/utils';
 import scholarships from '../../data/scholarships.json';
@@ -142,11 +141,11 @@ const faqJson = {
     This matters practically rather than as trivia. When you see dozens of awards sharing a date, you are usually looking at one institution's portfolio, which means one administering body, one set of rules, and often one application that considers you for everything you qualify for. A date that looks like {st.onDayFrom('12-18', 'keyano.ca')} deadlines can be an afternoon's work. Check the administrator before you assume the date is impossible.
   </p>
 
-  <h2>Month by month, with what to actually do</h2>
+  <h2>Month by month, and what to do in each</h2>
 
   <h3>September and October: the expensive ones</h3>
   <p>
-    September holds {m(9)} deadlines, and its own awards are quietly some of the least competed on the site: the Charmaine Letourneau Scholarship, the two UFCW awards and the Cypress County Agricultural Service Board Bursary all close September 30. October holds {m(10)} and is the most valuable month of the year. If you are reading this in September of Grade 12, the Loran application is the thing to start this week, and the <a href="/guides/reference-letters-for-scholarships/">reference letters</a> are the thing to ask for before the November crush.
+    September holds {m(9)} deadlines, and its own awards are some of the least competed on the site: the Charmaine Letourneau Scholarship, the two UFCW awards and the Cypress County Agricultural Service Board Bursary all close September 30. October holds {m(10)} and is the most valuable month of the year. If you are reading this in September of Grade 12, the Loran application is the thing to start this week, and the <a href="/guides/reference-letters-for-scholarships/">reference letters</a> are the thing to ask for before the November crush.
   </p>
 
   <h3>November and December: leadership awards, then the institutions</h3>
@@ -162,7 +161,7 @@ const faqJson = {
     March picks up to {m(3)} as the Edmonton foundations open: the Winspear Fund classical music scholarships, the Ranald and Vera Shean Memorial Scholarships and the Belcourt Brosseau Metis Awards all close March 31.
   </p>
 
-  <h3>April to June: where the awards actually are</h3>
+  <h3>April to June: where most of the awards are</h3>
   <p>
     {spring} deadlines. This is the part of the year worth planning properly, and the plan is boring: one strong essay, one reference package, and apply to everything you plausibly qualify for. April 10 and April 1 both carry clusters, May 1 and May 30 are the two biggest days on the calendar, and June 1 carries {st.onDay('06-01')} more. Filter the directory to your own region and work down it.
   </p>
@@ -185,6 +184,6 @@ const faqJson = {
     <li><strong>Do the Rutherford regardless.</strong> It has no deadline to miss and no competition to lose.</li>
   </ul>
   <p>
-    Counts on this page are drawn from the {st.total} scholarship listings in the directory with a calendar date still ahead, the same set the <a href="/deadlines/">deadline calendar</a> lists, and they move as listings are added and cycles roll over. Awards with rolling, ongoing or unannounced dates are not counted here and are not therefore unavailable. The <a href="/scholarships/">full directory</a> shows live status for all of them, and the match quiz takes {QUIZ_DURATION} and narrows the calendar to what your grade and region actually qualify you for.
+    Counts on this page are drawn from the {st.total} scholarship listings in the directory with a calendar date still ahead, the same set the <a href="/deadlines/">deadline calendar</a> lists, and they move as listings are added and cycles roll over. Awards with rolling, ongoing or unannounced dates are not counted here and are not therefore unavailable. The <a href="/scholarships/">full directory</a> shows live status for all of them, and <a href="/match/">Build my combo</a> narrows the calendar to what your grade and region qualify you for.
   </p>
 </SabGuide>

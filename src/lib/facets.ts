@@ -448,7 +448,7 @@ export const PROGRAM_FACETS: Facet[] = [
     description:
       'Engineering summer programs, design competitions, and faculty-run camps for Alberta high school students at U of A, U of C, and beyond.',
     intro:
-      'Faculty-run camps and design competitions, most of them at Alberta universities, and the simplest way to find out which discipline you actually like before applying to a five-year program.',
+      'Faculty-run camps and design competitions, most of them at Alberta universities, and the simplest way to find out which discipline you like before applying to a five-year program.',
   },
   {
     slug: 'trades',

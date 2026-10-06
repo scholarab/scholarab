@@ -4,12 +4,16 @@ import SabFonts from '../components/sab/SabFonts.astro';
 import Layout from '../layouts/Layout.astro';
 import SabHeader from '../components/sab/SabHeader.astro';
 import { webPageJson } from '../lib/ld';
+import { months } from '../lib/updates';
 const title = 'About ScholarAB | Free Alberta Scholarship Directory';
 const description =
   'ScholarAB is a free scholarship directory built by Ilia Ivanov, a Medicine Hat high school student. No ads, no login, no data sold.';
 // The founder node reuses the @id declared on the homepage Organization, so
 // Google reads one person described in two places rather than two people who
 // happen to share a name.
+// The first working version, from the /updates history: proof the story is
+// real, where a page dressed as handwriting only claimed it.
+const firstShot = months.flatMap(m => m.shots ?? []).find(s => s.src.endsWith('first-prototype.webp'))!;
 const ldJson = webPageJson({ name: 'About ScholarAB', description, path: '/about/' }, [
   {
     '@type': 'Person',
@@ -43,15 +47,17 @@ const ldJson = webPageJson({ name: 'About ScholarAB', description, path: '/about
       </p>
 
       <!-- The story, in Ilia's words (2026-09-18) -->
-      <div class="saba-paper-wrap">
-      <section class="saba-story saba-paper" id="story">
+      <section class="saba-story" id="story">
         <p>During my first week of Grade 10, I was signing up for dual credit courses when the coordinator mentioned that they could strengthen my resume and help with scholarship applications. He told me about a friend’s son who had covered his university tuition through scholarships that hardly anyone applied for.</p>
         <p>I remembered that conversation because I wanted to go to university too, and I knew I’d need scholarships myself.</p>
         <p>At the start of Grade 11, I began searching for scholarships myself. The information was scattered across different websites, and a lot of them wanted me to create an account and fill out registration forms. That got tiring. I just wanted to see which scholarships I could apply for without signing up for so many sites.</p>
         <p>In March 2026, I started working on the first version of ScholarAB. I made it free, with no ads and no account required, because those were the things I wanted when I first started searching.</p>
+        <figure class="saba-shot">
+          <img src={firstShot.src} width={firstShot.width} height={firstShot.height} alt={firstShot.alt} loading="lazy" decoding="async" />
+          <figcaption>{firstShot.caption} <a href="/updates/">Every month since</a></figcaption>
+        </figure>
         <p>I figured other students were running into the same problems, and I wanted to make that search easier.</p>
       </section>
-      </div>
 
       <section class="saba-details" aria-labelledby="saba-details-heading">
         <h2 id="saba-details-heading">About the site</h2>
@@ -71,10 +77,6 @@ const ldJson = webPageJson({ name: 'About ScholarAB', description, path: '/about
   body:has(#sab-about) { background: var(--bg-page); }
 </style>
 
-<style is:global>
-  @font-face { font-family: 'Patrick Hand'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/hw-patrick-hand.woff2') format('woff2'); }
-</style>
-
 <style>
   .saba-body { padding: 72px var(--sab-gutter) 110px; width: 100%; max-width: var(--sab-measure); margin: 0 auto; box-sizing: border-box; }
 
@@ -83,37 +85,13 @@ const ldJson = webPageJson({ name: 'About ScholarAB', description, path: '/about
     font-size: clamp(44px, 7vw, 76px); line-height: 1.05; letter-spacing: -0.015em; margin: 0;
   }
 
-  /* The story is written on a sheet of ruled paper (Ilia, 2026-09-18).
-     The scan's blue rules are 54.594px apart at its native 1326px width,
-     first rule at y=227, red margin at x=46, faint right margin near 1090.
-     --u is one scan pixel at the rendered size, so every measurement below is
-     in scan pixels and the text lands on the rules at any width. The sheet
-     never renders narrower than 700px (a phone shows its left part), because
-     narrower rules would force the writing below a readable size.
-     The scan is cut in two: the top 1073 rows, then an 11-rule band that
-     repeats for as long as the story runs. Line height is one rule;
-     paragraphs are one blank rule apart (1lh). The first baseline sits
-     0.08 of a rule above rule one: padding = 227 minus the half line box
-     minus the face's ascent-over-descent share, all in rule units. */
-  .saba-paper-wrap { container-type: inline-size; max-width: 880px; margin-top: 40px; }
-  /* Patrick Hand: printed handwriting, chosen over Kalam and Caveat as the
-     least template-looking of the three that still reads easily. */
-  .saba-paper {
-    --pw: max(100cqi, 700px); --u: calc(var(--pw) / 1326); --rule: calc(var(--u) * 54.594);
-    --hw-r: 0.707; --hw-ad: 0.730;
-    background:
-      url('/photos/paper/lined-top.webp') 0 0 / var(--pw) auto no-repeat,
-      url('/photos/paper/lined-band.webp') 0 calc(var(--u) * 1073) / var(--pw) auto repeat-y;
-    background-color: #F7F9FA;
-    box-shadow: 0 1px 2px rgba(20,25,21,0.08), 0 10px 30px rgba(20,25,21,0.10);
-    font-family: 'Patrick Hand', 'Comic Sans MS', cursive;
-    font-size: calc(var(--rule) * var(--hw-r)); line-height: var(--rule);
-    color: #1F2A44;
-    padding: calc(var(--u) * (199.703 - 54.594 * (var(--hw-r) * var(--hw-ad) / 2 + 0.08))) calc(var(--u) * 250) calc(var(--rule) * 2) calc(var(--u) * 80);
-    box-sizing: border-box;
-  }
-  .saba-paper p { margin: 0 0 1lh; }
-  .saba-paper p:last-child { margin-bottom: 0; }
+  .saba-story { margin-top: 40px; max-width: 65ch; font-size: 19px; line-height: 1.65; color: var(--text-primary); }
+  .saba-story p { margin: 0 0 1em; }
+  .saba-story p:last-child { margin-bottom: 0; }
+  .saba-shot { margin: 32px 0; max-width: 100%; }
+  .saba-shot img { display: block; width: 100%; height: auto; border: 1px solid rgba(20,25,21,0.16); border-radius: var(--radius); }
+  .saba-shot figcaption { margin-top: 10px; font-size: 15px; line-height: 1.5; color: var(--ink-soft); }
+  .saba-shot figcaption a { color: #0A6B4D; text-decoration: underline; text-underline-offset: 3px; white-space: nowrap; }
   .saba-details { margin-top: 48px; max-width: 720px; font-size: 16px; line-height: 1.6; color: var(--ink-soft); }
   .saba-details h2 {
     font-family: var(--font-display); font-weight: 400;
@@ -129,6 +107,6 @@ const ldJson = webPageJson({ name: 'About ScholarAB', description, path: '/about
   /* The design specifies >=1080px only; below is our adaptation. */
   @media (max-width: 900px) {
     .saba-body { padding: 40px 20px 72px; }
-    .saba-paper { padding-right: calc(var(--u) * 60); }
+    .saba-story { font-size: 17px; }
   }
 </style>
