@@ -280,7 +280,7 @@ const carousels = [
         <div class="sab-hero-bottom">
           <div class="sab-hero-copy">
             <p>
-              <span class="sab-hero-p-l1">Every listing is written from the provider's own page. Free, no ads, no account.</span>
+              <span class="sab-hero-p-l1">ScholarAB tracks scholarships and programs for Alberta high school students.</span>
             </p>
             {/* The home page had no search (critique 2026-09-24); the directory
                 reads ?q= the same way the 404 page's search uses it. */}
@@ -290,6 +290,19 @@ const carousels = [
               <input id="sab-hero-q" name="q" type="search" enterkeyhint="search" placeholder="Search, e.g. nursing" class="sab-hero-search-input" />
               <button type="submit" class="sab-hero-search-btn">Search</button>
             </form>
+            {/* The example in the box rotates through fields so students see
+                it searches more than one subject. Stops once they type. */}
+            <script is:inline>(function () {
+              const input = document.getElementById('sab-hero-q');
+              if (!input) return;
+              const terms = ['nursing', 'business', 'engineering', 'music', 'agriculture', 'medicine', 'trades', 'science'];
+              let i = 0;
+              setInterval(function () {
+                if (document.activeElement === input || input.value) return;
+                i = (i + 1) % terms.length;
+                input.placeholder = 'Search, e.g. ' + terms[i];
+              }, 2500);
+            })();</script>
             <div class="sab-hero-ctas">
               <a href="/scholarships/" class="sab-btn-accent">
                 Browse {scholarshipCount.toLocaleString('en-CA')} scholarships
@@ -323,7 +336,7 @@ const carousels = [
             })();</script>
             {/* The home page's only road to the quiz went with the mini-quiz
                 (critique 2026-09-23). One quiet line, not a third button. */}
-            <p class="sab-hero-quiz">Not sure where to start? <a href="/match/">Build my combo</a><span class="sab-hero-quiz-tail">: a few questions, one shortlist.</span></p>
+            <p class="sab-hero-quiz">Not sure where to start? <a href="/match/">Build my combo</a></p>
           </div>
 
         </div>
@@ -1390,8 +1403,8 @@ const carousels = [
     .sab-hero-p-l1 { display: inline; white-space: normal; }
     .sab-hero-copy p { font-size: var(--fs-small); line-height: 1.5; margin: 0 0 16px; }
     /* Less text on a phone: the tagline repeats the headline, and the quiz
-       line keeps its link without the second sentence. */
-    .sab-hero-copy > p:first-child, .sab-hero-quiz-tail { display: none; }
+       line keeps its link. */
+    .sab-hero-copy > p:first-child { display: none; }
     /* Three separate blocks all said "free, student-built, no account" before
        the fold. On a phone that reads as a wall, so the two decorative ones
        go and the sentence keeps the claim. */
