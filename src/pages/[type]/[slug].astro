@@ -20,6 +20,7 @@ import { placeOf } from '../../lib/school-awards';
 import { OPEN_NO_DEADLINE, STATUS_WORDS, canApplyNow, programIsListed, programUndatedLabel, programStatusOf, scholarshipStatusOf, scholarshipIsIndexable, programIsIndexable } from '../../lib/status.ts';
 import { guides } from '../../lib/guides.ts';
 import { saysNoApplication, howYouApply } from '../../lib/apply-method.ts';
+import { oneFormBlock } from '../../lib/one-form.ts';
 import { feeFigure } from '../../lib/fee-figure.ts';
 import { eligibilityFacts } from '../../lib/eligibility-facts';
 import { SCHOLARSHIP_FACETS, PROGRAM_FACETS, PROGRAM_FORMATS, facetForListing } from '../../lib/facets.ts';
@@ -332,6 +333,7 @@ export async function getStaticPaths() {
         alternatives: alternativesForScholarship(s),
         next: nextForScholarship(s, i),
         metaDescription: descriptions[i]!,
+        oneForm: oneFormBlock(s.oneForm, scholarships),
       },
     })),
     ...programs.map((p, i) => ({
@@ -351,6 +353,7 @@ export async function getStaticPaths() {
 }
 
 const { kind, scholarship, program, related, alternatives, next, metaDescription } = Astro.props;
+const oneForm = 'oneForm' in Astro.props ? Astro.props.oneForm ?? null : null;
 // A programs block of nothing but "Date not confirmed" rows offers nothing to
 // do (critique 2026-09-24): it shows only when one of them is open, open first.
 const crossRelated = Astro.props.crossRelated.some(r => r.open !== false)
@@ -464,6 +467,7 @@ if (kind === 'scholarship') {
     about: (s as { description?: string }).description
       ?? `${s.title} is an Alberta award for high school students.`,
     notes: s.notes,
+    oneForm,
     // The data has no per-listing application steps. The generic three
     // ("read the requirements", "prepare your documents", "submit") said
     // nothing the button did not, and were false for every award with no
@@ -685,6 +689,7 @@ const breadcrumbJson = {
       howApply={"howApply" in d ? d.howApply : null}
       about={d.about}
       notes={d.notes}
+      oneForm={"oneForm" in d ? d.oneForm : null}
       steps={d.steps}
       toApply={"toApply" in d ? d.toApply : null}
       valueLabel={d.valueLabel}

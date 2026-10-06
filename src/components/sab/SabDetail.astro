@@ -55,6 +55,8 @@ interface Props {
   eligibility: string | null;
   about: string | null;
   notes?: string | null;
+  /** The shared form this award goes through (lib/one-form.ts). */
+  oneForm?: { heading: string; text: string; count: number } | null;
   /** Who takes the application, from lib/apply-method.ts; null when the listing doesn't say. */
   howApply?: string | null;
   steps: string[];
@@ -84,7 +86,7 @@ const {
   itemType, itemId, typeLabel, name, subline,
   status: datedStatus, availability = null, daysLeft, deadlineIso, openDateIso, inactive, estimated = false, dueLong, opensLabel,
   backHref, backLabel, facetHref = null, facetLabel = null,
-  facts, needs = [], eligibility, howApply = null, about, notes, steps, toApply = null,
+  facts, needs = [], eligibility, howApply = null, about, notes, oneForm = null, steps, toApply = null,
   valueLabel, valueBig, valueNote, checkedLabel = null, valueQuiet = false,
   ctaLabel, url, canRemind, guideHref, guideTitle,
   alternatives = [], alternativesHref = backHref, next = [],
@@ -208,12 +210,13 @@ const chip: { text: string; tone: Tone } =
     {/* Under the date it vouches for. The check is what the site is for (the
         moat in PRODUCT.md), and as 14px grey under the requirements it was the
         quietest line on the page (critique 2026-10-02). A posted, dated
-        deadline says so; anything else keeps the plain check. */}
+        deadline says so; anything else keeps the plain check, a bare tick
+        (an empty ring read as an unticked box beside the word "Checked"). */}
     {checkedLabel && (
       <p class:list={['sabd-checked', { 'is-confirmed': dateConfirmed }]}>
         <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true">{dateConfirmed
           ? <><circle cx="8" cy="8" r="8" fill="currentColor" /><path d="M4.6 8.3 7 10.6l4.4-5" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></>
-          : <circle cx="8" cy="8" r="6.75" fill="none" stroke="currentColor" stroke-width="1.5" />}</svg>
+          : <path d="M3.2 8.4 6.6 11.6 12.8 4.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />}</svg>
         <span>{dateConfirmed ? `Date confirmed on the provider's page, ${checkedLabel}.` : `Checked against the provider's page in ${checkedLabel}.`}</span>
       </p>
     )}
@@ -312,6 +315,17 @@ const chip: { text: string; tone: Tone } =
       <section class="sabd-note" aria-labelledby="sabd-note-h">
         <h2 id="sabd-note-h" class="sabd-note-h">Worth knowing</h2>
         <p class="sabd-note-text" set:html={notesHtml} />
+      </section>
+    )}
+
+    {/* The form a whole set of awards shares, written once in lib/one-form.ts.
+        It used to be pasted into each listing's notes, so the same paragraph
+        sat on 115 EducationMatters pages as if it were news about this one. */}
+    {oneForm && (
+      <section class="sabd-form" aria-labelledby="sabd-form-h">
+        <h2 id="sabd-form-h" class="sabd-h2">{oneForm.heading}</h2>
+        <p class="sabd-form-text" set:html={emailOff(oneForm.text)} />
+        {oneForm.count > 1 && <p class="sabd-kit-note">{oneForm.count} awards listed here go through it.</p>}
       </section>
     )}
 
@@ -566,6 +580,8 @@ const chip: { text: string; tone: Tone } =
   .sabd-about p + p { margin-top: 12px; }
 
   .sabd-kit { max-width: 640px; }
+  .sabd-form { max-width: 640px; }
+  .sabd-form-text { margin: 0; padding-top: 14px; border-top: 2px solid #141915; font-size: var(--fs-lead); line-height: 1.6; color: #141915; }
   .sabd-kit-list { list-style: none; margin: 0; padding: 0; border-top: 2px solid #141915; }
   .sabd-kit-item { padding: 14px 0 14px 26px; position: relative; border-bottom: 1px solid rgba(20,25,21,0.14); font-size: var(--fs-lead); line-height: 1.5; color: #141915; }
   /* A tick box, not a bullet: the list is the one a student works through. */

@@ -2,6 +2,7 @@ import type { EligibilityCriteria } from './eligibility-types'
 import { eligibilitySchema } from './eligibility-types'
 import type { ToApply } from './to-apply'
 import type { ApplyRoute } from './apply-method'
+import type { OneFormKey } from './one-form'
 
 export { eligibilitySchema } from './eligibility-types'
 
@@ -75,6 +76,8 @@ export type Scholarship = {
   toApply?: ToApply | null
   /** Who takes the application, on the 175 school-route listings. JSON-only. See lib/apply-method.ts. */
   applyRoute?: ApplyRoute | null
+  /** The shared form this award goes through, when its notes said so. JSON-only. See lib/one-form.ts. */
+  oneForm?: OneFormKey | null
 }
 
 export type Program = {

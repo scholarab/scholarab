@@ -44,7 +44,7 @@ export const guides: GuideMeta[] = [
     // impressions. "research opportunities for high school students" is also
     // the highest-converting query on the site at 28.6%, so the demand was
     // measured before this was written rather than assumed.
-    title: 'Research programs for Alberta students: who pays',
+    title: 'Research programs for Alberta students, and which ones pay',
     description:
       'Which Alberta research programs pay, what marks they ask for, and the geography rule that decides which HYRS campus you apply to. Deadlines run March.',
     minutes: 8,
@@ -160,7 +160,7 @@ export const guides: GuideMeta[] = [
     // to write a listing for it found the CIC publishes no junior division at
     // all, so the honest answer is a pillar that says so and points a Grade 10
     // somewhere real, rather than a page for a competition that does not exist.
-    title: 'Chemistry competitions in Canada: the CCC and CCO ladder',
+    title: 'Chemistry competitions in Canada: the CCC and CCO',
     description:
       'One entry point, one date. How the Canadian Chemistry Contest feeds the Olympiad, why there is no junior division, and when a teacher has to sign you up.',
     minutes: 6,
@@ -195,7 +195,7 @@ export const guides: GuideMeta[] = [
   },
   {
     slug: 'how-to-write-a-scholarship-essay',
-    title: 'How to write a scholarship essay that gets read',
+    title: 'How to write a scholarship essay',
     description:
       'A 500-word scholarship essay is about four short sittings. How to structure it, what the committee is deciding, and what gets an essay skipped.',
     minutes: 10,
@@ -281,9 +281,9 @@ export const guides: GuideMeta[] = [
   },
   {
     slug: 'local-scholarships-better-odds',
-    title: 'Local scholarships: smaller awards, much better odds',
+    title: 'Local scholarships in Alberta and where to find them',
     description:
-      'Three $1,000 awards cover a semester. Why local scholarships in towns like Medicine Hat and Lethbridge draw from far fewer students, and how to find them.',
+      'Awards from one town, county or school are open to far fewer students than national ones. Where to find them in Alberta, from county offices to unions.',
     minutes: 5,
     datePublished: '2026-07-19',
     dateModified: '2026-08-22',

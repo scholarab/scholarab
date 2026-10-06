@@ -20,6 +20,7 @@ import { facetItems, SCHOLARSHIP_FACETS, type FacetTarget } from './facets.ts';
 import { scholarshipStatusOf, type StatusInput } from './status.ts';
 import { AUDIENCE_SCHOOLS, MIN_COMBO_CORE, type ComboEntry, type ComboKey } from './combo-pick.ts';
 import { QUIZ_QUESTIONS } from './quiz.ts';
+import { ONE_FORMS, type OneForm } from './one-form.ts';
 
 export interface ComboTarget extends FacetTarget, StatusInput {
   id: number;
@@ -327,24 +328,17 @@ function generatedCombos(city: string, pool: ComboTarget[]): Combo[] {
 }
 
 /**
- * Application routes where one form covers a whole set, each quoted from the
- * listings' own notes: EducationMatters ("one application for all CBE and
- * Calgary Catholic awards"), Red Deer Polytechnic's General Application, the
- * Northwestern Alberta Foundation's universal form, Bev Facey's one in-house
- * form and LPSD's ("one form covers every LPSD award").
+ * Forms that cover a whole set, from lib/one-form.ts: the ones with a provider
+ * URL prefix can name a combo whose every award sits on that site.
  */
-const ONE_FORMS: { prefix: string; text: string }[] = [
-  { prefix: 'www.educationmatters.ca/', text: 'One EducationMatters application covers these' },
-  { prefix: 'rdpolytech.academicworks.ca/', text: 'One Red Deer Polytechnic General Application covers these' },
-  { prefix: 'nafgives.com/', text: 'One Northwestern Alberta Foundation form covers these' },
-  { prefix: 'www.bevfacey.ca/', text: 'One Bev Facey awards form covers these' },
-  { prefix: 'sites.google.com/lpsd.ca/', text: 'One LPSD awards form covers these' },
-];
+const COMBO_FORMS = Object.values(ONE_FORMS as Record<string, OneForm>)
+  .filter((f): f is OneForm & { prefix: string } => !!f.prefix)
+  .map(f => ({ prefix: f.prefix, text: `One ${f.form} covers these` }));
 
 /** The one form every core award goes through, or null when they differ. */
 export function oneForm(core: { url?: string | null }[]): string | null {
   const bare = (u: string | null | undefined) => (u ?? '').replace(/^https?:\/\//, '');
-  const route = ONE_FORMS.find(f => bare(core[0]?.url).startsWith(f.prefix));
+  const route = COMBO_FORMS.find(f => bare(core[0]?.url).startsWith(f.prefix));
   return route && core.every(s => bare(s.url).startsWith(route.prefix)) ? route.text : null;
 }
 

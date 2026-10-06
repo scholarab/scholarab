@@ -8,6 +8,7 @@ import { scholarshipStatusOf } from '../src/lib/status.ts';
 import { eligibilitySchema } from '../src/lib/eligibility-types.ts';
 import { toApplyProblems } from '../src/lib/to-apply.ts';
 import { APPLY_ROUTES } from '../src/lib/apply-method.ts';
+import { ONE_FORM_KEYS } from '../src/lib/one-form.ts';
 import {
   RESERVED_SCHOLARSHIP_SLUGS,
   RESERVED_PROGRAM_SLUGS,
@@ -295,7 +296,13 @@ for (const s of scholarships) {
   if (route !== undefined && s.applyViaGuidance !== true) {
     console.error(`${tag}: applyRoute is set but applyViaGuidance is not`);
     failed = true;
-  } else if (route === undefined && s.applyViaGuidance === true) {
+  }
+  const form = (s as { oneForm?: unknown }).oneForm;
+  if (form !== undefined && !(ONE_FORM_KEYS as readonly unknown[]).includes(form)) {
+    console.error(`${tag}: oneForm "${String(form)}" is not one of ${ONE_FORM_KEYS.join(', ')}`);
+    failed = true;
+  }
+  if (route === undefined && s.applyViaGuidance === true) {
     console.warn(`${tag}: applyViaGuidance has no applyRoute, so its page shows no "How you apply" line`);
   }
 }
@@ -734,7 +741,15 @@ if (fillerHits.length) {
 // "almost nobody"). Each was rewritten as a fact or deleted. These phrases fail
 // the build like the filler adverbs: say what the student needs, or a number
 // the data backs.
-const WORKSHOP_PATTERN = /\b(?:rolled forward|carried forward|this listing (?:had|previously|already|understated|said)|previously listed here|Re-verified against|under-?applied|single digits|the real (?:gate|filter)|almost nobody|nobody is looking)\b|\bHeads up:/i;
+// The third pass (same day) found the same guesses at scale in listing
+// notes: "close to the best odds on the site", "the reason most students never
+// see this one", "nobody markets them", on about 40 listings, plus "when we
+// checked" on 61 notes that the page's checked date already covers. A count a
+// provider publishes is stated as the count ("eleven applications for three
+// awards"), never as odds; `(?<!-)` spares the guide's URL slug. Rankings
+// nobody measured ("one of the few", "the opposite of most") and guesses at
+// what a committee rewards ("is the filter", "separates applicants") go too.
+const WORKSHOP_PATTERN = /\b(?:rolled forward|carried forward|this listing (?:had|previously|already|understated|said)|previously listed here|Re-verified against|under-?applied|single digits|the real (?:gate|filter)|almost nobody|nobody is looking|small(?:er|est)? field|least competitive|most students (?:miss|never)|nobody (?:markets|thinks|would think)|families miss|when (?:we|this was) checked|made-up numbers|one of the (?:very )?few|the opposite of most|unlike most|in the corpus|is the filter|separates applicants|a real candidate|at a disadvantage|usual reason applicants|often assume|stronger candidate|most winnable|least demanding)\b|(?<!-)\bodds\b|\bHeads up:/i;
 const workshopHits = sourceFiles(FILLER_ROOTS)
   .filter((f) => /\.(?:astro|tsx?|json)$/.test(f.rel) && !FILLER_SKIP.test(f.rel))
   .flatMap(({ rel, full }) => {
@@ -761,11 +776,29 @@ const unflaggedLastYear = scholarships.filter(
     s.deadline &&
     !s.deadlineEstimated &&
     typeof s.notes === 'string' &&
-    /(?:date|dates|deadline) shown (?:is|are) last year's|date here (?:is last year's|repeats)/.test(s.notes),
+    /(?:date|dates|deadline) shown (?:is|are) last (?:year|cycle)'s|date here (?:is last year's|repeats)/.test(s.notes),
 );
 if (unflaggedLastYear.length) {
   console.error(
     `validate-data: ${unflaggedLastYear.length} scholarship(s) say the date is last year's but lack deadlineEstimated: true: ${unflaggedLastYear
+      .map((s) => s.id)
+      .join(', ')}`,
+  );
+  failed = true;
+}
+
+// The other direction: on an estimated listing the status chip, the deadline
+// ("Around June 1") and the rail line under it already say the date is last
+// year's, and 115 of 150 notes said it a fourth time (2026-10-05).
+const restatedEstimate = scholarships.filter(
+  (s) =>
+    s.deadlineEstimated &&
+    typeof s.notes === 'string' &&
+    /(?:date|dates|deadline|year) (?:shown|here) (?:is|are) last (?:year|cycle)'s/.test(s.notes),
+);
+if (restatedEstimate.length) {
+  console.error(
+    `validate-data: ${restatedEstimate.length} estimated scholarship(s) repeat "last year's date" in their notes; the page already says it: ${restatedEstimate
       .map((s) => s.id)
       .join(', ')}`,
   );
