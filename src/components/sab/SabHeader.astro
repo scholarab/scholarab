@@ -124,9 +124,9 @@ const exploreLinks: MenuLink[] = [
   { label: 'What changed', href: '/updates/' },
 ];
 
-// The desktop dropdowns are SpaceX's plain lists, six rows at most
-// (Ilia, 2026-10-03). The phone sheet keeps the full tiles and lists below.
-const DESK_MAX = 6;
+// The desktop dropdowns are SpaceX's plain lists, five rows at most
+// (Ilia, 2026-10-03; six to five 2026-10-05). The phone sheet keeps the full tiles and lists below.
+const DESK_MAX = 5;
 const scholarshipDesk: MenuLink[] = [
   { label: 'All scholarships', href: '/scholarships/' },
   ...scopeTiles.slice(0, DESK_MAX - 2),

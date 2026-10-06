@@ -18,7 +18,7 @@ test('Explore keeps every tool reachable by keyboard and phone menu', async ({ p
   await expect(menu).toBeVisible();
   const links = menu.getByRole('link');
   const hrefs = await links.evaluateAll(all => all.map(a => a.getAttribute('href')));
-  // Desktop is the spacex.com list, six rows at most; the phone sheet keeps
+  // Desktop is the spacex.com list, five rows at most; the phone sheet keeps
   // every tool.
   expect(hrefs).toEqual(mobile ? [
     '/match/', '/#closing', '/deadlines/', '/guides/',

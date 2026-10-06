@@ -231,9 +231,9 @@ test('every field hub links to every other field', async ({ page }, testInfo) =>
   }
 });
 
-// Desktop menus are spacex.com lists (2026-10-03): at most six rows hanging
+// Desktop menus are spacex.com lists (2026-10-03): at most five rows hanging
 // under their own label. Off the home page the dark band spans the window.
-test('header dropdowns hang under their label, six rows at most', async ({ page }, testInfo) => {
+test('header dropdowns hang under their label, five rows at most', async ({ page }, testInfo) => {
   test.skip(testInfo.project.name === 'mobile', 'desktop layout');
   await page.goto('/about/');
   const width = page.viewportSize()!.width;
@@ -246,7 +246,7 @@ test('header dropdowns hang under their label, six rows at most', async ({ page 
     await expect(menu).toBeVisible();
     const rows = menu.locator('.sabh-menu-desk li');
     expect(await rows.count()).toBeGreaterThan(1);
-    expect(await rows.count()).toBeLessThanOrEqual(6);
+    expect(await rows.count()).toBeLessThanOrEqual(5);
     const labelLeft = (await page.locator('.sabh-has-menu .sabh-link-label', { hasText: label }).boundingBox())!.x;
     expect(Math.abs((await rows.first().boundingBox())!.x - labelLeft)).toBeLessThan(2);
     await expect(page.locator('.sabh-drop')).toHaveAttribute('data-on', '');
@@ -418,7 +418,7 @@ test('rows: Save and Apply on one line, underline under the word, stripes altern
       for (const r of rows) {
         expect(r.off).toBeLessThanOrEqual(1);
         expect(r.gap).toBeGreaterThanOrEqual(0);
-        expect(r.gap).toBeLessThanOrEqual(6);
+        expect(r.gap).toBeLessThanOrEqual(5);
       }
       const shaded = rows.map(r => r.bg !== 'rgba(0, 0, 0, 0)');
       expect(shaded).toEqual(rows.map((_, i) => i % 2 === 1));
