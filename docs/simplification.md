@@ -2020,3 +2020,13 @@ Outcome: the home page holds still while it loads; the headline no longer jumps 
 Repair attempts: none on this cause; the earlier entries had tried font preloads against the same test.
 
 Add-back fraction: 0/1. Local only, built site, 1280x720 Chromium, 20 loads each: largest CLS on the home page 0.0257 before and 0.0016 after; median first contentful paint 88 ms before and 84 ms after. The marker sits 46 KB into the 98 KB page. The flaky test: 48 of 48 repeats passed, against 4, 6 and 9 failures in 24 on the three earlier runs. `npm run ci` passed (1,215 tests); E2E 165 passed, 0 failed. Not measured: real Safari and Firefox, which ignore the hint and keep their own paint timing.
+
+## Bigger footer logo, October 7, 2026
+
+Outcome: the footer signs off with a logo a visitor can read, as the header now does. Ilia asked for it after the header change.
+
+| Candidate | Result and retained requirement |
+| --- | --- |
+| Footer logo 36 px tall (171 px wide) | 48 px tall (228 px wide) at every width; 20 px under it instead of 16. |
+
+Repair attempts: none. Add-back fraction: 0/0 (nothing removed). Local only, built site at 320, 390 and 1400 wide: 228 by 48 px, no horizontal overflow. `npm run ci` passed (1,215 tests); E2E 165 passed, 0 failed.
