@@ -178,7 +178,7 @@ const fonts = [
 ];
 
 const INK = '#EEF1EC';
-const GREEN = '#2FD3A0';
+const GREEN = '#4AA873';
 const BG = '#0B1512';
 
 const el = (type: string, style: Record<string, unknown>, children?: unknown) =>

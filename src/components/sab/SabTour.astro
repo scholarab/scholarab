@@ -197,19 +197,19 @@ const STEPS = 5;
   .sabt-row-acts { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; font-size: 13px; font-weight: 700; }
   .sabt-save { display: inline-flex; align-items: center; gap: 5px; }
   .sabt-save :global(svg) { width: 11px; height: 13px; fill: none; }
-  .sabt-apply { border-bottom: 2px solid #2FD3A0; padding-bottom: 2px; }
+  .sabt-apply { border-bottom: 2px solid var(--cta); padding-bottom: 2px; }
 
   .sabt-quiz { width: 270px; }
   .sabt-bar { display: flex; gap: 4px; margin-bottom: 14px; }
   .sabt-bar span { flex: 1; height: 4px; border-radius: 4px; background: rgba(20, 25, 21, 0.1); }
-  .sabt-bar span.on { background: #0E8C64; }
+  .sabt-bar span.on { background: #2E7A50; }
   .sabt-q { font-family: var(--font-display); font-weight: 700; font-size: 24px; line-height: 1.1; margin-bottom: 14px; }
   .sabt-chips { display: flex; gap: 6px; flex-wrap: wrap; }
   .sabt-chips span {
     padding: 7px 12px; border-radius: var(--radius); font-size: 13px; font-weight: 600;
     border: 1.5px solid rgba(20, 25, 21, 0.18);
   }
-  .sabt-chips span.on { background: #2FD3A0; border-color: #2FD3A0; color: #08120E; }
+  .sabt-chips span.on { background: var(--cta); border-color: var(--cta); color: var(--text-on-cta); }
   .sabt-chips-sm span { padding: 5px 10px; font-size: 12px; }
 
   .sabt-cal { width: 250px; padding: 14px 16px; }
@@ -217,11 +217,11 @@ const STEPS = 5;
   .sabt-cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; font-size: 11px; text-align: center; }
   .sabt-cal-grid span { height: 22px; line-height: 22px; border-radius: var(--radius); color: var(--ink-muted); }
   .sabt-cal-grid span.is-off { visibility: hidden; }
-  .sabt-cal-grid span.is-mark { background: #2FD3A0; color: #08120E; font-weight: 700; }
+  .sabt-cal-grid span.is-mark { background: var(--cta); color: var(--text-on-cta); font-weight: 700; }
 
   .sabt-mail { width: 280px; }
   .sabt-mail-from { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--ink-faint); font-weight: 600; }
-  .sabt-dot { width: 8px; height: 8px; border-radius: 0; background: #2FD3A0; }
+  .sabt-dot { width: 8px; height: 8px; border-radius: 0; background: var(--cta); }
   .sabt-mail-subj { font-weight: 700; font-size: 16px; line-height: 1.3; margin: 8px 0 12px; }
 
   .sabt-guides { display: flex; flex-direction: column; gap: 8px; width: 280px; }
@@ -233,7 +233,7 @@ const STEPS = 5;
   .sabt-body { padding: 22px 26px 4px; }
   .sabt-count {
     margin: 0 0 6px; font-family: var(--font-label); font-size: 12px; letter-spacing: 0.08em;
-    text-transform: uppercase; color: #0A6B4D;
+    text-transform: uppercase; color: #0A5632;
   }
   .sabt-title { margin: 0 0 10px; font-family: var(--font-display); font-weight: 800; font-size: 32px; line-height: 1.02; letter-spacing: -0.005em; }
   .sabt-text { margin: 0; font-size: 15px; line-height: 1.55; color: var(--ink-soft); }
@@ -241,7 +241,7 @@ const STEPS = 5;
   .sabt-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 20px 26px 24px; flex: none; }
   .sabt-dots { display: flex; gap: 6px; }
   .sabt-dots span { width: 6px; height: 6px; border-radius: 0; background: rgba(20, 25, 21, 0.18); transition: background-color 0.2s ease; }
-  .sabt-dots span.on { width: 20px; background: #0E8C64; }
+  .sabt-dots span.on { width: 20px; background: #2E7A50; }
   .sabt-btns { display: flex; align-items: center; gap: 6px; }
   .sabt-back {
     min-height: 44px; padding: 0 14px; border: 0; background: none; cursor: pointer;
@@ -250,11 +250,11 @@ const STEPS = 5;
   .sabt-back:hover { color: #141915; }
   .sabt-next {
     display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 26px;
-    border: 0; border-radius: var(--radius); background: #2FD3A0; color: #08120E; cursor: pointer;
+    border: 0; border-radius: var(--radius); background: var(--cta); color: var(--text-on-cta); cursor: pointer;
     font: inherit; font-size: 15px; font-weight: 700; text-decoration: none; white-space: nowrap;
     transition: background-color 0.15s ease;
   }
-  .sabt-next:hover { background: #5CE3BB; }
+  .sabt-next:hover { background: var(--cta-hover); }
   .sabt-next[hidden], .sabt-back[hidden] { display: none; }
 
   @media (prefers-reduced-motion: no-preference) {

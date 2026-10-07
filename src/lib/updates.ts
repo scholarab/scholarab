@@ -81,7 +81,7 @@ export const KIND_LABELS: Record<UpdateKind, string> = {
  * 6.06, 5.08 and 6.52; the blue and purple always cleared it at 5.22 and 5.77.
  */
 export const KIND_COLORS: Record<UpdateKind, string> = {
-  'new': '#0A6B4D',
+  'new': '#0A5632',
   'better': '#1F6FB8',
   'fixed': '#A0491A',
   'listings': '#7A4FB8',

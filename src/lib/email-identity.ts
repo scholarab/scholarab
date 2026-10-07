@@ -59,8 +59,8 @@ export function senderIdentityHtml(opts: {
   if (opts.preamble) parts.push(opts.preamble)
   parts.push(
     `${escape(SENDER_NAME)} · ${address} · ` +
-    `<a href="${site}" style="color:#0c8060;text-decoration:none">${site.replace(/^https?:\/\//, '')}</a> · ` +
-    `<a href="mailto:${escape(SENDER_CONTACT_EMAIL)}" style="color:#0c8060;text-decoration:none">${escape(SENDER_CONTACT_EMAIL)}</a>`
+    `<a href="${site}" style="color:#0a5632;text-decoration:none">${site.replace(/^https?:\/\//, '')}</a> · ` +
+    `<a href="mailto:${escape(SENDER_CONTACT_EMAIL)}" style="color:#0a5632;text-decoration:none">${escape(SENDER_CONTACT_EMAIL)}</a>`
   )
   if (opts.unsubscribeUrl)
     parts.push(`<a href="${escape(opts.unsubscribeUrl)}" style="color:#aaa">Unsubscribe</a>`)

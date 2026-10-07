@@ -65,22 +65,23 @@ describe('green text colour', () => {
     'src/pages/[type]/[slug].astro',
   ]
 
-  it('never uses #0E8C64 as a text colour', () => {
-    // 3.96:1 on cream, 4.24:1 on a white card; under AA either way, at any
-    // size that is not large-scale. #0A6B4D is 6.09:1 on cream. The lighter
-    // green is still fine as a fill, a border or an SVG shape, which is why
-    // this checks the property and not the value.
+  it('never uses #2E7A50 as a text colour', () => {
+    // The fill green: 4.59:1 on cream and 5.23:1 on white since the Lodgepole
+    // palette (2026-10-07), so it would now pass AA, but text keeps one green,
+    // #0A5632 (8.79:1 on white), so links and money never look like two shades.
+    // The lighter green is a fill, a border or an SVG shape, which is why this
+    // checks the property and not the value.
     const offenders: string[] = []
     for (const f of files) {
       stripComments(read(f)).split('\n').forEach((line, i) => {
-        if (/(?<!border-)color: *#0E8C64/i.test(line)) offenders.push(`${f}:${i + 1}`)
+        if (/(?<!border-)color: *#2E7A50/i.test(line)) offenders.push(`${f}:${i + 1}`)
       })
     }
     expect(offenders).toEqual([])
   })
 
   it('points the focus ring at the accessible green', () => {
-    expect(globalCss).toMatch(/--focus-ring: #0A6B4D/)
+    expect(globalCss).toMatch(/--focus-ring: #0A5632/)
   })
 })
 

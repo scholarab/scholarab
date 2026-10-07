@@ -1979,3 +1979,18 @@ Outcome: every page, browser tab, home-screen icon and shared link shows the new
 Repair attempts: none.
 
 Add-back fraction: 0/3. Local only. `npm run ci` passed (1,215 tests). E2E: 164 passed, 1 failed, "home and the 404 page hold still while their fonts arrive" (CLS 0.024). Over 24 repeats it failed 4 times with this change and 6 times with HEAD's header and footer restored, the same value each time, so it is the flake recorded above and not this change. Checked in the built site at 1400 and 390 wide: header over the home film, header on /scholarships/, the phone bar beside the menu button, and the footer; the logo loads and measures 24 px tall in the bar. Not measured: how long Google takes to show the new favicon in results.
+
+## Site colours matched to the logo, October 7, 2026
+
+Outcome: the site uses the logo's greens. On white, the main actions (Apply, Save, Remind me, the open-now count, quiz progress, filter Done) are Lodgepole `#0A5632` with white text; on ink surfaces (home hero, header, footer, map, share cards) the light green `#4AA873` replaces the mint. Ilia compared before, soft and strong on desktop and phone and chose strong.
+
+| Candidate | Result and retained requirement |
+| --- | --- |
+| Four mints (`#2FD3A0`, `#22D3A5`, `#4FE0B4`, `#5CE3BB`), the hover `#28BC8E` and four on-white greens (`#0A6B4D`, `#0E8C64`, `#0C8060`, `#08573E`, plus a stray `#0E6B4D`) | Replaced by five: `#0A5632` text and fills on white, `#08452A` pressed, `#2E7A50` the lighter fill, `#4AA873` and `#66B987` on ink. Public greens in src and scripts went from 11 distinct values to 5 (admin untouched: only Ilia sees it). |
+| On-white buttons each carrying their own mint literal and its hover | One pair of tokens, `--cta`/`--cta-hover` with `--text-on-cta`, in global.css; SabDetail, SabTour, 404, educators and the list styles use them. |
+| The name typed in Public Sans on the 1,493 share cards | The logo SVG, so a shared link shows the same mark as the site. |
+| The combo menu board's mint tray | Kept as the light green with ink text: it is one of three pastel trays (with yellow and pink), not a button. |
+
+Repair attempts: none. A scan of 22 page types at 1400 and 390 wide listed every element whose fill, text, border or underline is the light green on a light surface; it found 13 components, all changed; three remaining hits are on ink (consent banner, map) or the tray above.
+
+Add-back fraction: 0/4. Local only. `npm run ci` passed (1,215 tests); E2E 165 passed, 0 failed. Contrast: `#0A5632` on white 8.79:1; white on `#0A5632` the same; `#4AA873` on the footer ink 6.41:1; ink on `#4AA873` 6.47:1. Not measured: whether the deeper Apply changes click-through.

@@ -124,9 +124,16 @@
      with inline styles. Was #22d3a5; the old dark-theme mint, which made
      the toast the one public element rendering off-palette. These are the
      editorial accent pair, the same two colours every mint CTA already uses. */
-  --brand:         #2FD3A0;
-  --brand-rgb:     47, 211, 160;
+  --brand:         #4AA873;
+  --brand-rgb:     74, 168, 115;
   --text-on-brand: #08120E;
+
+  /* The primary fill on white (2026-10-07, with the new logo): Lodgepole, the
+     logo's own green, with white text. The light green above stays for ink
+     surfaces, where Lodgepole would sink into the black. */
+  --cta:           #0A5632;
+  --cta-hover:     #08452A;
+  --text-on-cta:   #FFFFFF;
 
   /* The canvas behind everything. Layout.astro pins `html` to the same value
      for pages it owns; this is what /admin and any future page outside that
@@ -136,8 +143,8 @@
 
   /* The rest of the palette global.css repeats. Components still carry their
      own literals; these are here so this file names each colour once. */
-  --green:        #0A6B4D;  /* money, links, primary action on white */
-  --green-shadow: #0E8C64;  /* the lighter green: fills and done quiz segments, never text */
+  --green:        #0A5632;  /* money, links, primary action on white */
+  --green-shadow: #2E7A50;  /* the lighter green: fills and done quiz segments, never text */
   --paper:        #EEF1EC;  /* light text on ink */
   --rust:         #A0491A;  /* deadlines; above 5.5:1 on white */
   --bg-panel:     #F3F5F2;  /* the filter panel: controls, not listings */
@@ -194,7 +201,7 @@ body {
    indicator. Dark green by default, mint on the ink surfaces, which inherit
    it down to every control they contain. */
 :root {
-  --focus-ring: #0A6B4D;
+  --focus-ring: #0A5632;
   /* Reading measure for long-form prose; narrower than --sab-measure, which
      is for grids and dashboards. 17px over ~610px of text is about 78
      characters a line; the guides were running past 95. */
@@ -223,7 +230,7 @@ body {
 .sabf-footer,
 .sabe-cta { --focus-ring: var(--brand); }
 
-/* Accent-filled controls are themselves #2FD3A0, so they must opt back out of
+/* Accent-filled controls are themselves #4AA873, so they must opt back out of
    whatever surface they sit on; a mint ring on a mint pill is 1:1. */
 .sab-btn-accent,
 .sabm-btn-accent,
@@ -259,7 +266,7 @@ body {
 .sabp-header, .sab-hero-band {
   position: sticky; top: 0; z-index: 40;
   box-shadow: 0 0 0 rgba(0,0,0,0);
-  border-bottom: 1px solid rgba(92,227,187,0);
+  border-bottom: 1px solid rgba(102,185,135,0);
 }
 /* Title bands inside <main> reuse .sabp-header for its dark surface and mint
    accents, and the rule above made them stick too: on every guide the 560px
@@ -281,7 +288,7 @@ body {
   html[data-sab-stuck] .sabp-header,
   html[data-sab-stuck] .sab-hero-band {
     box-shadow: 0 10px 30px -12px rgba(0,0,0,0.75);
-    border-bottom-color: rgba(92,227,187,0.18);
+    border-bottom-color: rgba(102,185,135,0.18);
   }
 }
 
@@ -864,9 +871,9 @@ html:not(.js) .sabl-lean { display: none; }
   html.js[data-filters] .sabl-filters-done {
     display: block; position: sticky; bottom: calc(12px + env(safe-area-inset-bottom, 0px)); z-index: 3;
     width: 100%; min-height: 50px; margin: 18px 0 12px; border: 0; border-radius: var(--radius);
-    /* The one primary fill, mint with ink, as Apply (critique 2026-10-02:
-       black, dark green and mint pills all played primary). */
-    background: var(--brand); color: var(--text-on-brand); font: 700 16px var(--font-body); cursor: pointer;
+    /* The one primary fill, as Apply (critique 2026-10-02: black, dark
+       green and mint pills all played primary). */
+    background: var(--cta); color: var(--text-on-cta); font: 700 16px var(--font-body); cursor: pointer;
     box-shadow: 0 8px 20px -8px rgba(20,25,21,0.45);
   }
   /* Inside the fold the rows wrap instead of scrolling sideways: a clipped
@@ -904,7 +911,7 @@ html:not(.js) .sabl-lean { display: none; }
 /* The spring note (lib/status.ts openLaterNote), over the first row. */
 html[data-later-ok] .sabm-later-note { display: none; }
 .sab-later-ok {
-  font: inherit; font-weight: 700; color: #0E6B4D; cursor: pointer;
+  font: inherit; font-weight: 700; color: var(--green); cursor: pointer;
   padding: 0; border: 0; background: none;
   text-decoration: underline; text-underline-offset: 3px;
   /* A 44px target without making the line taller. */
@@ -1161,7 +1168,7 @@ html.js .sabl-group-toggle { display: inline-flex; }
 .sabl-corrected { margin: 0 0 16px; font-size: 15px; color: var(--ink-muted); }
 .sabl-save-label { font-size: 14px; font-weight: 700; color: var(--text-primary); }
 .sabl-save.on .sabl-save-label { color: var(--green); }
-.sabl-save.on { color: var(--green); background: rgba(47,211,160,0.15); }
+.sabl-save.on { color: var(--green); background: rgba(74,168,115,0.15); }
 /* The bookmark is drawn, not a ☆ character standing in for an icon set. Saved
    fills it; unsaved leaves it open. */
 .sabl-save svg { fill: none; }
@@ -1175,7 +1182,7 @@ html.js .sabl-group-toggle { display: inline-flex; }
   font-size: 14px; font-weight: 700; color: var(--text-primary); text-decoration: none;
   white-space: nowrap; display: inline-flex; align-items: center; gap: 5px;
 }
-.sabl-apply::before { content: ''; position: absolute; left: 0; right: 0; bottom: -4px; height: 2px; background: var(--brand); }
+.sabl-apply::before { content: ''; position: absolute; left: 0; right: 0; bottom: -4px; height: 2px; background: var(--cta); }
 .sabl-apply:hover { color: var(--green); }
 /* 44px to the pointer on every width without growing the row: the drawn
    controls stay 34px and 21px, the hit area around them does not
@@ -1241,15 +1248,15 @@ html:not(.js) .sabl-more { display: none; }
   color: var(--green); text-decoration: underline; text-underline-offset: 3px;
   text-decoration-thickness: 1.5px;
 }
-.sabl-empty-link:hover, .sabl-empty-link:focus-visible { color: #08573E; }
+.sabl-empty-link:hover, .sabl-empty-link:focus-visible { color: #08452A; }
 
 .sabl-empty-btn {
-  font-family: var(--font-body); background: var(--brand); color: var(--text-on-brand);
+  font-family: var(--font-body); background: var(--cta); color: var(--text-on-cta);
   font-weight: 700; font-size: 15px; padding: 13px 26px; border-radius: var(--radius); border: none; cursor: pointer;
   transition: background 0.18s ease, transform 0.07s ease;
 }
 .sabl-empty-btn:hover, .sabl-empty-btn:focus-visible {
-  background: #5CE3BB;
+  background: var(--cta-hover);
 }
 .sabl-empty-btn:active { transform: translateY(1px); transition-duration: 0.07s; }
 
@@ -1443,7 +1450,7 @@ html:not(.js) .sabl-more { display: none; }
 .sabm-progress { display: flex; gap: 8px; max-width: 420px; }
 .sabm-seg { flex: 1; height: 5px; border-radius: 0; background: rgba(20,25,21,0.12); }
 .sabm-seg.done { background: var(--green-shadow); }
-.sabm-seg.current { background: var(--brand); }
+.sabm-seg.current { background: var(--cta); }
 /* A question only some cities get: outlined until the city answer decides. */
 .sabm-seg.maybe { background: transparent; box-shadow: inset 0 0 0 1px rgba(20,25,21,0.22); }
 .sabm-step-label, .sabm-ph-step-label { font-family: var(--font-body); font-size: 14px; color: var(--ink-muted); margin-top: 14px; }
@@ -1475,7 +1482,7 @@ html:not(.js) .sabl-more { display: none; }
 /* Pointers only: on a touch screen the tint stuck to whatever option
    landed under the finger on the next question (critique 2026-10-01). */
 @media (hover: hover) { .sabm-opt:hover { background: #F5F6F4; } }
-.sabm-opt-selected { border-color: var(--green); background: #EEF6F1; box-shadow: inset 0 0 0 1.5px var(--green); }
+.sabm-opt-selected { border-color: var(--green); background: #EDF5EF; box-shadow: inset 0 0 0 1.5px var(--green); }
 .sabm-opt-dim { opacity: 0.45; }
 .sabm-opt-text { display: flex; flex-direction: column; gap: 5px; }
 .sabm-opt-label, .sabm-ph-opt-label { font-weight: 700; font-size: 18px; letter-spacing: -0.01em; color: var(--text-primary); }
@@ -1542,12 +1549,12 @@ button.sabm-pick-go { min-height: 48px; }
 }
 .sabm-btn-outline:active { transform: translateY(1px); transition-duration: 0.07s; }
 .sabm-btn-accent {
-  font-size: var(--fs-small); font-weight: 700; background: var(--brand); color: var(--text-on-brand);
+  font-size: var(--fs-small); font-weight: 700; background: var(--cta); color: var(--text-on-cta);
   padding: 12px 22px; border-radius: var(--radius); text-decoration: none; display: inline-block;
   transition: background 0.18s ease, color 0.18s ease, transform 0.07s ease;
 }
 .sabm-btn-accent:hover, .sabm-btn-accent:focus-visible {
-  background: #4FE0B4; color: var(--text-on-brand);
+  background: var(--cta-hover); color: var(--text-on-cta);
 }
 .sabm-btn-accent:active { transform: translateY(1px); transition-duration: 0.07s; }
 /* The save-all action is a <button>, the rest of the accents are links. */
@@ -1628,13 +1635,13 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
 .sabm-row-why li { display: flex; align-items: center; gap: 6px; }
 .sabm-row-why li::before {
   content: ''; width: 4px; height: 4px; border-radius: 0;
-  background: var(--brand); flex: none;
+  background: var(--cta); flex: none;
 }
 .sabm-tier {
   font-family: var(--font-body); font-size: 13px; font-weight: 600;
   padding: 3px 10px; border-radius: var(--radius); white-space: normal; max-width: 100%;
 }
-.sabm-tier-strong { background: rgba(47,211,160,0.18); color: var(--green); }
+.sabm-tier-strong { background: rgba(74,168,115,0.18); color: var(--green); }
 .sabm-tier-good { background: rgba(20,25,21,0.07); color: var(--ink-muted); }
 /* An eligibility rule the quiz never asked about. Rust, like every other
    "act on this" mark, at #A0491A, the directory day-chip rust, which clears AA on white. */
@@ -1644,7 +1651,7 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
 .sabm-amount-cell { display: flex; flex-direction: column; align-items: flex-end; gap: 7px; }
 .sabm-paid-chip {
   font-family: var(--font-body); font-size: 13px; font-weight: 700; padding: 5px 11px; border-radius: var(--radius);
-  background: rgba(14,140,100,0.12); color: var(--green); white-space: nowrap;
+  background: rgba(46,122,80,0.12); color: var(--green); white-space: nowrap;
 }
 .sabm-paid-note {
   font-family: var(--font-body); font-size: var(--fs-meta); line-height: 1.35;
@@ -1735,7 +1742,7 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
 }
 .sabs-status select:hover { border-color: var(--text-primary); }
 [data-status="working"] .sabs-status select { border-color: var(--text-primary); }
-[data-status="submitted"] .sabs-status select { background-color: #E3F3EC; border-color: #0A6B4D; color: #0A6B4D; }
+[data-status="submitted"] .sabs-status select { background-color: #E1F0E5; border-color: #0A5632; color: #0A5632; }
 [data-status="won"] .sabs-status select {
   background-color: var(--text-primary); border-color: var(--text-primary); color: #FFC700;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23FFC700' stroke-width='1.6'/%3E%3C/svg%3E");
@@ -1799,7 +1806,7 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
 .sabs-cal-nav.has-due { border-color: rgba(20, 25, 21, 0.68); }
 .sabs-cal-nav-count {
   font-size: 11px; font-weight: 500; line-height: 1;
-  background: var(--brand); color: var(--text-on-brand); border-radius: var(--radius); padding: 3px 6px;
+  background: var(--cta); color: var(--text-on-cta); border-radius: var(--radius); padding: 3px 6px;
 }
 .sabs-cal-nav:hover { border-color: var(--text-primary); }
 .sabs-cal-grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px; }
@@ -1809,7 +1816,7 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
   background: transparent; border: 1.5px solid rgba(20,25,21,0.08);
 }
 .sabs-cal-cell.blank { border-color: transparent; }
-.sabs-cal-cell.has-due { background: rgba(47,211,160,0.16); border-color: rgba(14,140,100,0.4); }
+.sabs-cal-cell.has-due { background: rgba(74,168,115,0.16); border-color: rgba(46,122,80,0.4); }
 .sabs-cal-cell.today { border-color: var(--text-primary); }
 .sabs-cal-day { font-size: var(--fs-ui); color: var(--text-primary); }
 .sabs-cal-cell.has-due .sabs-cal-day, .sabs-cal-cell.today .sabs-cal-day { font-weight: 700; }
@@ -1843,7 +1850,7 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
   border-top: 1.5px solid rgba(255, 255, 255, 0.14);
   /* Mint on near-black is the readable pairing; the ink surfaces hand the
      focus ring back to mint for exactly this reason. */
-  --focus-ring: #2FD3A0;
+  --focus-ring: #4AA873;
   padding: 16px 20px calc(16px + env(safe-area-inset-bottom, 0px));
 }
 .sab-consent-inner {
@@ -1964,7 +1971,7 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
   background: var(--text-primary); color: #FFC700;
   font: 800 13px/1.1 var(--font-display); letter-spacing: 0.04em; text-transform: uppercase;
 }
-.sabl-special-name { color: #0A6B4D; font-weight: 700; text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
+.sabl-special-name { color: #0A5632; font-weight: 700; text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
 .sabl-special-name:hover { color: var(--text-primary); }
 .sabl-special-v { color: var(--ink-muted); }
 /* A city board's photo (2026-10-02), desktop only; see ScholarshipDirectory. */
@@ -2003,7 +2010,7 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
 .sabl-title-row .sabs-toggle-btn.on { background: #fff; color: var(--text-primary); }
 /* City hubs: where the rest of the reader's awards are (critique 2026-10-01). */
 .sabl-also { margin: 0 0 18px; max-width: 75ch; font-size: 15px; line-height: 1.5; color: var(--ink-soft); }
-.sabl-also a { color: #0A6B4D; font-weight: 700; text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
+.sabl-also a { color: #0A5632; font-weight: 700; text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
 .sabl-also a:hover { color: var(--text-primary); }
 .sabl-promo {
   position: absolute; top: 22px; right: 30px; width: 124px; height: 124px;
@@ -2030,7 +2037,7 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
   font: 800 21px/1 var(--font-display); letter-spacing: 0.04em; text-transform: uppercase;
   min-height: 52px; border-width: 0;
 }
-.sabl-more-btn:hover { background: var(--brand); color: var(--text-primary); }
+.sabl-more-btn:hover { background: var(--cta); color: var(--text-on-cta); }
 @media (max-width: 900px) {
   /* Kept tight: the first listing on a phone was fought up to 330px of 844
      (critique 2026-09-29), and the board may only cost it a little. */
@@ -2057,10 +2064,10 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
   .sabl-card > :is(.sabl-amount, .sabl-card-top-left) { justify-self: start; text-align: left; }
 }
 /* The count stickers say what the run is: rust for the ones closing within
-   two weeks (rust is the deadline colour everywhere), mint for open now. */
-[data-dir-group='active'] .sabl-group-count { background: var(--brand); color: var(--text-primary); }
+   two weeks (rust is the deadline colour everywhere), green for open now. */
+[data-dir-group='active'] .sabl-group-count { background: var(--cta); color: var(--text-on-cta); }
 /* A row lights up mint under the pointer instead of going grey. */
-@media (hover: hover) { .sabl-card:hover { background-color: rgba(47, 211, 160, 0.14); } }
+@media (hover: hover) { .sabl-card:hover { background-color: rgba(74, 168, 115, 0.14); } }
 /* The pickers were 6px boxes with a hairline, the most default-looking thing
    on the page; they take the sort picker's pill and an ink outline. */
 .sabl-filter-select, html.js .sabl-rail .sabl-scope-select {

@@ -50,6 +50,9 @@ function fmtDeadline(d: string | null | undefined, estimated = false): string {
     .toUpperCase();
 }
 
+// The dark-background logo, 4.75:1, as the header uses.
+const LOGO = 'data:image/svg+xml;base64,' + readFileSync(join(__dirname, '../public/brand/scholarab-logo-on-dark.svg')).toString('base64');
+
 // Satori element helper (object tree, no JSX in a .ts script)
 const el = (type: string, style: Record<string, unknown>, children?: unknown) =>
   ({ type, props: { style, children } });
@@ -61,22 +64,20 @@ function card(s: Scholarship) {
     justifyContent: 'space-between', backgroundColor: '#0B1512',
     padding: '64px 72px', color: '#EEF1EC',
   }, [
-    el('div', { display: 'flex', alignItems: 'center', gap: 14, fontFamily: 'Big Shoulders Label', fontWeight: 700, fontSize: 22, letterSpacing: 2, color: '#2FD3A0' }, [
-      el('div', { width: 14, height: 14, borderRadius: 999, backgroundColor: '#2FD3A0' }),
+    el('div', { display: 'flex', alignItems: 'center', gap: 14, fontFamily: 'Big Shoulders Label', fontWeight: 700, fontSize: 22, letterSpacing: 2, color: '#4AA873' }, [
+      el('div', { width: 14, height: 14, borderRadius: 999, backgroundColor: '#4AA873' }),
       el('div', {}, `SCHOLARSHIP · ${(placeOf(s) || 'ALBERTA').toUpperCase()}`),
     ]),
     el('div', { display: 'flex', flexDirection: 'column', gap: 28 }, [
       el('div', { fontFamily: 'Big Shoulders', fontWeight: 800, fontSize: titleSize, lineHeight: 1.05, letterSpacing: -1 }, s.title),
       el('div', { display: 'flex', alignItems: 'baseline', gap: 24 }, [
-        el('div', { fontFamily: 'Big Shoulders', fontWeight: 800, fontSize: 68, color: '#2FD3A0' }, s.amount),
+        el('div', { fontFamily: 'Big Shoulders', fontWeight: 800, fontSize: 68, color: '#4AA873' }, s.amount),
         el('div', { fontFamily: 'Big Shoulders Label', fontWeight: 700, fontSize: 22, letterSpacing: 1.5, color: 'rgba(238,241,236,0.6)' }, fmtDeadline(s.deadline, s.deadlineEstimated)),
       ]),
     ]),
     el('div', { display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid rgba(238,241,236,0.2)', paddingTop: 28 }, [
-      el('div', { display: 'flex', fontFamily: 'Public Sans', fontSize: 30, fontWeight: 700 }, [
-        el('span', {}, 'Scholar'),
-        el('span', { color: '#2FD3A0' }, 'AB'),
-      ]),
+      // The logo itself, not the name typed in a font (2026-10-07).
+      { type: 'img', props: { src: LOGO, width: 190, height: 40 } },
       el('div', { fontFamily: 'Big Shoulders Label', fontWeight: 700, fontSize: 20, letterSpacing: 1.5, color: 'rgba(238,241,236,0.6)' }, 'FIND YOUR SCHOLARSHIP · SCHOLARAB.CA'),
     ]),
   ]);

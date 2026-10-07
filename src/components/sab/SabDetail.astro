@@ -460,7 +460,7 @@ const chip: { text: string; tone: Tone } =
     border: 1px solid rgba(20,25,21,0.14); border-radius: 4px;
     background: var(--bg-page); text-decoration: none; box-sizing: border-box;
   }
-  .sabd-guide:hover { border-color: #0E8C64; }
+  .sabd-guide:hover { border-color: #2E7A50; }
 
   /* Collection notice, sits under the sign-up form. Deliberately quiet but
      always present: the address is the only personal data the site takes, and
@@ -475,14 +475,14 @@ const chip: { text: string; tone: Tone } =
   .sabd-remind-how { margin-top: 4px; font-size: var(--fs-meta); line-height: 1.55; color: var(--ink-muted); }
   .sabd-remind-how summary {
     display: inline-flex; align-items: center; gap: 6px; min-height: 24px; cursor: pointer;
-    list-style: none; color: #0A6B4D; text-decoration: underline; text-underline-offset: 2px;
+    list-style: none; color: #0A5632; text-decoration: underline; text-underline-offset: 2px;
   }
   .sabd-remind-how summary::-webkit-details-marker { display: none; }
   .sabd-remind-caret { flex: none; transition: transform 0.18s ease; }
   .sabd-remind-how[open] .sabd-remind-caret { transform: rotate(180deg); }
   .sabd-remind-how p { margin: 4px 0 0; }
   .sabd-remind-late { margin-bottom: 0; }
-  .sabd-remind-how a { color: #0A6B4D; text-decoration: underline; text-underline-offset: 2px; }
+  .sabd-remind-how a { color: #0A5632; text-decoration: underline; text-underline-offset: 2px; }
   @media (prefers-reduced-motion: reduce) { .sabd-remind-caret { transition: none; } }
   .sabd-guide-label { display: block; font-size: var(--fs-ui); font-weight: 600; color: var(--ink-muted); }
   .sabd-guide-title {
@@ -497,7 +497,7 @@ const chip: { text: string; tone: Tone } =
   /* 12px of padding cancelled by margin: the text sits where it did, the tap
      target grows from 20px to 44px. */
   .sabd-back { font-size: 13px; letter-spacing: 0.04em; color: var(--ink-faint); text-decoration: none; display: inline-block; padding: 12px 0; margin: -12px 0; }
-  .sabd-back:hover { color: #0A6B4D; }
+  .sabd-back:hover { color: #0A5632; }
   /* The facet crumb sits beside the back link with a separator drawn in CSS, so
      the two read as one trail rather than two competing back-buttons. */
   .sabd-facet::before { content: '/'; margin-right: 8px; opacity: 0.45; }
@@ -516,7 +516,7 @@ const chip: { text: string; tone: Tone } =
   .sabd-chips { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
   .sabd-chip { font-family: var(--font-body); font-size: 15px; font-weight: 700; }
   .sabd-chip[data-tone='quiet'] { color: var(--ink-muted); }
-  .sabd-chip[data-tone='go'] { color: #0A6B4D; }
+  .sabd-chip[data-tone='go'] { color: #0A5632; }
   .sabd-chip[data-tone='soon'], .sabd-chip[data-tone='urgent'] { color: #A0491A; }
   .sabd-h1 {
     font-family: var(--font-display); font-weight: 400;
@@ -525,7 +525,7 @@ const chip: { text: string; tone: Tone } =
   }
   .sabd-subline { font-size: 15px; color: var(--ink-soft); margin-top: 12px; }
   .sabd-who { font-size: 16px; line-height: 1.5; color: #141915; margin: 14px 0 0; max-width: 640px; }
-  .sabd-who-label { font-weight: 600; color: #0A6B4D; }
+  .sabd-who-label { font-weight: 600; color: #0A5632; }
   .sabd-how { margin-top: 6px; }
   .sabd-grid {
     padding: 44px var(--sab-gutter) 96px; box-sizing: border-box;
@@ -600,14 +600,14 @@ const chip: { text: string; tone: Tone } =
     display: block; padding: 13px 0; border-bottom: 1px solid rgba(20,25,21,0.14);
     text-decoration: none; color: #141915;
   }
-  .sabd-next-why { display: block; font-size: var(--fs-ui); font-weight: 600; color: #0A6B4D; }
+  .sabd-next-why { display: block; font-size: var(--fs-ui); font-weight: 600; color: #0A5632; }
   .sabd-next-name { display: block; margin-top: 2px; font-size: 17px; font-weight: 600; line-height: 1.3; }
-  .sabd-next-row:hover .sabd-next-name { color: #0A6B4D; text-decoration: underline; text-underline-offset: 3px; }
+  .sabd-next-row:hover .sabd-next-name { color: #0A5632; text-decoration: underline; text-underline-offset: 3px; }
   .sabd-next-meta { display: block; margin-top: 3px; font-size: 14px; color: var(--ink-muted); }
 
   .sabd-steps { display: flex; flex-direction: column; border-top: 1px solid rgba(20,25,21,0.14); max-width: 640px; }
   .sabd-step { display: flex; gap: 18px; align-items: baseline; padding: 16px 0; border-bottom: 1px solid rgba(20,25,21,0.14); }
-  .sabd-step-n { font-family: var(--font-display); font-size: 24px; color: #0A6B4D; flex: none; width: 28px; }
+  .sabd-step-n { font-family: var(--font-display); font-size: 24px; color: #0A5632; flex: none; width: 28px; }
   .sabd-step-text { font-size: var(--fs-body); line-height: 1.55; color: var(--ink-soft); }
 
   .sabd-rail { grid-column: 2; grid-row: 2; display: flex; flex-direction: column; gap: 16px; }
@@ -615,7 +615,7 @@ const chip: { text: string; tone: Tone } =
     background: #FFFFFF; border: 1.5px solid rgba(20,25,21,0.85); border-radius: var(--radius);
     padding: 28px 26px;
   }
-  .sabd-value { font-family: var(--font-display); font-size: 52px; line-height: 1.05; color: #0A6B4D; margin: 8px 0 4px; }
+  .sabd-value { font-family: var(--font-display); font-size: 52px; line-height: 1.05; color: #0A5632; margin: 8px 0 4px; }
   .sabd-value.is-cost { color: #141915; }
   .sabd-value.is-quiet { font-family: var(--font-body); font-size: 20px; font-weight: 700; line-height: 1.3; margin: 6px 0 2px; }
   .sabd-value-note { font-size: 14px; color: var(--ink-faint); }
@@ -636,30 +636,29 @@ const chip: { text: string; tone: Tone } =
   }
   .sabd-checked svg { flex: none; margin-top: 2px; color: var(--ink-faint); }
   .sabd-checked.is-confirmed { color: var(--text-primary); }
-  .sabd-checked.is-confirmed svg { color: #0A6B4D; }
+  .sabd-checked.is-confirmed svg { color: #0A5632; }
   .sabd-estimate-note { margin: 10px 0 0; font-size: var(--fs-ui); line-height: 1.45; color: var(--ink-muted); }
   .sabd-alts { margin: 18px 0 0; padding-top: 16px; border-top: 1px solid rgba(20,25,21,0.12); }
   .sabd-alts-h { margin: 0 0 4px; font-size: 14px; font-weight: 700; color: var(--ink-muted); }
   .sabd-alts ul { list-style: none; margin: 0; padding: 0; }
   .sabd-alt { display: block; padding: 9px 0; text-decoration: none; color: #141915; border-bottom: 1px solid rgba(20,25,21,0.08); }
   .sabd-alt-name { display: block; font-size: 15px; font-weight: 600; line-height: 1.3; }
-  .sabd-alt:hover .sabd-alt-name { color: #0A6B4D; text-decoration: underline; text-underline-offset: 3px; }
+  .sabd-alt:hover .sabd-alt-name { color: #0A5632; text-decoration: underline; text-underline-offset: 3px; }
   .sabd-alt-meta { display: block; margin-top: 2px; font-size: var(--fs-ui); color: var(--ink-muted); }
   .sabd-alts-all {
     display: inline-flex; align-items: center; min-height: 32px; margin-top: 4px;
     font-size: 14px; font-weight: 600; color: #141915;
-    text-decoration: underline; text-underline-offset: 3px; text-decoration-color: #2FD3A0;
+    text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--cta);
   }
-  .sabd-alts-all:hover { color: #0A6B4D; }
+  .sabd-alts-all:hover { color: #0A5632; }
   .sabd-cta-row { display: flex; gap: 10px; margin-top: 22px; }
   .sabd-cta {
     flex: 1; text-align: center; font-size: var(--fs-body); font-weight: 700;
-    /* The site's one Apply fill, the mint of the home and hero buttons; it was
-       dark green here alone (critique 2026-09-23). */
-    background: #2FD3A0; color: #08120E; padding: 15px 18px; border-radius: var(--radius); line-height: 1.25; text-decoration: none;
+    /* The site's one Apply fill on white: the logo's green (2026-10-07). */
+    background: var(--cta); color: var(--text-on-cta); padding: 15px 18px; border-radius: var(--radius); line-height: 1.25; text-decoration: none;
     transition: background-color 0.15s ease;
   }
-  .sabd-cta:hover { background: #5CE3BB; color: #08120E; }
+  .sabd-cta:hover { background: var(--cta-hover); color: var(--text-on-cta); }
   .sabd-cta-disabled { background: rgba(20,25,21,0.08); color: var(--ink-muted); cursor: not-allowed; }
   .sabd-cta-disabled:hover { background: rgba(20,25,21,0.08); color: var(--ink-muted); }
   .sabd-save {
@@ -669,9 +668,9 @@ const chip: { text: string; tone: Tone } =
     font-size: var(--fs-body); font-weight: 700; color: #141915; background: transparent; flex: none;
   }
   .sabd-save:hover { border-color: #141915; }
-  .sabd-save[data-saved] { color: #0A6B4D; background: rgba(47,211,160,0.15); }
-  .sabd-save-primary:not([data-saved]) { background: #2FD3A0; border-color: #2FD3A0; color: #08120E; }
-  .sabd-save-primary:not([data-saved]):hover { background: #5CE3BB; border-color: #5CE3BB; }
+  .sabd-save[data-saved] { color: #0A5632; background: rgba(74,168,115,0.15); }
+  .sabd-save-primary:not([data-saved]) { background: var(--cta); border-color: var(--cta); color: var(--text-on-cta); }
+  .sabd-save-primary:not([data-saved]):hover { background: var(--cta-hover); border-color: var(--cta-hover); }
   .sabd-save-primary { flex: 1; }
   /* Two full-width rows when the listing has not opened: side by side, the
      opening date wrapped onto two lines in the narrow card. */
@@ -709,7 +708,7 @@ const chip: { text: string; tone: Tone } =
     border: 1.5px solid rgba(20,25,21,0.25); border-radius: var(--radius);
     padding: 11px 18px; color: var(--ink-soft);
   }
-  .sabd-visit:hover { border-color: #0E8C64; color: #0A6B4D; }
+  .sabd-visit:hover { border-color: #2E7A50; color: #0A5632; }
 
   /* A light inline form under the card, not a dark newsletter box
      (critique 2026-09-23). */
@@ -734,12 +733,12 @@ const chip: { text: string; tone: Tone } =
   .sabd-remind-input::placeholder { color: var(--ink-faint); }
   .sabd-remind-btn {
     font-family: var(--font-body); font-size: var(--fs-ui); font-weight: 700;
-    background: #2FD3A0; color: #08120E; border: none; border-radius: var(--radius);
+    background: var(--cta); color: var(--text-on-cta); border: none; border-radius: var(--radius);
     padding: 11px 18px; cursor: pointer; flex: none;
   }
-  .sabd-remind-btn:hover { background: #5CE3BB; }
+  .sabd-remind-btn:hover { background: var(--cta-hover); }
   .sabd-remind-btn:disabled { opacity: 0.6; cursor: default; }
-  .sabd-remind-msg { margin-top: 8px; font-size: var(--fs-small); font-weight: 600; color: #0A6B4D; }
+  .sabd-remind-msg { margin-top: 8px; font-size: var(--fs-small); font-weight: 600; color: #0A5632; }
   /* It was near-white on the white card, so a bad address showed nothing. */
   .sabd-remind-msg.is-error { color: #B42318; }
   .sabd-remind-input[aria-invalid="true"] { border-color: #B42318; }
