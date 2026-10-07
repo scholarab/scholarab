@@ -249,6 +249,7 @@ const carousels = [
   {/* The poster is the phone LCP and a CSS background, so the browser only
       found it after the stylesheet: 2.5 s on a throttled 4G run. Phones get
       the same 720x1080 centre crop as the `.m` clips, at under half the bytes. */}
+  <link rel="expect" href="#sab-hero-end" blocking="render" slot="head" />
   <link rel="preload" as="image" href="/video/hero/poster.webp" media="(min-width: 901px)" fetchpriority="high" slot="head" />
   <link rel="preload" as="image" href="/video/hero/poster.m.webp" media="(max-width: 900px)" fetchpriority="high" slot="head" />
 
@@ -290,19 +291,6 @@ const carousels = [
               <input id="sab-hero-q" name="q" type="search" enterkeyhint="search" placeholder="Search, e.g. nursing" class="sab-hero-search-input" />
               <button type="submit" class="sab-hero-search-btn">Search</button>
             </form>
-            {/* The example in the box rotates through fields so students see
-                it searches more than one subject. Stops once they type. */}
-            <script is:inline>(function () {
-              const input = document.getElementById('sab-hero-q');
-              if (!input) return;
-              const terms = ['nursing', 'business', 'engineering', 'music', 'agriculture', 'medicine', 'trades', 'science'];
-              let i = 0;
-              setInterval(function () {
-                if (document.activeElement === input || input.value) return;
-                i = (i + 1) % terms.length;
-                input.placeholder = 'Search, e.g. ' + terms[i];
-              }, 2500);
-            })();</script>
             <div class="sab-hero-ctas">
               <a href="/scholarships/" class="sab-btn-accent">
                 Browse {scholarshipCount.toLocaleString('en-CA')} scholarships
@@ -340,6 +328,26 @@ const carousels = [
           </div>
 
         </div>
+        {/* The end of the hero. The head asks the browser not to paint before
+            this is parsed: a paint halfway through the hero showed the copy
+            without its buttons, and the bottom-anchored block grew under the
+            headline and pushed it up 48px when they arrived (CLS 0.024, the
+            "hold still" e2e flake, traced 2026-10-07). */}
+        <span id="sab-hero-end" hidden></span>
+        {/* The example in the box rotates through fields so students see
+            it searches more than one subject. Stops once they type. Out of
+            the hero, so the parser never stops inside it. */}
+        <script is:inline>(function () {
+          const input = document.getElementById('sab-hero-q');
+          if (!input) return;
+          const terms = ['nursing', 'business', 'engineering', 'music', 'agriculture', 'medicine', 'trades', 'science'];
+          let i = 0;
+          setInterval(function () {
+            if (document.activeElement === input || input.value) return;
+            i = (i + 1) % terms.length;
+            input.placeholder = 'Search, e.g. ' + terms[i];
+          }, 2500);
+        })();</script>
       </div>
 
     </div>

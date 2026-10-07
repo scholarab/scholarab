@@ -2006,3 +2006,17 @@ Outcome: a first-time visitor can read the logo in the bar. Ilia compared the ho
 Repair attempts: one. 30 px at 901 px wide left 17 px to the first link; the 26 px step gives 36 px.
 
 Add-back fraction: 0/0 (nothing removed). Local only, built site: nearest header item from the logo's right edge, 96 px at 320 wide, 166 at 390, 36 at 901, 63 at 960 and 1001, 219 at 1400, 479 at 1920; no horizontal overflow at any of the ten widths checked. `npm run ci` passed (1,215 tests). E2E 164 passed, 1 failed: the known font test (CLS 0.0242, 9 of 24 repeats). Its layout-shift sources over 25 loads are the home headline, hero bottom and byline (0.024) and the nav links (0.0015); the logo is never a source.
+
+## Home headline jump, October 7, 2026
+
+Outcome: the home page holds still while it loads; the headline no longer jumps up as the hero finishes. This was the "home and the 404 page hold still while their fonts arrive" E2E failure recorded twice above.
+
+| Candidate | Result and retained requirement |
+| --- | --- |
+| The suspected cause, the headline font arriving late | Ruled out: with every font blocked, the hero lays out at the same positions. The layout-shift record showed the hero's bottom block growing from 164 to 259 px about 30 ms in, pushing the headline up 48 px: Chrome painted while the parser was paused at an inline script inside the hero, before the buttons and the quiz line existed. |
+| The placeholder-rotating script in the middle of the hero | Moved after the hero: it only needs to run before its first 2.5 s tick. |
+| A first paint before the hero is complete | `<link rel="expect" href="#sab-hero-end" blocking="render">` holds the first paint until the marker at the end of the hero is parsed (Chromium; other browsers ignore it). The city line's script stays where it is, so a returning student's line is still in place at first paint. |
+
+Repair attempts: none on this cause; the earlier entries had tried font preloads against the same test.
+
+Add-back fraction: 0/1. Local only, built site, 1280x720 Chromium, 20 loads each: largest CLS on the home page 0.0257 before and 0.0016 after; median first contentful paint 88 ms before and 84 ms after. The marker sits 46 KB into the 98 KB page. The flaky test: 48 of 48 repeats passed, against 4, 6 and 9 failures in 24 on the three earlier runs. `npm run ci` passed (1,215 tests); E2E 165 passed, 0 failed. Not measured: real Safari and Firefox, which ignore the hint and keep their own paint timing.
