@@ -1994,3 +1994,15 @@ Outcome: the site uses the logo's greens. On white, the main actions (Apply, Sav
 Repair attempts: none. A scan of 22 page types at 1400 and 390 wide listed every element whose fill, text, border or underline is the light green on a light surface; it found 13 components, all changed; three remaining hits are on ink (consent banner, map) or the tray above.
 
 Add-back fraction: 0/4. Local only. `npm run ci` passed (1,215 tests); E2E 165 passed, 0 failed. Contrast: `#0A5632` on white 8.79:1; white on `#0A5632` the same; `#4AA873` on the footer ink 6.41:1; ink on `#4AA873` 6.47:1. Not measured: whether the deeper Apply changes click-through.
+
+## Bigger header logo, October 7, 2026
+
+Outcome: a first-time visitor can read the logo in the bar. Ilia compared the home page with spacex.com: at 24 px tall the cap and the name were too small to make out.
+
+| Candidate | Result and retained requirement |
+| --- | --- |
+| Logo 24 px tall (114 px wide) in the 52 px bar | 36 px tall from 1101 px wide, 30 px from 1001 to 1100, 26 px from 901 to 1000 (where the centred links need the room), 32 px on phones. The bar keeps its declared 52 px, so the home fold does not move. |
+
+Repair attempts: one. 30 px at 901 px wide left 17 px to the first link; the 26 px step gives 36 px.
+
+Add-back fraction: 0/0 (nothing removed). Local only, built site: nearest header item from the logo's right edge, 96 px at 320 wide, 166 at 390, 36 at 901, 63 at 960 and 1001, 219 at 1400, 479 at 1920; no horizontal overflow at any of the ten widths checked. `npm run ci` passed (1,215 tests). E2E 164 passed, 1 failed: the known font test (CLS 0.0242, 9 of 24 repeats). Its layout-shift sources over 25 loads are the home headline, hero bottom and byline (0.024) and the nav links (0.0015); the logo is never a source.
