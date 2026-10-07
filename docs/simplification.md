@@ -2030,3 +2030,16 @@ Outcome: the footer signs off with a logo a visitor can read, as the header now 
 | Footer logo 36 px tall (171 px wide) | 48 px tall (228 px wide) at every width; 20 px under it instead of 16. |
 
 Repair attempts: none. Add-back fraction: 0/0 (nothing removed). Local only, built site at 320, 390 and 1400 wide: 228 by 48 px, no horizontal overflow. `npm run ci` passed (1,215 tests); E2E 165 passed, 0 failed.
+
+## Calmer logo, October 7, 2026
+
+Outcome: the logo reads as one idea (the mountain in the A) instead of several competing tricks. Ilia said it looked generic and that the mountain sat too close to the top of the A, leaving too little space inside.
+
+| Candidate | Result and retained requirement |
+| --- | --- |
+| Bookmark l hanging below the line | Removed: plain Lexend l. The logo is now one line tall, so at the same height the letters are larger. |
+| Sloped top on the h | Removed: plain Lexend h. |
+| Mountain peak at 46% of the cap height, full-weight chevron | Lowered to 36% with a chevron 82% as thick; the space above the peak about doubles and stays open at header size. |
+| Logo widths in the header, footer and share cards | Kept heights; widths follow the new proportions (179, 150, 130, 159, 239 and 199 px). |
+
+Repair attempts: none. Add-back fraction: 0/2 (neither letter trick returned). Local only, built site at 320, 390, 901, 1000, 1101 and 1400 wide: no horizontal overflow; the smallest gap from the logo to the first menu item is 30 px at 901. `npm run ci` passed (1,215 tests); E2E 165 passed, 0 failed.

@@ -77,7 +77,7 @@ function card(s: Scholarship) {
     ]),
     el('div', { display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid rgba(238,241,236,0.2)', paddingTop: 28 }, [
       // The logo itself, not the name typed in a font (2026-10-07).
-      { type: 'img', props: { src: LOGO, width: 190, height: 40 } },
+      { type: 'img', props: { src: LOGO, width: 199, height: 40 } },
       el('div', { fontFamily: 'Big Shoulders Label', fontWeight: 700, fontSize: 20, letterSpacing: 1.5, color: 'rgba(238,241,236,0.6)' }, 'FIND YOUR SCHOLARSHIP · SCHOLARAB.CA'),
     ]),
   ]);
