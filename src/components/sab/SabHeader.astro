@@ -13,7 +13,6 @@ import { todayDate as albertaToday } from '../../lib/calendar';
 // 44×44 button ("ScholarAB Mobile Home.dc.html", state B); one nav, two
 // layouts, so there is no second link list to keep in sync.
 
-import SabLogoMark from './SabLogoMark.astro';
 import SabTour from './SabTour.astro';
 import { loadScholarships, loadPrograms } from '../../lib/data-loader';
 import { programIsListed } from '../../lib/status';
@@ -184,8 +183,7 @@ const isActive = (href: string, also: string[] = []) =>
 <header class="sabh" data-sab-header>
   <div class="sabh-nav">
     <a href="/" class="sabh-logo" aria-label="ScholarAB home">
-      <SabLogoMark size={24} id="header" />
-      <span class="sabh-logo-word">Scholar<span style="color:#2FD3A0;">AB</span></span>
+      <img src="/brand/scholarab-logo-on-dark.svg" alt="" width="114" height="24" />
     </a>
     <div class="sabh-actions">
       <!-- The site nav is a real landmark: it is the only way to jump past
@@ -326,8 +324,10 @@ const isActive = (href: string, also: string[] = []) =>
        fold, and a height that moves with a font metric would move the fold. */
     height: var(--sab-nav-h);
   }
-  .sabh-logo { display: flex; align-items: center; gap: 9px; text-decoration: none; justify-self: start; }
-  .sabh-logo-word { font-family: var(--font-body); font-weight: 700; font-size: 17px; letter-spacing: -0.015em; color: #EEF1EC; }
+  /* The logo (2026-10-07): Alberta in a cap + the lettered name, one SVG drawn for dark
+     backgrounds. Its size is fixed in the markup, so it never shifts the bar. */
+  .sabh-logo { display: flex; align-items: center; text-decoration: none; justify-self: start; }
+  .sabh-logo img { display: block; }
   /* The wrapper only exists so the burger can sit beside the links in the
      markup; on desktop the links take the middle column and the burger the
      last, as if the wrapper were not there. */

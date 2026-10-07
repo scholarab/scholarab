@@ -1,5 +1,4 @@
 ---
-import SabLogoMark from './SabLogoMark.astro';
 
 // Full dark footer shared by every sab-design page (same design as the home page).
 const footerCols = [
@@ -35,8 +34,7 @@ const footerCols = [
     <div class="sabf-top">
       <div>
         <div class="sabf-logo">
-          <SabLogoMark size={32} id="footer" />
-          <span class="sabf-word">Scholar<span class="sabf-accent">AB</span></span>
+          <img src="/brand/scholarab-logo-on-dark.svg" alt="ScholarAB" width="171" height="36" />
         </div>
         <p class="sabf-blurb">ScholarAB is a free directory of scholarships and programs for Alberta high school students, with deadlines tracked. No account needed.</p>
         <p class="sabf-blurb sabf-disclaimer">Listings are checked against each provider's own page, but this site can still contain errors and out-of-date information. Deadlines move and rules change. Always confirm the details on the provider's own page before you apply. <a href="/terms/">More in the terms of use</a>.</p>
@@ -73,10 +71,9 @@ const footerCols = [
      with the logo and the social icons above (2026-09-18). */
   .sabf-inner { padding: 64px clamp(20px, 4vw, 56px) 40px; box-sizing: border-box; }
   .sabf-mono { font-family: var(--font-label); }
-  .sabf-accent { color: #2FD3A0; }
   .sabf-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 40px; }
-  .sabf-logo { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
-  .sabf-word { font-weight: 800; letter-spacing: -0.02em; color: #EEF1EC; font-size: 28px; line-height: 1; }
+  .sabf-logo { display: flex; align-items: center; margin-bottom: 16px; }
+  .sabf-logo img { display: block; }
   .sabf-blurb { font-size: 14px; line-height: 1.6; max-width: 340px; margin: 0; }
   /* The accuracy disclaimer. Deliberately in the footer rather than only in
      the terms: a student about to miss a deadline is not reading /terms. */

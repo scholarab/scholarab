@@ -1963,3 +1963,19 @@ Outcome: on the home page, opening a header menu and moving across it keeps the 
 Repair attempts: four approaches failed before the method changed. They were the `:has()` rule, the text-shadow, link hover visuals alone, and single-run variant comparisons. Run-to-run noise was larger than every effect. The stutter appeared only while the GPU was shared (another Firefox playing the film, or the app's browser pane), so the method became variants toggled on and off inside one session, under a fixed load of two extra Firefox windows playing the home page. A Firefox profiler capture showed no busy thread (page main thread 5.8% CPU) and the refresh driver "waiting for paint" 38 times a second against 4.7, which pointed at repaint count.
 
 Add-back fraction: 0/1. Local only, Playwright Firefox 155 at 1600x900, 2x, same-session alternation, frames over 33 ms while the pointer moves inside the open menu: production with the fades removed by injected CSS 56 against 359 (8 cycles, lower in every cycle); the built page 52 against 288 with the fades put back (6 cycles), and 44 with every header and headline transition off. Without the extra load, production and the build both ran at 60 fps in Firefox, Chrome and WebKit. Second pass, built page under the same load, two sessions: the original page 413 and 445, the fades removed (what 691ffc3 shipped) 85 and 70, fades and blur removed 24 and 40, and in two further sessions the open menu matched the no-menu phases (1 against 0, 0 against 0). Not measured: Ilia's own Firefox with its extensions, and real Safari.
+
+## New logo on the site, October 7, 2026
+
+Outcome: every page, browser tab, home-screen icon and shared link shows the new ScholarAB logo (Alberta in a graduation cap beside the lettered name: mountain A, sloped h, bookmark l, Lodgepole green), the one Ilia approved.
+
+| Candidate | Result and retained requirement |
+| --- | --- |
+| `SabLogoMark.astro`, the old round "rim break" mark drawn inline on every page, plus the name typed in the body font beside it in the header and the footer | Deleted. One file, `public/brand/scholarab-logo-on-dark.svg`, serves both as an `<img>` with fixed width and height, so the bar cannot shift while it loads. The anchor keeps its "ScholarAB home" label. |
+| The `.sabh-logo-word`, `.sabf-word` and `.sabf-accent` styles | Deleted with the typed name. |
+| `/brand/scholarab-mark.svg` | Kept at the same URL, because README.md and TRADEMARK.md give it to schools; it now holds the new logo. |
+| `icon-512.png` doing "any maskable" | Split: the tile for "any", a separate `icon-maskable-512.png` with the mark inside the safe circle, so Android no longer crops the edges of the old icon. |
+| The per-listing share cards (`scripts/generate-og-images.ts`, 1,493 images) | Not touched: they type "ScholarAB" in Public Sans with the site's mint accent, which belongs to the site colour pass Ilia has not approved yet. |
+
+Repair attempts: none.
+
+Add-back fraction: 0/3. Local only. `npm run ci` passed (1,215 tests). E2E: 164 passed, 1 failed, "home and the 404 page hold still while their fonts arrive" (CLS 0.024). Over 24 repeats it failed 4 times with this change and 6 times with HEAD's header and footer restored, the same value each time, so it is the flake recorded above and not this change. Checked in the built site at 1400 and 390 wide: header over the home film, header on /scholarships/, the phone bar beside the menu button, and the footer; the logo loads and measures 24 px tall in the bar. Not measured: how long Google takes to show the new favicon in results.
