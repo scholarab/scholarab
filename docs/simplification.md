@@ -2043,3 +2043,19 @@ Outcome: the logo reads as one idea (the mountain in the A) instead of several c
 | Logo widths in the header, footer and share cards | Kept heights; widths follow the new proportions (179, 150, 130, 159, 239 and 199 px). |
 
 Repair attempts: none. Add-back fraction: 0/2 (neither letter trick returned). Local only, built site at 320, 390, 901, 1000, 1101 and 1400 wide: no horizontal overflow; the smallest gap from the logo to the first menu item is 30 px at 901. `npm run ci` passed (1,215 tests); E2E 165 passed, 0 failed.
+
+## Reverified accuracy audit, October 8, 2026
+
+Outcome: students see amounts and eligibility that agree with the provider, and preferences no longer exclude otherwise eligible students. This is a review patch in an isolated worktree, with no publication or shipping step.
+
+| Candidate | Outcome and retained requirement |
+| --- | --- |
+| Blanket financial-need, apprenticeship and Indigenous restrictions contradicted by provider preferences or alternative routes | Removed 32 true boolean restrictions across the affected listings. Retained the actual preference or conditional requirement in public text. Added mandatory restrictions where the source required them. |
+| Duplicate explanations created while correcting amounts and eligibility | Removed the repeated notes after the first validation run identified them. Facts remain in the description or other appropriate field. |
+| A repeated provider download for every audit finding | Reused one fetched source per URL for the initial check: 187 unique sources covered 277 candidate findings, avoiding 90 duplicate initial downloads. Each finding was still reviewed in its award context. |
+
+Repair attempts: the first validation run caught duplicated notes, and the first test run caught four short snippets after text changes. One correction pass removed the repetitions and adjusted the affected metadata clauses. The unchanged base passed both corresponding checks. Inaccessible provider pages received bounded retrieval attempts; nine findings remain skipped, with no award deleted.
+
+Measured locally: 32 unsupported blanket boolean restrictions before, zero of those restrictions after; 1,554 catalogue listings before and after. Add-back fraction: 0/32. No removal failed the retained provider-supported behavior, so none was restored to manufacture the requested 10% target. No runtime speedup or hosted result is claimed. The work saved is the 90 duplicate initial fetches counted above; no elapsed-time reduction was measured.
+
+Evidence: `private/rotfix-2026-10-08/SUMMARY.md`, per-finding `log.jsonl`, source index, catalogue patch and the requested validation/test logs. No new automation or runtime implementation was introduced. Shipping checks remain required before any later publication.
