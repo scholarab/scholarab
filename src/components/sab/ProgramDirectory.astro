@@ -251,6 +251,7 @@ const openNow = programOpenNowCount(initial);
           data-format={p.format ?? undefined}
           data-paid={p.paid ? '1' : undefined}
           data-deadline={p.deadline ?? undefined}
+          data-open-date={p.openDate ?? undefined}
           data-search={programSearchBlob(p)}
         >
           {/* Same four cells as a scholarship row. The category label above the
@@ -350,6 +351,7 @@ const openNow = programOpenNowCount(initial);
         grades: null,
         paid: d.paid === '1',
         deadline: d.deadline ?? null,
+        openDate: d.openDate ?? null,
         // Visitor-timezone ms from the ISO string; a serialized build-time
         // value would be UTC-midnight and close listings a day early here.
         _deadline_ms: d.deadline && d.deadline !== 'TBA' && d.deadline !== 'Ongoing'

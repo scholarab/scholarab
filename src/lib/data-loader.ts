@@ -117,6 +117,9 @@ export type Program = {
   location: string | null
   eligibility: string | null
   deadline: string | null
+  /** When applications open, only when the provider posts an exact date.
+   *  Before it the program is not open yet, whatever its deadline says. */
+  openDate?: string | null
   url: string
   description: string | null
   /**

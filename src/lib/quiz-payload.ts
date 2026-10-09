@@ -29,6 +29,7 @@ export type QuizProgram = Pick<
   | 'category'
   | 'grades'
   | 'deadline'
+  | 'openDate'
   | 'active'
   | 'paid'
   | 'stipend'
@@ -73,6 +74,7 @@ export function quizPayload(scholarships: Scholarship[], programs: Program[], co
         category,
         grades,
         deadline,
+        openDate,
         active,
         paid,
         stipend,
@@ -87,6 +89,7 @@ export function quizPayload(scholarships: Scholarship[], programs: Program[], co
         category,
         grades,
         deadline,
+        ...(openDate ? { openDate } : {}),
         active,
         paid,
         stipend,

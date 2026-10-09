@@ -1145,6 +1145,15 @@ html.js .sabl-group-toggle { display: inline-flex; }
   .sabl-card .sabl-when.is-quiet [data-when-main] { font-size: 13px; }
   .sabl-card .sabl-when.is-quiet .sabl-when-sub { font-size: 12px; }
 }
+/* Under 360px the buttons take a line of their own: beside them the amount
+   had 47px, and "Approximately $1,800" ran under Save (QA 2026-10-08). */
+@media (max-width: 359px) {
+  .sabl-card {
+    grid-template-columns: 66px minmax(0, 1fr);
+    grid-template-areas: "when main" "when amount" "when actions";
+  }
+  .sabl-card > .sabl-card-actions { justify-self: start; }
+}
 /* "Last checked Mar 2026", under the date, only on a row whose check is old
    enough to matter (isCheckStale in utils.ts). It was on every row, in full
    ink with a green tick, and on every row it said August or September 2026,

@@ -1,7 +1,7 @@
 // Framework-free filtering/sorting/status logic for the public directories.
 // Shared by the directory page scripts and the eligibility quiz.
 import { getToday } from './utils.ts';
-import { NO_DEADLINE, STATUS_WORDS, canApplyNow, scholarshipStatusOf, waitingLabel } from './status.ts';
+import { NO_DEADLINE, STATUS_WORDS, canApplyNow, programOpensLater, programStatusOf, scholarshipStatusOf, waitingLabel } from './status.ts';
 import type { ScholarshipStatus } from './status.ts';
 import type { Scholarship, Program } from './data-loader.ts';
 import { schoolOf } from './school-awards.ts';
@@ -373,11 +373,9 @@ export function programMatchesGrade(gradesText: string | null, grade: number): b
 export type ProgramStatus = 'active' | 'ongoing' | 'tba' | 'closed';
 
 export function getProgramStatus(p: ProgramWithMeta): ProgramStatus {
-  if (p.deadline === 'Ongoing') return 'ongoing';
-  if (!p.deadline || p.deadline === 'TBA') return 'tba';
-  const deadMs = p._deadline_ms ?? new Date(p.deadline + 'T00:00:00').getTime();
-  if (getToday().getTime() > deadMs) return 'closed';
-  return 'active';
+  const status = programStatusOf(p, getToday());
+  if ((status !== 'active' && status !== 'closed') || p._deadline_ms == null) return status;
+  return getToday().getTime() > p._deadline_ms ? 'closed' : 'active';
 }
 
 // The program row's deadline cell, in the same one-line form as scholarshipWhen.
@@ -385,7 +383,12 @@ export function programWhen(p: ProgramWithMeta): { main: string; sub: string; cl
   const status = getProgramStatus(p);
   if (status === 'closed') return { main: STATUS_WORDS.closed, sub: '', cls: 'sabl-when is-quiet' };
   if (status === 'ongoing') return { main: STATUS_WORDS.open, sub: NO_DEADLINE, cls: 'sabl-when is-quiet' };
-  if (status === 'tba') return { main: STATUS_WORDS.future, sub: 'date not posted', cls: 'sabl-when is-quiet' };
+  if (status === 'tba') {
+    const fmt = (iso: string) => new Date(iso + 'T00:00:00').toLocaleDateString('en-CA', { month: 'short', day: 'numeric' });
+    return programOpensLater(p, getToday())
+      ? { main: `Opens ${fmt(p.openDate!)}`, sub: `due ${fmt(p.deadline!)}`, cls: 'sabl-when is-quiet' }
+      : { main: STATUS_WORDS.future, sub: 'date not posted', cls: 'sabl-when is-quiet' };
+  }
   const deadMs = p._deadline_ms ?? new Date(p.deadline! + 'T00:00:00').getTime();
   const days = Math.max(0, Math.round((deadMs - getToday().getTime()) / 86400000));
   const main = new Date(deadMs).toLocaleDateString('en-CA', { month: 'short', day: 'numeric' });

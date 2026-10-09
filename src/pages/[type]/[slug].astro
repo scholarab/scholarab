@@ -17,7 +17,7 @@ import SabDetail from '../../components/sab/SabDetail.astro';
 import { loadScholarships, loadPrograms } from '../../lib/data-loader';
 import { generateSlug, parseAmount, formatVerifiedMonth, formatDeadline, amountSpan } from '../../lib/utils.ts';
 import { placeOf } from '../../lib/school-awards';
-import { OPEN_NO_DEADLINE, STATUS_WORDS, canApplyNow, programIsListed, programUndatedLabel, programStatusOf, scholarshipStatusOf, scholarshipIsIndexable, programIsIndexable } from '../../lib/status.ts';
+import { OPEN_NO_DEADLINE, STATUS_WORDS, canApplyNow, programIsListed, programOpensLater, programUndatedLabel, programStatusOf, scholarshipStatusOf, scholarshipIsIndexable, programIsIndexable } from '../../lib/status.ts';
 import { guides } from '../../lib/guides.ts';
 import { saysNoApplication, howYouApply } from '../../lib/apply-method.ts';
 import { oneFormBlock } from '../../lib/one-form.ts';
@@ -453,7 +453,9 @@ if (kind === 'scholarship') {
     estimated: s.deadlineEstimated === true,
     // The list says "date not posted"; "TBA" here described one award two ways (critique 2026-10-01).
     dueLong: s.rolling ? 'No fixed deadline' : s.deadline ? formatDate(s.deadline) : 'Not posted yet',
-    opensLabel: s.openDate ? formatDate(s.openDate) : null,
+    // Only a future opening: a closed award said "The next one opens June 23,
+    // 2026" in October (built-site QA 2026-10-08).
+    opensLabel: s.openDate && new Date(s.openDate + 'T00:00:00').getTime() > todayDate.getTime() ? formatDate(s.openDate) : null,
     // Empty on purpose. Every one of the five facts this used to list was
     // already on the page within one screen of itself: REGION is the subline,
     // CATEGORY is a chip beside the title, DEADLINE and OPENS are the status
@@ -503,12 +505,13 @@ if (kind === 'scholarship') {
   const slug = generateSlug(p.name);
   const hasDate = !!p.deadline && p.deadline !== 'TBA' && p.deadline !== 'Ongoing';
   const deadlineDate = hasDate ? new Date(p.deadline + 'T00:00:00') : null;
-  const status: 'active' | 'tba' | 'closed' | 'future' | 'unconfirmed' | 'ongoing' = programStatusOf(p, todayDate);
+  const opensLater = programOpensLater(p, todayDate);
+  const status: 'active' | 'tba' | 'closed' | 'future' | 'unconfirmed' | 'ongoing' = opensLater ? 'future' : programStatusOf(p, todayDate);
   const daysLeft = status === 'active' && deadlineDate ? daysUntil(deadlineDate) : null;
 
   // Word-boundary clamp, not `slice(0, 157) + '...'`: that cut 123 of the 125
   // program descriptions mid-word. Dated cycles lead with the closing date.
-  const programDescription = programMeta(p, p.active === false ? 'tba' : status, formatDate);
+  const programDescription = programMeta(p, p.active === false ? 'tba' : status === 'future' ? 'active' : status, formatDate);
   const canonical = `https://www.scholarab.ca/programs/${slug}/`;
   const dueLong = status === 'ongoing' ? 'No deadline, join any time' : hasDate ? formatDate(p.deadline) : 'Not posted yet';
 
@@ -541,10 +544,10 @@ if (kind === 'scholarship') {
     noindex: !programIsIndexable(p, todayDate),
     daysLeft,
     deadlineIso: hasDate ? p.deadline : null,
-    openDateIso: null,
+    openDateIso: opensLater ? p.openDate : null,
     inactive: false,
     dueLong,
-    opensLabel: undefined,
+    opensLabel: opensLater ? formatDate(p.openDate!) : undefined,
     // Programs keep the facts that appear nowhere else on the page. DEADLINE
     // left with them; the rail already carries it. FORMAT says what shape the
     // thing is (2026-09-15): the tag above reads HEALTH for both a one-day

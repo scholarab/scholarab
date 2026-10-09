@@ -27,8 +27,8 @@ const items: SavedItem[] = [
     const via = rowRoute(applyRoute, saysNoApplication(notes, metaDetail, (rest as { description?: string }).description));
     return { type: 'scholarship' as const, id, name, amount, audience, deadline, openDate, active, concluded, deadlineEstimated, rolling, url, href: `/scholarships/${generateSlug(name)}/`, ...(toApply ? { kit: kitOf(toApply) } : {}), ...(via ? { via } : {}) };
   }),
-  ...initialPrograms.map(({ id, name, eligibility: audience, paid, cost, deadline, active, url }) =>
-    ({ type: 'program' as const, id, name, audience, paid, cost, deadline, ...(active === false ? { active: false } : {}), url, href: `/programs/${generateSlug(name)}/` })),
+  ...initialPrograms.map(({ id, name, eligibility: audience, paid, cost, deadline, openDate, active, url }) =>
+    ({ type: 'program' as const, id, name, audience, paid, cost, deadline, ...(openDate ? { openDate } : {}), ...(active === false ? { active: false } : {}), url, href: `/programs/${generateSlug(name)}/` })),
 ];
 
 // The empty page leads with a real count rather than a dashed box (flow plan,

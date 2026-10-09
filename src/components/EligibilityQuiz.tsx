@@ -8,7 +8,7 @@ import { isRestrictedCheck, matchAll, matchPrograms } from '../lib/eligibility-m
 import { getSaved, toggleSaved, getSavedPrograms, toggleSavedProgram } from '../lib/tracker.ts'
 import { generateSlug, parseAmount } from '../lib/utils.ts'
 import { sendEvent } from '../lib/events.ts'
-import { NO_DEADLINE, STATUS_WORDS, canApplyNow, openLaterNote, programStatusOf, programUndatedLabel, rowAction, scholarshipStatusOf, waitingLabel } from '../lib/status.ts'
+import { NO_DEADLINE, STATUS_WORDS, canApplyNow, openLaterNote, programOpensLater, programStatusOf, programUndatedLabel, rowAction, scholarshipStatusOf, waitingLabel } from '../lib/status.ts'
 import { amountCell, whenTier } from '../lib/list-core.ts'
 import { BOOKMARK } from '../lib/icons.ts'
 import { comboHref, pickCombos, type ComboEntry } from '../lib/combo-pick.ts'
@@ -826,7 +826,7 @@ export default function EligibilityQuiz({ scholarships, programs, combos = [] }:
                 titleHref={`/programs/${generateSlug(p.name)}/`}
                 subtitle={p.provider}
                 when={p.deadline && p.deadline !== 'TBA' && p.deadline !== 'Ongoing'
-                  ? rowWhen(programStatusOf(p, today) === 'closed' ? 'closed' : 'active', { deadline: p.deadline })
+                  ? rowWhen(programOpensLater(p, today) ? 'future' : programStatusOf(p, today) === 'closed' ? 'closed' : 'active', { deadline: p.deadline, openDate: p.openDate })
                   : { main: programUndatedLabel(p.deadline), sub: '', cls: 'sabl-when is-quiet' }}
                 tags={p.category ? <span className="sabm-tier sabm-cat">{p.category}</span> : null}
                 amountClass="sabl-card-top-left"

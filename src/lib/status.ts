@@ -103,18 +103,28 @@ export type ProgramStatus = 'active' | 'tba' | 'ongoing' | 'closed';
 
 export interface ProgramStatusInput {
   deadline?: string | null;
+  openDate?: string | null;
   active?: boolean;
 }
 
+/** A dated program whose applications open later: a countdown to its
+ *  deadline read as open now (built-site QA 2026-10-08). */
+export function programOpensLater(p: ProgramStatusInput, today: Date): boolean {
+  return !!p.openDate && !!p.deadline && p.deadline !== 'TBA' && p.deadline !== 'Ongoing'
+    && today.getTime() < new Date(p.openDate + 'T00:00:00').getTime();
+}
+
 /**
- * The program twin of scholarshipStatusOf. Programs have no openDate and no
- * "future" state: between cycles auto-expire rewrites a passed deadline to
- * 'TBA', so a dated deadline in the past only ever means "this cycle closed
- * and today's sync hasn't run yet".
+ * The program twin of scholarshipStatusOf. Programs have no "future" state:
+ * between cycles auto-expire rewrites a passed deadline to 'TBA', so a dated
+ * deadline in the past only ever means "this cycle closed and today's sync
+ * hasn't run yet". One that opens later is 'tba' here (not open, so no Apply
+ * and not counted open); pages that can say when it opens check
+ * programOpensLater.
  */
 export function programStatusOf(p: ProgramStatusInput, today: Date): ProgramStatus {
   const d = p.deadline;
-  if (!d || d === 'TBA') return 'tba';
+  if (!d || d === 'TBA' || programOpensLater(p, today)) return 'tba';
   if (d === 'Ongoing') return 'ongoing';
   return today.getTime() > new Date(d + 'T00:00:00').getTime() ? 'closed' : 'active';
 }

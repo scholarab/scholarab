@@ -223,7 +223,7 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     description:
       'Scholarships for Cold Lake and Lloydminster students: the 4 Wing military award, Lakeland credit union money, division bursaries and service clubs.',
     intro:
-      'The largest local award here, the Billion Barrel scholarship in Cold Lake at $5,000, stays open until July 31, and two Lloydminster awards stay open until August 31.',
+      'The largest local award here, the Billion Barrel scholarship in Cold Lake at $5,000, is due June 1, and two Lloydminster awards stay open until August 31.',
   },
   {
     slug: 'central-alberta',
@@ -263,9 +263,9 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     backdrop: 'alberta',
     title: 'Province-Wide Scholarships in Alberta',
     description:
-      'Alberta scholarships with no city requirement: the Rutherford, provincial arts and trades awards, credit union and energy money, open anywhere in the province.',
+      'Alberta scholarships open across the province: the Rutherford, provincial arts and trades awards, credit union and energy money, open anywhere in the province.',
     intro:
-      'These awards carry no city requirement, and this is where the large provincial money sits: three Alberta Foundation for the Arts awards at $7,000 each and the Advancing Futures Bursary at up to $40,000.',
+      'Most of these are open anywhere in Alberta, and the large provincial money sits here: three Alberta Foundation for the Arts awards at $7,000 each and the Advancing Futures Bursary at up to $40,000.',
   },
   {
     slug: 'national',

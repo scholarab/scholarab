@@ -1399,7 +1399,9 @@ const carousels = [
     .sab-hero { min-height: 100dvh; }
     .sab-hero-body { padding-top: calc(28px + var(--sab-nav-h)); padding-bottom: calc(76px + env(safe-area-inset-bottom, 0px)); justify-content: flex-start; }
     .sab-hero-bottom { flex: 1; margin-top: 0; padding-bottom: 0; }
-    .sab-hero-copy { flex: 1; display: flex; flex-direction: column; justify-content: space-evenly; }
+    /* The wrapping column above sizes its line to content, so the copy grew
+       past a 320px screen and clipped Search (QA 2026-10-08). */
+    .sab-hero-copy { flex: 1; max-width: 100%; display: flex; flex-direction: column; justify-content: space-evenly; }
     .sab-hero-copy > .sab-hero-quiz, .sab-hero .sab-hero-quiz { margin: 0; }
     .sab-hero-copy .sab-hero-search, .sab-hero-copy .sab-hero-ctas { margin: 0; }
     .sab-byline { margin-bottom: 0; }

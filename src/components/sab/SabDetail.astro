@@ -522,6 +522,8 @@ const chip: { text: string; tone: Tone } =
     font-family: var(--font-display); font-weight: 400;
     font-size: clamp(38px, 6vw, 64px); line-height: 1.05; letter-spacing: -0.015em;
     margin: 22px 0 0; max-width: 820px;
+    /* "Service/Entrepreneurial" is one unbreakable word at 320px. */
+    overflow-wrap: break-word;
   }
   .sabd-subline { font-size: 15px; color: var(--ink-soft); margin-top: 12px; }
   .sabd-who { font-size: 16px; line-height: 1.5; color: #141915; margin: 14px 0 0; max-width: 640px; }

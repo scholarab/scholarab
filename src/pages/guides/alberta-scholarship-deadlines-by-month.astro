@@ -9,13 +9,25 @@ const guide = getGuide('alberta-scholarship-deadlines-by-month');
 
 // Every count on this page comes from the catalogue; see deadline-stats.ts
 // for why none of them are typed in any more.
-const st = deadlineStats(scholarships as Array<{ deadline?: string | null; url?: string | null }>, getToday().toLocaleDateString('en-CA'));
+const st = deadlineStats(scholarships as Parameters<typeof deadlineStats>[0], getToday().toLocaleDateString('en-CA'));
 const m = (n: number) => st.byMonth[n - 1]!;
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 const runnerUp = st.byMonth.map((n, i) => ({ n, i })).filter(x => x.i !== 4).sort((a, b) => b.n - a.n)[0]!;
 const mayRatio = Math.floor(m(5) / runnerUp.n);
 const mayVs = mayRatio >= 2 ? `more than ${['', '', 'twice', 'three times', 'four times', 'five times'][mayRatio] ?? `${mayRatio} times`}` : 'well ahead of';
 const spring = st.sum(4, 5, 6);
+// The busiest days, ranked from the data: the ranking was typed in once and
+// said May 30 led after May 1 and May 31 had passed it (QA 2026-10-08).
+const dayName = (mmdd: string) => `${MONTHS[Number(mmdd.slice(0, 2)) - 1]} ${Number(mmdd.slice(3))}`;
+const top = st.topDays(3);
+const SPIKES: Record<string, string> = {
+  '05-30': `${st.onDayFrom('05-30', 'educationmatters.ca')} of them are administered by EducationMatters, the Calgary Board of Education's foundation, with another ${st.onDayFrom('05-30', 'calgaryfoundation.org')} through the Calgary Foundation.`,
+  '05-01': `A genuine mix, including ${st.onDayFrom('05-01', 'educationmatters.ca')} more EducationMatters awards and ${st.onDayFrom('05-01', 'cpaalberta.ca')} from CPA Alberta.`,
+  '05-31': `${st.onDayFrom('05-31', 'rdpolytech.academicworks.ca')} of these are Red Deer Polytechnic awards, listed together on its online scholarship portal.`,
+  '12-18': `${st.onDayFor('12-18', 'Keyano College')} of these are Keyano College awards, published together in one student award booklet.`,
+};
+const spikeDays = Object.keys(SPIKES).sort((a, b) => st.onDay(b) - st.onDay(a));
+const spikeWord = ['None', 'One', 'Two', 'Three', 'Four', 'Five'][spikeDays.length]!;
 
 const faqJson = {
   '@context': 'https://schema.org',
@@ -34,7 +46,7 @@ const faqJson = {
       'name': 'What scholarships close in September and October in Alberta?',
       'acceptedAnswer': {
         '@type': 'Answer',
-        'text': `September holds ${m(9)} dated deadlines, including the Charmaine Letourneau Scholarship, the UFCW Local 401 Scholarships and the Cypress County Agricultural Service Board Bursary on September 30. October holds ${m(10)}, and they are the most valuable of the year: the Loran Award closes October 15 at roughly $150,000, the Advancing Futures Bursary at $40,000 closes October 1, and the Alex Decoteau Award of Honour and Keyera Peter J. Renton Memorial both close October 31.`,
+        'text': `September holds ${m(9)} dated deadlines, including the Charmaine Letourneau Scholarship, the UFCW Local 401 Scholarships and the Cypress County Agricultural Service Board Bursary on September 30. October holds ${m(10)}, and they are the most valuable of the year: the Loran Award closes October 15 at roughly $150,000, and the Alex Decoteau Award of Honour and Keyera Peter J. Renton Memorial both close October 31.`,
       },
     },
     {
@@ -42,7 +54,7 @@ const faqJson = {
       'name': 'What scholarships close in November in Alberta?',
       'acceptedAnswer': {
         '@type': 'Answer',
-        'text': `Only ${m(11)} dated deadlines, but they carry the largest amounts of the year after Loran. The Wolf Scholars Program at $80,000 closes November 2 and TD Scholarships for Community Leadership at $70,000 closes November 15. November 1 alone carries the First Nations, Metis and Inuit Bursary at $11,500, the Cenovus Energy Indigenous Scholarship at $5,000 and the ATB Financial Bursary.`,
+        'text': `Only ${m(11)} dated deadlines, but they carry the largest amounts of the year after Loran. The Wolf Scholars Program, which is fully funded, closes November 2. November 1 alone carries the First Nations, Metis and Inuit Bursary at $11,500, the Cenovus Energy Indigenous Scholarship at $5,000 and the ATB Financial Bursary.`,
       },
     },
     {
@@ -50,7 +62,7 @@ const faqJson = {
       'name': 'Which single day has the most Alberta scholarship deadlines?',
       'acceptedAnswer': {
         '@type': 'Answer',
-        'text': `May 30, with ${st.onDay('05-30')} awards closing on it, followed by May 1 with ${st.onDay('05-01')} and December 18 with ${st.onDay('12-18')}. These are not coincidences. Each spike is an administrator booking a whole portfolio on one date: ${st.onDayFrom('12-18', 'keyano.ca')} of the December 18 awards belong to a single college, and ${st.onDayFrom('05-30', 'educationmatters.ca')} of the May 30 awards are administered by EducationMatters, the Calgary Board of Education foundation.`,
+        'text': `${dayName(top[0]!.mmdd)}, with ${top[0]!.count} awards closing on it, followed by ${dayName(top[1]!.mmdd)} with ${top[1]!.count} and ${dayName(top[2]!.mmdd)} with ${top[2]!.count}. These are not coincidences. Each spike is an administrator booking a whole portfolio on one date: ${st.onDayFrom('05-31', 'rdpolytech.academicworks.ca')} of the May 31 awards belong to Red Deer Polytechnic, ${st.onDayFor('12-18', 'Keyano College')} of the December 18 awards to Keyano College, and ${st.onDayFrom('05-30', 'educationmatters.ca')} of the May 30 awards are administered by EducationMatters, the Calgary Board of Education foundation.`,
       },
     },
     {
@@ -122,23 +134,21 @@ const faqJson = {
 
   <h2>The largest awards close in the fall</h2>
   <p>
-    October and November hold {st.sum(10, 11)} deadlines between them, the two thinnest months of the school year. They also hold almost every large award on the site: the <a href="/guides/loran-award-guide/">Loran Award</a> at roughly $150,000 on October 15, the Wolf Scholars Program at $80,000 on November 2, TD Scholarships for Community Leadership at $70,000 on November 15, and the Advancing Futures Bursary at $40,000 on October 1.
+    October and November hold {st.sum(10, 11)} deadlines between them, the two thinnest months of the school year. They also hold almost every large award on the site: the <a href="/guides/loran-award-guide/">Loran Award</a> at roughly $150,000 on October 15, and the Wolf Scholars Program, fully funded, on November 2.
   </p>
   <p>
     So the fall asks for the most work in the first ten weeks of Grade 12, for the awards with the most applicants. Loran is still worth five weeks for its finalist awards alone. Plan the fall as a few expensive applications and the spring as many cheap ones.
   </p>
 
-  <h2>Three dates with dozens of awards each</h2>
+  <h2>{spikeWord} dates with dozens of awards each</h2>
   <p>
-    Three single days carry more awards than most whole months:
+    {spikeWord} single days carry more awards than most whole months:
   </p>
   <ul>
-    <li><strong>May 30, {st.onDay('05-30')} awards.</strong> {st.onDayFrom('05-30', 'educationmatters.ca')} of them are administered by EducationMatters, the Calgary Board of Education's foundation, with another {st.onDayFrom('05-30', 'calgaryfoundation.org')} through the Calgary Foundation.</li>
-    <li><strong>May 1, {st.onDay('05-01')} awards.</strong> A genuine mix, including {st.onDayFrom('05-01', 'educationmatters.ca')} more EducationMatters awards and {st.onDayFrom('05-01', 'cpaalberta.ca')} from CPA Alberta.</li>
-    <li><strong>December 18, {st.onDay('12-18')} awards.</strong> {st.onDayFrom('12-18', 'keyano.ca')} of these are Keyano College awards, published together in one student award booklet.</li>
+    {spikeDays.map(d => <li><strong>{dayName(d)}, {st.onDay(d)} awards.</strong> {SPIKES[d]}</li>)}
   </ul>
   <p>
-    When you see dozens of awards sharing a date, you are usually looking at one institution's portfolio, which means one administering body, one set of rules, and often one application that considers you for everything you qualify for. A date that looks like {st.onDayFrom('12-18', 'keyano.ca')} deadlines can be an afternoon's work. Check the administrator before you assume the date is impossible.
+    When you see dozens of awards sharing a date, you are usually looking at one institution's portfolio, which means one administering body, one set of rules, and often one application that considers you for everything you qualify for. A date that looks like {st.onDayFor('12-18', 'Keyano College')} deadlines can be an afternoon's work. Check the administrator before you assume the date is impossible.
   </p>
 
   <h2>Month by month, and what to do in each</h2>

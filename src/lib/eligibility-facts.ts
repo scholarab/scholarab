@@ -22,6 +22,10 @@ function gradeFact(grades: string[]): string | null {
   const post = grades.includes('post-secondary');
   if (!nums.length) return post ? 'Post-secondary students' : null;
   if (nums.length === 1 && nums[0] === 12 && !post) return null;
-  const range = nums.length === 1 ? `Grade ${nums[0]}` : `Grades ${nums[0]} to ${nums[nums.length - 1]}`;
+  // A gap is listed, not spanned: 6, 9 and 12 read as "Grades 6 to 12".
+  const contiguous = nums.every((n, i) => i === 0 || n === nums[i - 1]! + 1);
+  const range = nums.length === 1 ? `Grade ${nums[0]}`
+    : contiguous ? `Grades ${nums[0]} to ${nums[nums.length - 1]}`
+    : `Grades ${nums.slice(0, -1).join(', ')} and ${nums[nums.length - 1]}`;
   return post ? `${range} or post-secondary` : range;
 }

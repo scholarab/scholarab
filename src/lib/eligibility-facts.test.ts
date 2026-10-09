@@ -9,6 +9,7 @@ describe('eligibilityFacts', () => {
   it('names a grade only when it is not just Grade 12', () => {
     expect(eligibilityFacts({ grades: ['10', '11', '12'] })).toEqual(['Grades 10 to 12']);
     expect(eligibilityFacts({ grades: ['11'] })).toEqual(['Grade 11']);
+    expect(eligibilityFacts({ grades: ['6', '9', '12'] })).toEqual(['Grades 6, 9 and 12']);
     expect(eligibilityFacts({ grades: ['12', 'post-secondary'] })).toEqual(['Grade 12 or post-secondary']);
     expect(eligibilityFacts({ grades: ['post-secondary'] })).toEqual(['Post-secondary students']);
   });

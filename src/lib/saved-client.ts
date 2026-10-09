@@ -25,7 +25,7 @@ export function savedWhen(type: 'scholarship' | 'program', f: { deadline: string
   // so without it the helper reads "between cycles" and says Opening later.
   return type === 'scholarship'
     ? scholarshipWhen({ id: 0, deadline: f.deadline, openDate: f.openDate ?? null, active: f.active ?? true, concluded: f.concluded, deadlineEstimated: f.deadlineEstimated, rolling: f.rolling } as unknown as ScholarshipWithMeta)
-    : programWhen({ id: 0, deadline: f.deadline } as unknown as ProgramWithMeta);
+    : programWhen({ id: 0, deadline: f.deadline, openDate: f.openDate ?? null } as unknown as ProgramWithMeta);
 }
 
 // ── Controller ────────────────────────────────────────────────────────────────
@@ -56,7 +56,7 @@ function savedCard(s: SavedItem): string {
   const sh = s.type === 'scholarship';
   const attr = (key: string, value: string | undefined | null) => value == null ? '' : ` data-${key}="${esc(value)}"`;
   return `<div class="h-full" data-sv-wrap data-type="${s.type}" data-id="${s.id}">
-    <div class="sabl-card h-full" data-id="${s.id}" data-name="${esc(s.name)}"${attr('deadline', s.deadline)}${attr('inactive', s.active === false ? '' : undefined)}${sh ? attr('open-date', s.openDate) + attr('concluded', s.concluded ? '' : undefined) + attr('estimated', s.deadlineEstimated ? '' : undefined) + attr('rolling', s.rolling ? '' : undefined) + attr('amount', s.amount) : ''} data-url="${esc(s.url)}">
+    <div class="sabl-card h-full" data-id="${s.id}" data-name="${esc(s.name)}"${attr('deadline', s.deadline)}${attr('inactive', s.active === false ? '' : undefined)}${attr('open-date', s.openDate)}${sh ? attr('concluded', s.concluded ? '' : undefined) + attr('estimated', s.deadlineEstimated ? '' : undefined) + attr('rolling', s.rolling ? '' : undefined) + attr('amount', s.amount) : ''} data-url="${esc(s.url)}">
       <div class="sabl-row-main">
         <h3 class="sabl-name-h"><span class="sabs-start" data-sv-start hidden></span><a href="${esc(s.href)}" class="sabl-name">${esc(s.name)}</a></h3>
         ${s.audience ? `<div class="sabl-blurb">${esc(s.audience)}</div>` : ''}
