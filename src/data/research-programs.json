@@ -10,11 +10,11 @@
     "paid": true,
     "stipend": "~$15/hr (30–35 hrs/week)",
     "location": "Edmonton (in-person)",
-    "eligibility": "Grade 11, north of Red Deer, 85%+ in Math 20, Bio 20, and one other science",
+    "eligibility": "Grade 11 students who live in or north of Red Deer and can legally work in Canada; normally a combined 85% in Math 20, Biology 20 and one other science",
     "deadline": "TBA",
     "url": "https://www.ualberta.ca/en/current-students/undergraduate-research-initiative/opportunities-for-high-school-students/high-school-youth-researcher-summer-program/index.html",
     "description": "Paid six-week health research at the U of A through Alberta Innovates' High School Youth Researcher Summer (HYRS). Applications close mid-March.",
-    "lastVerified": "2026-08"
+    "lastVerified": "2026-10"
   },
   {
     "id": 2,
@@ -31,8 +31,9 @@
     "deadline": "TBA",
     "url": "https://research.ucalgary.ca/research-services/alberta-innovates-HYRS",
     "description": "Paid research in biomedical and health sciences at UCalgary through Alberta Innovates' High School Youth Researcher Summer (HYRS), for Grade 11 students at central Alberta high schools. The award is a $3,000 stipend for six weeks from early July to mid-August. Applications for 2027 launch in January to February 2027.",
-    "lastVerified": "2026-09",
-    "metaDescription": "Paid six-week health research at UCalgary for Grade 11 students at central Alberta high schools, with a $3,000 stipend."
+    "lastVerified": "2026-10",
+    "metaDescription": "Paid six-week health research at UCalgary for Grade 11 students at central Alberta high schools, with a $3,000 stipend.",
+    "notes": "Applications for HYRS 2027 open between January and February 2027."
   },
   {
     "id": 3,
@@ -47,9 +48,9 @@
     "location": "Lethbridge (in-person)",
     "eligibility": "Grade 11, in or south of Claresholm, 85%+ in Math 20, Bio 20, and one other science",
     "deadline": "2027-03-26",
-    "url": "https://www.ulethbridge.ca/artsci/hyrs-applications",
+    "url": "https://www.ulethbridge.ca/artsci/hyrs-student-application",
     "description": "Paid six-week health research at ULethbridge through Alberta Innovates' High School Youth Researcher Summer (HYRS), for Grade 11 students. The 2027 program runs July 2 to August 13. Applications close March 26, 2027, and your three references (two science or math teachers and one community member) are due March 29. Afterwards you present your research to a Grade 11 science class.",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "metaDescription": "Paid six-week health research at the University of Lethbridge for Grade 11 students, with a $3,000 stipend."
   },
   {
@@ -63,12 +64,12 @@
     "paid": true,
     "stipend": "Paid research assistantship",
     "location": "Edmonton (in-person)",
-    "eligibility": "Grade 11 students; focus on underrepresented groups in STEM, open to all genders",
+    "eligibility": "Students finishing Grade 11 and entering Grade 12; for young women, with dedicated pathways for Black and Indigenous students. A Canadian SIN is required and the academic bar is normally 85%",
     "deadline": "TBA",
     "url": "https://www.ualberta.ca/en/women-in-scholarship-engineering-science-technology/programs/summer-research-program/index.html",
     "description": "Student applications open in early March and close in early April for the July-August placement. Paid summer research at the U of A for students underrepresented in STEM, ending with a celebration event in August.",
     "metaDescription": "Paid summer research at the University of Alberta for students underrepresented in STEM, running July to August and ending with a celebration event.",
-    "lastVerified": "2026-08"
+    "lastVerified": "2026-10"
   },
   {
     "id": 6,
@@ -86,8 +87,9 @@
     "url": "https://www.ualberta.ca/en/engineering/community-giving/discovere-camps/fem-plus-engineering-mentorship-program.html",
     "description": "A free seven-month mentorship pairing you one-to-one with a U of A engineering student, who helps with university applications, the move from high school and what engineering is really like. You meet at least monthly however suits you both, and there are group events like class shadowing, design challenges and facility tours. Students from anywhere in Canada can join; travel to in-person events is not covered. Applications for 2026-27 close September 30, 2026.",
     "metaDescription": "A free seven-month mentorship with a U of A engineering student for female high school students across Canada.",
-    "lastVerified": "2026-09",
-    "cost": "free"
+    "lastVerified": "2026-10",
+    "cost": "free",
+    "notes": "The 2026-27 mentee deadline was September 30, 2026. The next intake date is not out yet."
   },
   {
     "id": 7,
@@ -98,13 +100,13 @@
     "grades": "Ages 15–22",
     "duration": "8 or 16 weeks (summer)",
     "paid": true,
-    "stipend": "Paid internship",
+    "stipend": "Paid at least Alberta minimum wage",
     "location": "Edmonton (in-person)",
-    "eligibility": "Black youth aged 15–22 interested in STEM",
+    "eligibility": "Youth aged 15 to 22 when the internship starts, interested in STEM. The program centres Black youth, and non-Black applicants may also apply",
     "deadline": "TBA",
     "url": "https://www.eliteprogram.ca/apply/",
     "description": "Applications are accepted through the DiscoverE form, with separate intern streams in Edmonton and Ottawa. ELITE is a paid summer program for Black youth in innovation, technology and entrepreneurship.",
-    "lastVerified": "2026-08"
+    "lastVerified": "2026-10"
   },
   {
     "id": 8,
@@ -173,14 +175,15 @@
     "paid": false,
     "stipend": null,
     "location": "Teams run at seven university campuses across Canada; ask Youreka whether one runs near you",
-    "eligibility": "High school students in grades 9 to 12",
+    "eligibility": "Students in grades 9 to 12, CEGEP students, and first-year Queen's University students",
     "deadline": "TBA",
     "url": "https://yourekacanada.org/apply",
     "description": "A 10-week program where teams of high school students, led by an undergraduate mentor, run their own research project on open-source data in areas like bioinformatics, public health and economics, using the R programming language. Teams present at a regional symposium, the best go on to a national one, and top manuscripts can be published after peer review. Applications for the 2026-27 program open this fall. There is a CA$80 program fee.",
     "metaDescription": "A 10-week citizen science project guided by an undergrad mentor: collect real data and present your findings.",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "cost": "fee",
-    "costNote": "CA$80 program fee"
+    "costNote": "CA$80 program fee",
+    "notes": "2026-27 applications open this fall; the exact date is not announced yet."
   },
   {
     "id": 13,
@@ -211,13 +214,15 @@
     "duration": "1 week (May)",
     "paid": false,
     "stipend": null,
-    "location": "University of Alberta, Edmonton",
-    "eligibility": "Indigenous (First Nation, Métis, and Inuit) high school students in grades 10-12",
+    "location": "Residential, at participating universities across Canada",
+    "eligibility": "First Nations, Métis and Inuit students in Grade 11; Grade 10 and 12 students go on a wait list",
     "deadline": "TBA",
     "url": "https://www.vernajkirkness.org/vjfk-program/",
     "description": "Applications for the 2027 program reopen in fall 2026. A one-week program where Indigenous high school students conduct research alongside university professors and graduate students at the U of A.",
     "metaDescription": "A one-week program where Indigenous high school students conduct research alongside university professors and graduate students at the U of A.",
-    "lastVerified": "2026-08"
+    "lastVerified": "2026-10",
+    "cost": "free",
+    "costNote": "All expenses are paid"
   },
   {
     "id": 15,
@@ -262,7 +267,7 @@
     "format": "competitions",
     "provider": "STEM Fellowship",
     "grades": "9-12",
-    "duration": "Multi-month (Sep–Apr)",
+    "duration": "Research period October 18, 2026 to January 10, 2027; conferences February 5, 12 and 20, 2027",
     "paid": false,
     "stipend": null,
     "location": "National/virtual + in-person finale in Calgary, AB",
@@ -270,7 +275,8 @@
     "deadline": "2026-10-18",
     "url": "https://www.stemfellowship.org/hsbdc/2026-27",
     "description": "Teams produce a peer-reviewed manuscript from open-data and AI research, with a finale in Calgary. The 2026-2027 challenge is running, and team registration and payment close October 18, 2026.",
-    "lastVerified": "2026-10"
+    "lastVerified": "2026-10",
+    "costNote": "$980 per participant for the Scholar Internship; $250 per team for Independent Research"
   },
   {
     "id": 19,
@@ -283,11 +289,11 @@
     "paid": false,
     "stipend": null,
     "location": "National (AB, BC, SK, MB, ON, QC, NB), in-person events in Alberta",
-    "eligibility": "Students in grades 7–12 from participating provinces; self-organized teams",
+    "eligibility": "Students in grades 7 to 12 and post-secondary students in Alberta, British Columbia and Yukon; self-organized teams",
     "deadline": "TBA",
     "url": "https://mindfuel.ca/tfc/",
     "description": "National innovation challenge where youth teams design and prototype STEM solutions to real-world problems. Teams receive access to industry mentors, workshops, and MindFuel's Connect2Innovate platform. 13+ years running with 5,000+ alumni.",
-    "lastVerified": "2026-08"
+    "lastVerified": "2026-10"
   },
   {
     "id": 20,
@@ -342,7 +348,8 @@
     "url": "https://www.essualberta.ca/studentgroups/ieeeuofa-lc666",
     "description": "A student-run group in U of A engineering that brings free STEM project kits and mentoring to grades 5-12, building things like robotic arms and wind turbines.",
     "metaDescription": "A student-run U of A engineering group bringing free STEM project kits and mentoring to grades 5-12, building robotic arms and wind turbines.",
-    "lastVerified": "2026-08"
+    "lastVerified": "2026-10",
+    "cost": "free"
   },
   {
     "id": 25,
@@ -369,7 +376,7 @@
     "category": "Enrichment",
     "format": "summer",
     "provider": "University of Lethbridge",
-    "grades": "High school",
+    "grades": "Kindergarten to Grade 10",
     "duration": "Summer (varies by camp)",
     "paid": false,
     "stipend": null,
@@ -379,7 +386,7 @@
     "url": "https://www.ulethbridge.ca/destination-exploration",
     "description": "The high-school stream is InSRA, a six-week paid Indigenous Summer Research Academy ($3,000 award, plus a $500 travel bursary) for students who have completed Grade 11, running alongside HYRS at ULethbridge. There is also a 3-week paid summer intern role for Gr 9+. Dates for the next cycle are not yet posted.",
     "metaDescription": "The high-school stream is InSRA, a six-week paid Indigenous Summer Research Academy with a $3,000 award, for students who have completed Grade 11.",
-    "lastVerified": "2026-08"
+    "lastVerified": "2026-10"
   },
   {
     "id": 28,
@@ -390,13 +397,14 @@
     "grades": "Ages 16–18",
     "duration": "7 weeks (summer)",
     "paid": true,
-    "stipend": "Government of Alberta wages",
+    "stipend": "$16 an hour for first-year crew members, with meals and accommodation covered",
     "location": "Various Alberta locations (field-based)",
-    "eligibility": "Ages 16–18, Canadian citizen or permanent resident, physically fit",
+    "eligibility": "Full-time Alberta high school students aged 16 to 18 on July 1, physically fit and available for seven weeks of residential work",
     "deadline": "TBA",
     "url": "https://alis.alberta.ca/junior-forest-rangers/",
     "description": "A paid Government of Alberta summer job for 16-18 year olds: seven weeks of forestry, wildfire and conservation work. Intake opens over the winter.",
-    "lastVerified": "2026-08"
+    "lastVerified": "2026-10",
+    "notes": "Applications for the 2027 season open February 1, 2027."
   },
   {
     "id": 29,
@@ -463,13 +471,13 @@
     "duration": "1 week (summer)",
     "paid": false,
     "stipend": "Subsidized (accommodation and meals included)",
-    "location": "Waterloo, Ontario (in-person)",
+    "location": "Online in the latest cycle (2026), with an optional in-person lab day in the Waterloo region",
     "eligibility": "Grade 11–12 Canadian students with strong math and physics background",
     "deadline": "TBA",
     "url": "https://uwaterloo.ca/institute-for-quantum-computing/outreach/qsys",
     "description": "Applications typically close in mid-May for the August session. Week-long dive into quantum information science and cryptography at IQC, University of Waterloo (formerly QCSYS), with lectures, labs and direct researcher access.",
     "metaDescription": "A week-long dive into quantum information science and cryptography at the Institute for Quantum Computing, with lectures, labs and researcher access.",
-    "lastVerified": "2026-08"
+    "lastVerified": "2026-10"
   },
   {
     "id": 33,
@@ -478,15 +486,15 @@
     "format": "summer",
     "provider": "University of Toronto Faculty of Applied Science & Engineering",
     "grades": "Grades 10–11",
-    "duration": "Summer program + year-long engagement",
+    "duration": "July 5 to 30, 2027, then biweekly sessions from October 2027 to February 2028",
     "paid": false,
     "stipend": null,
-    "location": "Virtual/online (open to Alberta students)",
-    "eligibility": "Black high school students in grades 10–11 interested in engineering and applied research",
+    "location": "University of Toronto St. George campus, Toronto (in person)",
+    "eligibility": "Black Canadian citizens or permanent residents in Grade 10 or 11 in 2026-27, interested in engineering and applied research",
     "deadline": "TBA",
     "url": "https://outreach.engineering.utoronto.ca/blueprint/",
     "description": "Applications open in late November and close in mid-April for the following summer. A free U of T engineering program: a July intensive on the St. George campus, followed by biweekly events from October through February.",
-    "lastVerified": "2026-08"
+    "lastVerified": "2026-10"
   },
   {
     "id": 34,
@@ -504,9 +512,10 @@
     "url": "https://ysp.utoronto.ca/medysp/",
     "description": "Postponed: U of T states Med YSP is pushed to Summer 2027. The program runs hands-on medical modules (human physiology, microbiology) with labs, lectures and discussions for high school students, open to Canadian and international applicants.",
     "metaDescription": "Postponed to Summer 2027. Hands-on medical modules in human physiology and microbiology, with labs, lectures and discussions for high school students.",
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-10",
     "cost": "fee",
-    "costNote": "~$1,700 per module"
+    "costNote": "~$1,700 per module",
+    "notes": "Med YSP was postponed to summer 2027. The 2027 fees and grade rules are not confirmed yet."
   },
   {
     "id": 35,
@@ -514,7 +523,7 @@
     "category": "Health",
     "format": "olympiads",
     "provider": "Canadian Association for Neuroscience (CAN)",
-    "grades": "High school",
+    "grades": "Grades 9–12",
     "duration": "1 day (regional competition)",
     "paid": false,
     "stipend": null,
@@ -524,7 +533,7 @@
     "url": "https://brainbee.ca/students/who-can-compete/",
     "description": "Regional neuroscience knowledge competitions for high school students in Calgary and Edmonton. Winners advance to the national Brain Bee where competitors analyze brain tissue and patient diagnoses. Top finishers represent Canada internationally.",
     "metaDescription": "Regional neuroscience competitions in Calgary and Edmonton. Winners advance to the national Brain Bee, where top finishers go on to represent Canada.",
-    "lastVerified": "2026-08"
+    "lastVerified": "2026-10"
   },
   {
     "id": 36,
@@ -532,16 +541,16 @@
     "category": "Research",
     "format": "summer",
     "provider": "Immerse Education",
-    "grades": "High school",
-    "duration": "2 weeks (virtual, summer)",
+    "grades": "Ages 13–18",
+    "duration": "10 or 15 hours of one-on-one tuition, scheduled flexibly",
     "paid": false,
     "stipend": null,
     "location": "Virtual (online)",
     "eligibility": "High school students worldwide; tuition fee applies",
-    "deadline": "TBA",
+    "deadline": "Ongoing",
     "url": "https://www.immerse.education/pathways/online",
     "description": "Online academic program where students work directly with university tutors to research and draft a university-level paper. Research tracks available in medicine, computer science, engineering, and more. Builds academic writing and independent research skills.",
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-10",
     "cost": "fee",
     "costNote": "Tuition fee applies"
   },
@@ -782,11 +791,12 @@
     "paid": false,
     "stipend": "Competitive scholarships available (fully funded)",
     "location": "Arctic or Antarctic (in-person expedition)",
-    "eligibility": "High school students; highly competitive scholarship selection",
+    "eligibility": "Youth aged 14 to 35; scholarship criteria vary by expedition",
     "deadline": "TBA",
     "url": "https://studentsonice.com/en/youth/expeditions/",
     "description": "Fully funded scholarships for high school students to join scientific expeditions to the Arctic or Antarctic. Students conduct hands-on environmental and climate field research alongside polar scientists, Indigenous knowledge holders, and global youth peers.",
-    "lastVerified": "2026-08"
+    "lastVerified": "2026-10",
+    "notes": "Applications for the 2027 expedition season open October 15, 2026."
   },
   {
     "id": 46,
@@ -816,11 +826,12 @@
     "paid": false,
     "stipend": null,
     "location": "Alberta-wide (multiple regional sites)",
-    "eligibility": "Alberta high school students; teams of 4–6",
-    "deadline": "TBA",
+    "eligibility": "Students in grades 1 to 12; teams of four in Peace River and five at the other events",
+    "deadline": "2026-10-19",
     "url": "https://www.apega.ca/educators-students/k-12/science-olympics",
     "description": "A one-day engineering and geoscience challenge where high school teams solve timed, hands-on problems. Regionals feed the provincial finals.",
-    "lastVerified": "2026-08"
+    "lastVerified": "2026-10",
+    "costNote": "Free in Peace River and Fort McMurray; $80 to $100 in Edmonton and Calgary"
   },
   {
     "id": 49,
@@ -851,11 +862,12 @@
     "paid": false,
     "stipend": null,
     "location": "Virtual + in-person nationals (open to Alberta teams)",
-    "eligibility": "Canadian high school students grades 9–12; teams of up to 15",
+    "eligibility": "Middle and high school students in Canada; a teacher registers teams of 2 to 6",
     "deadline": "TBA",
     "url": "https://etalentcanada.ca/for-educators/programs/cybertitan",
     "description": "National cyber defence competition for Grade 9-12 teams, running October to May. Your teacher registers the team between April and October, not students.",
-    "lastVerified": "2026-08"
+    "lastVerified": "2026-10",
+    "notes": "Registration runs from April to October; the exact 2026-27 deadline is not stated."
   },
   {
     "id": 52,
@@ -872,7 +884,8 @@
     "deadline": "2027-02-11",
     "url": "https://cemc.uwaterloo.ca/contests/ccc",
     "description": "Premier Canadian programming and algorithm design challenge hosted by the University of Waterloo. Students apply advanced computer science and algorithmic research to solve complex problems. Top scorers are invited to the Canadian Computing Olympiad (CCO).",
-    "lastVerified": "2026-08"
+    "lastVerified": "2026-10",
+    "costNote": "$10 per participant plus a $5 processing fee per school order"
   },
   {
     "id": 53,
@@ -901,12 +914,12 @@
     "duration": "Year-long research project + international competition (May)",
     "paid": false,
     "stipend": "Travel funded for selected Team Canada members",
-    "location": "Regional qualifier in Alberta + international (USA)",
+    "location": "Regional qualifier in Alberta, then Regeneron ISEF 2027 in Los Angeles, California, in May 2027",
     "eligibility": "Alberta students who qualify through a regional science fair (e.g., CYSF, SARSF); top projects advance to CWSF, then ISEF selection",
     "deadline": "TBA",
     "url": "https://www.societyforscience.org/isef/",
     "description": "The world's largest pre-college science competition. No direct application: you qualify through an affiliated regional fair. Travel funded if selected.",
-    "lastVerified": "2026-08"
+    "lastVerified": "2026-10"
   },
   {
     "id": 55,
@@ -919,12 +932,13 @@
     "paid": false,
     "stipend": null,
     "location": "Virtual (fully online, open to Alberta students)",
-    "eligibility": "High school students aged 13–17 worldwide; competitive application",
+    "eligibility": "Students aged 13 to 17 worldwide with strong English and a parent or guardian's consent; competitive application",
     "deadline": "TBA",
     "url": "https://www.nyas.org/learning/high-school-research-programs/the-junior-academy/",
     "description": "Applications open April 1 and close in early July, with decisions by August 31. A free online research program from the New York Academy of Sciences where students team up on industry-set challenges with a mentor.",
     "metaDescription": "A free online research program from the New York Academy of Sciences where students team up on industry-set challenges with a mentor.",
-    "lastVerified": "2026-08"
+    "lastVerified": "2026-10",
+    "cost": "free"
   },
   {
     "id": 56,
@@ -942,9 +956,10 @@
     "url": "https://pioneeracademics.com/pioneer-research-institute/admission/",
     "description": "Rigorous virtual research institute for high school students. Accepted students work one-on-one with university professors across disciplines, from neuroscience to computer science, to produce a peer-reviewed research paper over 8 weeks.",
     "metaDescription": "Accepted students work one-on-one with a university professor over eight weeks to produce a peer-reviewed research paper.",
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-10",
     "cost": "fee",
-    "costNote": "Tuition applies; need-based aid available"
+    "costNote": "US$7,465 tuition, plus a lab fee of up to 2% of tuition for some projects; need-based scholarships available",
+    "notes": "Applications for the 2027 cycle are open; the summer deadline will be announced in the second week of January."
   },
   {
     "id": 58,
@@ -961,7 +976,8 @@
     "deadline": "TBA",
     "url": "https://cdnmedhall.ca/discoverydays",
     "description": "A day on a medical campus: hands-on health-science workshops and career panels with clinicians. Your school registers about six weeks ahead.",
-    "lastVerified": "2026-08"
+    "lastVerified": "2026-10",
+    "cost": "free"
   },
   {
     "id": 59,
@@ -1055,7 +1071,8 @@
     "url": "https://www.mhpsd.ca/dual-credit",
     "description": "Enrol through your school counsellor rather than applying separately. Dual Credit lets Medicine Hat Public students take real post-secondary courses while in high school, earning 5 to 30-level high school credits plus 3 post-secondary credits per course.",
     "metaDescription": "Enrol through your counsellor to take post-secondary courses in high school, earning 5 to 30-level credits plus 3 post-secondary credits per course.",
-    "lastVerified": "2026-08"
+    "lastVerified": "2026-10",
+    "costNote": "Tuition is paid by Medicine Hat Public School Division"
   },
   {
     "id": 67,
@@ -1087,12 +1104,13 @@
     "paid": false,
     "stipend": null,
     "location": "Calgary (in-person hub) + virtual cohorts",
-    "eligibility": "High school students grades 9–12; competitive application",
+    "eligibility": "Ages 13 to 17 (12-year-olds may apply), with good English and internet access; competitive application",
     "deadline": "TBA",
     "url": "https://www.tks.world/program/calgary",
     "description": "Applications for the 2026-27 cohort are open now. TKS is a 10-month after-school program where students go deep on AI, biotech and robotics and build projects with companies; alumni have reached research labs and startups before 19.",
     "metaDescription": "A 10-month after-school program where students go deep on AI, biotech and robotics and build projects with companies. The 2026-27 cohort is open.",
-    "lastVerified": "2026-08"
+    "lastVerified": "2026-10",
+    "costNote": "$589 CAD a month plus a $1,000 CAD deposit for the 10-month 2026-27 program"
   },
   {
     "id": 69,
@@ -1101,7 +1119,7 @@
     "format": "clubs",
     "provider": "The Coding School (Qubit by Qubit)",
     "grades": "Grades 9–12",
-    "duration": "1 academic year (virtual)",
+    "duration": "Fall Foundations course: September 27 to December 12, 2026",
     "paid": false,
     "stipend": null,
     "location": "Virtual (online, open to Alberta students); need-based aid available",
@@ -1109,7 +1127,7 @@
     "deadline": "TBA",
     "url": "https://www.qubitbyqubit.org/programs",
     "description": "Summer research applications are open now, and the signature Introduction to Quantum Computing course runs from October. Qubit by Qubit teaches quantum computing to high school students, taught by PhD researchers with Google Quantum AI.",
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-10",
     "cost": "fee",
     "costNote": "Tuition applies; need-based aid available"
   },
@@ -1157,7 +1175,7 @@
     "format": "olympiads",
     "provider": "University of Waterloo, Centre for Education in Mathematics and Computing",
     "grades": "High school",
-    "duration": "Single exam (spring) + preparation period",
+    "duration": "A two-hour supervised online exam on April 29, 2027",
     "paid": false,
     "stipend": null,
     "location": "School-based across Alberta (national exam)",
@@ -1166,7 +1184,8 @@
     "url": "https://uwaterloo.ca/centre-advanced-science-education/science-contests/sir-isaac-newton-exam",
     "description": "Registration opens in mid-March; the exam is written at your school on the first Thursday of May. A demanding open-ended physics exam from the University of Waterloo that rewards months of independent study.",
     "metaDescription": "A demanding open-ended physics exam from the University of Waterloo that rewards months of independent study, written at your school in early May.",
-    "lastVerified": "2026-08"
+    "lastVerified": "2026-10",
+    "costNote": "$4 per student"
   },
   {
     "id": 73,
@@ -1272,7 +1291,9 @@
     "url": "https://www.stemracing.ca/dates-and-fees",
     "description": "Multidisciplinary engineering competition where teams use CAD and CAM software to research aerodynamics, design, and race miniature compressed-air powered F1 cars. Alberta teams actively compete at national championships. Builds skills in design, manufacturing, and project management.",
     "metaDescription": "Teams use CAD and CAM to design and race miniature air-powered F1 cars, with Alberta teams at national championships.",
-    "lastVerified": "2026-10"
+    "lastVerified": "2026-10",
+    "costNote": "$750 + HST team registration for the qualifier; $1,500 + HST for the national championship",
+    "notes": "Team affiliation closes October 31, 2026; the qualifier is November 28, 2026 and nationals are April 9 to 11, 2027."
   },
   {
     "id": 81,
@@ -1316,8 +1337,8 @@
     "category": "Research",
     "format": "summer",
     "provider": "University of Toronto",
-    "grades": "Grades 10–12",
-    "duration": "2 weeks (summer, in-person)",
+    "grades": "Grades 9–12",
+    "duration": "One-week sessions: July 5–9, 12–16, 19–23 or 26–30, 2027",
     "paid": false,
     "stipend": null,
     "location": "Toronto, Ontario (in-person); open to Alberta students; tuition fee applies",
@@ -1325,7 +1346,7 @@
     "deadline": "TBA",
     "url": "https://outreach.engineering.utoronto.ca/pre-university-programs/high-school-program/deep/",
     "description": "Two weeks of university engineering at U of T's St. George campus for Grades 10-12. A paid academy; applications open early March, early-bird round first.",
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-10",
     "cost": "fee",
     "costNote": "Tuition fee applies"
   },
@@ -1347,7 +1368,8 @@
     "metaDescription": "Teams research a market, prototype a tech product and pitch a working startup to investors, on MIT-affiliated material.",
     "lastVerified": "2026-10",
     "cost": "fee",
-    "costNote": "Tuition fee applies; need-based aid available"
+    "costNote": "US$7,495 for the five-week online program, plus a $50 to $100 application fee depending on when you apply",
+    "notes": "Applications opened October 1, 2026; the financial aid deadline is March 4, 2027. The online program runs July 5 to August 6, 2027."
   },
   {
     "id": 87,
@@ -1378,11 +1400,11 @@
     "paid": true,
     "stipend": "Paid internship",
     "location": "Alberta-wide",
-    "eligibility": "Ages 15-30, high school graduate, legally entitled to work in Canada, not on EI",
+    "eligibility": "Ages 15 to 30, high school graduates who are Canadian citizens, permanent residents or refugees, legally able to work and not on EI",
     "deadline": "Ongoing",
     "url": "https://www.cfsalberta.ca/workExperience.php",
     "description": "Paid IT work experience refurbishing and deploying computers, about 20 placements a year. You must have finished high school to apply.",
-    "lastVerified": "2026-08"
+    "lastVerified": "2026-10"
   },
   {
     "id": 90,
@@ -1418,7 +1440,8 @@
     "url": "https://skillsbuild.org/high-school",
     "description": "Virtual platform with active Canadian school partnerships providing mentorship and micro-credentials in artificial intelligence, web development, and cloud computing. Students earn IBM-recognized badges upon completion.",
     "metaDescription": "Mentorship and micro-credentials in AI, web development and cloud computing, with IBM-recognized badges on completion.",
-    "lastVerified": "2026-08"
+    "lastVerified": "2026-10",
+    "cost": "free"
   },
   {
     "id": 92,
@@ -1431,11 +1454,11 @@
     "paid": false,
     "stipend": null,
     "location": "Virtual (open to Alberta students)",
-    "eligibility": "Students enrolled in an educational institution; age 18 or under for student category",
+    "eligibility": "Students aged 13 or older in Canada, enrolled in school or recently graduated, and not working full time as a developer",
     "deadline": "TBA",
     "url": "https://developer.apple.com/swift-student-challenge/",
     "description": "Design and submit an original Swift playground or iOS app to Apple. Open to under-18 high schoolers; winners get WWDC access and Apple developer tools.",
-    "lastVerified": "2026-08"
+    "lastVerified": "2026-10"
   },
   {
     "id": 93,
@@ -1471,7 +1494,7 @@
     "deadline": "TBA",
     "url": "https://hackergal.org/ambassador/",
     "description": "Hackergal's national program for girls in Grades 9–12, built for the ones who have aged out of its Grades 6–9 hackathon. Ambassadors start Hackergal Clubs in their own school or community, run workshops, mentor newer ambassadors, and meet women working in tech, moving through four yearly stages from Role Model to Future-Ready Focus. Taking part also qualifies you for Hackergal's scholarship for graduating secondary students, which reopens in November 2026. The ambassador intake is closed at the moment with no reopening date posted.",
-    "lastVerified": "2026-08"
+    "lastVerified": "2026-10"
   },
   {
     "id": 95,
@@ -1532,7 +1555,7 @@
     "category": "Health",
     "format": "summer",
     "provider": "Active Living, Faculty of Kinesiology, University of Calgary",
-    "grades": "Entering grades 4–11 (varies by camp)",
+    "grades": "Kindergarten to Grade 12 (varies by camp)",
     "duration": "1 week per camp (summer)",
     "paid": false,
     "stipend": null,
@@ -1541,9 +1564,10 @@
     "deadline": "TBA",
     "url": "https://active-living.ucalgary.ca/programs/camps",
     "description": "Registration is closed. UCalgary states the camp form \"is no longer available\" while the service is being updated. Active Living runs multi-sport and recreation summer camps on campus; sign up for their notification list for the next intake.",
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-10",
     "cost": "fee",
-    "costNote": "Registration fee applies"
+    "costNote": "Registration fee applies",
+    "notes": "Registration for 2027 summer camps opens February 1, 2027."
   },
   {
     "id": 101,
@@ -1724,11 +1748,11 @@
     "paid": false,
     "stipend": null,
     "location": "Olds, Alberta (in-person)",
-    "eligibility": "Alberta high school students grades 10–12 with interest in ag-tech",
+    "eligibility": "Students in grades 10 to 12 whose Alberta school authority has a partnership with Olds College; the school handles selection and tuition",
     "deadline": "TBA",
     "url": "https://www.oldscollege.ca/programs/high-school-learning/dual-credit-programs.html",
     "description": "Bootcamps and dual-credit courses focusing on the intersection of agriculture, drone telemetry, precision farming, and data science. Students use Olds College's smart farm and tech facilities.",
-    "lastVerified": "2026-08"
+    "lastVerified": "2026-10"
   },
   {
     "id": 115,
@@ -1737,11 +1761,11 @@
     "format": "conferences",
     "provider": "Forum for Young Canadians",
     "grades": "Grades 10–12",
-    "duration": "1 week (Ottawa, spring and fall sessions)",
+    "duration": "One week in Ottawa: February 7–12, February 28 to March 5, or April 18–23, 2027",
     "paid": false,
     "stipend": "Subsidized; bursaries available",
     "location": "Ottawa, Ontario (in-person); open to Alberta students",
-    "eligibility": "Canadian high school students grades 10–12; school nomination or independent application",
+    "eligibility": "Canadian high school students aged 15 to 18; school nomination or independent application",
     "deadline": "2026-10-25",
     "url": "https://forum.ca/forum-for-young-canadians-national-summit/",
     "description": "Applications for Forum 2027 close October 25, 2026, for sessions running February 7-12, February 28 - March 5, and April 18-23, 2027. Three hundred students aged 15-18 spend a week in Ottawa meeting MPs and Senators; travel, meals and accommodation are covered, with bursaries against the $995 fee.",
@@ -1810,7 +1834,7 @@
     "format": "competitions",
     "provider": "Skills Canada Alberta",
     "grades": "High school (secondary division)",
-    "duration": "Regional and qualifying rounds through the winter; two-day provincial competition in May",
+    "duration": "Regional and qualifying rounds through the winter; provincials May 5 and 6, 2027",
     "paid": false,
     "stipend": "Medals and prizes; top competitors join Team Alberta for nationals",
     "location": "Alberta-wide (9 regional competitions; provincials in Edmonton)",
@@ -1819,7 +1843,7 @@
     "url": "https://skillsalberta.com/competition-progression/",
     "description": "Registration for the regional qualifiers opens in early January. Alberta students compete in trades and technology contests at regionals, with winners advancing to the provincial competition and on to Skills Canada nationals.",
     "metaDescription": "Alberta students compete in trades and technology contests at regionals, with winners advancing to provincials and on to Skills Canada nationals.",
-    "lastVerified": "2026-08"
+    "lastVerified": "2026-10"
   },
   {
     "id": 120,
@@ -1910,9 +1934,9 @@
     "deadline": "2027-03-11",
     "url": "https://cemc.uwaterloo.ca/contests/euclid",
     "description": "Canada's best-known senior high school mathematics contest, written each year by more than 25,000 students worldwide. Ten questions in 2.5 hours, mixing final-answer and full-solution problems. Results carry real weight in University of Waterloo admissions and scholarship decisions. Ask a math teacher to register the school. The ordering deadline is March 11, 2027 for the April 6, 2027 contest.",
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-10",
     "cost": "fee",
-    "costNote": "$18 per participant plus school order fees"
+    "costNote": "$18 per participant, plus $5 processing and $5 shipping per school order"
   },
   {
     "id": 125,
@@ -2077,11 +2101,11 @@
     "paid": false,
     "stipend": null,
     "location": "School-based (written at your own school); free to enter",
-    "eligibility": "Any student currently in Grade 11 physics. Students who have already started Grade 12 physics are not eligible. As of the 2026 contest the invitation is open to all schools, not only Ontario ones.",
+    "eligibility": "Students currently taking Grade 11 or Grade 12 physics, in separate divisions. Since 2026 the contest is open to all schools, not only Ontario ones.",
     "deadline": "TBA",
     "url": "https://oaopt.wildapricot.org/contest",
     "description": "A one-hour, 30 question physics contest that opened to the rest of Canada in 2026, when OAPT extended its invitation beyond Ontario schools. Questions run from easy to difficult and reward physical intuition rather than formula memorization, which makes it a useful bridge between Physics 20 and the far harder CAP Prize Exam. Free to enter and non-programmable calculators are allowed. The 2026 contest ran May 20; a teacher can register the school up to a week before contest day.",
-    "lastVerified": "2026-08"
+    "lastVerified": "2026-10"
   },
   {
     "id": 134,
@@ -2182,15 +2206,15 @@
     "format": "clubs",
     "provider": "League of Innovators (LOI)",
     "grades": "Ages 15 to 30",
-    "duration": "Launch It is self-paced, Labs runs 12 weeks, Boost runs 12 months",
+    "duration": "Labs runs 10 weeks and Boost six months; Launch It is paused",
     "paid": false,
     "stipend": "Free and equity-free; Labs holds a $120 refundable deposit, Boost $250",
     "location": "Online, open to founders in every province",
-    "eligibility": "Canadian founders aged 15 to 30 who are building something. Launch It is open enrolment. Labs and Boost are selective, judged on traction, fit and readiness for the stage.",
-    "deadline": "Ongoing",
+    "eligibility": "Canadian founders aged 15 to 30 who are building something. Launch It is paused; Labs and Boost are selective, with waitlists.",
+    "deadline": "TBA",
     "url": "https://www.loi.ac/find-your-program",
     "description": "The largest youth startup accelerator in Canada, a national charity founded by Hootsuite founder Ryan Holmes. Launch It is a free self-paced course for getting an idea off the ground. Labs is the flagship 12-week virtual accelerator, with workshops, mentors, AMA sessions and a cohort of other young founders. Boost is a 12-month program for founders further along. All three are free and take no equity, and the deposits are returned on completion. Applications for the fall 2026 Labs cohort opened in July 2026.",
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-10",
     "cost": "fee",
     "costNote": "Free to join; refundable deposit of $120 (Labs) or $250 (Boost)"
   },
@@ -2239,14 +2263,14 @@
     "grades": "Ages 15 to 17 as of July 1 of the cohort year",
     "duration": "Application project over several months, then lifetime membership if selected",
     "paid": false,
-    "stipend": "Global Winners receive a four-year post-secondary scholarship, project funding and a technology package",
+    "stipend": "Fellows may receive need-based university scholarships, project funding and technology support",
     "location": "Worldwide; the application is online and the summit is in person",
     "eligibility": "Open globally to young people aged 15 to 17 as of July 1 of the cohort year, with no citizenship restriction. You apply with a project or piece of work that serves other people, not with a transcript.",
     "deadline": "TBA",
     "url": "https://www.risefortheworld.org/",
     "description": "A global talent program that names 100 Global Winners a year and backs them for life. Winners get a four-year post-secondary scholarship covering tuition and a living stipend, awarded on need and only where other financial aid does not already cover it, plus a fully funded residential summit, a laptop or tablet, and the ability to apply for funding for their own projects later on. It suits students who already run something that serves other people rather than students with a strong report card alone. Check the status before you plan around it: the most recent cohort announced on the Rise site is 2024, and as of August 2026 the apply subdomain redirects to the homepage with no open cycle posted.",
     "metaDescription": "Names 100 Global Winners a year, with a four-year scholarship, a funded summit and later project funding. No open cycle was posted as of August 2026.",
-    "lastVerified": "2026-08"
+    "lastVerified": "2026-10"
   },
   {
     "id": 143,
@@ -2264,7 +2288,8 @@
     "url": "https://www.non-trivial.org/apply",
     "description": "An online research incubator where you pick a problem that matters, get matched with a mentor and produce a real piece of work over the cohort, in anything from policy and economics to computer science and biology. It runs in three tiers: Research Foundations gives a certificate and community access, Research Fellows adds mentorship and project grants, and Research Scholars adds custom mentorship and a $10,000 scholarship. Applications for the next cohort open in November 2026, with a priority deadline of December 15, 2026 and a final deadline of January 4, 2027. Widely circulated figures about a $500 acceptance award and $30,000 in seed funding are not on the Non-Trivial site as of August 2026, so treat the tiers above as the published offer.",
     "metaDescription": "An online research incubator where you pick a problem, get matched with a mentor and produce real work over the cohort.",
-    "lastVerified": "2026-08"
+    "lastVerified": "2026-10",
+    "notes": "The priority deadline is December 15, 2026; the final deadline is January 4, 2027."
   },
   {
     "id": 144,
@@ -2293,9 +2318,9 @@
     "grades": "Apply in Grade 12, work during your first year of university",
     "duration": "One academic year, about 15 hours a week around full-time studies",
     "paid": true,
-    "stipend": "$20,018 for the year, paid in 26 instalments, plus a $1,200 completion bonus, per the participating universities",
+    "stipend": "$20,018 salary for the year (under review), plus a $1,200 completion payment",
     "location": "Parliament Hill, Ottawa; you study at the University of Ottawa, Carleton, Saint Paul University or Université du Québec en Outaouais",
-    "eligibility": "Canadian citizen or permanent resident graduating from high school, enrolling at an eligible institution in the National Capital Region in September, willing to live in the region, and fluent in both official languages. Bilingualism is formally assessed, so plan your French ahead of the application.",
+    "eligibility": "Canadian citizen or permanent resident graduating from high school and starting first-year studies, full or part time, at an eligible university or college in the National Capital Region in September, willing to live in the region, and fluent in both official languages. Bilingualism is formally assessed, so plan your French ahead of the application.",
     "deadline": "2026-11-08",
     "url": "https://www.ourcommons.ca/About/PageProgram/Index-e.html",
     "description": "Forty students are chosen from across Canada each year to work on the floor of the House of Commons while doing their first year of university in Ottawa. Pages carry documents and messages during sittings, work directly around Members of Parliament and see federal legislation as it happens, which is experience almost nothing else at that age can match. Recruitment runs on a long cycle: applications for the 2027 to 2028 cohort open in September 2026 and close in November 2026, selections finish in March 2027 and offers go out at the end of April 2027. You apply in your Grade 12 year, so the timing lines up with university applications.",
@@ -2467,11 +2492,12 @@
     "location": "Calgary (in-person)",
     "eligibility": "Graduating Grade 12 students with at least an 85% average and a clear interest in a health research career; you must first secure a full-time UCalgary faculty supervisor",
     "deadline": "2027-01-25",
-    "url": "https://signaturelearning.ucalgary.ca/undergraduate-research/urex-funding/alberta-innovates-summer-research-studentships",
+    "url": "https://signaturelearning.ucalgary.ca/undergraduate-research/urex-summer/alberta-innovates-summer-research-studentships",
     "description": "A paid summer in a UCalgary health research lab the summer after Grade 12, funded by Alberta Innovates. You find a faculty supervisor first, then apply together. Applications open November 23, 2026 and close January 25, 2027; students without a UCalgary ID request one first.",
     "metaDescription": "Paid health research at UCalgary the summer after Grade 12, up to $7,500. Find a faculty supervisor first.",
-    "lastVerified": "2026-09",
-    "cost": "free"
+    "lastVerified": "2026-10",
+    "cost": "free",
+    "notes": "Applications open November 23, 2026. Students from outside UCalgary must request a UCID by noon on January 20, 2027."
   },
   {
     "id": 155,
@@ -2483,7 +2509,7 @@
     "duration": "3-day provincial competition in early May",
     "paid": false,
     "stipend": "Cash prizes and trophies for the top three teams",
-    "location": "Vermilion (Lakeland College) in recent years",
+    "location": "University of Alberta Augustana Campus, Camrose (May 12 to 14, 2027)",
     "eligibility": "Teams of five high school students with one or two advisers, from schools or clubs across Alberta",
     "deadline": "2027-03-12",
     "url": "https://www.albertaenvirothon.org/",
@@ -2509,9 +2535,9 @@
     "url": "https://cemc.uwaterloo.ca/contests/csimc",
     "description": "The CEMC's November contests, with full-solution questions alongside short answers. A step up from Pascal, Cayley and Fermat and a common route toward the Canadian Open Mathematics Challenge. Schools order by October 22, 2026 for the November 18, 2026 contest.",
     "metaDescription": "Two-hour CEMC contests in November: Intermediate for grades 9–10, Senior for 11–12, written at your school.",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "cost": "fee",
-    "costNote": "$14 per participant plus school order and shipping fees"
+    "costNote": "$14 per participant, plus $5 processing and $5 shipping per school order"
   },
   {
     "id": 157,
@@ -2569,9 +2595,10 @@
     "url": "https://cemc.uwaterloo.ca/contests/ctmc",
     "description": "A team math contest for six students, run as an in-school event on or after April 14, 2027, or at the University of Waterloo by lottery. Schools order the in-school version by April 12, 2027; the Waterloo lottery closes November 19, 2026.",
     "metaDescription": "Six-student math teams in any mix of grades 9–12 compete each April, at your school or at the University of Waterloo.",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "cost": "fee",
-    "costNote": "$50 per school for the in-school event (unlimited teams), plus a $5 processing fee"
+    "costNote": "$50 per school for the in-school event plus a $5 processing fee; $240 a team in person or $60 a team virtually at hosted events",
+    "notes": "To compete at the University of Waterloo, enter the lottery by November 19, 2026; the in-school contest deadline stays April 12, 2027."
   },
   {
     "id": 160,
@@ -2580,7 +2607,7 @@
     "format": "olympiads",
     "provider": "NACLO, hosted in Alberta by the University of Alberta's Alberta Language Technology Lab",
     "grades": "High school (ages 13–18)",
-    "duration": "3-hour Open Round in late January; invitational round in March",
+    "duration": "Open Round January 28, 2027; Invitational Round March 18, 2027",
     "paid": false,
     "stipend": null,
     "location": "Host sites, including the University of Alberta North Campus in Edmonton",
@@ -2589,8 +2616,9 @@
     "url": "https://naclo.org/",
     "description": "Linguistics puzzles: work out how an unfamiliar language works from a handful of examples, no prior linguistics needed. The 2027 Open Round is January 28, 2027. The top four Anglophone Canadian students in the invitational round represent Canada at the International Linguistics Olympiad.",
     "metaDescription": "Solve puzzles about unfamiliar languages, no background needed. Open Round January 28, 2027, with a site at the U of A.",
-    "lastVerified": "2026-09",
-    "cost": "unconfirmed"
+    "lastVerified": "2026-10",
+    "cost": "unconfirmed",
+    "notes": "Student registration opens October 12, 2026."
   },
   {
     "id": 161,
@@ -2603,12 +2631,12 @@
     "paid": false,
     "stipend": null,
     "location": "Online",
-    "eligibility": "Any secondary school student; the school creates an account and buys seats (minimum 5 students), then students register with a key",
+    "eligibility": "Any secondary school student, and first-year CEGEP students. A school needs five or more students only to enter the team ranking",
     "deadline": "TBA",
     "url": "https://biocomp.utoronto.ca/",
     "description": "A national biology exam written online each April, covering biochemistry, cells, metabolism and genetics at a senior high school level. Schools with five or more students are also ranked as teams.",
     "metaDescription": "A 75-minute national biology exam written online each April. Your school buys seats, minimum five students.",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "cost": "fee",
     "costNote": "$7 CAD per student, minimum 5 students per school"
   },
@@ -2725,9 +2753,10 @@
     "url": "https://uwaterloo.ca/centre-advanced-science-education/science-contests/chemistry-high-school-exams",
     "description": "The University of Waterloo's Grade 11 chemistry contest, written online at school with a teacher supervising. Teachers register students by April 30, 2027 for the May 13, 2027 exam.",
     "metaDescription": "Waterloo's Grade 11 chemistry contest: 40 questions in 75 minutes, written online at your school in May.",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "cost": "fee",
-    "costNote": "$8 per student"
+    "costNote": "$8 per student",
+    "notes": "Teachers register students starting in mid-February 2027."
   },
   {
     "id": 168,
@@ -2745,9 +2774,10 @@
     "url": "https://uwaterloo.ca/centre-advanced-science-education/science-contests/chemistry-high-school-exams",
     "description": "The University of Waterloo's senior chemistry contest, the Grade 12 counterpart to the Avogadro exam. Written online at school; teachers register students by April 23, 2027 for the May 6, 2027 exam.",
     "metaDescription": "Waterloo's Grade 12 chemistry contest: 40 questions in 75 minutes, written online at your school in May.",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "cost": "fee",
-    "costNote": "$8 per student"
+    "costNote": "$8 per student",
+    "notes": "Teachers register students starting in mid-February 2027."
   },
   {
     "id": 169,
@@ -2765,9 +2795,10 @@
     "url": "https://uwaterloo.ca/centre-advanced-science-education/science-contests/willow-river-biology-contest",
     "description": "A University of Waterloo biology contest on Grade 11 and 12 content, open to schools worldwide. Teachers register students from mid-February until April 9, 2027, for the April 22, 2027 contest.",
     "metaDescription": "Waterloo's biology contest on Grade 11 and 12 content: 75 minutes, multiple choice, written at school.",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "cost": "fee",
-    "costNote": "$4 per student"
+    "costNote": "$4 per student",
+    "notes": "Teachers register students starting in mid-February; the exam is April 22, 2027."
   },
   {
     "id": 170,
@@ -2785,8 +2816,9 @@
     "url": "https://www.assembly.ab.ca/about/careers/page-program",
     "description": "A paid part-time job on the floor of the Alberta Legislature: pages deliver documents to MLAs during sittings, help at public events, and take part in professional development and a speech competition. Recruitment runs each spring; apply with a cover letter, résumé, latest report card, and letters of support from a parent and your school.",
     "metaDescription": "A paid job at the Alberta Legislature for students in grades 10–12: $17 an hour, recruited each spring.",
-    "lastVerified": "2026-09",
-    "cost": "free"
+    "lastVerified": "2026-10",
+    "cost": "free",
+    "notes": "Recruitment happens each spring; the next intake dates are not published yet."
   },
   {
     "id": 171,
@@ -2798,13 +2830,13 @@
     "duration": "October to June, about 6 hours a month",
     "paid": false,
     "stipend": null,
-    "location": "Calgary (in-person)",
+    "location": "Calgary (in person, with hybrid options)",
     "eligibility": "Calgary junior and senior high students aged 12–18; applications open every fall",
     "deadline": "TBA",
     "url": "https://youthcentral.com/program/mayors-youth-council/",
     "description": "Calgary's youth council, running since 1992: members meet weekly in subcommittees on civic engagement, careers, health and current issues, hear from guest speakers, meet city officials and plan youth-led events. The 2025–26 council drew from 16 schools across 11 wards. Applications open each fall.",
     "metaDescription": "Calgary's youth council for ages 12–18: weekly subcommittees, meetings with city officials, applications each fall.",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "cost": "free"
   },
   {
@@ -2856,13 +2888,13 @@
     "duration": "6 weeks each summer",
     "paid": false,
     "stipend": null,
-    "location": "Ohio State University (Columbus) or Indiana University (residential)",
+    "location": "Otterbein University (Columbus, Ohio) or Rose-Hulman Institute of Technology (Terre Haute, Indiana), residential",
     "eligibility": "Mostly ages 15–18, occasionally exceptional 14-year-olds; students from outside the US are accepted every year. Apply with essays, a video, a teacher recommendation, a transcript and the application problems",
     "deadline": "TBA",
     "url": "https://rossprogram.org/participants/application/",
     "description": "A six-week residential summer of number theory built on proving everything yourself, at Ohio State or Indiana University. About 60 first-year students per site are admitted, roughly 15% of applicants. The 2026 deadline was March 8; the program aims to fund every admitted student who needs aid, though aid for international students is limited.",
     "metaDescription": "Six weeks of proof-based number theory at Ohio State or Indiana; Canadian students are admitted every year.",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "cost": "varies",
     "costNote": "$7,500 USD program fee; need-based aid, limited for international students"
   },
@@ -2876,13 +2908,13 @@
     "duration": "Six Saturday meetings a year",
     "paid": false,
     "stipend": null,
-    "location": "Calgary (Alberta Children's Hospital); mileage covered for members from outside Calgary",
+    "location": "Calgary (Alberta Children's Hospital), with a mix of in-person and online meetings; mileage covered for members from outside Calgary",
     "eligibility": "Ages 12–16 with an interest in youth health care, plus at least one of: experience as a patient or a patient's family member, living with a disability or chronic condition, a diverse background, adversity affecting your health, or living in southern Alberta outside greater Calgary",
     "deadline": "TBA",
     "url": "https://fcrc.albertahealthservices.ca/youth/cayac/",
     "description": "Youth volunteers who give Alberta Children's Hospital a youth voice on its programs and services, through consultations and meetings with staff. Recruitment runs each year from June 1 to September 7; apply through the hospital's volunteer portal.",
     "metaDescription": "Help shape care at Alberta Children's Hospital from age 12: six Saturday meetings a year, recruited June to September.",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "cost": "free"
   },
   {
@@ -2920,9 +2952,10 @@
     "url": "https://www.hsmun.net/registration-faqs",
     "description": "The 25th session of the U of A's high school Model UN: delegates represent countries in committee debates on global issues. Teachers register schools October 13 to November 5, 2026; students then register by December 19, 2026, and position papers are due February 12, 2027.",
     "metaDescription": "Represent a country in Model UN committees at the U of A, February 18–20, 2027. Ask a teacher to register your school.",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "cost": "fee",
-    "costNote": "$125 per student; fee waivers for financial hardship"
+    "costNote": "$125 per student; fee waivers for financial hardship",
+    "notes": "Teachers register from October 13, 2026 at noon; student forms are due December 19, 2026."
   },
   {
     "id": 178,
@@ -2940,9 +2973,10 @@
     "url": "https://cahsmun.org/register",
     "description": "One of Canada's largest high school Model UN conferences, open to delegations from any province. A sponsor teacher registers the school first, then delegates sign up; early pricing runs to October 25 and registration closes when the conference fills. Bursaries can cover up to the full fee.",
     "metaDescription": "A national high school Model UN in Vancouver, April 2–4, 2027, with hotel included and bursaries up to the full fee.",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "cost": "fee",
-    "costNote": "$320 early, $360 regular, $385 late per delegate, including two nights' hotel; bursaries up to 100%"
+    "costNote": "$320 early, $360 regular, $385 late per delegate, including two nights' hotel; bursaries up to 100%",
+    "notes": "Early registration runs September 28 to October 25, 2026; regular registration until January 24, 2027; late registration after that until full."
   },
   {
     "id": 179,
@@ -2990,7 +3024,7 @@
     "format": "olympiads",
     "provider": "Canadian Economics Olympiad",
     "grades": "High school",
-    "duration": "Online Round 1, then invitational national finals",
+    "duration": "Round 1 online on February 13, 2027; national finals April 8, 2027",
     "paid": false,
     "stipend": null,
     "location": "Online Round 1; finals by invitation",
@@ -2999,8 +3033,9 @@
     "url": "https://www.ceo-oec.ca/",
     "description": "Canada's high school economics competition and the qualifier for the International Economics Olympiad, covering economics, finance and business case analysis. Five students go to the International Economics Olympiad and five to the Economics Olympiad International Final Round. Registration for 2027 opens in January.",
     "metaDescription": "Canada's economics, finance and business-case contest for high school students, and the route to the international olympiad.",
-    "lastVerified": "2026-09",
-    "cost": "unconfirmed"
+    "lastVerified": "2026-10",
+    "cost": "unconfirmed",
+    "notes": "2027 registration opens in January 2027."
   },
   {
     "id": 182,
@@ -3046,17 +3081,17 @@
     "category": "Enrichment",
     "format": "clubs",
     "provider": "Government of Canada (Employment and Social Development Canada)",
-    "grades": "Ages 15–30",
+    "grades": "Ages 12–30",
     "duration": "Flexible (at least 120 hours over 12 months) or full-time placements",
     "paid": false,
     "stipend": null,
     "location": "Across Canada, including Alberta (in-person and remote)",
-    "eligibility": "Young Canadians aged 15–30; placements are run by partner organizations, and some regional programs start younger",
+    "eligibility": "Young people aged 12 to 30 in Canada; placements are run by partner organizations with their own requirements",
     "deadline": "Ongoing",
     "url": "https://www.canada.ca/en/services/youth/canada-service-corps.html",
     "description": "The federal youth volunteer service program: find a service placement with a partner organization, or propose your own project and apply for a micro-grant to run it. Placements are volunteer, not paid. Search and apply for current placements at youth.volunteer.ca.",
     "metaDescription": "Federal youth service placements for Canadians aged 15–30, or a micro-grant to run your own community project.",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "cost": "free"
   },
   {
@@ -3113,9 +3148,10 @@
     "url": "https://www.sait.ca/youth-programs/summer-camps",
     "description": "Hands-on week-long camps at SAIT in trades and technology: welding, construction, automotive and aviation mechanics, electronics, engineering, computers and media arts, plus career-skills camps for high school students. Each week has its own registration deadline.",
     "metaDescription": "Week-long SAIT day camps for grades 9–12 in welding, mechanics, electronics and media arts, with bursaries.",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "cost": "varies",
-    "costNote": "Weekly fee varies by camp; bursaries for families in need"
+    "costNote": "Weekly fee varies by camp; bursaries for families in need",
+    "notes": "Summer 2027 registration opens January 25, 2027."
   },
   {
     "id": 188,
@@ -3287,9 +3323,10 @@
     "url": "https://ssp.org/application/",
     "description": "A residential research summer in astrophysics (tracking a near-Earth asteroid), biochemistry, bacterial genomics or cell biology, with about 700 students a year and no grades or tests. Admission is need-blind. Applications for 2027 open around the end of December 2026; the 2026 international deadline was January 29, earlier than the US one.",
     "metaDescription": "Research a near-Earth asteroid or a protein in a residential summer program, free for lower-income families.",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "cost": "varies",
-    "costNote": "Free for families earning $75,000 or less, discounted under about $140,000; need-blind admission"
+    "costNote": "Free for families earning $75,000 or less, discounted under about $140,000; need-blind admission",
+    "notes": "2027 applications open in December 2026; the international deadline is expected in January 2027."
   },
   {
     "id": 198,
@@ -3327,8 +3364,9 @@
     "url": "https://rotary5360.ca/page/long-term-exchange-information",
     "description": "A school year abroad as a Rotary youth ambassador: live with two to four host families, attend high school full-time and learn the language. For the August 2027 departure, southern Alberta applications close November 15, 2026, with interviews in late November. Students in northern Alberta apply through Rotary District 5370.",
     "metaDescription": "Spend a school year abroad with Rotary host families, for ages 15.5 to 17.9, sponsored by a local Rotary club.",
-    "lastVerified": "2026-09",
-    "cost": "unconfirmed"
+    "lastVerified": "2026-10",
+    "cost": "unconfirmed",
+    "notes": "District 5360 applications for the 2027-28 exchange opened June 5, 2026 and close November 15, 2026."
   },
   {
     "id": 200,
@@ -3365,8 +3403,9 @@
     "url": "https://cemc.uwaterloo.ca/workshops/student-workshops/math-circles",
     "description": "A free weekly math enrichment program run by Waterloo's CEMC, exploring topics beyond the curriculum through short lessons and problem solving. The Grade 9/10 online section meets Wednesday or Thursday evenings (Eastern Time, so late afternoon in Alberta). Register September 10–28, 2026.",
     "metaDescription": "Free weekly math enrichment from Waterloo for grades 9–10, live online through the fall and winter terms.",
-    "lastVerified": "2026-09",
-    "cost": "free"
+    "lastVerified": "2026-10",
+    "cost": "free",
+    "notes": "Registration for Winter 2027 Math Circles opens in January 2027."
   },
   {
     "id": 202,
@@ -3493,14 +3532,15 @@
     "paid": false,
     "stipend": null,
     "location": "Edmonton (University of Alberta campus)",
-    "eligibility": "Female students in grades 10–12; dedicated spots and mentorship for Indigenous students. Capped at 225 participants",
+    "eligibility": "Female students in grades 10 to 12, with reserved spots for Indigenous students. Capped at 225 participants",
     "deadline": "2026-10-30",
     "url": "https://www.ualberta.ca/en/women-in-scholarship-engineering-science-technology/programs/set-conference/index.html",
     "description": "A one-day science, engineering and technology conference with hands-on lab activities, panels with professionals, career sessions and a networking mixer. Registration opens October 2, 2026, with payment due November 3; it is limited to 225 students, so register early to choose your sessions.",
     "metaDescription": "A one-day STEM conference at the U of A for female students in grades 10–12, with labs, panels and lunch.",
     "lastVerified": "2026-10",
     "cost": "fee",
-    "costNote": "$75 including lunch; lower fee without lunch"
+    "costNote": "$80 with lunch or $65 without",
+    "notes": "Online registration opened October 2, 2026."
   },
   {
     "id": 209,
@@ -3572,10 +3612,10 @@
     "location": "Online",
     "eligibility": "Students worldwide aged 13 and up; under 18 needs parental consent",
     "deadline": "TBA",
-    "url": "https://picoctf.org/",
+    "url": "https://cylabacademy.org/",
     "description": "A free capture-the-flag hacking competition from Carnegie Mellon: solve security puzzles in cryptography, web exploitation, forensics and reverse engineering. The picoGym practice site runs year-round with past challenges and guided lessons, so you can start well before the spring competition.",
     "metaDescription": "A free capture-the-flag cybersecurity competition from Carnegie Mellon each spring, with a practice site open all year.",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "cost": "free"
   },
   {
@@ -3634,8 +3674,8 @@
     "url": "https://bowseat.org/programs/blue-planet-awareness-contest/contest-overview/",
     "description": "Formerly the Ocean Awareness Contest: respond to the year's environmental theme with art, film, poetry, creative writing, music, dance or interactive work. The 2027 theme is \"Nature of Truth: Environmentalism in an Age of Disinformation\".",
     "metaDescription": "Answer an environmental theme with art, writing, film or music, ages 11–18 worldwide, for awards up to $1,000.",
-    "lastVerified": "2026-09",
-    "cost": "unconfirmed"
+    "lastVerified": "2026-10",
+    "cost": "free"
   },
   {
     "id": 216,
@@ -3653,8 +3693,9 @@
     "url": "https://www.theearthprize.org/competition",
     "description": "The world's largest environmental sustainability competition for teenagers: identify a real environmental problem and design a solution, submitted as an Earth Prize Blueprint that ends in a video pitch. Register by January 10, 2027 and submit by January 31, 2027.",
     "metaDescription": "Design a solution to a real environmental problem, alone or in a team of five, for $10,000 regional prizes.",
-    "lastVerified": "2026-09",
-    "cost": "free"
+    "lastVerified": "2026-10",
+    "cost": "free",
+    "notes": "Registration closes January 10, 2027; the project blueprint is due January 31, 2027."
   },
   {
     "id": 217,
@@ -3744,12 +3785,13 @@
     "stipend": "Cash prizes at the national level; first-place senior winners go to Ottawa for the National Remembrance Day Ceremony",
     "location": "Through your local Legion branch; video entries online",
     "eligibility": "Students across Canada; poster and literary entries go to your nearest Legion branch, which sets its own deadline",
-    "deadline": "TBA",
+    "deadline": "2026-12-15",
     "url": "https://www.remembrancecontests.ca/",
     "description": "Remembrance-themed contests in three forms: a poster, an original essay or poem, or a video. Poster and literary entries are judged at the branch, then provincial, then national level; video entries go online from September 1 to December 15, 2026. Ask your nearest Legion branch for its poster and literary deadline.",
     "metaDescription": "Enter a Remembrance poster, essay, poem or video; the top senior winners represent Canadian youth in Ottawa.",
-    "lastVerified": "2026-09",
-    "cost": "free"
+    "lastVerified": "2026-10",
+    "cost": "free",
+    "notes": "Video submissions opened September 1, 2026."
   },
   {
     "id": 222,
@@ -3767,8 +3809,9 @@
     "url": "https://poetryinvoice.ca/recite/rules-dates",
     "description": "Memorize and recite poems from the Poetry In Voice anthology, including at least one written before the 21st century, in the English, French or bilingual stream. Submissions open February 1, 2027; senior semifinalists are named March 11 and finalists March 18.",
     "metaDescription": "Recite poems in English, French or both for cash and a trip to the Toronto finals, open to grades 10–12.",
-    "lastVerified": "2026-09",
-    "cost": "free"
+    "lastVerified": "2026-10",
+    "cost": "free",
+    "notes": "Online qualifiers open February 1, 2027 and close March 4, 2027 at 8 p.m. ET."
   },
   {
     "id": 223,
@@ -3801,14 +3844,14 @@
     "paid": false,
     "stipend": null,
     "location": "Local units across Alberta",
-    "eligibility": "Girls aged 15–17; register online and pick a unit near you with the unit finder",
+    "eligibility": "Girls aged 15 to 17 (a 14-year-old turning 15 by December 31 can join that year); register online and pick a unit near you with the unit finder",
     "deadline": "Ongoing",
     "url": "https://www.girlguides.ca/WEB/BC/Parents/What_We_Offer/Rangers/GGC/Programs/Core_Programming/Rangers.aspx",
     "description": "The Girl Guides branch for teens: Rangers lead community projects, mentor younger girls, raise awareness for causes they choose, and go on overnight canoe trips while learning skills like budgeting and resume writing. Registration for 2026–27 is open.",
     "metaDescription": "Lead community projects, mentor younger girls and go canoe tripping with Girl Guides Rangers, ages 15–17.",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "cost": "fee",
-    "costNote": "Under $200 a year for weekly programming, plus uniform and some activity costs"
+    "costNote": "About $125 to $205 a year depending on region, plus uniform and some activity costs"
   },
   {
     "id": 225,
@@ -3978,12 +4021,13 @@
     "stipend": null,
     "location": "Online, entered through your school",
     "eligibility": "High school students (or younger) anywhere, in teams of up to four with a faculty advisor; no limit on teams per school",
-    "deadline": "TBA",
+    "deadline": "2026-11-04",
     "url": "https://comap.org/contests/himcm-midmcm",
     "description": "An international team contest where high school students pick one of several open-ended real-world problems, build a mathematical model and write up their solution as a report. Teams have 14 consecutive days in the contest window to download the problem, work on it and submit electronically, under a teacher advisor.",
     "metaDescription": "Team up with up to three classmates to solve a real-world problem with a math model and a written report over 14 days.",
-    "lastVerified": "2026-09",
-    "cost": "unconfirmed"
+    "lastVerified": "2026-10",
+    "cost": "unconfirmed",
+    "costNote": "$100 registration fee per team"
   },
   {
     "id": 234,
@@ -4003,7 +4047,8 @@
     "metaDescription": "Design a small experiment to fly on a NASA scientific balloon, for ages 11 to 18 working with an adult educator.",
     "lastVerified": "2026-10",
     "cost": "varies",
-    "costNote": "Free to register and apply; a US$75 flight fee if selected, plus shipping both ways for international teams"
+    "costNote": "Free to register and apply; a US$75 flight fee if selected, plus shipping both ways for international teams",
+    "notes": "Registration opens November 9, 2026; Intent to Fly is due March 12, 2027 and the spaceflight application April 12, 2027."
   },
   {
     "id": 235,
@@ -4037,13 +4082,14 @@
     "stipend": null,
     "location": "Finals in person in Rochester, New York",
     "eligibility": "Students in grades 8 to 12 from any country, with a project in one of nine categories",
-    "deadline": "2027-03-07",
+    "deadline": "TBA",
     "url": "https://geniusolympiad.org/",
     "description": "An international high school project fair with nine categories: science, art, short film, music, robotics, entrepreneurship, speech, coding and artificial intelligence. Students submit a project online; finalists are announced March 25 and present in person at the finals in Rochester, New York.",
     "metaDescription": "Enter a science, art, film, music, robotics or coding project in an international fair with finals in New York.",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "cost": "fee",
-    "costNote": "US$75 application fee per project; US$695 per finalist to take part in the finals"
+    "costNote": "US$75 application fee per project; US$695 per finalist to take part in the finals",
+    "notes": "Applications for 2027 open in December 2026."
   },
   {
     "id": 237,
@@ -4051,7 +4097,7 @@
     "category": "Computing",
     "format": "competitions",
     "provider": "European Space Agency and the Raspberry Pi Foundation",
-    "grades": "Under 19",
+    "grades": "Age 19 and under",
     "duration": "Registration September 14, 2026 to February 22, 2027; about 2 to 6 hours of work",
     "paid": false,
     "stipend": null,
@@ -4061,8 +4107,9 @@
     "url": "https://astro-pi.org/mission-space-lab",
     "description": "Students write Python code for a task set by ESA scientists, test it on the Astro Pi replica, and qualifying programs run on the Astro Pi computers aboard the International Space Station. Canada takes part as an ESA cooperating state. A shorter Mission Zero, about an hour of coding, is also open.",
     "metaDescription": "Write Python that runs on a computer aboard the International Space Station, free for Canadians under 19.",
-    "lastVerified": "2026-09",
-    "cost": "free"
+    "lastVerified": "2026-10",
+    "cost": "free",
+    "notes": "Registration is open until the February 22, 2027 deadline (noon CET)."
   },
   {
     "id": 238,
@@ -4178,9 +4225,10 @@
     "url": "https://summer.harvard.edu/high-school-programs/secondary-school-program/",
     "description": "High school students take college courses for credit alongside Harvard Summer School students, in four- or seven-week sessions on campus, commuting or online. Early and regular deadlines are January 13 and February 10, 2027, and the late deadline is March 31. International residential students get visa sponsorship.",
     "metaDescription": "Take college courses for credit at Harvard for four or seven weeks, on campus or online, for students 16 to 18.",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "cost": "fee",
-    "costNote": "2027 tuition from about US$4,180 (online) to US$15,980 (seven weeks residential), plus a US$75 application fee"
+    "costNote": "2027 tuition from about US$4,180 (online) to US$15,980 (seven weeks residential), plus a US$75 application fee",
+    "notes": "Applications open December 1, 2026; priority deadline January 13, 2027; regular deadline February 10, 2027; late deadline March 31, 2027, or earlier if full."
   },
   {
     "id": 245,
@@ -4198,8 +4246,9 @@
     "url": "https://www.uwo.ca/cssl/internships/index.html",
     "description": "A paid summer on Western University's severe storms team. The hail internship is based in Olds, Alberta and chases hailstorms to collect data; flights and housing in Olds are covered. High school interns get the same $10,000 as university interns. The 2026 round opened December 1, 2025 and closed January 26, 2026, with a required virtual info session in January.",
     "metaDescription": "Chase Alberta hailstorms for Western University's storm lab: $10,000 for Grade 11 and 12 students from Olds.",
-    "lastVerified": "2026-09",
-    "cost": "free"
+    "lastVerified": "2026-10",
+    "cost": "free",
+    "notes": "2027 internship details are expected in December 2026."
   },
   {
     "id": 246,
@@ -4227,7 +4276,7 @@
     "format": "summer",
     "provider": "The Hospital for Sick Children (SickKids) Research Institute",
     "grades": "Grade 12 (graduating)",
-    "duration": "Up to 15 weeks, May to mid-August",
+    "duration": "Length and hours are set with your supervisor; some funded studentships require 15 weeks",
     "paid": true,
     "stipend": "Minimum wage plus 6% vacation pay",
     "location": "Toronto, ON (in-person; remote work only from inside Ontario)",
@@ -4236,7 +4285,7 @@
     "url": "https://www.sickkids.ca/en/research/research-training-centre/summer-research-program/",
     "description": "A paid summer research job at SickKids in Toronto, open to students in their last year of high school who start post-secondary in the fall. You work on a project under a SickKids researcher, who must supervise you, and present at the August symposium. If you have not heard back by early April, the position has likely been filled.",
     "metaDescription": "Paid summer research at SickKids in Toronto for graduating Grade 12 students headed to university in the fall.",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "cost": "free"
   },
   {
@@ -4251,11 +4300,11 @@
     "stipend": null,
     "location": "Your school, plus beamtime at the Canadian Light Source in Saskatoon, SK",
     "eligibility": "High school students 14 and older, as a group led by a teacher; the teacher writes the proposal and needs a prior connection with CLS Education. Grades are not a criterion",
-    "deadline": "TBA",
+    "deadline": "2026-11-15",
     "url": "https://www.lightsource.ca/public/ed/programs/students-on-the-beamline.php",
     "description": "A teacher and a group of students design their own experiment and run it on a beamline at Canada's synchrotron in Saskatoon, then present what they found. Students lead the project with mentors from the Light Source. The teacher applies, not the student, so show this to a science teacher. The spring 2026 call closed April 1, and the next call opens in October 2026.",
     "metaDescription": "Run your own experiment on Canada's synchrotron in Saskatoon with a teacher-led group of high school students.",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "cost": "free"
   },
   {
@@ -4361,7 +4410,7 @@
     "format": "summer",
     "provider": "UC Santa Barbara Summer Sessions",
     "grades": "Grade 10-11",
-    "duration": "7 weeks (June 14 to July 31, 2027)",
+    "duration": "June 14 to July 30, 2027, starting online June 14 to 16",
     "paid": false,
     "stipend": null,
     "location": "Santa Barbara, California (in-person; three virtual days to start)",
@@ -4370,9 +4419,10 @@
     "url": "https://www.summer.ucsb.edu/programs/research-mentorship-program/overview",
     "description": "A seven-week summer at UC Santa Barbara where you are paired with a graduate student, postdoc or professor and carry out your own research project, with lectures on research methods along the way. International students are welcome. Applications for 2027 open December 15, 2026 and close March 8, 2027, with decisions on a rolling basis. It is expensive: in 2026, US$5,675 to commute or US$13,274 living on campus.",
     "metaDescription": "Seven weeks of mentored research at UC Santa Barbara for Grade 10 and 11 students from anywhere, Canada included.",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "cost": "fee",
-    "costNote": "US$5,675 commuter or US$13,274 residential (2026); limited need-based aid, California residents first"
+    "costNote": "US$5,675 commuter or US$13,274 residential (2026); limited need-based aid, California residents first",
+    "notes": "Applications open December 15, 2026 and close March 8, 2027, with rolling decisions."
   },
   {
     "id": 255,
@@ -4385,12 +4435,12 @@
     "paid": true,
     "stipend": "Paid position (amount not posted)",
     "location": "Toronto, ON (in-person, Mount Sinai or Hennick Bridgepoint Hospital)",
-    "eligibility": "Grade 11 and 12 students who are 16 by the start, have taken or are taking Grade 11 Biology and Chemistry, can legally work in Canada and meet the hospital's immunization policy",
+    "eligibility": "Grade 11 and 12 students who are 16 by the start, will have completed Grade 11 Biology and Chemistry before starting, can legally work in Canada and meet the hospital's immunization policy",
     "deadline": "TBA",
     "url": "https://scihigh.ca/students/internships/",
     "description": "A paid eight-week summer internship working full time with a biomedical research group at the Lunenfeld-Tanenbaum Research Institute in Toronto. The page sets no rule on where you live, but the work is in person at Mount Sinai or Hennick Bridgepoint Hospital. Places are very competitive. Applications for summer 2026 have closed; a one-week March Break placement also runs.",
     "metaDescription": "A paid eight-week summer internship in a Toronto biomedical research lab for Grade 11 and 12 students who are 16 or older.",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "cost": "free"
   },
   {
@@ -4443,12 +4493,12 @@
     "paid": false,
     "stipend": null,
     "location": "Online entry; national finalists travel to Washington, DC",
-    "eligibility": "Teams of 2 to 4 students who are Canadian or US citizens living in Canada or the US, in school full time and 21 or younger, with a coach aged 21+ (a teacher, counsellor, youth leader or parent)",
+    "eligibility": "Teams of 2 to 4 full-time K-12 students living in Canada or the US, with a coach aged 21 or older. Only teams of US or Canadian citizens can advance to the regional and national rounds or win prizes",
     "deadline": "2027-01-27",
     "url": "https://www.exploravision.org/rules-requirements/",
     "description": "A science competition for Canadian and US students. Your team of 2 to 4 imagines a future technology, researches the science behind it and writes it up: a project description of up to 11 pages, an abstract, a bibliography and a launch flyer. High school teams (Grades 10 to 12) compete in their own division. First-prize students each get US$5,000 cash (or a larger savings bond), second prize US$2,500, and the eight finalist teams go to Washington, DC in June. Every student on a team that submits a complete project gets a certificate and a gift. Note that it asks for citizenship, not residency.",
     "metaDescription": "Team up with 2 to 4 classmates, design a future technology and compete for up to US$5,000 each plus a DC trip.",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "cost": "unconfirmed"
   },
   {
@@ -4460,14 +4510,14 @@
     "grades": "Grade 10 completed, age 16+",
     "duration": "About 6 weeks, early July to late August",
     "paid": true,
-    "stipend": "Paid for the whole program; travel, food, lodging and gear are covered",
+    "stipend": "About $4,200 in pay; travel, food, lodging and gear are covered",
     "location": "CFB Wainwright, AB",
-    "eligibility": "First Nations (Status or non-Status), Métis or Inuit youth who are Canadian citizens, 16 or older with Grade 10 done (parent consent under 18), from Western Canada: Thunder Bay to the West Coast, including the territories",
+    "eligibility": "First Nations (Status or non-Status), Métis or Inuit youth who are Canadian citizens with Grade 10 done, aged 16 or older if in full-time school (17 otherwise; parent consent under 18), from Western Canada: Thunder Bay to the West Coast, including the territories",
     "deadline": "TBA",
     "url": "https://www.canada.ca/en/army/services/bold-eagle.html",
     "description": "A paid summer program at CFB Wainwright for Indigenous youth from Western Canada that combines basic military training with cultural teachings led by Elders. You learn drill, navigation, first aid and weapons handling, and finish with the Army Reserve Basic Military Qualification. After it you can stay in the Forces or be released, and some high schools count the time as career experience credits. The Forces pay you and cover travel, food and lodging. Applications usually close at the end of April. The 2026 course, its 37th year, graduated 64 people.",
     "metaDescription": "A paid six-week summer at CFB Wainwright for Indigenous youth 16+, mixing basic military training with Elder-led teachings.",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "cost": "free"
   },
   {
@@ -4479,16 +4529,17 @@
     "grades": "Ages 16-28",
     "duration": "About 7 weeks, mid-June to early August 2027",
     "paid": true,
-    "stipend": "Full scholarship plus an honorarium",
+    "stipend": "A full scholarship worth about $23,500, plus a $1,500 honorarium for members without another NYO award",
     "location": "Wilfrid Laurier University, Waterloo, ON",
     "eligibility": "Orchestral musicians aged 16 to 28 on July 1, 2027 who live in Canada, including full-time students at a Canadian school; video audition",
     "deadline": "2027-02-01",
     "url": "https://nyoc.org/auditions/faq",
     "description": "Canada's national training orchestra. Musicians spend the summer in intensive rehearsal and coaching with professional faculty, then perform. No member pays tuition: everyone gets a full scholarship and an honorarium. You apply with an audition video. The application fee rises the later you apply: $50 in the first week of October, $75 to November 30 and $100 after that. Videos are due February 1, 2027.",
     "metaDescription": "Spend the summer in Canada's national youth orchestra for free, with an honorarium, if you are 16 or older.",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "cost": "fee",
-    "costNote": "Application fee $50 (October 1 to 7), $75 (to November 30) or $100 (to February 1); no tuition"
+    "costNote": "Application fee $50 (October 1 to 7), $75 (to November 30) or $100 (to February 1); no tuition",
+    "notes": "The application fee window opens October 1, 2026; the video deadline is February 1, 2027."
   },
   {
     "id": 262,
@@ -4545,8 +4596,10 @@
     "url": "https://tellurideassociation.org/our-programs/high-school-students/tass-faq-2/",
     "description": "A free five-week humanities seminar in the US: university-level reading, writing and discussion with a small group. There are two tracks, TASS-CBS and TASS-AOS, and you apply to one. Telluride covers tuition, books, room and board and field trips, but does not help with visas. International students, Canadians included, can only apply in Grade 10. The 2026 deadline was December 3, 2025, so expect the next one in early December.",
     "metaDescription": "A free five-week university-level humanities seminar at Cornell or Maryland; Canadian students apply in Grade 10.",
-    "lastVerified": "2026-09",
-    "cost": "free"
+    "lastVerified": "2026-10",
+    "cost": "free",
+    "active": false,
+    "notes": "TASS will not run summer sessions in 2027 while the program is under review."
   },
   {
     "id": 266,
@@ -4640,8 +4693,9 @@
     "url": "https://www.calgarypolice.ca/public-safety/youth-safety-and-programs/calgary-police-cadet-corps.html",
     "description": "A free cadet program run by the Calgary Police Service. Cadets meet Thursday evenings from 5:45 to 9:15, September to May, and join weekend exercises and volunteer work. Over five levels they build leadership, fitness, first aid and marksmanship skills. Uniforms and equipment are provided. Applications for the next September intake open November 1 and close March 31, so a Grade 10 student who is still 16 can join.",
     "metaDescription": "Join Calgary's free police cadet corps at 12 to 16 for weekly leadership, fitness and first-aid training; apply November to March.",
-    "lastVerified": "2026-09",
-    "cost": "free"
+    "lastVerified": "2026-10",
+    "cost": "free",
+    "notes": "Applications are open November 1 to March 31 for the following year's intake."
   },
   {
     "id": 271,
@@ -4674,12 +4728,12 @@
     "paid": false,
     "stipend": null,
     "location": "Calgary",
-    "eligibility": "Singers and dancers aged 8 to 21 from Calgary and area; Intermediates and Seniors need two years of dance, and singers need vocal training or natural ability",
+    "eligibility": "Singers and dancers aged 8 to 21 from Calgary and area; two years of dance are recommended for Intermediates and Seniors, and singers need vocal training or natural ability",
     "deadline": "TBA",
     "url": "https://corporate.calgarystampede.com/foundation/programs/young-canadians/auditions",
     "description": "The Calgary Stampede's performing arts school, whose members sing and dance in the Grandstand Show every July. Seniors (15 to 21) train 12 to 15 hours a week on Tuesdays, Thursdays, Saturdays and some Sundays, and attendance is mandatory. Tuition is $2,100 a year plus a one-time fee for new members, with financial help and payment plans. Audition dates for 2027-28 are not posted yet.",
     "metaDescription": "Sing and dance in the Calgary Stampede Grandstand Show as a Young Canadian; Seniors are 15 to 21 and audition yearly.",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "cost": "fee",
     "costNote": "$2,100 a year plus a one-time fee for new members; financial help and payment plans"
   },
@@ -4696,10 +4750,10 @@
     "location": "Citadel Theatre, Edmonton",
     "eligibility": "Actors (Young Performing Company) or technicians, designers and stage managers (Young Production Company) aged 16 to 21 who are serious about studying theatre after high school",
     "deadline": "TBA",
-    "url": "https://citadeltheatre.com/theatre-education/pre-professional-training-young-companies/",
+    "url": "https://citadeltheatre.com/theatre-education/young-companies/",
     "description": "Pre-professional theatre training at the Citadel in Edmonton for 16 to 21 year olds planning on theatre school or a theatre career. One cohort trains as actors and the other in production (tech, design and stage management). Local theatre professionals teach, and the season ends with a spring production in the Rice Theatre. Submissions for 2026-27 are closed; 2027-28 audition details come later.",
     "metaDescription": "Train as an actor or theatre technician with Edmonton's Citadel Theatre at 16 to 21, ending in a spring production.",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "cost": "unconfirmed"
   },
   {
@@ -4737,8 +4791,9 @@
     "url": "https://www.esa.int/Education/Moon_Camp/Moon_Camp_2026-2027_Challenge_your_students_to_design_a_space_habitat",
     "description": "An ESA challenge to design a habitat on the Moon, open to Canada because Canada cooperates with ESA. Use any design tool you like, from 3D modelling to games, robotics or experiments. A teacher or educator registers the team and submits on the Moon Camp site. Every valid entry gets an ESA certificate and a place in the online gallery, and teams are invited to a livestream with an astronaut. Early certificates go to entries in by April 19, 2027. Only students up to 16 qualify.",
     "metaDescription": "Design a Moon habitat for the European Space Agency's challenge, open to Canadian students up to age 16.",
-    "lastVerified": "2026-09",
-    "cost": "unconfirmed"
+    "lastVerified": "2026-10",
+    "cost": "unconfirmed",
+    "notes": "Submissions opened September 18, 2026; the early-certificate deadline is April 19, 2027."
   },
   {
     "id": 276,
@@ -4747,10 +4802,10 @@
     "format": "competitions",
     "provider": "Canadian Music Competition, Calgary Chapter (Canadian Music Competitions Southern Alberta Committee)",
     "grades": "Ages 7-25 (15-18 category for most high schoolers)",
-    "duration": "Chapter audition in spring; national final in Montreal in July",
+    "duration": "Pathways auditions April 6 to 15, 2027; national final dates to be announced",
     "paid": false,
     "stipend": null,
-    "location": "Calgary audition (Edmonton candidates audition in Calgary); national final in Montreal",
+    "location": "Pathways Program auditions at Scarboro United Church, Calgary; 2027 national finals location to be announced",
     "eligibility": "Canadian citizens and permanent residents; solo performers and ensembles in age groups 7-10, 11-14, 15-18 and 19-25 (to 29 for voice)",
     "deadline": "2027-01-22",
     "url": "https://pathwaysprogram.ca/pathways-program/important-dates-location/",
@@ -4758,7 +4813,8 @@
     "metaDescription": "Audition in Calgary for the Canadian Music Competition; top classical players go on to the national final in Montreal.",
     "lastVerified": "2026-10",
     "cost": "fee",
-    "costNote": "Chapter registration fee (set by the Calgary Chapter); $200 more to compete in the national final"
+    "costNote": "Chapter registration fee (set by the Calgary Chapter); $200 more to compete in the national final",
+    "notes": "Registration opens December 1, 2026 and closes January 22, 2027 at 11:59 p.m. MT."
   },
   {
     "id": 277,
@@ -4776,9 +4832,10 @@
     "url": "https://www.inspiritai.com/liveonline",
     "description": "A paid online course in artificial intelligence in groups of about five students per instructor, taught by graduates of Stanford, MIT and similar universities. You learn Python and AI basics, then build a mentored AI project for social impact. Sessions run in fall, winter and summer, and applications are rolling. The winter 2026-27 intensives run daily over the holiday break. It is expensive and not affiliated with any university, so weigh it against free options.",
     "metaDescription": "A paid online AI course for Grades 9 to 12 where you build a mentored project in small groups; no coding needed to start.",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "cost": "fee",
-    "costNote": "US$1,400; payment plans available"
+    "costNote": "US$1,400; payment plans available",
+    "notes": "Rolling review with cohort cutoffs: October 15, 2026 for Fall and November 15, 2026 for Winter."
   },
   {
     "id": 278,
@@ -4787,7 +4844,7 @@
     "format": "clubs",
     "provider": "Choir Alberta",
     "grades": "Ages 16-22",
-    "duration": "Two singing weekends and a residency in 2027",
+    "duration": "Rehearsal weekend January 30 to 31, 2027; residency February 18 to 20 and showcase February 21, 2027 in Calgary",
     "paid": false,
     "stipend": null,
     "location": "Alberta",
@@ -4796,7 +4853,7 @@
     "url": "https://www.choiralberta.ca/alberta-youth-choir.html",
     "description": "Alberta's provincial honour choir for singers aged 16 to 22, led by conductors from across Canada and abroad. For AYC 2027 your teacher or conductor recommends you by November 2, 2026, and auditions run November 23 to 28. The choir meets for a rehearsal weekend and a residency.",
     "metaDescription": "Sing in Alberta's provincial honour choir at 16 to 22; your teacher recommends you, then you audition in November.",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "cost": "unconfirmed"
   },
   {
@@ -4870,12 +4927,13 @@
     "location": "Calgary",
     "eligibility": "Performers from across Alberta up to age 26: solo, ensemble, chamber and speech arts",
     "deadline": "2027-01-31",
-    "url": "https://cpafestival.ca/registration-information-2026-2/",
+    "url": "https://cpafestival.ca/registration-information/",
     "description": "One of North America's largest competitive performing arts festivals, with over 3,000 entries a year. You perform for an adjudicator in music or speech arts, solo or in a group, and compete for more than $40,000 in scholarships. Registration for 2027 opens November 1, 2026 and closes January 31, 2027. Fees depend on your age, how long you perform and how many are on stage.",
     "metaDescription": "Perform for an adjudicator in Calgary's festival and compete for $40,000+ in music and speech scholarships.",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "cost": "fee",
-    "costNote": "Entry fee depends on age, performance length and number of performers; full refund if withdrawn by January 31"
+    "costNote": "Entry fee depends on age, performance length and number of performers; every cancellation carries a $25 fee",
+    "notes": "Registration opens November 1, 2026 and closes January 31, 2027 at 11:59 p.m. MST."
   },
   {
     "id": 283,
@@ -4953,9 +5011,10 @@
     "url": "https://rdfpa.ca/",
     "description": "Central Alberta's competitive performing arts festival, with more than 1,000 student performers. You perform for an adjudicator and can be recommended on to the Alberta provincial festival; in 2026 two Red Deer entries took first place in their provincial classes. The 2027 festival runs April 13 to 15 at Red Deer Polytechnic and April 26 to May 1 at Sunnybrook United Church. Registration details for 2027 are not posted yet.",
     "metaDescription": "Perform for an adjudicator at Central Alberta's spring festival in Red Deer, with a path to the provincial festival.",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "cost": "fee",
-    "costNote": "Entry fee per class, listed on the festival's entry fees page"
+    "costNote": "Entry fee per class, listed on the festival's entry fees page",
+    "notes": "Registration opens January 1, 2027."
   },
   {
     "id": 287,
@@ -4963,7 +5022,7 @@
     "category": "Enrichment",
     "format": "competitions",
     "provider": "Grande Prairie and District Music Festival Association",
-    "grades": "All ages",
+    "grades": "Up to age 28",
     "duration": "March 21 to April 30, 2027, with a Grand Concert on May 2",
     "paid": false,
     "stipend": null,
@@ -4973,7 +5032,7 @@
     "url": "https://gpmusicfestival.ca/",
     "description": "The Peace Country's competitive music festival. You perform for an adjudicator in classes from the Alberta and local syllabi, and top performers are featured in the Grand Concert. The 2027 festival runs March 21 to April 30, and entries close February 11, 2027. You register online through the festival site.",
     "metaDescription": "Perform for an adjudicator at Grande Prairie's spring music festival; top performers play the Grand Concert.",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "cost": "fee",
     "costNote": "Entry fee per class, set in the festival syllabus"
   },
@@ -5070,9 +5129,9 @@
     "url": "https://www.albertaballetschool.com/summer-intensive",
     "description": "A three-week pre-professional ballet intensive at Alberta Ballet School in Calgary. Classes include ballet, pointe, pas de deux for some levels, repertoire, variations, contemporary and character dance, plus conditioning. Students in Grades 9 to 12 audition as seniors. Out-of-town students can live in residence at Mount Royal University, with supervised social activities. There are two 2027 sessions.",
     "metaDescription": "Audition for a three-week ballet intensive at Alberta Ballet School in Calgary; Grades 9 to 12 train as seniors.",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "cost": "fee",
-    "costNote": "Tuition not posted on the program page; residence costs extra"
+    "costNote": "2026 fees: $2,345 tuition for Canadians ($3,275 international), plus $2,470 for residence with meals. 2027 prices are not confirmed."
   },
   {
     "id": 293,
@@ -5090,8 +5149,9 @@
     "url": "https://csdcms.ca/cansat.html",
     "description": "Build a satellite the size of a pop can with a small computer and sensors, and fly it. Teams of up to six get a free CanSat kit by mail and follow tutorials over the fall and winter. In spring, Beginner teams' CanSats are dropped from a drone, while Advanced teams travel to Lethbridge to launch theirs by rocket to about 1 km and transmit live data. The top Advanced team represents Canada at the European Space Agency's CanSat event in the Netherlands. Registration for the 2026-27 challenge is open now.",
     "metaDescription": "Build a pop-can satellite with up to five teammates; Advanced teams launch by rocket near Lethbridge. Free kit provided.",
-    "lastVerified": "2026-09",
-    "cost": "unconfirmed"
+    "lastVerified": "2026-10",
+    "cost": "unconfirmed",
+    "costNote": "Free CanSat kit provided"
   },
   {
     "id": 294,
