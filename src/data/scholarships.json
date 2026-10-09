@@ -4260,9 +4260,9 @@
     "title": "Electronic Recycling Association Scholarship",
     "amount": "Varies",
     "audience": "Students in Canada who run an e-waste collection event in their community",
-    "url": "https://www.era.ca/scholarship-competition/",
+    "url": "https://www.era.ca/electronic-recycling-association-era-2026-scholarship-competition/",
     "category": "Community",
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-10",
     "region": "National",
     "notes": null,
     "toApply": {
@@ -4298,7 +4298,9 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "metaDetail": "You run a collection drive and submit a report on it."
+    "metaDetail": "You run a collection drive and submit a report on it.",
+    "deadline": "2026-11-15",
+    "openDate": "2026-04-01"
   },
   {
     "id": 129,
@@ -15019,9 +15021,9 @@
     "audience": "Graduating Grasslands students who are children of division teachers",
     "url": "https://sites.google.com/grasslands.ab.ca/scholarship-handbook/home",
     "category": "General",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "Brooks",
-    "notes": "The handbook publishes no closing date for this award. Applications go through your Grasslands school rather than to the sponsor, and the form is a Google Doc only Grasslands students can open, so ask your school office in the fall for the date it is collecting by.",
+    "notes": "Applications go through your Grasslands school rather than to the sponsor, and the form is a Google Doc only Grasslands students can open, so ask your school office for it.",
     "applyViaGuidance": true,
     "applyRoute": "school",
     "active": true,
@@ -15047,7 +15049,8 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "metaDetail": "Four awards a year."
+    "metaDetail": "Four awards a year.",
+    "deadline": "2027-05-21"
   },
   {
     "id": 393,
@@ -17804,7 +17807,7 @@
     "audience": "Spruce Grove Composite graduates who served school and community",
     "url": "https://sgchs.psd.ca/students/awards/grade-12",
     "category": "Community",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "Spruce Grove",
     "notes": null,
     "oneForm": "sprucegrove",
@@ -17834,7 +17837,8 @@
       "extracurriculars": [
         "Volunteering"
       ]
-    }
+    },
+    "deadline": "2027-04-16"
   },
   {
     "id": 464,
@@ -17843,9 +17847,9 @@
     "audience": "A Spruce Grove Composite graduate chosen by their graduating class",
     "url": "https://sgchs.psd.ca/students/awards/grade-12",
     "category": "Community",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "Spruce Grove",
-    "notes": "This one needs a separate nomination form on top of the school's awards package, and Student Services holds it. Ten classmates and a teacher have to sign, so start collecting signatures well before the April cutoff, not in the last week.",
+    "notes": "This one needs a separate nomination form on top of the school's awards package, and Student Services holds it. Ten classmates and a teacher have to sign, so start collecting signatures well before the deadline, not in the last week.",
     "applyViaGuidance": true,
     "active": true,
     "description": "Funded by the Schellenberger family in memory of Darren Schellenberger, and given to the student who best exemplifies love of life, integrity, friendship and enthusiasm. You get there through a nomination form supported by ten graduating classmates and a teacher, after which the graduating class votes to pick the recipient from the nominees. It is decided by the people who have watched you for three years rather than by a committee reading forms.",
@@ -17870,7 +17874,8 @@
       "citizenship": "any",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "deadline": "2027-04-16"
   },
   {
     "id": 465,
@@ -17879,9 +17884,9 @@
     "audience": "Students who took French to the 30 level without French Immersion",
     "url": "https://sgchs.psd.ca/students/awards/grade-12",
     "category": "Academic",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "Spruce Grove",
-    "notes": "This one is offered at both Parkland high schools, and each collects it its own way: Spruce Grove Composite through its April awards package, Memorial Composite in the spring of Semester 2. Neither publishes a fixed calendar date that repeats, so ask your own Student Services.",
+    "notes": "This one is offered at both Parkland high schools, and each collects it its own way. The date here is Spruce Grove Composite's awards package deadline; Memorial Composite collects in the spring of Semester 2, so ask your own Student Services.",
     "applyViaGuidance": true,
     "applyRoute": "school",
     "active": true,
@@ -17909,7 +17914,8 @@
       "extracurriculars": [
         "Leadership"
       ]
-    }
+    },
+    "deadline": "2027-04-16"
   },
   {
     "id": 466,
@@ -17918,7 +17924,7 @@
     "audience": "Spruce Grove French Immersion graduates",
     "url": "https://sgchs.psd.ca/students/awards/grade-12",
     "category": "Academic",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "Spruce Grove",
     "notes": null,
     "oneForm": "sprucegrove",
@@ -17949,7 +17955,8 @@
       "extracurriculars": [
         "Leadership"
       ]
-    }
+    },
+    "deadline": "2027-04-16"
   },
   {
     "id": 467,
@@ -17958,7 +17965,7 @@
     "audience": "Spruce Grove Composite students on Student Council",
     "url": "https://sgchs.psd.ca/students/awards/grade-12",
     "category": "Community",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "Spruce Grove",
     "notes": null,
     "oneForm": "sprucegrove",
@@ -17989,7 +17996,8 @@
         "Leadership",
         "Student Council"
       ]
-    }
+    },
+    "deadline": "2027-04-16"
   },
   {
     "id": 468,
@@ -17998,7 +18006,7 @@
     "audience": "A Spruce Grove Composite graduate chosen by their graduating class",
     "url": "https://sgchs.psd.ca/students/awards/grade-12",
     "category": "Community",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "Spruce Grove",
     "notes": "This one needs a separate nomination form from Student Services, signed by ten classmates and a teacher, before the graduating class votes on the nominees. Two of the school's awards run that way, so if you are organising signatures, organise them for both at once.",
     "applyViaGuidance": true,
@@ -18025,7 +18033,8 @@
       "citizenship": "any",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "deadline": "2027-04-16"
   },
   {
     "id": 469,
@@ -18034,7 +18043,7 @@
     "audience": "Spruce Grove Composite athletes with a 70% average",
     "url": "https://sgchs.psd.ca/students/awards/grade-12",
     "category": "Sports",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "Spruce Grove",
     "notes": null,
     "oneForm": "sprucegrove",
@@ -18064,7 +18073,8 @@
       "extracurriculars": [
         "Athletics"
       ]
-    }
+    },
+    "deadline": "2027-04-16"
   },
   {
     "id": 470,
@@ -18073,9 +18083,9 @@
     "audience": "Parkland students with a 70 to 79.5% average and no other major award",
     "url": "https://sgchs.psd.ca/students/awards/grade-12",
     "category": "Community",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "Spruce Grove",
-    "notes": "This one is offered at both Parkland high schools, and each collects it its own way: Spruce Grove Composite through its April awards package, Memorial Composite in the spring of Semester 2. Neither publishes a fixed calendar date that repeats, so ask your own Student Services.",
+    "notes": "This one is offered at both Parkland high schools, and each collects it its own way. The date here is Spruce Grove Composite's awards package deadline; Memorial Composite collects in the spring of Semester 2, so ask your own Student Services.",
     "applyViaGuidance": true,
     "applyRoute": "school",
     "active": true,
@@ -18103,7 +18113,8 @@
       "extracurriculars": [
         "Volunteering"
       ]
-    }
+    },
+    "deadline": "2027-04-16"
   },
   {
     "id": 471,
@@ -18112,7 +18123,7 @@
     "audience": "Spruce Grove Composite students with a learning disability",
     "url": "https://sgchs.psd.ca/students/awards/grade-12",
     "category": "General",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "Spruce Grove",
     "notes": null,
     "oneForm": "sprucegrove",
@@ -18140,7 +18151,8 @@
       "citizenship": "any",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "deadline": "2027-04-16"
   },
   {
     "id": 472,
@@ -18149,7 +18161,7 @@
     "audience": "RAP students entering the NAIT electrical apprenticeship",
     "url": "https://sgchs.psd.ca/students/awards/grade-12",
     "category": "Trades",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "Spruce Grove",
     "notes": "This one takes a separate application from Student Services rather than riding on the school's general awards package, so ask for it by name.",
     "applyViaGuidance": true,
@@ -18179,7 +18191,8 @@
       "citizenship": "any",
       "apprenticeship": true,
       "extracurriculars": []
-    }
+    },
+    "deadline": "2027-04-16"
   },
   {
     "id": 473,
@@ -23930,10 +23943,10 @@
   {
     "id": 621,
     "region": "University & college",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "active": true,
-    "url": "https://www.ualberta.ca/en/augustana/giving/cap/annual-awards.html",
-    "notes": "Augustana awards are administered by the campus rather than applied for at school, and the annual awards list publishes values and criteria but no dates. Ask the Augustana student awards office once you have accepted an offer.",
+    "url": "https://alberta.academicworks.ca/opportunities/27218",
+    "notes": "Apply through the University of Alberta awards system once you have applied for admission. The deadline matches the university's January 10 entrance award deadline.",
     "applyViaGuidance": true,
     "applyRoute": "campus",
     "title": "Ryan Henderson Memorial Entrance Award",
@@ -23964,7 +23977,9 @@
       "citizenship": "any",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01"
   },
   {
     "id": 622,
@@ -24088,10 +24103,10 @@
   {
     "id": 625,
     "region": "Camrose",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "active": true,
-    "url": "https://www.ualberta.ca/en/augustana/giving/cap/annual-awards.html",
-    "notes": "Augustana awards are administered by the campus rather than applied for at school, and the annual awards list publishes values and criteria but no dates. Ask the Augustana student awards office once you have accepted an offer.",
+    "url": "https://alberta.academicworks.ca/opportunities/26966",
+    "notes": "Apply through the University of Alberta awards system once you have applied for admission. The deadline matches the university's January 10 entrance award deadline.",
     "applyViaGuidance": true,
     "title": "Burgar Funeral Home Scholarship",
     "amount": "$1,000",
@@ -24121,7 +24136,9 @@
       "citizenship": "any",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01"
   },
   {
     "id": 626,
@@ -24282,10 +24299,10 @@
   {
     "id": 630,
     "region": "Camrose",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "active": true,
-    "url": "https://www.ualberta.ca/en/augustana/giving/cap/annual-awards.html",
-    "notes": "Augustana awards are administered by the campus rather than applied for at school, and the annual awards list publishes values and criteria but no dates. Ask the Augustana student awards office once you have accepted an offer.",
+    "url": "https://alberta.academicworks.ca/opportunities/27329",
+    "notes": "Apply through the University of Alberta awards system once you have applied for admission. The deadline matches the university's January 10 entrance award deadline.",
     "applyViaGuidance": true,
     "title": "Camrose and District Fish and Game Association Scholarship",
     "amount": "$1,500",
@@ -24315,15 +24332,17 @@
       "citizenship": "any",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01"
   },
   {
     "id": 631,
     "region": "Camrose",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "active": true,
-    "url": "https://www.ualberta.ca/en/augustana/giving/cap/annual-awards.html",
-    "notes": "Augustana awards are administered by the campus rather than applied for at school, and the annual awards list publishes values and criteria but no dates. Ask the Augustana student awards office once you have accepted an offer.",
+    "url": "https://alberta.academicworks.ca/opportunities/27037",
+    "notes": "Apply through the University of Alberta awards system once you have applied for admission. The deadline matches the university's January 10 entrance award deadline.",
     "applyViaGuidance": true,
     "title": "Richardson Pioneer Award",
     "amount": "$1,000",
@@ -24353,7 +24372,9 @@
       "citizenship": "any",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01"
   },
   {
     "id": 632,
@@ -41723,7 +41744,7 @@
     "audience": "Students graduating from Grade 12 in Canada with a 2.0 GPA or higher, enrolling full-time in post-secondary",
     "url": "https://scholarshipamerica.org/scholarship/burgerking/",
     "category": "General",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "National",
     "active": false,
     "description": "A North American program that has awarded nearly $64 million to over 55,000 students, and it is open to Canadians, not US-only. The bar is deliberately low: a 2.0 cumulative average on a 4.0 scale, with selection weighing work experience, extracurriculars, community service and financial need alongside marks.",
@@ -41748,8 +41769,10 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "notes": "Employment at a Burger King restaurant is not required for the general track. The 2025 cycle ran October 15 to December 15 and the program describes its 2026 details as tentative, so treat the autumn window as the shape to watch, not a confirmed date. Awards can be used at an accredited college, university or vocational school in Canada or the United States.",
-    "metaDetail": "A 2.0 average is enough."
+    "notes": "Employment at a Burger King restaurant is not required for the general track, which stops reviewing after the first 30,000 applications, so apply early in the window. Awards can be used at an accredited college, university or vocational school in Canada or the United States.",
+    "metaDetail": "A 2.0 average is enough.",
+    "deadline": "2026-12-15",
+    "openDate": "2026-10-15"
   },
   {
     "id": 1063,
@@ -43061,7 +43084,7 @@
     "category": "General",
     "region": "National",
     "description": "A minimum of 35 scholarships of $3,000 across Canada for students in their final year of high school who live with type 1 diabetes and are heading to post-secondary study.",
-    "notes": "Written for graduating high school students. You must be in your final year at a Canadian secondary school or CEGEP, be a Canadian citizen or permanent resident, hold a valid SIN, and have been under the care of a Canadian pediatric diabetes team or physician for type 1 diabetes for at least a year before applying. Judged on both merit and need, weighing how you balance diabetes management against school, community involvement and your own health. The Foundation aims for a minimum of 35 awards a year, funding permitting. The 2026 round opened January 5 and closed March 2, so this sits early in the Grade 12 calendar. Applications run only through the portal at dhfscholarship.smapply.io. Note that the Foundation's own 2026 guidelines PDF still says 'fall of 2025' in one line; that is their typo, not a different cycle.",
+    "notes": "Written for graduating high school students. You must be in your final year at a Canadian secondary school or CEGEP, be a Canadian citizen or permanent resident, hold a valid SIN, and have been under the care of a Canadian pediatric diabetes team or physician for type 1 diabetes for at least a year before applying. Judged on both merit and need, weighing how you balance diabetes management against school, community involvement and your own health. The Foundation aims for a minimum of 35 awards a year, funding permitting. The round opens in January and closes March 1, early in the Grade 12 calendar. Applications run only through the portal at dhfscholarship.smapply.io.",
     "metaDetail": "Written for graduating students, not adapted to fit them.",
     "eligibility": {
       "grades": [
@@ -43084,8 +43107,10 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "lastVerified": "2026-09",
-    "active": true
+    "lastVerified": "2026-10",
+    "active": true,
+    "deadline": "2027-03-01",
+    "openDate": "2027-01-04"
   },
   {
     "id": 1099,
@@ -43722,11 +43747,11 @@
     "title": "Canadian Fallen Firefighters Foundation Education Program",
     "amount": "Up to $3,000",
     "audience": "Children and spouses of firefighters who died in the line of duty",
-    "url": "https://www.cfff.ca/education-program",
+    "url": "https://www.cfff.ca/education-program-policy",
     "category": "General",
     "region": "National",
     "description": "Scholarships and bursaries from the Canadian Fallen Firefighters Foundation for the children and spouses of firefighters whose line-of-duty deaths the Foundation recognizes.",
-    "notes": "Two separate streams with two separate forms: the CFFF / Doug Lock Memorial Scholarship, and bursaries capped at $3,000 with a maximum of six awarded a year, including one funded by the Council of Canadian Fire Marshals and Fire Commissioners. You may apply for a scholarship OR a bursary, not both, so read the CFFFEP policy before choosing. Open to children and to the spouse or common-law partner of a firefighter whose line-of-duty death is recognized by the Foundation. Check that first. The written policy sets the window as March 1 to July 31 for the academic year starting that September, but the Foundation reserves the right to modify it, and its own page said applications were being accepted as of 2026-09-08, so go by the page, not the policy dates. Forms download from cfff.ca.",
+    "notes": "Two separate streams with two separate forms: the CFFF / Doug Lock Memorial Scholarship, and bursaries capped at $3,000 with a maximum of six awarded a year, including one funded by the Council of Canadian Fire Marshals and Fire Commissioners. You may apply for a scholarship OR a bursary, not both, so read the CFFFEP policy before choosing. Open to children and to the spouse or common-law partner of a firefighter whose line-of-duty death is recognized by the Foundation. Check that first. The current policy accepts applications at any time of year. Forms download from cfff.ca.",
     "metaDetail": "You may apply for a scholarship or a bursary, not both.",
     "eligibility": {
       "grades": [
@@ -43749,8 +43774,9 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "lastVerified": "2026-09",
-    "active": true
+    "lastVerified": "2026-10",
+    "active": true,
+    "rolling": true
   },
   {
     "id": 1117,

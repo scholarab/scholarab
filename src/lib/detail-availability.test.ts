@@ -129,9 +129,9 @@ describe('detail availability', () => {
     expect(text('[data-status-chip]')).toBe('Closed')
   })
 
-  it('distinguishes both rolling deadlines from unconfirmed and estimated dates', async () => {
+  it('distinguishes every rolling deadline from unconfirmed and estimated dates', async () => {
     const rolling = scholarships.filter(s => 'rolling' in s && s.rolling)
-    expect(rolling).toHaveLength(2)
+    expect(rolling).toHaveLength(3)
     for (const s of rolling) {
       await render(data('scholarship', s))
       expect(text('.sabd-deadline-value')).toBe('No fixed deadline')
