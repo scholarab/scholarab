@@ -259,10 +259,6 @@
     "hash": "cc991d8db92c3074",
     "date": "2026-09-26"
   },
-  "/programs/canadian-music-competition-cmc-calgary-chapter/": {
-    "hash": "c774ee4ed4f0383b",
-    "date": "2026-10-09"
-  },
   "/programs/canadian-open-mathematics-challenge-comc/": {
     "hash": "5321d5b0c794c3cf",
     "date": "2026-10-02"
@@ -354,6 +350,10 @@
   "/programs/cybertitan-national-cybersecurity-competition/": {
     "hash": "642ded8b7cc44410",
     "date": "2026-10-08"
+  },
+  "/programs/cylab-security-academy-formerly-picoctf/": {
+    "hash": "a6ad250a38e0b88f",
+    "date": "2026-10-09"
   },
   "/programs/deep-summer-academy-university-of-toronto/": {
     "hash": "f7b7ed3d8d86c0ca",
@@ -519,9 +519,9 @@
     "hash": "43d60d310365a09e",
     "date": "2026-09-15"
   },
-  "/programs/immerse-education-virtual-summer-school-research-track/": {
-    "hash": "5b00782b186b7272",
-    "date": "2026-10-08"
+  "/programs/immerse-education-online-research-pathway/": {
+    "hash": "f96d0fa7662b4872",
+    "date": "2026-10-09"
   },
   "/programs/indigenous-summer-research-academy-insra-university-of-lethbridge/": {
     "hash": "d5d568fd3532b13a",
@@ -680,8 +680,8 @@
     "date": "2026-10-08"
   },
   "/programs/non-trivial-fellowship/": {
-    "hash": "f312ce338f2c9eba",
-    "date": "2026-10-08"
+    "hash": "0798a34b51b2cf82",
+    "date": "2026-10-09"
   },
   "/programs/north-american-computational-linguistics-open-naclo/": {
     "hash": "e6ee7806e6a48c09",
@@ -723,13 +723,13 @@
     "hash": "d096cedd04660d1c",
     "date": "2026-10-05"
   },
+  "/programs/pathways-program-music-festival/": {
+    "hash": "9621ab20a9e935b7",
+    "date": "2026-10-09"
+  },
   "/programs/peace-country-regional-science-fair-pcrsf/": {
     "hash": "21c90914e5f3030f",
     "date": "2026-10-05"
-  },
-  "/programs/picoctf-carnegie-mellon-cybersecurity-competition/": {
-    "hash": "9ebe866d5b3fa8e2",
-    "date": "2026-10-08"
   },
   "/programs/pims-high-school-programs-ualberta-ucalgary/": {
     "hash": "ce0d417a5dc119a5",
@@ -757,10 +757,6 @@
   },
   "/programs/quantum-school-for-young-students-qsys/": {
     "hash": "2d2b79516116b808",
-    "date": "2026-10-08"
-  },
-  "/programs/qubit-by-qubit-high-school-quantum-computing/": {
-    "hash": "d18028845bdb248b",
     "date": "2026-10-08"
   },
   "/programs/queens-commonwealth-writing-competition/": {
@@ -967,10 +963,6 @@
     "hash": "cfd2f56543e182c0",
     "date": "2026-10-08"
   },
-  "/programs/the-knowledge-society-tks/": {
-    "hash": "f2c232f7a94c9728",
-    "date": "2026-10-08"
-  },
   "/programs/toshibansta-exploravision/": {
     "hash": "0d4adb75bc5096ac",
     "date": "2026-10-08"
@@ -1036,8 +1028,8 @@
     "date": "2026-10-05"
   },
   "/programs/wood-buffalo-regional-science-fair-wbrsf/": {
-    "hash": "1792d48f92f70164",
-    "date": "2026-09-15"
+    "hash": "6279f1208defe38d",
+    "date": "2026-10-09"
   },
   "/programs/wordsworth-youth-writing-residency-week-2/": {
     "hash": "16807715fefcc320",
@@ -1131,6 +1123,10 @@
     "hash": "a8f33dedb4763516",
     "date": "2026-10-08"
   },
+  "/scholarships/aaaf-memorial-bursary/": {
+    "hash": "c0ffb275fe059b6c",
+    "date": "2026-10-09"
+  },
   "/scholarships/aaron-family-award-for-students-with-disabilities/": {
     "hash": "af4b4c7d28307f3e",
     "date": "2026-10-08"
@@ -1150,6 +1146,10 @@
   "/scholarships/academy-of-learning-award/": {
     "hash": "adaf91277b0e0c72",
     "date": "2026-10-08"
+  },
+  "/scholarships/acadia-valley-recreation-club-scholarship/": {
+    "hash": "9dc190fbc2b9a16c",
+    "date": "2026-10-09"
   },
   "/scholarships/access-to-the-future-matching-grant-award/": {
     "hash": "c8d439002c9821f3",
@@ -1812,8 +1812,8 @@
     "date": "2026-10-05"
   },
   "/scholarships/bearspaw-foundation-bursary/": {
-    "hash": "b7150453c5515764",
-    "date": "2026-10-08"
+    "hash": "dd614f0cb41fc857",
+    "date": "2026-10-09"
   },
   "/scholarships/beaumont-chamber-of-commerce-rcmp-scholarship/": {
     "hash": "9cad8d509e3d13e5",
@@ -2706,10 +2706,6 @@
   "/scholarships/ceea-indigenous-award/": {
     "hash": "89edc76f874ede78",
     "date": "2026-10-08"
-  },
-  "/scholarships/cemf-john-evans-engineering-entrance-award/": {
-    "hash": "11a8be8883b42ebf",
-    "date": "2026-10-09"
   },
   "/scholarships/cenovus-energy-indigenous-scholarship/": {
     "hash": "4a76e3c1668a4c16",
@@ -5228,8 +5224,8 @@
     "date": "2026-10-08"
   },
   "/scholarships/mah-society-of-edmonton-centennial-scholarship/": {
-    "hash": "9b31c22e54f32321",
-    "date": "2026-10-08"
+    "hash": "64113d0204bb4dcf",
+    "date": "2026-10-09"
   },
   "/scholarships/maizex-4-h-canada-scholarship/": {
     "hash": "3c4cdea6e40b69e1",

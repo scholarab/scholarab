@@ -81,7 +81,7 @@ describe('detail availability', () => {
 
   it('keeps every inactive program neutral, linked, and explained after clock repaint', async () => {
     const inactive = programs.filter(p => p.active === false)
-    expect(inactive).toHaveLength(13)
+    expect(inactive).toHaveLength(14)
     for (const p of inactive) {
       const d = data('program', p)
       await render(d)
@@ -119,7 +119,7 @@ describe('detail availability', () => {
   })
 
   it('retains ordinary closed-cycle wording, alternatives and provider access', async () => {
-    const s = scholarships.find(s => s.id === 138)!
+    const s = scholarships.find(s => s.id === 312)!
     await render(data('scholarship', s))
     expect(text('[data-status-chip]')).toBe('Closed')
     expect(text('.sabd-estimate-note')).toContain('This cycle is over')

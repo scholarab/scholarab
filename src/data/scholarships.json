@@ -2536,14 +2536,14 @@
     "amount": "$100–$500",
     "deadline": "2027-04-17",
     "deadlineEstimated": true,
-    "audience": "Students with the surname \"Mah\" entering post-secondary in Canada",
+    "audience": "Mah Society of Edmonton members in Grades 10-12 with a Mah/Ma family connection",
     "url": "https://edmontonmahsociety.com/scholarships/",
     "category": "Community",
     "lastVerified": "2026-10",
     "region": "Edmonton",
     "notes": "The 2026 round closed April 17. Applications go to Gene Mah at mahsocietyedmonton@gmail.com.",
     "active": false,
-    "description": "The Mah Society of Edmonton gives $1,000 to a student entering post-secondary anywhere in Canada who carries the surname Mah. That is the whole requirement: any background, no minimum average.",
+    "description": "The Mah Society of Edmonton awards scholarships to members in Grades 10, 11 and 12 with a Mah/Ma surname or a mother whose maiden name is Mah/Ma. Applicants must be Canadian citizens or permanent residents and earn at least 80% in each of four core courses. The posted application lists three $100 awards for Grade 10, three $300 awards for Grade 11 and four $500 awards for Grade 12.",
     "eligibility": {
       "grades": [
         "10",
@@ -2556,7 +2556,7 @@
         "any"
       ],
       "fields": [],
-      "minAverage": null,
+      "minAverage": 80,
       "minAge": null,
       "maxAge": null,
       "genderRequired": null,
@@ -2569,7 +2569,7 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "metaDetail": "No minimum average, and no other condition."
+    "metaDetail": "Society membership and core-course marks are required."
   },
   {
     "id": 87,
@@ -4760,14 +4760,14 @@
     "id": 138,
     "title": "AAAF Memorial Bursary",
     "amount": "$1,000",
-    "deadline": "2026-09-01",
+    "deadline": "2027-09-01",
     "audience": "Alberta residents entering an agriculture or environmental science program at a college or university",
     "category": "Academic",
     "region": "Alberta",
     "active": false,
     "lastVerified": "2026-08",
     "applyViaGuidance": false,
-    "notes": null,
+    "notes": "Applicants must be Alberta residents accepted into or attending an agricultural or environmental sciences program at an Alberta post-secondary institution. First-year students receive priority. Apply through the local Agricultural Fieldman by September 1 annually.",
     "toApply": {
       "checked": "2026-10-01",
       "complete": false,
@@ -37347,7 +37347,7 @@
     "amount": "$7,500",
     "deadline": "2027-03-01",
     "openDate": null,
-    "audience": "Cochrane High School graduating students",
+    "audience": "Cochrane High School or Bow Valley High School graduates",
     "url": "https://cochrane.rockyview.ab.ca/activities/graduation",
     "category": "Community",
     "lastVerified": "2026-10",
@@ -37363,10 +37363,16 @@
       ],
       "schoolBoards": [],
       "specificSchools": [
-        "Cochrane High School"
+        "Cochrane High School",
+        "Bow Valley High School"
       ],
       "targetInstitutions": [],
-      "fields": [],
+      "fields": [
+        "Education",
+        "Engineering",
+        "Science",
+        "Medicine"
+      ],
       "minAverage": null,
       "minAge": null,
       "maxAge": null,
@@ -37376,7 +37382,7 @@
       "financialNeed": true,
       "maxFamilyIncome": null,
       "fosterCare": false,
-      "citizenship": "any",
+      "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
     },
@@ -42410,7 +42416,7 @@
     "category": "STEM",
     "region": "National",
     "description": "A $5,000 entrance award from the Canadian Engineering Memorial Foundation for a young woman entering an accredited Canadian engineering program from high school. It also carries a potential paid summer engineering work placement with Fortis at one of their Canadian utilities after second or third year.",
-    "notes": "The Canadian Engineering Memorial Foundation website no longer works; its old address now goes to an unrelated site, so we could not confirm a 2027 round. This link is the University of Calgary registrar page for the award. The foundation states that this award is not based on academic achievement, so a mid-range average is no barrier. You must self-identify as a woman and hold Canadian citizenship or permanent residency.",
+    "notes": "Polytechnique Montréal reported in August 2025 that the Canadian Engineering Memorial Foundation wound down its activities and entrusted its mission to Polytechnique. No provider confirmation of a John Evans entrance award for 2027 was found. The successor scholarship is for second- or third-year engineering students and is not a Grade 12 replacement. The Calgary registrar page still describes the historical entrance award.",
     "metaDetail": "Not judged on marks, and carries a paid Fortis placement.",
     "eligibility": {
       "grades": [
@@ -42436,7 +42442,8 @@
       "extracurriculars": []
     },
     "lastVerified": "2026-09",
-    "active": false
+    "active": false,
+    "concluded": true
   },
   {
     "id": 1065,
@@ -69193,5 +69200,42 @@
       "extracurriculars": []
     },
     "metaDetail": "For Haven's Way and Haven's Harbour youth."
+  },
+  {
+    "id": 1881,
+    "title": "Acadia Valley Recreation Club Scholarship",
+    "amount": "Varies",
+    "deadline": null,
+    "audience": "Graduating students in the Acadia Valley community",
+    "url": "https://mdacadia.ab.ca/community-programs-recreation/",
+    "category": "Community",
+    "region": "Alberta",
+    "localArea": "Acadia Valley students",
+    "active": false,
+    "description": "The Acadia Valley Recreation Club offers a scholarship for graduating students, according to the Municipal District of Acadia community programs page. The amount and application dates are not posted.",
+    "notes": "Contact the Recreation Club or the municipal office for the application process and precise residency conditions. The municipal page provides no marks threshold, field restriction or application form.",
+    "applyViaGuidance": false,
+    "lastVerified": "2026-10",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
   }
 ]
