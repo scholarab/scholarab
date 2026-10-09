@@ -74,7 +74,7 @@ function data(kind: 'scholarship' | 'program', record: object) {
 describe('detail availability', () => {
   it('carries all inactive program flags into the saved payload without adding active defaults', () => {
     const payload = prepareSaved({ initialScholarships: [], initialPrograms: programs })
-    expect(payload).toHaveLength(270)
+    expect(payload).toHaveLength(286)
     expect(payload.filter(p => p.active === false).map(p => p.id)).toEqual(programs.filter(p => p.active === false).map(p => p.id))
     expect(payload.filter(p => p.active !== false).every(p => !('active' in p))).toBe(true)
   })

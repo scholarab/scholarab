@@ -119,6 +119,10 @@
     "hash": "d4fb59dc49a4e4bf",
     "date": "2026-10-08"
   },
+  "/programs/asclepius-medical-camp-for-youth-edmonton/": {
+    "hash": "e6d2e365305ef910",
+    "date": "2026-10-09"
+  },
   "/programs/avogadro-chemistry-exam/": {
     "hash": "d8067f347cf4098b",
     "date": "2026-10-08"
@@ -131,9 +135,17 @@
     "hash": "ab57ab55878fb0c0",
     "date": "2026-10-05"
   },
+  "/programs/biochemistry-1850-genetically-engineered-machines-dual-credit/": {
+    "hash": "c65c8859eb7120c2",
+    "date": "2026-10-09"
+  },
   "/programs/bioengineering-summer-institute-university-of-calgary/": {
     "hash": "6050d40532f16bf6",
     "date": "2026-10-05"
+  },
+  "/programs/black-youth-mentorship-and-leadership-program-for-high-school-youth/": {
+    "hash": "322f9ed2b9954083",
+    "date": "2026-10-09"
   },
   "/programs/blue-ocean-student-entrepreneur-competition/": {
     "hash": "dd26fb7db2ad0224",
@@ -291,6 +303,10 @@
     "hash": "55bd57c685217f1d",
     "date": "2026-10-05"
   },
+  "/programs/catalyst-summer-program/": {
+    "hash": "7b2f0062017d7ed3",
+    "date": "2026-10-09"
+  },
   "/programs/cemc-math-circles-online/": {
     "hash": "bbba89b55344f706",
     "date": "2026-10-08"
@@ -383,9 +399,17 @@
     "hash": "60612ef1be022776",
     "date": "2026-09-26"
   },
+  "/programs/explore-engineering-innovation-homewood-residential/": {
+    "hash": "7cff4200b5561425",
+    "date": "2026-10-09"
+  },
   "/programs/explore-french-immersion-bursary/": {
     "hash": "abffdd7c3c5323cf",
     "date": "2026-10-08"
+  },
+  "/programs/exploring-veterinary-medicine-large-animals/": {
+    "hash": "f828a033731710d8",
+    "date": "2026-10-09"
   },
   "/programs/fem-engineering-mentorship-program/": {
     "hash": "8fc1d4b9b23b53f4",
@@ -414,6 +438,10 @@
   "/programs/future-creators-university-of-alberta/": {
     "hash": "894451b179bdb650",
     "date": "2026-10-08"
+  },
+  "/programs/future-mechanics-small-engines-big-skills/": {
+    "hash": "d48457ad890b5530",
+    "date": "2026-10-09"
   },
   "/programs/genius-olympiad/": {
     "hash": "c9622736dec4ed71",
@@ -454,6 +482,10 @@
   "/programs/healthcare-career-exploration-camp-alberta-health-services/": {
     "hash": "d1c58a3b597489ca",
     "date": "2026-10-05"
+  },
+  "/programs/heavy-metal-summer-experience-alberta/": {
+    "hash": "e604b172b7adb93b",
+    "date": "2026-10-09"
   },
   "/programs/high-school-model-un-university-of-calgary/": {
     "hash": "0107faaad28ee203",
@@ -511,6 +543,10 @@
     "hash": "74ebaccaaec6d97d",
     "date": "2026-09-28"
   },
+  "/programs/introduction-to-veterinary-medicine-for-teens/": {
+    "hash": "7a5d5f175745a300",
+    "date": "2026-10-09"
+  },
   "/programs/ja-northern-alberta-company-program/": {
     "hash": "2daea6e80f72b25d",
     "date": "2026-10-05"
@@ -542,6 +578,14 @@
   "/programs/key-club-kiwanis/": {
     "hash": "13a00cb8067bb2cb",
     "date": "2026-10-05"
+  },
+  "/programs/keyano-college-trades-dual-credit/": {
+    "hash": "7f69bb9c77b8bd2b",
+    "date": "2026-10-09"
+  },
+  "/programs/lakeland-college-alberta-dual-credit/": {
+    "hash": "5bf94c64b7c9e22d",
+    "date": "2026-10-09"
   },
   "/programs/launchx-virtual-summer-program/": {
     "hash": "dcae82fc4a815089",
@@ -587,6 +631,10 @@
     "hash": "4131838760e2507a",
     "date": "2026-10-08"
   },
+  "/programs/mcmaster-engineering-immersive-experience-and-engineering-design-studio/": {
+    "hash": "aa42061dc87d38f2",
+    "date": "2026-10-09"
+  },
   "/programs/medicine-hat-college-summer-stem-tech-camps/": {
     "hash": "7e91c2e66bfd0287",
     "date": "2026-09-15"
@@ -614,6 +662,10 @@
   "/programs/nasa-international-space-apps-challenge/": {
     "hash": "b2229f9e07a386b7",
     "date": "2026-10-08"
+  },
+  "/programs/nathacks/": {
+    "hash": "9aa01d5fcad5c680",
+    "date": "2026-10-09"
   },
   "/programs/national-biology-competition-university-of-toronto/": {
     "hash": "2044ad8edd1845cb",
@@ -743,6 +795,10 @@
     "hash": "377aac56927d026f",
     "date": "2026-10-08"
   },
+  "/programs/roots-2-stem-space-camp/": {
+    "hash": "c64ef75b160e15ce",
+    "date": "2026-10-09"
+  },
   "/programs/ross-mathematics-program/": {
     "hash": "84cb35dea7587f0f",
     "date": "2026-10-08"
@@ -867,6 +923,10 @@
     "hash": "4468baf10b610170",
     "date": "2026-10-08"
   },
+  "/programs/sunia-summer-seminar-on-the-united-nations-and-international-affairs/": {
+    "hash": "167c6c913ed5b4d6",
+    "date": "2026-10-09"
+  },
   "/programs/team-canada-regeneron-isef/": {
     "hash": "72dd40f56654cbe6",
     "date": "2026-10-08"
@@ -978,6 +1038,10 @@
   "/programs/wood-buffalo-regional-science-fair-wbrsf/": {
     "hash": "1792d48f92f70164",
     "date": "2026-09-15"
+  },
+  "/programs/wordsworth-youth-writing-residency-week-2/": {
+    "hash": "16807715fefcc320",
+    "date": "2026-10-09"
   },
   "/programs/write-2-film-youthwrite/": {
     "hash": "43169b6aed8ddb11",
