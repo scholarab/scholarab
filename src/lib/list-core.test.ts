@@ -203,6 +203,20 @@ describe('programMatchesGrade', () => {
     expect(programMatchesGrade('Grades 9–12 (ages 13–18)', 9)).toBe(true)
     expect(programMatchesGrade('Grades 10–11 (ages 15–17)', 12)).toBe(false)
   })
+
+  it('reads every grade mention, not only the first', () => {
+    // Each of these hid a program from Grade 12 (match audit 2026-10-08).
+    expect(programMatchesGrade('Grade 10+ (age 15+)', 12)).toBe(true)
+    expect(programMatchesGrade('Grade 11 (completed)', 12)).toBe(true)
+    expect(programMatchesGrade('Grade 11 (completed)', 11)).toBe(false)
+    expect(programMatchesGrade('Grade 10 completed, age 16+', 12)).toBe(true)
+    expect(programMatchesGrade('Ages 14–18, Grade 9 completed', 10)).toBe(true)
+    expect(programMatchesGrade('Ages 16+; entering or completing Grade 10, 11 or 12', 12)).toBe(true)
+    expect(programMatchesGrade('Grades 9–10 online (Grades 11–12 in person at Waterloo only)', 12)).toBe(true)
+    expect(programMatchesGrade('Up to Grade 12 (ages 11–18)', 11)).toBe(true)
+    expect(programMatchesGrade('Grade 12 and below', 10)).toBe(true)
+    expect(programMatchesGrade('Kindergarten to Grade 10', 12)).toBe(false)
+  })
 })
 
 // ── filterSortScholarships ────────────────────────────────────────────────────

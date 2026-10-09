@@ -348,10 +348,10 @@ export function matchScholarship(
     }
   }
 
-  // Average confirmed; student provided their average and it clears the bar.
-  // Inside the band it is said, not scored.
+  // Average confirmed only when the whole band clears the bar; a minimum
+  // inside the band is a check, never a claim.
   if (eligibility.minAverage !== null && profile.averagePercent !== null) {
-    if (profile.averagePercent >= eligibility.minAverage) {
+    if ((profile.averageFloor ?? profile.averagePercent) >= eligibility.minAverage) {
       confidence += AVERAGE_CLEARED_BOOST
       signals.push(`Your average clears its ${eligibility.minAverage}% minimum`)
     } else {

@@ -333,22 +333,39 @@ export interface ProgramWithMeta extends Program {
 }
 
 // "Grades 9–12", "9-12", "Grade 11", "Grade 12 (graduating)" → range/single match.
+// Every grade mention counts, not only the first: "Grade 10+", "Grade 11
+// (completed)", "Grade 10, 11 or 12" and "Grades 9–10 online (Grades 11–12 in
+// person)" all admit Grade 12 (match audit 2026-10-08).
 // "High school", "Ages 13–18", and anything unparseable count as inclusive;
 // better to show a listing the student can rule out than to hide one they can't see.
 export function programMatchesGrade(gradesText: string | null, grade: number): boolean {
   if (!gradesText) return true;
-  const range = gradesText.match(/(\d{1,2})\s*[–-]\s*(\d{1,2})/);
-  if (range) {
-    const lo = parseInt(range[1]!, 10);
-    const hi = parseInt(range[2]!, 10);
-    if (hi <= 12) return grade >= lo && grade <= hi; // grades, not ages
+  const ok = new Set<number>();
+  const add = (lo: number, hi: number) => { for (let g = lo; g <= hi; g++) ok.add(g); };
+  let text = gradesText;
+  // Completed grade N: you are in the grade after it.
+  text = text.replace(/(?:completed\s+grade\s*(\d{1,2})|grade\s*(\d{1,2})\s*\(?completed\)?)/gi, (_, a, b) => {
+    add(parseInt(a ?? b, 10) + 1, 12); return ' ';
+  });
+  // Open-ended above: "Grade 10+", "Grade 10 and up".
+  text = text.replace(/grades?\s*(\d{1,2})\s*(?:\+|and\s+(?:up|above|older))/gi, (_, n) => { add(parseInt(n, 10), 12); return ' '; });
+  // Open-ended below: "Grade 12 and below", "Up to Grade 12", "Kindergarten to Grade 10".
+  text = text.replace(/grades?\s*(\d{1,2})\s+and\s+(?:below|under|younger)/gi, (_, n) => { add(0, parseInt(n, 10)); return ' '; });
+  text = text.replace(/(?:up\s+to|kindergarten\s+to)\s+grades?\s*(\d{1,2})/gi, (_, n) => { add(0, parseInt(n, 10)); return ' '; });
+  // Ranges, skipping age ranges ("Ages 13–18", "(ages 13–17)").
+  text = text.replace(/(ages?\s*)?(\d{1,2})\s*[–-]\s*(\d{1,2})/gi, (m, age, a, b) => {
+    const lo = parseInt(a, 10), hi = parseInt(b, 10);
+    if (age || hi > 12 || lo > hi) return m;
+    add(lo, hi); return ' ';
+  });
+  // Lists and singles: "Grade 10, 11 or 12", "Grade 11".
+  for (const m of text.matchAll(/grades?\s*(\d{1,2}(?:\s*(?:,|\/|or|and|&)\s*\d{1,2})*)/gi)) {
+    for (const n of m[1]!.match(/\d{1,2}/g)!) {
+      const g = parseInt(n, 10);
+      if (g <= 12) ok.add(g);
+    }
   }
-  const single = gradesText.match(/grade\s*(\d{1,2})/i);
-  if (single && !range) {
-    const g = parseInt(single[1]!, 10);
-    if (g <= 12) return grade === g;
-  }
-  return true;
+  return ok.size === 0 || ok.has(grade);
 }
 
 // 'ongoing' (open with no deadline) was folded into 'tba' until 2026-09-23,

@@ -252,6 +252,18 @@ describe('matchScholarship', () => {
       expect(result.signals.join(' ')).not.toContain('clears')
     })
 
+    it('a band only claims to clear a minimum its bottom clears', () => {
+      // "Below 80%" is stored as 79: a 65% student was told they cleared 75%.
+      const below = { ...baseProfile, averagePercent: 79, averageTop: 79, averageFloor: 0 }
+      const r1 = matchScholarship(below, sch({ minAverage: 75 }))
+      expect(r1.match).toBe(true)
+      expect(r1.signals.join(' ')).not.toContain('clears')
+      expect(r1.checks).toContain('Needs an average of 75%')
+      const band = { ...baseProfile, averagePercent: 85, averageTop: 89, averageFloor: 80 }
+      expect(matchScholarship(band, sch({ minAverage: 85 })).signals.join(' ')).not.toContain('clears')
+      expect(matchScholarship(band, sch({ minAverage: 80 })).signals).toContain('Your average clears its 80% minimum')
+    })
+
     it('a minimum above the band still rejects', () => {
       const p = { ...baseProfile, averagePercent: 85, averageTop: 89 }
       expect(matchScholarship(p, sch({ minAverage: 90 })).match).toBe(false)

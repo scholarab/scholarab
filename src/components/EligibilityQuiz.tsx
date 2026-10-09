@@ -16,7 +16,7 @@ import {
   QUIZ_QUESTIONS, QUIZ_STORAGE_KEY, QUIZ_TTL_MS, QUIZ_MAX_QUESTION_COUNT,
   SCHOOL_QUESTION_KEY, schoolQuestion, schoolsForCity,
   BOARD_QUESTION_KEY, boardQuestion, boardsForCity, RESULT_LIMIT,
-  quizQuestionCeiling, quizTotalLabel, AVERAGE_BAND_TOP, QUIZ_PROGRAM_QUESTIONS,
+  quizQuestionCeiling, quizTotalLabel, AVERAGE_BAND_TOP, AVERAGE_BAND_FLOOR, QUIZ_PROGRAM_QUESTIONS,
   quizOptionBatch, quizOptionPage,
   INSTITUTION_QUESTION_KEY, institutionsOf, joinInstitutions,
 } from '../lib/quiz.ts'
@@ -45,7 +45,7 @@ const TIER_STYLES: Record<ConfidenceTier, { badge: string; label: string }> = {
 }
 
 // Results come in up to four groups: the strongest few, then by date.
-type ResultGroup = 'best' | 'soon' | 'now' | 'later'
+type ResultGroup = 'best' | 'soon' | 'now' | 'later' | 'more'
 const SOON_DAYS = 30
 const SOON_SHOWN = 3
 // Rows a combo shows before Show all: its strongest few, under its button.
@@ -61,6 +61,7 @@ const GROUP_LABELS: Record<ResultGroup, string> = {
   soon: `Due in the next ${SOON_DAYS} days, best fit first`,
   now: 'Open now, best fit first',
   later: 'Upcoming or undated, best fit first',
+  more: 'Possible fits, with more to check',
 }
 
 function loadStoredQuiz(): { step: number; answers: Record<string, string> } {
@@ -382,6 +383,7 @@ export default function EligibilityQuiz({ scholarships, programs, combos = [] }:
       fields: fieldVal ? [fieldVal] : [],
       averagePercent: avgVal ? parseInt(avgVal) : null,
       averageTop: avgVal ? AVERAGE_BAND_TOP[avgVal] ?? null : null,
+      averageFloor: avgVal ? AVERAGE_BAND_FLOOR[avgVal] ?? null : null,
       town: city === 'Other Alberta' ? answers.town ?? null : null,
       identifiesAsFemale: null,
       identifiesAsIndigenous: null,
@@ -454,6 +456,10 @@ export default function EligibilityQuiz({ scholarships, programs, combos = [] }:
     const dueSoon = (r: { scholarship: Scholarship; checks: string[] }) =>
       inMonth(r) && calendarDaysUntil(r.scholarship.deadline!) >= 2
     const kept = quality.length >= 5 ? [...quality, ...possible.filter(inMonth)] : [...quality, ...possible]
+    // The possible fits cut above stay behind Show all, last, instead of
+    // vanishing: Show all hid most local and national awards from anyone with
+    // five better fits (match audit 2026-10-08).
+    const cut = quality.length >= 5 ? possible.filter(r => !inMonth(r)) : []
     // Two groups, each best fit first: what a student can apply to tonight,
     // then what opens later. By fit alone a September list was ten "Opens
     // Mar 1" rows (critique 2026-09-24), since most Grade 12 money opens in
@@ -478,7 +484,8 @@ export default function EligibilityQuiz({ scholarships, programs, combos = [] }:
     const soon = tagged.filter(r => r.group === 'soon')
       .sort((a, b) => TIER_RANK[a.tier]! - TIER_RANK[b.tier]!
         || parseAmount(b.scholarship.amount) - parseAmount(a.scholarship.amount))
-    return [...tagged.filter(r => r.group === 'best'), ...soon, ...tagged.filter(r => r.group === 'now'), ...tagged.filter(r => r.group === 'later')]
+    const more = cut.map(r => ({ ...r, group: 'more' as ResultGroup }))
+    return [...tagged.filter(r => r.group === 'best'), ...soon, ...tagged.filter(r => r.group === 'now'), ...tagged.filter(r => r.group === 'later'), ...more]
   }, [profile, step, openScholarships, scholarshipMap, showScholarships, QUESTIONS.length])
 
   const allProgramResults = useMemo(() => {
@@ -488,9 +495,11 @@ export default function EligibilityQuiz({ scholarships, programs, combos = [] }:
 
   // The combos this student is in (combo-pick.ts), checked against every
   // match rather than the ten on screen.
-  const pickedCombos = useMemo(() => allScholarshipResults
-    ? pickCombos(combos, answers, new Set(allScholarshipResults.map(r => r.scholarship.id)))
-    : [], [combos, answers, allScholarshipResults])
+  // Combos are built from the kept matches; the Show all extras stay out.
+  const comboMatches = useMemo(() => allScholarshipResults?.filter(r => r.group !== 'more') ?? null, [allScholarshipResults])
+  const pickedCombos = useMemo(() => comboMatches
+    ? pickCombos(combos, answers, new Set(comboMatches.map(r => r.scholarship.id)))
+    : [], [combos, answers, comboMatches])
 
   // Build my combo (Ilia, 2026-10-04): the combos a student is in lead the
   // results, each with its own rows, and every award shows once, under the
@@ -498,11 +507,11 @@ export default function EligibilityQuiz({ scholarships, programs, combos = [] }:
   const comboSections = useMemo(() => {
     const taken = new Set<number>()
     return pickedCombos.map(({ entry, hits }) => {
-      const rows = (allScholarshipResults ?? []).filter(r => hits.includes(r.scholarship.id) && !taken.has(r.scholarship.id))
+      const rows = (comboMatches ?? []).filter(r => hits.includes(r.scholarship.id) && !taken.has(r.scholarship.id))
       for (const r of rows) taken.add(r.scholarship.id)
       return { entry, hits, rows }
     }).filter(c => c.rows.length > 0)
-  }, [pickedCombos, allScholarshipResults])
+  }, [pickedCombos, comboMatches])
   const inCombo = useMemo(() => new Set(comboSections.flatMap(c => c.rows.map(r => r.scholarship.id))), [comboSections])
   const restResults = useMemo(() => allScholarshipResults?.filter(r => !inCombo.has(r.scholarship.id)) ?? null, [allScholarshipResults, inCombo])
 

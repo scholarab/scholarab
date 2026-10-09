@@ -199,6 +199,9 @@ export const QUIZ_PROGRAM_QUESTIONS: QuizQuestion[] = [
  *  middle). An award whose minimum falls inside the band stays in the
  *  results with a check instead of dropping out. */
 export const AVERAGE_BAND_TOP: Record<string, number> = { '93': 100, '85': 89, '79': 79 };
+/** The bottom of each band. Only a band whose bottom clears a minimum can
+ *  say so: "Below 80%" (79) told a 65% student they cleared 75%. */
+export const AVERAGE_BAND_FLOOR: Record<string, number> = { '93': 90, '85': 80, '79': 0 };
 
 export const SCHOOL_QUESTION_KEY = 'school';
 
