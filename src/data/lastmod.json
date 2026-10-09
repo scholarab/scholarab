@@ -1203,6 +1203,10 @@
     "hash": "331db87548312c70",
     "date": "2026-10-08"
   },
+  "/scholarships/agnes-cote-scholarship-st-marys-university/": {
+    "hash": "d52c51191a54fd3c",
+    "date": "2026-10-09"
+  },
   "/scholarships/agnes-jacks-scholarship-awards/": {
     "hash": "a198a7805e86c877",
     "date": "2026-10-05"
@@ -1298,6 +1302,10 @@
   "/scholarships/alberta-blue-cross-away-from-home-entrance-award/": {
     "hash": "d19751183d2c93b3",
     "date": "2026-10-08"
+  },
+  "/scholarships/alberta-blue-cross-away-from-home-scholarship-concordia-university-of-edmonton/": {
+    "hash": "9799e589f9fbf4e0",
+    "date": "2026-10-09"
   },
   "/scholarships/alberta-blue-cross-away-from-home-scholarship/": {
     "hash": "c626e92fce046952",
@@ -1470,6 +1478,22 @@
   "/scholarships/altalink-centennial-scholarship/": {
     "hash": "bbfaed77cf46f012",
     "date": "2026-10-08"
+  },
+  "/scholarships/ambrose-university-academic-entrance-scholarship/": {
+    "hash": "fa3178c619c12c55",
+    "date": "2026-10-09"
+  },
+  "/scholarships/ambrose-university-christian-high-school-scholarship/": {
+    "hash": "f3efb668c4f33a71",
+    "date": "2026-10-09"
+  },
+  "/scholarships/ambrose-university-financial-assistance-application/": {
+    "hash": "a718de06d4bff0e9",
+    "date": "2026-10-09"
+  },
+  "/scholarships/ambrose-university-presidential-scholarship/": {
+    "hash": "0a5aa1793c5ab4ac",
+    "date": "2026-10-09"
   },
   "/scholarships/amrize-education-endowment-scholarship/": {
     "hash": "9d54def1b9bca5b6",
@@ -1647,9 +1671,21 @@
     "hash": "fac623e5407b0e74",
     "date": "2026-10-08"
   },
+  "/scholarships/athabasca-university-indigenous-undergraduate-entrance-bursary/": {
+    "hash": "2bfff11b45732b6e",
+    "date": "2026-10-09"
+  },
   "/scholarships/atoskewan-indigenous-scholarship/": {
     "hash": "ac673aae42b949b5",
     "date": "2026-10-08"
+  },
+  "/scholarships/auarts-automatic-domestic-entrance-scholarships/": {
+    "hash": "f6e3aab80a6debd7",
+    "date": "2026-10-09"
+  },
+  "/scholarships/auarts-lodgepole-center-entrance-scholarship/": {
+    "hash": "84715d94db9cd0b7",
+    "date": "2026-10-09"
   },
   "/scholarships/aufricht-family-fund-student-award/": {
     "hash": "550b00c46ad44417",
@@ -1943,6 +1979,10 @@
     "hash": "030368804059ef35",
     "date": "2026-10-05"
   },
+  "/scholarships/bissett-family-scholars-entrance-bursary-bow-valley-college/": {
+    "hash": "7dbd943a5c97f83d",
+    "date": "2026-10-09"
+  },
   "/scholarships/black-knight-inn-university-transfer-scholarship/": {
     "hash": "4a31fcb4567d75a3",
     "date": "2026-10-08"
@@ -2118,6 +2158,10 @@
   "/scholarships/bow-island-and-district-health-foundation-scholarship/": {
     "hash": "a2d072f8fa71d551",
     "date": "2026-09-19"
+  },
+  "/scholarships/bow-valley-college-entrance-awards-application/": {
+    "hash": "c5ae999d5cd092ee",
+    "date": "2026-10-09"
   },
   "/scholarships/bow-valley-health-care-scholarships/": {
     "hash": "d3847fdaf1f637cb",
@@ -2923,6 +2967,14 @@
     "hash": "7bc6dd331efac570",
     "date": "2026-10-08"
   },
+  "/scholarships/concordia-university-of-edmonton-bursary-application-for-first-year-domestic-students/": {
+    "hash": "1fbbecc7609a2d6e",
+    "date": "2026-10-09"
+  },
+  "/scholarships/concordia-university-of-edmonton-university-entrance-scholarship/": {
+    "hash": "6713ea0b32db1772",
+    "date": "2026-10-09"
+  },
   "/scholarships/conner-lukan-tighten-your-skates-award/": {
     "hash": "3eeb4e6bfbc4d700",
     "date": "2026-10-08"
@@ -3359,6 +3411,10 @@
     "hash": "c298059aa5db52bd",
     "date": "2026-10-04"
   },
+  "/scholarships/eaton-entrance-scholarship-auarts/": {
+    "hash": "2b30c88267d2f37b",
+    "date": "2026-10-09"
+  },
   "/scholarships/eckville-juniorsenior-high-school-awards-and-scholarships/": {
     "hash": "9bfab66f1721bcf4",
     "date": "2026-10-08"
@@ -3522,6 +3578,10 @@
   "/scholarships/erin-james-scholarship/": {
     "hash": "1712526a510c3b05",
     "date": "2026-10-08"
+  },
+  "/scholarships/ernest-and-iris-damkar-entrance-awards-olds-college/": {
+    "hash": "40c3d5a8cd6ff58b",
+    "date": "2026-10-09"
   },
   "/scholarships/errol-moen-memorial-award/": {
     "hash": "08978bc5c49e1800",
@@ -3722,6 +3782,10 @@
   "/scholarships/fp-walshe-high-school-scholarships-and-awards/": {
     "hash": "5d7428b433eff5e1",
     "date": "2026-10-08"
+  },
+  "/scholarships/frank-buckley-entrance-scholarship-st-marys-university/": {
+    "hash": "3f64825077571daf",
+    "date": "2026-10-09"
   },
   "/scholarships/frank-freeman-educational-scholarship/": {
     "hash": "c32785d7b2a8037e",
@@ -4783,6 +4847,14 @@
     "hash": "b65961deeeca3477",
     "date": "2026-10-08"
   },
+  "/scholarships/lakeland-college-academic-excellence-entrance-scholarship/": {
+    "hash": "edfbab5501ac648e",
+    "date": "2026-10-09"
+  },
+  "/scholarships/lakeland-college-entrance-awards-application/": {
+    "hash": "f87ede499bfe7da8",
+    "date": "2026-10-09"
+  },
   "/scholarships/lakeland-credit-union-post-secondary-scholarship/": {
     "hash": "14cf2f673fa2e566",
     "date": "2026-10-08"
@@ -5162,6 +5234,10 @@
   "/scholarships/maizex-4-h-canada-scholarship/": {
     "hash": "3c4cdea6e40b69e1",
     "date": "2026-10-08"
+  },
+  "/scholarships/makami-college-safe-haven-educational-scholarship/": {
+    "hash": "9fc7594364f67c26",
+    "date": "2026-10-09"
   },
   "/scholarships/malwyn-jones-memorial-award/": {
     "hash": "d26a2123f3515d9c",
@@ -5603,6 +5679,14 @@
     "hash": "3c4c36be6f2e363d",
     "date": "2026-10-08"
   },
+  "/scholarships/norquest-college-1000women4stem-award---certificate/": {
+    "hash": "ce95500e3b0f6607",
+    "date": "2026-10-09"
+  },
+  "/scholarships/norquest-college-1000women4stem-award---diploma/": {
+    "hash": "a0b839b1fed8fe2e",
+    "date": "2026-10-09"
+  },
   "/scholarships/norris-bowen-scholarship/": {
     "hash": "0f1f0823f4338164",
     "date": "2026-10-05"
@@ -5635,9 +5719,17 @@
     "hash": "3be3a7a21a16f219",
     "date": "2026-10-08"
   },
+  "/scholarships/northern-lakes-college-alberta-blue-cross-entrance-bursary/": {
+    "hash": "dd60948b752c85e4",
+    "date": "2026-10-09"
+  },
   "/scholarships/northern-lakes-college-dual-credit-bursary/": {
     "hash": "4134490a4a247d55",
     "date": "2026-10-08"
+  },
+  "/scholarships/northern-lakes-college-fall-awards-application/": {
+    "hash": "0d06f4e0c3d5cde3",
+    "date": "2026-10-09"
   },
   "/scholarships/northern-lights-aboriginal-achievement-scholarship/": {
     "hash": "eba914fe87a59833",
@@ -5787,6 +5879,14 @@
     "hash": "b0114f324ec3b677",
     "date": "2026-10-08"
   },
+  "/scholarships/olds-college-entrance-awards-application/": {
+    "hash": "37f0a217f640f2ea",
+    "date": "2026-10-09"
+  },
+  "/scholarships/oleary-family-scholarship-st-marys-university/": {
+    "hash": "88d2edc593ded864",
+    "date": "2026-10-09"
+  },
   "/scholarships/oliver-collumbell-kelly-memorial-scholarship/": {
     "hash": "8fa65f9c3e9bd539",
     "date": "2026-10-08"
@@ -5887,9 +5987,17 @@
     "hash": "f3b829c66feca955",
     "date": "2026-10-08"
   },
+  "/scholarships/paul-and-carol-hill-scholarships-st-marys-university/": {
+    "hash": "31230993bc8afb12",
+    "date": "2026-10-09"
+  },
   "/scholarships/paul-and-gerri-charette-bursary/": {
     "hash": "e608a8fa45cf16e9",
     "date": "2026-10-04"
+  },
+  "/scholarships/paul-and-gerri-charette-endowed-award/": {
+    "hash": "0bba1e660c213e25",
+    "date": "2026-10-09"
   },
   "/scholarships/paul-kane-global-languages-award/": {
     "hash": "422274235ed62c08",
@@ -6002,6 +6110,18 @@
   "/scholarships/ponoka-ag-society-scholarship/": {
     "hash": "2fff5586f47b3def",
     "date": "2026-10-08"
+  },
+  "/scholarships/portage-college-entrance-scholarship/": {
+    "hash": "842d06bf0d9888f6",
+    "date": "2026-10-09"
+  },
+  "/scholarships/portage-college-general-entrance-awards-application/": {
+    "hash": "2a47797b56731ce2",
+    "date": "2026-10-09"
+  },
+  "/scholarships/portage-college-invest-in-your-future-early-admission-award/": {
+    "hash": "60cb8fdc4083cc91",
+    "date": "2026-10-09"
   },
   "/scholarships/possibilities-are-endless-relocation-entrance-award/": {
     "hash": "64599d7433301c09",
@@ -6167,6 +6287,10 @@
     "hash": "a4acc32c95100bd1",
     "date": "2026-10-08"
   },
+  "/scholarships/regina-and-peter-fridgen-memorial-bursary-st-marys-university/": {
+    "hash": "d7db52c5532b6966",
+    "date": "2026-10-09"
+  },
   "/scholarships/rellis-path-forward-scholarship/": {
     "hash": "fb437e9f5edec2ee",
     "date": "2026-10-05"
@@ -6274,6 +6398,10 @@
   "/scholarships/robert-e-walter-memorial-scholarship/": {
     "hash": "81ef35fa0cf70b25",
     "date": "2026-09-27"
+  },
+  "/scholarships/robert-spence-foundation-bursaries-st-marys-university/": {
+    "hash": "3c6218260cd1d3dd",
+    "date": "2026-10-09"
   },
   "/scholarships/robert-trimmer-sr-prize-in-science/": {
     "hash": "700aa5decd03bceb",
@@ -6771,6 +6899,14 @@
     "hash": "ff6b1d2b8e7f520c",
     "date": "2026-10-05"
   },
+  "/scholarships/st-marys-university-automatic-entrance-scholarships/": {
+    "hash": "d8192001e50020ae",
+    "date": "2026-10-09"
+  },
+  "/scholarships/st-marys-university-high-school-awards-application/": {
+    "hash": "e4804d64377a7179",
+    "date": "2026-10-09"
+  },
   "/scholarships/st-oscar-romero-grade-10-student-award/": {
     "hash": "9472bd9ca6f0df3f",
     "date": "2026-10-08"
@@ -7062,6 +7198,10 @@
   "/scholarships/trans-canada-energy-award/": {
     "hash": "ff8921ac611715d9",
     "date": "2026-10-08"
+  },
+  "/scholarships/transalta-women-pivoting-in-tech-entrance-bursary-bow-valley-college/": {
+    "hash": "98b54e49fe31b090",
+    "date": "2026-10-09"
   },
   "/scholarships/trevor-h-shirtliff-difference-maker-scholarship/": {
     "hash": "89ad0dfb56dff78a",

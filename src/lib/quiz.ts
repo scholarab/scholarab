@@ -148,7 +148,8 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
     // Medicine Hat College left on 2026-09-30 with the colleges' own awards and
     // came back on 2026-10-01 with their entrance awards; Burman, The King's,
     // Lethbridge Polytechnic and CBTS joined then, since a school's own
-    // entrance awards are only reached through this answer.
+    // entrance awards are only reached through this answer. The other twelve
+    // map schools joined on 2026-10-09 with their own entrance awards.
     opts: [
       { label: 'University of Alberta', value: 'University of Alberta', hint: 'Edmonton' },
       { label: 'University of Calgary', value: 'University of Calgary', hint: 'Calgary' },
@@ -165,6 +166,18 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
       { label: "The King's University", value: "The King's University", hint: 'Edmonton' },
       { label: 'Lethbridge Polytechnic', value: 'Lethbridge Polytechnic', hint: 'Lethbridge' },
       { label: 'Canadian Baptist Theological Seminary and College', value: 'Canadian Baptist Theological Seminary and College', hint: 'Cochrane' },
+      { label: 'Athabasca University', value: 'Athabasca University', hint: 'Online' },
+      { label: 'AUArts', value: 'Alberta University of the Arts', hint: 'Calgary' },
+      { label: 'Ambrose University', value: 'Ambrose University', hint: 'Calgary' },
+      { label: 'Concordia University of Edmonton', value: 'Concordia University of Edmonton', hint: 'Edmonton' },
+      { label: "St. Mary's University", value: "St. Mary's University", hint: 'Calgary' },
+      { label: 'Bow Valley College', value: 'Bow Valley College', hint: 'Calgary' },
+      { label: 'NorQuest College', value: 'NorQuest College', hint: 'Edmonton' },
+      { label: 'Olds College', value: 'Olds College', hint: 'Olds' },
+      { label: 'Lakeland College', value: 'Lakeland College', hint: 'Vermilion, Lloydminster' },
+      { label: 'Portage College', value: 'Portage College', hint: 'Lac La Biche' },
+      { label: 'Northern Lakes College', value: 'Northern Lakes College', hint: 'Slave Lake' },
+      { label: 'MaKami College', value: 'MaKami College', hint: 'Edmonton, Calgary' },
       { label: 'Trades / Apprenticeship', value: 'Trades / Apprenticeship program', hint: 'Any apprenticeship' },
       { label: 'Somewhere else, or not sure', value: '' },
     ],

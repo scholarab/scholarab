@@ -67801,5 +67801,1397 @@
       "apprenticeship": false,
       "extracurriculars": []
     }
+  },
+  {
+    "id": 1846,
+    "title": "Concordia University of Edmonton University Entrance Scholarship",
+    "amount": "$1,000 to $5,000 per year (renewable)",
+    "deadline": "2027-04-01",
+    "openDate": null,
+    "audience": "Grade 12 students entering first year at Concordia University of Edmonton",
+    "url": "https://concordia.ab.ca/scholarships/university-entrance-scholarship/",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "No separate application. Submit admission documents and interim or final transcripts by April 1. Domestic and international students qualify. Register in at least 12 credits each semester; values depend on the award average.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "Renewable entrance scholarships of $1,000 to $5,000 per year for students entering Arts, Management or Science directly from high school with an award average of at least 75%.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Concordia University of Edmonton"
+      ],
+      "fields": [],
+      "minAverage": 75,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1847,
+    "title": "Concordia University of Edmonton Bursary Application for First-Year Domestic Students",
+    "amount": "Varies",
+    "deadline": "2027-10-15",
+    "openDate": null,
+    "audience": "Grade 12 students entering first year at Concordia University of Edmonton",
+    "url": "https://concordia.ab.ca/student-services/financial-aid/bursaries/",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply after enrolling through Online Services for Students. A 60% course load, satisfactory academic standing and no previous bankruptcy or student-loan default are required. General bursaries can be $500 without government aid, or up to $1,500 with government aid; donor-funded bursaries have additional criteria.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "Need-based bursaries for full-time domestic degree students, including students in their first year.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Concordia University of Edmonton"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1848,
+    "title": "Alberta Blue Cross Away from Home Scholarship (Concordia University of Edmonton)",
+    "amount": "$750",
+    "deadline": null,
+    "openDate": null,
+    "audience": "Grade 12 students entering first year at Concordia University of Edmonton",
+    "url": "https://concordia.ab.ca/scholarships/alberta-blue-cross-50th-anniversary-travellers-scholarship/",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "No separate application. You cannot receive more than $3,500 in other awards. Selection uses the 30-level subjects used for admission.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "A $750 first-year award for an Alberta resident with strong high school marks and financial need whose hometown is at least 100 kilometres from the university.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Concordia University of Edmonton"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1849,
+    "title": "Ambrose University Academic Entrance Scholarship",
+    "amount": "$1,000 to $3,000",
+    "deadline": "2027-08-01",
+    "openDate": null,
+    "audience": "Grade 12 students entering first year at Ambrose University",
+    "url": "https://ambrose.edu/scholarship/academic-entrance-scholarship",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "No separate application. Apply for admission by August 1. The amount rises at the 85%, 90% and 95% average tiers.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "Automatic entrance funding of $1,000 to $3,000 for high school students with averages of at least 80%.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Ambrose University"
+      ],
+      "fields": [],
+      "minAverage": 80,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1850,
+    "title": "Ambrose University Presidential Scholarship",
+    "amount": "Full domestic tuition for up to eight consecutive semesters",
+    "deadline": "2026-12-31",
+    "openDate": "2026-11-01",
+    "audience": "Grade 12 students entering first year at Ambrose University",
+    "url": "https://ambrose.edu/scholarship/presidential-scholarship",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply for admission and submit the separate scholarship package with a transcript, résumé, personal statement and two references. The award can cover up to eight consecutive semesters. The main award pages say December 31; older reference forms say January 31, so verify reference timing with Ambrose. A Canadian or American high school transcript is required; homeschool applicants may use the stated alternatives. The FAQ uses roughly 85% as guidance. Continuing funding requires a 3.0 GPA and at least 12 credits each semester.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "Full domestic tuition for a current high school student with academic achievement, Christian character and leadership potential.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Ambrose University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1851,
+    "title": "Ambrose University Christian High School Scholarship",
+    "amount": "$3,000",
+    "deadline": "2027-01-31",
+    "openDate": null,
+    "audience": "Grade 12 students entering first year at Ambrose University",
+    "url": "https://ambrose.edu/scholarship/christian-high-school-scholarship",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Ask your guidance counsellor about nomination. ACSI or CSI member schools may nominate two students, though some schools are excluded. You need an 80% admission average, 12 credits each fall and winter, and a 3.0 university GPA. You cannot also receive the Church Servant Leadership or Presidential scholarship.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "A $3,000 entrance scholarship for a current Grade 12 student nominated by a participating Christian high school for academics, Christian character and leadership.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Ambrose University"
+      ],
+      "fields": [],
+      "minAverage": 80,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1852,
+    "title": "Ambrose University Financial Assistance Application",
+    "amount": "Varies",
+    "deadline": "2027-06-01",
+    "openDate": "2027-01-25",
+    "audience": "Grade 12 students entering first year at Ambrose University",
+    "url": "https://ambrose.edu/financial-aid",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply online and plan to take at least nine credits per semester, unless approved for a reduced full-time load. New international students are excluded. The amount depends on your financial circumstances and other awards.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "One financial-assistance application covers need-based institutional and donor bursaries for new domestic undergraduate students.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Ambrose University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "metaDetail": "One form covers need-based bursaries."
+  },
+  {
+    "id": 1853,
+    "title": "Olds College Entrance Awards Application",
+    "amount": "Varies",
+    "deadline": "2027-10-31",
+    "openDate": null,
+    "audience": "Grade 12 students entering first year at Olds College",
+    "url": "https://oldscollege.academicworks.ca/opportunities",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply in the awards portal with your college login once enrolled. Complete any recommended additional questions. October 31, 2027 is estimated from the posted 2026 fall-and-winter deadline.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "The general awards application includes entrance scholarships and bursaries for first-year Olds College students.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Olds College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadlineEstimated": true,
+    "metaDetail": "One form covers scholarships and bursaries."
+  },
+  {
+    "id": 1854,
+    "title": "Ernest and Iris Damkar Entrance Awards (Olds College)",
+    "amount": "$3,000",
+    "deadline": "2027-10-31",
+    "openDate": null,
+    "audience": "Grade 12 students entering first year at Olds College",
+    "url": "https://oldscollege.academicworks.ca/opportunities/8054",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Complete the general awards application. Payment comes in two $1,500 instalments; the second requires a fall GPA of 2.0. The directory lists two Damkar funds with the same eligibility, so they are grouped here. The deadline is estimated from 2026.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "A $3,000 entrance award for Canadian citizens starting Agricultural & Heavy Equipment, Agricultural Management or Land and Water Resources who demonstrate financial need and effort.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Olds College"
+      ],
+      "fields": [
+        "Agriculture",
+        "Heavy equipment",
+        "Land and water resources"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadlineEstimated": true
+  },
+  {
+    "id": 1855,
+    "title": "Lakeland College Entrance Awards Application",
+    "amount": "Varies",
+    "deadline": "2027-05-01",
+    "openDate": null,
+    "audience": "Grade 12 students entering first year at Lakeland College",
+    "url": "https://www.lakelandcollege.ca/admissions/funding-your-education/entrance-awards-scholarships.html",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Accepted and conditionally accepted students receive an application link by email in early March. International students are not eligible for entrance scholarships. Regional and Indigenous awards have additional criteria.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "A common application for entrance awards based on high school academics, leadership and community involvement. The competition includes Indigenous and regional awards.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Lakeland College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "metaDetail": "Rewards academics, leadership and community work."
+  },
+  {
+    "id": 1856,
+    "title": "Lakeland College Academic Excellence Entrance Scholarship",
+    "amount": "$1,500 to $3,500",
+    "deadline": "2027-04-30",
+    "openDate": null,
+    "audience": "Grade 12 students entering first year at Lakeland College",
+    "url": "https://www.lakelandcollege.ca/admissions/funding-your-education/academic-excellence-entrance-scholarship.html",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "No separate application. Submit an official Grade 11 transcript by April 30. The Grade 11 average must be at least 85% using the specified subjects. Take a full course load in both semesters; the second payment requires good academic standing.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "A $1,500 to $3,500 entrance scholarship for current Grade 12 students living in Canada and entering business, environmental sciences, interior design or university transfer.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Lakeland College"
+      ],
+      "fields": [
+        "Business",
+        "Environmental sciences",
+        "Interior design",
+        "University transfer"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1857,
+    "title": "NorQuest College 1000Women4STEM Award - Certificate",
+    "amount": "Up to $11,000",
+    "deadline": "2027-05-01",
+    "openDate": null,
+    "audience": "Grade 12 students entering first year at NorQuest College",
+    "url": "https://norquest.academicworks.ca/opportunities/5529",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Applicants must be Canadian citizens or permanent residents and cannot have other sponsorship, grants or bursaries covering tuition, books or mandatory fees. Admission does not have to be decided yet. Complete the general application and the 1000Women4STEM recommended opportunity, including family-income documents.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "Up to $11,000 for a woman applying to an eligible STEM certificate program for fall 2027 who has financial need.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "NorQuest College"
+      ],
+      "fields": [
+        "Digital Information Careers",
+        "Engineering University Transfer"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": "female",
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1858,
+    "title": "NorQuest College 1000Women4STEM Award - Diploma",
+    "amount": "Up to $22,000",
+    "deadline": "2027-05-01",
+    "openDate": null,
+    "audience": "Grade 12 students entering first year at NorQuest College",
+    "url": "https://norquest.academicworks.ca/opportunities/5534",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Applicants must be Canadian citizens or permanent residents and cannot have other sponsorship, grants or bursaries covering tuition, books or mandatory fees. Admission does not have to be decided yet. Complete the general application and the 1000Women4STEM recommended opportunity, including family-income documents.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "Up to $22,000 for a woman applying to an eligible STEM diploma program for fall 2027 who has financial need.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "NorQuest College"
+      ],
+      "fields": [
+        "Arts and Science Diploma",
+        "Energy Management",
+        "Environmental Technician",
+        "Machine Learning Analyst"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": "female",
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1859,
+    "title": "Bow Valley College Entrance Awards Application",
+    "amount": "Varies",
+    "deadline": "2027-08-01",
+    "openDate": "2027-05-01",
+    "audience": "Grade 12 students entering first year at Bow Valley College",
+    "url": "https://www.bowvalleycollege.ca/apply/financial/awards",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply in the student awards portal during the semester before your program starts. Domestic and international eligibility differs by award.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "Entrance awards for students starting a certificate or diploma for the first time. The competition includes financial-need bursaries.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Bow Valley College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "metaDetail": "For a first certificate or diploma."
+  },
+  {
+    "id": 1860,
+    "title": "Bissett Family Scholars Entrance Bursary (Bow Valley College)",
+    "amount": "$5,000 per term, up to $10,000 for a certificate or $20,000 for a diploma",
+    "deadline": "2027-08-01",
+    "openDate": null,
+    "audience": "Grade 12 students entering first year at Bow Valley College",
+    "url": "https://www.bowvalleycollege.ca/apply/financial/awards",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Applicants must have graduated from a Calgary high school within two years, or pursued their high school diploma in the college’s School of Foundational Learning, with no previous post-secondary education. Selection considers academic potential and career planning. Apply through the awards portal; funding is limited to two certificate payments or four diploma payments. Renewal requires acceptable grades.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "A renewable bursary of $5,000 per term for new domestic students entering a full-time career certificate or diploma with financial need.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Bow Valley College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1861,
+    "title": "Paul and Gerri Charette Endowed Award",
+    "amount": "$2,000 per term in first year",
+    "deadline": "2027-08-01",
+    "openDate": null,
+    "audience": "Grade 12 students entering first year at Bow Valley College",
+    "url": "https://www.bowvalleycollege.ca/apply/financial/awards",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Domestic and international students may apply through the college’s student awards portal.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "An entrance award of $2,000 per term during the first year of a certificate or diploma career program for a full-time student under 25.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Bow Valley College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": 24,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1862,
+    "title": "TransAlta Women Pivoting in Tech Entrance Bursary (Bow Valley College)",
+    "amount": "$10,000",
+    "deadline": "2027-08-01",
+    "openDate": null,
+    "audience": "Grade 12 students entering first year at Bow Valley College",
+    "url": "https://www.bowvalleycollege.ca/apply/financial/awards",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through the student awards portal before starting in the fall. Domestic and international applicants can study full-time or part-time. The award also covers some post-diploma programs, which require prior qualifications; high school entrants must choose a program whose admission requirements they meet.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "A $10,000 entrance bursary for women entering eligible technology programs, including the Software Development diploma.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Bow Valley College"
+      ],
+      "fields": [
+        "Technology"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": "female",
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1863,
+    "title": "Portage College General Entrance Awards Application",
+    "amount": "Varies",
+    "deadline": "2027-09-25",
+    "openDate": null,
+    "audience": "Grade 12 students entering first year at Portage College",
+    "url": "https://portagecollege.ca/september-awards-deadline",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply after registration and attach the documents required by each award. The financial-need awards require the budget section; academic awards require your high school transcript.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "The general awards form covers entrance scholarships and bursaries, including the Board of Governors, President’s and Career and Technology Strand awards.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Portage College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1864,
+    "title": "Portage College Entrance Scholarship",
+    "amount": "$500",
+    "deadline": "2027-09-25",
+    "openDate": null,
+    "audience": "Grade 12 students entering first year at Portage College",
+    "url": "https://portagecollege.ca/september-awards-deadline",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Use the separate Entrance Scholarship application and attach your transcript. You must have no breaks in high school study and no intervening post-secondary or upgrading study. The program must last at least eight weeks. The first 30 qualified students accepted receive funding after satisfactory attendance and progress.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "A $500 entrance scholarship for students entering a full-time post-secondary program directly from high school in the same year they graduate.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Portage College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1865,
+    "title": "Portage College Invest in Your Future Early Admission Award",
+    "amount": "$400 to $1,200",
+    "deadline": "2027-09-25",
+    "openDate": null,
+    "audience": "Grade 12 students entering first year at Portage College",
+    "url": "https://portagecollege.ca/september-awards-deadline",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Use the separate Invest in Your Future application and include an essay on community involvement. Your high school must be within 100 kilometres of the service region. Early assessment uses Grade 11 and/or Grade 12 marks: 60-69%, 70-79%, or above 80% for the three award tiers.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "An entrance award of $400, $800 or $1,200 for high school graduates near Portage College’s service region entering a full-time career program without a break in studies.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Portage College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1866,
+    "title": "Athabasca University Indigenous Undergraduate Entrance Bursary",
+    "amount": "Two three-credit course tuition credits plus $500 for service fees",
+    "deadline": "2027-05-31",
+    "openDate": null,
+    "audience": "Grade 12 students entering first year at Athabasca University",
+    "url": "https://au.scholarships.ngwebsolutions.com/Scholarships/Search",
+    "category": "Indigenous",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply in the Student Awards Portal under Tasks. You must have been admitted within the previous 12 months and completed no more than nine AU undergraduate credits. The bursary can be received once.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "Need-based entrance funding for Canadian Indigenous students newly admitted to an AU undergraduate degree or certificate. It covers two three-credit courses and a $500 service-fee credit.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Athabasca University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1867,
+    "title": "St. Mary's University High School Awards Application",
+    "amount": "Varies",
+    "deadline": null,
+    "openDate": null,
+    "audience": "Grade 12 students entering first year at St. Mary's University",
+    "url": "https://stmu.ca/admission/scholarships/",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Use the online awards application and submit supporting documents by the announced deadline. The public page has not posted fall 2027 application dates. To receive payment, maintain at least nine credits per term and a 2.0 GPA.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "A common awards application for new full-time students entering from high school, including academic, rural and financial-need awards.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "St. Mary's University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1868,
+    "title": "St. Mary's University Automatic Entrance Scholarships",
+    "amount": "$500 to $3,000",
+    "deadline": null,
+    "openDate": null,
+    "audience": "Grade 12 students entering first year at St. Mary's University",
+    "url": "https://stmu.ca/admission/scholarships/",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "No separate application. For President’s scholarships, enter within one year of high school graduation; the average uses the five best Grade 11 or Grade 12 admission subjects and half the award is applied each term. Notre Dame des Rocheuses scholarships are for full-time first-year students. To receive payment, maintain at least nine credits in both fall and winter and a 2.0 GPA.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "Automatic entrance funding includes President’s scholarships of $500 to $3,000 and $1,250 Notre Dame des Rocheuses scholarships. Both require a scholarship average of at least 75%.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "St. Mary's University"
+      ],
+      "fields": [],
+      "minAverage": 75,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1869,
+    "title": "Agnes Cote Scholarship (St. Mary’s University)",
+    "amount": "$2,500",
+    "deadline": null,
+    "openDate": null,
+    "audience": "Grade 12 students entering first year at St. Mary's University",
+    "url": "https://stmu.ca/admission/scholarships/",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Selection also considers community volunteering or leadership, course interests and future goals. Apply through the online awards application. You must enter directly from high school or within one year of graduation. To receive payment, maintain at least nine credits per term and a 2.0 GPA.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "An entrance scholarship for a full-time student from rural Alberta with a scholarship average of at least 90%.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "St. Mary's University"
+      ],
+      "fields": [],
+      "minAverage": 90,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1870,
+    "title": "Frank Buckley Entrance Scholarship (St. Mary’s University)",
+    "amount": "$5,000",
+    "deadline": null,
+    "openDate": null,
+    "audience": "Grade 12 students entering first year at St. Mary's University",
+    "url": "https://stmu.ca/admission/scholarships/",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Include a reference letter about your community involvement or leadership. Apply through the online awards application. You must enter directly from high school or within one year of graduation. To receive payment, maintain at least nine credits per term and a 2.0 GPA.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "An entrance scholarship for a full-time Catholic high school graduate with at least a 90% scholarship average, community involvement and leadership.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "St. Mary's University"
+      ],
+      "fields": [],
+      "minAverage": 90,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1871,
+    "title": "O’Leary Family Scholarship (St. Mary’s University)",
+    "amount": "Up to $20,000 over four years",
+    "deadline": null,
+    "openDate": null,
+    "audience": "Grade 12 students entering first year at St. Mary's University",
+    "url": "https://stmu.ca/admission/scholarships/",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Include a reference letter. Renewal requires at least a 3.3 university GPA and continued campus involvement. Apply through the online awards application. You must enter directly from high school or within one year of graduation. To receive payment, maintain at least nine credits per term and a 2.0 GPA.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "A renewable entrance scholarship for a full-time bachelor’s degree student with at least an 80% scholarship average, leadership and community involvement.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "St. Mary's University"
+      ],
+      "fields": [],
+      "minAverage": 80,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1872,
+    "title": "Paul and Carol Hill Scholarships (St. Mary’s University)",
+    "amount": "$31,000 to $36,000 over five to six years",
+    "deadline": null,
+    "openDate": null,
+    "audience": "Grade 12 students entering first year at St. Mary's University",
+    "url": "https://stmu.ca/admission/scholarships/",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You need at least an 80% scholarship average, volunteer and extracurricular involvement, and a reference about work with children or youth. Preference goes first to Athol Murray College of Notre Dame graduates, then other Saskatchewan Catholic high schools, then Alberta and other jurisdictions. Apply through the online awards application. You must enter directly from high school or within one year of graduation. To receive payment, maintain at least nine credits per term and a 2.0 GPA.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "Renewable entrance scholarships for full-time Catholic high school graduates planning a bachelor’s degree followed immediately by a St. Mary’s education degree and a career teaching in a Catholic school.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "St. Mary's University"
+      ],
+      "fields": [],
+      "minAverage": 80,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1873,
+    "title": "Regina and Peter Fridgen Memorial Bursary (St. Mary’s University)",
+    "amount": "$2,500",
+    "deadline": null,
+    "openDate": null,
+    "audience": "Grade 12 students entering first year at St. Mary's University",
+    "url": "https://stmu.ca/admission/scholarships/",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Preference goes to single mothers and students with disabilities. Apply through the online awards application. You must enter directly from high school or within one year of graduation. To receive payment, maintain at least nine credits per term and a 2.0 GPA.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "A bursary for a new full-time student with a scholarship average of at least 65% and financial need.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "St. Mary's University"
+      ],
+      "fields": [],
+      "minAverage": 65,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1874,
+    "title": "Robert Spence Foundation Bursaries (St. Mary’s University)",
+    "amount": "$3,500",
+    "deadline": null,
+    "openDate": null,
+    "audience": "Grade 12 students entering first year at St. Mary's University",
+    "url": "https://stmu.ca/admission/scholarships/",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through the online awards application. Enter directly from high school or within one year of graduation. To receive payment, maintain at least nine credits per term and a 2.0 GPA.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "A $3,500 entrance bursary for an Alberta resident with some French fluency and a scholarship average of at least 65%.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "St. Mary's University"
+      ],
+      "fields": [],
+      "minAverage": 65,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1875,
+    "title": "AUArts Automatic Domestic Entrance Scholarships",
+    "amount": "$750 to $2,000",
+    "deadline": "2027-02-01",
+    "openDate": null,
+    "audience": "Grade 12 students entering first year at Alberta University of the Arts",
+    "url": "https://auarts.ca/future-students/student-awards-and-financial-aid/awards-and-scholarships/entrance-awards",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "No separate application. Complete your admission application by February 1. Canadian citizens and permanent residents are eligible. The named AUArts Entrance Scholarship is $2,000; smaller awards in this competition have their own values.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "Automatic first-year tuition scholarships for domestic applicants starting a degree in the fall. Selection uses academic and creative performance.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Alberta University of the Arts"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1876,
+    "title": "Eaton Entrance Scholarship (AUArts)",
+    "amount": "$4,500",
+    "deadline": "2027-02-01",
+    "openDate": null,
+    "audience": "Grade 12 students entering first year at Alberta University of the Arts",
+    "url": "https://auarts.ca/future-students/student-awards-and-financial-aid/awards-and-scholarships/entrance-awards",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "No separate application. Complete your admission application by February 1. Selection considers high school academic and creative performance. Canadian citizens and permanent residents are eligible.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "A $4,500 first-year tuition scholarship for a domestic student entering AUArts in the fall.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Alberta University of the Arts"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1877,
+    "title": "AUArts Lodgepole Center Entrance Scholarship",
+    "amount": "$2,000",
+    "deadline": "2027-02-01",
+    "openDate": null,
+    "audience": "Grade 12 students entering first year at Alberta University of the Arts",
+    "url": "https://auarts.ca/future-students/student-awards-and-financial-aid/awards-and-scholarships/entrance-awards",
+    "category": "Indigenous",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "No separate application. Complete your admission application by February 1. Indigenous students can also be considered for the other domestic entrance scholarships.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "A $2,000 first-year tuition scholarship for an Indigenous Canadian citizen starting at AUArts in the fall.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Alberta University of the Arts"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1878,
+    "title": "Northern Lakes College Fall Awards Application",
+    "amount": "Varies",
+    "deadline": null,
+    "openDate": null,
+    "audience": "Grade 12 students entering first year at Northern Lakes College",
+    "url": "https://www.northernlakescollege.ca/future-students/financial-aid-scholarships-and-funding/register-now-nlc-funding-applications",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "The Community Spirit Bursary is $1,000 and accepts full-time or part-time first-year students. Complete one fall form, select the awards you want, and fill in the budget section. International students are not eligible. The old common-form deadline conflicts with the current award list, so the application deadline is left unconfirmed.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "A common fall awards application includes the Community Spirit Bursary for a student who is the first in their immediate family to enter post-secondary study.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Northern Lakes College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1879,
+    "title": "Northern Lakes College Alberta Blue Cross Entrance Bursary",
+    "amount": "$750",
+    "deadline": "2027-10-08",
+    "openDate": null,
+    "audience": "Grade 12 students entering first year at Northern Lakes College",
+    "url": "https://www.northernlakescollege.ca/future-students/financial-aid-scholarships-and-funding/nlc-awards",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must study full-time and show community involvement. Students receiving student loans can qualify. Include at least one support letter and use the official Awards Application Page. The displayed 2026 deadline is estimated for fall 2027.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "A $750 entrance bursary for a self-funded student with financial need entering the first year of a two-year diploma.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Northern Lakes College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadlineEstimated": true
+  },
+  {
+    "id": 1880,
+    "title": "MaKami College Safe Haven Educational Scholarship",
+    "amount": "Varies",
+    "deadline": null,
+    "openDate": null,
+    "audience": "Grade 12 students entering first year at MaKami College",
+    "url": "https://makamicollege.com/student-awards/",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Complete the Safe Haven scholarship form. Attach a 500-word description of yourself and your need for the award, two references from people who are not relatives, and confirmation of enrolment. Applicants must be Canadian citizens.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "Education funding for young women from Haven’s Way, Haven’s Harbour or the programs’ alumni who are entering a MaKami College program.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "MaKami College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": "female",
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "metaDetail": "For Haven's Way and Haven's Harbour youth."
   }
 ]
