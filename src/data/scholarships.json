@@ -1752,6 +1752,7 @@
     "description": "Keyera awards two $3,000 scholarships in memory of Peter J. Renton to Albertans enrolled full-time in the first or second year of a degree or diploma supporting the energy sector at a publicly funded Alberta institution. Eligible fields include business, communications, science, engineering, technical programs and information technology. A minimum 3.0 GPA out of 4 is required.",
     "eligibility": {
       "grades": [
+        "12",
         "post-secondary"
       ],
       "schoolBoards": [],
@@ -3338,7 +3339,7 @@
       "maxFamilyIncome": null,
       "fosterCare": false,
       "citizenship": "canadian",
-      "apprenticeship": true,
+      "apprenticeship": false,
       "extracurriculars": [
         "4-H"
       ]
@@ -5370,7 +5371,7 @@
     "deadline": "2027-05-31",
     "audience": "Students entering RDP full-time who graduated from a listed Central Alberta high school in the most recent year",
     "category": "Academic",
-    "region": "Red Deer",
+    "region": "University & college",
     "active": false,
     "lastVerified": "2026-10",
     "applyViaGuidance": false,
@@ -6834,7 +6835,7 @@
       "maxFamilyIncome": null,
       "fosterCare": false,
       "citizenship": "canadian",
-      "apprenticeship": true,
+      "apprenticeship": false,
       "extracurriculars": []
     },
     "metaDetail": "Ten CTS, K&E or RAP credits."
@@ -7044,7 +7045,7 @@
       "financialNeed": true,
       "maxFamilyIncome": null,
       "fosterCare": false,
-      "citizenship": "canadian",
+      "citizenship": "any",
       "apprenticeship": false,
       "extracurriculars": []
     },
@@ -7991,7 +7992,7 @@
       "maxFamilyIncome": null,
       "fosterCare": false,
       "citizenship": "canadian",
-      "apprenticeship": true,
+      "apprenticeship": false,
       "extracurriculars": []
     },
     "metaDetail": "Open to students registered in grade 12 at Lord Beaverbrook."
@@ -8106,9 +8107,7 @@
       ],
       "specificSchools": [],
       "targetInstitutions": [],
-      "fields": [
-        "trades"
-      ],
+      "fields": [],
       "minAverage": null,
       "minAge": null,
       "maxAge": 20,
@@ -8119,7 +8118,7 @@
       "maxFamilyIncome": null,
       "fosterCare": false,
       "citizenship": "canadian",
-      "apprenticeship": true,
+      "apprenticeship": false,
       "extracurriculars": []
     },
     "metaDetail": "$3,000 a year, renewable for a second year.",
@@ -10987,7 +10986,7 @@
       "maxFamilyIncome": null,
       "fosterCare": false,
       "citizenship": "canadian",
-      "apprenticeship": true,
+      "apprenticeship": false,
       "extracurriculars": [
         "sports"
       ]
@@ -13998,6 +13997,7 @@
     "description": "A $500 award for a Rocky View County resident in the first or second year of Agricultural Management, Environmental Science & Technology, or Agricultural & Heavy Equipment at Olds College, with a GPA of at least 3.00. The county funds it and Olds College administers it through its awards portal.",
     "eligibility": {
       "grades": [
+        "12",
         "post-secondary"
       ],
       "schoolBoards": [],
@@ -14482,7 +14482,7 @@
       "maxFamilyIncome": null,
       "fosterCare": false,
       "citizenship": "canadian",
-      "apprenticeship": true,
+      "apprenticeship": false,
       "extracurriculars": []
     },
     "openDate": null
@@ -15803,7 +15803,7 @@
       "maxFamilyIncome": null,
       "fosterCare": false,
       "citizenship": "any",
-      "apprenticeship": true,
+      "apprenticeship": false,
       "extracurriculars": []
     },
     "metaDetail": "Needs Construction 10, 20 and 30 already done."
@@ -15921,7 +15921,7 @@
       "maxFamilyIncome": null,
       "fosterCare": false,
       "citizenship": "any",
-      "apprenticeship": true,
+      "apprenticeship": false,
       "extracurriculars": []
     },
     "metaDetail": "Needs a staff letter backing your trades plan.",
@@ -15961,7 +15961,7 @@
       "maxFamilyIncome": null,
       "fosterCare": false,
       "citizenship": "any",
-      "apprenticeship": true,
+      "apprenticeship": false,
       "extracurriculars": []
     },
     "metaDetail": "The largest single Brooks trades award."
@@ -16035,7 +16035,7 @@
       "maxFamilyIncome": null,
       "fosterCare": false,
       "citizenship": "any",
-      "apprenticeship": true,
+      "apprenticeship": false,
       "extracurriculars": []
     },
     "metaDetail": "Five awards a year; dual credit preferred."
@@ -16075,7 +16075,7 @@
       "maxFamilyIncome": null,
       "fosterCare": false,
       "citizenship": "any",
-      "apprenticeship": true,
+      "apprenticeship": false,
       "extracurriculars": []
     },
     "metaDetail": "The school sets the date, not the sponsor."
@@ -19326,7 +19326,7 @@
     "url": "https://www.blackgold.ca/student-scholarships",
     "category": "Academic",
     "lastVerified": "2026-10",
-    "region": "Leduc",
+    "region": "National",
     "notes": "Black Gold's own division-managed scholarship summary is where the criteria and the date come from, and the date it gives is a bare day with no year, so it repeats. The summary was last updated in April 2025, so confirm the amount with the division before counting on it. Applicants must have attended a Black Gold high school for at least one year, including Grade 12.",
     "applyViaGuidance": true,
     "applyRoute": "board",
@@ -26307,7 +26307,7 @@
       "maxFamilyIncome": null,
       "fosterCare": false,
       "citizenship": "any",
-      "apprenticeship": true,
+      "apprenticeship": false,
       "extracurriculars": []
     },
     "deadline": "2027-05-31"
@@ -26941,7 +26941,7 @@
       "maxFamilyIncome": null,
       "fosterCare": false,
       "citizenship": "any",
-      "apprenticeship": true,
+      "apprenticeship": false,
       "extracurriculars": []
     },
     "deadline": "2027-05-31"
@@ -29703,6 +29703,7 @@
     "metaDetail": "Twenty awards of $1,000, the biggest pool at Keyano.",
     "eligibility": {
       "grades": [
+        "12",
         "post-secondary"
       ],
       "schoolBoards": [],
@@ -29742,6 +29743,7 @@
     "metaDetail": "Diplomas only, not certificates.",
     "eligibility": {
       "grades": [
+        "12",
         "post-secondary"
       ],
       "schoolBoards": [],
@@ -30059,6 +30061,7 @@
     "metaDetail": "Judged on marks alone, no need component.",
     "eligibility": {
       "grades": [
+        "12",
         "post-secondary"
       ],
       "schoolBoards": [],
@@ -30098,6 +30101,7 @@
     "metaDetail": "Judged on your high school record.",
     "eligibility": {
       "grades": [
+        "12",
         "post-secondary"
       ],
       "schoolBoards": [],
@@ -39865,13 +39869,13 @@
       "fields": [
         "Engineering"
       ],
-      "minAverage": 70,
+      "minAverage": 80,
       "minAge": null,
       "maxAge": null,
       "genderRequired": null,
-      "indigenousRequired": true,
+      "indigenousRequired": false,
       "bipocRequired": false,
-      "financialNeed": true,
+      "financialNeed": false,
       "maxFamilyIncome": null,
       "fosterCare": false,
       "citizenship": "permanent_resident",
@@ -40492,7 +40496,7 @@
       "maxFamilyIncome": null,
       "fosterCare": false,
       "citizenship": "permanent_resident",
-      "apprenticeship": true,
+      "apprenticeship": false,
       "extracurriculars": []
     },
     "active": false
@@ -41733,6 +41737,7 @@
     "metaDetail": "Applications close at 4:30 p.m. on October 15.",
     "eligibility": {
       "grades": [
+        "12",
         "post-secondary"
       ],
       "schoolBoards": [],
@@ -41773,6 +41778,7 @@
     "metaDetail": "Nomination-based; membership not required.",
     "eligibility": {
       "grades": [
+        "12",
         "post-secondary"
       ],
       "schoolBoards": [],
@@ -51120,7 +51126,7 @@
       "fields": [
         "health"
       ],
-      "minAverage": 75,
+      "minAverage": null,
       "minAge": null,
       "maxAge": null,
       "genderRequired": null,
@@ -53540,7 +53546,7 @@
       "maxFamilyIncome": null,
       "fosterCare": false,
       "citizenship": "canadian",
-      "apprenticeship": true,
+      "apprenticeship": false,
       "extracurriculars": []
     }
   },
@@ -57965,13 +57971,14 @@
     "url": "https://registrar.uwo.ca/student_finances/scholarships_awards/pdfs/Knowlton%20Family%20Rural%20Alberta%20HBA%20Award%20%202023-2024.pdf",
     "category": "Academic",
     "lastVerified": "2026-10",
-    "region": "Alberta",
+    "region": "National",
     "notes": "This is the largest award on this site for a rural Alberta student. You need to enrol in Business 1220E, show interest in Ivey, and have competitive extracurricular experience. Renewal in second year needs a 70 percent average.",
     "active": false,
     "description": "An award worth up to $30,000 over four years for a first-year Western University student from Alberta outside Calgary and Edmonton, paying $5,000 in each of years one and two and $10,000 in years three and four if the student continues into the Ivey Business School HBA program. Applicants must be full-time first-year undergraduate students in any program, with an interest in Ivey and enrollment in Business 1220E.",
     "metaDetail": "Up to $30,000 across four years.",
     "eligibility": {
       "grades": [
+        "12",
         "post-secondary"
       ],
       "schoolBoards": [],
