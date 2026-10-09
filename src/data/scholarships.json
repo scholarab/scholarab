@@ -952,9 +952,9 @@
     "audience": "Grade 12 Indigenous Albertans accepted into an Alberta business program",
     "url": "https://www.cpaalberta.ca/Foundation/Scholarships/Indigenous-Scholarships",
     "category": "Indigenous",
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-10",
     "region": "Alberta",
-    "notes": "Apply through the online form on the CPA Education Foundation site, one form per award. CPA has not published the 2027 dates yet. May 1 has been the deadline in recent years, so confirm with cpaef@cpaalberta.ca.",
+    "notes": "Apply through the online form on the CPA Education Foundation site, one form per award. The May 1 deadline covers all of CPA Alberta's high school awards.",
     "active": true,
     "description": "Two $1,500 awards for Grade 12 Indigenous students who are enrolled in or accepted into a business program at an Alberta college, polytechnic or university that offers the prerequisites for the CPA Professional Education Program. You have to be an Alberta resident, self-identify as First Nations (status or non-status), Métis or Inuit, and submit a letter or a two to three minute video on why you are heading into business or accounting, plus recent transcripts and one letter of support from an instructor. Preference goes to students who intend to pursue the CPA designation.",
     "eligibility": {
@@ -980,8 +980,7 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "metaDetail": "Two awards; video can replace the letter.",
-    "deadlineEstimated": true
+    "metaDetail": "Two awards; video can replace the letter."
   },
   {
     "id": 47,
@@ -991,9 +990,9 @@
     "audience": "Grade 12 Alberta students demonstrating professionalism, integrity, and leadership",
     "url": "https://www.cpaalberta.ca/Foundation/Scholarships/High-School-Scholarships",
     "category": "Academic",
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-10",
     "region": "Alberta",
-    "notes": "Apply through the online form on the CPA Education Foundation site, one form per award. CPA has not published the 2027 dates yet. May 1 has been the deadline in recent years, so confirm with cpaef@cpaalberta.ca.",
+    "notes": "Apply through the online form on the CPA Education Foundation site, one form per award. The May 1 deadline covers all of CPA Alberta's high school awards.",
     "toApply": {
       "checked": "2026-10-01",
       "complete": true,
@@ -1036,8 +1035,7 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "metaDetail": "A video can replace it.",
-    "deadlineEstimated": true
+    "metaDetail": "A video can replace it."
   },
   {
     "id": 48,
@@ -1047,9 +1045,9 @@
     "audience": "Grade 12 Albertans, preference for those relocating within Alberta for post-secondary",
     "url": "https://www.cpaalberta.ca/Foundation/Scholarships/High-School-Scholarships",
     "category": "Academic",
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-10",
     "region": "Alberta",
-    "notes": "Apply through the online form on the CPA Education Foundation site, one form per award. CPA has not published the 2027 dates yet. May 1 has been the deadline in recent years, so confirm with cpaef@cpaalberta.ca.",
+    "notes": "Apply through the online form on the CPA Education Foundation site, one form per award. The May 1 deadline covers all of CPA Alberta's high school awards.",
     "toApply": {
       "checked": "2026-10-01",
       "complete": true,
@@ -1103,8 +1101,7 @@
       "extracurriculars": [
         "volunteer"
       ]
-    },
-    "deadlineEstimated": true
+    }
   },
   {
     "id": 49,
@@ -1114,9 +1111,9 @@
     "audience": "Grade 12 Alberta students who identify as a girl or woman",
     "url": "https://www.cpaalberta.ca/Foundation/Scholarships/High-School-Scholarships",
     "category": "Academic",
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-10",
     "region": "Alberta",
-    "notes": "Apply through the online form on the CPA Education Foundation site, one form per award. CPA has not published the 2027 dates yet. May 1 has been the deadline in recent years, so confirm with cpaef@cpaalberta.ca.",
+    "notes": "Apply through the online form on the CPA Education Foundation site, one form per award. The May 1 deadline covers all of CPA Alberta's high school awards.",
     "toApply": {
       "checked": "2026-10-01",
       "complete": true,
@@ -1161,8 +1158,7 @@
       "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
-    },
-    "deadlineEstimated": true
+    }
   },
   {
     "id": 50,
@@ -1172,9 +1168,9 @@
     "audience": "Grade 12 Alberta students who demonstrate leadership through volunteering",
     "url": "https://www.cpaalberta.ca/Foundation/Scholarships/High-School-Scholarships",
     "category": "Community",
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-10",
     "region": "Alberta",
-    "notes": "Apply through the online form on the CPA Education Foundation site, one form per award. CPA has not published the 2027 dates yet. May 1 has been the deadline in recent years, so confirm with cpaef@cpaalberta.ca.",
+    "notes": "Apply through the online form on the CPA Education Foundation site, one form per award. The May 1 deadline covers all of CPA Alberta's high school awards.",
     "toApply": {
       "checked": "2026-10-01",
       "complete": true,
@@ -1219,8 +1215,7 @@
         "volunteer"
       ]
     },
-    "metaDetail": "A video may replace the letter.",
-    "deadlineEstimated": true
+    "metaDetail": "A video may replace the letter."
   },
   {
     "id": 51,
@@ -1230,9 +1225,9 @@
     "audience": "Grade 12 Alberta students entering BBA, B.Mgmt, or B.Comm at an Alberta institution",
     "url": "https://www.cpaalberta.ca/Foundation/Scholarships/High-School-Scholarships",
     "category": "Academic",
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-10",
     "region": "Alberta",
-    "notes": "Apply through the online form on the CPA Education Foundation site, one form per award. CPA has not published the 2027 dates yet. May 1 has been the deadline in recent years, so confirm with cpaef@cpaalberta.ca.",
+    "notes": "Apply through the online form on the CPA Education Foundation site, one form per award. The May 1 deadline covers all of CPA Alberta's high school awards.",
     "active": true,
     "description": "Four $1,250 awards for Grade 12 students at Alberta high schools who have been accepted into a Bachelor of Business Administration, Bachelor of Management or Bachelor of Commerce program at an Alberta post-secondary. Your letter has to indicate financial need, show professionalism, integrity, ethics and leadership, and state that you have no immediate family member who is a CPA. You also need proof of acceptance and at least one letter of support from a teacher or community leader.",
     "eligibility": {
@@ -1260,8 +1255,7 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "metaDetail": "No immediate family CPA.",
-    "deadlineEstimated": true
+    "metaDetail": "No immediate family CPA."
   },
   {
     "id": 53,
@@ -1576,14 +1570,13 @@
     "id": 60,
     "title": "Terry Fox Humanitarian Award",
     "amount": "$28,000",
-    "deadline": "2027-02-01",
-    "deadlineEstimated": true,
+    "deadline": "2026-12-01",
     "audience": "Canadian students demonstrating humanitarian work, up to 4 years of funding",
-    "url": "https://terryfoxawards.ca/",
+    "url": "https://terryfoxawards.ca/apply/",
     "category": "Community",
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-10",
     "region": "National",
-    "notes": "Confirm on their site.",
+    "notes": "Applications are submitted online and must be in by 11:59 pm Pacific time on December 1.",
     "active": false,
     "description": "Up to $28,000 over four years for Canadian students with a sustained record of humanitarian work. The selection committee looks for years of service, not a single project.",
     "eligibility": {
@@ -1611,7 +1604,8 @@
         "volunteer"
       ]
     },
-    "metaDetail": "The committee looks for years of service, not one project."
+    "metaDetail": "The committee looks for years of service, not one project.",
+    "openDate": "2026-11-01"
   },
   {
     "id": 62,
@@ -3827,12 +3821,11 @@
     "title": "Mount Royal University Entrance Scholarship",
     "amount": "Varies",
     "deadline": "2027-03-01",
-    "deadlineEstimated": true,
     "openDate": "2026-11-01",
     "audience": "Grade 12 students entering any MRU program with an 80%+ average",
     "url": "https://www.mtroyal.ca/Admission/FinancingYourEducation/ScholarshipsBursaries/",
     "category": "Academic",
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-10",
     "region": "Alberta",
     "notes": "Confirm on their site.",
     "active": false,
@@ -5688,7 +5681,7 @@
     "audience": "Red Deer Public or Catholic graduates with financial need, entering Alberta post-secondary",
     "url": "https://cfcab.ca/rotary-career-opportunity-awards/",
     "category": "Community",
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-10",
     "region": "Red Deer",
     "notes": "Administered through your school. Ask your counsellor for this year's deadline as soon as school starts, these local awards close earlier than the big ones.",
     "applyViaGuidance": true,
@@ -5721,7 +5714,8 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "metaDetail": "Ask your counsellor; it closes early."
+    "metaDetail": "Ask your counsellor; it closes early.",
+    "openDate": "2027-01-01"
   },
   {
     "id": 164,
@@ -5730,9 +5724,9 @@
     "deadline": "2027-05-01",
     "deadlineEstimated": true,
     "audience": "Graduating students from Red Deer Public or Catholic school divisions",
-    "url": "https://cfcab.ca/william-arthur-bower-memorial-scholarship-for-red-deer-students/",
+    "url": "https://cfcab.ca/donor/financialawards/bower-memorial-scholarship/",
     "category": "Academic",
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-10",
     "region": "Red Deer",
     "notes": "Administered through your school. Ask your counsellor for this year's deadline as soon as school starts, these local awards close earlier than the big ones.",
     "applyViaGuidance": true,
@@ -5763,7 +5757,8 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "metaDetail": "Renewable for up to four years; ask your counsellor for the date."
+    "metaDetail": "Renewable for up to four years; ask your counsellor for the date.",
+    "openDate": "2027-01-01"
   },
   {
     "id": 165,
@@ -5867,7 +5862,7 @@
     "audience": "Red Deer County or Chinook's Edge students on a working farm or ranch, or in high school rodeo",
     "url": "https://cfcab.ca/trey-purdie-memorial-scholarship-2/",
     "category": "Community",
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-10",
     "region": "Red Deer",
     "notes": null,
     "active": false,
@@ -5899,7 +5894,8 @@
         "sports"
       ]
     },
-    "metaDetail": "Active involvement in agriculture."
+    "metaDetail": "Active involvement in agriculture.",
+    "openDate": "2027-01-01"
   },
   {
     "id": 168,
@@ -12457,13 +12453,13 @@
     "amount": "$10,000",
     "deadline": "2027-05-30",
     "deadlineEstimated": true,
-    "openDate": null,
+    "openDate": "2027-01-01",
     "audience": "Central Albertans 25 or under served by the Sheldon Kennedy or Child Advocacy Centre",
     "url": "https://cfcab.ca/rising-futures-scholarship/",
     "category": "Community",
     "region": "Red Deer",
     "active": false,
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-10",
     "notes": null,
     "description": "The Rising Futures Scholarship gives at least two students $10,000 each toward post-secondary, technical, or trade school. It is open to applicants who are planning to enrol as well as those already enrolled, so you can apply in your graduating year. Applicants must be 25 or younger and must have received services from the Sheldon Kennedy Centre of Excellence or the Central Alberta Child Advocacy Centre. The Community Foundation of Central Alberta pays the money to your institution, which credits it to your tuition account.",
     "eligibility": {
@@ -12498,13 +12494,13 @@
     "amount": "$3,000",
     "deadline": "2027-06-30",
     "deadlineEstimated": true,
-    "openDate": null,
+    "openDate": "2027-01-01",
     "audience": "Graduating students at H.J. Cody High School in Sylvan Lake",
     "url": "https://cfcab.ca/shea-family-award",
     "category": "General",
     "region": "Red Deer",
     "active": false,
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-10",
     "notes": "Applications close at 4:30pm on the day of the deadline.",
     "description": "The Shea Family Education Award is $3,000 granted annually to one student graduating from H.J. Cody High School in Sylvan Lake. You apply through the Community Foundation of Central Alberta portal with a transcript or outline of your high school results, and proof that you have enrolled at a post-secondary institution. The application also asks for a parent or guardian Notice of Assessment, but you can still apply without one if you explain why.",
     "eligibility": {
@@ -12538,13 +12534,13 @@
     "amount": "At least $1,000",
     "deadline": "2027-06-30",
     "deadlineEstimated": true,
-    "openDate": null,
+    "openDate": "2027-01-01",
     "audience": "Students graduating from a high school in Red Deer or Red Deer County who are involved in golf",
     "url": "https://cfcab.ca/red-deer-golf-country-club-centennial-scholarship/",
     "category": "Community",
     "region": "Red Deer",
     "active": false,
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-10",
     "notes": "The reference letters are the part to start early on: you need two, each from a member of a golf club in the eligible area.",
     "description": "The Red Deer Golf and Country Club created this endowed fund for its centenary. Awards are made annually at no less than $1,000 to students who graduated from a high school in Red Deer or Red Deer County and are entering full-time study in a certificate, diploma, or degree program of at least two years at a recognized Canadian post-secondary institution. Applications need support letters from at least two members of a golf club within the eligible area. Selection is on merit, with preference possible for applicants who show financial need.",
     "eligibility": {
@@ -12578,13 +12574,13 @@
     "amount": "$5,000",
     "deadline": "2027-05-31",
     "deadlineEstimated": true,
-    "openDate": null,
+    "openDate": "2027-01-01",
     "audience": "Young women in Central Alberta pursuing a career in aviation",
     "url": "https://cfcab.ca/smiles-thru-lindsey-women-in-aviation-award/",
     "category": "STEM",
     "region": "Red Deer",
     "active": false,
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-10",
     "notes": "The award page describes who it is for but does not spell out a grade requirement, so ask the foundation whether your year qualifies.",
     "description": "A $5,000 bursary for girls pursuing a career in aviation, created in memory of Lindsey More, who was training for her private pilot licence at Sky Wings Aviation Academy. Her family founded Smiles Thru Lindsey after her death in 2015 to raise suicide awareness and fund mental health education for youth in Central Alberta. The Community Foundation of Central Alberta releases the money to your post-secondary institution, which credits your tuition account.",
     "eligibility": {
@@ -12621,13 +12617,13 @@
     "amount": "$500",
     "deadline": "2027-05-20",
     "deadlineEstimated": true,
-    "openDate": null,
+    "openDate": "2027-01-01",
     "audience": "Current members of the Red Deer Royals heading to post-secondary",
     "url": "https://cfcab.ca/jenkins-family-collaborative-member-bursary/",
     "category": "Arts",
     "region": "Red Deer",
     "active": false,
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-10",
     "notes": "Applications close at 4:30pm, and the portal needs its own account, so leave time for the two reference letters.",
     "description": "A $500 scholarship for current members of the Red Deer Royals, the city marching show band. You must be enrolling in or already attending a post-secondary program at an institution in Canada, so graduating members can apply. The application asks for a completed form and two reference letters, submitted through the Community Foundation of Central Alberta portal.",
     "eligibility": {
@@ -20295,9 +20291,9 @@
     "title": "Twice But Nice Scholarship",
     "amount": "$5,000",
     "audience": "Any Fort Saskatchewan high school graduate, including gap year students",
-    "url": "https://www.twicebutnicefortsask.com/scholarships.html",
+    "url": "https://www.twicebutnicefortsask.com/scholarships-off-season.html",
     "category": "General",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "Fort Saskatchewan",
     "notes": "The store publishes a dated cutoff each year; the 2026 round closed June 14, and the date shown here assumes the same day repeats, so confirm it on their site. Applications must be one combined PDF emailed in, with letters of reference on letterhead, a conditional acceptance letter and a transcript. Recipients attend the March annual general meeting to report back, and anyone who withdraws within 30 days of a term start has to repay.",
     "applyViaGuidance": true,
@@ -28928,10 +28924,10 @@
   {
     "id": 748,
     "region": "Wetaskiwin",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "active": false,
     "url": "https://www.county.wetaskiwin.ab.ca/847/Agricultural-Bursary",
-    "notes": "The three year residency window means a student who moved away for work or a first year of study still qualifies. County policy allows you to receive this bursary only once. Participation in 4-H or agricultural fairs is described as desirable, not required. Applications go to the Director of Agricultural Services and are reviewed by the Agricultural Service Board at its first meeting after the deadline; the county's page still shows the previous year's October 1 date.",
+    "notes": "The three year residency window means a student who moved away for work or a first year of study still qualifies. County policy allows you to receive this bursary only once. Participation in 4-H or agricultural fairs is described as desirable, not required. Applications go to the Director of Agricultural Services and are reviewed by the Agricultural Service Board at its first meeting after the deadline. The county announced the October 15, 2026 deadline in a September notice; its bursary page may still show an older date.",
     "applyViaGuidance": false,
     "title": "County of Wetaskiwin Agricultural Bursary",
     "amount": "$1,000",
@@ -28962,8 +28958,7 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "deadline": "2026-10-01",
-    "deadlineEstimated": true
+    "deadline": "2026-10-15"
   },
   {
     "id": 749,
@@ -59007,13 +59002,12 @@
     "title": "An Elnora Lorraine (Sandham) Riddle Nursing Entrance Scholarship",
     "amount": "Varies",
     "deadline": "2027-01-10",
-    "deadlineEstimated": true,
     "audience": "Rural Alberta students entering first-year Nursing at the University of Alberta",
-    "url": "https://alberta.academicworks.ca/opportunities/21255",
+    "url": "https://alberta.academicworks.ca/opportunities/27296",
     "category": "STEM",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "Alberta",
-    "notes": "Selection is on your admission average. The award page listed a deadline of 01/10/2026, which the University of Alberta's award system writes month first; the 2027 date here repeats that one, so check the page when you apply for admission.",
+    "notes": "Selection is on your admission average. You are considered automatically, so the step that matters is applying for admission to Nursing before the deadline.",
     "active": true,
     "description": "Endowed by Dr. James Dean Sandham, this University of Alberta entrance scholarship goes to a rural Alberta resident entering the first year of an undergraduate degree in the Faculty of Nursing, on the basis of superior academic achievement.",
     "metaDetail": "For rural Albertans entering Nursing.",
@@ -59041,7 +59035,8 @@
       "citizenship": "any",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "openDate": "2026-10-01"
   },
   {
     "id": 1646,
