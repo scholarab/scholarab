@@ -143,20 +143,20 @@ it('gates both first delivery and retries outside Alberta daytime, even after UT
   await run();
   expect(send).toHaveBeenCalledTimes(2);
 });
-it('deletes undated and estimated sign-ups within 60 days, preserving newer and dated rows', async () => {
+it('deletes undated sign-ups within a year, preserving newer, estimated and dated rows', async () => {
   await subscribe('posted,30,14,3');
-  await state.query("UPDATE subscribers SET created_at=now()-interval '59 days 1 second'");
+  await state.query("UPDATE subscribers SET created_at=now()-interval '364 days 1 second'");
   state.scholarships.push(
     { id: 3, title: 'Dated', deadline: '2027-01-01', url: 'https://provider.invalid' },
     { id: 4, title: 'Estimated', deadline: '2027-01-01', deadlineEstimated: true, url: 'https://provider.invalid' },
   );
   await state.query(`INSERT INTO subscribers(email,item_type,item_id,token,cadence,confirmed_at,created_at) VALUES
-    ('new@local.invalid','program',2,'new','posted,30,14,3',now(),now()-interval '58 days'),
+    ('new@local.invalid','program',2,'new','posted,30,14,3',now(),now()-interval '363 days'),
     ('dated@local.invalid','scholarship',3,'dated','open,30,14,3',now(),now()-interval '80 days'),
     ('estimate@local.invalid','scholarship',4,'estimate','posted,30,14,3',now(),now()-interval '59 days 1 second'),
     ('unconfirmed@local.invalid','program',2,'unconfirmed','posted,30,14,3',NULL,now()-interval '29 days 1 second')`);
   await prune();
-  expect((await state.query('SELECT token FROM subscribers ORDER BY token')).map(r => r.token)).toEqual(['dated', 'new']);
+  expect((await state.query('SELECT token FROM subscribers ORDER BY token')).map(r => r.token)).toEqual(['dated', 'estimate', 'new']);
   expect(send).not.toHaveBeenCalled();
 });
 it('confirmation describes each waiting request and the following deadlines', () => {

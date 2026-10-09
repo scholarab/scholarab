@@ -13,7 +13,6 @@
 import { readFileSync } from 'fs'
 import { dirname, join } from 'path'
 import { fileURLToPath } from 'url'
-import { hasConfirmedDeadline } from '../src/lib/alerts.ts'
 import { validateCatalogue } from '../src/lib/catalogue.ts'
 import { neon } from '@neondatabase/serverless'
 
@@ -115,13 +114,16 @@ if (scholarshipIds.length === 0 || programIds.length === 0) {
 }
 for (const type of ['scholarship', 'program'] as const) {
   const list = type === 'scholarship' ? scholarships : programs
-  const waitingIds = list.filter(item => !hasConfirmedDeadline(item)).map(item => item.id)
+  // Only listings with no date at all. An estimated date is still a date, and
+  // the deadline cutoff above already covers it; cutting those at sign-up + 60
+  // days would delete an "opens in January" request before it could be sent.
+  const waitingIds = list.filter(item => !item.deadline || !/^\d{4}-\d{2}-\d{2}$/.test(item.deadline)).map(item => item.id)
   const [gone] = await pruneSql`
     with del as (
       delete from subscribers
       where item_type = ${type}
         and (item_id = any(${[...deadItemIds[type]]}) or item_id <> all(${liveIds[type]})
-          or (item_id = any(${waitingIds}) and created_at < now() - interval '59 days'))
+          or (item_id = any(${waitingIds}) and created_at < now() - interval '364 days'))
       returning 1
     )
     select count(*)::int as n from del
