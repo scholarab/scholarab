@@ -267,10 +267,10 @@
     "stipend": null,
     "location": "National/virtual + in-person finale in Calgary, AB",
     "eligibility": "Canadian high school students grades 9–12; teams of up to 5; no coding experience required",
-    "deadline": "TBA",
-    "url": "https://www.stemfellowship.org/programs/hsbdc",
-    "description": "This challenge is not currently running. STEM Fellowship lists no active Big Data & AI Challenge cycle. Teams previously produced a peer-reviewed manuscript from open-data and AI research, with a finale in Calgary.",
-    "lastVerified": "2026-08"
+    "deadline": "2026-10-18",
+    "url": "https://www.stemfellowship.org/hsbdc/2026-27",
+    "description": "Teams produce a peer-reviewed manuscript from open-data and AI research, with a finale in Calgary. The 2026-2027 challenge is running, and team registration and payment close October 18, 2026.",
+    "lastVerified": "2026-10"
   },
   {
     "id": 19,
@@ -448,9 +448,10 @@
     "eligibility": "Grade 11–12 Canadian and international students; highly competitive selection",
     "deadline": "TBA",
     "url": "https://perimeterinstitute.ca/outreach/students",
-    "description": "Two fully funded weeks at Perimeter Institute for Grade 11-12 students serious about theoretical physics, with travel, room and meals covered. Perimeter did not run ISSYP in 2024 and has not posted a 2026 or 2027 session, so check with Perimeter before planning on it.",
-    "lastVerified": "2026-09",
-    "metaDescription": "Two fully funded weeks of theoretical physics at Perimeter Institute for Grade 11 and 12 students; check it is running first."
+    "description": "Perimeter Institute says ISSYP no longer operates. It offered two fully funded weeks at Perimeter for Grade 11-12 students serious about theoretical physics; look at Perimeter's current student programs instead.",
+    "lastVerified": "2026-10",
+    "metaDescription": "Two fully funded weeks of theoretical physics at Perimeter Institute for Grade 11 and 12 students; check it is running first.",
+    "active": false
   },
   {
     "id": 32,
@@ -573,10 +574,11 @@
     "stipend": null,
     "location": "Virtual or local Alberta hubs",
     "eligibility": "Young women and girls aged 13–18",
-    "deadline": "TBA",
+    "deadline": "2027-03-11",
     "url": "https://technovationchallenge.org/competition/",
     "description": "Global tech education program where teams of young women identify a community problem, conduct user research, and build a mobile app or AI solution. Alberta participants can work remotely or through local hubs. Teams pitch to a panel of tech industry judges.",
-    "lastVerified": "2026-08"
+    "lastVerified": "2026-10",
+    "metaDescription": "Teams of young women spot a community problem and build a mobile app or AI solution to pitch to tech industry judges."
   },
   {
     "id": 40,
@@ -1123,11 +1125,11 @@
     "stipend": null,
     "location": "School-based (must be in a participating school district)",
     "eligibility": "High school students at participating schools; teams of 3–6",
-    "deadline": "TBA",
+    "deadline": "2026-11-03",
     "url": "http://ssep.ncesse.org/about-ssep/the-flight-experiment-design-competition/",
     "description": "Open only where your school or district has joined SSEP as a community. Those teams design flight experiments from September 1 to November 3, 2026, with community submissions to NCESSE by November 12 for Mission 22 to the International Space Station.",
-    "metaDescription": "Open only where your school or district has joined SSEP. Those teams design flight experiments for Mission 22 to the International Space Station.",
-    "lastVerified": "2026-08"
+    "metaDescription": "Open where your school or district has joined SSEP. Teams design an experiment to fly on the Space Station.",
+    "lastVerified": "2026-10"
   },
   {
     "id": 71,
@@ -1266,11 +1268,11 @@
     "stipend": null,
     "location": "Alberta (regional hubs) + national championships",
     "eligibility": "High school students grades 9–12; teams of 3–6",
-    "deadline": "TBA",
-    "url": "https://www.stemracing.ca/about-the-challenge",
+    "deadline": "2026-10-31",
+    "url": "https://www.stemracing.ca/dates-and-fees",
     "description": "Multidisciplinary engineering competition where teams use CAD and CAM software to research aerodynamics, design, and race miniature compressed-air powered F1 cars. Alberta teams actively compete at national championships. Builds skills in design, manufacturing, and project management.",
-    "metaDescription": "Teams use CAD and CAM software to design and race miniature compressed-air F1 cars, with Alberta teams competing at national championships.",
-    "lastVerified": "2026-08"
+    "metaDescription": "Teams use CAD and CAM to design and race miniature air-powered F1 cars, with Alberta teams at national championships.",
+    "lastVerified": "2026-10"
   },
   {
     "id": 81,
@@ -1339,11 +1341,11 @@
     "stipend": null,
     "location": "Virtual (online, open to Alberta students); tuition fee applies, need-based aid available",
     "eligibility": "High school students grades 9–12; competitive application; financial aid available",
-    "deadline": "TBA",
+    "deadline": "2027-03-31",
     "url": "https://www.launchx.com/programs",
     "description": "Rigorous global entrepreneurship program where high schoolers form teams to conduct deep market research, prototype a digital or physical tech product, and pitch a fully functioning startup to a panel of investors. MIT-affiliated curriculum.",
-    "metaDescription": "High schoolers form teams to do market research, prototype a tech product and pitch a functioning startup to investors, on MIT-affiliated curriculum.",
-    "lastVerified": "2026-08",
+    "metaDescription": "Teams research a market, prototype a tech product and pitch a working startup to investors, on MIT-affiliated material.",
+    "lastVerified": "2026-10",
     "cost": "fee",
     "costNote": "Tuition fee applies; need-based aid available"
   },
@@ -1740,12 +1742,13 @@
     "stipend": "Subsidized; bursaries available",
     "location": "Ottawa, Ontario (in-person); open to Alberta students",
     "eligibility": "Canadian high school students grades 10–12; school nomination or independent application",
-    "deadline": "TBA",
+    "deadline": "2026-10-25",
     "url": "https://www.forum.ca/",
-    "description": "Applications for Forum 2027 open soon, for sessions running February 7-12, February 28 - March 5, and April 18-23, 2027. Three hundred students aged 15-18 spend a week in Ottawa meeting MPs and Senators; travel, meals and accommodation are covered, with bursaries against the $995 fee.",
-    "lastVerified": "2026-08",
+    "description": "Applications for Forum 2027 close October 25, 2026, for sessions running February 7-12, February 28 - March 5, and April 18-23, 2027. Three hundred students aged 15-18 spend a week in Ottawa meeting MPs and Senators; travel, meals and accommodation are covered, with bursaries against the $995 fee.",
+    "lastVerified": "2026-10",
     "cost": "fee",
-    "costNote": "$995; bursaries available"
+    "costNote": "$995; bursaries available",
+    "metaDescription": "A week in Ottawa meeting MPs and Senators for students aged 15 to 18. Travel, meals and lodging are covered, with bursaries."
   },
   {
     "id": 116,
@@ -2275,11 +2278,11 @@
     "stipend": "Bursary covers tuition, instructional material, meals, accommodation and cultural activities",
     "location": "Host universities and colleges across Canada, including Quebec and the Atlantic provinces",
     "eligibility": "Canadian citizen or permanent resident who has been a student for at least one term in the current school year, or took part in Odyssey in the last two years. No French level is required, from beginner up. Places are awarded by a randomized computer draw, not on merit, and applicants who miss the first draw go into a wait pool for institutional draws from March to July.",
-    "deadline": "TBA",
+    "deadline": "2027-02-02",
     "url": "https://englishfrench.ca/explore/",
     "description": "Application portals open September 14, 2026 for the 2027 sessions. Explore is a federally funded bursary covering tuition, accommodation and meals for a spring or summer French immersion session in another province, for students aged 16 and up.",
-    "metaDescription": "A federally funded bursary covering tuition, accommodation and meals for a spring or summer French immersion session in another province.",
-    "lastVerified": "2026-08"
+    "metaDescription": "A federal bursary for tuition, room and meals at a spring or summer French immersion session in another province.",
+    "lastVerified": "2026-10"
   },
   {
     "id": 145,
@@ -2290,13 +2293,14 @@
     "grades": "Apply in Grade 12, work during your first year of university",
     "duration": "One academic year, about 15 hours a week around full-time studies",
     "paid": true,
-    "stipend": "Around $18,400 for the year plus a $1,200 completion bonus, per the participating universities",
+    "stipend": "$20,018 for the year, paid in 26 instalments, plus a $1,200 completion bonus, per the participating universities",
     "location": "Parliament Hill, Ottawa; you study at the University of Ottawa, Carleton, Saint Paul University or Université du Québec en Outaouais",
     "eligibility": "Canadian citizen or permanent resident graduating from high school, enrolling at an eligible institution in the National Capital Region in September, willing to live in the region, and fluent in both official languages. Bilingualism is formally assessed, so plan your French ahead of the application.",
-    "deadline": "TBA",
+    "deadline": "2026-11-08",
     "url": "https://www.ourcommons.ca/About/PageProgram/Index-e.html",
     "description": "Forty students are chosen from across Canada each year to work on the floor of the House of Commons while doing their first year of university in Ottawa. Pages carry documents and messages during sittings, work directly around Members of Parliament and see federal legislation as it happens, which is experience almost nothing else at that age can match. Recruitment runs on a long cycle: applications for the 2027 to 2028 cohort open in September 2026 and close in November 2026, selections finish in March 2027 and offers go out at the end of April 2027. You apply in your Grade 12 year, so the timing lines up with university applications.",
-    "lastVerified": "2026-08"
+    "lastVerified": "2026-10",
+    "metaDescription": "Forty students work on the floor of the House of Commons, paid, during first-year university in Ottawa. You apply in Grade 12."
   },
   {
     "id": 146,
@@ -2386,11 +2390,11 @@
     "stipend": null,
     "location": "Red Deer (in-person, Red Deer Polytechnic)",
     "eligibility": "Central Alberta students; experimental, innovation or research projects accepted",
-    "deadline": "TBA",
+    "deadline": "2027-03-13",
     "url": "https://www.centralalbertasciencefair.com/",
     "description": "One fair day at Red Deer Polytechnic on March 20, 2027, with setup the evening before. A $10 entry fee applies per project, payable on or after the fair, and up to six of the top senior projects advance to the Canada-Wide Science Fair.",
-    "metaDescription": "One day at Red Deer Polytechnic on March 20, 2027. A $10 entry fee applies, and up to six senior projects advance to the Canada-Wide Science Fair.",
-    "lastVerified": "2026-09",
+    "metaDescription": "One fair day at Red Deer Polytechnic on March 20, 2027, with a $10 entry fee. Up to six senior projects go on to the national fair.",
+    "lastVerified": "2026-10",
     "cost": "fee",
     "costNote": "$10 entry fee per project"
   },
@@ -2481,12 +2485,13 @@
     "stipend": "Cash prizes and trophies for the top three teams",
     "location": "Vermilion (Lakeland College) in recent years",
     "eligibility": "Teams of five high school students with one or two advisers, from schools or clubs across Alberta",
-    "deadline": "TBA",
+    "deadline": "2027-03-12",
     "url": "https://www.albertaenvirothon.org/",
     "description": "A three-day environmental science competition. Teams of five work through field stations and written tests in aquatic ecology, forestry, soils and land use, wildlife and a current issue, then give an oral presentation. The winning team represents Alberta at the international NCF-Envirothon.",
     "metaDescription": "Teams of five compete in ecology, forestry, soils and wildlife over three days in May. The winner represents Alberta internationally.",
-    "lastVerified": "2026-09",
-    "cost": "unconfirmed"
+    "lastVerified": "2026-10",
+    "cost": "fee",
+    "costNote": "$350 per team for 2027"
   },
   {
     "id": 156,
@@ -3894,11 +3899,11 @@
     "stipend": null,
     "location": "UBC Vancouver campus (residential option) or online",
     "eligibility": "Ages 15–18 with Grade 10 finished (about a 78% average recommended). No application or transcript: check eligibility and register",
-    "deadline": "TBA",
+    "deadline": "2027-05-21",
     "url": "https://extendedlearning.ubc.ca/programs-high-school-students/ubc-future-global-leaders",
     "description": "First-year-level summer courses and mini schools taught by UBC instructors, without exams, in areas like business and economics, engineering and technology, health and life sciences, media and fine arts, history, law and politics. On-campus students add workshops and social activities; everyone gets a letter of completion.",
     "metaDescription": "Take a first-year-level summer course at UBC, on campus or online, for ages 15–18 who have finished Grade 10.",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "cost": "fee",
     "costNote": "Course or mini-school fee, plus residence for on-campus students"
   },
@@ -3992,11 +3997,11 @@
     "stipend": null,
     "location": "Online program; experiments ship to Virginia to fly on NASA missions",
     "eligibility": "Students aged 11 to 18 not in college or university, with an adult educator (teacher, club leader, homeschool parent) who registers and delivers the program. Students outside the US fly on balloon missions only",
-    "deadline": "TBA",
+    "deadline": "2027-02-22",
     "url": "https://www.cubesinspace.com/",
     "description": "Students design an experiment small enough to fit in a 4 cm or 10 cm cube and propose it for flight. Selected experiments fly on a NASA sounding rocket or scientific balloon and come back for analysis. Registration for the 2027 missions opens November 9, 2026; students from outside the US can fly on the balloon missions.",
-    "metaDescription": "Design a small experiment that could fly on a NASA scientific balloon, for ages 11 to 18 working with an adult educator.",
-    "lastVerified": "2026-09",
+    "metaDescription": "Design a small experiment to fly on a NASA scientific balloon, for ages 11 to 18 working with an adult educator.",
+    "lastVerified": "2026-10",
     "cost": "varies",
     "costNote": "Free to register and apply; a US$75 flight fee if selected, plus shipping both ways for international teams"
   },
@@ -4612,11 +4617,11 @@
     "stipend": null,
     "location": "Heritage Park, Calgary",
     "eligibility": "Grade 12 students from Calgary and the surrounding area; spots are limited",
-    "deadline": "TBA",
+    "deadline": "2027-04-23",
     "url": "https://www.calgarypolice.ca/public-safety/youth-safety-and-programs/student-police-academy.html",
-    "description": "A one-day academy where Grade 12 students put on a mock police uniform and duty belt, get paired with an officer mentor, and work through more than 20 realistic scenarios such as wellness checks, vehicle stops and noise complaints. It also covers crime scene analysis, collision reconstruction and surveillance. Breakfast and lunch are provided. In 2026 it ran May 13 and applications closed April 24; you apply by emailing the form.",
+    "description": "A one-day academy where Grade 12 students put on a mock police uniform and duty belt, get paired with an officer mentor, and work through more than 20 realistic scenarios such as wellness checks, vehicle stops and noise complaints. It also covers crime scene analysis, collision reconstruction and surveillance. Breakfast and lunch are provided. The 2027 academy runs May 19; you apply by emailing the form.",
     "metaDescription": "A one-day Calgary police academy for Grade 12 students: an officer mentor and 20+ realistic scenarios at Heritage Park.",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "cost": "unconfirmed"
   },
   {
@@ -4747,11 +4752,11 @@
     "stipend": null,
     "location": "Calgary audition (Edmonton candidates audition in Calgary); national final in Montreal",
     "eligibility": "Canadian citizens and permanent residents; solo performers and ensembles in age groups 7-10, 11-14, 15-18 and 19-25 (to 29 for voice)",
-    "deadline": "TBA",
-    "url": "https://cmcnational.com/en/about/the-chapters/",
-    "description": "A national classical music competition with a first round run by local chapters. Albertans audition with the Calgary Chapter, which also takes Edmonton candidates. Top performers go to the national final in Montreal (July 2 to 10 in 2026), where category winners are invited to play with a Canadian orchestra and scholarships are awarded. Each chapter sets its own registration deadline and fee, so contact the Calgary Chapter directly.",
+    "deadline": "2027-01-22",
+    "url": "https://pathwaysprogram.ca/pathways-program/important-dates-location/",
+    "description": "A national classical music competition with a first round run by local chapters. Albertans audition with the Calgary Chapter, which also takes Edmonton candidates. Top performers go to the national final in Montreal (July 2 to 10 in 2026), where category winners are invited to play with a Canadian orchestra and scholarships are awarded. In Alberta, first-round registration runs through the Pathways program from December 1, 2026 to January 22, 2027.",
     "metaDescription": "Audition in Calgary for the Canadian Music Competition; top classical players go on to the national final in Montreal.",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "cost": "fee",
     "costNote": "Chapter registration fee (set by the Calgary Chapter); $200 more to compete in the national final"
   },
