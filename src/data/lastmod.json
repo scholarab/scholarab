@@ -2951,6 +2951,14 @@
     "hash": "3b35d2f6dc47a4d1",
     "date": "2026-10-04"
   },
+  "/scholarships/cst-foundation-founders-awards---skilled-trades-community-college-based-programs/": {
+    "hash": "57544145d1c2be66",
+    "date": "2026-10-08"
+  },
+  "/scholarships/cst-foundation-founders-awards---undergraduate-general/": {
+    "hash": "5e41abe9c63f3784",
+    "date": "2026-10-08"
+  },
   "/scholarships/cst-jose-agostinho-memorial-scholarship/": {
     "hash": "6364bf6a2e7de267",
     "date": "2026-10-05"
@@ -3114,6 +3122,10 @@
   "/scholarships/didsbury-high-school-scholarship-fund-society-scholarships/": {
     "hash": "c20066c2f22f1567",
     "date": "2026-10-04"
+  },
+  "/scholarships/discover-university-of-alberta-award/": {
+    "hash": "018573e750bcc5ea",
+    "date": "2026-10-08"
   },
   "/scholarships/don-and-norine-lowry-awards-for-women-of-excellence/": {
     "hash": "7c281f48b69c55af",
@@ -3385,6 +3397,10 @@
   },
   "/scholarships/empowered-young-woman-award/": {
     "hash": "4ce0635818f39169",
+    "date": "2026-10-08"
+  },
+  "/scholarships/ena-lee-leaders-in-business-scholarship/": {
+    "hash": "7feaa3dd75dd1772",
     "date": "2026-10-08"
   },
   "/scholarships/energyratesca-scholarship/": {
@@ -4275,6 +4291,10 @@
     "hash": "d1c4c68a787a8597",
     "date": "2026-10-08"
   },
+  "/scholarships/joe-chowaniec-scholarship---esaa-member-award/": {
+    "hash": "ed3e38aa5725d821",
+    "date": "2026-10-08"
+  },
   "/scholarships/joe-mclean-agricultural-scholarship/": {
     "hash": "5e5c70450d7de2c8",
     "date": "2026-10-08"
@@ -4290,6 +4310,10 @@
   "/scholarships/john-and-edna-bullock-mathematics-scholarship/": {
     "hash": "22cfcec5449e382e",
     "date": "2026-10-04"
+  },
+  "/scholarships/john-and-mary-petrie-chancellors-scholarship/": {
+    "hash": "b0febb2a4a5b1e81",
+    "date": "2026-10-08"
   },
   "/scholarships/john-and-vera-dunnigan-education-scholarship/": {
     "hash": "9a172c9542c3ea64",
@@ -4434,6 +4458,14 @@
   "/scholarships/ken-litke-and-family-memorial-award/": {
     "hash": "d2d8aac9a354981e",
     "date": "2026-10-04"
+  },
+  "/scholarships/kennedy-scholars-academic-excellence-scholarship-calgary/": {
+    "hash": "e24a15e2bd9d272f",
+    "date": "2026-10-08"
+  },
+  "/scholarships/kennedy-scholars-academic-excellence-scholarship-outside-of-calgary/": {
+    "hash": "b7ddcf5dc224be02",
+    "date": "2026-10-08"
   },
   "/scholarships/kermet-archibald-jacoba-van-den-brink-entrance-bursary/": {
     "hash": "76d1120441126f17",
@@ -5111,6 +5143,10 @@
     "hash": "88f372b051a5ed41",
     "date": "2026-09-09"
   },
+  "/scholarships/mcgill-major-entrance-scholarships/": {
+    "hash": "c4d0cb4c0aa933ab",
+    "date": "2026-10-08"
+  },
   "/scholarships/mckillop-student-awards/": {
     "hash": "da2f677f6c6a01ea",
     "date": "2026-10-05"
@@ -5483,12 +5519,44 @@
     "hash": "0d4983229cd73b6f",
     "date": "2026-10-02"
   },
+  "/scholarships/npfbf-gordon-clarke-annual-bursary/": {
+    "hash": "6acb0fe0862bc1d3",
+    "date": "2026-10-08"
+  },
+  "/scholarships/npfbf-member-child-bursary/": {
+    "hash": "e0cd06dbb08c66d6",
+    "date": "2026-10-08"
+  },
+  "/scholarships/npfbf-regional-bursary---prairie-region/": {
+    "hash": "f53a7117a0994110",
+    "date": "2026-10-08"
+  },
+  "/scholarships/nupge-brian-fudge-memorial-scholarship/": {
+    "hash": "a5c2df067dfe25d7",
+    "date": "2026-10-08"
+  },
+  "/scholarships/nupge-scholarship-for-black-students/": {
+    "hash": "c1ec413090c4f60b",
+    "date": "2026-10-08"
+  },
+  "/scholarships/nupge-scholarship-for-indigenous-students/": {
+    "hash": "0dc1a0d12991eab6",
+    "date": "2026-10-08"
+  },
+  "/scholarships/nupge-students-of-colour-scholarship/": {
+    "hash": "9acdd733b1572312",
+    "date": "2026-10-08"
+  },
   "/scholarships/nupge-terry-fox-memorial-scholarship/": {
     "hash": "8c9db70c81b341d3",
     "date": "2026-10-08"
   },
   "/scholarships/nupge-tommy-douglas-scholarship/": {
     "hash": "6584344d660f91d6",
+    "date": "2026-10-08"
+  },
+  "/scholarships/nupge-young-worker-scholarship/": {
+    "hash": "61fa6348972aa343",
     "date": "2026-10-08"
   },
   "/scholarships/obsidian-energy-energy-excellence-scholarship/": {
@@ -5787,6 +5855,22 @@
     "hash": "4580dc4af16f79dd",
     "date": "2026-10-04"
   },
+  "/scholarships/queens-bank-of-montreal-award/": {
+    "hash": "20e70eb22be661ad",
+    "date": "2026-10-08"
+  },
+  "/scholarships/queens-chancellors-scholarship/": {
+    "hash": "f42d2399362e2ef6",
+    "date": "2026-10-08"
+  },
+  "/scholarships/queens-chernoff-family-award/": {
+    "hash": "792f649fe0838286",
+    "date": "2026-10-08"
+  },
+  "/scholarships/queens-gregory-scholarship-in-engineering/": {
+    "hash": "f0f4eb30d5aae82f",
+    "date": "2026-10-08"
+  },
   "/scholarships/queens-platinum-jubilee-scholarship-for-performing-arts/": {
     "hash": "c241c15ff2f628a2",
     "date": "2026-10-08"
@@ -5903,6 +5987,10 @@
     "hash": "c82df0451426c14e",
     "date": "2026-10-02"
   },
+  "/scholarships/retail-education-scholarship-program/": {
+    "hash": "8033ebbed6496795",
+    "date": "2026-10-08"
+  },
   "/scholarships/rex-turple-memorial-hockey-education-scholarship/": {
     "hash": "2f00e90c3e91cf61",
     "date": "2026-10-08"
@@ -5925,6 +6013,10 @@
   },
   "/scholarships/richard-and-irma-kutzner-entrance-bursaries/": {
     "hash": "a81b237ef1bf9681",
+    "date": "2026-10-08"
+  },
+  "/scholarships/richard-and-lois-haskayne-legacy-scholarship/": {
+    "hash": "e60f97c7491da56e",
     "date": "2026-10-08"
   },
   "/scholarships/richard-anderson-scholarship/": {
@@ -6303,6 +6395,22 @@
     "hash": "6d8e12e5388de7f4",
     "date": "2026-10-08"
   },
+  "/scholarships/seymour-schulich-academic-excellence-entrance-scholarship-for-calgary-area-residents/": {
+    "hash": "c604a41495404913",
+    "date": "2026-10-08"
+  },
+  "/scholarships/seymour-schulich-academic-excellence-entrance-scholarship-for-students-outside-the-calgary-area/": {
+    "hash": "128ba56a7b34333f",
+    "date": "2026-10-08"
+  },
+  "/scholarships/seymour-schulich-community-serviceentrepreneurial-entrance-award-for-calgary-area-residents/": {
+    "hash": "88accb47b142cfd8",
+    "date": "2026-10-08"
+  },
+  "/scholarships/seymour-schulich-community-serviceentrepreneurial-entrance-award-for-students-outside-the-calgary-area/": {
+    "hash": "8eabd47f8c9afbfe",
+    "date": "2026-10-08"
+  },
   "/scholarships/sharon-saunders-memorial-award/": {
     "hash": "5208d1a58dc7b8bc",
     "date": "2026-10-05"
@@ -6643,6 +6751,10 @@
     "hash": "77ef43968910d06b",
     "date": "2026-10-08"
   },
+  "/scholarships/telus-student-bursary/": {
+    "hash": "ac5f7405857ec598",
+    "date": "2026-10-08"
+  },
   "/scholarships/terry-allen-leadership-award/": {
     "hash": "6e5fad86e3bbd869",
     "date": "2026-10-05"
@@ -6775,6 +6887,18 @@
     "hash": "c648d5f8f366cd07",
     "date": "2026-10-04"
   },
+  "/scholarships/ubc-beyond-tomorrow-scholars-award/": {
+    "hash": "265e03a627295d13",
+    "date": "2026-10-08"
+  },
+  "/scholarships/ubc-centennial-scholars-entrance-awards/": {
+    "hash": "81887a7a908565f7",
+    "date": "2026-10-08"
+  },
+  "/scholarships/ubc-presidential-scholars-awards/": {
+    "hash": "dc659f49c45da774",
+    "date": "2026-10-08"
+  },
   "/scholarships/ucalgary-pathways-to-medicine-scholarship/": {
     "hash": "5f19d7df9d0b0394",
     "date": "2026-10-08"
@@ -6794,6 +6918,14 @@
   "/scholarships/unifor-national-and-regional-council-scholarships/": {
     "hash": "50204e92e2aed533",
     "date": "2026-10-05"
+  },
+  "/scholarships/university-of-alberta-ap-and-ib-scholarships/": {
+    "hash": "44ca5163917828e6",
+    "date": "2026-10-08"
+  },
+  "/scholarships/university-of-alberta-opportunities-awards/": {
+    "hash": "78567b11baffada4",
+    "date": "2026-10-08"
   },
   "/scholarships/university-of-alberta-turtle-spirit-pathway-award/": {
     "hash": "ceb7de78397453f5",
@@ -6822,6 +6954,14 @@
   "/scholarships/university-of-lethbridge-high-school-entrance-awards/": {
     "hash": "0a366f4c4aae300f",
     "date": "2026-10-05"
+  },
+  "/scholarships/university-of-toronto-arbor-scholarship/": {
+    "hash": "444e2096a612a7af",
+    "date": "2026-10-08"
+  },
+  "/scholarships/university-of-toronto-national-scholarship/": {
+    "hash": "2f42a4ee53c5489d",
+    "date": "2026-10-08"
   },
   "/scholarships/usw-indigenous-post-secondary-scholarships/": {
     "hash": "bdf8518d2d30bcc2",
@@ -6919,6 +7059,34 @@
     "hash": "b0c8e77cbec016c7",
     "date": "2026-10-08"
   },
+  "/scholarships/waterloo-5kpi-award-for-black-and-indigenous-students-in-mathematics/": {
+    "hash": "6b8b24e904c0bc9e",
+    "date": "2026-10-08"
+  },
+  "/scholarships/waterloo-dean-of-environments-scholarship-for-excellence/": {
+    "hash": "fa7133c30b1e8d28",
+    "date": "2026-10-08"
+  },
+  "/scholarships/waterloo-faculty-of-environment-student-engagement-award/": {
+    "hash": "a38f50e161dab61e",
+    "date": "2026-10-08"
+  },
+  "/scholarships/waterloo-faculty-of-mathematics-entrance-scholarship-for-black-students/": {
+    "hash": "c817d07ce500004b",
+    "date": "2026-10-08"
+  },
+  "/scholarships/waterloo-faculty-of-mathematics-olympiad-scholarship/": {
+    "hash": "50ead6d7f39911ac",
+    "date": "2026-10-08"
+  },
+  "/scholarships/waterloo-jean-andrey-environment-leadership-scholarship/": {
+    "hash": "26e7e018faa29af1",
+    "date": "2026-10-08"
+  },
+  "/scholarships/waterloo-rico-mariani-entrance-scholarship-for-black-and-indigenous-students/": {
+    "hash": "08766af445c4075f",
+    "date": "2026-10-08"
+  },
   "/scholarships/wayne-ericksen-lions-memorial-scholarship/": {
     "hash": "30e29c06fb06098f",
     "date": "2026-10-05"
@@ -6947,6 +7115,10 @@
     "hash": "676bf26f10491658",
     "date": "2026-10-05"
   },
+  "/scholarships/western-beryl-ivey-continuing-entrance-scholarship/": {
+    "hash": "aa034232be87cf11",
+    "date": "2026-10-08"
+  },
   "/scholarships/western-canada-leader-of-tomorrow-award/": {
     "hash": "228f7e346e532089",
     "date": "2026-10-05"
@@ -6955,6 +7127,10 @@
     "hash": "44c234c5bb575ea0",
     "date": "2026-10-05"
   },
+  "/scholarships/western-faculty-entrance-scholarships/": {
+    "hash": "f4d33a47839139d0",
+    "date": "2026-10-08"
+  },
   "/scholarships/western-inspirational-award/": {
     "hash": "61346be33ab0f208",
     "date": "2026-10-04"
@@ -6962,6 +7138,22 @@
   "/scholarships/western-inspirational-bursary-award/": {
     "hash": "1a1bb7fb3c5faa10",
     "date": "2026-10-05"
+  },
+  "/scholarships/western-james-jenkins-presidents-entrance-scholarship-for-black-students/": {
+    "hash": "099ddf78cce112ab",
+    "date": "2026-10-08"
+  },
+  "/scholarships/western-national-indigenous-scholarship/": {
+    "hash": "af0f21b856aac94b",
+    "date": "2026-10-08"
+  },
+  "/scholarships/western-neen-hodgins-national-entrance-scholarship/": {
+    "hash": "13e98e94ce2cd189",
+    "date": "2026-10-08"
+  },
+  "/scholarships/western-presidents-entrance-scholarships/": {
+    "hash": "adbfde877f1d2be6",
+    "date": "2026-10-08"
   },
   "/scholarships/western-wheel-journalism-award/": {
     "hash": "bffaa516948a730d",

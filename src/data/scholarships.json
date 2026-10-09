@@ -63520,5 +63520,1858 @@
       "apprenticeship": false,
       "extracurriculars": []
     }
+  },
+  {
+    "id": 1757,
+    "title": "NUPGE Brian Fudge Memorial Scholarship",
+    "amount": "$2,500",
+    "deadline": "2027-07-15",
+    "deadlineEstimated": true,
+    "audience": "NUPGE members' children, grandchildren or wards entering policing, criminal justice, community services or health care",
+    "url": "https://nupge.ca/scholarship-faq/",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply through NUPGE's online scholarship form with an original 750 to 1,000 word essay on the current topic. The family relationship may be to a current or retired member of a NUPGE component or affiliated union, and includes stepchildren and foster children. Study must be full-time or part-time at a public Canadian college or university. The estimated deadline is July 15, 2027. The 2027 date is not published yet; this is last year's date moved forward one year.",
+    "active": true,
+    "description": "This $2,500 award is for children, grandchildren or legal wards of NUPGE members entering their first year in policing, criminal justice, community services or health care. Selection is based on the essay's content, presentation and response to the assigned topic.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Policing",
+        "Criminal Justice",
+        "Community Services",
+        "Health Care"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1758,
+    "title": "NUPGE Scholarship for Black Students",
+    "amount": "$2,500",
+    "deadline": "2027-07-15",
+    "deadlineEstimated": true,
+    "audience": "Black children, grandchildren or wards of NUPGE members entering public post-secondary in Canada",
+    "url": "https://nupge.ca/scholarship-faq/",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply through NUPGE's online scholarship form with an original 750 to 1,000 word essay on the current topic. The family relationship may be to a current or retired member of a NUPGE component or affiliated union, and includes stepchildren and foster children. Study must be full-time or part-time at a public Canadian college or university. The estimated deadline is July 15, 2027. The 2027 date is not published yet; this is last year's date moved forward one year.",
+    "active": true,
+    "description": "This $2,500 award is for Black students who are children, grandchildren or legal wards of NUPGE members and are entering their first year of post-secondary study. The essay is assessed for content, presentation and response to the assigned topic.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": true,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1759,
+    "title": "NUPGE Scholarship for Indigenous Students",
+    "amount": "$2,500",
+    "deadline": "2027-07-15",
+    "deadlineEstimated": true,
+    "audience": "Indigenous children, grandchildren or wards of NUPGE members entering public post-secondary in Canada",
+    "url": "https://nupge.ca/scholarship-faq/",
+    "category": "Indigenous",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply through NUPGE's online scholarship form with an original 750 to 1,000 word essay on the current topic. The family relationship may be to a current or retired member of a NUPGE component or affiliated union, and includes stepchildren and foster children. Study must be full-time or part-time at a public Canadian college or university. The estimated deadline is July 15, 2027. Indigenous identity documentation is required. The 2027 date is not published yet; this is last year's date moved forward one year.",
+    "active": true,
+    "description": "This $2,500 award is for Indigenous children, grandchildren or legal wards of NUPGE members entering their first year of post-secondary study. Selection considers the essay's content, presentation and response to the assigned topic.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1760,
+    "title": "NUPGE Students of Colour Scholarship",
+    "amount": "$2,500",
+    "deadline": "2027-07-15",
+    "deadlineEstimated": true,
+    "audience": "Students of colour who are NUPGE members' children, grandchildren or wards entering public post-secondary in Canada",
+    "url": "https://nupge.ca/scholarship-faq/",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply through NUPGE's online scholarship form with an original 750 to 1,000 word essay on the current topic. The family relationship may be to a current or retired member of a NUPGE component or affiliated union, and includes stepchildren and foster children. Study must be full-time or part-time at a public Canadian college or university. The estimated deadline is July 15, 2027. The 2027 date is not published yet; this is last year's date moved forward one year.",
+    "active": true,
+    "description": "This $2,500 award is for students of colour who are children, grandchildren or legal wards of NUPGE members entering their first year of post-secondary study. The essay is assessed for content, presentation and response to the assigned topic.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": true,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1761,
+    "title": "NUPGE Young Worker Scholarship",
+    "amount": "$2,500",
+    "deadline": "2027-07-15",
+    "deadlineEstimated": true,
+    "audience": "NUPGE members, or their children, grandchildren or wards, under 35 entering public post-secondary in Canada",
+    "url": "https://nupge.ca/scholarship-faq/",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply through NUPGE's online form with an original 750 to 1,000 word essay on the current topic. Applicants must be under 35 on the deadline and entering or continuing full-time or part-time study at a public Canadian college or university. Current and retired members of component or affiliated unions qualify; eligible family relationships include stepchildren and foster children. The estimated deadline is July 15, 2027. The 2027 date is not published yet; this is last year's date moved forward one year.",
+    "active": true,
+    "description": "This $2,500 award supports NUPGE members and eligible members' children, grandchildren or legal wards who are under 35. Selection is based on the essay's content, presentation and response to the assigned topic.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": 34,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1762,
+    "title": "CST Foundation Founders' Awards - Undergraduate (General)",
+    "amount": "$7,000",
+    "deadline": "2027-03-25",
+    "deadlineEstimated": true,
+    "audience": "CST beneficiaries with financial need entering an undergraduate program in Canada",
+    "url": "https://www.cst.org/en/foundation/student-awards/founders-award",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Use the Founders' Awards online application portal. The first stage uses written responses, and shortlisted applicants submit a short video. The estimated deadline is March 25, 2027. The 2027 date is not published yet; this is last year's date moved forward one year.",
+    "active": true,
+    "description": "This $7,000 award is for CST beneficiaries entering an undergraduate program in Canada. Selection considers motivation for post-secondary study, education and career goals, and financial need, with need receiving secondary weight.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1763,
+    "title": "CST Foundation Founders' Awards - Skilled Trades & Community College-Based Programs",
+    "amount": "$4,000",
+    "deadline": "2027-03-25",
+    "deadlineEstimated": true,
+    "audience": "CST beneficiaries with financial need entering a skilled trades or community college program in Canada",
+    "url": "https://www.cst.org/en/foundation/student-awards/founders-award",
+    "category": "Trades",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Use the Founders' Awards online application portal. The first stage uses written responses, and shortlisted applicants submit a short video. The estimated deadline is March 25, 2027. The 2027 date is not published yet; this is last year's date moved forward one year.",
+    "active": true,
+    "description": "This $4,000 award is for CST beneficiaries entering a skilled trades or community college program in Canada. Selection considers motivation for post-secondary study, education and career goals, and financial need, with need receiving secondary weight.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1764,
+    "title": "Retail Education Scholarship Program",
+    "amount": "$3,000 to $5,000",
+    "deadline": "2027-03-30",
+    "deadlineEstimated": true,
+    "audience": "Students entering a retail-related program in Canada who work in retail or have a clear retail career plan",
+    "url": "https://www.retailcouncil.org/resources/education/retail-education-scholarship-program/",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply through the Retail Council of Canada's scholarship portal with an essay and presentation, an employer reference, transcripts and proof of enrolment or an offer of admission. Full-time and part-time students may apply. Qualifying studies include retail, business, fashion, marketing, analytics, supply chain and retail-related information technology. The estimated deadline is March 30, 2027. The 2027 date is not published yet; this is last year's date moved forward one year.",
+    "active": true,
+    "description": "This program offers $3,000 to $5,000 for students entering retail-related post-secondary study in Canada. Selection considers the essay and presentation, commitment to retail, career plans and the employer reference.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Retail",
+        "business",
+        "Fashion",
+        "Marketing",
+        "Analytics",
+        "Supply Chain",
+        "Information Technology"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1765,
+    "title": "TELUS Student Bursary",
+    "amount": "$3,000 for college students and $5,000 for university students",
+    "deadline": "2027-03-27",
+    "deadlineEstimated": true,
+    "audience": "Students aged 17 to 29 with financial need entering a first full-time degree or diploma in Canada",
+    "url": "https://www.friendlyfuture.com/en/foundation/social-impact-bursary",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply through the Scholarship Partners Canada portal with the personal statement and social impact commitment. Applicants must be Canadian citizens, permanent residents, protected persons or Convention refugees, and the program must be at least two years long. TELUS employees and their dependants cannot apply. The estimated deadline is March 27, 2027; the last cycle also closed once 1,500 applications were received. The 2027 date is not published yet; this is last year's date moved forward one year.",
+    "active": true,
+    "description": "The bursary pays $5,000 for a first bachelor's degree or $3,000 for a first college diploma for students aged 17 to 29 with financial need. Selection considers the personal statement, education and career goals, planned social impact and financial circumstances.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": 17,
+      "maxAge": 29,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1766,
+    "title": "NPFBF Gordon Clarke Annual Bursary",
+    "amount": "$5,000 Canadian",
+    "deadline": "2027-05-14",
+    "deadlineEstimated": true,
+    "audience": "Students with an 80% average entering a full-time Canadian college or university program related to public safety",
+    "url": "https://npf-fpn.com/npfbfbursaries/",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply through the NPFBF online public bursary application with transcripts, references and a community involvement essay. Applicants must be Canadian citizens or permanent residents, have at least 80% across their last three terms, and enter a program lasting at least one year. One application covers the Gordon Clarke and regional bursaries, and a student can receive only one. Previous NPFBF bursary winners and children of salaried NPF employees are ineligible. The estimated deadline is May 14, 2027. The 2027 date is not published yet; this is last year's date moved forward one year.",
+    "active": true,
+    "description": "This $5,000 bursary supports students entering a full-time Canadian degree or diploma related to public safety. Selection considers grades, community and volunteer activities, the essay and references.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Public Safety"
+      ],
+      "minAverage": 80,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1767,
+    "title": "NPFBF Regional Bursary - Prairie Region",
+    "amount": "$2500 Canadian",
+    "deadline": "2027-05-14",
+    "deadlineEstimated": true,
+    "audience": "Alberta, Saskatchewan or Manitoba residents with 70% entering a Canadian post-secondary program related to public safety",
+    "url": "https://npf-fpn.com/npfbfbursaries/",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "Alberta",
+    "notes": "Apply through the NPFBF online public bursary application with transcripts, references and a community involvement essay. Applicants must be Canadian citizens or permanent residents, have at least 70% across their last three terms, and enter a program lasting at least one year. One application covers the Gordon Clarke and regional bursaries, and a student can receive only one. Previous NPFBF bursary winners and children of salaried NPF employees are ineligible. The estimated deadline is May 14, 2027. The 2027 date is not published yet; this is last year's date moved forward one year.",
+    "active": true,
+    "description": "This $2,500 bursary supports students entering a full-time Canadian degree or diploma related to public safety who live in Alberta, Saskatchewan or Manitoba. Selection considers grades, community and volunteer activities, the essay and references.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Public Safety"
+      ],
+      "minAverage": 70,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1768,
+    "title": "NPFBF Member Child Bursary",
+    "amount": "$5000 Canadian for one year",
+    "deadline": "2027-05-14",
+    "deadlineEstimated": true,
+    "audience": "Children of active or deceased NPF members, aged 17 to 25 with 70%, entering full-time post-secondary study in Canada",
+    "url": "https://npf-fpn.com/npfbfbursaries/",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Use the NPFBF dependent and spouse bursary online application, including the member consent form, transcripts, two references and essay. Applicants must be Canadian citizens or permanent residents, be aged 17 to 25, and have at least 70% across their last three terms. The program must last at least one year. Previous NPFBF bursary winners and children of salaried NPF employees are ineligible. The estimated deadline is May 14, 2027. The 2027 date is not published yet; this is last year's date moved forward one year.",
+    "active": true,
+    "description": "This $5,000 bursary is for children of active or deceased National Police Federation members entering a full-time Canadian undergraduate degree or diploma. Selection considers academic performance, volunteer and community activities, the essay and references.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": 70,
+      "minAge": 17,
+      "maxAge": 25,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1769,
+    "title": "Joe Chowaniec Scholarship - ESAA Member Award",
+    "amount": "$2,500.00",
+    "deadline": "2027-08-07",
+    "deadlineEstimated": true,
+    "audience": "ESAA member-company employees or their immediate family entering a full-time environmental program in Alberta",
+    "url": "https://esaa.org/membership/scholarship/",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "Alberta",
+    "notes": "Complete the ESAA member application form and send it with your letter, transcript and two references by email to scholarship@esaa.org or by post to ESAA. The company must be an ESAA member in good standing. The estimated deadline is August 7, 2027. The 2027 date is not published yet; this is last year's date moved forward one year.",
+    "active": true,
+    "description": "This $2,500 scholarship supports ESAA member-company employees and their immediate family who enter a full-time environmental program in Alberta. Selection considers community involvement, with a supporting letter covering career goals, leadership, volunteering and challenges overcome.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "environment"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1770,
+    "title": "University of Alberta AP and IB Scholarships",
+    "amount": "up to $3,500",
+    "deadline": "2027-01-10",
+    "audience": "Grade 12 students taking AP courses or an IB Diploma and entering a full-time undergraduate degree at U of A",
+    "url": "https://www.ualberta.ca/en/admissions/tuition-and-scholarships/entrance-scholarships/index.html",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply for admission first, then sign in to Awards Hub with your U of A CCID and complete the entrance scholarship application. Applications open October 1, 2026 and close January 10, 2027.",
+    "active": true,
+    "description": "This award provides up to $3,500 for students taking AP courses or an IB Diploma who enter the University of Alberta from high school. Selection recognises academic achievement in those programs.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "openDate": "2026-10-01"
+  },
+  {
+    "id": 1771,
+    "title": "University of Alberta Opportunities Awards",
+    "amount": "up to $5,000",
+    "deadline": "2027-01-10",
+    "audience": "Grade 12 students from diverse backgrounds entering a full-time undergraduate degree at the University of Alberta",
+    "url": "https://www.ualberta.ca/en/admissions/tuition-and-scholarships/entrance-scholarships/index.html",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply for admission first, then sign in to Awards Hub with your U of A CCID and complete the entrance scholarship application. Applications open October 1, 2026 and close January 10, 2027.",
+    "active": true,
+    "description": "These awards provide up to $5,000 for students from diverse backgrounds entering the University of Alberta. The shared entrance application assesses academics, leadership, inclusion and financial need; separate scoring criteria for this award are not published.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "openDate": "2026-10-01"
+  },
+  {
+    "id": 1772,
+    "title": "Discover University of Alberta Award",
+    "amount": "up to $8,000",
+    "deadline": "2027-02-15",
+    "audience": "Domestic students with financial barriers and no post-secondary coursework entering a direct-entry degree at U of A",
+    "url": "https://www.ualberta.ca/en/admissions/tuition-and-scholarships/entrance-scholarships/index.html",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply for admission first, then complete the separate Discover University of Alberta Award application in Awards Hub. Applications open October 1, 2026 and close February 15, 2027.",
+    "active": true,
+    "description": "This award provides up to $8,000 for domestic students entering a direct-entry undergraduate program at the University of Alberta. Applicants must show financial challenges and barriers to attending university and must not have completed post-secondary coursework.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "openDate": "2026-10-01"
+  },
+  {
+    "id": 1773,
+    "title": "John and Mary Petrie Chancellor's Scholarship",
+    "amount": "$15,000 (Renewable)",
+    "deadline": "2026-12-01",
+    "audience": "Canadian citizens or permanent residents entering their first undergraduate year at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/john-and-mary-petrie-chancellors-scholarship",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through the High School Prestige Awards form in My UCalgary after applying for admission. One form covers these UCalgary awards. Applications open October 1, 2026 and close December 1, 2026. Renewal requires a 3.20 GPA over at least 30 units and continued extracurricular involvement.",
+    "active": true,
+    "description": "This scholarship pays $15,000 a year for up to four years for students entering the University of Calgary. Selection considers academic achievement, leadership and contributions to school or community life.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "openDate": "2026-10-01"
+  },
+  {
+    "id": 1774,
+    "title": "Ena Lee Leaders in Business Scholarship",
+    "amount": "$20,000 (Renewable)",
+    "deadline": "2026-12-01",
+    "audience": "Canadian citizens or permanent residents entering UCalgary's Bachelor of Commerce program",
+    "url": "https://www.ucalgary.ca/registrar/awards/ena-lee-leaders-business-scholarship",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through the High School Prestige Awards form in My UCalgary after applying for admission. One form covers these UCalgary awards. Applications open October 1, 2026 and close December 1, 2026. Renewal requires continued study in the Bachelor of Commerce, a 3.20 GPA over at least 30 units and continued extracurricular involvement.",
+    "active": true,
+    "description": "This scholarship pays $20,000 a year for up to four years for students entering the Haskayne School of Business. Selection considers academic achievement and leadership in school or community activities.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [
+        "business"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "openDate": "2026-10-01"
+  },
+  {
+    "id": 1775,
+    "title": "Seymour Schulich Academic Excellence Entrance Scholarship for Calgary Area Residents",
+    "amount": "$15,200 (Renewable)",
+    "deadline": "2026-12-01",
+    "audience": "Grade 12 students entering UCalgary Engineering with a permanent home within 100 km of Calgary city centre",
+    "url": "https://www.ucalgary.ca/registrar/awards/seymour-schulich-academic-excellence-entrance-scholarship-calgary-area-residents",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through the High School Prestige Awards form in My UCalgary after applying for admission. One form covers these UCalgary awards. Applications open October 1, 2026 and close December 1, 2026. The permanent home must be within 100 km of Calgary city centre. Renewal requires continued Engineering enrolment and a 3.00 GPA over at least 30 units.",
+    "active": true,
+    "description": "This scholarship pays $15,200 a year for up to three years for students entering UCalgary's Schulich School of Engineering. Selection considers academic achievement.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [
+        "engineering"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "openDate": "2026-10-01"
+  },
+  {
+    "id": 1776,
+    "title": "Seymour Schulich Academic Excellence Entrance Scholarship for Students Outside the Calgary Area",
+    "amount": "$30,400 (Renewable)",
+    "deadline": "2026-12-01",
+    "audience": "Grade 12 students entering UCalgary Engineering whose home and high school are at least 100 km from Calgary city centre",
+    "url": "https://www.ucalgary.ca/registrar/awards/seymour-schulich-academic-excellence-entrance-scholarship-students-outside-calgary-area",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through the High School Prestige Awards form in My UCalgary after applying for admission. One form covers these UCalgary awards. Applications open October 1, 2026 and close December 1, 2026. Both the permanent home and high school must be at least 100 km from Calgary city centre. Renewal requires continued Engineering enrolment and a 3.00 GPA over at least 30 units.",
+    "active": true,
+    "description": "This scholarship pays $30,400 in the first year and $22,700 in each of the next two years for students entering UCalgary's Schulich School of Engineering. Selection considers academic achievement.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [
+        "engineering"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "openDate": "2026-10-01"
+  },
+  {
+    "id": 1777,
+    "title": "Seymour Schulich Community Service/Entrepreneurial Entrance Award For Calgary Area Residents",
+    "amount": "$15,200 (Renewable)",
+    "deadline": "2026-12-01",
+    "audience": "Grade 12 students entering UCalgary Engineering with a permanent home within 100 km of Calgary city centre",
+    "url": "https://www.ucalgary.ca/registrar/awards/seymour-schulich-community-serviceentrepreneurial-entrance-award-calgary-area-residents",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through the High School Prestige Awards form in My UCalgary after applying for admission. One form covers these UCalgary awards. Applications open October 1, 2026 and close December 1, 2026. The permanent home must be within 100 km of Calgary city centre. Renewal requires continued Engineering enrolment and a 2.70 GPA over at least 30 units, plus continued service or entrepreneurial activity.",
+    "active": true,
+    "description": "This award pays $15,200 a year for up to three years for students entering UCalgary's Schulich School of Engineering. Selection considers academic achievement and contributions to school life, community service or entrepreneurial activity.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [
+        "engineering"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "openDate": "2026-10-01"
+  },
+  {
+    "id": 1778,
+    "title": "Seymour Schulich Community Service/Entrepreneurial Entrance Award for Students Outside the Calgary Area",
+    "amount": "$30,400 (Renewable)",
+    "deadline": "2026-12-01",
+    "audience": "Grade 12 students entering UCalgary Engineering whose home and high school are at least 100 km from Calgary city centre",
+    "url": "https://www.ucalgary.ca/registrar/awards/seymour-schulich-community-serviceentrepreneurial-entrance-award-students-outside-calgary-area",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through the High School Prestige Awards form in My UCalgary after applying for admission. One form covers these UCalgary awards. Applications open October 1, 2026 and close December 1, 2026. Both the permanent home and high school must be at least 100 km from Calgary city centre. Renewal requires continued Engineering enrolment and a 2.70 GPA over at least 30 units, plus continued service or entrepreneurial activity.",
+    "active": true,
+    "description": "This award pays $30,400 in the first year and $22,700 in each of the next two years for students entering UCalgary's Schulich School of Engineering. Selection considers academic achievement and contributions to school life, community service or entrepreneurial activity.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [
+        "engineering"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "openDate": "2026-10-01"
+  },
+  {
+    "id": 1779,
+    "title": "Richard and Lois Haskayne Legacy Scholarship",
+    "amount": "$25,000 (Renewable)",
+    "deadline": "2026-12-01",
+    "audience": "Canadian citizens or permanent residents entering UCalgary's Bachelor of Commerce program",
+    "url": "https://www.ucalgary.ca/registrar/awards/richard-and-lois-haskayne-legacy-scholarship",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through the High School Prestige Awards form in My UCalgary after applying for admission. One form covers these UCalgary awards. Applications open October 1, 2026 and close December 1, 2026. Renewal requires continued Bachelor of Commerce study, a 3.20 GPA over at least 30 units and continued extracurricular involvement.",
+    "active": true,
+    "description": "This scholarship pays $25,000 a year for up to four years for students entering the Haskayne School of Business. Selection considers academic achievement, leadership and contributions to school or community activities.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [
+        "business"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "openDate": "2026-10-01"
+  },
+  {
+    "id": 1780,
+    "title": "Kennedy Scholars Academic Excellence Scholarship (Calgary)",
+    "amount": "$15,000 (Renewable)",
+    "deadline": "2026-12-01",
+    "audience": "Grade 12 students entering UCalgary Computer Science with a permanent home within 100 km of Calgary city centre",
+    "url": "https://www.ucalgary.ca/registrar/awards/kennedy-scholars-academic-excellence-scholarship-calgary",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through the High School Prestige Awards form in My UCalgary after applying for admission. One form covers these UCalgary awards. Applications open October 1, 2026 and close December 1, 2026. Applicants must be Canadian citizens or permanent residents. The permanent home must be within 100 km of Calgary city centre. Renewal requires continued Computer Science study and a 3.20 GPA over at least 30 units.",
+    "active": true,
+    "description": "This scholarship pays $15,000 a year for up to four years for students entering Computer Science at UCalgary. Selection considers academic achievement, leadership, and entrepreneurial thinking or innovation in technology.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [
+        "computer-science"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "openDate": "2026-10-01"
+  },
+  {
+    "id": 1781,
+    "title": "Kennedy Scholars Academic Excellence Scholarship (Outside of Calgary)",
+    "amount": "$25,000 (Renewable)",
+    "deadline": "2026-12-01",
+    "audience": "Grade 12 students entering UCalgary Computer Science whose home and high school are at least 100 km from Calgary city centre",
+    "url": "https://www.ucalgary.ca/registrar/awards/kennedy-scholars-academic-excellence-scholarship-outside-calgary",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through the High School Prestige Awards form in My UCalgary after applying for admission. One form covers these UCalgary awards. Applications open October 1, 2026 and close December 1, 2026. Applicants must be Canadian citizens or permanent residents. Both the permanent home and high school must be at least 100 km from Calgary city centre. Renewal requires continued Computer Science study and a 3.20 GPA over at least 30 units.",
+    "active": true,
+    "description": "This scholarship pays $25,000 a year for up to four years for students entering Computer Science at UCalgary. Selection considers academic achievement, leadership, and entrepreneurial thinking or innovation in technology.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [
+        "computer-science"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "openDate": "2026-10-01"
+  },
+  {
+    "id": 1782,
+    "title": "UBC Centennial Scholars Entrance Awards",
+    "amount": "up to $80,000",
+    "deadline": "2026-12-01",
+    "audience": "Grade 12 students with financial need entering UBC who are Canadian citizens, permanent residents or protected persons",
+    "url": "https://you.ubc.ca/financial-planning/scholarships-awards-canadian-students/entrance-award/",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Submit a UBC admission application and the separate 2027 UBC Entrance Awards application through the online awards portal by December 1, 2026. The awards application opens October 5, 2026 and includes a Description of Circumstance, a parent or guardian financial form and a reference. Applicants must be Canadian citizens, permanent residents or protected persons, meet admission requirements and be entering their first undergraduate degree.",
+    "active": true,
+    "description": "These awards provide up to $80,000 in one-time or renewable funding for students with financial need entering UBC. Assessment considers financial circumstances and the personal statement about challenges, interests and contributions to school, family or community.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of British Columbia"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "openDate": "2026-10-05"
+  },
+  {
+    "id": 1783,
+    "title": "UBC Beyond Tomorrow Scholars Award",
+    "amount": "up to $80,000",
+    "deadline": "2026-12-01",
+    "audience": "Black Grade 12 students with financial need entering UBC who are Canadian citizens, permanent residents or protected persons",
+    "url": "https://you.ubc.ca/financial-planning/scholarships-awards-canadian-students/beyond-tomorrow/",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Submit a UBC admission application and the separate 2027 UBC Entrance Awards application through the online awards portal by December 1, 2026. The awards application opens October 5, 2026 and includes a Description of Circumstance, a parent or guardian financial form and a reference. Applicants must be Canadian citizens, permanent residents or protected persons, meet admission requirements and be entering their first undergraduate degree.",
+    "active": true,
+    "description": "This award provides up to $80,000 in one-time or renewable funding for Black students with financial need entering UBC. Assessment considers financial circumstances and the personal statement about challenges, interests and contributions to school, family or community.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of British Columbia"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": true,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "openDate": "2026-10-05"
+  },
+  {
+    "id": 1784,
+    "title": "UBC Presidential Scholars Awards",
+    "amount": "approximately $5,000; renewable awards of up to $40,000 on the Okanagan campus, and $80,000 on the Vancouver campus",
+    "deadline": "2026-12-01",
+    "audience": "Canadian citizens or permanent residents entering UBC who opt in to Presidential Scholars consideration",
+    "url": "https://you.ubc.ca/financial-planning/scholarships-awards-canadian-students/presidential-scholars/",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Select Yes for Presidential Scholars consideration in the Awards section of the UBC admission application and submit it by December 1, 2026. This opt-in is required; there is no separate scholarship form. Renewable awards cover up to four years, subject to renewal conditions.",
+    "active": true,
+    "description": "Awards include about $5,000 paid once, or renewable funding totalling up to $40,000 at UBC Okanagan or $80,000 at UBC Vancouver. They are for students entering from high school, with selection based on academics and the personal profile's evidence of leadership and involvement in school or community activities.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of British Columbia"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1785,
+    "title": "McGill Major Entrance Scholarships",
+    "amount": "$3,000, $5,000, $10,000 or $12,000 renewable",
+    "deadline": "2027-02-07",
+    "deadlineEstimated": true,
+    "audience": "Students entering their first full-time undergraduate degree at McGill University",
+    "url": "https://www.mcgill.ca/studentaid/scholarships-aid/future-undergrads/entrance-scholarships",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "After applying for admission, complete the separate major entrance scholarship application in McGill's Undergraduate Admissions Applicant Portal. The estimated deadline for Alberta applicants is February 7, 2027. The $12,000 annual awards are restricted to Canadian citizens and permanent residents; the lower award levels also accept international applicants. Renewal depends on meeting the award conditions. The 2027 date is not published yet; this is last year's date moved forward one year.",
+    "active": true,
+    "description": "These scholarships pay $3,000, $5,000, $10,000 or $12,000 a year and may be renewed for three or four years, depending on the award. They are for first-time university students, with academic achievement considered first and leadership in school or community activities also assessed.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "McGill University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1786,
+    "title": "Queen's Bank of Montreal Award",
+    "amount": "$40,000-$72,000",
+    "deadline": "2026-12-08",
+    "audience": "Grade 12 students with financial need entering their first undergraduate year at Queen's University",
+    "url": "https://www.queensu.ca/registrar/financial-aid/application-required/future-students/major-awards",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply for admission, then submit the Major Admission Awards application in SOLUS by December 8, 2026. Queen's recommends applying for admission by November 20 to allow time to receive SOLUS access. Applicants must be Canadian citizens, permanent residents or protected persons. Queen's lists 90% as a guide to high school achievement. Renewal requires a 3.5 GPA with a full course load. Also complete the Financial Aid and Awards Profile in SOLUS.",
+    "active": true,
+    "description": "This award provides $40,000 to $72,000 over four years, depending on the program, for students with financial need entering Queen's University. Selection considers academic achievement, creative thinking, leadership and involvement in school and community life.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Queen's University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1787,
+    "title": "Queen's Chancellor's Scholarship",
+    "amount": "$48,000",
+    "deadline": "2026-12-08",
+    "audience": "Grade 12 students nominated by their high school and entering their first undergraduate year at Queen's University",
+    "url": "https://www.queensu.ca/registrar/financial-aid/application-required/future-students/major-awards",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply for admission, then submit the Major Admission Awards application in SOLUS by December 8, 2026. Queen's recommends applying for admission by November 20 to allow time to receive SOLUS access. Applicants must be Canadian citizens, permanent residents or protected persons. Queen's lists 90% as a guide to high school achievement. Renewal requires a 3.5 GPA with a full course load. Ask your high school to nominate you and enter your school official's contact details in the application.",
+    "active": true,
+    "description": "This scholarship pays $12,000 a year for up to four years for students entering Queen's University with a high school nomination. Selection considers academic achievement, creative thinking and leadership.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Queen's University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1788,
+    "title": "Queen's Chernoff Family Award",
+    "amount": "$48,000-$72,000",
+    "deadline": "2026-12-08",
+    "audience": "Grade 12 students with financial need entering Queen's University, with preference for rural or remote applicants",
+    "url": "https://www.queensu.ca/registrar/financial-aid/application-required/future-students/major-awards",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply for admission, then submit the Major Admission Awards application in SOLUS by December 8, 2026. Queen's recommends applying for admission by November 20 to allow time to receive SOLUS access. Applicants must be Canadian citizens, permanent residents or protected persons. Queen's lists 90% as a guide to high school achievement. Renewal requires a 3.5 GPA with a full course load. Also complete the Financial Aid and Awards Profile in SOLUS. The description calls rural or remote residence a preference, while the criteria table lists it as a condition. Confirm this point with Queen's if you live in an urban area. Continuing financial need is required for renewal.",
+    "active": true,
+    "description": "This award provides $48,000 to $72,000 over four years, depending on the program, for students with financial need entering Queen's University. Selection considers academic achievement, creative thinking and leadership, with preference for students from rural or remote parts of Canada.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Queen's University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1789,
+    "title": "Queen's Gregory Scholarship in Engineering",
+    "amount": "$48,000",
+    "deadline": "2026-12-08",
+    "audience": "Grade 12 students entering Queen's Engineering with a school nomination for the Chancellor's Scholarship",
+    "url": "https://www.queensu.ca/registrar/financial-aid/application-required/future-students/major-awards",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply for admission, then submit the Major Admission Awards application in SOLUS by December 8, 2026. Queen's recommends applying for admission by November 20 to allow time to receive SOLUS access. Applicants must be Canadian citizens, permanent residents or protected persons. Queen's lists 90% as a guide to high school achievement. Renewal requires a 3.5 GPA with a full course load. A high school nomination for the Queen's Chancellor's Scholarship is required. Continued leadership and extracurricular involvement are also required for renewal.",
+    "active": true,
+    "description": "This scholarship pays $12,000 a year for up to four years for students entering Smith Engineering at Queen's University. Selection considers academic achievement, creative thinking, leadership and involvement in school or community activities.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Queen's University"
+      ],
+      "fields": [
+        "engineering"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1790,
+    "title": "Western Neen Hodgins National Entrance Scholarship",
+    "amount": "$100,000",
+    "deadline": "2027-02-14",
+    "deadlineEstimated": true,
+    "audience": "School-nominated Grade 12 students with 90% entering Western's Faculty of Arts and Humanities",
+    "url": "https://www.registrar.uwo.ca/student_finances/scholarships_awards/admission/national_scholarship_program.html",
+    "category": "Arts",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply for admission to Western's main campus, obtain a school nomination and complete the online National Scholarship application with the required supporting documents and essay. Full-time study is required. Applications are expected by mid-November 2026, and the estimated deadline is February 14, 2027. Applicants must be Canadian citizens or permanent residents. A financial information supplement is required. Renewal requires continued Arts and Humanities study, an 80% average, a full course load and financial need. The 2027 date is not published yet; this is last year's date moved forward one year.",
+    "active": true,
+    "description": "This scholarship pays $25,000 a year for up to four years to a student entering Western's Faculty of Arts and Humanities. Selection considers grades, creative thinking, extracurricular activities and community service, with preference for financial need.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Western University"
+      ],
+      "fields": [
+        "arts",
+        "humanities"
+      ],
+      "minAverage": 90,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1791,
+    "title": "Western President's Entrance Scholarships",
+    "amount": "$50,000, $65,000, $70,000 or $93,000",
+    "deadline": "2027-02-14",
+    "deadlineEstimated": true,
+    "audience": "School-nominated Grade 12 students with 90% entering full-time study at Western's main campus",
+    "url": "https://www.registrar.uwo.ca/student_finances/scholarships_awards/admission/national_scholarship_program.html",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply for admission to Western's main campus, obtain a school nomination and complete the online National Scholarship application with the required supporting documents and essay. Full-time study is required. Applications are expected by mid-November 2026, and the estimated deadline is February 14, 2027. Applicants must be Canadian citizens or permanent residents. The 2027 date is not published yet; this is last year's date moved forward one year.",
+    "active": true,
+    "description": "These scholarships provide $50,000, $65,000, $70,000 or $93,000 over four years for students entering Western's main campus. Selection considers academic achievement, creative thinking, extracurricular activities and service to school and community.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Western University"
+      ],
+      "fields": [],
+      "minAverage": 90,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1792,
+    "title": "Western James Jenkins President's Entrance Scholarship for Black Students",
+    "amount": "$50,000",
+    "deadline": "2027-02-14",
+    "deadlineEstimated": true,
+    "audience": "School-nominated Black Grade 12 students with 90% entering full-time study at Western's main campus",
+    "url": "https://www.registrar.uwo.ca/student_finances/scholarships_awards/admission/national_scholarship_program.html",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply for admission to Western's main campus, obtain a school nomination and complete the online National Scholarship application with the required supporting documents and essay. Full-time study is required. Applications are expected by mid-November 2026, and the estimated deadline is February 14, 2027. Both domestic and international Black students may apply. The 2027 date is not published yet; this is last year's date moved forward one year.",
+    "active": true,
+    "description": "This scholarship pays $20,000 in the first year and $10,000 in each of the next three years for Black students entering Western's main campus. Selection considers academics, creative thinking, extracurricular activities and school or community service.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Western University"
+      ],
+      "fields": [],
+      "minAverage": 90,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": true,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1793,
+    "title": "Western Beryl Ivey Continuing Entrance Scholarship",
+    "amount": "$96,000",
+    "deadline": "2027-02-14",
+    "deadlineEstimated": true,
+    "audience": "School-nominated Grade 12 students with 90% and financial need entering Western's main campus",
+    "url": "https://www.registrar.uwo.ca/student_finances/scholarships_awards/admission/national_scholarship_program.html",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply for admission to Western's main campus, obtain a school nomination and complete the online National Scholarship application with the required supporting documents and essay. Full-time study is required. Applications are expected by mid-November 2026, and the estimated deadline is February 14, 2027. Applicants must be Canadian citizens or permanent residents and complete the financial information supplement. The 2027 date is not published yet; this is last year's date moved forward one year.",
+    "active": true,
+    "description": "This scholarship pays $24,000 a year for up to four years for students with financial need entering Western's main campus. Selection considers academics, creative thinking, extracurricular activities, school and community service, and financial need.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Western University"
+      ],
+      "fields": [],
+      "minAverage": 90,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1794,
+    "title": "Western Faculty Entrance Scholarships",
+    "amount": "$30,000",
+    "deadline": "2027-02-14",
+    "deadlineEstimated": true,
+    "audience": "School-nominated Grade 12 students with 90% entering full-time study at Western's main campus",
+    "url": "https://www.registrar.uwo.ca/student_finances/scholarships_awards/admission/national_scholarship_program.html",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply for admission to Western's main campus, obtain a school nomination and complete the online National Scholarship application with the required supporting documents and essay. Full-time study is required. Applications are expected by mid-November 2026, and the estimated deadline is February 14, 2027. Applicants must be Canadian citizens or permanent residents. The scholarship can be used only in the faculty for which it is awarded. The 2027 date is not published yet; this is last year's date moved forward one year.",
+    "active": true,
+    "description": "These scholarships pay $12,000 in the first year and $6,000 in each of the next three years for students entering Western's main campus. Selection considers academics, creative thinking, extracurricular activities and school or community service.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Western University"
+      ],
+      "fields": [],
+      "minAverage": 90,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1795,
+    "title": "Western National Indigenous Scholarship",
+    "amount": "$50,000 each",
+    "deadline": "2027-02-14",
+    "deadlineEstimated": true,
+    "audience": "First Nations, Métis or Inuit students entering full-time study at Western's main campus from a Canadian high school",
+    "url": "https://www.registrar.uwo.ca/student_finances/scholarships_awards/admission/national_scholarship_is.html",
+    "category": "Indigenous",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Complete the separate online National Indigenous Scholarship application, essay and Indigenous identity verification, and arrange a reference from a school or community contact. A school nomination is not required. Applicants must meet their program's admission average; eligible faculties are Arts and Humanities, Engineering, Music, Health Sciences, Information and Media Studies, Social Science and Science. The estimated deadline is February 14, 2027. The 2027 date is not published yet; this is last year's date moved forward one year.",
+    "active": true,
+    "description": "This $50,000 scholarship supports First Nations, Métis and Inuit students entering full-time undergraduate study at Western's main campus. Selection considers academic achievement, creative thinking and past or planned contributions to Indigenous communities.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Western University"
+      ],
+      "fields": [
+        "arts",
+        "humanities",
+        "engineering",
+        "music",
+        "health",
+        "Information and Media Studies",
+        "social-sciences",
+        "science"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1796,
+    "title": "Waterloo 5KPi Award for Black and Indigenous Students in Mathematics",
+    "amount": "$15,707.96",
+    "deadline": "2027-04-15",
+    "deadlineEstimated": true,
+    "audience": "Black or Indigenous Grade 12 students entering a full-time co-op program in Waterloo's Faculty of Mathematics",
+    "url": "https://uwaterloo.ca/math/undergraduate-studies/applying/scholarships",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "After applying for admission, open Awards and Financial Aid in the Waterloo applicant portal and complete the Entrance Awards for Black Students or Entrance Awards for Indigenous Students form, as applicable. The estimated deadline is April 15, 2027. Applicants must be Canadian citizens, permanent residents or protected persons in Canada. Software Engineering is excluded. The 2027 date is not published yet; this is last year's date moved forward one year.",
+    "active": true,
+    "description": "This $15,707.96 award supports Black or Indigenous students entering a full-time co-op degree in Waterloo's Faculty of Mathematics. Selection is based on the applicant's statement explaining how the award would affect their post-secondary studies.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Waterloo"
+      ],
+      "fields": [
+        "mathematics",
+        "computer-science"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": true,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1797,
+    "title": "Waterloo Faculty of Mathematics Entrance Scholarship for Black Students",
+    "amount": "$10,000 to $20,000",
+    "deadline": "2027-04-15",
+    "deadlineEstimated": true,
+    "audience": "Black Grade 12 students entering a full-time degree in Waterloo's Faculty of Mathematics",
+    "url": "https://uwaterloo.ca/math/undergraduate-studies/applying/scholarships",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "After applying for admission, complete the Entrance Awards for Black Students form under Awards and Financial Aid in the Waterloo applicant portal. Applicants must be Canadian citizens, permanent residents or protected persons. The faculty page excludes Software Engineering and Computing and Financial Management. Payments after the first year require an 80% average and five courses per term. The estimated deadline is April 15, 2027. The 2027 date is not published yet; this is last year's date moved forward one year.",
+    "active": true,
+    "description": "This scholarship provides $10,000 to $20,000 over eight academic terms for Black students entering Waterloo's Faculty of Mathematics. Selection considers academics and community involvement, with preference for students who explain how the funding would affect their studies.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Waterloo"
+      ],
+      "fields": [
+        "mathematics",
+        "computer-science"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": true,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1798,
+    "title": "Waterloo Rico Mariani Entrance Scholarship for Black and Indigenous Students",
+    "amount": "Up to $6,000",
+    "deadline": "2027-04-15",
+    "deadlineEstimated": true,
+    "audience": "Black or Indigenous Grade 12 students entering Computer Science at Waterloo, excluding Software Engineering",
+    "url": "https://uwaterloo.ca/math/undergraduate-studies/applying/scholarships",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "After applying for admission, open Awards and Financial Aid in the Waterloo applicant portal and complete the Entrance Awards for Black Students or Entrance Awards for Indigenous Students form, as applicable. The estimated deadline is April 15, 2027. Computing and Financial Management is eligible; Software Engineering is excluded. Applicants applying as Indigenous must complete identity verification through Waterloo. The 2027 date is not published yet; this is last year's date moved forward one year.",
+    "active": true,
+    "description": "This scholarship provides up to $6,000 for Black or Indigenous students entering Computer Science at Waterloo. Selection considers academics and community involvement, with preference for applicants working to advance Black or Indigenous initiatives in their community.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Waterloo"
+      ],
+      "fields": [
+        "computer-science"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": true,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1799,
+    "title": "Waterloo Faculty of Mathematics Olympiad Scholarship",
+    "amount": "Up to $50,000 each ($6,250/term for up to 8 terms)",
+    "deadline": "2027-03-05",
+    "audience": "Grade 12 Olympiad medallists entering Waterloo's Faculty of Mathematics, excluding Software Engineering",
+    "url": "https://uwaterloo.ca/math/undergraduate-studies/applying/scholarships",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Submit the Faculty of Mathematics Olympiad Scholarship application by March 5, 2027. The faculty identifies IMO, IOI, EGMO and EGOI medals as eligible. The central entrance awards page publishes the 2027 deadline, while the faculty page still shows the prior cycle. Renewal after the first year requires an 80% average and full-time enrolment.",
+    "active": true,
+    "description": "This scholarship provides up to $50,000 over eight terms for students entering Waterloo's Faculty of Mathematics with an international mathematics or informatics Olympiad medal. Selection considers the medal, the Admission Information Form and Waterloo mathematics contest results.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Waterloo"
+      ],
+      "fields": [
+        "mathematics",
+        "computer-science"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1800,
+    "title": "Waterloo Jean Andrey Environment Leadership Scholarship",
+    "amount": "up to $7,500 for one year",
+    "deadline": "2027-04-01",
+    "audience": "Grade 12 students with an 85% admission average entering a program in Waterloo's Faculty of Environment",
+    "url": "https://uwaterloo.ca/environment/undergraduate/future-undergraduate/scholarships-and-bursaries",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Complete the Faculty of Environment scholarship application by April 1, 2027. One form covers the faculty's application-based entrance awards. The central entrance awards page confirms this date; the faculty page still carries a closed notice for the 2026 cycle. Sustainability and Financial Management is eligible.",
+    "active": true,
+    "description": "This scholarship provides up to $7,500 for one year to a student entering Waterloo's Faculty of Environment. Selection considers academic achievement, leadership potential and interest in environmental issues shown through extracurricular or volunteer activities.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Waterloo"
+      ],
+      "fields": [
+        "environment"
+      ],
+      "minAverage": 85,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1801,
+    "title": "Waterloo Dean of Environment's Scholarship for Excellence",
+    "amount": "$7,500 for one year",
+    "deadline": "2027-04-01",
+    "audience": "Grade 12 students with 85% entering Waterloo Environment, excluding Sustainability and Financial Management",
+    "url": "https://uwaterloo.ca/environment/undergraduate/future-undergraduate/scholarships-and-bursaries",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Complete the Faculty of Environment scholarship application by April 1, 2027. One form covers the faculty's application-based entrance awards. The central entrance awards page confirms this date; the faculty page still carries a closed notice for the 2026 cycle. Sustainability and Financial Management is excluded.",
+    "active": true,
+    "description": "This scholarship pays $7,500 for one year to students entering Waterloo's Faculty of Environment. Selection considers academic achievement and demonstrated interest in environmental issues.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Waterloo"
+      ],
+      "fields": [
+        "environment"
+      ],
+      "minAverage": 85,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1802,
+    "title": "Waterloo Faculty of Environment Student Engagement Award",
+    "amount": "$4,000 for one year",
+    "deadline": "2027-04-01",
+    "audience": "Grade 12 students with 85% entering Waterloo Environment, excluding Sustainability and Financial Management",
+    "url": "https://uwaterloo.ca/environment/undergraduate/future-undergraduate/scholarships-and-bursaries",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Complete the Faculty of Environment scholarship application by April 1, 2027. One form covers the faculty's application-based entrance awards. The central entrance awards page confirms this date; the faculty page still carries a closed notice for the 2026 cycle. Sustainability and Financial Management is excluded.",
+    "active": true,
+    "description": "This award pays $4,000 for one year to students entering Waterloo's Faculty of Environment. Selection considers academic achievement and previous volunteer work, leadership or sustainability activities in the community.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Waterloo"
+      ],
+      "fields": [
+        "environment"
+      ],
+      "minAverage": 85,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1803,
+    "title": "University of Toronto National Scholarship",
+    "amount": "tuition, incidental and residence fees for up to four years of study",
+    "deadline": "2026-10-30",
+    "audience": "Grade 12 students nominated by their Canadian high school for U of T's National Book Award and applying to U of T",
+    "url": "https://future.utoronto.ca/national-scholarships",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "A school nomination for the U of T National Book Award is required by October 9, 2026. Apply for admission by October 16, then use your JOINid to submit the online National Scholarship application by October 30, 2026. The reference letter is due November 6, 2026. Applicants must be Canadian citizens, permanent residents or protected persons in their final year of a Canadian high school, entering a full-time first undergraduate degree.",
+    "active": true,
+    "description": "This scholarship covers tuition, incidental fees and residence fees for up to four years at the University of Toronto. It is for school-nominated students entering from Canadian high schools, with selection considering academics, creative thinking and contributions to school and community.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Toronto"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1804,
+    "title": "University of Toronto Arbor Scholarship",
+    "amount": "$7,500 in the first year and $1,500 per year for three additional years",
+    "deadline": "2026-10-30",
+    "audience": "School-nominated Grade 12 applicants to U of T's National Scholarship who are selected as runners-up",
+    "url": "https://future.utoronto.ca/national-scholarships",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "A school nomination for the U of T National Book Award is required by October 9, 2026. Apply for admission by October 16, then use your JOINid to submit the online National Scholarship application by October 30, 2026. The reference letter is due November 6, 2026. Applicants must be Canadian citizens, permanent residents or protected persons in their final year of a Canadian high school, entering a full-time first undergraduate degree. There is no separate Arbor application; consideration follows the National Scholarship application and selection process.",
+    "active": true,
+    "description": "This scholarship pays $7,500 in the first year and $1,500 in each of the next three years for a total of $12,000 at the University of Toronto. It is awarded to runners-up in the National Scholarship competition, which assesses academics, creative thinking and contributions to school and community.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Toronto"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
   }
 ]
