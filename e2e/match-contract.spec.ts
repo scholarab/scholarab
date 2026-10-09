@@ -160,9 +160,11 @@ test('320px results wrap long waiting dates without horizontal overflow', async 
   await page.setViewportSize({ width: 320, height: 844 });
   // Keep this recorded waiting-date case stable as the calendar advances.
   await page.clock.setFixedTime(new Date('2026-09-30T12:00:00-06:00'));
+  // Edmonton returns several waiting dates; the Calgary STEM profile this
+  // used had none left after the 2026-10-08 catalogue audit.
   const profile = {
-    searchType: 'both', city: 'Calgary', field: 'STEM',
-    average: '93', institution: 'University of Calgary', board: 'CBE', school: '',
+    searchType: 'both', city: 'Edmonton', field: 'STEM',
+    average: '93', institution: 'University of Alberta', board: 'EPS', school: '',
   };
   await page.addInitScript(({ key, profile }) => sessionStorage.setItem(key, JSON.stringify({ version: 3, step: 7, answers: profile, savedAt: Date.now() })), { key: QUIZ_STORAGE_KEY, profile });
   await page.goto('/match/');
