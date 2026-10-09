@@ -122,7 +122,7 @@
     "audience": "Grade 12 students anywhere in Canada except Quebec",
     "url": "https://blog.remax.ca/quest-official-rules/",
     "category": "Community",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "National",
     "notes": "Dates and terms confirmed against RE/MAX's own Official Rules on 2026-09-08: the program opens August 24, 2026 and closes March 15, 2027, and forty applicants each receive $1,000. Two things the rules make plain that the marketing does not. Winners are picked by random drawing among entries that clear the essay bar, not ranked on merit, so a strong essay improves nothing beyond eligibility. And residents of Quebec are excluded, as are students finishing through high school equivalency courses. The essay must be at least 500 words on one of three themes: what home means to you, leadership or charity in your community, or a dream you hope to achieve. The /quest-for-excellence/ landing page carries the submission form while a cycle is open and 404s between cycles, so this points at the rules page, which stays up year-round.",
     "toApply": {
@@ -162,7 +162,7 @@
       "financialNeed": false,
       "maxFamilyIncome": null,
       "fosterCare": false,
-      "citizenship": "canadian",
+      "citizenship": "any",
       "apprenticeship": false,
       "extracurriculars": []
     },
@@ -516,7 +516,7 @@
     "category": "STEM",
     "lastVerified": "2026-10",
     "region": "Medicine Hat",
-    "active": true,
+    "active": false,
     "description": "Senior-division projects (grades 11-12) at the Southeast Alberta Regional Science Fair compete for certificates, prizes and special awards, and up to five students across the junior, intermediate and senior divisions advance to the Canada Wide Science Fair with expenses paid.",
     "eligibility": {
       "grades": [
@@ -1500,7 +1500,7 @@
     "amount": "$100,000 to $120,000",
     "deadline": "2027-01-27",
     "audience": "Canadian high school students entering STEM at one of 20 selected universities; school nominates 1 student",
-    "url": "https://www.schulichleaders.com/apply",
+    "url": "https://schulichleaders.com/apply/",
     "category": "STEM",
     "lastVerified": "2026-10",
     "region": "National",
@@ -1618,7 +1618,7 @@
     "title": "Advancing Futures Bursary",
     "amount": "$40,000",
     "deadline": "2027-02-01",
-    "audience": "Alberta youth aged 18 to 24 who have been in government care (foster care) at any point",
+    "audience": "Alberta youth aged 18 to 24 with qualifying government-care history; eligibility depends on the type and duration of care, not any foster-care stay",
     "url": "https://www.alberta.ca/advancing-futures",
     "category": "Community",
     "lastVerified": "2026-10",
@@ -2137,11 +2137,10 @@
     "amount": "$1,500",
     "deadline": "2027-04-27",
     "deadlineEstimated": true,
-    "openDate": "2027-02-01",
     "audience": "Edmonton Public Schools Grade 12 students with honours standing, conditional acceptance to UofA",
     "url": "https://www.epsb.ca/schools/goingtoschool/awards/communityawards/catherineandrobertpovaschuk/",
     "category": "Academic",
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-10",
     "region": "Edmonton",
     "notes": "Edmonton Public Schools Foundation says applications for the 2026-27 award open in February 2027. Recipients are contacted in June.",
     "toApply": {
@@ -2206,11 +2205,10 @@
     "amount": "Up to $4,000",
     "deadline": "2027-04-27",
     "deadlineEstimated": true,
-    "openDate": "2027-02-01",
     "audience": "Edmonton Public Schools Grade 12 students with a learning disability",
     "url": "https://www.epsb.ca/schools/goingtoschool/awards/communityawards/bettyfinch/",
     "category": "Academic",
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-10",
     "region": "Edmonton",
     "notes": "Edmonton Public Schools Foundation says applications for the 2026-27 award open in February 2027. Recipients are contacted in June.",
     "active": false,
@@ -2231,7 +2229,7 @@
       "genderRequired": null,
       "indigenousRequired": false,
       "bipocRequired": false,
-      "financialNeed": false,
+      "financialNeed": true,
       "maxFamilyIncome": null,
       "fosterCare": false,
       "citizenship": "canadian",
@@ -2246,11 +2244,10 @@
     "amount": "$3,000",
     "deadline": "2027-04-27",
     "deadlineEstimated": true,
-    "openDate": "2027-02-01",
     "audience": "Edmonton Public Schools Grade 12 students headed to UofA, NAIT or MacEwan",
     "url": "https://www.epsb.ca/schools/goingtoschool/awards/communityawards/estherandpetercunliffe/",
     "category": "Academic",
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-10",
     "region": "Edmonton",
     "notes": "Edmonton Public Schools Foundation says applications for the 2026-27 award open in February 2027. Recipients are contacted in June.",
     "active": false,
@@ -2275,10 +2272,10 @@
       "genderRequired": null,
       "indigenousRequired": false,
       "bipocRequired": false,
-      "financialNeed": false,
+      "financialNeed": true,
       "maxFamilyIncome": null,
       "fosterCare": false,
-      "citizenship": "canadian",
+      "citizenship": "permanent_resident",
       "apprenticeship": false,
       "extracurriculars": []
     },
@@ -2290,11 +2287,10 @@
     "amount": "$500",
     "deadline": "2027-04-27",
     "deadlineEstimated": true,
-    "openDate": "2027-02-01",
     "audience": "Edmonton Public Schools Grade 12 students who attended Garneau School",
     "url": "https://www.epsb.ca/schools/goingtoschool/awards/communityawards/graceelainecampbell/",
     "category": "Academic",
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-10",
     "region": "Edmonton",
     "notes": "Edmonton Public Schools Foundation says applications for the 2026-27 award open in February 2027. Recipients are contacted in June.",
     "active": false,
@@ -2330,11 +2326,10 @@
     "amount": "$600",
     "deadline": "2027-04-27",
     "deadlineEstimated": true,
-    "openDate": "2027-02-01",
     "audience": "Edmonton Public Schools Grade 12 students taking 30-level French",
     "url": "https://www.epsb.ca/schools/goingtoschool/awards/communityawards/jamespjones/",
     "category": "Academic",
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-10",
     "region": "Edmonton",
     "notes": "Edmonton Public Schools Foundation says applications for the 2026-27 award open in February 2027. Recipients are contacted in June.",
     "active": false,
@@ -2370,11 +2365,10 @@
     "amount": "$1,000",
     "deadline": "2027-04-27",
     "deadlineEstimated": true,
-    "openDate": "2027-02-01",
     "audience": "Edmonton Public Schools Grade 12 students demonstrating educational commitment",
     "url": "https://www.epsb.ca/schools/goingtoschool/awards/communityawards/sandrabwoitas/",
     "category": "Community",
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-10",
     "region": "Edmonton",
     "notes": "Edmonton Public Schools Foundation says applications for the 2026-27 award open in February 2027. Recipients are contacted in June.",
     "active": false,
@@ -2395,7 +2389,7 @@
       "genderRequired": null,
       "indigenousRequired": false,
       "bipocRequired": false,
-      "financialNeed": false,
+      "financialNeed": true,
       "maxFamilyIncome": null,
       "fosterCare": false,
       "citizenship": "canadian",
@@ -2410,11 +2404,10 @@
     "amount": "Up to $10,000",
     "deadline": "2027-04-27",
     "deadlineEstimated": true,
-    "openDate": "2027-02-01",
     "audience": "Edmonton Public Schools Grade 12 students with financial need and clear career plans",
     "url": "https://www.epsb.ca/schools/goingtoschool/awards/communityawards/leroywardenassociates/",
     "category": "Academic",
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-10",
     "region": "Edmonton",
     "notes": "Edmonton Public Schools Foundation says applications for the 2026-27 award open in February 2027. Recipients are contacted in June.",
     "active": false,
@@ -2435,10 +2428,10 @@
       "genderRequired": null,
       "indigenousRequired": false,
       "bipocRequired": false,
-      "financialNeed": false,
+      "financialNeed": true,
       "maxFamilyIncome": null,
       "fosterCare": false,
-      "citizenship": "canadian",
+      "citizenship": "permanent_resident",
       "apprenticeship": false,
       "extracurriculars": []
     },
@@ -2477,7 +2470,7 @@
       "financialNeed": false,
       "maxFamilyIncome": null,
       "fosterCare": false,
-      "citizenship": "canadian",
+      "citizenship": "permanent_resident",
       "apprenticeship": false,
       "extracurriculars": [
         "music"
@@ -2520,7 +2513,7 @@
       "financialNeed": false,
       "maxFamilyIncome": null,
       "fosterCare": false,
-      "citizenship": "canadian",
+      "citizenship": "permanent_resident",
       "apprenticeship": false,
       "extracurriculars": [
         "music"
@@ -2531,19 +2524,21 @@
   {
     "id": 86,
     "title": "Mah Society of Edmonton Centennial Scholarship",
-    "amount": "$1,000",
+    "amount": "$100–$500",
     "deadline": "2027-04-17",
     "deadlineEstimated": true,
     "audience": "Students with the surname \"Mah\" entering post-secondary in Canada",
     "url": "https://edmontonmahsociety.com/scholarships/",
     "category": "Community",
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-10",
     "region": "Edmonton",
     "notes": "The 2026 round closed April 17. Applications go to Gene Mah at mahsocietyedmonton@gmail.com.",
     "active": false,
     "description": "The Mah Society of Edmonton gives $1,000 to a student entering post-secondary anywhere in Canada who carries the surname Mah. That is the whole requirement: any background, no minimum average.",
     "eligibility": {
       "grades": [
+        "10",
+        "11",
         "12"
       ],
       "schoolBoards": [],
@@ -2561,7 +2556,7 @@
       "financialNeed": false,
       "maxFamilyIncome": null,
       "fosterCare": false,
-      "citizenship": "canadian",
+      "citizenship": "permanent_resident",
       "apprenticeship": false,
       "extracurriculars": []
     },
@@ -2614,11 +2609,10 @@
     "amount": "$2,500",
     "deadline": "2027-04-29",
     "deadlineEstimated": true,
-    "openDate": "2027-01-13",
     "audience": "Lethbridge School Division students demonstrating innovation, creativity, and entrepreneurship",
     "url": "https://www.lethsd.ab.ca/board/ice-awards-scholarship/scholarship-applications",
     "category": "Academic",
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-10",
     "region": "Lethbridge",
     "notes": "The 2026 application period ran January 13 to April 29.",
     "active": false,
@@ -2766,21 +2760,22 @@
   {
     "id": 93,
     "title": "LaDue Ladies Lunch Scholarship",
-    "amount": "$4,000",
+    "amount": "$1,500–$4,000",
     "deadline": "2027-04-17",
     "deadlineEstimated": true,
     "openDate": "2027-01-26",
     "audience": "Female-identifying Grade 12 students in Alberta entering post-secondary",
-    "url": "https://albertascholarships.ca/scholarships/39046/la-due-ladies-lunch-scholarship",
+    "url": "https://ladueladieslunch.ca/scholarships/",
     "category": "Community",
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-10",
     "region": "Alberta",
     "notes": "The 2026 round opened January 26 and closed at midnight April 17. The dates shown are those, so check ladueladieslunch.ca in January.",
     "active": false,
     "description": "The LaDue Ladies Lunch Scholarship supports female-identifying Grade 12 students in Alberta who are entering post-secondary education. This $4,000 award recognizes and encourages young women pursuing their educational goals at the post-secondary level.",
     "eligibility": {
       "grades": [
-        "12"
+        "12",
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -2809,8 +2804,8 @@
     "audience": "Piano students in Alberta",
     "url": "https://armta.ca/bette-joan-rac-piano-scholarship-2/",
     "category": "Arts",
-    "lastVerified": "2026-08",
-    "region": "Edmonton",
+    "lastVerified": "2026-10",
+    "region": "Alberta",
     "notes": "Deadline is April 30 every year. One $1,000 award, presented annually through the Alberta Piano Teachers Association.",
     "active": false,
     "description": "This $1,000 scholarship supports piano students pursuing their musical education in Alberta. Offered to recognize excellence and passion in piano performance, it is open to high school students interested in continuing their musical studies.",
@@ -2833,10 +2828,10 @@
       "genderRequired": null,
       "indigenousRequired": false,
       "bipocRequired": false,
-      "financialNeed": false,
+      "financialNeed": true,
       "maxFamilyIncome": null,
       "fosterCare": false,
-      "citizenship": "canadian",
+      "citizenship": "any",
       "apprenticeship": false,
       "extracurriculars": [
         "music"
@@ -2849,16 +2844,20 @@
     "amount": "$3,000",
     "deadline": "2027-04-30",
     "audience": "Alberta youth curlers eligible for U20 sanctioned season",
-    "url": "https://curlingalberta.ca/about-us/scholarships/",
+    "url": "https://curlingalberta.ca/hecgervaisscholarship/",
     "category": "Community",
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-10",
     "region": "Alberta",
     "notes": "Curling Alberta's scholarships page is empty, so nothing here is confirmed for the new cycle. Contact Curling Alberta before you plan on it.",
     "active": false,
     "description": "$3,000 for an Alberta youth curler with strong marks who is eligible for U20 sanctioned competition during the academic year. Named after Hec Gervais, one of Alberta curling's greats.",
     "eligibility": {
       "grades": [
-        "12"
+        "9",
+        "10",
+        "11",
+        "12",
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -3339,14 +3338,15 @@
     "audience": "Alberta students 25 or younger demonstrating talent and clear goals in literary arts",
     "url": "https://www.affta.ab.ca/funding/special-programs/awards-and-scholarships",
     "category": "Arts",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "Alberta",
     "notes": "All four Alberta Foundation for the Arts scholarship programs pay $7,000 and close March 1 every year.",
     "active": false,
     "description": "$7,000 for an Alberta writer aged 25 or under, named for Grant MacEwan, author and former Lieutenant Governor of Alberta. One award is given annually, and the jury wants to see real literary ambition.",
     "eligibility": {
       "grades": [
-        "12"
+        "12",
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -3363,7 +3363,7 @@
       "financialNeed": false,
       "maxFamilyIncome": null,
       "fosterCare": false,
-      "citizenship": "canadian",
+      "citizenship": "permanent_resident",
       "apprenticeship": false,
       "extracurriculars": []
     },
@@ -3503,7 +3503,9 @@
     "openDate": "2026-10-05",
     "description": "Alberta Blue Cross awards this $1,500 scholarship to Indigenous (First Nations, Métis, or Inuit) students who are enrolled full-time in post-secondary programs of at least 2 years in duration. Nine scholarships are awarded annually to recognize and support Indigenous learners pursuing their education. Applicants cannot have previously received this award.",
     "eligibility": {
-      "grades": [],
+      "grades": [
+        "post-secondary"
+      ],
       "schoolBoards": [],
       "specificSchools": [],
       "targetInstitutions": [
@@ -4542,10 +4544,10 @@
     "id": 134,
     "title": "Queen's Platinum Jubilee Scholarship for Performing Arts",
     "amount": "$7,000",
-    "audience": "Alberta performing artists 25 or younger enrolled in a performing arts training program",
+    "audience": "Alberta musicians age 25 or younger enrolled in eligible music training",
     "url": "https://www.affta.ab.ca/funding/find-funding/queens-platinum-jubilee-scholarship-performing-arts",
     "category": "Arts",
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-10",
     "region": "Alberta",
     "notes": "This is not the citizenship award of a similar name, and it does not need a school nomination. You apply directly through the GATE Front Office system, and first time users have to email registrationafa@gov.ab.ca at least five business days ahead to get login credentials, so do not leave that to the last week. The application wants a two page letter, a resume, a program description, proof of age, a reference letter and audition materials.",
     "applyViaGuidance": false,
@@ -4560,7 +4562,7 @@
       "specificSchools": [],
       "targetInstitutions": [],
       "fields": [
-        "arts"
+        "Music"
       ],
       "minAverage": null,
       "minAge": null,
@@ -5272,7 +5274,7 @@
       ],
       "fields": [],
       "minAverage": null,
-      "minAge": null,
+      "minAge": 16,
       "maxAge": null,
       "genderRequired": null,
       "indigenousRequired": false,
@@ -5280,7 +5282,7 @@
       "financialNeed": false,
       "maxFamilyIncome": null,
       "fosterCare": false,
-      "citizenship": "canadian",
+      "citizenship": "permanent_resident",
       "apprenticeship": false,
       "extracurriculars": []
     }
@@ -5411,7 +5413,9 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "metaDetail": "Needs two signed references; funds go straight to your school."
+    "metaDetail": "Needs two signed references; funds go straight to your school.",
+    "deadlineEstimated": true,
+    "openDate": "2027-01-01"
   },
   {
     "id": 156,
@@ -5503,7 +5507,7 @@
     "audience": "Students graduating from high school or already in post-secondary",
     "url": "https://www.kincanada.ca/EN/Web/OurBursaries/Apply.aspx",
     "category": "Community",
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-10",
     "region": "National",
     "notes": "Applications run October 1 to February 1 at 11:59pm Pacific, and Kin Canada calls that date firm. You cannot win this twice, so it is worth timing against your other February deadlines.",
     "toApply": {
@@ -5553,7 +5557,8 @@
         "volunteer"
       ]
     },
-    "metaDetail": "Kin club endorsed, nationally judged."
+    "metaDetail": "Kin club endorsed, nationally judged.",
+    "openDate": "2026-10-01"
   },
   {
     "id": 159,
@@ -5561,13 +5566,13 @@
     "amount": "$1,000–$2,500",
     "deadline": "2027-01-31",
     "audience": "Canadian students enrolled full-time at a Canadian post-secondary institution",
-    "url": "https://mensa.ca/scholarships/",
+    "url": "https://www.mensacanada.ca/",
     "category": "Academic",
     "lastVerified": "2026-10",
     "region": "National",
     "notes": "Deadline is January 31 every year. You submit a 250 word essay on your career goals. Winners are announced in the summer.",
     "applyViaGuidance": false,
-    "active": false,
+    "active": true,
     "description": "Mensa Canada awards multiple scholarships ranging from $1,000 to $2,500 to Canadian students enrolled full-time at Canadian post-secondary institutions. Selection is based entirely on an essay submission; there is no GPA requirement, and the scholarship is open to all students regardless of Mensa membership. Applicants can learn more and apply at canada.mensa.org.",
     "eligibility": {
       "grades": [],
@@ -5670,7 +5675,8 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "metaDetail": "Two awards; typed applications only."
+    "metaDetail": "Two awards; typed applications only.",
+    "deadlineEstimated": true
   },
   {
     "id": 163,
@@ -6302,7 +6308,7 @@
     "audience": "Alberta Grade 12 students who have completed Chinese Language and Culture 10 and 20",
     "url": "https://www.alberta.ca/china-alberta-award-for-excellence-in-chinese",
     "category": "Academic",
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-10",
     "region": "Alberta",
     "notes": "You need Chinese Language and Culture 10 and 20 done, be in or finished 30, be in Grade 12, and hold an 80 percent average overall and in Chinese. You submit a form, a two paragraph essay and a teacher reference.",
     "active": false,
@@ -6326,7 +6332,7 @@
       "financialNeed": false,
       "maxFamilyIncome": null,
       "fosterCare": false,
-      "citizenship": "canadian",
+      "citizenship": "permanent_resident",
       "apprenticeship": false,
       "extracurriculars": []
     },
@@ -8459,7 +8465,7 @@
   {
     "id": 231,
     "title": "Drs. Harry & Martha Cohen Promising Student Prize",
-    "amount": "$450",
+    "amount": "Minimum $450",
     "deadline": "2027-04-15",
     "openDate": "2027-03-01",
     "audience": "Students enrolled in Dr. Martha Cohen School who show promise and financial need",
@@ -12408,13 +12414,14 @@
     "url": "https://www.centralalbertaco-op.crs/sites/centralalberta/membership/detail/central-alberta-co-op-scholarship-program",
     "category": "Community",
     "region": "Red Deer",
-    "active": true,
-    "lastVerified": "2026-08",
+    "active": false,
+    "lastVerified": "2026-10",
     "notes": "The co-op states a fixed April 1 to April 30 window every year, so the dates here are that window, not a guess. The membership test is on the household, not on you: a parent counts. Applications run through the Do Some Good platform, which needs its own account.",
     "description": "Central Alberta Co-op awards ten $1,000 scholarships each year to Grade 12 and mature students heading to post-secondary. There is no restriction on your field of study or which institution you attend. The applicant or an immediate family member must have been a Central Alberta Co-op member for at least one year with more than $2,500 in purchases over the past year, and must live in the co-op's trading area. The application asks for transcripts, two community reference letters, one education reference letter, proof of acceptance, and a 200 to 500 word essay on what the co-op means to you.",
     "eligibility": {
       "grades": [
-        "12"
+        "12",
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -13894,20 +13901,19 @@
   },
   {
     "id": 364,
-    "title": "Rocky View County Agricultural Scholarship at Olds College",
+    "title": "Rocky View Agricultural Award",
     "amount": "$500",
     "deadline": "2027-01-31",
-    "audience": "Rocky View County residents in Agricultural Production or Land and Water Resources at Olds College",
+    "audience": "Rocky View residents in first or second year of Agricultural Management, Environmental Science & Technology, or Agricultural & Heavy Equipment at Olds College",
     "category": "Academic",
     "region": "Airdrie",
     "active": true,
     "lastVerified": "2026-10",
     "url": "https://www.rockyview.ca/services/agriculture-and-environment/awards-and-scholarships",
     "notes": "Olds College considers you automatically once you complete its General Application, and its award record gives a January 31 deadline. The county page lists older fall and winter dates. Residency is in the county itself, so a student inside Airdrie's city limits does not qualify for this one even though the rest of the page applies to them. The application is Olds College's own awards portal.",
-    "description": "A $500 award for a Rocky View County resident in the first or second year of the Agricultural Production or the Land and Water Resources program at Olds College, with a GPA of at least 3.00. The county funds it and Olds College administers it through its awards portal.",
+    "description": "A $500 award for a Rocky View County resident in the first or second year of Agricultural Management, Environmental Science & Technology, or Agricultural & Heavy Equipment at Olds College, with a GPA of at least 3.00. The county funds it and Olds College administers it through its awards portal.",
     "eligibility": {
       "grades": [
-        "12",
         "post-secondary"
       ],
       "schoolBoards": [],
@@ -14888,9 +14894,9 @@
     "amount": "$2,500",
     "deadline": "2027-04-15",
     "audience": "Students under 19 who have not yet finished secondary school",
-    "url": "https://www.amsnwoptimist.com/essay-contest.html",
+    "url": "https://www.optimist.org/essay",
     "category": "Academic",
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-10",
     "region": "National",
     "notes": "April 15 is the date your District has to send its winner to Optimist International, and the Districts send to that date every year. Your own deadline is set by your sponsoring club and is much earlier: club contests run in early February, and clubs pass their winner up by the end of that month. Contact a local club in the fall rather than waiting for a posted date. Alberta clubs sit in Zones 3, 5 and 6 of the AMSNW District.",
     "applyViaGuidance": true,
@@ -16011,7 +16017,7 @@
     "audience": "Grade 12 hockey players at Paul Kane, Bellerose or St. Albert Catholic",
     "url": "https://sascf.ca/jaxon-joseph-award/",
     "category": "Sports",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "St. Albert",
     "notes": "The date here is Paul Kane's April 10. Bellerose collects the same award until June 1 and the other schools set their own, so the deadline you are held to is your own school's, not the one printed here. Ask your counsellor which applies to you.",
     "applyViaGuidance": true,
@@ -16024,7 +16030,11 @@
         "12"
       ],
       "schoolBoards": [],
-      "specificSchools": [],
+      "specificSchools": [
+        "Paul Kane High School",
+        "Bellerose High School",
+        "St. Albert Catholic High School"
+      ],
       "targetInstitutions": [],
       "fields": [],
       "minAverage": 70,
@@ -16052,7 +16062,7 @@
     "audience": "Grade 12 hockey players entering athletic therapy or physiotherapy",
     "url": "https://sascf.ca/connor-lukan-award/",
     "category": "Sports",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "St. Albert",
     "notes": "The date here is Paul Kane's April 10. Bellerose collects the same award until June 1 and the other schools set their own, so the deadline you are held to is your own school's, not the one printed here. Ask your counsellor which applies to you.",
     "applyViaGuidance": true,
@@ -16065,7 +16075,11 @@
         "12"
       ],
       "schoolBoards": [],
-      "specificSchools": [],
+      "specificSchools": [
+        "Paul Kane High School",
+        "Bellerose High School",
+        "St. Albert Catholic High School"
+      ],
       "targetInstitutions": [],
       "fields": [
         "Health"
@@ -16094,7 +16108,7 @@
     "audience": "Grade 12 hockey players who coach or volunteer with younger kids",
     "url": "https://sascf.ca/logan-hunter-award/",
     "category": "Sports",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "St. Albert",
     "notes": "The date here is Paul Kane's April 10. Bellerose collects the same award until June 1 and the other schools set their own, so the deadline you are held to is your own school's, not the one printed here. Ask your counsellor which applies to you.",
     "applyViaGuidance": true,
@@ -16107,7 +16121,11 @@
         "12"
       ],
       "schoolBoards": [],
-      "specificSchools": [],
+      "specificSchools": [
+        "Paul Kane High School",
+        "Bellerose High School",
+        "St. Albert Catholic High School"
+      ],
       "targetInstitutions": [],
       "fields": [],
       "minAverage": 70,
@@ -16136,7 +16154,7 @@
     "audience": "Grade 10, 11 and 12 hockey players with an 80% average",
     "url": "https://sascf.ca/stephen-wack-award/",
     "category": "Sports",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "St. Albert",
     "notes": "The date here is Paul Kane's April 10. Bellerose collects the same award until June 1 and the other schools set their own, so the deadline you are held to is your own school's, not the one printed here. Ask your counsellor which applies to you.",
     "applyViaGuidance": true,
@@ -16151,7 +16169,11 @@
         "12"
       ],
       "schoolBoards": [],
-      "specificSchools": [],
+      "specificSchools": [
+        "Paul Kane High School",
+        "Bellerose High School",
+        "St. Albert Catholic High School"
+      ],
       "targetInstitutions": [],
       "fields": [],
       "minAverage": 80,
@@ -16178,7 +16200,7 @@
     "audience": "Graduating volleyball players at Bellerose, Paul Kane or St. Albert Catholic",
     "url": "https://sascf.ca/shea-lynn-mcgaw-awards/",
     "category": "Sports",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "St. Albert",
     "notes": "The date here is Paul Kane's April 10. Bellerose collects the same award until June 1 and the other schools set their own, so the deadline you are held to is your own school's, not the one printed here. Ask your counsellor which applies to you.",
     "applyViaGuidance": true,
@@ -16191,7 +16213,11 @@
         "12"
       ],
       "schoolBoards": [],
-      "specificSchools": [],
+      "specificSchools": [
+        "Paul Kane High School",
+        "Bellerose High School",
+        "St. Albert Catholic High School"
+      ],
       "targetInstitutions": [],
       "fields": [],
       "minAverage": null,
@@ -16331,7 +16357,7 @@
     "audience": "Paul Kane students in grades 10 to 12 who are working hard to get ahead",
     "url": "https://sascf.ca/stanley-dennis-scholarship/",
     "category": "General",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "St. Albert",
     "notes": "Paul Kane collects this one and its handout gives April 10 as the date, with no year attached, so it is an annual cutoff, not a one-off. The handout says every detail in it is subject to change, so confirm the date with Student Services.",
     "applyViaGuidance": true,
@@ -16345,7 +16371,9 @@
         "12"
       ],
       "schoolBoards": [],
-      "specificSchools": [],
+      "specificSchools": [
+        "Paul Kane High School"
+      ],
       "targetInstitutions": [],
       "fields": [],
       "minAverage": null,
@@ -16370,7 +16398,7 @@
     "audience": "Grade 12 Paul Kane students entering fine or performing arts",
     "url": "https://sascf.ca/katherine-dennis-scholarship/",
     "category": "Arts",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "St. Albert",
     "notes": "Paul Kane collects this one and its handout gives April 10 as the date, with no year attached, so it is an annual cutoff, not a one-off. The handout says every detail in it is subject to change, so confirm the date with Student Services.",
     "applyViaGuidance": true,
@@ -16382,7 +16410,9 @@
         "12"
       ],
       "schoolBoards": [],
-      "specificSchools": [],
+      "specificSchools": [
+        "Paul Kane High School"
+      ],
       "targetInstitutions": [],
       "fields": [
         "Arts"
@@ -16409,7 +16439,7 @@
     "audience": "Grade 12 Paul Kane students entering commerce or technology",
     "url": "https://sascf.ca/christopher-dennis-scholarship/",
     "category": "Academic",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "St. Albert",
     "notes": "Paul Kane collects this one and its handout gives April 10 as the date, with no year attached, so it is an annual cutoff, not a one-off. The handout says every detail in it is subject to change, so confirm the date with Student Services.",
     "applyViaGuidance": true,
@@ -16421,7 +16451,9 @@
         "12"
       ],
       "schoolBoards": [],
-      "specificSchools": [],
+      "specificSchools": [
+        "Paul Kane High School"
+      ],
       "targetInstitutions": [],
       "fields": [
         "Business",
@@ -17129,7 +17161,7 @@
     "audience": "A graduating Paul Kane senior team athlete whose marks improved",
     "url": "https://pkhs.spschools.org/students/scholarships-awards",
     "category": "Sports",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "St. Albert",
     "notes": "Paul Kane collects this one and its handout gives April 10 as the date, with no year attached, so it is an annual cutoff, not a one-off. The handout says every detail in it is subject to change, so confirm the date with Student Services.",
     "applyViaGuidance": true,
@@ -17143,9 +17175,7 @@
       "schoolBoards": [],
       "specificSchools": [],
       "targetInstitutions": [],
-      "fields": [
-        "Business"
-      ],
+      "fields": [],
       "minAverage": null,
       "minAge": null,
       "maxAge": null,
@@ -17806,7 +17836,9 @@
         "12"
       ],
       "schoolBoards": [],
-      "specificSchools": [],
+      "specificSchools": [
+        "Spruce Grove Composite High School"
+      ],
       "targetInstitutions": [],
       "fields": [],
       "minAverage": null,
@@ -17845,7 +17877,9 @@
         "12"
       ],
       "schoolBoards": [],
-      "specificSchools": [],
+      "specificSchools": [
+        "Spruce Grove Composite High School"
+      ],
       "targetInstitutions": [],
       "fields": [],
       "minAverage": null,
@@ -17883,7 +17917,9 @@
         "12"
       ],
       "schoolBoards": [],
-      "specificSchools": [],
+      "specificSchools": [
+        "Spruce Grove Composite High School"
+      ],
       "targetInstitutions": [],
       "fields": [],
       "minAverage": null,
@@ -17924,7 +17960,9 @@
         "12"
       ],
       "schoolBoards": [],
-      "specificSchools": [],
+      "specificSchools": [
+        "Spruce Grove Composite High School"
+      ],
       "targetInstitutions": [],
       "fields": [],
       "minAverage": null,
@@ -17964,7 +18002,9 @@
         "12"
       ],
       "schoolBoards": [],
-      "specificSchools": [],
+      "specificSchools": [
+        "Spruce Grove Composite High School"
+      ],
       "targetInstitutions": [],
       "fields": [],
       "minAverage": null,
@@ -18004,7 +18044,9 @@
         "12"
       ],
       "schoolBoards": [],
-      "specificSchools": [],
+      "specificSchools": [
+        "Spruce Grove Composite High School"
+      ],
       "targetInstitutions": [],
       "fields": [],
       "minAverage": null,
@@ -18042,7 +18084,9 @@
         "12"
       ],
       "schoolBoards": [],
-      "specificSchools": [],
+      "specificSchools": [
+        "Spruce Grove Composite High School"
+      ],
       "targetInstitutions": [],
       "fields": [],
       "minAverage": 70,
@@ -18122,7 +18166,9 @@
         "12"
       ],
       "schoolBoards": [],
-      "specificSchools": [],
+      "specificSchools": [
+        "Spruce Grove Composite High School"
+      ],
       "targetInstitutions": [],
       "fields": [],
       "minAverage": null,
@@ -18160,7 +18206,9 @@
         "12"
       ],
       "schoolBoards": [],
-      "specificSchools": [],
+      "specificSchools": [
+        "Spruce Grove Composite High School"
+      ],
       "targetInstitutions": [
         "Northern Alberta Institute of Technology"
       ],
@@ -23705,7 +23753,7 @@
   {
     "id": 615,
     "region": "Camrose",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "active": true,
     "title": "Robyn Gray Memorial Scholarship",
     "amount": "$1,000",
@@ -23718,7 +23766,8 @@
     "metaDetail": "Renewable four years, so worth $4,000.",
     "eligibility": {
       "grades": [
-        "12"
+        "12",
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -26160,7 +26209,9 @@
         "12"
       ],
       "schoolBoards": [],
-      "specificSchools": [],
+      "specificSchools": [
+        "Lacombe Composite"
+      ],
       "targetInstitutions": [],
       "fields": [],
       "minAverage": null,
@@ -26296,8 +26347,8 @@
   {
     "id": 682,
     "region": "Lacombe",
-    "lastVerified": "2026-09",
-    "active": true,
+    "lastVerified": "2026-10",
+    "active": false,
     "url": "https://www.wolfcreek.ab.ca/students-families/scholarships/ecole-secondaire-lacombe-composite-high-school-scholarships",
     "notes": "Two reference letters and a Detailed Academic Report are required. There are two dates: April 29 direct to Lacombe Rotary, or April 27 if you hand it in at the LCHS Career Centre. The earlier one is used here so nobody misses it.",
     "applyViaGuidance": true,
@@ -26336,7 +26387,7 @@
   {
     "id": 683,
     "region": "Lacombe",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "active": true,
     "url": "https://www.wolfcreek.ab.ca/students-families/scholarships/ecole-secondaire-lacombe-composite-high-school-scholarships",
     "notes": "If April 1 is not a school day, applications are accepted on the first school day after it.",
@@ -26354,7 +26405,9 @@
         "12"
       ],
       "schoolBoards": [],
-      "specificSchools": [],
+      "specificSchools": [
+        "Lacombe Composite"
+      ],
       "targetInstitutions": [],
       "fields": [],
       "minAverage": null,
@@ -26963,7 +27016,8 @@
     "metaDetail": "Lacombe residents skip the membership requirement.",
     "eligibility": {
       "grades": [
-        "12"
+        "12",
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -27031,14 +27085,14 @@
   {
     "id": 701,
     "region": "Lacombe",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "active": true,
     "url": "https://www.wolfcreek.ab.ca/students-families/scholarships/wolf-creek-scholarships",
     "notes": "The station describes the award as up to $2,000, so the amount can be less. A current letter of recommendation is helpful but not required. Applications go to the Career Centre or scholarship committee by April 17.",
     "applyViaGuidance": true,
     "applyRoute": "school",
     "title": "Sunny 94 Scholarship",
-    "amount": "$2,000",
+    "amount": "Up to $2,000",
     "category": "Arts",
     "audience": "Wolf Creek students entering music, broadcasting or journalism",
     "description": "Up to $2,000 from the local radio station, for a student enrolling within twelve months in an accredited music, broadcasting or journalism program. Broadcasting and journalism count as fields in their own right.",
@@ -36810,13 +36864,13 @@
   {
     "id": 939,
     "title": "Bearspaw Foundation Bursary",
-    "amount": "Varies",
+    "amount": "$7,500",
     "deadline": "2027-03-01",
     "openDate": null,
     "audience": "Cochrane High School graduating students",
     "url": "https://cochrane.rockyview.ab.ca/activities/graduation",
     "category": "Community",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "Cochrane",
     "notes": "This is the only award in the Cochrane High package that closes on March 1, not April 1. The school allows you to submit a package for it and then submit an updated package in April, which replaces the first, so applying early costs you nothing.",
     "applyViaGuidance": true,
@@ -36839,7 +36893,7 @@
       "genderRequired": null,
       "indigenousRequired": false,
       "bipocRequired": false,
-      "financialNeed": false,
+      "financialNeed": true,
       "maxFamilyIncome": null,
       "fosterCare": false,
       "citizenship": "any",
@@ -36851,13 +36905,13 @@
   {
     "id": 940,
     "title": "Brett Binder Leadership Award",
-    "amount": "Varies",
+    "amount": "$1,500",
     "deadline": "2027-04-01",
     "openDate": null,
     "audience": "A Cochrane High School student who has shown leadership",
     "url": "https://cochrane.rockyview.ab.ca/activities/graduation",
     "category": "Community",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "Cochrane",
     "notes": "The package asks for a Record of Accomplishments chart that names your role in each activity, whether you led, initiated, participated or organised, and whether it would have happened without you. That chart is what a leadership award is decided on.",
     "applyViaGuidance": true,
@@ -36894,14 +36948,14 @@
   {
     "id": 941,
     "title": "Cochrane Activettes Bursary",
-    "amount": "Varies",
+    "amount": "$4,500",
     "deadline": "2027-04-01",
     "deadlineEstimated": true,
     "openDate": null,
     "audience": "Cochrane High School graduating students",
     "url": "https://cochrane.rockyview.ab.ca/activities/graduation",
     "category": "Community",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "Cochrane",
     "notes": "Cochrane High runs almost all of its local awards through one printed application package handed in at the main office, so ticking this box costs you nothing once the package is written. The date shown is the annual cutoff from the last posted cycle.",
     "applyViaGuidance": true,
@@ -36935,14 +36989,14 @@
   {
     "id": 942,
     "title": "Cochrane Home Treasures Award",
-    "amount": "Varies",
+    "amount": "$5,000",
     "deadline": "2027-04-01",
     "deadlineEstimated": true,
     "openDate": null,
     "audience": "Cochrane High School graduating students",
     "url": "https://cochrane.rockyview.ab.ca/activities/graduation",
     "category": "Community",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "Cochrane",
     "notes": "Cochrane High runs almost all of its local awards through one printed application package handed in at the main office, so ticking this box costs you nothing once the package is written. The date shown is the annual cutoff from the last posted cycle.",
     "applyViaGuidance": true,
@@ -36976,13 +37030,13 @@
   {
     "id": 943,
     "title": "Cochrane High School Class Act Award",
-    "amount": "Varies",
+    "amount": "$750",
     "deadline": "2027-04-01",
     "openDate": null,
     "audience": "A graduating Cochrane High School student",
     "url": "https://cochrane.rockyview.ab.ca/activities/graduation",
     "category": "General",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "Cochrane",
     "notes": "Because it is the school's own award rather than a sponsor's, the essay questions in the package carry the most weight here. Those ask what you are most proud of, what you most need to improve, and what obstacles you have overcome.",
     "applyViaGuidance": true,
@@ -37017,13 +37071,13 @@
   {
     "id": 944,
     "title": "Cochrane Lions Club Scholarship",
-    "amount": "Varies",
+    "amount": "$1,000",
     "deadline": "2027-04-01",
     "openDate": null,
     "audience": "Cochrane High School graduating students",
     "url": "https://cochrane.rockyview.ab.ca/activities/graduation",
     "category": "Community",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "Cochrane",
     "notes": "The package marks this as requiring a written response, so the general application alone will not put you in the running. Only this and the Meaghan Kate Foley award carry that extra requirement.",
     "applyViaGuidance": true,
@@ -37058,14 +37112,14 @@
   {
     "id": 945,
     "title": "Danielle Kendall Memorial Scholarship",
-    "amount": "Varies",
+    "amount": "$500",
     "deadline": "2027-04-01",
     "deadlineEstimated": true,
     "openDate": null,
     "audience": "Cochrane High School graduating students",
     "url": "https://cochrane.rockyview.ab.ca/activities/graduation",
     "category": "Community",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "Cochrane",
     "notes": "Cochrane High runs almost all of its local awards through one printed application package handed in at the main office, so ticking this box costs you nothing once the package is written. The date shown is the annual cutoff from the last posted cycle.",
     "applyViaGuidance": true,
@@ -37140,13 +37194,13 @@
   {
     "id": 947,
     "title": "Meaghan Kate Foley Memorial Scholarship",
-    "amount": "Varies",
+    "amount": "$2,000",
     "deadline": "2027-04-01",
     "openDate": null,
     "audience": "Cochrane High School graduating students",
     "url": "https://cochrane.rockyview.ab.ca/activities/graduation",
     "category": "Community",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "Cochrane",
     "notes": "Along with the Cochrane Lions Club award, this is one of only two in the package that ask for a separate written response, which means fewer students bother to complete it.",
     "applyViaGuidance": true,
@@ -37181,13 +37235,13 @@
   {
     "id": 948,
     "title": "West Fraser Career Development Scholarship",
-    "amount": "Varies",
+    "amount": "$500",
     "deadline": "2027-04-01",
     "openDate": null,
     "audience": "Cochrane High School students heading into a trade or career program",
     "url": "https://cochrane.rockyview.ab.ca/activities/graduation",
     "category": "Trades",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "Cochrane",
     "notes": "West Fraser funds two separate awards in the same package, this one and a forestry-specific version, and nothing stops you being considered for both. The package asks for your career objective and intended programme of study, which is what this turns on.",
     "applyViaGuidance": true,
@@ -37224,13 +37278,13 @@
   {
     "id": 949,
     "title": "West Fraser Career Development Forestry Scholarship",
-    "amount": "Varies",
+    "amount": "$500",
     "deadline": "2027-04-01",
     "openDate": null,
     "audience": "Cochrane High School students entering forestry or a related field",
     "url": "https://cochrane.rockyview.ab.ca/activities/graduation",
     "category": "Trades",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "Cochrane",
     "notes": "Because it names forestry specifically, the eligible group is much smaller than for the general West Fraser award, so a student heading into forestry, environmental science or a related trade should tick this box as well as the other.",
     "applyViaGuidance": true,
@@ -38547,15 +38601,15 @@
     "title": "Rex Turple Memorial Hockey Education Scholarship",
     "amount": "Varies",
     "deadline": "2027-03-01",
-    "openDate": null,
+    "openDate": "2027-01-01",
     "audience": "Post-secondary students playing in the Heritage Junior Hockey League",
     "url": "https://cfcab.ca/rex-turple-memorial-scholarship/",
     "category": "Sports",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "Red Deer",
     "notes": "Paid against courses you have already completed in the fall and winter terms rather than up front, so it reimburses study rather than funding it. The foundation does not publish a value. As with all its awards the money goes straight to the institution and is credited to your tuition account, never to you.",
     "applyViaGuidance": false,
-    "active": true,
+    "active": false,
     "description": "The Community Foundation of Central Alberta funds this in memory of Rex Turple, who played for the Red Deer Rustlers and coached in Scotland, England and Austria. It goes to post-secondary students who are part of a team in Alberta's Heritage Junior Hockey League.",
     "metaDetail": "Reimburses completed courses.",
     "eligibility": {
@@ -38580,7 +38634,8 @@
       "extracurriculars": [
         "sports"
       ]
-    }
+    },
+    "deadlineEstimated": true
   },
   {
     "id": 982,
@@ -39926,11 +39981,10 @@
     "title": "AEHL Scholarship",
     "amount": "$3,000",
     "deadline": "2027-03-15",
-    "openDate": "2027-01-01",
     "audience": "Current and just-graduated Alberta Elite Hockey League U18 AAA players",
     "url": "https://www.aehl.ca/aehl-scholarship/",
     "category": "Sports",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "Alberta",
     "notes": "Sixteen awards, roughly one per U18 AAA team, which makes the field your own dressing room, not the province. You can still apply up to one year after your last registered season. The money never reaches you directly; it is paid to your institution, and you have five years to collect it before it is forfeited. The league page gives only a January opening, so the March date comes from Hockey Alberta's own announcement.",
     "description": "The Alberta Elite Hockey League has paid out more than $500,000 since 2006, weighing character, hockey ability, marks and financial need together.",
@@ -39957,7 +40011,7 @@
         "sports"
       ]
     },
-    "active": true,
+    "active": false,
     "metaDetail": "Sixteen awards, roughly one per U18 AAA team."
   },
   {
@@ -41093,7 +41147,6 @@
     "title": "Utility Safety Partners Scholarship",
     "amount": "$2,500",
     "deadline": "2027-04-30",
-    "openDate": "2027-01-14",
     "audience": "Alberta students entering or continuing eligible trades, safety or engineering programs",
     "url": "https://utilitysafety.ca/learning-centre/usp-scholarship-program/",
     "category": "Trades",
@@ -41115,7 +41168,7 @@
         "Engineering",
         "Health"
       ],
-      "minAverage": null,
+      "minAverage": 80,
       "minAge": null,
       "maxAge": null,
       "genderRequired": null,
@@ -41130,7 +41183,7 @@
         "volunteer"
       ]
     },
-    "active": true
+    "active": false
   },
   {
     "id": 1047,
@@ -41770,7 +41823,7 @@
     "audience": "Canadian residents aged 8 to 18 who have organized and led a service project benefiting people or the planet",
     "url": "https://barronprize.org/apply/",
     "category": "Community",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "National",
     "active": false,
     "description": "Open well below Grade 12: applicants must be 8 to 18 and not yet 19 on the April 15 deadline. It rewards a service or research project the applicant started and led themselves, and Canadian residents compete on the same footing as American ones.",
@@ -41794,7 +41847,7 @@
       "financialNeed": false,
       "maxFamilyIncome": null,
       "fosterCare": false,
-      "citizenship": "canadian",
+      "citizenship": "permanent_resident",
       "apprenticeship": false,
       "extracurriculars": []
     },
@@ -42162,11 +42215,11 @@
   },
   {
     "id": 1074,
-    "title": "Double A Solutions Blitz Scholarship",
+    "title": "Double A Solutions Annual Scholarship",
     "amount": "$1,000",
     "audience": "Students in their final year of high school, transitioning, or enrolled in Canada or the US",
     "deadline": "2027-04-01",
-    "url": "https://www.nowblitz.com/blitz-scholarship/",
+    "url": "https://www.doubleasolutions.net/scholarship/",
     "category": "General",
     "region": "National",
     "description": "A $1,000 award on a workplace-themed essay question. The scholarship opens January 1 and closes April 1, and is paid by cheque made out jointly to the winner and the institution they attend.",
@@ -42193,14 +42246,14 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "lastVerified": "2026-09",
-    "active": true,
+    "lastVerified": "2026-10",
+    "active": false,
     "openDate": "2027-01-01"
   },
   {
     "id": 1075,
     "title": "Pretty Lightroom Presets Scholarship",
-    "amount": "$500",
+    "amount": "$500 USD",
     "audience": "Students in their final year of high school, transitioning, or enrolled in Canada or the US",
     "deadline": "2027-04-15",
     "url": "https://www.lightroompresets.com/pages/pretty-lightroom-presets-scholarship-program",
@@ -42230,7 +42283,7 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "active": true
   },
   {
@@ -42637,7 +42690,7 @@
       "indigenousRequired": false,
       "bipocRequired": false,
       "financialNeed": true,
-      "maxFamilyIncome": null,
+      "maxFamilyIncome": 80000,
       "fosterCare": false,
       "citizenship": "permanent_resident",
       "apprenticeship": false,
@@ -43093,12 +43146,12 @@
       "financialNeed": true,
       "maxFamilyIncome": null,
       "fosterCare": false,
-      "citizenship": "canadian",
+      "citizenship": "permanent_resident",
       "apprenticeship": false,
       "extracurriculars": []
     },
     "lastVerified": "2026-10",
-    "active": true,
+    "active": false,
     "deadline": "2027-03-01",
     "openDate": "2027-01-04"
   },
@@ -43186,7 +43239,8 @@
     "metaDetail": "Spouses and children of patients can apply too.",
     "eligibility": {
       "grades": [
-        "12"
+        "12",
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -43205,8 +43259,8 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "lastVerified": "2026-09",
-    "active": true
+    "lastVerified": "2026-10",
+    "active": false
   },
   {
     "id": 1102,
@@ -45011,10 +45065,11 @@
     "description": "The County of Stettler's Agricultural Service Board gives one $1,000 bursary a year to a county resident with a high school diploma who has contributed to their community and understands why agriculture matters to rural life.",
     "notes": "Send the county proof that you are enrolled in college or university (any year counts), proof of your diploma or eligibility for it, and two references from people who are not related to you. Applications must reach the county office by April 15, and you can only win it once. The April 15 date is from the current form; check that it has not changed before applying.",
     "applyViaGuidance": false,
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "eligibility": {
       "grades": [
-        "12"
+        "12",
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -45348,14 +45403,15 @@
     "category": "General",
     "region": "Alberta",
     "localArea": "Big Lakes County residents",
-    "active": true,
+    "active": false,
     "description": "Big Lakes County pays $3,500 a year, matched by another $3,500 from the provincial Northern Alberta Development Bursary, for up to two years to two students entering a one- or two-year program or the last two years of a degree. Larger streams exist for medicine, dentistry, nurse practitioner, pharmacy and large-animal vet students.",
     "notes": "In return you must work full-time in your field in Big Lakes County or northern Alberta for one year per year of funding. You must be 18 or older, live in the county (towns included), have lived in Alberta for 12 months and have applied to a provincially funded program. Apply January 2 to April 30 and reapply each year. A $750 trades stream has no matching money.",
     "applyViaGuidance": false,
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "eligibility": {
       "grades": [
-        "12"
+        "12",
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -45764,7 +45820,7 @@
     "url": "https://www.jakeweitz.ca/how-to-apply",
     "category": "Trades",
     "region": "National",
-    "active": false,
+    "active": true,
     "description": "A registered Canadian charity based in Didsbury, Alberta that pays $1,000 to students entering the mechanical trades. It awarded 13 scholarships in 2026 and 10 in 2025.",
     "notes": "You apply for the program you are starting, not the one you are in: the form asks for proof of application or enrolment in an accredited Canadian college or university mechanics program, so a Grade 12 applies in the winter before starting. Eligible paths include automotive service, heavy duty equipment, agricultural equipment and aviation maintenance technician. You need high school English, math, physics or science plus any related CTS courses. A 30 second to one minute video explaining your interest in mechanics is strongly recommended. Applications go through a Google form or a PDF emailed to the foundation by March 1, with winners notified by April 15. You can only receive this award once in your lifetime.",
     "applyViaGuidance": false,
@@ -49401,7 +49457,9 @@
         "Palliser Beyond Borders"
       ],
       "targetInstitutions": [],
-      "fields": [],
+      "fields": [
+        "Agriculture"
+      ],
       "minAverage": null,
       "minAge": null,
       "maxAge": null,
@@ -49708,10 +49766,10 @@
     "audience": "Albertans up to age 18 living with epilepsy",
     "url": "https://edmontonepilepsy.org/scholarships/",
     "category": "Community",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "Alberta",
     "notes": "This one pays for activities rather than tuition, so a season of hockey, a music program or a camp fee all fit. Applications are accepted from January 1 to March 31 each year.",
-    "active": true,
+    "active": false,
     "description": "The Edmonton Epilepsy Association gives up to $500 to help youth up to age 18 take part in sports or recreation that will help them develop as individuals.",
     "metaDetail": "It pays for activities, not tuition.",
     "eligibility": {
@@ -49738,7 +49796,8 @@
       "extracurriculars": [
         "sports"
       ]
-    }
+    },
+    "openDate": "2027-01-01"
   },
   {
     "id": 1404,
@@ -49748,10 +49807,10 @@
     "audience": "Alberta post-secondary students living with epilepsy",
     "url": "https://edmontonepilepsy.org/scholarships/",
     "category": "Academic",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "Edmonton",
     "notes": "The 2026 round is closed. The next one opens January 5, 2027 and closes March 31. The Association does not publish the amount or the detailed criteria, so ask before the window opens.",
-    "active": true,
+    "active": false,
     "description": "The Edmonton Epilepsy Association manages this scholarship for students with epilepsy who are continuing their education.",
     "metaDetail": "The next window opens January 5, 2027.",
     "eligibility": {
@@ -49786,7 +49845,7 @@
     "audience": "Alberta First Nation students in law or politics",
     "url": "https://aiicbusiness.org/scholarships/",
     "category": "Indigenous",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "Alberta",
     "notes": "You send a copy of your status card, a certified transcript and a statement of 100 to 200 words on your objectives. Proof of acceptance is needed before the money is released.",
     "active": true,
@@ -49794,13 +49853,15 @@
     "metaDetail": "Needs a status card and a certified transcript.",
     "eligibility": {
       "grades": [
-        "12",
         "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
       "targetInstitutions": [],
-      "fields": [],
+      "fields": [
+        "law",
+        "political science"
+      ],
       "minAverage": null,
       "minAge": null,
       "maxAge": null,
@@ -49818,12 +49879,12 @@
   {
     "id": 1406,
     "title": "Senator James Gladstone Memorial Scholarship",
-    "amount": "$1,000",
+    "amount": "$750 to $1,000",
     "deadline": "2027-02-15",
     "audience": "Alberta status First Nation students in business or economics",
     "url": "https://aiicbusiness.org/scholarships/",
     "category": "Indigenous",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "Alberta",
     "notes": "Selection weighs your marks, your career plans and what your studies will contribute to First Nation business and economic development. Same paperwork and date as the Corporation's law award.",
     "active": true,
@@ -49831,7 +49892,6 @@
     "metaDetail": "College students receive $750.",
     "eligibility": {
       "grades": [
-        "12",
         "post-secondary"
       ],
       "schoolBoards": [],
@@ -49860,13 +49920,13 @@
     "amount": "Varies",
     "deadline": "2027-04-28",
     "audience": "Banff National Park residents aged 21 to 35",
-    "url": "https://banffcanmorefoundation.org/wp-content/uploads/BCF-Scholarship-Programs-2025.pdf",
+    "url": "https://banffcanmorefoundation.org/programs/scholarships/",
     "category": "Community",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "Alberta",
     "localArea": "Banff National Park residents",
     "notes": "Priority goes to non-traditional students, including people returning to school or changing careers. You submit a budget, a cover letter, references and proof of acceptance or a pending decision. The 2025 guide does not state the amount.",
-    "active": true,
+    "active": false,
     "description": "The Banff Canmore Community Foundation backs students aged 21 to 35 with a real connection to the communities inside Banff National Park who are pursuing practical education and plan to give back locally.",
     "metaDetail": "Built for career changers and returning students.",
     "eligibility": {
@@ -49897,13 +49957,13 @@
     "amount": "$5,000",
     "deadline": "2027-04-28",
     "audience": "Hospitality students tied to Banff or Lake Louise",
-    "url": "https://banffcanmorefoundation.org/wp-content/uploads/BCF-Scholarship-Programs-2025.pdf",
+    "url": "https://banffcanmorefoundation.org/programs/scholarships/",
     "category": "Community",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "Alberta",
     "localArea": "Banff or Lake Louise students",
     "notes": "New Canadians, Albertans and local youth get special consideration. You need a budget, references, a transcript and evidence of acceptance, plus banking details and a photo if you win.",
-    "active": true,
+    "active": false,
     "description": "Four $5,000 bursaries for post-secondary students in tourism, hospitality or culinary programs who face barriers to advancing their careers and have a personal or professional tie to Banff or Lake Louise.",
     "metaDetail": "Four bursaries, and new Canadians are prioritized.",
     "eligibility": {
@@ -51258,7 +51318,7 @@
     "audience": "Prairie Land graduates from the Consort area",
     "url": "https://drive.google.com/uc?export=download&id=1N86-SYWpsiovjx4V2kdakqHVUH89opAB",
     "category": "Academic",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "Alberta",
     "localArea": "Consort-area students",
     "notes": "The five year window means this is still open long after you graduate. An entrepreneurial streak is preferred, and the application covers your community involvement and proof of enrolment.",
@@ -51267,7 +51327,6 @@
     "metaDetail": "Open up to five years after Grade 12.",
     "eligibility": {
       "grades": [
-        "12",
         "post-secondary"
       ],
       "schoolBoards": [],
@@ -53674,7 +53733,7 @@
     "audience": "Willow Creek Composite High School graduates",
     "url": "https://img1.wsimg.com/blobby/go/0a1a0c84-331d-4ca7-b5b0-af3c435cda1e/Unsung%20Hero%20Award-b65ae75.pdf",
     "category": "Community",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "Alberta",
     "localArea": "Willow Creek Composite students",
     "notes": "You cannot apply for this one yourself. A staff member has to nominate you, so the useful move is being known by the adults in the building. First presented in 2026 and intended to run annually.",
@@ -53705,7 +53764,8 @@
       "extracurriculars": [
         "volunteer"
       ]
-    }
+    },
+    "deadlineEstimated": true
   },
   {
     "id": 1506,
@@ -54999,11 +55059,11 @@
     "audience": "Clearview area students in a final year",
     "url": "https://www.clearview.ab.ca/download/558280",
     "category": "Academic",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "Alberta",
     "localArea": "Clearview School Division students",
     "notes": "Ten thousand dollars is exceptional for a rural division, and it comes with a return to service expectation, so read what you are agreeing to work. You apply in your last year, not your first.",
-    "active": true,
+    "active": false,
     "description": "A $10,000 bursary for a post-secondary student entering their final year or final semester who graduated from a Clearview high school or lived in the division's service area for three consecutive years.",
     "metaDetail": "Exceptional money, with a service commitment attached.",
     "eligibility": {
@@ -55023,10 +55083,11 @@
       "financialNeed": false,
       "maxFamilyIncome": null,
       "fosterCare": false,
-      "citizenship": "any",
+      "citizenship": "permanent_resident",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "openDate": "2027-01-02"
   },
   {
     "id": 1542,
@@ -57005,7 +57066,8 @@
       "citizenship": "any",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "deadlineEstimated": true
   },
   {
     "id": 1593,
@@ -57321,7 +57383,7 @@
     "title": "Entwistle Scholarship at Guelph",
     "amount": "$1,500",
     "deadline": "2027-04-15",
-    "audience": "Black students and students of colour entering Guelph",
+    "audience": "Black students and students of colour entering undergraduate programs in Guelph’s College of Social and Applied Human Sciences",
     "url": "https://www.uoguelph.ca/regweb/studentfinance/apps/awards?id=E1483",
     "category": "Academic",
     "lastVerified": "2026-10",
@@ -57349,7 +57411,7 @@
       "financialNeed": false,
       "maxFamilyIncome": null,
       "fosterCare": false,
-      "citizenship": "any",
+      "citizenship": "permanent_resident",
       "apprenticeship": false,
       "extracurriculars": []
     }
@@ -61996,7 +62058,7 @@
     "lastVerified": "2026-10",
     "region": "University & college",
     "notes": "Applications for King's competitive awards open February 1, 2027 and close March 26, 2027; music awards that need a performance video are due before March 31. The awards page filters by program and year of study and gives each award's criteria.",
-    "active": true,
+    "active": false,
     "description": "About forty King's awards take applications from incoming high school students, usually needing an 80% entrance average for scholarships or financial need for bursaries. They include the Boessenkool Scholarship (twelve at $2,000 for commerce), the Cook/Mahaffy Bursary ($4,000), Computronix computing science awards ($1,000 to $3,000), environmental studies awards from $500 to $2,000, the King's Awareness Scholarship ($2,000, renewable, for students from a Canadian high school that has not sent anyone to King's in two years), music scholarships that ask for a video, and several awards that ask for a statement of Christian commitment. The Gerry Segger Music Scholarship in Performance Excellence is worth $6,000.",
     "metaDetail": "One window: February 1 to March 26.",
     "eligibility": {
@@ -62032,10 +62094,10 @@
     "audience": "Students already enrolled at The King's University",
     "url": "https://www.kingsu.ca/services/financial-aid/scholarships",
     "category": "Academic",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "Edmonton",
     "notes": "Returning scholarships based on GPA are automatic; the competitive ones open February 1, 2027 and close March 26, 2027. Check the awards page for each award's year of study.",
-    "active": true,
+    "active": false,
     "description": "Once you are at King's, about ninety more awards open up for returning students: automatic Returning Student Scholarships on GPA, program awards in education, business, the sciences, English, history, music and political science, bursaries for financial need and Christian service, Eagles athletics awards, pre-seminary and pre-medical scholarships, and Foundation bursaries.",
     "metaDetail": "About ninety awards after first year.",
     "eligibility": {
@@ -62071,10 +62133,10 @@
     "audience": "Women entering or in the Bachelor of Commerce at The King's University",
     "url": "https://www.kingsu.ca/services/financial-aid/scholarships",
     "category": "Academic",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "University & college",
     "notes": "Apply in King's competitive awards window, February 1 to March 26, 2027.",
-    "active": true,
+    "active": false,
     "description": "One $4,000 scholarship each year from GLC Solutions for a full-time female student, incoming or returning, in the four-year Bachelor of Commerce at The King's University. You need an 80% high school entrance average or a 3.30 GPA, and a written statement of Christian commitment, career intent and volunteer experience; marks and the statement are weighed together.",
     "metaDetail": "Needs an 80% entrance average.",
     "eligibility": {
@@ -62115,10 +62177,10 @@
     "audience": "Women entering or in Computing Science at The King's University",
     "url": "https://www.kingsu.ca/services/financial-aid/scholarships",
     "category": "STEM",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "University & college",
     "notes": "Apply in King's competitive awards window, February 1 to March 26, 2027.",
-    "active": true,
+    "active": false,
     "description": "One $4,000 scholarship each year from GLC Solutions for a full-time female student, incoming or returning, in the four-year Bachelor of Science with a major in Computing Science at The King's University. You need an 80% high school entrance average or a 3.30 GPA, and a written statement of Christian commitment, career intent and volunteer experience.",
     "metaDetail": "Needs an 80% entrance average.",
     "eligibility": {
@@ -62159,10 +62221,10 @@
     "audience": "Music performance students at The King's University",
     "url": "https://www.kingsu.ca/services/financial-aid/scholarships",
     "category": "Arts",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "Edmonton",
     "notes": "Apply before March 31 with a 3 to 5 minute performance video. You can hold this award only once.",
-    "active": true,
+    "active": false,
     "description": "A $6,000 scholarship each year for a full-time student, incoming or returning, in the Bachelor of Music (performance) or Performance Diploma at The King's University; if no one qualifies, a Bachelor of Arts in Music performance major can be considered. Selection is mainly on performance ability, shown in a short video.",
     "metaDetail": "Chosen on a 3 to 5 minute video.",
     "eligibility": {
@@ -62192,7 +62254,8 @@
       "extracurriculars": [
         "music"
       ]
-    }
+    },
+    "deadlineEstimated": true
   },
   {
     "id": 1725,
@@ -62203,10 +62266,10 @@
     "audience": "International students from Africa at The King's University",
     "url": "https://www.kingsu.ca/services/financial-aid/scholarships",
     "category": "General",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "Edmonton",
     "notes": "Apply in King's competitive awards window, February 1 to March 26, 2027, and show financial need.",
-    "active": true,
+    "active": false,
     "description": "One $4,000 bursary each year for a full-time international student from Africa, incoming or returning, at The King's University, with preference for students of African ancestry. You must apply and show financial need.",
     "metaDetail": "For international students from Africa.",
     "eligibility": {
@@ -62521,7 +62584,7 @@
     "region": "Alberta",
     "localArea": "County of Minburn, Vegreville, Innisfree and Mannville residents",
     "notes": "The county lists which area high schools qualify, so check that your school is on its current list before you apply.",
-    "active": true,
+    "active": false,
     "description": "Four $500 scholarships from the County of Minburn for graduating students who live in the county, Vegreville, Innisfree or Mannville and are applying to an agriculture-related post-secondary program. Related business and trades programs count. You must be a Canadian citizen or permanent resident.",
     "metaDetail": "Four awards of $500 for local graduates.",
     "eligibility": {
@@ -62529,7 +62592,12 @@
         "12"
       ],
       "schoolBoards": [],
-      "specificSchools": [],
+      "specificSchools": [
+        "Vegreville Composite High School",
+        "St. Mary’s Catholic School (Vegreville)",
+        "Innisfree Delnorte School",
+        "Mannville School"
+      ],
       "targetInstitutions": [],
       "fields": [
         "Agriculture"
