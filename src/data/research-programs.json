@@ -1111,7 +1111,8 @@
     "metaDescription": "A 10-month after-school program where students go deep on AI, biotech and robotics and build projects with companies. The 2026-27 application cycle is closed.",
     "lastVerified": "2026-10",
     "costNote": "$589 CAD a month plus a $1,000 CAD deposit for the 10-month 2026-27 program",
-    "notes": "Applications for the 2026-27 program are closed. TKS is taking waitlist registrations for 2027-28, with no opening date posted."
+    "notes": "Applications for the 2026-27 program are closed. TKS is taking waitlist registrations for 2027-28, with no opening date posted.",
+    "active": false
   },
   {
     "id": 69,

@@ -81,7 +81,7 @@ describe('detail availability', () => {
 
   it('keeps every inactive program neutral, linked, and explained after clock repaint', async () => {
     const inactive = programs.filter(p => p.active === false)
-    expect(inactive).toHaveLength(14)
+    expect(inactive).toHaveLength(15)
     for (const p of inactive) {
       const d = data('program', p)
       await render(d)
