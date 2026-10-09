@@ -66364,5 +66364,1442 @@
       "apprenticeship": false,
       "extracurriculars": []
     }
+  },
+  {
+    "id": 1810,
+    "title": "University of Alberta Entrance Awards Application",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01",
+    "audience": "Grade 12 students entering first year at University of Alberta",
+    "url": "https://www.ualberta.ca/en/admissions/tuition-and-scholarships/entrance-scholarships/index.html",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply for admission first, then use your CCID to apply in Awards Hub. The dates are confirmed for September 2027 entry.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "One application considers high school entrants for scholarships based on academics, leadership, inclusion and financial need.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1811,
+    "title": "University of Alberta Gold Standard Scholarship",
+    "amount": "Up to $6,000",
+    "deadline": null,
+    "openDate": null,
+    "audience": "Grade 12 students entering first year at University of Alberta",
+    "url": "https://www.ualberta.ca/en/admissions/tuition-and-scholarships/entrance-scholarships/index.html",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "No separate application. You are considered on your high school admission average when you receive an admission offer.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "Domestic students in the top 5% of their faculty by admission average may receive up to $6,000.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1812,
+    "title": "University of Alberta Indigenous Entrance Scholarship",
+    "amount": "$1,500",
+    "deadline": null,
+    "openDate": null,
+    "audience": "Grade 12 students entering first year at University of Alberta",
+    "url": "https://www.ualberta.ca/en/admissions/tuition-and-scholarships/entrance-scholarships/index.html",
+    "category": "Indigenous",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "No separate application. Self-declare as Indigenous and provide the required identity documents.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "A $1,500 admission scholarship for First Nations, Métis and Inuit entrants with an admission average of at least 80%.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [],
+      "minAverage": 80,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1813,
+    "title": "University of Calgary Undergraduate Entrance Awards Application",
+    "amount": "Varies",
+    "deadline": "2026-12-01",
+    "openDate": "2026-10-01",
+    "audience": "Grade 12 students entering first year at University of Calgary",
+    "url": "https://ucalgary.ca/registrar/finances/awards/apply",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply in Student Centre after submitting your admission application. Submit by December 1 for prestige awards; the regular High School Awards deadline is March 1, 2027. Individual awards have their own eligibility rules.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "High school applicants use one application for competitive entrance awards. The competition includes awards for first-generation and Indigenous students.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1814,
+    "title": "Fairfax Financial Holdings Limited Entrance Bursary (University of Calgary)",
+    "amount": "$6,000 (renewable)",
+    "deadline": "2027-03-01",
+    "openDate": null,
+    "audience": "Grade 12 students entering first year at University of Calgary",
+    "url": "https://ucalgary.ca/registrar/awards/fairfax-financial-holdings-limited-entrance-bursary",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through the High School Awards application in My UCalgary. Applicants must be Canadian citizens or permanent residents. Renewal is conditional on the university’s academic requirements.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "A $6,000 renewable bursary for a student entering any undergraduate faculty. Selection considers academic merit and financial need.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1815,
+    "title": "Writing Symbols Lodge Award",
+    "amount": "Up to $10,500 (renewable)",
+    "deadline": "2027-03-01",
+    "openDate": null,
+    "audience": "Grade 12 students entering first year at University of Calgary",
+    "url": "https://ucalgary.ca/registrar/awards/writing-symbols-lodge-award",
+    "category": "Indigenous",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary. Selection considers academic merit; renewal depends on continued enrolment and the award’s GPA and course-load requirements.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "A renewable entrance award of up to $10,500 for a Canadian Indigenous student entering any undergraduate faculty.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1816,
+    "title": "Bob Grainger Entrance Bursary",
+    "amount": "Up to $5,500",
+    "deadline": "2027-03-01",
+    "openDate": null,
+    "audience": "Grade 12 students entering first year at University of Calgary",
+    "url": "https://ucalgary.ca/registrar/awards/bob-grainger-entrance-bursary",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary. The award is open to any citizenship or residency.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "An entrance bursary of up to $5,500 for a first-year student in any faculty, based on academic merit, financial need and extracurricular activities.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1817,
+    "title": "Mount Royal University Chancellor's Scholarship",
+    "amount": "$20,000",
+    "deadline": "2027-03-01",
+    "openDate": "2026-11-01",
+    "audience": "Grade 12 students entering first year at Mount Royal University",
+    "url": "https://mtroyal.academicworks.ca/opportunities/16665",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply for admission by February 1 and complete the awards application in MyMRU. You must be in Grade 12 or have graduated in the preceding calendar year, with no previous post-secondary education. Initial selection uses two Group A subjects; the final five-subject average must be 90%. You cannot also receive the President’s Scholarship.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "An entrance scholarship for a full-time first-year degree or diploma student with strong academics and leadership.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Mount Royal University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1818,
+    "title": "Mount Royal University President's Scholarships",
+    "amount": "$7,500",
+    "deadline": "2027-03-01",
+    "openDate": "2026-11-01",
+    "audience": "Grade 12 students entering first year at Mount Royal University",
+    "url": "https://mtroyal.academicworks.ca/opportunities/18607",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply for admission by February 1 and submit the MyMRU awards application. Applicants must be in Grade 12 or have graduated in the preceding calendar year, without previous post-secondary education. Initial selection uses two subjects; the final five-subject average must be 80%.",
+    "metaDetail": "Rewards academic achievement and leadership.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "Entrance scholarships for full-time first-year credit-program students with academic achievement and leadership.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Mount Royal University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1819,
+    "title": "Mount Royal University Haskayne Entrance Scholarship",
+    "amount": "$4,000",
+    "deadline": "2027-03-01",
+    "openDate": "2026-11-01",
+    "audience": "Grade 12 students entering first year at Mount Royal University",
+    "url": "https://mtroyal.academicworks.ca/opportunities/17995",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through the MyMRU awards application. You must live in Mount Royal residence in the fall.",
+    "metaDetail": "For a rural student starting a full-time degree.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "An academic entrance scholarship for a rural student starting a full-time degree.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Mount Royal University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1820,
+    "title": "Mount Royal University Indigenous Business Bursary",
+    "amount": "$7,600",
+    "deadline": "2027-03-01",
+    "openDate": "2026-11-01",
+    "audience": "Grade 12 students entering first year at Mount Royal University",
+    "url": "https://mtroyal.academicworks.ca/opportunities/16862",
+    "category": "Indigenous",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through the MyMRU awards application. Preference goes to past recipients and students in years two through four.",
+    "metaDetail": "For an Indigenous business student with financial need.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "A bursary for a full-time Indigenous Bachelor of Business Administration student with financial need. First-year students are eligible.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Mount Royal University"
+      ],
+      "fields": [
+        "Business"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1821,
+    "title": "Mount Royal University Indigenous Single-Room Housing Bursary",
+    "amount": "Varies",
+    "deadline": "2027-07-01",
+    "openDate": "2027-05-01",
+    "audience": "Grade 12 students entering first year at Mount Royal University",
+    "url": "https://www.mtroyal.ca/ProgramsCourses/FacultiesSchoolsCentres/IniskimCentre/IndigenousHousingProgram/index.htm",
+    "category": "Indigenous",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply to Residence Services first, then submit the separate bursary application. Single-room applicants cannot have dependents or partners.",
+    "metaDetail": "Helps Indigenous students with campus housing costs.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "A housing bursary for Indigenous students, including new students, living in designated rooms on campus.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Mount Royal University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1822,
+    "title": "MacEwan University President’s Entrance Scholarship",
+    "amount": "$3,000",
+    "deadline": "2027-03-01",
+    "openDate": null,
+    "audience": "Grade 12 students entering first year at MacEwan University",
+    "url": "https://www.macewan.ca/apply-enrol/fees-finances/scholarships-awards-bursaries/search/details/?sabid=SAB_923000001005",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "No separate application. Apply for admission by March 1. Domestic eligibility includes Canadian citizens, permanent residents and protected persons. You must take 12 credits in both fall and winter; the winter payment requires a fall GPA of 2.0. Nursing offers only the Chancellor’s, President’s and Provost’s tiers, with 60 scholarships across those tiers. Fine Arts and Communications may also use an audition or portfolio.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "An entrance scholarship for domestic students entering a degree directly from high school with an admission average of 90% to 94.99%.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "MacEwan University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1823,
+    "title": "MacEwan University Provost’s Entrance Scholarship",
+    "amount": "$2,000",
+    "deadline": "2027-03-01",
+    "openDate": null,
+    "audience": "Grade 12 students entering first year at MacEwan University",
+    "url": "https://www.macewan.ca/apply-enrol/fees-finances/scholarships-awards-bursaries/search/details/?sabid=SAB_923000001009",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "No separate application. Apply for admission by March 1. Domestic eligibility includes Canadian citizens, permanent residents and protected persons. You must take 12 credits in both fall and winter; the winter payment requires a fall GPA of 2.0. Nursing offers only the Chancellor’s, President’s and Provost’s tiers, with 60 scholarships across those tiers. Fine Arts and Communications may also use an audition or portfolio.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "An entrance scholarship for domestic students entering a degree directly from high school with an admission average of 85% to 89.99%.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "MacEwan University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1824,
+    "title": "MacEwan University Dean’s Entrance Scholarship",
+    "amount": "$1,000",
+    "deadline": "2027-03-01",
+    "openDate": null,
+    "audience": "Grade 12 students entering first year at MacEwan University",
+    "url": "https://www.macewan.ca/apply-enrol/fees-finances/scholarships-awards-bursaries/search/details/?sabid=SAB_923000001013",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "No separate application. Apply for admission by March 1. Domestic eligibility includes Canadian citizens, permanent residents and protected persons. You must take 12 credits in both fall and winter; the winter payment requires a fall GPA of 2.0. Nursing offers only the Chancellor’s, President’s and Provost’s tiers, with 60 scholarships across those tiers. Fine Arts and Communications may also use an audition or portfolio.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "An entrance scholarship for domestic students entering a degree outside Nursing directly from high school with an admission average of 80% to 84.99%.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "MacEwan University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1825,
+    "title": "MacEwan Residence Award",
+    "amount": "$6,510",
+    "deadline": null,
+    "openDate": null,
+    "audience": "Grade 12 students entering first year at MacEwan University",
+    "url": "https://www.macewan.ca/apply-enrol/fees-finances/scholarships-awards-bursaries/search/details/?sabid=SAB_922000001071",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "No separate application. Selection is by nomination. It covers September through April in a single bedroom within a two-bedroom suite; you pay Residence Life fees.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "An entrance residence award valued at $6,510 for a full-time bachelor’s degree student who receives a MacEwan Entrance Scholarship.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "MacEwan University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1826,
+    "title": "MacEwan University Entrance Bursaries Application",
+    "amount": "Varies",
+    "deadline": null,
+    "openDate": null,
+    "audience": "Grade 12 students entering first year at MacEwan University",
+    "url": "https://www.macewan.ca/apply-enrol/fees-finances/scholarships-awards-bursaries/search/details/?sabid=SAB_922000000483",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply in myStudentSystem under Financial Aid when the application opens. Full-time enrolment and good academic standing are required to receive funds. Check the portal for competition dates.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "The Awards & Bursaries Application includes the Stollery Charitable Foundation Entrance Bursary for new students with financial need and hardship.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "MacEwan University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1827,
+    "title": "NAIT Entrance Awards Application",
+    "amount": "Varies",
+    "deadline": null,
+    "openDate": null,
+    "audience": "Grade 12 students entering first year at Northern Alberta Institute of Technology",
+    "url": "https://www.nait.ca/nait/admissions/financial-planning/student-awards-funding-options/entrance-awards",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply for admission first, then use the emailed link to MyAwards Central. You do not need to wait for an admission offer. You cannot have previously taken NAIT credits or completed a NAIT program. Check MyAwards Central for dates because the public pages disagree on the fall application window. The application includes the Enbridge Northern Student Entrance Award for students from North Eastern Alberta entering an energy-related program with financial need.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "One application considers new NAIT students for entrance awards, bursaries and diversity grants. Awards consider achievement, community involvement and financial need.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Northern Alberta Institute of Technology"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1828,
+    "title": "NAIT General Entrance Award",
+    "amount": "Varies",
+    "deadline": null,
+    "openDate": null,
+    "audience": "Grade 12 students entering first year at Northern Alberta Institute of Technology",
+    "url": "https://nait.academicworks.ca/opportunities/13144",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "No separate application. Register in at least 60% of a full course load. Domestic eligibility includes Canadian citizens, permanent residents and Convention Refugees.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "An automatic entrance award for domestic students entering Business Administration or the Bachelor of Business Administration for the first time with at least a 70% admission average.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Northern Alberta Institute of Technology"
+      ],
+      "fields": [
+        "Business"
+      ],
+      "minAverage": 70,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1829,
+    "title": "NAIT Four Directions Entrance Award",
+    "amount": "$1,000",
+    "deadline": null,
+    "openDate": null,
+    "audience": "Grade 12 students entering first year at Northern Alberta Institute of Technology",
+    "url": "https://nait.academicworks.ca/opportunities/13441",
+    "category": "Indigenous",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "No separate application. Selection is based on admission to the program and satisfactory academic achievement.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "An automatic $1,000 entrance award for Indigenous students entering Business Administration or the Bachelor of Business Administration.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Northern Alberta Institute of Technology"
+      ],
+      "fields": [
+        "Business"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1830,
+    "title": "Anthem Properties Fall Entrance Bursaries (NAIT)",
+    "amount": "$2,500",
+    "deadline": "2027-03-02",
+    "openDate": null,
+    "audience": "Grade 12 students entering first year at Northern Alberta Institute of Technology",
+    "url": "https://nait.academicworks.ca/opportunities/10356",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Complete the MyAwards Central application. Eligible programs are Architectural, Civil Engineering, Construction Engineering, Engineering Design, Interior Design and Landscape Architectural Technology; Advanced Carpentry, Advanced Plumbing and Electrical Installations Technology; HVAC Refrigeration Technician; and Millwork and Carpentry. Satisfactory admission academics are required. The March 2 deadline is estimated from 2026.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "A $2,500 entrance bursary for students with financial need entering designated construction, design or trades diploma and certificate programs.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Northern Alberta Institute of Technology"
+      ],
+      "fields": [
+        "Construction",
+        "Design",
+        "Trades"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadlineEstimated": true
+  },
+  {
+    "id": 1831,
+    "title": "Homes by Avi Diploma Entrance Bursary (NAIT)",
+    "amount": "$5,000",
+    "deadline": "2027-07-31",
+    "openDate": null,
+    "audience": "Grade 12 students entering first year at Northern Alberta Institute of Technology",
+    "url": "https://nait.academicworks.ca/opportunities/10536",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Complete the MyAwards Central application. You need satisfactory admission academics. Preference goes to applicants who participated in the M.E. LaZerte and Homes by Avi construction program; attendance at that high school is not required. Eligible programs: Advanced Plumbing Technology, Advanced Carpentry Technology, Electrical Installations Technology. The deadline is estimated from 2026.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "A $5,000 entrance bursary for students with financial need entering eligible NAIT diploma programs.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Northern Alberta Institute of Technology"
+      ],
+      "fields": [
+        "Advanced Plumbing Technology",
+        "Advanced Carpentry Technology",
+        "Electrical Installations Technology"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadlineEstimated": true
+  },
+  {
+    "id": 1832,
+    "title": "Homes by Avi Certificate Entrance Bursary (NAIT)",
+    "amount": "$2,500",
+    "deadline": "2027-03-31",
+    "openDate": null,
+    "audience": "Grade 12 students entering first year at Northern Alberta Institute of Technology",
+    "url": "https://nait.academicworks.ca/opportunities/11920",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Complete the MyAwards Central application. You need satisfactory admission academics. Preference goes to applicants who participated in the M.E. LaZerte and Homes by Avi construction program; attendance at that high school is not required. Eligible programs: Millwork and Carpentry, Heating Ventilation Air Conditioning Refrigeration Technician.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "A $2,500 entrance bursary for students with financial need entering eligible NAIT certificate programs.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Northern Alberta Institute of Technology"
+      ],
+      "fields": [
+        "Millwork and Carpentry",
+        "Heating Ventilation Air Conditioning Refrigeration Technician"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1833,
+    "title": "Guy and Dawn Turcotte Rural Assistance Entrance Award (NAIT)",
+    "amount": "Anticipated $3,000 over two years",
+    "deadline": "2027-03-06",
+    "openDate": null,
+    "audience": "Grade 12 students entering first year at Northern Alberta Institute of Technology",
+    "url": "https://nait.academicworks.ca/opportunities/9999",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply in MyAwards Central. Selection considers final-year high school Math, English and Science results and proof of acceptance. Half is paid after fall registration. The other half requires top-third first-year marks and immediate progression to year two. The deadline is estimated from 2026.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "Entrance funding for rural Alberta students with financial need starting a full-time two-year NAIT diploma. The anticipated total award is $3,000 across two years.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Northern Alberta Institute of Technology"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadlineEstimated": true
+  },
+  {
+    "id": 1834,
+    "title": "SAIT Entrance Awards Application",
+    "amount": "Varies",
+    "deadline": null,
+    "openDate": null,
+    "audience": "Grade 12 students entering first year at Southern Alberta Institute of Technology",
+    "url": "https://www.sait.ca/tuition-and-financial-aid/student-awards",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "In mySAIT, open the student-awards application and choose FYG-Entrance. Both domestic and international students may apply; each award has its own criteria.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "The entrance application considers new SAIT students for scholarships and bursaries before their program starts.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "SAIT"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1835,
+    "title": "SAIT Bissett Bursary Program",
+    "amount": "Tuition and mandatory fees",
+    "deadline": "2027-06-22",
+    "openDate": null,
+    "audience": "Grade 12 students entering first year at Southern Alberta Institute of Technology",
+    "url": "https://www.sait.ca/tuition-and-financial-aid/student-awards/bissett-bursary-program",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Use the separate Bissett application. Applicants must be domestic, age 24 or younger, from Calgary or within one hour of the city, and have no previous post-secondary education. Selection also considers community involvement, career planning and high school success. Degree programs are excluded. The 2027 deadline is estimated from June 22, 2026.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "Tuition and mandatory-fee support for recent high school graduates with financial need who are starting a SAIT certificate, diploma or pre-employment program.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "SAIT"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": 24,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadlineEstimated": true
+  },
+  {
+    "id": 1836,
+    "title": "Joyce Family Foundation SAIT Centennial Entrance Award",
+    "amount": "$5,000",
+    "deadline": "2027-08-15",
+    "openDate": null,
+    "audience": "Grade 12 students entering first year at Southern Alberta Institute of Technology",
+    "url": "https://www.sait.ca/tuition-and-financial-aid/student-awards/scholarships-bursaries-and-awards-directory",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Preference goes to a student without other funding or support. Full-time means at least nine course credits per semester. Apply through the FYG-Entrance application in mySAIT.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "An entrance award for a Canadian citizen or permanent resident taking a full-time certificate, diploma, degree or applied degree.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "SAIT"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1837,
+    "title": "Dick and Lois Haskayne Entrance Award (SAIT)",
+    "amount": "$4,000",
+    "deadline": "2027-08-15",
+    "openDate": null,
+    "audience": "Grade 12 students entering first year at Southern Alberta Institute of Technology",
+    "url": "https://www.sait.ca/tuition-and-financial-aid/student-awards/scholarships-bursaries-and-awards-directory",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Preference goes to rural Canadian high school graduates and students planning to live in SAIT residence in first year. Apply through the FYG-Entrance application in mySAIT.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "An entrance award for a student in any credit program with financial need and academic achievement.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "SAIT"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1838,
+    "title": "SAIT First Choice - SAIT Board of Governors",
+    "amount": "$2,500 to $10,000",
+    "deadline": "2027-08-15",
+    "openDate": null,
+    "audience": "Grade 12 students entering first year at Southern Alberta Institute of Technology",
+    "url": "https://www.sait.ca/tuition-and-financial-aid/student-awards/scholarships-bursaries-and-awards-directory",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "The award category depends on the credential you are entering. Apply through the FYG-Entrance application in mySAIT.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "Entrance awards based on prerequisite marks: $2,500 for a certificate, $5,000 for a diploma or $10,000 for a degree.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "SAIT"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1839,
+    "title": "Rainer Launhardt Entrance Award (SAIT)",
+    "amount": "$10,000",
+    "deadline": "2027-08-15",
+    "openDate": null,
+    "audience": "Grade 12 students entering first year at Southern Alberta Institute of Technology",
+    "url": "https://www.sait.ca/tuition-and-financial-aid/student-awards/scholarships-bursaries-and-awards-directory",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Explain why you chose SAIT and your program. Preference goes to mature students or female students, but these are not requirements. Apply through the FYG-Entrance application in mySAIT.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "A need-based entrance award for students starting a program in SAIT’s School of Hospitality and Tourism.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "SAIT"
+      ],
+      "fields": [
+        "Hospitality and tourism"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1840,
+    "title": "Marjory Rebecca Girvin Henderson Memorial Entrance Award (SAIT)",
+    "amount": "$10,000",
+    "deadline": "2027-08-15",
+    "openDate": null,
+    "audience": "Grade 12 students entering first year at Southern Alberta Institute of Technology",
+    "url": "https://www.sait.ca/tuition-and-financial-aid/student-awards/scholarships-bursaries-and-awards-directory",
+    "category": "Indigenous",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Describe your interest in cultural arts and how it influences your studies. Apply through the FYG-Entrance application in mySAIT.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "An entrance award for a Canadian First Nations, Métis or Inuit student entering Journalism or Interactive Design - Graphic Design, with financial need and academic achievement.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "SAIT"
+      ],
+      "fields": [
+        "Journalism",
+        "Graphic design"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1841,
+    "title": "Labuhn Family Indigenous Impact Prize",
+    "amount": "$2,000",
+    "deadline": "2027-02-01",
+    "openDate": null,
+    "audience": "Grade 12 students entering first year at University of Lethbridge",
+    "url": "https://uleth.academicworks.ca/opportunities/13846",
+    "category": "Indigenous",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Complete the general application and the prize’s essay of at least 500 words. Full-time and part-time students are eligible. You must submit the university’s Indigenous Attestation Form by the deadline. February 1, 2027 is estimated from the 2026 competition.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "A $2,000 award open to entering students who have contributed to improving the lives of Indigenous communities and peoples in Canada.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Lethbridge"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadlineEstimated": true
+  },
+  {
+    "id": 1842,
+    "title": "Lethbridge Polytechnic Regional Stewardship Entrance Award",
+    "amount": "$2,500",
+    "deadline": "2027-07-15",
+    "openDate": "2027-03-01",
+    "audience": "Grade 12 students entering first year at Lethbridge Polytechnic",
+    "url": "https://lethpolytech.awardspring.ca/Home/Scholarships",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Your permanent address must be in one of the communities explicitly listed in the award criteria. Submit the common online awards application after accepting your offer and paying the required deposit.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "Need-based entrance funding for a full-time student from a rural community in Lethbridge Polytechnic’s service region.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Lethbridge Polytechnic"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1843,
+    "title": "FortisAlberta Inc. Indigenous Entrance Award (Lethbridge Polytechnic)",
+    "amount": "$2,500",
+    "deadline": "2027-07-15",
+    "openDate": "2027-03-01",
+    "audience": "Grade 12 students entering first year at Lethbridge Polytechnic",
+    "url": "https://lethpolytech.awardspring.ca/Home/Scholarships",
+    "category": "Indigenous",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Preference goes to students from the Fortis-served Indigenous communities named in the award criteria. Submit the common online awards application after accepting your offer and paying the required deposit.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "An entrance award for a full-time Indigenous student with financial need.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Lethbridge Polytechnic"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1844,
+    "title": "Métis Scholar Entrance Award (Lethbridge Polytechnic)",
+    "amount": "$3,500",
+    "deadline": "2027-07-15",
+    "openDate": "2027-03-01",
+    "audience": "Grade 12 students entering first year at Lethbridge Polytechnic",
+    "url": "https://lethpolytech.awardspring.ca/Home/Scholarships",
+    "category": "Indigenous",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Provide proof of heritage, an essay and a reference. You cannot receive other Rupertsland Institute funding or appear on Canada’s Indian Registry or a Band list. Recipients must register with the Otipemisiwak Métis Student and Alumni Association. Submit the common online awards application after accepting your offer and paying the required deposit.",
+    "metaDetail": "For a Métis student with a 66% core-subject average.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "Entrance funding for a full-time Métis student with a high school core-subject average of at least 66%.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Lethbridge Polytechnic"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1845,
+    "title": "Possibilities are Endless Relocation Entrance Award",
+    "amount": "$3,000",
+    "deadline": "2027-07-15",
+    "openDate": "2027-03-01",
+    "audience": "Grade 12 students entering first year at Lethbridge Polytechnic",
+    "url": "https://lethpolytech.awardspring.ca/Home/Scholarships",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Selection favours the applicant who relocated the greatest distance. Submit the common online awards application after accepting your offer and paying the required deposit.",
+    "metaDetail": "For a student moving within Canada to attend.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "An entrance award for a full-time student who has moved within Canada to attend Lethbridge Polytechnic.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Lethbridge Polytechnic"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
   }
 ]

@@ -1447,6 +1447,10 @@
     "hash": "25a9e670e7eb5503",
     "date": "2026-10-05"
   },
+  "/scholarships/anthem-properties-fall-entrance-bursaries-nait/": {
+    "hash": "1462a8e03aac6fe5",
+    "date": "2026-10-09"
+  },
   "/scholarships/aon-scholarship-westwood/": {
     "hash": "15771ed5de0e194c",
     "date": "2026-10-08"
@@ -1898,6 +1902,10 @@
   "/scholarships/bmo-financial-group-award-keyano/": {
     "hash": "24336beee6551c8d",
     "date": "2026-10-08"
+  },
+  "/scholarships/bob-grainger-entrance-bursary/": {
+    "hash": "2d036424363ff56b",
+    "date": "2026-10-09"
   },
   "/scholarships/bonnyville-agriculture-society-scholarship/": {
     "hash": "ac4ed690c9c51213",
@@ -3119,6 +3127,10 @@
     "hash": "0adbe14f7d5e16ac",
     "date": "2026-10-08"
   },
+  "/scholarships/dick-and-lois-haskayne-entrance-award-sait/": {
+    "hash": "c59b905401cc9cfd",
+    "date": "2026-10-09"
+  },
   "/scholarships/dick-martin-scholarship-award/": {
     "hash": "d25b88363636b4ab",
     "date": "2026-10-08"
@@ -3475,6 +3487,10 @@
     "hash": "653f2f59a18b5df4",
     "date": "2026-10-08"
   },
+  "/scholarships/fairfax-financial-holdings-limited-entrance-bursary-university-of-calgary/": {
+    "hash": "c8bef160cd236117",
+    "date": "2026-10-09"
+  },
   "/scholarships/fairview-health-complex-foundation-scholarship/": {
     "hash": "5c58281437e6ee6d",
     "date": "2026-10-08"
@@ -3630,6 +3646,10 @@
   "/scholarships/fort-vermilion-agricultural-society-student-bursary/": {
     "hash": "ccfa9eb8f9894ddb",
     "date": "2026-10-08"
+  },
+  "/scholarships/fortisalberta-inc-indigenous-entrance-award-lethbridge-polytechnic/": {
+    "hash": "2e2568562f902ad7",
+    "date": "2026-10-09"
   },
   "/scholarships/fountain-tire-automotive-technician-annual-award/": {
     "hash": "c23f723c098526b5",
@@ -3959,6 +3979,10 @@
     "hash": "91eb8f4194291ce6",
     "date": "2026-09-27"
   },
+  "/scholarships/guy-and-dawn-turcotte-rural-assistance-entrance-award-nait/": {
+    "hash": "f4c05a93b0020570",
+    "date": "2026-10-09"
+  },
   "/scholarships/hal-winlaw-health-nutrition-legacy-award/": {
     "hash": "708fcb111cdf58aa",
     "date": "2026-10-05"
@@ -4066,6 +4090,14 @@
   "/scholarships/holy-trinity-academy-scholarship/": {
     "hash": "ccfa3e94de93df95",
     "date": "2026-10-04"
+  },
+  "/scholarships/homes-by-avi-certificate-entrance-bursary-nait/": {
+    "hash": "e294e363a8b0da6a",
+    "date": "2026-10-09"
+  },
+  "/scholarships/homes-by-avi-diploma-entrance-bursary-nait/": {
+    "hash": "155a2cb3aab15c38",
+    "date": "2026-10-09"
   },
   "/scholarships/horatio-alger-canadian-scholarships/": {
     "hash": "89477ed52c14179a",
@@ -4379,6 +4411,10 @@
     "hash": "9117b2fc92de0993",
     "date": "2026-10-08"
   },
+  "/scholarships/joyce-family-foundation-sait-centennial-entrance-award/": {
+    "hash": "8a44a56078572a17",
+    "date": "2026-10-09"
+  },
   "/scholarships/julia-turnbull-leadership-award/": {
     "hash": "bc1ae078ee62f699",
     "date": "2026-10-08"
@@ -4631,6 +4667,10 @@
     "hash": "30f64ff3138091ea",
     "date": "2026-10-08"
   },
+  "/scholarships/labuhn-family-indigenous-impact-prize/": {
+    "hash": "8cd5634c3792957d",
+    "date": "2026-10-09"
+  },
   "/scholarships/lac-la-biche-agricultural-society-scholarship/": {
     "hash": "dabc0497598be79c",
     "date": "2026-10-08"
@@ -4814,6 +4854,10 @@
   "/scholarships/lethbridge-polytechnic-entrance-award/": {
     "hash": "762316fbcdff8b22",
     "date": "2026-10-05"
+  },
+  "/scholarships/lethbridge-polytechnic-regional-stewardship-entrance-award/": {
+    "hash": "039ee5a969aa332a",
+    "date": "2026-10-09"
   },
   "/scholarships/lethbridge-school-division-ice-scholarship/": {
     "hash": "45012c3fdb0de716",
@@ -4999,9 +5043,29 @@
     "hash": "ac7ea4dbb7188b10",
     "date": "2026-10-04"
   },
+  "/scholarships/macewan-residence-award/": {
+    "hash": "513d8f894df43d6c",
+    "date": "2026-10-09"
+  },
   "/scholarships/macewan-university-chancellors-scholarship/": {
     "hash": "5e5ac0feed8ea913",
     "date": "2026-10-08"
+  },
+  "/scholarships/macewan-university-deans-entrance-scholarship/": {
+    "hash": "631179116394ef6e",
+    "date": "2026-10-09"
+  },
+  "/scholarships/macewan-university-entrance-bursaries-application/": {
+    "hash": "f49d4d61c2775b0a",
+    "date": "2026-10-09"
+  },
+  "/scholarships/macewan-university-presidents-entrance-scholarship/": {
+    "hash": "55b987615682fe44",
+    "date": "2026-10-09"
+  },
+  "/scholarships/macewan-university-provosts-entrance-scholarship/": {
+    "hash": "e231285a8d06a6db",
+    "date": "2026-10-09"
   },
   "/scholarships/madd-canada-youth-bursary-fund/": {
     "hash": "93a43f69897ab1e4",
@@ -5086,6 +5150,10 @@
   "/scholarships/marjorie-taylor-memorial-scholarship/": {
     "hash": "d33c081ac4f903df",
     "date": "2026-10-08"
+  },
+  "/scholarships/marjory-rebecca-girvin-henderson-memorial-entrance-award-sait/": {
+    "hash": "168a4901bad002b8",
+    "date": "2026-10-09"
   },
   "/scholarships/mark-ward-indigenous-award/": {
     "hash": "5fc309b914d7f096",
@@ -5247,6 +5315,10 @@
     "hash": "9829a1dd0da8876c",
     "date": "2026-10-08"
   },
+  "/scholarships/metis-scholar-entrance-award-lethbridge-polytechnic/": {
+    "hash": "77868c4369f8abec",
+    "date": "2026-10-09"
+  },
   "/scholarships/michael-a-strembitsky-award-of-excellence/": {
     "hash": "5f46a514c801a5b3",
     "date": "2026-10-05"
@@ -5331,9 +5403,29 @@
     "hash": "41d671386a5d40df",
     "date": "2026-10-08"
   },
+  "/scholarships/mount-royal-university-chancellors-scholarship/": {
+    "hash": "478d192b07cf17b2",
+    "date": "2026-10-09"
+  },
   "/scholarships/mount-royal-university-entrance-scholarship/": {
     "hash": "f6ffd98c58b165b7",
     "date": "2026-10-08"
+  },
+  "/scholarships/mount-royal-university-haskayne-entrance-scholarship/": {
+    "hash": "a97e1653873b82de",
+    "date": "2026-10-09"
+  },
+  "/scholarships/mount-royal-university-indigenous-business-bursary/": {
+    "hash": "8f94442d28a6f62e",
+    "date": "2026-10-09"
+  },
+  "/scholarships/mount-royal-university-indigenous-single-room-housing-bursary/": {
+    "hash": "a74d38cdca8bbef6",
+    "date": "2026-10-09"
+  },
+  "/scholarships/mount-royal-university-presidents-scholarships/": {
+    "hash": "4e889203fbb44352",
+    "date": "2026-10-09"
   },
   "/scholarships/mountain-view-county-citizenship-awards/": {
     "hash": "3209b31bc29eaec6",
@@ -5354,6 +5446,18 @@
   "/scholarships/mw-jr-tebo-memorial-journalism-award/": {
     "hash": "06f9fdfce572d925",
     "date": "2026-10-08"
+  },
+  "/scholarships/nait-entrance-awards-application/": {
+    "hash": "87b6297cfe701eeb",
+    "date": "2026-10-09"
+  },
+  "/scholarships/nait-four-directions-entrance-award/": {
+    "hash": "38ca3e1320486064",
+    "date": "2026-10-09"
+  },
+  "/scholarships/nait-general-entrance-award/": {
+    "hash": "a8d7398a8a3e4cc3",
+    "date": "2026-10-09"
   },
   "/scholarships/nait-student-awards/": {
     "hash": "4b08d487d35ac5c2",
@@ -5835,6 +5939,10 @@
     "hash": "2fff5586f47b3def",
     "date": "2026-10-08"
   },
+  "/scholarships/possibilities-are-endless-relocation-entrance-award/": {
+    "hash": "64599d7433301c09",
+    "date": "2026-10-09"
+  },
   "/scholarships/pre-apprentice-scholarship/": {
     "hash": "b7d16334f0ed70bd",
     "date": "2026-10-08"
@@ -5910,6 +6018,10 @@
   "/scholarships/rainer-hofmann-memorial-scholarship/": {
     "hash": "95eaa4dbab09f414",
     "date": "2026-10-08"
+  },
+  "/scholarships/rainer-launhardt-entrance-award-sait/": {
+    "hash": "92da4d132ab3dafe",
+    "date": "2026-10-09"
   },
   "/scholarships/rally-engineering-indigenous-award/": {
     "hash": "efcf456ff17c5af4",
@@ -6298,6 +6410,18 @@
   "/scholarships/sadiq-scholarship-for-emerging-newcomers-fund/": {
     "hash": "e745de748b68c785",
     "date": "2026-10-08"
+  },
+  "/scholarships/sait-bissett-bursary-program/": {
+    "hash": "2ab5098cf1c35135",
+    "date": "2026-10-09"
+  },
+  "/scholarships/sait-entrance-awards-application/": {
+    "hash": "a67ce90bbbc2838a",
+    "date": "2026-10-09"
+  },
+  "/scholarships/sait-first-choice---sait-board-of-governors/": {
+    "hash": "1878ecbf64651608",
+    "date": "2026-10-09"
   },
   "/scholarships/sally-hansen-memorial-commerce-award/": {
     "hash": "b0209b82c1965a01",
@@ -6943,6 +7067,18 @@
     "hash": "44ca5163917828e6",
     "date": "2026-10-08"
   },
+  "/scholarships/university-of-alberta-entrance-awards-application/": {
+    "hash": "e47428a0f9ede8f3",
+    "date": "2026-10-09"
+  },
+  "/scholarships/university-of-alberta-gold-standard-scholarship/": {
+    "hash": "ad26cd0d8de0e3ae",
+    "date": "2026-10-09"
+  },
+  "/scholarships/university-of-alberta-indigenous-entrance-scholarship/": {
+    "hash": "b666125e90a16f49",
+    "date": "2026-10-09"
+  },
   "/scholarships/university-of-alberta-opportunities-awards/": {
     "hash": "78567b11baffada4",
     "date": "2026-10-08"
@@ -6954,6 +7090,10 @@
   "/scholarships/university-of-calgary-undergraduate-awards/": {
     "hash": "1062261d5e8e81e2",
     "date": "2026-10-08"
+  },
+  "/scholarships/university-of-calgary-undergraduate-entrance-awards-application/": {
+    "hash": "612d1c0e6b685409",
+    "date": "2026-10-09"
   },
   "/scholarships/university-of-lethbridge-board-of-governors-award/": {
     "hash": "652d2f3b01570314",
@@ -7306,6 +7446,10 @@
   "/scholarships/worleycord-lp-engineering-award/": {
     "hash": "34c86fcea21d2b73",
     "date": "2026-10-08"
+  },
+  "/scholarships/writing-symbols-lodge-award/": {
+    "hash": "9eac55c3467b3192",
+    "date": "2026-10-09"
   },
   "/scholarships/xerox-scholarship-award-for-business-and-entrepreneurship/": {
     "hash": "37d1b7248959b7df",
