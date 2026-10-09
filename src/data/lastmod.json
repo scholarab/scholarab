@@ -2879,6 +2879,14 @@
     "hash": "a3424dad9ea4c6f8",
     "date": "2026-10-01"
   },
+  "/scholarships/county-of-forty-mile-agricultural-committee-bursary/": {
+    "hash": "f1bbf13023656fc7",
+    "date": "2026-10-08"
+  },
+  "/scholarships/county-of-minburn-growing-futures-scholarship/": {
+    "hash": "f1131bab25ec7250",
+    "date": "2026-10-08"
+  },
   "/scholarships/county-of-northern-lights-student-bursary/": {
     "hash": "29cb1be6a0e33915",
     "date": "2026-09-27"
@@ -2886,6 +2894,10 @@
   "/scholarships/county-of-stettler-agricultural-service-board-bursary/": {
     "hash": "279f2a8d7e8ccee0",
     "date": "2026-09-27"
+  },
+  "/scholarships/county-of-warner-memorial-scholarship/": {
+    "hash": "cd4a8909f21c8fe8",
+    "date": "2026-10-08"
   },
   "/scholarships/county-of-wetaskiwin-agricultural-bursary/": {
     "hash": "d93450a1e84a3cb2",
@@ -3459,6 +3471,10 @@
     "hash": "1664d823ca4d22fe",
     "date": "2026-08-02"
   },
+  "/scholarships/flagstaff-county-educational-scholarship-program/": {
+    "hash": "4351bb91cf18ad06",
+    "date": "2026-10-08"
+  },
   "/scholarships/florence-a-wilford-scholarship/": {
     "hash": "88066142995e15c7",
     "date": "2026-10-04"
@@ -3562,6 +3578,10 @@
   "/scholarships/fort-saskatchewan-high-school-opportunity-scholarship/": {
     "hash": "6261a7a4479e491f",
     "date": "2026-10-05"
+  },
+  "/scholarships/fort-vermilion-agricultural-society-student-bursary/": {
+    "hash": "6d368a301cdcb9eb",
+    "date": "2026-10-08"
   },
   "/scholarships/fountain-tire-automotive-technician-annual-award/": {
     "hash": "9f44286537202976",
@@ -4543,6 +4563,14 @@
     "hash": "f03e6b5915eab426",
     "date": "2026-10-05"
   },
+  "/scholarships/lac-la-biche-agricultural-society-scholarship/": {
+    "hash": "dabc0497598be79c",
+    "date": "2026-10-08"
+  },
+  "/scholarships/lac-la-biche-county-agricultural-service-board-bursary/": {
+    "hash": "840fb02001a51203",
+    "date": "2026-10-08"
+  },
   "/scholarships/lacombe-county-leadership-scholarship/": {
     "hash": "73390e1496ebde55",
     "date": "2026-09-11"
@@ -5066,6 +5094,10 @@
   "/scholarships/md-of-bonnyville-municipal-scholarship-for-veterinary-medicine/": {
     "hash": "57b8e526e4c214f1",
     "date": "2026-09-27"
+  },
+  "/scholarships/md-of-spirit-river-bursary/": {
+    "hash": "273b2d7c37cdfb29",
+    "date": "2026-10-08"
   },
   "/scholarships/md-of-taber-annual-bursary/": {
     "hash": "9db2ff1dfb474958",
@@ -5631,6 +5663,10 @@
     "hash": "4e3a37364be93cb1",
     "date": "2026-10-05"
   },
+  "/scholarships/pincher-creek-district-hometown-award/": {
+    "hash": "04f8d49657a784fd",
+    "date": "2026-10-08"
+  },
   "/scholarships/pioneer-homestead-bursary/": {
     "hash": "fc0aa0b7b77984e2",
     "date": "2026-09-27"
@@ -6073,6 +6109,10 @@
   },
   "/scholarships/ryan-henderson-memorial-entrance-award/": {
     "hash": "6541fc214aa5389c",
+    "date": "2026-10-08"
+  },
+  "/scholarships/rycroft-agricultural-society-joy-eric-astell-scholarship/": {
+    "hash": "f0fabadb17dc1318",
     "date": "2026-10-08"
   },
   "/scholarships/ryder-ferguson-memorial-scholarship/": {
@@ -6667,6 +6707,10 @@
     "hash": "fd49f70ccf39d959",
     "date": "2026-10-04"
   },
+  "/scholarships/two-hills-and-district-agricultural-society-scholarship/": {
+    "hash": "fe99816500fae8ba",
+    "date": "2026-10-08"
+  },
   "/scholarships/tye-friesen-memorial-scholarship/": {
     "hash": "493563091dce3a7c",
     "date": "2026-10-04"
@@ -6750,6 +6794,10 @@
   "/scholarships/vappa-student-bursary/": {
     "hash": "6d4e797d978e5370",
     "date": "2026-09-27"
+  },
+  "/scholarships/vegreville-agricultural-society-scholarship/": {
+    "hash": "e1fdaa80966ffbc3",
+    "date": "2026-10-08"
   },
   "/scholarships/verna-jean-maisie-hawkins-scholarship/": {
     "hash": "083a93421c3eb03f",
@@ -6874,6 +6922,10 @@
   "/scholarships/western-wheel-visual-communications-technology-scholarship/": {
     "hash": "903e94f6556ec2db",
     "date": "2026-10-05"
+  },
+  "/scholarships/westlock-county-scholarship-grant/": {
+    "hash": "2924821611520233",
+    "date": "2026-10-08"
   },
   "/scholarships/westmoreland-coal-company-award/": {
     "hash": "7fc9426183e87cd2",
