@@ -9,7 +9,7 @@ import catalogue from '../../data/runtime-catalogue.json'
 import { jsonOk, jsonError } from '../../lib/api-response'
 import { getClientIp, hitRateLimit } from '../../lib/rate-limit'
 import { defer } from '../../lib/defer'
-import { ALERT_MILESTONES, cadenceFromInput, formatCadence, milestonesAhead } from '../../lib/alerts'
+import { ALERT_MILESTONES, cadenceFromInput, formatCadence, milestonesAhead, reminderState, type AlertKind } from '../../lib/alerts'
 import { sendConfirmEmail } from '../../lib/confirm-email'
 import { canonicalUrl } from '../../lib/site-origin'
 import { EMAIL_RE } from '../../lib/utils'
@@ -55,42 +55,23 @@ export const POST: APIRoute = async ({ request, locals }) => {
   if (cadence === null)
     return jsonError(`days must be a non-empty list of ${ALERT_MILESTONES.join(', ')}`, 400)
 
-  const today = todayDate()
+  const now = new Date()
+  const today = todayDate(now)
 
-  let deadline: string
-  let itemLabel: string
-  // Build-derived public identities, never admin drafts or legacy DB IDs.
-  if (itemType === 'scholarship') {
-    const s = catalogue.scholarships.find(x => x.id === itemId)
-    if (!s) return jsonError('Scholarship not found', 404)
-    if (s.active === false) return jsonError('This scholarship is not open', 400)
-    if (!s.deadline) return jsonError('This scholarship has no deadline', 400)
-    // The listing page never offers the form for a rolled-forward date; this
-    // keeps a hand-made request from subscribing to one anyway.
-    if ((s as { deadlineEstimated?: boolean }).deadlineEstimated)
-      return jsonError("This date isn't confirmed yet, so there is nothing to remind you about.", 400)
-    deadline = s.deadline
-    itemLabel = s.title
-  } else {
-    const p = catalogue.programs.find(x => x.id === itemId)
-    if (!p) return jsonError('Program not found', 404)
-    // `active !== false` rather than truthy, matching the sender: most program
-    // entries omit the field entirely.
-    if (p.active === false) return jsonError('This program is not open', 400)
-    if (!p.deadline || p.deadline === 'TBA' || p.deadline === 'Ongoing')
-      return jsonError('This program has no fixed deadline', 400)
-    deadline = p.deadline
-    itemLabel = p.name
-  }
-
-  if (new Date(deadline + 'T00:00:00') <= today)
-    return jsonError('Deadline has already passed', 400)
-
-  // Store only the reminders the mailer can still send. A milestone already
-  // behind the deadline would sit in the row and never fire, and the
-  // confirmation email would promise it.
-  const ahead = new Set<number>(milestonesAhead(calendarDaysUntil(deadline)))
-  const sendable = cadence.filter(m => ahead.has(m))
+  // Published JSON and the page's status rules are the only authority.
+  const item = itemType === 'scholarship'
+    ? catalogue.scholarships.find(x => x.id === itemId)
+    : catalogue.programs.find(x => x.id === itemId)
+  if (!item) return jsonError('Listing not found', 404)
+  const itemLabel = 'title' in item ? item.title : item.name
+  const state = reminderState(item, itemType, today)
+  if (!state) return jsonError('This listing has no reminder available', 400)
+  if (state === 'too-soon')
+    return jsonError('This closes too soon for an email reminder. Apply today.', 400)
+  const ahead = new Set<number>(milestonesAhead(calendarDaysUntil(item.deadline ?? '', now)))
+  // Waiting sign-ups keep every chosen milestone: the date may not exist yet.
+  const sendable: AlertKind[] = state === 'deadline'
+    ? cadence.filter(m => ahead.has(m)) : [state, ...cadence]
   if (sendable.length === 0)
     return jsonError('This closes too soon for an email reminder. Apply today.', 400)
 

@@ -2,7 +2,7 @@ name: Email Deadline Alerts
 
 on:
   schedule:
-    - cron: '0 */6 * * *'   # Same milestone is deduplicated; retry failures within 24h
+    - cron: '0 */6 * * *'   # Sender gates 08:00-20:00 Edmonton; dedupes and retries within 23h
   workflow_dispatch:
     inputs:
       test_subscription_id:

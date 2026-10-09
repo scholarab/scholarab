@@ -2059,3 +2059,63 @@ Repair attempts: the first validation run caught duplicated notes, and the first
 Measured locally: 32 unsupported blanket boolean restrictions before, zero of those restrictions after; 1,554 catalogue listings before and after. Add-back fraction: 0/32. No removal failed the retained provider-supported behavior, so none was restored to manufacture the requested 10% target. No runtime speedup or hosted result is claimed. The work saved is the 90 duplicate initial fetches counted above; no elapsed-time reduction was measured.
 
 Evidence: `private/rotfix-2026-10-08/SUMMARY.md`, per-finding `log.jsonl`, source index, catalogue patch and the requested validation/test logs. No new automation or runtime implementation was introduced. Shipping checks remain required before any later publication.
+
+
+## Reminders while waiting, October 9, 2026
+
+Outcomes: students can request the next useful reminder while an award is
+waiting to open or publish a date. Existing open-deadline reminders, consent,
+privacy limits, public styling and too-soon/closed/ongoing behavior stay intact.
+Scheduled emails and retries arrive only between 08:00 and 20:00 Edmonton time.
+
+| Removal candidate | Outcome and retained behavior |
+| --- | --- |
+| API's separate deadline-only eligibility branches | Removed in favor of one reminder-state function backed by status.ts, shared with page and browser. Confirmed dates, closed/concluded exclusions and too-soon behavior remain tested. |
+| Sender's deadline-required catalogue filters and duplicate milestone array | Removed; one pure selector considers opening day, date publication and the existing authoritative milestones. No public catalogue entries are removed. |
+| Milestone span inside the existing explanation | Removing it during message consolidation broke the retained deadline-form Playwright checks. Restored it with the same milestone text and unchanged tests. |
+| A new subscriber column and migration for waiting kinds | Unnecessary: existing cadence tokens and delivery tombstones retain consent, retry and once-only state. No schema operation is needed. |
+
+Add-back fraction: 1/3 attempted removals (33%); the milestone span was
+restored after a real failure. The proposed column is avoided work, not a
+claimed removal. No failure or test change was manufactured for the target. The existing retry
+ledger and the single recipient query were retained, rather than replaced.
+
+Repair record: the first focused run still contained two old tests requiring
+rejection of undated requests; those expectations were changed to test the
+explicitly requested new consent flow. The next run exposed three incorrect
+hardcoded winter-2026 UTC offsets in the new tests. Local Node uses tzdata
+2026c; historical winter and transition dates now test standard time without
+assuming future timezone rules. Production code continues to use IANA
+America/Edmonton, with no fixed offset. The first full CI run then found the generated catalogue contract test still
+expected the old fields, and the designated-test sender fixture used the real
+hour. The contract now checks all status inputs and that fixture has a fixed
+Alberta daytime instant; its scope assertions are retained. A second catalogue-contract check exposed the loader's null normalization
+for absent scholarship open dates; the generator now matches it. Astro then
+printed an install prompt without diagnostics, fixed using the user's exact
+lockfile-version @emnapi/runtime workaround. No repeated repair approach
+reached three failures.
+
+Measurement and final verification are recorded with the local built-catalogue
+counts in private/remind-more-2026-10-09/SUMMARY.md. Hosted delivery and conversion
+are not measured. No real database access or email send is used in testing.
+
+
+Final browser review: the first E2E run passed 171 checks and failed two
+project variants of the existing milestone-span assertion. The span was
+restored, rather than changing those assertions. Browser status refresh also
+now carries the existing rolling flag, so a future year-round listing cannot
+turn into a date-posted request when its opening day arrives.
+
+Local work measurement: the built catalogue has 555 scholarship and 52 program
+forms under the old rule, versus 1,533 and 225 after this change. This removes
+978 and 173 cases respectively where the student had to return and check by
+hand. A fixed-date enumeration of the four configured UTC schedule ticks
+admits two daytime runs instead of four unrestricted runs. Avoiding the other
+two database/send sweeps per day is a projection from that schedule; only the
+local gate and no-query behavior were tested. No hosted speedup or conversion
+improvement is claimed.
+
+Final verification: `npm run ci` passed with 1,268 tests and completed Astro
+and script type checks. `npm run test:e2e` passed 173 checks, with 19 existing
+platform/opt-in skips. `npm run ship-check -- origin/main` passed the URL check
+and its two RUN commands were completed. No push or hosted operation occurred.

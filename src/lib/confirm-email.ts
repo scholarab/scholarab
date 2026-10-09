@@ -4,7 +4,7 @@
  * row the Worker could not mail (no RESEND_API_KEY bound, Resend down) so a
  * sign-up is never silently stranded unconfirmed.
  */
-import { parseCadence } from './alerts'
+import { parseCadence, isMilestone } from './alerts'
 import { claimRecipient, deliverMail, mailKey } from './mail-delivery'
 import { listUnsubscribeHeaders, senderIdentityHtml } from './email-identity'
 
@@ -56,9 +56,16 @@ export function confirmEmailHtml(itemLabel: string, confirmUrl: string, mailingA
   const origin = (() => {
     try { return new URL(confirmUrl).origin } catch { return 'https://www.scholarab.ca' }
   })()
+  const kinds = parseCadence(cadence)
+  const days = kinds.filter(isMilestone).join(', ')
+  const promise = kinds.includes('open')
+    ? `when it opens, then ${days} days before the deadline if one is posted`
+    : kinds.includes('posted')
+      ? `when a confirmed deadline is posted, then ${days} days before it closes`
+      : `${days} days before it closes`
   return `<!doctype html><html><body style="font-family:system-ui,-apple-system,sans-serif;color:#141915;line-height:1.55">
   <p>Someone (hopefully you) asked ScholarAB to send deadline reminders for <strong>${escapeHtml(itemLabel)}</strong>.</p>
-  <p>Confirm and we'll email you ${parseCadence(cadence).join(', ')} days before it closes.</p>
+  <p>Confirm and we'll email you ${promise}.</p>
   <p><a href="${escapeHtml(confirmUrl)}"
         style="display:inline-block;background:#0A5632;color:#FFFFFF;font-weight:600;
                text-decoration:none;padding:12px 28px;border-radius:100px">Confirm my reminder</a></p>

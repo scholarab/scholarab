@@ -17,7 +17,7 @@ import { emailOff } from '../../lib/email-off';
 import { BOOKMARK } from '../../lib/icons';
 import { URGENT_DAYS, SOON_DAYS } from '../../lib/list-core';
 import { LIKELY_DATE, STATUS_WORDS } from '../../lib/status';
-import { milestonesAhead, milestonePhrase, closesPhrase } from '../../lib/alerts';
+import { milestonesAhead, closesPhrase, reminderFormCopy, type ReminderState } from '../../lib/alerts';
 import type { ToApply } from '../../lib/to-apply';
 import { formatVerifiedMonth } from '../../lib/utils';
 
@@ -41,6 +41,7 @@ interface Props {
   deadlineIso?: string | null;
   openDateIso?: string | null;
   inactive?: boolean; // curator-closed next-cycle listing (open date unknown)
+  rolling?: boolean; // accepts applications year-round
   estimated?: boolean; // the deadline is last cycle's, rolled forward
   dueLong: string; // 'July 15, 2026' / 'No fixed deadline, join any time' / 'Not posted yet'
   opensLabel?: string | null; // formatted open date, for status 'future'
@@ -71,7 +72,7 @@ interface Props {
   checkedLabel?: string | null;
   ctaLabel: string;
   url: string;
-  canRemind: boolean;
+  reminder: ReminderState;
   /** Link to the guide that explains this listing, when one covers it. */
   guideHref?: string;
   guideTitle?: string;
@@ -84,11 +85,11 @@ interface Props {
 
 const {
   itemType, itemId, typeLabel, name, subline,
-  status: datedStatus, availability = null, daysLeft, deadlineIso, openDateIso, inactive, estimated = false, dueLong, opensLabel,
+  status: datedStatus, availability = null, daysLeft, deadlineIso, openDateIso, inactive, estimated = false, rolling = false, dueLong, opensLabel,
   backHref, backLabel, facetHref = null, facetLabel = null,
   facts, needs = [], eligibility, howApply = null, about, notes, oneForm = null, steps, toApply = null,
   valueLabel, valueBig, valueNote, checkedLabel = null, valueQuiet = false,
-  ctaLabel, url, canRemind, guideHref, guideTitle,
+  ctaLabel, url, reminder, guideHref, guideTitle,
   alternatives = [], alternativesHref = backHref, next = [],
 } = Astro.props;
 const status = availability ?? datedStatus;
@@ -102,7 +103,8 @@ const far = status === 'active' && typeof daysLeft === 'number' && daysLeft > SO
 // The reminder block's first paint; refreshRemind redoes it in the visitor's
 // browser on load, because the page is prerendered.
 const remindAhead = typeof daysLeft === 'number' ? milestonesAhead(daysLeft) : [];
-const remindLate = canRemind && remindAhead.length === 0;
+const remindLate = reminder === 'too-soon';
+const remindCopy = reminderFormCopy(reminder, remindAhead);
 const lateWhen = remindLate && deadlineIso ? closesPhrase(daysLeft ?? 0, deadlineIso) : '';
 const lateApply = ctaLabel === 'Apply';
 // A posted deadline for a listing still to come: what "confirmed" means in
@@ -409,8 +411,8 @@ const chip: { text: string; tone: Tone } =
       </a>
     )}
 
-    {!availability && canRemind && (
-      <div class="sabd-remind" data-remind data-deadline={deadlineIso ?? undefined}>
+    {!availability && reminder && (
+      <div class="sabd-remind" data-remind data-reminder-state={reminder} data-item-type={itemType} data-deadline={deadlineIso ?? undefined} data-open-date={openDateIso ?? undefined} data-inactive={inactive ? 'true' : undefined} data-estimated={estimated ? 'true' : undefined} data-rolling={rolling ? 'true' : undefined}>
       {/* Once no milestone is ahead, the form promised mail the mailer never
           sends (critique 2026-09-29). The late line replaces it instead. */}
       <div data-remind-late hidden={!remindLate}>
@@ -418,12 +420,12 @@ const chip: { text: string; tone: Tone } =
         <p class="sabd-remind-sub sabd-remind-late">Too soon for an email reminder.{lateApply && ' Apply today.'}</p>
       </div>
       <div data-remind-open hidden={remindLate}>
-        <h2 class="sabd-remind-label">Email me before it closes</h2>
-        <div class="sabd-remind-sub">We send one link to confirm, then a reminder <span data-remind-when>{milestonePhrase(remindAhead.length ? remindAhead : [30, 14, 3])}</span> before the deadline.</div>
+        <h2 class="sabd-remind-label" data-remind-heading>{remindCopy.heading}</h2>
+        <div class="sabd-remind-sub" data-remind-explanation>{remindCopy.before}<span data-remind-when>{remindCopy.when}</span>{remindCopy.after}</div>
         <form data-sabd-alert-form data-item-type={itemType} data-item-id={itemId} class="sabd-remind-form" novalidate>
           <label for={`sabd-remind-${itemType}-${itemId}`} class="sr-only">Your email for a deadline reminder</label>
           <input id={`sabd-remind-${itemType}-${itemId}`} type="email" name="email" required autocomplete="email" placeholder="your@email.com" class="sabd-remind-input" aria-describedby={`sabd-remind-msg-${itemType}-${itemId}`} />
-          <button type="submit" class="sab-btn sabd-remind-btn">Remind me</button>
+          <button type="submit" class="sab-btn sabd-remind-btn">{remindCopy.button}</button>
         </form>
         <div id={`sabd-remind-msg-${itemType}-${itemId}`} data-sabd-alert-msg class="sabd-remind-msg" role="status" aria-live="polite" hidden></div>
         <div class="sabd-remind-fine">
@@ -785,22 +787,32 @@ const chip: { text: string; tone: Tone } =
   import { URGENT_DAYS, SOON_DAYS } from '../../lib/list-core';
   import { LIKELY_DATE, STATUS_WORDS } from '../../lib/status';
   import { placeInList, readListContext } from '../../lib/list-context.ts';
-  import { milestonesAhead, milestonePhrase, closesPhrase } from '../../lib/alerts';
+  import { milestonesAhead, closesPhrase, reminderFormCopy, reminderState } from '../../lib/alerts';
 
   /** The reminder block from today's date, not the build's. */
   function refreshRemind() {
     const box = document.querySelector<HTMLElement>('[data-remind]');
-    const deadline = box?.dataset.deadline;
-    if (!box || !deadline) return;
-    const days = Math.round((new Date(deadline + 'T00:00:00').getTime() - todayDate().getTime()) / 86400000);
-    box.hidden = days < 0;
-    const ahead = milestonesAhead(days);
+    if (!box) return;
+    const deadline = box.dataset.deadline;
+    const today = todayDate();
+    const state = reminderState({ deadline, openDate: box.dataset.openDate,
+      active: box.dataset.inactive !== 'true', deadlineEstimated: box.dataset.estimated === 'true', rolling: box.dataset.rolling === 'true',
+    }, box.dataset.itemType === 'program' ? 'program' : 'scholarship', today);
+    box.dataset.reminderState = state ?? '';
+    box.hidden = !state;
+    const days = deadline ? Math.round((new Date(deadline + 'T00:00:00').getTime() - today.getTime()) / 86400000) : NaN;
     const late = box.querySelector<HTMLElement>('[data-remind-late]')!;
     const open = box.querySelector<HTMLElement>('[data-remind-open]')!;
-    late.hidden = ahead.length > 0;
-    open.hidden = ahead.length === 0;
-    if (ahead.length) box.querySelector('[data-remind-when]')!.textContent = milestonePhrase(ahead);
-    else box.querySelector('[data-remind-late-when]')!.textContent = closesPhrase(days, deadline);
+    late.hidden = state !== 'too-soon';
+    open.hidden = state === 'too-soon';
+    const copy = reminderFormCopy(state, milestonesAhead(days));
+    box.querySelector('[data-remind-heading]')!.textContent = copy.heading;
+    const when = box.querySelector('[data-remind-when]')!;
+    when.textContent = copy.when;
+    box.querySelector('[data-remind-explanation]')!.replaceChildren(copy.before, when, copy.after);
+    const button = box.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+    if (!button.disabled) button.textContent = copy.button;
+    if (state === 'too-soon' && deadline) box.querySelector('[data-remind-late-when]')!.textContent = closesPhrase(days, deadline);
   }
 
   /** Point the ‹ › arrows at the list the reader came from, or leave them off. */
@@ -901,6 +913,7 @@ const chip: { text: string; tone: Tone } =
       input.focus();
       return;
     }
+    const idleLabel = btn.textContent;
     btn.disabled = true;
     btn.textContent = 'Saving…';
     try {
@@ -919,12 +932,12 @@ const chip: { text: string; tone: Tone } =
         say('Request received. If confirmation is needed, check your inbox. Existing reminders stay unchanged.', false);
       } else {
         btn.disabled = false;
-        btn.textContent = 'Remind me';
+        btn.textContent = idleLabel;
         say(data.error || 'Something went wrong. Try again.', true);
       }
     } catch {
       btn.disabled = false;
-      btn.textContent = 'Remind me';
+      btn.textContent = idleLabel;
       say('Could not reach the server. Check your connection and try again.', true);
     }
   }, true);

@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import {
   ALERT_MILESTONES, isMilestone, parseCadence, formatCadence, cadenceFromInput,
-  milestonesAhead, milestonePhrase, reminderCopy,
+  milestonesAhead, milestonePhrase, reminderCopy, reminderState, inReminderWindow, remindersDue,
 } from './alerts'
 
 describe('isMilestone', () => {
@@ -149,5 +149,80 @@ describe('reminderCopy', () => {
 
   it('says 1 day, not 1 days', () => {
     expect(reminderCopy({ deadline: '2026-10-02' }, 'X', 1, today)!.subject).toBe('1 day left: X closes October 2, 2026')
+  })
+})
+
+
+describe('reminder states from the shared listing status', () => {
+  const today = new Date('2026-10-09T00:00:00')
+  it.each([
+    [{ deadline: '2026-12-01' }, 'deadline'],
+    [{ deadline: '2026-10-12' }, 'too-soon'],
+    [{ deadline: '2026-10-09' }, 'too-soon'],
+    [{ deadline: '2026-10-08' }, null],
+    [{ deadline: '2026-12-01', openDate: '2026-11-01' }, 'open'],
+    [{ openDate: '2026-11-01' }, 'open'],
+    [{ active: false, openDate: '2026-11-01', deadline: '2026-12-01' }, 'open'],
+    [{ active: false, deadline: '2026-12-01' }, null],
+    [{ active: false, deadline: '2026-12-01', openDate: '2026-09-01' }, null],
+    [{}, 'posted'],
+    [{ deadline: '2026-12-01', deadlineEstimated: true, openDate: '2026-11-01' }, 'posted'],
+    [{ deadline: '2026-10-08', deadlineEstimated: true }, null],
+    [{ rolling: true }, null],
+    [{ concluded: true }, null],
+    [{ concluded: true, deadline: '2026-12-01', openDate: '2026-11-01' }, null],
+  ] as const)('scholarship %j gets %s', (item, state) => {
+    expect(reminderState(item, 'scholarship', today)).toBe(state)
+  })
+  it.each([
+    [{ deadline: '2026-12-01' }, 'deadline'],
+    [{ deadline: '2026-10-12' }, 'too-soon'],
+    [{ deadline: '2026-10-08' }, null],
+    [{ deadline: 'TBA' }, 'posted'],
+    [{}, 'posted'],
+    [{ deadline: 'Ongoing' }, null],
+    [{ deadline: '2026-12-01', openDate: '2026-11-01' }, 'open'],
+    [{ active: false, deadline: 'TBA' }, null],
+  ] as const)('program %j gets %s', (item, state) => {
+    expect(reminderState(item, 'program', today)).toBe(state)
+  })
+})
+
+describe('waiting cadence', () => {
+  it('round trips kinds alongside the original milestone format', () => {
+    expect(parseCadence(' open , 3,30,open,14,bogus')).toEqual(['open', 30, 14, 3])
+    expect(parseCadence('posted')).toEqual(['posted'])
+    expect(parseCadence('posted,14,3')).toEqual(['posted', 14, 3])
+    expect(formatCadence(['posted', 3, 30, 14, 'posted'])).toBe('posted,30,14,3')
+    expect(cadenceFromInput(['posted'])).toBeNull() // server chooses kind from status
+  })
+})
+
+describe('Alberta sending hours on UTC runners', () => {
+  it.each([
+    ['2026-10-09T13:59:59Z', false], // 07:59 MDT
+    ['2026-10-09T14:00:00Z', true],
+    ['2026-10-10T01:59:59Z', true],
+    ['2026-10-10T02:00:00Z', false],
+    ['2025-12-09T14:59:59Z', false], // 07:59 MST
+    ['2025-12-09T15:00:00Z', true],
+    ['2025-12-10T02:59:59Z', true],
+    ['2025-12-10T03:00:00Z', false],
+    ['2026-03-08T13:59:59Z', false], // spring DST transition
+    ['2026-03-08T14:00:00Z', true],
+    ['2025-11-02T14:59:59Z', false], // autumn DST transition
+    ['2025-11-02T15:00:00Z', true],
+  ])('%s allowed: %s', (instant, allowed) => {
+    expect(inReminderWindow(new Date(instant))).toBe(allowed)
+  })
+  it('uses Alberta today after UTC midnight', () => {
+    const due = remindersDue({ openDate: '2026-10-09', deadline: '2026-11-08' }, 'scholarship', 'Award', new Date('2026-10-10T01:00:00Z'))
+    expect(due.map(d => d.kind)).toEqual(['open', 'posted', 30])
+    expect(due[0]!.copy.subject).toBe('Award opens today')
+  })
+  it('does not mistake an estimate or a passed date for publication', () => {
+    for (const item of [{}, { deadline: '2026-11-08', deadlineEstimated: true }, { deadline: '2026-10-09' }, { concluded: true, deadline: '2026-11-08' }]) {
+      expect(remindersDue(item, 'scholarship', 'Award', new Date('2026-10-09T18:00:00Z')).some(d => d.kind === 'posted')).toBe(false)
+    }
   })
 })

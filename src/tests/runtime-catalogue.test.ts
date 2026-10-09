@@ -13,11 +13,11 @@ it('preserves every public reminder identity, label, availability and deadline',
   // Compare the serialized contract, including omitted versus null fields.
   const json = (value: unknown) => JSON.parse(JSON.stringify(value));
   expect(catalogue.scholarships).toEqual(json(scholarships.map(
-    ({ id, title, active, deadline, deadlineEstimated }) =>
-      ({ id, title, active, deadline, ...(deadlineEstimated ? { deadlineEstimated: true } : {}) }),
+    ({ id, title, active, deadline, openDate, deadlineEstimated, concluded, rolling }) =>
+      ({ id, title, active, deadline, openDate, deadlineEstimated, concluded, rolling }),
   )));
   expect(catalogue.programs).toEqual(json(programs.map(
-    ({ id, name, active, deadline }) => ({ id, name, active, deadline }),
+    ({ id, name, active, deadline, openDate }) => ({ id, name, active, deadline, openDate }),
   )));
 });
 
@@ -36,7 +36,7 @@ it('generates both payloads together, preserves publication identity, and reject
     write('src/data/publication-request.json', { id: 'reviewed-request' });
     execFileSync(runner, [script], { cwd: root });
     const runtime = read('src/data/runtime-catalogue.json');
-    expect(runtime).toEqual({ scholarships: [{ id: 17, title: 'Award', active: false }],
+    expect(runtime).toEqual({ scholarships: [{ id: 17, title: 'Award', active: false, openDate: null }],
       programs: [{ id: 29, name: 'Program', active: true, deadline: 'TBA' }] });
     expect(read('src/data/quiz-payload.json').scholarships[0]).toMatchObject({ id: 17, audience: 'An audience' });
     const marker = read('public/publication.json');

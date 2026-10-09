@@ -124,7 +124,8 @@ What that means in practice:
   that tab until it closes. sessionStorage is per-tab and not readable by us
   or by another site, and the quiz has a visible restart that clears it.
 - **Limiting retention** is enforced by `scripts/prune-events.ts`, daily:
-  events 180 days, subscriptions 60 days past a deadline, unconfirmed sign-ups
+  events 180 days, subscriptions 60 days past a deadline (or within 60 days
+  of sign-up while no confirmed deadline is posted), unconfirmed sign-ups
   30 days, rate-limit windows 2 days, confirmation-throttle hashes and unsent
   email payloads 30 days.
 - **Access and correction** run through the contact address in the privacy
@@ -222,3 +223,17 @@ Re-read this file when any of these happen, not on a calendar:
   sentence about maintenance is a representation, and it spreads.
 - An outreach wave is about to send, or its template changes. See the section
   above; `npm run check-outreach` is the gate.
+
+
+## Reminder kinds, October 9, 2026
+
+The existing cadence field now also records an opening-day or date-posted
+request. No new personal information category, table or column is added.
+Double opt-in, unsubscribe, delivery-payload retention and recipient throttles
+are unchanged. The existing delivery ledger holds one tombstone for each
+one-time notice, so correcting a published date cannot repeat that notice.
+For subscriptions without a confirmed deadline, the 60-day retention window
+runs from sign-up; the daily prune starts at 59 days to keep 60 days a ceiling.
+The 60-days-after-deadline rule still applies once a confirmed date is posted.
+This fills the previously unbounded undated case; dated and unconfirmed-email
+retention windows are unchanged. The privacy policy states the fallback.

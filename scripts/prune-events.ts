@@ -13,6 +13,7 @@
 import { readFileSync } from 'fs'
 import { dirname, join } from 'path'
 import { fileURLToPath } from 'url'
+import { hasConfirmedDeadline } from '../src/lib/alerts.ts'
 import { validateCatalogue } from '../src/lib/catalogue.ts'
 import { neon } from '@neondatabase/serverless'
 
@@ -22,7 +23,7 @@ const url = process.env.DATABASE_URL
 if (!url) { console.error('DATABASE_URL is not set'); process.exit(1) }
 const sql = neon(url)
 
-type Listing = { id: number; deadline?: string | null }
+type Listing = { id: number; deadline?: string | null; deadlineEstimated?: boolean }
 const scholarships = JSON.parse(readFileSync(join(__dirname, '../src/data/scholarships.json'), 'utf8')) as Listing[]
 const programs = JSON.parse(readFileSync(join(__dirname, '../src/data/research-programs.json'), 'utf8')) as Listing[]
 validateCatalogue(scholarships,'scholarship')
@@ -97,7 +98,7 @@ const cutoff = new Date(Date.now() - CUTOFF_DAYS * 24 * 60 * 60 * 1000)
 for (const [type, list] of [['scholarship', scholarships], ['program', programs]] as const) {
   for (const item of list) {
     const d = item.deadline
-    // No deadline, TBA or Ongoing: nothing has passed, so nothing to prune.
+    // Undated subscriptions use the sign-up cutoff in the query below.
     if (!d || !/^\d{4}-\d{2}-\d{2}$/.test(d)) continue
     if (new Date(d + 'T00:00:00') < cutoff) deadItemIds[type].add(item.id)
   }
@@ -113,11 +114,14 @@ if (scholarshipIds.length === 0 || programIds.length === 0) {
   process.exit(1)
 }
 for (const type of ['scholarship', 'program'] as const) {
+  const list = type === 'scholarship' ? scholarships : programs
+  const waitingIds = list.filter(item => !hasConfirmedDeadline(item)).map(item => item.id)
   const [gone] = await pruneSql`
     with del as (
       delete from subscribers
       where item_type = ${type}
-        and (item_id = any(${[...deadItemIds[type]]}) or item_id <> all(${liveIds[type]}))
+        and (item_id = any(${[...deadItemIds[type]]}) or item_id <> all(${liveIds[type]})
+          or (item_id = any(${waitingIds}) and created_at < now() - interval '59 days'))
       returning 1
     )
     select count(*)::int as n from del

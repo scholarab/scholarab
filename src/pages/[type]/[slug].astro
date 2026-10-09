@@ -1,4 +1,5 @@
 ---
+import { reminderState } from '../../lib/alerts';
 import { todayDate as albertaToday } from '../../lib/calendar';
 import SabFooter from '../../components/sab/SabFooter.astro';
 import SabFonts from '../../components/sab/SabFonts.astro';
@@ -498,7 +499,8 @@ if (kind === 'scholarship') {
     url: s.url,
     // >= 0: on the due date the block still renders, as "Closes today. Too soon
     // for an email reminder. Apply today." With > 0 it vanished (critique 2026-10-02).
-    canRemind: status === 'active' && daysLeft !== null && daysLeft >= 0,
+    reminder: reminderState(s, 'scholarship', todayDate),
+    rolling: s.rolling,
   };
 } else {
   const p = program!;
@@ -578,7 +580,7 @@ if (kind === 'scholarship') {
     ctaLabel: 'Visit the program site',
     url: p.url,
     checkedLabel: formatVerifiedMonth(p.lastVerified),
-    canRemind: p.active !== false && status === 'active' && daysLeft !== null && daysLeft >= 0,
+    reminder: reminderState(p, 'program', todayDate),
   };
 }
 
@@ -702,7 +704,8 @@ const breadcrumbJson = {
       valueQuiet={"valueQuiet" in d ? d.valueQuiet : false}
       ctaLabel={d.ctaLabel}
       url={d.url}
-      canRemind={d.canRemind}
+      reminder={d.reminder}
+      rolling={"rolling" in d ? d.rolling : false}
       guideHref={guideSlug ? `/guides/${guideSlug.slug}/` : undefined}
       guideTitle={guideSlug?.title}
       alternatives={alternatives}

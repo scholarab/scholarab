@@ -1,18 +1,26 @@
 #!/usr/bin/env node
 // Sends deadline reminder emails via Resend.
-// Run daily via GitHub Actions. Requires DATABASE_URL and RESEND_API_KEY.
+// Run every six hours via GitHub Actions. Requires DATABASE_URL and RESEND_API_KEY.
 import { claimRecipient, deliverMail, mailKey, type MailPayload } from '../src/lib/mail-delivery.ts'
-import { calendarDaysUntil, todayDate } from '../src/lib/calendar.ts'
+import { albertaDate } from '../src/lib/calendar.ts'
 import { readFileSync } from 'fs'
 import { dirname, join } from 'path'
 import { fileURLToPath } from 'url'
 import { neon } from '@neondatabase/serverless'
 import { generateSlug } from '../src/lib/utils.ts'
-import { parseCadence, reminderCopy, type ReminderCopy } from '../src/lib/alerts.ts'
+import { ALERT_MILESTONES, parseCadence, remindersDue, inReminderWindow, hasConfirmedDeadline, type ReminderCopy } from '../src/lib/alerts.ts'
 import { CONFIRM_SUBJECT, confirmEmailHtml } from '../src/lib/confirm-email.ts'
 import { listUnsubscribeHeaders, senderIdentityHtml } from '../src/lib/email-identity.ts'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
+
+const NOW = new Date()
+// Before credentials, reads, confirmation sweeps or retries. UTC runners and
+// manual invocations obey the same Alberta window.
+if (!inReminderWindow(NOW)) {
+  console.log('Outside 08:00 to 20:00 America/Edmonton; delivery deferred')
+  process.exit(0)
+}
 
 const DATABASE_URL = process.env.DATABASE_URL
 const RESEND_API_KEY = process.env.RESEND_API_KEY
@@ -26,13 +34,13 @@ const MAILING_ADDRESS = process.env.ALERT_MAILING_ADDRESS
 if (!DATABASE_URL) { console.error('DATABASE_URL not set'); process.exit(1) }
 if (!RESEND_API_KEY) { console.error('RESEND_API_KEY not set'); process.exit(1) }
 
-interface Item { id: number; title?: string; name?: string; amount?: string; deadline?: string; url: string; active: boolean; openDate?: string; deadlineEstimated?: boolean; concluded?: boolean; rolling?: boolean }
+interface Item { id: number; title?: string; name?: string; amount?: string; deadline?: string; url: string; active?: boolean; openDate?: string; deadlineEstimated?: boolean; concluded?: boolean; rolling?: boolean }
 
 const scholarships: Item[] = JSON.parse(readFileSync(join(__dirname, '../src/data/scholarships.json'), 'utf8'))
 const programs: Item[] = JSON.parse(readFileSync(join(__dirname, '../src/data/research-programs.json'), 'utf8'))
 
 const sql = neon(DATABASE_URL)
-const MILESTONES = process.env.TEST_DAYS ? [parseInt(process.env.TEST_DAYS)] : [30, 14, 3]
+const MILESTONES = process.env.TEST_DAYS ? [parseInt(process.env.TEST_DAYS)] : ALERT_MILESTONES
 // CATCH_UP=1: one-off mode; remind every subscriber whose item still has a
 // future deadline, using the real days-left count instead of milestone days.
 // Used to catch everyone up after the alert pipeline was down. DRY_RUN=1
@@ -47,10 +55,8 @@ if (TEST_SUBSCRIPTION_ID !== null && !Number.isSafeInteger(TEST_SUBSCRIPTION_ID)
 // subscriber's chosen milestones would make them send nothing at all.
 const IGNORE_CADENCE = CATCH_UP || !!process.env.TEST_DAYS || TEST_SUBSCRIPTION_ID !== null
 
-interface SubscriberRow { id:number; email:string; token:string; cadence:string; item_type:string; item_id:number }
+interface SubscriberRow { id:number; email:string; token:string; cadence:string; item_type:string; item_id:number; sent_reminders: { key:string; created_at:string }[] }
 const query = (text:string,params?:unknown[]) => sql.query(text,params)
-function daysUntil(deadline:string):number { return calendarDaysUntil(deadline) }
-const TODAY = todayDate()
 
 function escapeHtml(s: string): string {
   return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
@@ -97,6 +103,8 @@ function emailHtml(rawLabel: string, rawAmount: string | undefined, copy: Remind
  * the one-click headers rather than fail loudly. See listUnsubscribeHeaders.
  */
 async function sendEmail(row: {id:number; email:string; token:string}, kind:'confirm'|'reminder', identity:string, subject:string, html:string, unsubscribeUrl:string): Promise<boolean> {
+  // A run started before 20:00 can cross the boundary while sending.
+  if (!inReminderWindow(new Date())) return false
   const payload:MailPayload = {from:FROM,to:[row.email],reply_to:REPLY_TO,subject,html,headers:listUnsubscribeHeaders(unsubscribeUrl)}
   return await deliverMail(query,await mailKey(identity),row.id,kind,payload,RESEND_API_KEY!) === 'sent'
 }
@@ -192,42 +200,54 @@ async function sendPendingConfirmations(): Promise<void> {
 if (TEST_SUBSCRIPTION_ID === null) await sendPendingConfirmations()
 
 const allItems = [
-  // `active !== false`: most program entries don't carry the field at all;
-  // requiring truthy `active` silently excluded them from alerts.
-  ...scholarships.filter(s => s.active !== false && s.deadline).map(s => ({ ...s, itemType: 'scholarship', label: s.title!, detailUrl: `${BASE_URL}/scholarships/${generateSlug(s.title!)}` })),
-  ...programs.filter(p => p.active !== false && p.deadline && p.deadline !== 'TBA' && p.deadline !== 'Ongoing').map(p => ({ ...p, itemType: 'program', label: p.name!, detailUrl: `${BASE_URL}/programs/${generateSlug(p.name!)}` })),
+  ...scholarships.map(s => ({ ...s, itemType: 'scholarship' as const, label: s.title!, detailUrl: `${BASE_URL}/scholarships/${generateSlug(s.title!)}` })),
+  ...programs.map(p => ({ ...p, itemType: 'program' as const, label: p.name!, detailUrl: `${BASE_URL}/programs/${generateSlug(p.name!)}` })),
 ]
+const targets = allItems.map(item => ({ item, due: remindersDue(item, item.itemType, item.label, NOW, {
+  milestones: MILESTONES, catchUp: CATCH_UP, test: TEST_SUBSCRIPTION_ID !== null,
+}) })).filter(t => t.due.length > 0)
 
-const targets = (CATCH_UP || TEST_SUBSCRIPTION_ID !== null)
-  ? allItems.map(item => ({ item, days: daysUntil(item.deadline!) })).filter(t => t.days > 0)
-  : MILESTONES.flatMap(m => allItems.filter(item => daysUntil(item.deadline!) === m).map(item => ({ item, days: m })))
-
-// One recipient read for all target items, not one HTTP round trip per listing.
+// One read, including delivery tombstones, for every target's confirmed subscribers.
 const targetKeys = targets.map(({item})=>`${item.itemType}:${item.id}`)
 const recipients = targetKeys.length ? await sql`
-  SELECT id,email,token,cadence,item_type,item_id FROM subscribers
-  WHERE confirmed_at IS NOT NULL AND (${TEST_SUBSCRIPTION_ID}::int IS NULL OR id = ${TEST_SUBSCRIPTION_ID}) AND (item_type || ':' || item_id::text) = ANY(${targetKeys}::text[])` as SubscriberRow[] : []
+  SELECT s.id,s.email,s.token,s.cadence,s.item_type,s.item_id,
+    COALESCE((SELECT json_agg(json_build_object('key',d.key,'created_at',d.created_at))
+      FROM mail_deliveries d WHERE d.subscription_id=s.id AND d.kind='reminder' AND d.state='sent'), '[]') AS sent_reminders
+  FROM subscribers s
+  WHERE s.confirmed_at IS NOT NULL AND (${TEST_SUBSCRIPTION_ID}::int IS NULL OR s.id = ${TEST_SUBSCRIPTION_ID}) AND (s.item_type || ':' || s.item_id::text) = ANY(${targetKeys}::text[])` as SubscriberRow[] : []
 const byItem = new Map<string,SubscriberRow[]>()
 for (const row of recipients) {
   if (TEST_SUBSCRIPTION_ID !== null && row.id !== TEST_SUBSCRIPTION_ID) continue
   const key=`${row.item_type}:${row.item_id}`
   const bucket=byItem.get(key) ?? [];bucket.push(row);byItem.set(key,bucket)
 }
-for (const {item,days} of targets) {
+for (const {item,due} of targets) {
   for (const row of byItem.get(`${item.itemType}:${item.id}`) ?? []) {
-    if (!IGNORE_CADENCE && !(parseCadence(row.cadence) as number[]).includes(days)) continue
     if (/@example\.(com|org|net)$/i.test(row.email)) continue
-    const copy = reminderCopy(item as Item & { deadline: string }, item.label, days, TODAY)
-    if (!copy) continue
-    const subject = `${TEST_SUBSCRIPTION_ID !== null ? '[TEST] ' : ''}${copy.subject}`
-    const unsubscribeUrl = `${BASE_URL}/api/unsubscribe?token=${row.token}`
-    const html = emailHtml(item.label,item.amount,copy,item.detailUrl,unsubscribeUrl)
-    if (DRY_RUN) {sent++;console.log(`would send ${days}d${copy.caution ? ' (date not confirmed)' : ''} to subscription ${row.id}`);continue}
-    try {
-      // Catch-up is one logical send per subscription/deadline, even on rerun.
-      const milestone=TEST_SUBSCRIPTION_ID !== null ? 'designated-test' : CATCH_UP?'catch-up':String(days)
-      if(await sendEmail(row,'reminder',`reminder/${row.token}/${item.deadline}/${milestone}`,subject,html,unsubscribeUrl)) sent++
-    } catch(e) {errors++;console.error(`delivery failed for subscription ${row.id}`,e instanceof Error?e.message:'unknown')}
+    const cadence = parseCadence(row.cadence)
+    for (const reminder of due) {
+      const special = reminder.kind === 'open' || reminder.kind === 'posted'
+      if (!IGNORE_CADENCE && !cadence.includes(reminder.kind)) continue
+      // New waiting subscriptions never count down to an estimated date.
+      if (!special && cadence.some(k => k === 'open' || k === 'posted') && !hasConfirmedDeadline(item)) continue
+      const identity = `reminder/${row.token}/${reminder.identity}`
+      const key = await mailKey(identity)
+      const previous = row.sent_reminders.find(d => d.key === key)
+      const copy = reminder.copy
+      const subject = `${TEST_SUBSCRIPTION_ID !== null ? '[TEST] ' : ''}${copy.subject}`
+      const unsubscribeUrl = `${BASE_URL}/api/unsubscribe?token=${row.token}`
+      const html = emailHtml(item.label,item.amount,copy,item.detailUrl,unsubscribeUrl)
+      // The one-time notice replaces a coinciding milestone on that day.
+      if (previous) {
+        if (special && albertaDate(new Date(previous.created_at)) === albertaDate(NOW)) break
+        continue
+      }
+      if (DRY_RUN) {sent++;console.log(`would send ${reminder.kind} to subscription ${row.id}`);if(special) break;continue}
+      try {
+        if(await sendEmail(row,'reminder',identity,subject,html,unsubscribeUrl)) sent++
+      } catch(e) {errors++;console.error(`delivery failed for subscription ${row.id}`,e instanceof Error?e.message:'unknown')}
+      if (special) break
+    }
   }
 }
 // Retry unsettled payloads within the provider's deduplication window, even if
@@ -241,6 +261,7 @@ if(!DRY_RUN && TEST_SUBSCRIPTION_ID === null) {
       AND d.updated_at < now()-interval '2 minutes'
       AND ((d.kind='reminder' AND s.confirmed_at IS NOT NULL) OR (d.kind='confirm' AND s.confirmed_at IS NULL))`
   for(const row of retries) {
+    if (!inReminderWindow(new Date())) break
     try {
       if(row.kind==='confirm' && !(await claimRecipient(query,row.email))) continue
       if(await deliverMail(query,row.key,row.subscription_id,row.kind,row.payload,RESEND_API_KEY!)==='sent') {

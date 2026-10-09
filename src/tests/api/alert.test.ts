@@ -1,5 +1,5 @@
 // @vitest-environment node
-import { beforeAll, beforeEach, afterAll, it, expect, vi } from 'vitest';
+import { beforeAll, beforeEach, afterAll, afterEach, it, expect, vi } from 'vitest';
 import { PGlite } from '@electric-sql/pglite';
 import { drizzle } from 'drizzle-orm/pglite';
 import { readFileSync } from 'node:fs';
@@ -22,9 +22,13 @@ vi.mock('../../data/runtime-catalogue.json', () => ({ default: {
     { id: 1, title: 'Example award', active: true, deadline: '2099-10-01' },
     { id: 3, title: 'Retired', active: false, deadline: '2099-10-01' },
     { id: 4, title: 'Expired', active: true, deadline: '2000-01-01' },
-    // Relative to the run date; a day either way still lands in the same case.
-    { id: 6, title: 'Closes in two days', active: true, deadline: new Date(Date.now() + 2 * 86400000).toISOString().slice(0, 10) },
-    { id: 7, title: 'Closes in ten days', active: true, deadline: new Date(Date.now() + 10 * 86400000).toISOString().slice(0, 10) },
+    // Fixed Alberta dates; these cases never depend on the time of the test run.
+    { id: 6, title: 'Closes in two days', active: true, deadline: '2026-10-11' },
+    { id: 7, title: 'Closes in ten days', active: true, deadline: '2026-10-19' },
+    { id: 9, title: 'Opens later', openDate: '2026-11-01', deadline: '2026-12-01' },
+    { id: 10, title: 'No date yet' },
+    { id: 11, title: 'Concluded', concluded: true },
+    { id: 12, title: 'Rolling', rolling: true },
     { id: 8, title: 'Rolled forward', active: true, deadline: '2099-10-01', deadlineEstimated: true },
   ],
   programs: [
@@ -40,11 +44,14 @@ beforeAll(async () => {
   state.db = drizzle(pg);
 }, 30000);
 beforeEach(async () => {
+  vi.useFakeTimers({ toFake: ['Date'] });
+  vi.setSystemTime(new Date('2026-10-09T18:00:00Z'));
   state.limited = false;
   state.send.mockClear();
   state.send.mockResolvedValue(true);
   await pg.exec('TRUNCATE subscribers,events CASCADE');
 });
+afterEach(() => vi.useRealTimers());
 afterAll(async () => pg.close());
 const valid = { email: 'student@example.org', itemType: 'scholarship', itemId: 1, days: [14, 3] };
 const call = (body: unknown) =>
@@ -133,14 +140,14 @@ it.each([
 ])('rejects malformed input %j', async (body) => {
   expect((await call(body)).status).toBe(400);
 });
-it.each([3, 4])('rejects closed scholarship %s', async (id) => {
+it.each([3, 4, 11, 12])('rejects closed scholarship %s', async (id) => {
   expect((await call({ ...valid, itemId: id })).status).toBe(400);
 });
 it('uses JSON program IDs and accepts missing active flag', async () => {
   expect((await call({ ...valid, itemType: 'program', itemId: 2 })).status).toBe(200);
 });
-it('rejects programs without fixed deadlines', async () => {
-  expect((await call({ ...valid, itemType: 'program', itemId: 5 })).status).toBe(400);
+it('offers date-posted reminders for TBA programs', async () => {
+  expect((await call({ ...valid, itemType: 'program', itemId: 5 })).status).toBe(200);
 });
 it('rejects unknown IDs', async () => {
   expect((await call({ ...valid, itemId: 9999 })).status).toBe(404);
@@ -163,9 +170,9 @@ it('stores only the milestones still ahead', async () => {
   expect(rows.rows[0]!.cadence).toBe('3');
   expect(state.send.mock.calls[0]![3]).toBe('3');
 });
-it('refuses a reminder for a date the provider has not posted', async () => {
-  const res = await call({ ...valid, itemId: 8 });
-  expect(res.status).toBe(400);
-  expect((await pg.query('SELECT 1 FROM subscribers')).rows).toHaveLength(0);
-  expect(state.send).not.toHaveBeenCalled();
+it.each([[8, 'posted,14,3'], [9, 'open,14,3'], [10, 'posted,14,3']])('stores the state-specific request for %s with double opt-in', async (itemId, cadence) => {
+  expect((await call({ ...valid, itemId })).status).toBe(200);
+  expect((await pg.query('SELECT cadence,confirmed_at FROM subscribers')).rows).toEqual([{ cadence, confirmed_at: null }]);
+  expect(state.send.mock.calls[0]![3]).toBe(cadence);
+  expect((await pg.query("SELECT event FROM events WHERE event='alert_subscribe'")).rows).toHaveLength(1);
 });

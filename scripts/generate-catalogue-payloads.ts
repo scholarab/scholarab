@@ -28,11 +28,10 @@ for (const [source, result] of [[scholarships, payload.scholarships], [programs,
 // need identity, label, availability and deadline, never full editorial records.
 writeFileSync('src/data/quiz-payload.json', JSON.stringify(payload));
 writeFileSync('src/data/runtime-catalogue.json', JSON.stringify({
-  // Sparse, like the quiz payload: /api/alert refuses a reminder for a date
-  // the provider has not posted, the same line the listing page draws.
-  scholarships: scholarships.map(({ id, title, active, deadline, deadlineEstimated }) =>
-    ({ id, title, active, deadline, ...(deadlineEstimated ? { deadlineEstimated: true } : {}) })),
-  programs: programs.map(({ id, name, active, deadline }) => ({ id, name, active, deadline })),
+  // Keep all status inputs so the API agrees with the published listing.
+  scholarships: scholarships.map(({ id, title, active, deadline, openDate, deadlineEstimated, concluded, rolling }) =>
+    ({ id, title, active, deadline, openDate: openDate ?? null, deadlineEstimated, concluded, rolling })),
+  programs: programs.map(({ id, name, active, deadline, openDate }) => ({ id, name, active, deadline, openDate })),
 }));
 // The publisher checks this same small marker after deployment: the request ID
 // it committed, bound to all content in the build's JSON snapshot. Only the ID

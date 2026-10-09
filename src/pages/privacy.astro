@@ -8,7 +8,7 @@ import { webPageJson } from '../lib/ld';
 // Shown in the page and used as the "last updated" line. Bump this whenever
 // what the site actually collects changes; the date is the only thing telling
 // a reader whether this document still describes the code.
-const LAST_UPDATED = 'October 2, 2026';
+const LAST_UPDATED = 'October 9, 2026';
 
 // One row per thing the site stores. Kept as data rather than prose so it is
 // obvious when a new table or endpoint has no row here yet.
@@ -16,11 +16,11 @@ const collected = [
   {
     what: 'Your email address',
     when: 'Only if you ask for deadline reminders.',
-    why: 'To email you 30, 14 and 3 days before a deadline, whichever of those you picked.',
-    kept: 'Until you unsubscribe, or until 60 days after the deadline passes, whichever comes first. If you never confirm the sign-up, it is deleted within 30 days.',
+    why: 'To send the opening-day or date-posted reminder you requested, and email you 30, 14 and 3 days before a deadline, whichever of those you picked.',
+    kept: 'Until you unsubscribe, or until 60 days after the deadline passes, whichever comes first. If no confirmed deadline is posted, it is deleted within 60 days of sign-up. If you never confirm the sign-up, it is deleted within 30 days.',
   },
   {
-    what: 'Which scholarship or program the reminder is for',
+    what: 'Which scholarship or program the reminder is for, and when you asked to be reminded',
     when: 'Stored alongside the email address above.',
     why: 'A reminder has to know what it is reminding you about.',
     kept: 'Same as the email address.',
