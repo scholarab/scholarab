@@ -1265,7 +1265,7 @@
     "audience": "Grade 11 students across Canada facing financial hardship",
     "url": "https://horatioalger.ca/scholarships-and-services/undergraduate-scholarships/",
     "category": "Community",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "National",
     "active": true,
     "description": "Horatio Alger Canada funds students who have come through real adversity. There are 160 awards of $10,000, and you apply in Grade 11, not Grade 12.",
@@ -1289,7 +1289,7 @@
       "financialNeed": true,
       "maxFamilyIncome": 65000,
       "fosterCare": false,
-      "citizenship": "canadian",
+      "citizenship": "permanent_resident",
       "apprenticeship": false,
       "extracurriculars": []
     },
@@ -1342,7 +1342,7 @@
     "audience": "Indigenous students in full-time post-secondary, with return of service in northern Alberta",
     "url": "https://www.alberta.ca/first-nations-metis-and-inuit-bursary",
     "category": "Indigenous",
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-10",
     "region": "Alberta",
     "notes": "Two intakes each year: February 1 to June 1, and June 5 to November 1. Apply in one intake only, late applications are not accepted. You need a verified Alberta.ca Account, which can take up to two weeks to set up.",
     "active": true,
@@ -1366,7 +1366,7 @@
       "financialNeed": true,
       "maxFamilyIncome": null,
       "fosterCare": false,
-      "citizenship": "canadian",
+      "citizenship": "permanent_resident",
       "apprenticeship": false,
       "extracurriculars": []
     }
@@ -1427,7 +1427,7 @@
     "audience": "Canadian citizens or permanent residents entering university for the first time in 2027, with an 88% average",
     "url": "https://loranscholar.ca/the-program/how-to-apply/",
     "category": "Academic",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "National",
     "active": true,
     "openDate": "2026-09-09",
@@ -1451,7 +1451,7 @@
       "financialNeed": false,
       "maxFamilyIncome": null,
       "fosterCare": false,
-      "citizenship": "canadian",
+      "citizenship": "permanent_resident",
       "apprenticeship": false,
       "extracurriculars": []
     },
@@ -1611,13 +1611,13 @@
     "id": 62,
     "title": "Advancing Futures Bursary",
     "amount": "$40,000",
-    "deadline": "2026-10-01",
+    "deadline": "2027-02-01",
     "audience": "Alberta youth aged 18 to 24 who have been in government care (foster care) at any point",
     "url": "https://www.alberta.ca/advancing-futures",
     "category": "Community",
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-10",
     "region": "Alberta",
-    "notes": "Three deadlines a year, tied to when you start school: apply by June 1 to start September to December, October 1 to start January to April, February 1 to start May to August. The next one is October 1, 2026. You reapply every year.",
+    "notes": "Three deadlines a year, tied to when you start school: apply by June 1 to start September to December, October 1 to start January to April, February 1 to start May to August. The next one is February 1, 2027. You reapply every year.",
     "toApply": {
       "checked": "2026-10-01",
       "complete": false,
@@ -1628,7 +1628,7 @@
         }
       ]
     },
-    "active": false,
+    "active": true,
     "description": "Alberta pays up to $40,000 toward post-secondary for youth aged 18 to 24 who have been in government care. If you've been in foster care, this is the largest source of funding available to you in the province.",
     "eligibility": {
       "grades": [],
@@ -1722,7 +1722,7 @@
     "audience": "Alberta residents entering first year of an oil and gas degree or diploma in AB",
     "url": "https://studentaid.alberta.ca/scholarships/keyera-energy-peter-j-renton-memorial-scholarship/",
     "category": "STEM",
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-10",
     "region": "Alberta",
     "notes": "Open August 1 to October 31 each year. Two awards of $3,000. Preference goes to the previous year's recipients if they hold a 3.0 GPA. You submit an essay on your community service, work, leadership and marks, and how your field connects to the energy sector.",
     "toApply": {
@@ -1760,7 +1760,7 @@
       "financialNeed": false,
       "maxFamilyIncome": null,
       "fosterCare": false,
-      "citizenship": "canadian",
+      "citizenship": "permanent_resident",
       "apprenticeship": false,
       "extracurriculars": []
     },
@@ -1775,7 +1775,7 @@
     "audience": "Students in the final two years of a post-secondary program, with return of service in northern Alberta",
     "url": "https://www.alberta.ca/northern-alberta-development-bursary",
     "category": "Academic",
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-10",
     "region": "Alberta",
     "notes": "Applications are accepted January 2 to May 15 each year for fall enrolment. Decisions go out by the end of July. You need a verified Alberta.ca Account, which can take up to two weeks to set up.",
     "active": false,
@@ -1799,7 +1799,7 @@
       "financialNeed": true,
       "maxFamilyIncome": null,
       "fosterCare": false,
-      "citizenship": "canadian",
+      "citizenship": "permanent_resident",
       "apprenticeship": false,
       "extracurriculars": []
     },
@@ -1813,7 +1813,7 @@
     "audience": "Alberta high school students; each school nominates ONE student per year",
     "url": "https://www.alberta.ca/premiers-citizenship-award",
     "category": "Community",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "Alberta",
     "notes": "No money is attached. The province runs three Alberta Citizenship Awards from one nomination process, and this is the one that pays nothing: the Alberta Centennial Award carries $2,005 and the Queen's Platinum Jubilee Citizenship Award carries $7,000, eight a year against 25 Centennial awards. Each high school may put forward one student, so the first competition is inside your own school. Academic achievement is not a criterion.",
     "applyViaGuidance": true,
@@ -1837,7 +1837,7 @@
       "financialNeed": false,
       "maxFamilyIncome": null,
       "fosterCare": false,
-      "citizenship": "canadian",
+      "citizenship": "permanent_resident",
       "apprenticeship": false,
       "extracurriculars": []
     },
@@ -1930,7 +1930,7 @@
     "audience": "Alberta grads entering a Faculty of Education, with no parent holding a university degree",
     "url": "https://studentaid.alberta.ca/scholarships/anna-and-john-kolesar-memorial-scholarship/",
     "category": "Academic",
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-10",
     "region": "Alberta",
     "notes": "Open August 1 to October 31 each year. You submit the form to Alberta Student Aid, and the money is released once they confirm you are enrolled full time in a Faculty of Education.",
     "active": true,
@@ -1954,7 +1954,7 @@
       "financialNeed": false,
       "maxFamilyIncome": null,
       "fosterCare": false,
-      "citizenship": "canadian",
+      "citizenship": "permanent_resident",
       "apprenticeship": false,
       "extracurriculars": []
     }
@@ -2566,7 +2566,7 @@
     "audience": "Women resident in the City of Edmonton studying energy, power, water, business, technology, safety or healthcare",
     "url": "https://ecf.ca/student-awards/don-and-norine-lowry-awards-for-women-of-excellence/",
     "category": "STEM",
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-10",
     "region": "Edmonton",
     "notes": "Edmonton Community Foundation does not publish the award value, so plan around the criteria, not a number. Applications open March 31 and close May 31 at 4:30 p.m., with decisions in late July.",
     "active": false,
@@ -2591,7 +2591,7 @@
       "financialNeed": false,
       "maxFamilyIncome": null,
       "fosterCare": false,
-      "citizenship": "canadian",
+      "citizenship": "permanent_resident",
       "apprenticeship": false,
       "extracurriculars": []
     },
@@ -3367,7 +3367,7 @@
     "audience": "Alberta students 25 or younger demonstrating talent and goals in film and video arts",
     "url": "https://www.affta.ab.ca/funding/special-programs/awards-and-scholarships",
     "category": "Arts",
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-10",
     "region": "Alberta",
     "notes": "Deadline for all four Alberta Foundation for the Arts scholarship programs is March 1 every year.",
     "active": false,
@@ -3391,7 +3391,7 @@
       "financialNeed": false,
       "maxFamilyIncome": null,
       "fosterCare": false,
-      "citizenship": "canadian",
+      "citizenship": "permanent_resident",
       "apprenticeship": false,
       "extracurriculars": [
         "arts"
@@ -3481,11 +3481,11 @@
     "id": 107,
     "title": "Alberta Blue Cross Indigenous Scholarship",
     "amount": "$1,500",
-    "deadline": "2027-01-31",
+    "deadline": "2027-01-26",
     "audience": "First Nations, Métis or Inuit Albertans in a full-time program of at least two years",
     "url": "https://www.community.ab.bluecross.ca/programs/indigenous-scholarships.php",
     "category": "Indigenous",
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-10",
     "region": "Alberta",
     "notes": "Applications open October 5, 2026.",
     "active": true,
@@ -3710,7 +3710,7 @@
     "audience": "Alberta high school graduates enrolled full-time in a post-secondary program related to broadcasting",
     "url": "https://studentaid.alberta.ca/scholarships/tiessen-foundation-broadcast-scholarship/",
     "category": "Arts",
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-10",
     "region": "Alberta",
     "active": true,
     "openDate": "2026-08-01",
@@ -3736,7 +3736,7 @@
       "financialNeed": false,
       "maxFamilyIncome": null,
       "fosterCare": false,
-      "citizenship": "canadian",
+      "citizenship": "permanent_resident",
       "apprenticeship": false,
       "extracurriculars": []
     }
@@ -3953,7 +3953,7 @@
     "audience": "Canadians ages 16–20 taking a job-ready skills course or certification in Canada",
     "url": "https://www.rbc.com/dms/enterprise/scholarships.html",
     "category": "Community",
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-10",
     "region": "National",
     "notes": "Cycle 2 runs June 23 to 1 p.m. on October 1, 2026, but RBC closes the portal early once the 500 awards are gone, so treat the date as a ceiling and apply early.",
     "toApply": {
@@ -3989,7 +3989,7 @@
       "financialNeed": false,
       "maxFamilyIncome": null,
       "fosterCare": false,
-      "citizenship": "canadian",
+      "citizenship": "permanent_resident",
       "apprenticeship": false,
       "extracurriculars": []
     },
@@ -4081,7 +4081,7 @@
     "audience": "Black Canadian students graduating from a Calgary-region high school and entering first-year post-secondary",
     "url": "https://calgaryblackchambers.ca/scholarship/",
     "category": "Community",
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-10",
     "region": "Calgary",
     "notes": "Most Calgary Black Chambers scholarships close June 1 at midnight, though a few named awards use other dates. Applications usually go through the Calgary Foundation grant interface.",
     "active": false,
@@ -4105,7 +4105,7 @@
       "financialNeed": true,
       "maxFamilyIncome": null,
       "fosterCare": false,
-      "citizenship": "canadian",
+      "citizenship": "permanent_resident",
       "apprenticeship": false,
       "extracurriculars": []
     },
@@ -4349,7 +4349,7 @@
     "audience": "Alberta residents on a designated provincial junior sport team, entering post-secondary",
     "url": "https://studentaid.alberta.ca/scholarships/alberta-junior-athletic-award/",
     "category": "Sports",
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-10",
     "region": "Alberta",
     "notes": "Your team coach nominates you, you do not apply on your own, so the person to talk to is the coach and not a guidance counsellor. Coaches submit nominations to Alberta Student Aid by January 15 and pick their nominees on academic standing, community involvement and athletic achievement, so ask your coach for their own internal deadline because it falls earlier. You send the coach a current official transcript and an essay on your extracurriculars and goals. Seventy awards are shared out each year: 30 through Alberta Junior Football, 30 through the Prairie Baseball Academy and 10 through the Friends of Alberta Junior Hockey Society.",
     "toApply": {
@@ -4397,7 +4397,7 @@
       "financialNeed": false,
       "maxFamilyIncome": null,
       "fosterCare": false,
-      "citizenship": "canadian",
+      "citizenship": "permanent_resident",
       "apprenticeship": false,
       "extracurriculars": [
         "sports"
@@ -5038,7 +5038,7 @@
     "category": "Community",
     "region": "Alberta",
     "active": false,
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-10",
     "applyViaGuidance": false,
     "notes": null,
     "toApply": {
@@ -5093,7 +5093,7 @@
       "financialNeed": true,
       "maxFamilyIncome": null,
       "fosterCare": false,
-      "citizenship": "canadian",
+      "citizenship": "permanent_resident",
       "apprenticeship": false,
       "extracurriculars": []
     },
@@ -5561,7 +5561,7 @@
     "audience": "Canadian students enrolled full-time at a Canadian post-secondary institution",
     "url": "https://mensa.ca/scholarships/",
     "category": "Academic",
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-10",
     "region": "National",
     "notes": "Deadline is January 31 every year. You submit a 250 word essay on your career goals. Winners are announced in the summer.",
     "applyViaGuidance": false,
@@ -5584,7 +5584,7 @@
       "financialNeed": false,
       "maxFamilyIncome": null,
       "fosterCare": false,
-      "citizenship": "canadian",
+      "citizenship": "permanent_resident",
       "apprenticeship": false,
       "extracurriculars": []
     },
@@ -6219,14 +6219,14 @@
     "id": 176,
     "title": "Valour Canada History and Heritage Scholarship",
     "amount": "$2,000",
-    "deadline": "2027-06-10",
+    "deadline": "2027-06-09",
     "audience": "Canadian youth under 21 not currently enrolled in post-secondary",
     "url": "https://valourcanada.ca/education/vchh-scholarship/",
     "category": "Community",
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-10",
     "region": "National",
-    "notes": "The 2025-26 contest closed June 10, 2026 at 23:59 EST. Valour Canada runs it annually on the same date. You submit an introductory document plus a video under 1 GB by email.",
-    "active": false,
+    "notes": "You submit an introductory document plus a video under 1 GB by email.",
+    "active": true,
     "description": "The Valour Canada History and Heritage Scholarship recognizes Canadian youth who engage with their country's military history and service. Applicants under 21 who are not currently in post-secondary education submit a 4–6 minute YouTube video visiting a local war memorial or monument, referencing at least two of Valour Canada's character pillars (communication, cooperation, courage, responsibility, resilience, or thoughtfulness), along with a short written statement. The top prize is $2,000; a runner-up award of $500 is also given. Quebec residents and those attending post-secondary during the 2025-2026 school year are not eligible.",
     "eligibility": {
       "grades": [
@@ -6248,7 +6248,7 @@
       "financialNeed": false,
       "maxFamilyIncome": null,
       "fosterCare": false,
-      "citizenship": "canadian",
+      "citizenship": "permanent_resident",
       "apprenticeship": false,
       "extracurriculars": []
     },
@@ -6343,7 +6343,7 @@
     "audience": "Grade 12 CBE students who are new Canadians",
     "url": "https://www.educationmatters.ca/awards/arrata-family-award-for-new-canadians",
     "category": "Community",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "Calgary",
     "notes": null,
     "oneForm": "educationmatters",
@@ -6369,7 +6369,7 @@
       "financialNeed": true,
       "maxFamilyIncome": null,
       "fosterCare": false,
-      "citizenship": "canadian",
+      "citizenship": "permanent_resident",
       "apprenticeship": false,
       "extracurriculars": []
     },
@@ -7111,7 +7111,7 @@
     "audience": "Grade 12 CBE students, preference to Bowness High School",
     "url": "https://www.educationmatters.ca/awards/jason-fasano-spirit-award",
     "category": "Community",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "Calgary",
     "notes": null,
     "oneForm": "educationmatters",
@@ -7137,7 +7137,7 @@
       "financialNeed": false,
       "maxFamilyIncome": null,
       "fosterCare": false,
-      "citizenship": "canadian",
+      "citizenship": "permanent_resident",
       "apprenticeship": false,
       "extracurriculars": []
     },
@@ -7152,7 +7152,7 @@
     "audience": "Grade 12 CBE and Calgary Catholic students who identify as female",
     "url": "https://www.educationmatters.ca/awards/jobs-daughters-international-scholarship",
     "category": "Community",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "Calgary",
     "notes": null,
     "oneForm": "educationmatters",
@@ -7179,7 +7179,7 @@
       "financialNeed": false,
       "maxFamilyIncome": null,
       "fosterCare": false,
-      "citizenship": "canadian",
+      "citizenship": "permanent_resident",
       "apprenticeship": false,
       "extracurriculars": []
     },
@@ -7278,7 +7278,7 @@
     "audience": "Grade 12 CBE and Calgary Catholic students in music",
     "url": "https://www.educationmatters.ca/awards/marjorie-taylor-memorial-scholarship",
     "category": "Arts",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "Calgary",
     "notes": null,
     "oneForm": "educationmatters",
@@ -7307,7 +7307,7 @@
       "financialNeed": false,
       "maxFamilyIncome": null,
       "fosterCare": false,
-      "citizenship": "canadian",
+      "citizenship": "permanent_resident",
       "apprenticeship": false,
       "extracurriculars": []
     },
@@ -7365,7 +7365,7 @@
     "audience": "Grade 12 CBE students who worked over the summer",
     "url": "https://www.educationmatters.ca/awards/richard-r-and-linda-a-singleton-education-fund-award",
     "category": "Academic",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "Calgary",
     "notes": null,
     "oneForm": "educationmatters",
@@ -7391,7 +7391,7 @@
       "financialNeed": true,
       "maxFamilyIncome": null,
       "fosterCare": false,
-      "citizenship": "canadian",
+      "citizenship": "permanent_resident",
       "apprenticeship": false,
       "extracurriculars": []
     },
@@ -7406,7 +7406,7 @@
     "audience": "Grade 12 CBE and Calgary Catholic students in hospitality or tourism",
     "url": "https://www.educationmatters.ca/awards/rudy-berger-memorial-scholarship",
     "category": "Community",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "Calgary",
     "notes": null,
     "oneForm": "educationmatters",
@@ -7433,7 +7433,7 @@
       "financialNeed": false,
       "maxFamilyIncome": null,
       "fosterCare": false,
-      "citizenship": "canadian",
+      "citizenship": "permanent_resident",
       "apprenticeship": false,
       "extracurriculars": []
     },
@@ -8043,12 +8043,11 @@
     "id": 220,
     "title": "Breakthrough Opportunity Bursary for New Immigrants",
     "amount": "$6,000",
-    "deadline": "2027-05-01",
-    "openDate": "2027-03-01",
+    "deadline": "2026-12-04",
     "audience": "Grade 12 students at CBE schools in Calgary",
     "url": "https://www.educationmatters.ca/awards/breakthrough-opportunity-bursary-for-new-immigrants",
     "category": "Trades",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "Calgary",
     "notes": null,
     "oneForm": "educationmatters",
@@ -8080,7 +8079,7 @@
       "apprenticeship": true,
       "extracurriculars": []
     },
-    "metaDetail": "Academic achievement is not the determining factor for this award."
+    "metaDetail": "$3,000 a year, renewable for a second year."
   },
   {
     "id": 221,
@@ -9138,7 +9137,7 @@
     "audience": "Grade 12 students at Discovering Choices Outreach",
     "url": "https://www.educationmatters.ca/awards/integro-legacy-post-secondary-scholarships",
     "category": "Academic",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "Calgary",
     "notes": null,
     "oneForm": "educationmatters",
@@ -9166,7 +9165,7 @@
       "financialNeed": true,
       "maxFamilyIncome": null,
       "fosterCare": false,
-      "citizenship": "canadian",
+      "citizenship": "permanent_resident",
       "apprenticeship": false,
       "extracurriculars": []
     },
@@ -9313,7 +9312,7 @@
     "audience": "Grade 12 students at CBE schools in Calgary",
     "url": "https://www.educationmatters.ca/awards/joan-ethier-women-in-science-scholarship",
     "category": "STEM",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "Calgary",
     "notes": "EducationMatters lists the value of this award as variable, so no fixed figure exists to quote.",
     "oneForm": "educationmatters",
@@ -9341,7 +9340,7 @@
       "financialNeed": true,
       "maxFamilyIncome": null,
       "fosterCare": false,
-      "citizenship": "canadian",
+      "citizenship": "permanent_resident",
       "apprenticeship": false,
       "extracurriculars": []
     },
@@ -9656,17 +9655,17 @@
     "id": 260,
     "title": "Laurie Sommerville Scholarship Award",
     "amount": "$2,000",
-    "deadline": "2026-12-08",
+    "deadline": "2026-12-04",
     "openDate": null,
     "audience": "Grade 11 to 12 students at CBE schools in Calgary",
     "url": "https://www.educationmatters.ca/awards/laurie-sommerville-scholarship-award",
     "category": "Community",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "Calgary",
     "notes": null,
     "oneForm": "educationmatters",
     "applyViaGuidance": false,
-    "active": false,
+    "active": true,
     "description": "Applicants must have a minimum average of 65% (NOTE: Academic achievement is not the determining factor for this award). Indigenous (First Nations, Metis, Inuit) students and students pursuing trades or vocational programs are strongly encouraged to apply.",
     "eligibility": {
       "grades": [
@@ -10006,7 +10005,7 @@
     "audience": "Grade 12 students at Robert Thirsk High School",
     "url": "https://www.educationmatters.ca/awards/nancy-wang-women-in-engineering-scholarship",
     "category": "STEM",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "Calgary",
     "notes": null,
     "oneForm": "educationmatters",
@@ -10036,7 +10035,7 @@
       "financialNeed": false,
       "maxFamilyIncome": null,
       "fosterCare": false,
-      "citizenship": "canadian",
+      "citizenship": "permanent_resident",
       "apprenticeship": false,
       "extracurriculars": []
     },
@@ -10454,7 +10453,7 @@
     "audience": "Grade 12 students at Louise Dean School",
     "url": "https://www.educationmatters.ca/awards/samaritan-club-scholarship",
     "category": "Academic",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "Calgary",
     "notes": null,
     "oneForm": "educationmatters",
@@ -10482,7 +10481,7 @@
       "financialNeed": true,
       "maxFamilyIncome": null,
       "fosterCare": false,
-      "citizenship": "canadian",
+      "citizenship": "permanent_resident",
       "apprenticeship": false,
       "extracurriculars": []
     },
@@ -10497,7 +10496,7 @@
     "audience": "Grade 12 students at Discovering Choices Outreach",
     "url": "https://www.educationmatters.ca/awards/samaritan-club-scholarship-for-discovering-choices",
     "category": "Academic",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "Calgary",
     "notes": null,
     "oneForm": "educationmatters",
@@ -10525,7 +10524,7 @@
       "financialNeed": true,
       "maxFamilyIncome": null,
       "fosterCare": false,
-      "citizenship": "canadian",
+      "citizenship": "permanent_resident",
       "apprenticeship": false,
       "extracurriculars": []
     },
@@ -11454,7 +11453,7 @@
     "audience": "Greater Edmonton classical music students aged 11 to 15",
     "url": "https://ecf.ca/student-awards/alexandra-m-munn-scholarships-and-john-andrea-wallin-awards/",
     "category": "Arts",
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-10",
     "region": "Edmonton",
     "notes": "The age cap is the catch: you must be 15 or younger on the May 15 deadline, so for most high school students this is a Grade 10 opportunity only, and only if your birthday falls late enough.",
     "active": true,
@@ -11478,7 +11477,7 @@
       "financialNeed": true,
       "maxFamilyIncome": null,
       "fosterCare": false,
-      "citizenship": "canadian",
+      "citizenship": "permanent_resident",
       "apprenticeship": false,
       "extracurriculars": [
         "music"
@@ -15137,9 +15136,9 @@
     "audience": "Grasslands Regional Division graduates entering post-secondary",
     "url": "https://sites.google.com/grasslands.ab.ca/scholarship-handbook/home",
     "category": "General",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "Brooks",
-    "notes": "Applications go to the BCHS main office by May 15, not to the sponsor. One thing to read carefully: the handbook blurb says the student should already have achieved another system-wide award, but the application form itself sets no such condition, so apply and let the committee decide. The form also asks for a social insurance number.",
+    "notes": "Applications go to the BCHS main office by May 1, not to the sponsor. One thing to read carefully: the handbook blurb says the student should already have achieved another system-wide award, but the application form itself sets no such condition, so apply and let the committee decide. The form also asks for a social insurance number.",
     "applyViaGuidance": true,
     "applyRoute": "school",
     "active": true,
@@ -15166,7 +15165,7 @@
       "extracurriculars": []
     },
     "metaDetail": "Three references and a transcript.",
-    "deadline": "2027-05-15"
+    "deadline": "2027-05-01"
   },
   {
     "id": 396,
@@ -21214,7 +21213,7 @@
   {
     "id": 550,
     "region": "Lloydminster",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "active": true,
     "url": "https://sites.google.com/lpsd.ca/baronsbeyond/home/scholarships",
     "notes": null,
@@ -21246,7 +21245,7 @@
       "financialNeed": false,
       "maxFamilyIncome": null,
       "fosterCare": false,
-      "citizenship": "canadian",
+      "citizenship": "permanent_resident",
       "apprenticeship": false,
       "extracurriculars": [
         "Leadership",
@@ -26162,7 +26161,7 @@
   {
     "id": 678,
     "region": "Lacombe",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "active": true,
     "url": "https://www.wolfcreek.ab.ca/students-families/scholarships/ecole-secondaire-lacombe-composite-high-school-scholarships",
     "notes": "Applications and supporting documents go to the Lacombe County office by 3:30pm, not to the school, and this is the earliest deadline in the Lacombe set.",
@@ -26190,7 +26189,7 @@
       "financialNeed": false,
       "maxFamilyIncome": null,
       "fosterCare": false,
-      "citizenship": "any",
+      "citizenship": "permanent_resident",
       "apprenticeship": false,
       "extracurriculars": []
     },
@@ -26237,7 +26236,7 @@
   {
     "id": 680,
     "region": "Lacombe",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "active": true,
     "url": "https://www.wolfcreek.ab.ca/students-families/scholarships/ecole-secondaire-lacombe-composite-high-school-scholarships",
     "notes": "Applications are made through kincanada.ca and the window runs October 1 to February 1, which is far earlier than the rest of the Lacombe awards.",
@@ -26266,7 +26265,7 @@
       "financialNeed": true,
       "maxFamilyIncome": null,
       "fosterCare": false,
-      "citizenship": "any",
+      "citizenship": "permanent_resident",
       "apprenticeship": false,
       "extracurriculars": [
         "Volunteering"
@@ -26655,7 +26654,7 @@
   {
     "id": 691,
     "region": "Lacombe",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "active": true,
     "url": "https://www.wolfcreek.ab.ca/students-families/scholarships/ecole-secondaire-lacombe-composite-high-school-scholarships",
     "notes": "The mailing address requirement is checked, and the form is linked from the LCHS scholarships page.",
@@ -26685,7 +26684,7 @@
       "financialNeed": false,
       "maxFamilyIncome": null,
       "fosterCare": false,
-      "citizenship": "any",
+      "citizenship": "permanent_resident",
       "apprenticeship": true,
       "extracurriculars": []
     },
@@ -26965,10 +26964,10 @@
   {
     "id": 699,
     "region": "Lacombe",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "active": true,
     "url": "https://www.wolfcreek.ab.ca/students-families/scholarships/wolf-creek-scholarships",
-    "notes": "Open to a high school senior accepted at a post-secondary institution or a student already enrolled. The association took applications online and extended the deadline to May 31.",
+    "notes": "Open to a high school senior accepted at a post-secondary institution or a student already enrolled. Applications are online.",
     "applyViaGuidance": true,
     "applyRoute": "sponsor",
     "title": "Lacombe Fish and Game Association Scholarship",
@@ -27001,7 +27000,7 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "deadline": "2027-05-31"
+    "deadline": "2027-03-01"
   },
   {
     "id": 700,
@@ -39170,7 +39169,7 @@
     "audience": "Calgary students entering a field that serves newcomers to Canada",
     "url": "https://www.immigrant-education.ca/community/scholarships",
     "category": "Community",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "Calgary",
     "notes": "Your program has to start within a year of applying, so a grade 12 student can apply on next year's acceptance. The essay is the whole application: 750 to 1,000 words naming a specific barrier immigrants face and proposing something concrete to fix it. Recent winners have been university students with running non-profits, so a strong idea matters more here than a strong transcript.",
     "description": "One award a year from The Immigrant Education Society, for a Calgary-area student training in non-profit management, social innovation, international relations, immigrant consultation or a related field.",
@@ -39191,7 +39190,7 @@
       "financialNeed": false,
       "maxFamilyIncome": null,
       "fosterCare": false,
-      "citizenship": "canadian",
+      "citizenship": "permanent_resident",
       "apprenticeship": false,
       "extracurriculars": []
     },
@@ -39207,7 +39206,7 @@
     "audience": "Korean-Canadian grade 11 and 12 students with a non-academic talent",
     "url": "https://calgaryksf.org/awards/",
     "category": "Arts",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "Calgary",
     "alsoOpenTo": [
       "Airdrie",
@@ -39235,7 +39234,7 @@
       "financialNeed": false,
       "maxFamilyIncome": null,
       "fosterCare": false,
-      "citizenship": "any",
+      "citizenship": "permanent_resident",
       "apprenticeship": false,
       "extracurriculars": [
         "arts",
@@ -39303,7 +39302,7 @@
     "audience": "Students entering a petroleum-focused engineering technology diploma",
     "url": "https://calgaryfoundation.org/awards/scholarships-awards-bursaries/",
     "category": "STEM",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "National",
     "notes": "The degree stream needs you to be entering second year or beyond, but the diploma stream accepts first year, which is the door a graduate can walk through: petroleum, mechanical, chemical or instrumentation engineering technology all count. It renews for a second year of a diploma and needs a cumulative 80% and one reference.",
     "description": "The Canadian Energy Executive Association pays $8,500 for a diploma or $10,000 for a degree, applied straight to tuition, for students heading into the petroleum industry.",
@@ -39326,7 +39325,7 @@
       "financialNeed": false,
       "maxFamilyIncome": null,
       "fosterCare": false,
-      "citizenship": "any",
+      "citizenship": "permanent_resident",
       "apprenticeship": false,
       "extracurriculars": []
     },
@@ -39379,7 +39378,7 @@
     "audience": "Alberta students who graduated this year entering agriculture, engineering, arts, health or trades",
     "url": "https://studentaid.alberta.ca/scholarships/dr-robert-and-anna-shaw-scholarship/",
     "category": "General",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "Alberta",
     "notes": "Three awards, and the window opens August 1 and closes October 31, so you apply after you have started, not during grade 12. Preference goes to a graduate of Sexsmith Secondary School, but it is a preference and every Alberta graduate can apply. Judged on grade 12 standing.",
     "toApply": {
@@ -39420,7 +39419,7 @@
       "financialNeed": false,
       "maxFamilyIncome": null,
       "fosterCare": false,
-      "citizenship": "canadian",
+      "citizenship": "permanent_resident",
       "apprenticeship": false,
       "extracurriculars": []
     },
@@ -39435,7 +39434,7 @@
     "audience": "Alberta students who graduated this year and enrolled full-time in post-secondary",
     "url": "https://studentaid.alberta.ca/scholarships/janet-and-horace-allen-science-scholarship/",
     "category": "STEM",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "Alberta",
     "notes": "The word science is in the title and in the government summary, which names accomplishments in the sciences, but the published eligibility list itself asks only that you graduated from an Alberta high school this year and are enrolled full-time. Preference goes to a graduate of Crowsnest Consolidated High School. One award, autumn window.",
     "toApply": {
@@ -39466,7 +39465,7 @@
       "financialNeed": false,
       "maxFamilyIncome": null,
       "fosterCare": false,
-      "citizenship": "canadian",
+      "citizenship": "permanent_resident",
       "apprenticeship": false,
       "extracurriculars": []
     },
@@ -39481,7 +39480,7 @@
     "audience": "École Olds High School graduates strong in mathematics and science",
     "url": "https://studentaid.alberta.ca/scholarships/helen-and-george-kilik-scholarship/",
     "category": "STEM",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "Alberta",
     "localArea": "École Olds High School graduates",
     "applyViaGuidance": true,
@@ -39507,7 +39506,7 @@
       "financialNeed": false,
       "maxFamilyIncome": null,
       "fosterCare": false,
-      "citizenship": "canadian",
+      "citizenship": "permanent_resident",
       "apprenticeship": false,
       "extracurriculars": []
     },
@@ -39676,7 +39675,7 @@
     "audience": "Alberta students enrolled full-time as undergraduates at Harvard College",
     "url": "https://studentaid.alberta.ca/scholarships/charles-s-noble-scholarship-for-study-at-harvard/",
     "category": "Academic",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "Alberta",
     "notes": "Three of these exist and Harvard adds up to $5,000 of its own financial aid on top, so the package can reach $10,000. The application goes to Harvard College, not to Alberta Student Aid. There is no year-of-study restriction, so an Alberta student admitted straight out of grade 12 is eligible in first year.",
     "description": "A provincial scholarship that exists for exactly one destination: an Alberta resident enrolled full-time in an undergraduate program at Harvard College.",
@@ -39699,7 +39698,7 @@
       "financialNeed": false,
       "maxFamilyIncome": null,
       "fosterCare": false,
-      "citizenship": "canadian",
+      "citizenship": "permanent_resident",
       "apprenticeship": false,
       "extracurriculars": []
     },
@@ -41696,7 +41695,7 @@
       "financialNeed": false,
       "maxFamilyIncome": null,
       "fosterCare": false,
-      "citizenship": "canadian",
+      "citizenship": "permanent_resident",
       "apprenticeship": false,
       "extracurriculars": []
     },
@@ -42324,11 +42323,11 @@
       "financialNeed": false,
       "maxFamilyIncome": null,
       "fosterCare": false,
-      "citizenship": "canadian",
+      "citizenship": "permanent_resident",
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "active": true
   },
   {
@@ -42649,11 +42648,11 @@
       "financialNeed": true,
       "maxFamilyIncome": null,
       "fosterCare": false,
-      "citizenship": "canadian",
+      "citizenship": "permanent_resident",
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "active": true
   },
   {
@@ -48518,11 +48517,11 @@
     "id": 1373,
     "title": "Elliott and Rosche Memorial Bursary",
     "amount": "$1,000",
-    "deadline": "2027-06-01",
+    "deadline": "2027-05-01",
     "audience": "Big Lakes County students in biology, earth or water sciences",
     "url": "https://www.lswc.ca/memorial_bursary",
     "category": "STEM",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "Alberta",
     "localArea": "Big Lakes County residents",
     "notes": "The county boundary is the only geographic test, so students from Kinuso, Faust, Joussard and High Prairie all qualify.",
@@ -56496,7 +56495,7 @@
     "audience": "Returning RDP students in agriculture, environmental and biological sciences",
     "url": "https://rdpolytech.academicworks.ca/opportunities/11603",
     "category": "STEM",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "Red Deer",
     "notes": "Preference goes to Agriculture, Environmental and Conservation Science, Environmental Management and Biological Sciences students, but the award is not closed to others.",
     "active": true,
@@ -56520,7 +56519,7 @@
       "financialNeed": true,
       "maxFamilyIncome": null,
       "fosterCare": false,
-      "citizenship": "canadian",
+      "citizenship": "permanent_resident",
       "apprenticeship": false,
       "extracurriculars": []
     }
