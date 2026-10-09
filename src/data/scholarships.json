@@ -425,9 +425,9 @@
     "deadline": "2026-11-01",
     "openDate": "2026-08-02",
     "audience": "Indigenous students from Alberta in or heading into post-secondary",
-    "url": "https://buildingbrighterfutures.ca/atb-financial-2",
+    "url": "https://indspirefunding.ca/atb-financial/",
     "category": "Indigenous",
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-10",
     "region": "Alberta",
     "notes": "Part of Indspire's Building Brighter Futures. One application covers every Indspire award you qualify for, and it stays in the running for all three cutoffs: August 1, November 1 and February 1 at 11:59 p.m. EST. Apply at indspire.microsoftcrmportals.com and use one account only.",
     "toApply": {
@@ -2699,7 +2699,7 @@
     "region": "University & college",
     "lastVerified": "2026-10",
     "active": true,
-    "openDate": "2026-09-01",
+    "openDate": "2026-09-14",
     "description": "The University of Lethbridge Board of Governors Award provides $1,000 to Grade 12 students pursuing post-secondary education. Students applying to the University of Lethbridge are automatically considered for this award based on their admission application, with no separate application process required. A Grade 12 admission average of at least 80% is required.",
     "eligibility": {
       "grades": [
@@ -3566,8 +3566,8 @@
     "id": 110,
     "title": "Grant MacEwan United World College Scholarship",
     "amount": "Varies",
-    "deadline": "2026-11-01",
-    "openDate": "2026-09-01",
+    "deadline": "2026-11-04",
+    "openDate": "2026-07-01",
     "audience": "Alberta residents completing Grade 11, aged 16 to 17.5, applying to United World College",
     "url": "https://studentaid.alberta.ca/scholarships/grant-macewan-united-world-college-scholarships/",
     "category": "Academic",
@@ -8043,7 +8043,7 @@
     "notes": null,
     "oneForm": "educationmatters",
     "applyViaGuidance": false,
-    "active": true,
+    "active": false,
     "description": "Open to students in a Calgary Board of Education school who are completing grade 12 and are new refugees or immigrants to Canada within the last five (5) years. Applicants must have academic grades sufficient to allow admission into their chosen area of study/educational facility and demonstrate financial need. Academic achievement is not the determining factor for this award.",
     "eligibility": {
       "grades": [
@@ -8070,7 +8070,8 @@
       "apprenticeship": true,
       "extracurriculars": []
     },
-    "metaDetail": "$3,000 a year, renewable for a second year."
+    "metaDetail": "$3,000 a year, renewable for a second year.",
+    "deadlineEstimated": true
   },
   {
     "id": 221,
@@ -9648,7 +9649,7 @@
     "notes": null,
     "oneForm": "educationmatters",
     "applyViaGuidance": false,
-    "active": true,
+    "active": false,
     "description": "Applicants must have a minimum average of 65% (NOTE: Academic achievement is not the determining factor for this award). Indigenous (First Nations, Metis, Inuit) students and students pursuing trades or vocational programs are strongly encouraged to apply.",
     "eligibility": {
       "grades": [
@@ -9674,7 +9675,8 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "metaDetail": "Applicants must have a minimum average of 65% (NOTE."
+    "metaDetail": "Applicants must have a minimum average of 65% (NOTE.",
+    "deadlineEstimated": true
   },
   {
     "id": 261,
@@ -13894,14 +13896,14 @@
     "id": 364,
     "title": "Rocky View County Agricultural Scholarship at Olds College",
     "amount": "$500",
-    "deadline": "2026-10-15",
+    "deadline": "2027-01-31",
     "audience": "Rocky View County residents in Agricultural Production or Land and Water Resources at Olds College",
     "category": "Academic",
     "region": "Airdrie",
     "active": true,
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-10",
     "url": "https://www.rockyview.ca/services/agriculture-and-environment/awards-and-scholarships",
-    "notes": "Two intakes rather than one: October 15 for the fall term and December 31 for winter. Residency is in the county itself, so a student inside Airdrie's city limits does not qualify for this one even though the rest of the page applies to them. The application is Olds College's own awards portal.",
+    "notes": "Olds College considers you automatically once you complete its General Application, and its award record gives a January 31 deadline. The county page lists older fall and winter dates. Residency is in the county itself, so a student inside Airdrie's city limits does not qualify for this one even though the rest of the page applies to them. The application is Olds College's own awards portal.",
     "description": "A $500 award for a Rocky View County resident in the first or second year of the Agricultural Production or the Land and Water Resources program at Olds College, with a GPA of at least 3.00. The county funds it and Olds College administers it through its awards portal.",
     "eligibility": {
       "grades": [
@@ -28929,7 +28931,7 @@
     "region": "Wetaskiwin",
     "lastVerified": "2026-10",
     "active": true,
-    "url": "https://www.county.wetaskiwin.ab.ca/847/Agricultural-Bursary",
+    "url": "https://county.wetaskiwin.ab.ca/m/newsflash/home/detail/1473",
     "notes": "The three year residency window means a student who moved away for work or a first year of study still qualifies. County policy allows you to receive this bursary only once. Participation in 4-H or agricultural fairs is described as desirable, not required. Applications go to the Director of Agricultural Services and are reviewed by the Agricultural Service Board at its first meeting after the deadline. The county announced the October 15, 2026 deadline in a September notice; its bursary page may still show an older date.",
     "applyViaGuidance": false,
     "title": "County of Wetaskiwin Agricultural Bursary",
@@ -37483,7 +37485,7 @@
     "deadline": "2026-12-01",
     "openDate": null,
     "audience": "Lethbridge applicants aged 16 and over who want to lifeguard",
-    "url": "https://lethbridgeymca.ca/programs/12/ymca-aquatic-leadership-certification-courses/",
+    "url": "https://lethbridgeymca.ca/lifeguard-scholarship-forms/",
     "category": "Sports",
     "lastVerified": "2026-10",
     "region": "Lethbridge",
@@ -37512,7 +37514,8 @@
       "extracurriculars": [
         "sports"
       ]
-    }
+    },
+    "deadlineEstimated": true
   },
   {
     "id": 957,
@@ -41127,9 +41130,8 @@
     "title": "UNA Nursing Education Scholarship",
     "amount": "$1,500",
     "deadline": "2026-10-15",
-    "openDate": "2026-10-03",
     "audience": "First-year Alberta nursing students related to a UNA member or associate member in good standing",
-    "url": "https://www.una.ca/1560/apply-for-a-una-nursing-education-scholarship",
+    "url": "https://www.una.ca/1813/apply-for-a-una-nursing-student-scholarship",
     "category": "Academic",
     "lastVerified": "2026-10",
     "region": "Alberta",
@@ -42227,7 +42229,7 @@
   {
     "id": 1076,
     "title": "Pretty Photoshop Actions Scholarship",
-    "amount": "$500",
+    "amount": "$500 USD",
     "audience": "Students in their final year of high school, transitioning, or enrolled in Canada or the US",
     "deadline": "2026-10-15",
     "url": "https://www.photoshopactions.com/pages/pretty-photoshop-actions-scholarship-program",
@@ -42271,7 +42273,7 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "active": true
   },
   {
@@ -43766,7 +43768,7 @@
     "deadline": "2026-10-19",
     "openDate": "2026-09-17",
     "audience": "Children of pipeline construction workers enrolled full-time in post-secondary",
-    "url": "https://pipeline.ca/member-services/awards/plcac-student-award-program/",
+    "url": "https://pipeline.ca/2026-plcac-student-award-program/",
     "category": "General",
     "region": "National",
     "description": "An award from the Pipe Line Contractors Association of Canada for the sons, daughters and wards of people whose principal income comes from the pipeline construction industry. Applicants must provide proof of full-time enrollment.",
@@ -48126,9 +48128,9 @@
     "amount": "$1,000",
     "deadline": "2026-10-31",
     "audience": "Stavely School alumni already in post-secondary",
-    "url": "https://www.willowcreekhighschool.ca/download/556820",
+    "url": "https://www.stavelyschool.ca/download/219682",
     "category": "Academic",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "Alberta",
     "localArea": "Stavely School alumni",
     "notes": "You need at least one finished semester of post-secondary before you qualify, so this is one to apply for after you leave, not in Grade 12. The amount can move year to year.",
@@ -48167,9 +48169,9 @@
     "amount": "$2,000",
     "deadline": "2026-10-31",
     "audience": "Stavely School alumni entering post-secondary",
-    "url": "https://www.willowcreekhighschool.ca/download/556820",
+    "url": "https://www.stavelyschool.ca/download/219684",
     "category": "Community",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "Alberta",
     "localArea": "Stavely School alumni",
     "notes": "Your confirmation of enrolment has to be dated September 30 or later, which is why the deadline falls in the fall. First-time applicants get preference.",
