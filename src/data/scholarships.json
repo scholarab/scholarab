@@ -1577,7 +1577,7 @@
     "lastVerified": "2026-10",
     "region": "National",
     "notes": "Applications are submitted online and must be in by 11:59 pm Pacific time on December 1.",
-    "active": false,
+    "active": true,
     "description": "Up to $28,000 over four years for Canadian students with a sustained record of humanitarian work. The selection committee looks for years of service, not a single project.",
     "eligibility": {
       "grades": [
@@ -3828,7 +3828,7 @@
     "lastVerified": "2026-10",
     "region": "Alberta",
     "notes": "Confirm on their site.",
-    "active": false,
+    "active": true,
     "description": "Mount Royal University awards entrance scholarships to graduating high school students with strong academic achievement. Recipients must maintain an 80%+ average and be entering any MRU program. With over $5.5 million awarded annually across all faculties, this is a major opportunity for Alberta students seeking to pursue post-secondary education at MRU.",
     "eligibility": {
       "grades": [
@@ -5688,7 +5688,7 @@
     "notes": "Administered through your school. Ask your counsellor for this year's deadline as soon as school starts, these local awards close earlier than the big ones.",
     "applyViaGuidance": true,
     "applyRoute": "school",
-    "active": false,
+    "active": true,
     "description": "The Rotary Career Opportunity Award is offered by Rotary to support graduating high school students from the Red Deer area who demonstrate financial need and plan to pursue post-secondary education in Alberta. Up to 15 awards of $3,000 are available annually to eligible students from Red Deer Public or Catholic school divisions.",
     "eligibility": {
       "grades": [
@@ -5733,7 +5733,7 @@
     "notes": "Administered through your school. Ask your counsellor for this year's deadline as soon as school starts, these local awards close earlier than the big ones.",
     "applyViaGuidance": true,
     "applyRoute": "school",
-    "active": false,
+    "active": true,
     "description": "Named for a Red Deer High School graduate who died in the First World War, this award gives at least five graduating Red Deer Public and Catholic students $5,000 each, renewable for up to four years.",
     "eligibility": {
       "grades": [
@@ -5867,7 +5867,7 @@
     "lastVerified": "2026-10",
     "region": "Red Deer",
     "notes": null,
-    "active": false,
+    "active": true,
     "description": "The Trey Purdie Memorial Scholarship supports graduating high school students from Red Deer County and Chinook's Edge School Division who are actively involved in agriculture. The scholarship has two streams: one for students living and working on a farm or ranch, and another for members in good standing with the Alberta High School Rodeo Association.",
     "eligibility": {
       "grades": [
@@ -12460,7 +12460,7 @@
     "url": "https://cfcab.ca/rising-futures-scholarship/",
     "category": "Community",
     "region": "Red Deer",
-    "active": false,
+    "active": true,
     "lastVerified": "2026-10",
     "notes": null,
     "description": "The Rising Futures Scholarship gives at least two students $10,000 each toward post-secondary, technical, or trade school. It is open to applicants who are planning to enrol as well as those already enrolled, so you can apply in your graduating year. Applicants must be 25 or younger and must have received services from the Sheldon Kennedy Centre of Excellence or the Central Alberta Child Advocacy Centre. The Community Foundation of Central Alberta pays the money to your institution, which credits it to your tuition account.",
@@ -12501,7 +12501,7 @@
     "url": "https://cfcab.ca/shea-family-award",
     "category": "General",
     "region": "Red Deer",
-    "active": false,
+    "active": true,
     "lastVerified": "2026-10",
     "notes": "Applications close at 4:30pm on the day of the deadline.",
     "description": "The Shea Family Education Award is $3,000 granted annually to one student graduating from H.J. Cody High School in Sylvan Lake. You apply through the Community Foundation of Central Alberta portal with a transcript or outline of your high school results, and proof that you have enrolled at a post-secondary institution. The application also asks for a parent or guardian Notice of Assessment, but you can still apply without one if you explain why.",
@@ -12541,7 +12541,7 @@
     "url": "https://cfcab.ca/red-deer-golf-country-club-centennial-scholarship/",
     "category": "Community",
     "region": "Red Deer",
-    "active": false,
+    "active": true,
     "lastVerified": "2026-10",
     "notes": "The reference letters are the part to start early on: you need two, each from a member of a golf club in the eligible area.",
     "description": "The Red Deer Golf and Country Club created this endowed fund for its centenary. Awards are made annually at no less than $1,000 to students who graduated from a high school in Red Deer or Red Deer County and are entering full-time study in a certificate, diploma, or degree program of at least two years at a recognized Canadian post-secondary institution. Applications need support letters from at least two members of a golf club within the eligible area. Selection is on merit, with preference possible for applicants who show financial need.",
@@ -12581,7 +12581,7 @@
     "url": "https://cfcab.ca/smiles-thru-lindsey-women-in-aviation-award/",
     "category": "STEM",
     "region": "Red Deer",
-    "active": false,
+    "active": true,
     "lastVerified": "2026-10",
     "notes": "The award page describes who it is for but does not spell out a grade requirement, so ask the foundation whether your year qualifies.",
     "description": "A $5,000 bursary for girls pursuing a career in aviation, created in memory of Lindsey More, who was training for her private pilot licence at Sky Wings Aviation Academy. Her family founded Smiles Thru Lindsey after her death in 2015 to raise suicide awareness and fund mental health education for youth in Central Alberta. The Community Foundation of Central Alberta releases the money to your post-secondary institution, which credits your tuition account.",
@@ -12624,7 +12624,7 @@
     "url": "https://cfcab.ca/jenkins-family-collaborative-member-bursary/",
     "category": "Arts",
     "region": "Red Deer",
-    "active": false,
+    "active": true,
     "lastVerified": "2026-10",
     "notes": "Applications close at 4:30pm, and the portal needs its own account, so leave time for the two reference letters.",
     "description": "A $500 scholarship for current members of the Red Deer Royals, the city marching show band. You must be enrolling in or already attending a post-secondary program at an institution in Canada, so graduating members can apply. The application asks for a completed form and two reference letters, submitted through the Community Foundation of Central Alberta portal.",
@@ -28946,7 +28946,7 @@
     "id": 748,
     "region": "Wetaskiwin",
     "lastVerified": "2026-10",
-    "active": false,
+    "active": true,
     "url": "https://www.county.wetaskiwin.ab.ca/847/Agricultural-Bursary",
     "notes": "The three year residency window means a student who moved away for work or a first year of study still qualifies. County policy allows you to receive this bursary only once. Participation in 4-H or agricultural fairs is described as desirable, not required. Applications go to the Director of Agricultural Services and are reviewed by the Agricultural Service Board at its first meeting after the deadline. The county announced the October 15, 2026 deadline in a September notice; its bursary page may still show an older date.",
     "applyViaGuidance": false,
@@ -41746,7 +41746,7 @@
     "category": "General",
     "lastVerified": "2026-10",
     "region": "National",
-    "active": false,
+    "active": true,
     "description": "A North American program that has awarded nearly $64 million to over 55,000 students, and it is open to Canadians, not US-only. The bar is deliberately low: a 2.0 cumulative average on a 4.0 scale, with selection weighing work experience, extracurriculars, community service and financial need alongside marks.",
     "eligibility": {
       "grades": [
