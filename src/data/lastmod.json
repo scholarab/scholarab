@@ -2443,9 +2443,9 @@
     "hash": "2ff0874cbf0e51d7",
     "date": "2026-10-05"
   },
-  "/scholarships/canadian-natural-power-engineer-award/": {
-    "hash": "29448f5f727fad8a",
-    "date": "2026-10-04"
+  "/scholarships/canadian-natural-power-engineering-award/": {
+    "hash": "12d0749521d104a8",
+    "date": "2026-10-08"
   },
   "/scholarships/canadian-natural-resources-scholarship/": {
     "hash": "961aa9af9d4131dc",
@@ -4271,9 +4271,9 @@
     "hash": "6d15a7cc9e57371f",
     "date": "2026-10-05"
   },
-  "/scholarships/joan-trettler-award/": {
-    "hash": "5aa2e682d58ed5e3",
-    "date": "2026-10-02"
+  "/scholarships/joan-trettler-high-school-scholarship/": {
+    "hash": "35b4598d70724a74",
+    "date": "2026-10-08"
   },
   "/scholarships/jobs-daughters-international-scholarship/": {
     "hash": "d1c4c68a787a8597",
@@ -4643,9 +4643,9 @@
     "hash": "d02660076ad2a33c",
     "date": "2026-10-05"
   },
-  "/scholarships/lakeland-fasd-scholarship/": {
-    "hash": "62b7d99b843a51ee",
-    "date": "2026-10-05"
+  "/scholarships/lakeland-fasd-joanne-lussier-ring-post-secondary-scholarship/": {
+    "hash": "3a225fbb12935100",
+    "date": "2026-10-08"
   },
   "/scholarships/lamont-county-centennial-scholarship/": {
     "hash": "a46a53101e6caf83",
@@ -4742,6 +4742,10 @@
   "/scholarships/leduc-performing-arts-and-cultural-foundation-visual-arts-scholarship/": {
     "hash": "e97a635c1f77aa25",
     "date": "2026-10-05"
+  },
+  "/scholarships/len-sarnecki-memorial-scholarship/": {
+    "hash": "035aa26375480e10",
+    "date": "2026-10-08"
   },
   "/scholarships/len-t-wong-associates-scholarship/": {
     "hash": "3d0d575379393e14",
@@ -5723,8 +5727,8 @@
     "hash": "fc0aa0b7b77984e2",
     "date": "2026-09-27"
   },
-  "/scholarships/pirates-minor-fastball-student-award-fund/": {
-    "hash": "e743592e653ffb2b",
+  "/scholarships/pirates-fastball-girls-legacy-fund/": {
+    "hash": "fef7507bf183cbd4",
     "date": "2026-10-08"
   },
   "/scholarships/pkhs-character-award/": {
@@ -5867,13 +5871,13 @@
     "hash": "7e69846cac421851",
     "date": "2026-10-08"
   },
-  "/scholarships/red-deer-polytechnic-high-school-entrance-scholarship/": {
-    "hash": "19fd759336d1a54c",
-    "date": "2026-10-01"
+  "/scholarships/red-deer-polytechnic-building-on-excellence-academic-award/": {
+    "hash": "02af5a2e664784a9",
+    "date": "2026-10-08"
   },
-  "/scholarships/red-deer-polytechnic-regional-access-excellence-scholarship/": {
-    "hash": "dbf8855b3134bba6",
-    "date": "2026-10-01"
+  "/scholarships/red-deer-polytechnic-regional-high-school-access-excellence-scholarship/": {
+    "hash": "0f46049e81b11803",
+    "date": "2026-10-08"
   },
   "/scholarships/red-deer-polytechnic-support-staff-legacy-entrance-scholarship/": {
     "hash": "30b01a3473b8f8c9",
@@ -6942,10 +6946,6 @@
   "/scholarships/west-fraser-career-development-scholarship/": {
     "hash": "8bca0c6cb86191f7",
     "date": "2026-10-04"
-  },
-  "/scholarships/west-meadowlark-memorial-scholarship/": {
-    "hash": "b5f95558c7a9330b",
-    "date": "2026-09-19"
   },
   "/scholarships/westec-scholarship/": {
     "hash": "676bf26f10491658",
