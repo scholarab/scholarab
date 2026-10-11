@@ -52672,7 +52672,7 @@
     "lastVerified": "2026-09",
     "region": "Alberta",
     "notes": "It comes with two return-of-service agreements: one month working for AHS in northern Alberta for every $500 you receive. You cannot already work for AHS, be in default on a provincial student loan, or take another NADB bursary the same year.",
-    "active": true,
+    "active": false,
     "description": "Alberta Health Services and the Northern Alberta Development Board fund up to $7,000 a year for full-time students in designated clinical health programs running at least September to April. Some funding is reserved for Indigenous students.",
     "metaDetail": "One month of northern service per $500.",
     "eligibility": {
