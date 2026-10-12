@@ -3,6 +3,7 @@ import { Toaster, toast } from 'sonner';
 import ScholarshipManager from './ScholarshipManager';
 import ProgramManager from './ProgramManager';
 import AnalyticsPanel, { type AnalyticsData } from './AnalyticsPanel';
+import { AdminSheet, Scoreboard, type ScoreboardData } from './primitives';
 import { optOutOfEvents } from '../../lib/events';
 
 interface User {
@@ -15,9 +16,17 @@ interface Props {
   user: User;
   page: 'scholarships' | 'programs' | 'analytics';
   data: string;
+  /** This month so far; the analytics page draws its own from the period picker. */
+  scoreboard?: ScoreboardData;
 }
 
-export default function AdminShell({ user, page, data }: Props) {
+const TABS = [
+  { page: 'scholarships', href: '/admin/scholarships', label: 'Scholarships' },
+  { page: 'programs', href: '/admin/programs', label: 'Programs' },
+  { page: 'analytics', href: '/admin/analytics', label: 'Analytics' },
+] as const;
+
+export default function AdminShell({ user, page, data, scoreboard }: Props) {
   // Anyone using the admin panel is the owner - stop counting their browsing
   useEffect(() => {
     optOutOfEvents();
@@ -101,116 +110,84 @@ export default function AdminShell({ user, page, data }: Props) {
         : { items: [], total: 0, counts: {}, page: 0, pageSize: 25 };
   }
 
+  const drafts = publication.drafts?.length ?? 0;
+  // A finished publication has nothing left to report, and its stored message
+  // can be a stale manual note; only in-flight or failed runs show it.
+  const settled = publication.status === 'idle' || publication.status === 'published';
+
   return (
-    <div
-      className="min-h-screen bg-[#0a0a0f] text-white flex"
-      style={{ fontFamily: 'var(--font-body)' }}
-    >
-      <Toaster richColors position="top-right" />
+    <div className="adm">
+      <Toaster
+        theme="dark"
+        position="bottom-right"
+        toastOptions={{
+          style: {
+            background: '#18271E', color: '#EEF1EC', border: '1px solid rgba(238, 241, 236, 0.22)',
+            borderRadius: 3, fontFamily: 'var(--adm-body)',
+          },
+        }}
+      />
 
-      {/* Sidebar */}
-      <aside className="w-56 bg-[#0a0a0f] border-r border-white/6 flex flex-col p-4 gap-2 fixed h-full z-10">
-        <div className="mb-4 px-2">
-          <span className="text-lg font-bold">
-            Scholar<span style={{ color: '#22d3a5' }}>AB</span>
-          </span>
-          <span className="ml-2 text-xs text-white/30 border border-white/10 rounded-sm px-1.5 py-0.5">
-            Admin
-          </span>
-        </div>
-
-        <nav className="flex flex-col gap-1 flex-1">
-          <a
-            href="/admin/scholarships"
-            className={`px-3 py-2 rounded-lg text-sm transition ${page === 'scholarships' ? 'bg-white/10 text-white' : 'text-white/50 hover:text-white hover:bg-white/5'}`}
-          >
-            Scholarships
-          </a>
-          <a
-            href="/admin/programs"
-            className={`px-3 py-2 rounded-lg text-sm transition ${page === 'programs' ? 'bg-white/10 text-white' : 'text-white/50 hover:text-white hover:bg-white/5'}`}
-          >
-            Research Programs
-          </a>
-          <a
-            href="/admin/analytics"
-            className={`px-3 py-2 rounded-lg text-sm transition ${page === 'analytics' ? 'bg-white/10 text-white' : 'text-white/50 hover:text-white hover:bg-white/5'}`}
-          >
-            Analytics
-          </a>
+      <header className="adm-bar">
+        <a className="adm-brand" href="/admin/scholarships">
+          <img src="/brand/scholarab-logo-on-dark.svg" alt="ScholarAB" width="107" height="24" />
+          <span>Admin</span>
+        </a>
+        <nav className="adm-tabs" aria-label="Admin">
+          {TABS.map(t => (
+            <a key={t.page} className="adm-tab" href={t.href} aria-current={page === t.page ? 'page' : undefined}>{t.label}</a>
+          ))}
         </nav>
-
-        <div className="border-t border-white/6 pt-4 space-y-3">
-          <button
-            onClick={handlePreview}
-            disabled={deploying}
-            className="w-full py-2 px-3 rounded-lg text-sm font-medium transition disabled:opacity-50 text-[#0a0a0f]"
-            style={{ background: deploying ? '#22d3a560' : '#22d3a5' }}
-          >
-            {deploying ? 'Queuing…' : 'Review and publish'}
-          </button>
-          <p role="status" className="text-xs text-white/50">
-            {/* A finished publication has nothing left to report, and its stored
-                message can be a stale manual note; only in-flight or failed
-                runs show their message. */}
-            {publication.status === 'idle' || publication.status === 'published'
-              ? 'Edits are saved as drafts until published.'
-              : (publication.message ?? publication.status)}
+        <div className="adm-bar-end">
+          <p role="status" className="adm-pub-status" data-state={publication.status}>
+            {settled
+              ? (drafts > 0 ? <><strong>{drafts} {drafts === 1 ? 'draft' : 'drafts'}</strong> waiting to publish</> : 'Everything is published')
+              : <strong>{publication.message ?? publication.status}</strong>}
           </p>
-          <div className="flex items-center justify-between">
-            <span className="text-xs text-white/40 truncate">{user.email}</span>
-            <button
-              onClick={handleLogout}
-              className="text-xs text-white/30 hover:text-white/70 transition"
-            >
-              Sign out
-            </button>
+          <button type="button" className="adm-btn adm-btn-primary" onClick={handlePreview} disabled={deploying}>
+            {deploying ? 'Queuing' : 'Review and publish'}
+          </button>
+          <div className="adm-user">
+            <span>{user.email}</span>
+            <button type="button" onClick={handleLogout}>Sign out</button>
           </div>
         </div>
-      </aside>
+      </header>
+
+      {page !== 'analytics' && scoreboard && (
+        <Scoreboard title={scoreboard.period} sub="So far this month" cells={scoreboard.cells} />
+      )}
 
       {reviewing && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="publication-title"
-          className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-8"
+        <AdminSheet
+          id="publication"
+          title="Review unpublished changes"
+          sub="Each change is checked before it reaches the public site."
+          onClose={() => setReviewing(false)}
+          footer={<>
+            <span className="adm-spacer" />
+            <button type="button" className="adm-btn adm-btn-ghost" onClick={() => setReviewing(false)}>Cancel</button>
+            <button type="button" className="adm-btn adm-btn-primary" disabled={deploying || !publication.drafts?.length} onClick={handleDeploy}>
+              Publish these changes
+            </button>
+          </>}
         >
-          <div className="bg-[#101817] p-6 rounded-lg max-w-2xl max-h-[80vh] overflow-auto">
-            <h2 id="publication-title" className="text-xl">
-              Review unpublished changes
-            </h2>
-            <p className="text-sm text-white/60 my-3">
-              These changes will be validated before they reach the public site.
-            </p>
-            <ul>
-              {publication.drafts?.map((d) => (
-                <li key={`${d.kind}-${d.id}`} className="border-t border-white/10 py-3">
-                  <strong>
-                    {d.action}: {d.title}
-                  </strong>
-                  <p className="text-xs text-white/60">
-                    {d.fields.filter((f) => f !== 'id').join(', ')}
-                  </p>
+          {publication.drafts?.length ? (
+            <ul className="adm-drafts">
+              {publication.drafts.map((d) => (
+                <li key={`${d.kind}-${d.id}`}>
+                  <span className="adm-verb" data-action={d.action}>{d.action}</span><b>{d.title}</b>
+                  <span className="adm-draft-fields">{d.kind === 'program' ? 'Program' : 'Scholarship'}, {d.fields.filter((f) => f !== 'id').join(', ') || 'no field changes'}</span>
                 </li>
               ))}
             </ul>
-            {!publication.drafts?.length && <p>No unpublished changes.</p>}
-            <div className="flex gap-4 mt-4">
-              <button onClick={() => setReviewing(false)}>Cancel</button>
-              <button
-                disabled={deploying || !publication.drafts?.length}
-                onClick={handleDeploy}
-                className="bg-[#2fd3a0] text-black px-4 py-2 rounded disabled:opacity-50"
-              >
-                Publish these changes
-              </button>
-            </div>
-          </div>
-        </div>
+          ) : (
+            <p className="adm-sub">No unpublished changes.</p>
+          )}
+        </AdminSheet>
       )}
-      {/* Main content */}
-      <main className="ml-56 flex-1 p-8">
+
+      <main className="adm-main">
         {page === 'scholarships' ? (
           <ScholarshipManager
             initialData={parsedData as ComponentProps<typeof ScholarshipManager>['initialData']}

@@ -1,4 +1,6 @@
 import { useMemo, useState } from 'react'
+import { Scoreboard } from './primitives'
+import type { ScoreCell } from '../../lib/admin-scoreboard'
 
 export interface AnalyticsData {
   /** Every event, bucketed by Alberta calendar month. */
@@ -111,14 +113,6 @@ const SEARCH_COLUMNS: { key: keyof SearchTotals; label: string; format: (v: numb
   { key: 'position', label: 'Pos.', format: v => (v === null ? '-' : v.toFixed(1)) },
 ]
 
-/** The table headers are cramped; the tiles have room to say what they mean. */
-const SEARCH_TILE_LABELS: Record<keyof SearchTotals, string> = {
-  clicks: 'Google search clicks',
-  impressions: 'Search impressions',
-  ctr: 'Search click rate',
-  position: 'Average position',
-}
-
 const ALL = 'all'
 
 /** "2026-07" → "Jul 2026". Parsed as UTC so the label can't slip a month. */
@@ -195,9 +189,6 @@ function buildItemRows(data: AnalyticsData, month: string): ItemRow[] {
   }
   return [...map.values()]
 }
-
-const chip = (on: boolean) =>
-  `px-3 py-1.5 rounded-lg text-xs font-medium transition cursor-pointer ${on ? 'bg-white/10 text-white' : 'text-white/40 hover:text-white hover:bg-white/5'}`
 
 export default function AnalyticsPanel({ data }: Props) {
   const [month, setMonth] = useState<string>(ALL)
@@ -413,9 +404,9 @@ export default function AnalyticsPanel({ data }: Props) {
 
   if (data.error) {
     return (
-      <div className="text-white/50 text-sm">
+      <p className="adm-alert">
         Couldn&apos;t load analytics. Check that the events table exists and DATABASE_URL is set.
-      </div>
+      </p>
     )
   }
 
@@ -427,368 +418,312 @@ export default function AnalyticsPanel({ data }: Props) {
   const visible = showAll ? rows : rows.slice(0, 15)
   const maxDaily = Math.max(1, ...dailyRows.map(d => d.n))
   const periodLabel = month === ALL ? 'all time' : monthLabel(month)
+  const n = (v: number) => v.toLocaleString('en-CA')
+
+  // The scoreboard for the chosen period: the same strip every admin page
+  // carries, here driven by the period picker inside it.
+  const cells: ScoreCell[] = [
+    ...Object.entries(EVENT_LABELS).map(([event, label]): ScoreCell => {
+      const from = EVENT_COVERED_FROM[event]
+      // A month that predates the counter reads "not counted", never 0.
+      const uncounted = month !== ALL && from !== undefined && month < from
+      const value = counts[event] ?? 0
+      const starts = counts['quiz_start'] ?? 0
+      const prev = prevCounts && !(prevMonth && from && prevMonth < from) ? prevCounts[event] ?? 0 : null
+      return {
+        key: event,
+        label: event === 'app_status' ? 'Marked in My combo' : event === 'alert_subscribe' ? 'Alert signups' : event === 'quiz_complete' ? 'Quiz done' : label,
+        value: uncounted ? null : value,
+        note: uncounted
+          ? `Not counted until ${monthLabel(from!)}`
+          : event === 'quiz_complete' && starts > 0
+            ? `${Math.round((value / starts) * 100)}% of ${n(starts)} starts`
+            : prev !== null ? `${n(prev)} in ${monthLabel(prevMonth!)}` : periodLabel,
+        trend: !uncounted && prev !== null && prev > 0 ? (value >= prev ? 'up' : 'down') : null,
+      }
+    }),
+    // Search Console, not the events table: the only measured numbers that
+    // exist for the months before Jul 17 2026.
+    ...SEARCH_COLUMNS.filter(col => col.key === 'clicks' || col.key === 'impressions').map((col): ScoreCell => {
+      const prev = prevSearch && prevMonth ? prevSearch[col.key] : null
+      const value = search[col.key] ?? 0
+      return {
+        key: col.key,
+        label: col.key === 'clicks' ? 'Google clicks' : 'Google impressions',
+        value,
+        note: prev !== null ? `${col.format(prev)} in ${monthLabel(prevMonth!)}` : periodLabel,
+        trend: prev !== null && prev > 0 ? (value >= prev ? 'up' : 'down') : null,
+      }
+    }),
+    // Live list, not a windowed event count: unsubscribing removes the row,
+    // so all time is who is actually on email right now.
+    {
+      key: 'email',
+      label: month === ALL ? 'On email' : 'Joined email',
+      value: subs.people,
+      note: `${n(subs.reminders)} reminder${subs.reminders === 1 ? '' : 's'} set${month === ALL && (data.subscribers.pending ?? 0) > 0 ? `, ${data.subscribers.pending} unconfirmed` : ''}`,
+      trend: null,
+    },
+  ]
 
   return (
     <div>
-      <div className="flex items-start justify-between mb-4 gap-3 flex-wrap">
+      <div className="adm-full-bleed">
+        <div className="adm-periodbar" role="group" aria-label="Period">
+          <button type="button" className="adm-facet" aria-pressed={month === ALL} onClick={() => setMonth(ALL)}>All time</button>
+          {months.map(m => (
+            <button key={m} type="button" className="adm-facet" aria-pressed={month === m} onClick={() => setMonth(m)}>{monthLabel(m)}</button>
+          ))}
+        </div>
+        <Scoreboard title={month === ALL ? 'All time' : monthLabel(month)} sub={month === ALL ? 'Since Jul 17 2026' : 'Alberta time'} cells={cells} />
+      </div>
+
+      <div className="adm-head" style={{ marginTop: 36 }}>
         <div>
-          <h1 className="text-xl font-semibold">Analytics</h1>
-          <p className="text-sm text-white/40">
-            Anonymous counts by Alberta month. One count per item per tab session; no cookies, IPs or user ids.
-          </p>
+          <h1 className="adm-title">Analytics</h1>
+          <p className="adm-sub">Anonymous counts by Alberta month. One count per item per tab session, with no cookies, IPs or user ids.</p>
         </div>
       </div>
 
-      {/* Period picker; drives every section below */}
-      <div className="flex gap-1 border border-white/6 rounded-lg p-0.5 mb-6 flex-wrap w-fit">
-        <button onClick={() => setMonth(ALL)} className={chip(month === ALL)}>All time</button>
-        {months.map(m => (
-          <button key={m} onClick={() => setMonth(m)} className={chip(month === m)}>{monthLabel(m)}</button>
-        ))}
-      </div>
-
-      {/* Totals for the selected period */}
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-8">
-        {Object.entries(EVENT_LABELS).map(([event, label]) => {
-          const from = EVENT_COVERED_FROM[event]
-          // A month that predates the counter reads "not counted", never 0.
-          const uncounted = month !== ALL && from !== undefined && month < from
-          const n = counts[event] ?? 0
-          const starts = counts['quiz_start'] ?? 0
-          const completionRate = event === 'quiz_complete' && starts > 0
-            ? `${Math.round((n / starts) * 100)}% of starts`
-            : null
-          const prev = prevCounts && !(prevMonth && from && prevMonth < from)
-            ? prevCounts[event] ?? 0
-            : null
-          return (
-            <div key={event} className="border border-white/6 rounded-xl p-4">
-              <p
-                className="text-2xl font-semibold"
-                style={{ color: uncounted ? 'rgba(255,255,255,0.2)' : '#22d3a5' }}
-              >
-                {uncounted ? 'n/a' : n.toLocaleString()}
-              </p>
-              <p className="text-xs text-white/40 mt-1">{label}</p>
-              <p className="text-xs text-white/25 mt-0.5">
-                {uncounted
-                  ? `not counted until ${monthLabel(from!)}`
-                  : completionRate ?? (prev !== null ? `${prev.toLocaleString()} in ${monthLabel(prevMonth!)}` : periodLabel)}
-              </p>
-            </div>
-          )
-        })}
-
-        {/* Search Console, not the events table. These four are the only
-            measured numbers that exist for the months before Jul 17 2026,
-            which is why they get tiles of their own rather than a footnote. */}
-        {SEARCH_COLUMNS.filter(col => col.key === 'clicks' || col.key === 'impressions').map(col => {
-          const value = search[col.key]
-          const prev = prevSearch ? prevSearch[col.key] : null
-          return (
-            <div key={col.key} className="border border-white/6 rounded-xl p-4" style={{ borderColor: 'rgba(255,255,255,0.1)' }}>
-              <p className="text-2xl font-semibold" style={{ color: '#22d3a5' }}>
-                {col.format(value)}
-              </p>
-              <p className="text-xs text-white/40 mt-1">{SEARCH_TILE_LABELS[col.key]}</p>
-              <p className="text-xs text-white/25 mt-0.5">
-                {prev !== null && prevMonth
-                  ? `${col.format(prev)} in ${monthLabel(prevMonth)}`
-                  : periodLabel}
-              </p>
-            </div>
-          )
-        })}
-
-        {/* Live list, not a windowed event count: unsubscribing removes the
-            row, so all-time is who is actually on email right now. */}
-        <div className="border rounded-xl p-4" style={{ borderColor: 'rgba(34,211,165,0.25)' }}>
-          <p className="text-2xl font-semibold" style={{ color: '#22d3a5' }}>
-            {subs.people.toLocaleString()}
-          </p>
-          <p className="text-xs text-white/40 mt-1">
-            {month === ALL ? 'Confirmed people on email' : 'Confirmed people who joined'}
-          </p>
-          <p className="text-xs text-white/25 mt-0.5">
-            {subs.reminders.toLocaleString()} confirmed reminder{subs.reminders === 1 ? '' : 's'} set
-            {month === ALL && (data.subscribers.pending ?? 0) > 0 && <span> · {data.subscribers.pending} awaiting confirmation</span>}
-          </p>
-        </div>
-      </div>
-
-      {/* Month-by-month totals */}
-      <h2 className="text-sm font-semibold mb-2 text-white/70">Every month</h2>
-      <div className="border border-white/6 rounded-xl overflow-x-auto mb-2">
-        <table className="w-full text-sm">
-          <thead>
-            <tr className="border-b border-white/6 text-white/40 text-xs uppercase">
-              <th className="text-left px-4 py-3 font-medium whitespace-nowrap">Month</th>
-              {MONTH_COLUMNS.map(c => (
-                <th key={c.key} className="text-right px-4 py-3 font-medium whitespace-nowrap">{c.label}</th>
-              ))}
-              <th className="text-right px-4 py-3 font-medium whitespace-nowrap">On email</th>
-              {SEARCH_COLUMNS.map(c => (
-                <th key={c.key} className="text-right px-4 py-3 font-medium whitespace-nowrap">{c.label}</th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {months.length === 0 && (
-              <tr><td colSpan={MONTH_COLUMNS.length + SEARCH_COLUMNS.length + 2} className="px-4 py-6 text-white/30 text-center">
-                No events yet. Data appears as students use the site.
-              </td></tr>
-            )}
-            {months.map(m => {
-              const c = countsFor(m)
-              return (
-                <tr
-                  key={m}
-                  onClick={() => setMonth(m)}
-                  className={`border-b border-white/4 cursor-pointer transition ${month === m ? 'bg-white/5' : 'hover:bg-white/3'}`}
-                >
-                  <td className="px-4 py-2.5 whitespace-nowrap">{monthLabel(m)}</td>
-                  {MONTH_COLUMNS.map(col => {
-                    const from = EVENT_COVERED_FROM[col.key]
-                    const uncounted = from !== undefined && m < from
-                    return (
-                      <td
-                        key={col.key}
-                        className="px-4 py-2.5 text-right"
-                        style={uncounted ? { color: 'rgba(255,255,255,0.2)' } : undefined}
-                        title={uncounted ? `Not counted until ${monthLabel(from)}` : undefined}
-                      >
-                        {uncounted ? 'n/a' : (c[col.key] ?? 0).toLocaleString()}
-                      </td>
-                    )
-                  })}
-                  <td className="px-4 py-2.5 text-right text-white/60">{subsFor(m).reminders.toLocaleString()}</td>
-                  {SEARCH_COLUMNS.map(col => (
-                    <td key={col.key} className="px-4 py-2.5 text-right text-white/60">
-                      {col.format(searchFor(m)[col.key])}
-                    </td>
-                  ))}
-                </tr>
-              )
-            })}
+      <section className="adm-block">
+        <h2 className="adm-h2">Every month <small>click a month to see it above</small></h2>
+        <div className="adm-table-wrap">
+          <table className="adm-table">
+            <thead>
+              <tr>
+                <th>Month</th>
+                {MONTH_COLUMNS.map(c => <th key={c.key} data-num>{c.label}</th>)}
+                <th data-num>On email</th>
+                {SEARCH_COLUMNS.map(c => <th key={c.key} data-num>{c.label}</th>)}
+              </tr>
+            </thead>
+            <tbody>
+              {months.length === 0 && (
+                <tr><td colSpan={MONTH_COLUMNS.length + SEARCH_COLUMNS.length + 2} data-dim>
+                  No events yet. Data appears as students use the site.
+                </td></tr>
+              )}
+              {months.map(m => {
+                const c = countsFor(m)
+                return (
+                  <tr key={m} data-click onClick={() => setMonth(m)} aria-selected={month === m}>
+                    <td>{monthLabel(m)}</td>
+                    {MONTH_COLUMNS.map(col => {
+                      const from = EVENT_COVERED_FROM[col.key]
+                      const uncounted = from !== undefined && m < from
+                      return (
+                        <td key={col.key} data-num data-dim={uncounted ? '' : undefined} title={uncounted ? `Not counted until ${monthLabel(from)}` : undefined}>
+                          {uncounted ? 'n/a' : n(c[col.key] ?? 0)}
+                        </td>
+                      )
+                    })}
+                    <td data-num data-dim>{n(subsFor(m).reminders)}</td>
+                    {SEARCH_COLUMNS.map(col => (
+                      <td key={col.key} data-num data-dim>{col.format(searchFor(m)[col.key])}</td>
+                    ))}
+                  </tr>
+                )
+              })}
+            </tbody>
             {months.length > 0 && (
-              <tr className="border-t border-white/10 font-semibold">
-                <td className="px-4 py-2.5 whitespace-nowrap">Total</td>
-                {MONTH_COLUMNS.map(col => (
-                  <td key={col.key} className="px-4 py-2.5 text-right">
-                    {(countsFor(ALL)[col.key] ?? 0).toLocaleString()}
-                  </td>
-                ))}
-                <td className="px-4 py-2.5 text-right" style={{ color: '#22d3a5' }}>
-                  {data.subscribers.reminders.toLocaleString()}
-                </td>
-                {SEARCH_COLUMNS.map(col => (
-                  <td key={col.key} className="px-4 py-2.5 text-right">
-                    {col.format(searchFor(ALL)[col.key])}
-                  </td>
-                ))}
-              </tr>
+              <tfoot>
+                <tr>
+                  <td>Total</td>
+                  {MONTH_COLUMNS.map(col => <td key={col.key} data-num>{n(countsFor(ALL)[col.key] ?? 0)}</td>)}
+                  <td data-num>{n(data.subscribers.reminders)}</td>
+                  {SEARCH_COLUMNS.map(col => <td key={col.key} data-num>{col.format(searchFor(ALL)[col.key])}</td>)}
+                </tr>
+              </tfoot>
             )}
-          </tbody>
-        </table>
-      </div>
-      <details className="mb-8">
-        <summary className="text-xs text-white/40 cursor-pointer">How to read this table</summary>
-      <p className="text-xs text-white/30 mt-2">
-        On email counts signups from that month that are still active, read from the list itself, so the Total is
-        the list as it stands today rather than the sum of the months above it. n/a is a month before that
-        column existed, which is not the same as a zero: the events table starts Jul 17 2026, Saves only
-        began recording Aug 4 2026, Started Aug 8 2026, and Alerts was being dropped before Aug 4 2026, so
-        it under-reports every month up to then. The panel starts at Jul 2026 for the same reason: Mar
-        to Jun have Search Console figures and 19 email signups, but no events, so they are left off
-        rather than shown as a screen of blanks. Search and Impr. come from Google Search Console rather than this
-        site, which is why Mar to mid-Jul have numbers at all; they count search visits and are not
-        comparable to Views. Pos. is the average rank of the pages that were shown, weighted by
-        impressions, so a rising number can mean new pages entering low rather than old ones
-        slipping. Mar 2026 covers 10 days, the property's first.{' '}
-        {data.searchGenerated ? `Search figures last pulled ${data.searchGenerated}.` : null}
-      </p>
-      </details>
-
-      {/* Per-item engagement */}
-      <div className="flex items-center justify-between mb-2 gap-3 flex-wrap">
-        <h2 className="text-sm font-semibold text-white/70">Engagement by item · {periodLabel}</h2>
-        <div className="flex items-center gap-2">
-          <div className="flex gap-1 border border-white/6 rounded-lg p-0.5">
-            {(['all', 'scholarship', 'program'] as const).map(t => (
-              <button key={t} onClick={() => setTypeFilter(t)} className={chip(typeFilter === t)}>
-                {t === 'all' ? 'All' : t === 'scholarship' ? 'Scholarships' : 'Programs'}
-              </button>
-            ))}
-          </div>
-          <input
-            type="search"
-            value={query}
-            onChange={e => setQuery(e.target.value)}
-            placeholder="Filter by name…"
-            className="bg-white/5 border border-white/6 rounded-lg px-3 py-1.5 text-xs text-white placeholder-white/25 outline-none focus:border-white/20"
-            style={{ width: 180 }}
-          />
+          </table>
         </div>
-      </div>
+        <details className="adm-details">
+          <summary><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M6 3.5 10.5 8 6 12.5" /></svg>How to read this table</summary>
+          <p className="adm-note">
+            On email counts signups from that month that are still active, read from the list itself, so the Total is
+            the list as it stands today rather than the sum of the months above it. n/a is a month before that
+            column existed, which is not the same as a zero. The events table starts Jul 17 2026, Saves only
+            began recording Aug 4 2026, Started Aug 8 2026, and Alerts was being dropped before Aug 4 2026, so
+            it under-reports every month up to then. The panel starts at Jul 2026 for the same reason. Mar
+            to Jun have Search Console figures and 19 email signups, but no events, so they are left off
+            rather than shown as a screen of blanks. Search and Impr. come from Google Search Console rather than this
+            site, which is why Mar to mid-Jul have numbers at all. They count search visits and are not
+            comparable to Views. Pos. is the average rank of the pages that were shown, weighted by
+            impressions, so a rising number can mean new pages entering low rather than old ones
+            slipping. Mar 2026 covers 10 days, the property&apos;s first.{' '}
+            {data.searchGenerated ? `Search figures last pulled ${data.searchGenerated}.` : null}
+          </p>
+        </details>
+      </section>
 
-      <div className="border border-white/6 rounded-xl overflow-x-auto mb-2">
-        <table className="w-full text-sm">
-          <thead>
-            <tr className="border-b border-white/6 text-white/40 text-xs uppercase">
-              {COLUMNS.map(col => (
-                <th
-                  key={col.key}
-                  onClick={() => handleSort(col.key, col.numeric)}
-                  aria-sort={sortKey === col.key ? (sortDesc ? 'descending' : 'ascending') : undefined}
-                  className={`${col.numeric ? 'text-right' : 'text-left'} px-4 py-3 font-medium cursor-pointer select-none hover:text-white transition whitespace-nowrap`}
-                >
-                  {col.label}
-                  <span className="inline-block w-3" style={{ color: '#22d3a5' }}>
-                    {sortKey === col.key ? (sortDesc ? '▾' : '▴') : ''}
-                  </span>
-                </th>
+      <section className="adm-block">
+        <div className="adm-head" style={{ marginBottom: 12, alignItems: 'center' }}>
+          <h2 className="adm-h2" style={{ margin: 0 }}>By listing <small>{periodLabel}</small></h2>
+          <div className="adm-actions">
+            <div className="adm-periods" role="group" aria-label="Listing type">
+              {(['all', 'scholarship', 'program'] as const).map(t => (
+                <button key={t} type="button" className="adm-facet" aria-pressed={typeFilter === t} onClick={() => setTypeFilter(t)}>
+                  {t === 'all' ? 'All' : t === 'scholarship' ? 'Scholarships' : 'Programs'}
+                </button>
               ))}
-            </tr>
-          </thead>
-          <tbody>
-            {rows.length === 0 && (
-              <tr><td colSpan={COLUMNS.length} className="px-4 py-6 text-white/30 text-center">
-                {allRows.length === 0 ? `Nothing recorded in ${periodLabel}.` : 'Nothing matches this filter.'}
-              </td></tr>
-            )}
-            {visible.map(row => (
-              <tr key={row.key} className="border-b border-white/4">
-                <td className="px-4 py-2.5">{row.title}{row.itemType === 'program' && <span className="text-white/30"> · program</span>}</td>
-                <td className="px-4 py-2.5 text-right">{row.views}</td>
-                <td className="px-4 py-2.5 text-right">{row.applies}</td>
-                <td className="px-4 py-2.5 text-right text-white/60">
-                  {row.rate !== null ? `${Math.round(row.rate * 100)}%` : '·'}
-                </td>
-                <td className="px-4 py-2.5 text-right">{row.saves}</td>
-                <td className="px-4 py-2.5 text-right">{row.alerts}</td>
-                <td className="px-4 py-2.5 text-right">{row.onList}</td>
+            </div>
+            <input
+              type="search"
+              aria-label="Filter by name"
+              value={query}
+              onChange={e => setQuery(e.target.value)}
+              placeholder="Filter by name"
+              className="adm-input"
+              style={{ width: 220, height: 36 }}
+            />
+          </div>
+        </div>
+        <div className="adm-table-wrap">
+          <table className="adm-table">
+            <thead>
+              <tr>
+                {COLUMNS.map(col => (
+                  <th key={col.key} data-num={col.numeric ? '' : undefined}
+                    aria-sort={sortKey === col.key ? (sortDesc ? 'descending' : 'ascending') : undefined}>
+                    <button type="button" onClick={() => handleSort(col.key, col.numeric)}>
+                      {col.label}
+                      <svg viewBox="0 0 10 10" width="10" height="10" aria-hidden="true" style={{ opacity: sortKey === col.key ? 1 : 0, transform: sortDesc ? 'none' : 'rotate(180deg)' }}>
+                        <path d="M2 3.5 5 6.5 8 3.5" fill="none" stroke="#4AA873" strokeWidth="1.6" strokeLinecap="round" />
+                      </svg>
+                    </button>
+                  </th>
+                ))}
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-      <div className="flex items-center justify-between mb-8 gap-3">
-        <p className="text-xs text-white/30">
-          Applies include clicks from list cards, which skip the detail page, so rates above 100% are possible.
-          On list counts reminders signed up in this period and still active.
-        </p>
-        {rows.length > 15 && (
-          <button onClick={() => setShowAll(s => !s)} className="text-xs text-white/40 hover:text-white transition cursor-pointer whitespace-nowrap">
-            {showAll ? 'Show top 15' : `Show all ${rows.length}`}
-          </button>
-        )}
-      </div>
+            </thead>
+            <tbody>
+              {rows.length === 0 && (
+                <tr><td colSpan={COLUMNS.length} data-dim>
+                  {allRows.length === 0 ? `Nothing recorded in ${periodLabel}.` : 'Nothing matches this filter.'}
+                </td></tr>
+              )}
+              {visible.map(row => (
+                <tr key={row.key}>
+                  <td>{row.title}{row.itemType === 'program' && <small>Program</small>}</td>
+                  <td data-num>{n(row.views)}</td>
+                  <td data-num>{n(row.applies)}</td>
+                  <td data-num data-dim>{row.rate !== null ? `${Math.round(row.rate * 100)}%` : '·'}</td>
+                  <td data-num>{n(row.saves)}</td>
+                  <td data-num>{n(row.alerts)}</td>
+                  <td data-num>{n(row.onList)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <div className="adm-pager" style={{ alignItems: 'flex-start', gap: 24 }}>
+          <p className="adm-note" style={{ margin: 0 }}>
+            Applies include clicks from list rows, which skip the detail page, so rates above 100% are possible.
+            On list counts reminders signed up in this period and still active.
+          </p>
+          {rows.length > 15 && (
+            <button type="button" onClick={() => setShowAll(s => !s)} className="adm-btn adm-btn-ghost">
+              {showAll ? 'Show top 15' : `Show all ${rows.length}`}
+            </button>
+          )}
+        </div>
+      </section>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {/* Content gaps */}
-        <div>
-          <h2 className="text-sm font-semibold mb-2 text-white/70">Searches with no results · {periodLabel}</h2>
-          <div className="border border-white/6 rounded-xl overflow-hidden">
-            <table className="w-full text-sm">
+      <div className="adm-split">
+        <section>
+          <h2 className="adm-h2">Searches with no results <small>{periodLabel}</small></h2>
+          <div className="adm-table-wrap">
+            <table className="adm-table">
               <tbody>
                 {searches.length === 0 && (
-                  <tr><td className="px-4 py-6 text-white/30 text-center">Nothing yet. These are scholarships students looked for and didn&apos;t find.</td></tr>
+                  <tr><td data-dim>Nothing yet. These are scholarships students looked for and didn&apos;t find.</td></tr>
                 )}
-                {searches.map(({ q, n, paths }) => (
-                  <tr key={q} className="border-b border-white/4">
-                    <td className="px-4 py-2.5">
-                      {q}
-                      {paths.length > 0 && (
-                        <div className="text-xs text-white/30 mt-0.5">{paths.slice(0, 3).join('  ')}</div>
-                      )}
-                    </td>
-                    <td className="px-4 py-2.5 text-right text-white/40 align-top">{n}×</td>
+                {searches.map(({ q, n: count, paths }) => (
+                  <tr key={q}>
+                    <td>{q}{paths.length > 0 && <small>{paths.slice(0, 3).join('   ')}</small>}</td>
+                    <td data-num data-dim style={{ verticalAlign: 'top' }}>{count}&times;</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
-        </div>
-
-        {/* Daily activity */}
-        <div>
-          <h2 className="text-sm font-semibold mb-2 text-white/70">
-            {month === ALL ? 'Events per day, today and the last 13 active days' : `Events per day, ${periodLabel}`}
-          </h2>
-          <div className="border border-white/6 rounded-xl p-4">
-            {dailyRows.length === 0 && <p className="text-white/30 text-sm">No activity in this period.</p>}
-            {dailyRows.map(d => (
-              <div key={d.day} className="flex items-center gap-3 py-1">
-                <span className="text-xs text-white/40 w-20 shrink-0">{d.day.slice(5)}</span>
-                <div className="flex-1 h-2 rounded-full bg-white/5 overflow-hidden">
-                  <div className="h-full rounded-full" style={{ width: `${(d.n / maxDaily) * 100}%`, background: '#22d3a5' }} />
-                </div>
-                <span className="text-xs text-white/60 w-8 text-right">{d.n}</span>
-              </div>
-            ))}
-          </div>
-
           {/* Which save button gets used */}
-          <h2 className="text-sm font-semibold mb-2 mt-8 text-white/70">
-            Where saves happen · {periodLabel}
-            {saves.per100 !== null && <span className="font-normal text-white/40"> · {saves.per100.toFixed(1)} per 100 views</span>}
-          </h2>
-          <div className="border border-white/6 rounded-xl overflow-hidden">
-            <table className="w-full text-sm">
-              <tbody>
-                {saves.rows.map(r => (
-                  <tr key={r.key} className="border-b border-white/4">
-                    <td className="px-4 py-2.5">{r.label}</td>
-                    <td className="px-4 py-2.5 text-right text-white/60 tabular-nums">{r.n}</td>
-                    <td className="px-4 py-2.5 text-right text-white/30 tabular-nums w-16">
-                      {saves.total > 0 ? `${Math.round((r.n / saves.total) * 100)}%` : ''}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <div className="adm-block">
+            <h2 className="adm-h2">
+              Where saves happen <small>{periodLabel}{saves.per100 !== null && `, ${saves.per100.toFixed(1)} per 100 views`}</small>
+            </h2>
+            <div className="adm-table-wrap">
+              <table className="adm-table">
+                <tbody>
+                  {saves.rows.map(r => (
+                    <tr key={r.key}>
+                      <td>{r.label}</td>
+                      <td data-num>{n(r.n)}</td>
+                      <td data-num data-dim style={{ width: 64 }}>{saves.total > 0 ? `${Math.round((r.n / saves.total) * 100)}%` : ''}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </section>
+
+        <section>
+          <div className="adm-block">
+            <h2 className="adm-h2">
+              Events per day <small>{month === ALL ? 'today and the last 13 active days' : periodLabel}</small>
+            </h2>
+            <div className="adm-bars">
+              {dailyRows.length === 0 && <p className="adm-note">No activity in this period.</p>}
+              {dailyRows.map(d => (
+                <div key={d.day}>
+                  <span>{d.day.slice(5)}</span>
+                  <i style={{ width: `${(d.n / maxDaily) * 100}%` }} />
+                  <span>{n(d.n)}</span>
+                </div>
+              ))}
+            </div>
           </div>
 
           {/* How it works, as a funnel */}
-          <h2 className="text-sm font-semibold mb-2 mt-8 text-white/70">
-            How it works · {periodLabel}
-            <span className="font-normal text-white/40"> · {tour.opens} opened</span>
-          </h2>
-          <div className="border border-white/6 rounded-xl overflow-hidden">
-            <table className="w-full text-sm" data-tour-table>
-              <tbody>
-                <tr><td colSpan={3} className="px-4 pt-3 pb-1 text-xs text-white/40">Where it was opened</td></tr>
-                {tour.from.map(r => (
-                  <tr key={r.k} className="border-b border-white/4">
-                    <td className="px-4 py-2.5">{r.label}</td>
-                    <td className="px-4 py-2.5 text-right text-white/60 tabular-nums">{r.n}</td>
-                    <td className="px-4 py-2.5 text-right text-white/30 tabular-nums w-16">{tour.pct(r.n)}</td>
+          <div className="adm-block">
+            <h2 className="adm-h2">How it works <small>{periodLabel}, {tour.opens} opened</small></h2>
+            <div className="adm-table-wrap">
+              <table className="adm-table" data-tour-table>
+                <tbody>
+                  <tr className="adm-sub-head"><td colSpan={3}>Where it was opened</td></tr>
+                  {tour.from.map(r => (
+                    <tr key={r.k}>
+                      <td>{r.label}</td>
+                      <td data-num>{r.n}</td>
+                      <td data-num data-dim style={{ width: 64 }}>{tour.pct(r.n)}</td>
+                    </tr>
+                  ))}
+                  <tr className="adm-sub-head"><td colSpan={3}>How far people got</td></tr>
+                  {tour.untracked > 0 && (
+                    <tr>
+                      <td data-dim>Not tracked (opened before Sep 26 2026, 10 pm)</td>
+                      <td data-num data-dim>{tour.untracked}</td>
+                      <td style={{ width: 64 }}></td>
+                    </tr>
+                  )}
+                  {tour.steps.map(r => (
+                    <tr key={r.label}>
+                      <td>{r.label}</td>
+                      <td data-num>{r.n}</td>
+                      <td data-num data-dim style={{ width: 64 }}>{r.pct}</td>
+                    </tr>
+                  ))}
+                  <tr>
+                    <td>Went on to the quiz</td>
+                    <td data-num>{tour.cta.n}</td>
+                    <td data-num data-dim style={{ width: 64 }}>{tour.cta.pct}</td>
                   </tr>
-                ))}
-                <tr><td colSpan={3} className="px-4 pt-3 pb-1 text-xs text-white/40">How far people got</td></tr>
-                {tour.untracked > 0 && (
-                  <tr className="border-b border-white/4">
-                    <td className="px-4 py-2.5 text-white/50">Not tracked (opened before Sep 26 2026, 10 pm)</td>
-                    <td className="px-4 py-2.5 text-right text-white/40 tabular-nums">{tour.untracked}</td>
-                    <td className="px-4 py-2.5 w-16"></td>
-                  </tr>
-                )}
-                {tour.steps.map(r => (
-                  <tr key={r.label} className="border-b border-white/4">
-                    <td className="px-4 py-2.5">{r.label}</td>
-                    <td className="px-4 py-2.5 text-right text-white/60 tabular-nums">{r.n}</td>
-                    <td className="px-4 py-2.5 text-right text-white/30 tabular-nums w-16">{r.pct}</td>
-                  </tr>
-                ))}
-                <tr className="border-b border-white/4">
-                  <td className="px-4 py-2.5">Went on to the quiz</td>
-                  <td className="px-4 py-2.5 text-right text-white/60 tabular-nums">{tour.cta.n}</td>
-                  <td className="px-4 py-2.5 text-right text-white/30 tabular-nums w-16">{tour.cta.pct}</td>
-                </tr>
-              </tbody>
-            </table>
+                </tbody>
+              </table>
+            </div>
           </div>
-        </div>
+        </section>
       </div>
     </div>
   )

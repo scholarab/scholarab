@@ -38,16 +38,18 @@ describe('theme tokens', () => {
     //     CSS beats a layer at any specificity
     // so the panel rendered white text on the cream page background and the
     // test stayed green. Assert the selectors, not just the properties.
+    // One layout carries the canvas for every admin page since 2026-10-12;
+    // each page must go through it rather than set its own.
+    const src = read('src/layouts/AdminLayout.astro')
+    expect(src).toMatch(/html:root \{[^}]*background-color: #0B140E/)
+    expect(src).toMatch(/html:root \{[^}]*color-scheme: dark/)
+    expect(src).toMatch(/html body \{[^}]*background-color: #0B140E/)
+    expect(src).toMatch(/html body \{[^}]*color: #EEF1EC/)
+    // A bare `html {` or `body {` setting the canvas is the losing form
+    // coming back. The guard is about which selector paints.
+    expect(stripComments(src)).not.toMatch(/^\s*(html|body) \{[^}]*(background-color|color-scheme|color):/m)
     for (const page of ['scholarships', 'programs', 'analytics', 'login']) {
-      const src = read(`src/pages/admin/${page}.astro`)
-      expect(src).toMatch(/html:root \{[^}]*background-color: #0a0a0f/)
-      expect(src).toMatch(/html:root \{[^}]*color-scheme: dark/)
-      expect(src).toMatch(/html body \{[^}]*background-color: #0a0a0f/)
-      expect(src).toMatch(/html body \{[^}]*color: #fff/)
-      // A bare `html {` or `body {` setting the canvas is the losing form
-      // coming back. `body { font-family }` is fine and pre-dates this; the
-      // guard is about which selector paints, not about the tag name.
-      expect(stripComments(src)).not.toMatch(/^\s*(html|body) \{[^}]*(background-color|color-scheme|color):/m)
+      expect(read(`src/pages/admin/${page}.astro`)).toContain("import AdminLayout from '../../layouts/AdminLayout.astro'")
     }
   })
 })

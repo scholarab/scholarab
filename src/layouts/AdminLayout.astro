@@ -1,0 +1,40 @@
+---
+// The one head every admin page shares. Each page used to carry its own copy
+// of the canvas rules below, four times over.
+import '../styles/global.css'
+import '../styles/admin.css'
+
+interface Props {
+  title: string
+}
+const { title } = Astro.props
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>{title} | ScholarAB Admin</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2" />
+  <link rel="preload" href="/fonts/big-shoulders-800.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/public-sans-400.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/public-sans-600.woff2" as="font" type="font/woff2" crossorigin />
+  <style is:global>
+    /* The one dark surface on the site, in the site's own ink: the colour of
+       the public header bar and the hero, so the admin reads as ScholarAB's
+       back office rather than a template (2026-10-12). */
+    /* `html:root`, not `html`: global.css sets `:root { color-scheme: light }`
+       for the public site, and a bare `html` (0,0,1) loses to `:root` (0,1,0),
+       which left native scrollbars, caret and <select> popups light. */
+    html:root { background-color: #0B140E; color-scheme: dark; }
+    /* `html body`, not `body`: global.css's unlayered `body { background }`
+       beats a Tailwind utility on the tag whatever its specificity. Two element
+       selectors clear it without depending on bundle order. */
+    html body { background-color: #0B140E; color: #EEF1EC; }
+  </style>
+</head>
+<body>
+  <slot />
+</body>
+</html>

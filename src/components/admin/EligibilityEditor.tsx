@@ -7,19 +7,18 @@ const EXTRACURRICULAR_OPTIONS = ['volunteer', 'music', 'sports', '4-H', 'science
 
 function ToggleChip({ label, active, onClick }: { label: string; active: boolean; onClick: () => void }) {
   return (
-    <button
-      type="button"
-      onClick={onClick}
-      aria-pressed={active}
-      className="text-xs px-2 py-0.5 rounded-full border transition"
-      style={{
-        background: active ? 'rgba(34,211,165,0.15)' : 'rgba(255,255,255,0.04)',
-        borderColor: active ? 'rgba(34,211,165,0.4)' : 'rgba(255,255,255,0.1)',
-        color: active ? '#22d3a5' : 'rgba(255,255,255,0.4)',
-      }}
-    >
-      {label}
+    <button type="button" onClick={onClick} aria-pressed={active} className="adm-opt">
+      {label.replace(/_/g, ' ')}
     </button>
+  )
+}
+
+function Check({ label, checked, onChange }: { label: string; checked: boolean; onChange: (v: boolean) => void }) {
+  return (
+    <label className="adm-check">
+      <input type="checkbox" checked={checked} onChange={e => onChange(e.target.checked)} />
+      <span>{label}</span>
+    </label>
   )
 }
 
@@ -31,115 +30,83 @@ export function EligibilityEditor({ value, onChange }: { value: EligibilityCrite
   const set = (patch: Partial<EligibilityCriteria>) => onChange({ ...value, ...patch })
 
   return (
-    <div className="space-y-3 text-xs">
-      <div>
-        <p className="text-white/40 mb-1.5">Grades</p>
-        <div className="flex flex-wrap gap-1.5">
+    <>
+      <div className="adm-field">
+        <span className="adm-label">Grades</span>
+        <div className="adm-opts">
           {GRADE_OPTIONS.map(g => (
             <ToggleChip key={g} label={g} active={value.grades.includes(g)} onClick={() => set({ grades: toggleArr(value.grades, g) })} />
           ))}
         </div>
       </div>
 
-      <div>
-        <p className="text-white/40 mb-1.5">Fields of study</p>
-        <div className="flex flex-wrap gap-1.5">
+      <div className="adm-field">
+        <span className="adm-label">Fields of study</span>
+        <div className="adm-opts">
           {FIELD_OPTIONS.map(f => (
             <ToggleChip key={f} label={f} active={value.fields.includes(f)} onClick={() => set({ fields: toggleArr(value.fields, f) })} />
           ))}
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-2">
-        <div>
-          <label htmlFor="eligibility-min-average" className="text-white/40 block mb-1">Min average (%)</label>
-          <input id="eligibility-min-average"
-            type="number"
+      <div className="adm-grid-2">
+        <div className="adm-field">
+          <label htmlFor="eligibility-min-average">Lowest average, %</label>
+          <input id="eligibility-min-average" type="number" className="adm-input" min={0} max={100}
             value={value.minAverage ?? ''}
-            onChange={e => set({ minAverage: e.target.value ? parseInt(e.target.value, 10) : null })}
-            placeholder="e.g. 75"
-            min={0} max={100}
-            className="w-full bg-white/5 border border-white/10 rounded-sm px-2 py-1 text-white text-xs focus:outline-hidden focus:border-[#22d3a5]/50"
-          />
+            onChange={e => set({ minAverage: e.target.value ? parseInt(e.target.value, 10) : null })} placeholder="75" />
         </div>
-        <div>
-          <label htmlFor="eligibility-max-family-income" className="text-white/40 block mb-1">Max family income ($)</label>
-          <input id="eligibility-max-family-income"
-            type="number"
+        <div className="adm-field">
+          <label htmlFor="eligibility-max-family-income">Highest family income, $</label>
+          <input id="eligibility-max-family-income" type="number" className="adm-input" min={0}
             value={value.maxFamilyIncome ?? ''}
-            onChange={e => set({ maxFamilyIncome: e.target.value ? parseInt(e.target.value, 10) : null })}
-            placeholder="e.g. 65000"
-            min={0}
-            className="w-full bg-white/5 border border-white/10 rounded-sm px-2 py-1 text-white text-xs focus:outline-hidden focus:border-[#22d3a5]/50"
-          />
+            onChange={e => set({ maxFamilyIncome: e.target.value ? parseInt(e.target.value, 10) : null })} placeholder="65000" />
         </div>
       </div>
 
-      <div>
-        <p className="text-white/40 mb-1.5">Identity requirements</p>
-        <div className="flex flex-wrap gap-2">
-          <label className="flex items-center gap-1.5 cursor-pointer text-white/50">
-            <input type="checkbox" checked={value.genderRequired === 'female'} onChange={e => set({ genderRequired: e.target.checked ? 'female' : null })} className="accent-[#22d3a5] w-3 h-3" />
-            Female-identifying only
-          </label>
-          <label className="flex items-center gap-1.5 cursor-pointer text-white/50">
-            <input type="checkbox" checked={value.indigenousRequired} onChange={e => set({ indigenousRequired: e.target.checked })} className="accent-[#22d3a5] w-3 h-3" />
-            Indigenous required
-          </label>
-          <label className="flex items-center gap-1.5 cursor-pointer text-white/50">
-            <input type="checkbox" checked={value.bipocRequired} onChange={e => set({ bipocRequired: e.target.checked })} className="accent-[#22d3a5] w-3 h-3" />
-            BIPOC required
-          </label>
+      <div className="adm-field">
+        <span className="adm-label">Who it is for</span>
+        <div className="adm-checks">
+          <Check label="Female students only" checked={value.genderRequired === 'female'} onChange={v => set({ genderRequired: v ? 'female' : null })} />
+          <Check label="Indigenous students" checked={value.indigenousRequired} onChange={v => set({ indigenousRequired: v })} />
+          <Check label="BIPOC students" checked={value.bipocRequired} onChange={v => set({ bipocRequired: v })} />
         </div>
       </div>
 
-      <div>
-        <p className="text-white/40 mb-1.5">Other requirements</p>
-        <div className="flex flex-wrap gap-2">
-          <label className="flex items-center gap-1.5 cursor-pointer text-white/50">
-            <input type="checkbox" checked={value.financialNeed} onChange={e => set({ financialNeed: e.target.checked })} className="accent-[#22d3a5] w-3 h-3" />
-            Financial need
-          </label>
-          <label className="flex items-center gap-1.5 cursor-pointer text-white/50">
-            <input type="checkbox" checked={value.fosterCare} onChange={e => set({ fosterCare: e.target.checked })} className="accent-[#22d3a5] w-3 h-3" />
-            Foster care history
-          </label>
-          <label className="flex items-center gap-1.5 cursor-pointer text-white/50">
-            <input type="checkbox" checked={value.apprenticeship} onChange={e => set({ apprenticeship: e.target.checked })} className="accent-[#22d3a5] w-3 h-3" />
-            RAP/apprenticeship
-          </label>
+      <div className="adm-field">
+        <span className="adm-label">Other requirements</span>
+        <div className="adm-checks">
+          <Check label="Financial need" checked={value.financialNeed} onChange={v => set({ financialNeed: v })} />
+          <Check label="Foster care history" checked={value.fosterCare} onChange={v => set({ fosterCare: v })} />
+          <Check label="RAP or apprenticeship" checked={value.apprenticeship} onChange={v => set({ apprenticeship: v })} />
         </div>
       </div>
 
-      <div>
-        <label htmlFor="eligibility-citizenship" className="block text-white/40 mb-1.5">Citizenship</label>
-        <select id="eligibility-citizenship"
+      <div className="adm-field">
+        <label htmlFor="eligibility-citizenship">Citizenship</label>
+        <select id="eligibility-citizenship" className="adm-select"
           value={value.citizenship}
-          onChange={e => set({ citizenship: e.target.value as EligibilityCriteria['citizenship'] })}
-          className="bg-[#1a1a24] border border-white/10 rounded-sm px-2 py-1 text-xs text-white focus:outline-hidden focus:border-[#22d3a5]/50"
-        >
+          onChange={e => set({ citizenship: e.target.value as EligibilityCriteria['citizenship'] })}>
           <option value="any">Any</option>
           <option value="canadian">Canadian citizens</option>
-          <option value="permanent_resident">Citizens + PRs</option>
+          <option value="permanent_resident">Citizens and permanent residents</option>
         </select>
       </div>
 
-      <div>
-        <p className="text-white/40 mb-1.5">Extracurriculars</p>
-        <div className="flex flex-wrap gap-1.5">
-          {EXTRACURRICULAR_OPTIONS.map(e => (
-            <ToggleChip key={e} label={e} active={value.extracurriculars.includes(e)} onClick={() => set({ extracurriculars: toggleArr(value.extracurriculars, e) })} />
+      <div className="adm-field">
+        <span className="adm-label">Activities</span>
+        <div className="adm-opts">
+          {EXTRACURRICULAR_OPTIONS.map(x => (
+            <ToggleChip key={x} label={x} active={value.extracurriculars.includes(x)} onClick={() => set({ extracurriculars: toggleArr(value.extracurriculars, x) })} />
           ))}
         </div>
       </div>
 
-      <button
-        type="button"
-        onClick={() => onChange({ ...EMPTY_ELIGIBILITY })}
-        className="text-white/20 hover:text-red-400 transition text-xs mt-1"
-      >
-        Clear all eligibility data
-      </button>
-    </div>
+      <div>
+        <button type="button" onClick={() => onChange({ ...EMPTY_ELIGIBILITY })} className="adm-btn adm-btn-danger">
+          Clear all eligibility
+        </button>
+      </div>
+    </>
   )
 }

@@ -1,9 +1,9 @@
 import { useAdminList, type AdminPage, type AdminRecord } from '../../lib/use-admin-list'
-import { useState, useMemo, useEffect } from 'react'
+import { useState, useMemo } from 'react'
 import { toast } from 'sonner'
 import { EMPTY_ELIGIBILITY } from '../../lib/eligibility-types'
 import { EligibilityEditor } from './EligibilityEditor'
-import { AdminTabBar, AdminPagination, AdminDeleteModal } from './primitives'
+import { AdminTabBar, AdminPagination, AdminDeleteModal, AdminSearch, AdminSheet, AdminSection, DeadlineFigure, Icon, albertaToday } from './primitives'
 import { ADMIN_PAGE_SIZE as PAGE_SIZE } from '../../lib/constants'
 
 import type { Scholarship as BaseScholarship } from '../../lib/data-loader'
@@ -39,15 +39,6 @@ export default function ScholarshipManager({ initialData }: Props) {
 
   const { items, setItems, total, counts: regionCounts, refresh, error } = useAdminList(initialData, '/admin/api/scholarships', page, search, regionTab, modal !== null, setPage)
 
-  useEffect(() => {
-    if (!modal) return
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') { setModal(null); setFetching(false); setParsing(false) }
-    }
-    document.addEventListener('keydown', onKey)
-    return () => document.removeEventListener('keydown', onKey)
-  }, [modal])
-
   // Duplicate detection: only active when adding, checks local state for instant feedback
   const localDuplicate = useMemo(() => {
     if (modal?.type !== 'add' || !form.title?.trim()) return null
@@ -59,8 +50,8 @@ export default function ScholarshipManager({ initialData }: Props) {
   const totalPages = Math.ceil(total / PAGE_SIZE)
   const paginated = items
 
-  function handleSearch(e: React.ChangeEvent<HTMLInputElement>) {
-    setSearch(e.target.value)
+  function handleSearch(value: string) {
+    setSearch(value)
     setPage(0)
   }
 
@@ -118,6 +109,8 @@ export default function ScholarshipManager({ initialData }: Props) {
   }
 
   const openDelete = (item: Scholarship) => setModal({ type: 'delete', item })
+  // Keep it goes back to the editor, with the form as it was left.
+  const cancelDelete = () => setModal(m => (m?.item ? { type: 'edit', item: m.item } : null))
   const closeModal = () => { setModal(null); setFetching(false); setParsing(false) }
 
   const handleSave = async () => {
@@ -227,275 +220,185 @@ export default function ScholarshipManager({ initialData }: Props) {
 
   const ALL_TABS = ['All', ...REGIONS, 'No region']
 
+  const today = albertaToday()
+  const tagged = items.filter(s => s.eligibility).length
+  const set = (patch: Partial<Scholarship>) => setForm(f => ({ ...f, ...patch }))
+  const editing = modal?.type === 'edit' || modal?.type === 'add'
+
   return (
     <div>
-      <div className="flex items-center justify-between mb-6">
+      <div className="adm-head">
         <div>
-          <h1 className="text-xl font-semibold">Scholarships</h1>
-          <p className="text-sm text-white/40">
-            {regionCounts.All ?? total} total · {items.filter(s => s.eligibility).length} tagged on this page
-          </p>
+          <h1 className="adm-title">Scholarships <small>{(regionCounts.All ?? total).toLocaleString('en-CA')}</small></h1>
+          <p className="adm-sub">{tagged} of {items.length} on this page have eligibility tagged. Click a row to edit it.</p>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="adm-actions">
           {bulkProgress ? (
-            <span className="text-xs text-white/40 animate-pulse">
-              Parsing {bulkProgress.done}/{bulkProgress.total}…
-            </span>
+            <span className="adm-progress" role="status">Parsing {bulkProgress.done} of {bulkProgress.total}</span>
           ) : (
-            <button
-              onClick={handleBulkParse}
-              className="px-3 py-2 rounded-lg text-xs font-medium border border-white/10 text-white/50 hover:text-white hover:border-white/20 transition"
-            >
-              ✦ Parse untagged on this page
-            </button>
+            <button type="button" onClick={handleBulkParse} className="adm-btn adm-btn-ghost">Parse untagged on this page</button>
           )}
-          <button onClick={openAdd} className="px-4 py-2 rounded-lg text-sm font-medium text-[#0a0a0f]" style={{background:'#22d3a5'}}>
-            + Add scholarship
-          </button>
+          <button type="button" onClick={openAdd} className="adm-btn adm-btn-ghost">Add scholarship</button>
         </div>
       </div>
 
-      {/* Search */}
-      <input
-        type="search"
-        aria-label="Search scholarships"
-        placeholder="Search scholarships…"
-        value={search}
-        onChange={handleSearch}
-        className="w-full max-w-sm bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-sm text-white mb-4 focus:outline-hidden focus:border-[#22d3a5]/50 transition"
-      />
+      <div className="adm-tools">
+        <AdminSearch label="Search scholarships" value={search} onChange={handleSearch} />
+      </div>
+      <AdminTabBar label="Region" tabs={ALL_TABS} counts={regionCounts} active={regionTab} onSelect={handleRegionTab} />
 
-      {/* Region tabs */}
-      <AdminTabBar tabs={ALL_TABS} counts={regionCounts} active={regionTab} onSelect={handleRegionTab} />
-
-      {/* Table */}
-      <div className="border border-white/6 rounded-xl overflow-hidden">
-        <table className="w-full text-sm">
-          <thead>
-            <tr className="border-b border-white/6 text-white/40 text-xs uppercase">
-              <th className="text-left px-4 py-3 font-medium">Title</th>
-              <th className="text-left px-4 py-3 font-medium">Amount</th>
-              <th className="text-left px-4 py-3 font-medium">Deadline</th>
-              <th className="text-left px-4 py-3 font-medium">Region</th>
-              <th className="text-left px-4 py-3 font-medium">Status</th>
-              <th className="text-left px-4 py-3 font-medium">Eligibility</th>
-              <th className="px-4 py-3" />
-            </tr>
-          </thead>
-          <tbody>
-            {paginated.map((s, i) => (
-              <tr key={s.id} className={`border-b border-white/4 hover:bg-white/2 transition ${i % 2 === 0 ? '' : 'bg-white/1'}`}>
-                <td className="px-4 py-3 font-medium max-w-xs truncate">{s.title}</td>
-                <td className="px-4 py-3 text-white/60">{s.amount}</td>
-                <td className="px-4 py-3 text-white/60">{s.deadline || ''}</td>
-                <td className="px-4 py-3 text-white/60">{s.region || ''}</td>
-                <td className="px-4 py-3">
-                  <span className={`text-xs px-2 py-0.5 rounded-full ${s.active ? 'bg-[#22d3a5]/15 text-[#22d3a5]' : 'bg-white/10 text-white/40'}`}>
-                    {s.active ? 'Active' : 'Inactive'}
-                  </span>
-                </td>
-                <td className="px-4 py-3">
-                  <span className={`text-xs px-2 py-0.5 rounded-full ${s.eligibility ? 'bg-blue-500/15 text-blue-400' : 'bg-white/5 text-white/25'}`}>
-                    {s.eligibility ? 'Tagged' : 'Untagged'}
-                  </span>
-                </td>
-                <td className="px-4 py-3 text-right">
-                  <button onClick={() => openEdit(s)} className="text-white/30 hover:text-white mr-3 transition">Edit</button>
-                  <button onClick={() => openDelete(s)} className="text-red-400/50 hover:text-red-400 transition">Delete</button>
-                </td>
-              </tr>
-            ))}
-            {paginated.length === 0 && (
-              <tr><td colSpan={6} className="px-4 py-8 text-center text-white/30">No scholarships found</td></tr>
-            )}
-          </tbody>
-        </table>
+      <div className="adm-list">
+        {paginated.map(s => (
+          <button key={s.id} type="button" className="adm-row" onClick={() => openEdit(s)} aria-current={modal?.item?.id === s.id && editing ? 'true' : undefined}>
+            <DeadlineFigure date={s.deadline} today={today} />
+            <div className="adm-what">
+              <div className="adm-name">
+                <strong>{s.title}</strong>
+                {s.amount && <span className="adm-money">{s.amount}</span>}
+              </div>
+              <div className="adm-meta">
+                {[s.region || 'No region', s.category || null].filter(Boolean).join(', ')}
+                {s.audience ? <>. <i>{s.audience}</i></> : null}
+              </div>
+            </div>
+            <div className="adm-state">
+              {s.active
+                ? <span className="adm-mark" data-tone="on">Active cycle</span>
+                : <span className="adm-mark" data-tone="off">Between cycles</span>}
+              {s.unpublished
+                ? <span className="adm-mark" data-tone="draft">Draft, not published</span>
+                : <span className="adm-mark" data-tone={s.eligibility ? 'on' : 'off'}>{s.eligibility ? 'Eligibility tagged' : 'Not tagged'}</span>}
+            </div>
+            <span className="adm-open">Edit<Icon name="open" size={14} /></span>
+          </button>
+        ))}
+        {paginated.length === 0 && <p className="adm-empty">No scholarships match.</p>}
       </div>
 
-      {error && <p role="alert" className="text-red-400">{error}</p>}
+      {error && <p role="alert" className="adm-alert">{error}</p>}
       <AdminPagination page={page} totalPages={totalPages} total={total} totalWord="results" onPage={setPage} />
 
-      {/* Edit/Add Modal */}
-      {(modal?.type === 'edit' || modal?.type === 'add') && (
-        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4" onClick={closeModal}>
-          <div role="dialog" aria-modal="true" aria-labelledby="sm-dialog-title" className="bg-[#111118] border border-white/10 rounded-2xl p-6 w-full max-w-lg max-h-[90vh] overflow-y-auto" onClick={e => e.stopPropagation()}>
-            <div className="flex items-center justify-between mb-1">
-              <h2 id="sm-dialog-title" className="text-lg font-semibold">{modal.type === 'edit' ? 'Edit Scholarship' : 'Add Scholarship'}</h2>
-              {fetching && <span className="text-xs text-white/30 animate-pulse">Loading latest…</span>}
-            </div>
-            <p className="text-xs text-white/30 mb-5">Fields marked * are required</p>
-
-            {/* Duplicate warning */}
-            {localDuplicate && (
-              <div className="mb-4 px-4 py-3 rounded-lg border border-yellow-500/30 bg-yellow-500/10 text-yellow-300 text-sm">
-                ⚠️ A scholarship with this name already exists: <span className="font-semibold">"{localDuplicate.title}"</span>
-              </div>
+      {editing && modal && (
+        <AdminSheet
+          id="sm-dialog"
+          title={modal.type === 'edit' ? (form.title || 'Edit scholarship') : 'Add a scholarship'}
+          sub={fetching ? <span className="adm-loading">Loading the latest version</span> : 'Saved as a draft until you publish.'}
+          onClose={closeModal}
+          footer={<>
+            {modal.type === 'edit' && modal.item && (
+              <button type="button" className="adm-btn adm-btn-danger" onClick={() => openDelete(modal.item!)} disabled={saving}>Delete</button>
             )}
-
-            {/* Essential fields */}
-            <div className="space-y-4">
-              <div>
-                <label htmlFor="sm-scholarship-name" className="block text-sm text-white/70 mb-1.5">Scholarship name *</label>
-                <input id="sm-scholarship-name"
-                  type="text"
-                  value={form.title ?? ''}
-                  onChange={e => setForm(f => ({ ...f, title: e.target.value }))}
-                  placeholder="e.g. Alexander Rutherford Scholarship"
-                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder-white/20 focus:outline-hidden focus:border-[#22d3a5]/50 transition"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="sm-amount" className="block text-sm text-white/70 mb-1.5">Amount *</label>
-                <input id="sm-amount"
-                  type="text"
-                  value={form.amount ?? ''}
-                  onChange={e => setForm(f => ({ ...f, amount: e.target.value }))}
-                  onBlur={e => {
-                    const v = e.target.value.trim()
-                    if (v && /^\d/.test(v)) setForm(f => ({ ...f, amount: '$' + v }))
-                  }}
-                  placeholder="e.g. $2,500 or Varies"
-                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder-white/20 focus:outline-hidden focus:border-[#22d3a5]/50 transition"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="sm-application-deadline" className="block text-sm text-white/70 mb-1.5">Application deadline</label>
-                <input id="sm-application-deadline"
-                  type="date"
-                  value={form.deadline ?? ''}
-                  onChange={e => setForm(f => ({ ...f, deadline: e.target.value }))}
-                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white focus:outline-hidden focus:border-[#22d3a5]/50 transition"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="sm-official-website" className="block text-sm text-white/70 mb-1.5">Official website *</label>
-                <input id="sm-official-website"
-                  type="url"
-                  value={form.url ?? ''}
-                  onChange={e => setForm(f => ({ ...f, url: e.target.value }))}
-                  onBlur={e => {
-                    const v = e.target.value.trim()
-                    if (v && !v.startsWith('http://') && !v.startsWith('https://')) {
-                      setForm(f => ({ ...f, url: 'https://' + v }))
-                    }
-                  }}
-                  placeholder="https://..."
-                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder-white/20 focus:outline-hidden focus:border-[#22d3a5]/50 transition"
-                />
-              </div>
-
-              <div className="grid grid-cols-2 gap-3">
-                <div>
-                  <label htmlFor="sm-category" className="block text-sm text-white/70 mb-1.5">Category</label>
-                  <select id="sm-category" value={form.category ?? ''} onChange={e => setForm(f => ({ ...f, category: e.target.value }))}
-                    className="w-full bg-[#1a1a24] border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white focus:outline-hidden focus:border-[#22d3a5]/50">
-                    <option value="">Select</option>
-                    {CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
-                  </select>
-                </div>
-                <div>
-                  <label htmlFor="sm-region" className="block text-sm text-white/70 mb-1.5">Region</label>
-                  <select id="sm-region" value={form.region ?? ''} onChange={e => setForm(f => ({ ...f, region: e.target.value }))}
-                    className="w-full bg-[#1a1a24] border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white focus:outline-hidden focus:border-[#22d3a5]/50">
-                    <option value="">Select</option>
-                    {REGIONS.map(r => <option key={r} value={r}>{r}</option>)}
-                  </select>
-                </div>
-              </div>
-
-              <label className="flex items-center gap-3 cursor-pointer">
-                <input type="checkbox" checked={form.active ?? true} onChange={e => setForm(f => ({ ...f, active: e.target.checked }))} className="accent-[#22d3a5] w-4 h-4" />
-                <span className="text-sm text-white/70">Active cycle (uncheck between cycles)</span>
-              </label>
-            </div>
-
-            {/* Advanced toggle */}
-            <button
-              type="button"
-              onClick={() => setShowAdvanced(v => !v)}
-              className="mt-5 text-xs text-white/30 hover:text-white/60 transition flex items-center gap-1"
-            >
-              <span>{showAdvanced ? '▾' : '▸'}</span>
-              {showAdvanced ? 'Hide advanced fields' : 'Show advanced fields'}
+            <span className="adm-spacer" />
+            <button type="button" onClick={closeModal} disabled={saving} className="adm-btn adm-btn-ghost">Cancel</button>
+            <button type="button" onClick={handleSave} disabled={saving || fetching || !!localDuplicate} className="adm-btn adm-btn-primary">
+              {saving ? 'Saving' : 'Save draft'}
             </button>
+          </>}
+        >
+          {localDuplicate && (
+            <p className="adm-warn" role="alert">A scholarship called {localDuplicate.title} already exists.</p>
+          )}
 
-            {showAdvanced && (
-              <div className="mt-3 space-y-3 border-t border-white/6 pt-4">
-                <div>
-                  <label htmlFor="sm-who-can-apply-audience" className="block text-xs text-white/50 mb-1">Who can apply? (Audience)</label>
-                  <input id="sm-who-can-apply-audience" type="text" value={form.audience ?? ''} onChange={e => setForm(f => ({ ...f, audience: e.target.value }))}
-                    placeholder="e.g. Grade 12 students, First Nations youth"
-                    className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white placeholder-white/20 focus:outline-hidden focus:border-[#22d3a5]/50 transition" />
-                </div>
-                <div>
-                  <label htmlFor="sm-notes" className="block text-xs text-white/50 mb-1">Notes</label>
-                  <input id="sm-notes" type="text" value={form.notes ?? ''} onChange={e => setForm(f => ({ ...f, notes: e.target.value }))}
-                    className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-hidden focus:border-[#22d3a5]/50 transition" />
-                </div>
-                <div>
-                  <label htmlFor="sm-applications-open-date" className="block text-xs text-white/50 mb-1">Applications open date</label>
-                  <input id="sm-applications-open-date" type="date" value={form.openDate ?? ''} onChange={e => setForm(f => ({ ...f, openDate: e.target.value }))}
-                    className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-hidden focus:border-[#22d3a5]/50 transition" />
-                </div>
-                <label className="flex items-center gap-2 text-sm cursor-pointer">
-                  <input type="checkbox" checked={form.applyViaGuidance ?? false} onChange={e => setForm(f => ({ ...f, applyViaGuidance: e.target.checked }))} className="accent-[#22d3a5]" />
-                  <span className="text-white/50">Students apply through school guidance office</span>
-                </label>
-              </div>
-            )}
+          <div className="adm-field">
+            <label htmlFor="sm-scholarship-name">Name <em>required</em></label>
+            <input id="sm-scholarship-name" type="text" className="adm-input" value={form.title ?? ''}
+              onChange={e => set({ title: e.target.value })} placeholder="Alexander Rutherford Scholarship" />
+          </div>
 
-            {/* ── Eligibility toggle ── */}
-            <div className="mt-4 border-t border-white/6 pt-4">
-              <div className="flex items-center justify-between">
-                <button
-                  type="button"
-                  onClick={() => setShowEligibility(v => !v)}
-                  className="text-xs text-white/30 hover:text-white/60 transition flex items-center gap-1"
-                >
-                  <span>{showEligibility ? '▾' : '▸'}</span>
-                  {showEligibility ? 'Hide eligibility criteria' : 'Show eligibility criteria'}
-                  {form.eligibility && <span className="ml-2 px-1.5 py-0.5 rounded-sm bg-blue-500/15 text-blue-400">Tagged</span>}
-                </button>
-                {modal?.type === 'edit' && modal.item?.audience && (
-                  <button
-                    type="button"
-                    onClick={handleParseEligibility}
-                    disabled={parsing}
-                    className="text-xs px-2.5 py-1 rounded-lg border border-white/10 text-white/50 hover:text-white hover:border-white/20 transition disabled:opacity-40"
-                  >
-                    {parsing ? 'Parsing…' : '✦ Parse with AI'}
-                  </button>
-                )}
-              </div>
-
-              {showEligibility && (
-                <div className="mt-3 space-y-3 p-3 rounded-lg bg-white/2 border border-white/6">
-                  <EligibilityEditor
-                    value={form.eligibility ?? EMPTY_ELIGIBILITY}
-                    onChange={e => setForm(f => ({ ...f, eligibility: e }))}
-                  />
-                </div>
-              )}
+          <div className="adm-grid-2">
+            <div className="adm-field">
+              <label htmlFor="sm-amount">Amount <em>required</em></label>
+              <input id="sm-amount" type="text" className="adm-input" value={form.amount ?? ''}
+                onChange={e => set({ amount: e.target.value })}
+                onBlur={e => {
+                  const v = e.target.value.trim()
+                  if (v && /^\d/.test(v)) set({ amount: '$' + v })
+                }}
+                placeholder="$2,500 or Varies" />
             </div>
-
-            <div className="flex gap-3 mt-6 justify-end">
-              <button onClick={closeModal} disabled={saving} className="px-4 py-2 rounded-lg text-sm text-white/50 hover:text-white border border-white/10 transition disabled:opacity-50">Cancel</button>
-              <button onClick={handleSave} disabled={saving || fetching || !!localDuplicate} className="px-4 py-2 rounded-lg text-sm font-medium text-[#0a0a0f] disabled:opacity-50" style={{background:'#22d3a5'}}>
-                {saving ? 'Saving…' : 'Save scholarship'}
-              </button>
+            <div className="adm-field">
+              <label htmlFor="sm-application-deadline">Deadline</label>
+              <input id="sm-application-deadline" type="date" className="adm-input" value={form.deadline ?? ''}
+                onChange={e => set({ deadline: e.target.value })} />
             </div>
           </div>
-        </div>
+
+          <div className="adm-field">
+            <label htmlFor="sm-official-website">Official website <em>required</em></label>
+            <input id="sm-official-website" type="url" className="adm-input" value={form.url ?? ''}
+              onChange={e => set({ url: e.target.value })}
+              onBlur={e => {
+                const v = e.target.value.trim()
+                if (v && !v.startsWith('http://') && !v.startsWith('https://')) set({ url: 'https://' + v })
+              }}
+              placeholder="https://" />
+          </div>
+
+          <div className="adm-grid-2">
+            <div className="adm-field">
+              <label htmlFor="sm-category">Category</label>
+              <select id="sm-category" className="adm-select" value={form.category ?? ''} onChange={e => set({ category: e.target.value })}>
+                <option value="">Choose</option>
+                {CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
+              </select>
+            </div>
+            <div className="adm-field">
+              <label htmlFor="sm-region">Region</label>
+              <select id="sm-region" className="adm-select" value={form.region ?? ''} onChange={e => set({ region: e.target.value })}>
+                <option value="">Choose</option>
+                {REGIONS.map(r => <option key={r} value={r}>{r}</option>)}
+              </select>
+            </div>
+          </div>
+
+          <label className="adm-check">
+            <input type="checkbox" checked={form.active ?? true} onChange={e => set({ active: e.target.checked })} />
+            <span>Active cycle. Untick between cycles, the listing stays up.</span>
+          </label>
+
+          <AdminSection title="More details" open={showAdvanced} onToggle={() => setShowAdvanced(v => !v)}>
+            <div className="adm-field">
+              <label htmlFor="sm-who-can-apply-audience">Who can apply</label>
+              <input id="sm-who-can-apply-audience" type="text" className="adm-input" value={form.audience ?? ''}
+                onChange={e => set({ audience: e.target.value })} placeholder="Grade 12 students in Lethbridge" />
+            </div>
+            <div className="adm-field">
+              <label htmlFor="sm-notes">Notes</label>
+              <textarea id="sm-notes" className="adm-textarea" rows={3} value={form.notes ?? ''}
+                onChange={e => set({ notes: e.target.value })} />
+            </div>
+            <div className="adm-field">
+              <label htmlFor="sm-applications-open-date">Applications open</label>
+              <input id="sm-applications-open-date" type="date" className="adm-input" value={form.openDate ?? ''}
+                onChange={e => set({ openDate: e.target.value })} />
+            </div>
+            <label className="adm-check">
+              <input type="checkbox" checked={form.applyViaGuidance ?? false} onChange={e => set({ applyViaGuidance: e.target.checked })} />
+              <span>Students apply through the school guidance office</span>
+            </label>
+          </AdminSection>
+
+          <AdminSection
+            title={form.eligibility ? 'Eligibility, tagged' : 'Eligibility'}
+            open={showEligibility}
+            onToggle={() => setShowEligibility(v => !v)}
+            aside={modal.type === 'edit' && modal.item?.audience ? (
+              <button type="button" onClick={handleParseEligibility} disabled={parsing} className="adm-btn adm-btn-ghost">
+                {parsing ? 'Parsing' : 'Parse with AI'}
+              </button>
+            ) : undefined}
+          >
+            <EligibilityEditor
+              value={form.eligibility ?? EMPTY_ELIGIBILITY}
+              onChange={e => set({ eligibility: e })}
+            />
+          </AdminSection>
+        </AdminSheet>
       )}
 
-      {/* Delete Modal */}
       {modal?.type === 'delete' && (
-        <AdminDeleteModal idPrefix="sm" entityLabel="scholarship" itemName={modal.item?.title} saving={saving} onCancel={closeModal} onConfirm={handleDelete} />
+        <AdminDeleteModal idPrefix="sm" entityLabel="scholarship" itemName={modal.item?.title} saving={saving} onCancel={cancelDelete} onConfirm={handleDelete} />
       )}
     </div>
   )
 }
-

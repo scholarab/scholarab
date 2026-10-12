@@ -1,8 +1,8 @@
 import { useAdminList, type AdminPage, type AdminRecord } from '../../lib/use-admin-list'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { toast } from 'sonner'
 import { ADMIN_PAGE_SIZE as PAGE_SIZE } from '../../lib/constants'
-import { AdminTabBar, AdminPagination, AdminDeleteModal } from './primitives'
+import { AdminTabBar, AdminPagination, AdminDeleteModal, AdminSearch, AdminSheet, AdminSection, DeadlineFigure, Icon, albertaToday } from './primitives'
 
 import type { Program as BaseProgram } from '../../lib/data-loader'
 import { PROGRAM_CATEGORIES } from '../../lib/facets'
@@ -38,8 +38,8 @@ export default function ProgramManager({ initialData }: Props) {
   const totalPages = Math.ceil(total / PAGE_SIZE)
   const paginated = items
 
-  function handleSearch(e: React.ChangeEvent<HTMLInputElement>) {
-    setSearch(e.target.value)
+  function handleSearch(value: string) {
+    setSearch(value)
     setPage(0)
   }
 
@@ -48,16 +48,10 @@ export default function ProgramManager({ initialData }: Props) {
     setPage(0)
   }
 
-  useEffect(() => {
-    if (!modal) return
-    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setModal(null) }
-    document.addEventListener('keydown', onKey)
-    return () => document.removeEventListener('keydown', onKey)
-  }, [modal])
-
   const openAdd = () => { setForm(emptyForm()); setShowAdvanced(false); setModal({ type: 'add' }) }
   const openEdit = (item: Program) => { setForm({ ...item }); setShowAdvanced(false); setModal({ type: 'edit', item }) }
   const openDelete = (item: Program) => setModal({ type: 'delete', item })
+  const cancelDelete = () => setModal(m => (m?.item ? { type: 'edit', item: m.item } : null))
   const closeModal = () => setModal(null)
 
   const handleSave = async () => {
@@ -106,238 +100,175 @@ export default function ProgramManager({ initialData }: Props) {
     }
   }
 
-  const textarea = (key: keyof Program, label: string) => (
-    <div key={key}>
-      <label htmlFor={`pm-${key}`} className="block text-xs text-white/50 mb-1">{label}</label>
-      <textarea id={`pm-${key}`}
-        value={(form[key] as string) ?? ''}
-        onChange={e => setForm(f => ({ ...f, [key]: e.target.value }))}
-        rows={3}
-        className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-hidden focus:border-[#22d3a5]/50 transition resize-none"
-      />
-    </div>
-  )
+  const today = albertaToday()
+  const set = (patch: Partial<Program>) => setForm(f => ({ ...f, ...patch }))
+  const editing = modal?.type === 'edit' || modal?.type === 'add'
+  const costWord: Record<string, string> = { free: 'Free', fee: 'Fee', varies: 'Cost varies', unconfirmed: 'Cost not checked' }
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-6">
+      <div className="adm-head">
         <div>
-          <h1 className="text-xl font-semibold">Research Programs</h1>
-          <p className="text-sm text-white/40">{categoryCounts.All ?? total} total</p>
+          <h1 className="adm-title">Programs <small>{(categoryCounts.All ?? total).toLocaleString('en-CA')}</small></h1>
+          <p className="adm-sub">Research programs, camps and competitions. Click a row to edit it.</p>
         </div>
-        <button onClick={openAdd} className="px-4 py-2 rounded-lg text-sm font-medium text-[#0a0a0f]" style={{background:'#22d3a5'}}>
-          + Add program
-        </button>
+        <div className="adm-actions">
+          <button type="button" onClick={openAdd} className="adm-btn adm-btn-ghost">Add program</button>
+        </div>
       </div>
 
-      <input
-        type="search"
-        aria-label="Search programs"
-        placeholder="Search programs…"
-        value={search}
-        onChange={handleSearch}
-        className="w-full max-w-sm bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-sm text-white mb-4 focus:outline-hidden focus:border-[#22d3a5]/50 transition"
-      />
+      <div className="adm-tools">
+        <AdminSearch label="Search programs" value={search} onChange={handleSearch} />
+      </div>
+      <AdminTabBar label="Category" tabs={['All', ...CATEGORIES, 'No category']} counts={categoryCounts} active={categoryTab} onSelect={handleCategoryTab} />
 
-      {/* Category tabs */}
-      <AdminTabBar tabs={['All', ...CATEGORIES, 'No category']} counts={categoryCounts} active={categoryTab} onSelect={handleCategoryTab} />
-
-      <div className="border border-white/6 rounded-xl overflow-hidden">
-        <table className="w-full text-sm">
-          <thead>
-            <tr className="border-b border-white/6 text-white/40 text-xs uppercase">
-              <th className="text-left px-4 py-3 font-medium">Name</th>
-              <th className="text-left px-4 py-3 font-medium">Provider</th>
-              <th className="text-left px-4 py-3 font-medium">Grades</th>
-              <th className="text-left px-4 py-3 font-medium">Location</th>
-              <th className="text-left px-4 py-3 font-medium">Paid</th>
-              <th className="text-left px-4 py-3 font-medium">Status</th>
-              <th className="px-4 py-3" />
-            </tr>
-          </thead>
-          <tbody>
-            {paginated.map((p, i) => (
-              <tr key={p.id} className={`border-b border-white/4 hover:bg-white/2 transition ${i % 2 === 0 ? '' : 'bg-white/1'}`}>
-                <td className="px-4 py-3 font-medium max-w-xs truncate">
-                  {p.emoji && <span className="mr-1.5">{p.emoji}</span>}
-                  {p.name}
-                </td>
-                <td className="px-4 py-3 text-white/60">{p.provider || ''}</td>
-                <td className="px-4 py-3 text-white/60">{p.grades || ''}</td>
-                <td className="px-4 py-3 text-white/60">{p.location || ''}</td>
-                <td className="px-4 py-3">
-                  {p.paid ? (
-                    <span className="text-xs px-2 py-0.5 rounded-full bg-[#22d3a5]/15 text-[#22d3a5]">Paid</span>
-                  ) : (
-                    <span className="text-xs px-2 py-0.5 rounded-full bg-white/10 text-white/40">Unpaid</span>
-                  )}
-                </td>
-                <td className="px-4 py-3">
-                  <span className={`text-xs px-2 py-0.5 rounded-full ${p.active !== false ? 'bg-[#22d3a5]/15 text-[#22d3a5]' : 'bg-white/10 text-white/40'}`}>
-                    {p.active !== false ? 'Active' : 'Inactive'}
-                  </span>
-                </td>
-                <td className="px-4 py-3 text-right">
-                  <button onClick={() => openEdit(p)} className="text-white/30 hover:text-white mr-3 transition">Edit</button>
-                  <button onClick={() => openDelete(p)} className="text-red-400/50 hover:text-red-400 transition">Delete</button>
-                </td>
-              </tr>
-            ))}
-            {paginated.length === 0 && (
-              <tr><td colSpan={6} className="px-4 py-8 text-center text-white/30">No programs found</td></tr>
-            )}
-          </tbody>
-        </table>
+      <div className="adm-list">
+        {paginated.map(p => (
+          <button key={p.id} type="button" className="adm-row" onClick={() => openEdit(p)} aria-current={modal?.item?.id === p.id && editing ? 'true' : undefined}>
+            <DeadlineFigure date={p.deadline} today={today} />
+            <div className="adm-what">
+              <div className="adm-name">
+                <strong>{p.name}</strong>
+                {p.paid && p.stipend && <span className="adm-money">{p.stipend}</span>}
+              </div>
+              <div className="adm-meta">
+                {[p.provider, p.grades, p.location].filter(Boolean).join(', ')}
+              </div>
+            </div>
+            <div className="adm-state">
+              {p.active !== false
+                ? <span className="adm-mark" data-tone="on">Listed</span>
+                : <span className="adm-mark" data-tone="off">Unlisted</span>}
+              {p.unpublished
+                ? <span className="adm-mark" data-tone="draft">Draft, not published</span>
+                : <span className="adm-mark" data-tone={p.paid ? 'on' : 'off'}>{p.paid ? 'Paid stipend' : costWord[p.cost ?? 'unconfirmed'] ?? 'Unpaid'}</span>}
+            </div>
+            <span className="adm-open">Edit<Icon name="open" size={14} /></span>
+          </button>
+        ))}
+        {paginated.length === 0 && <p className="adm-empty">No programs match.</p>}
       </div>
 
-      {error && <p role="alert" className="text-red-400">{error}</p>}
+      {error && <p role="alert" className="adm-alert">{error}</p>}
       <AdminPagination page={page} totalPages={totalPages} total={total} totalWord="total" onPage={setPage} />
 
-      {/* Edit/Add Modal */}
-      {(modal?.type === 'edit' || modal?.type === 'add') && (
-        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4" onClick={closeModal}>
-          <div role="dialog" aria-modal="true" aria-labelledby="pm-dialog-title" className="bg-[#111118] border border-white/10 rounded-2xl p-6 w-full max-w-lg max-h-[90vh] overflow-y-auto" onClick={e => e.stopPropagation()}>
-            <h2 id="pm-dialog-title" className="text-lg font-semibold mb-1">{modal.type === 'edit' ? 'Edit Program' : 'Add Program'}</h2>
-            <p className="text-xs text-white/30 mb-5">Fields marked * are required</p>
-
-            {/* ── Essential fields ── */}
-            <div className="space-y-4">
-              <div>
-                <label htmlFor="pm-program-name" className="block text-sm text-white/70 mb-1.5">Program name *</label>
-                <input id="pm-program-name" type="text" value={form.name ?? ''} onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
-                  placeholder="e.g. SHAD Canada"
-                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder-white/20 focus:outline-hidden focus:border-[#22d3a5]/50 transition" />
-              </div>
-
-              <div>
-                <label htmlFor="pm-organization-institution" className="block text-sm text-white/70 mb-1.5">Organization / Institution</label>
-                <input id="pm-organization-institution" type="text" value={form.provider ?? ''} onChange={e => setForm(f => ({ ...f, provider: e.target.value }))}
-                  placeholder="e.g. University of Alberta"
-                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder-white/20 focus:outline-hidden focus:border-[#22d3a5]/50 transition" />
-              </div>
-
-              <div>
-                <label htmlFor="pm-official-website" className="block text-sm text-white/70 mb-1.5">Official website *</label>
-                <input id="pm-official-website" type="url" value={form.url ?? ''} onChange={e => setForm(f => ({ ...f, url: e.target.value }))}
-                  onBlur={e => {
-                    const v = e.target.value.trim()
-                    if (v && !v.startsWith('http://') && !v.startsWith('https://')) {
-                      setForm(f => ({ ...f, url: 'https://' + v }))
-                    }
-                  }}
-                  placeholder="https://..."
-                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder-white/20 focus:outline-hidden focus:border-[#22d3a5]/50 transition" />
-              </div>
-
-              <div className="grid grid-cols-2 gap-3">
-                <div>
-                  <label htmlFor="pm-application-deadline" className="block text-sm text-white/70 mb-1.5">Application deadline</label>
-                  <input id="pm-application-deadline" type="date" value={form.deadline ?? ''} onChange={e => setForm(f => ({ ...f, deadline: e.target.value }))}
-                    className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white focus:outline-hidden focus:border-[#22d3a5]/50 transition" />
-                </div>
-                <div>
-                  <label htmlFor="pm-grade-levels" className="block text-sm text-white/70 mb-1.5">Grade levels</label>
-                  <input id="pm-grade-levels" type="text" value={form.grades ?? ''} onChange={e => setForm(f => ({ ...f, grades: e.target.value }))}
-                    placeholder="e.g. Grade 10–12"
-                    className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder-white/20 focus:outline-hidden focus:border-[#22d3a5]/50 transition" />
-                </div>
-              </div>
-
-              <div>
-                <label htmlFor="pm-location" className="block text-sm text-white/70 mb-1.5">Location</label>
-                <input id="pm-location" type="text" value={form.location ?? ''} onChange={e => setForm(f => ({ ...f, location: e.target.value }))}
-                  placeholder="e.g. Edmonton, AB or Online"
-                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder-white/20 focus:outline-hidden focus:border-[#22d3a5]/50 transition" />
-              </div>
-
-              <label className="flex items-center gap-3 cursor-pointer">
-                <input type="checkbox" checked={form.paid ?? false} onChange={e => setForm(f => ({ ...f, paid: e.target.checked }))} className="accent-[#22d3a5] w-4 h-4" />
-                <span className="text-sm text-white/70">Students receive a paid stipend</span>
-              </label>
-              {form.paid && (
-                <input aria-label="Stipend amount" type="text" value={form.stipend ?? ''} onChange={e => setForm(f => ({ ...f, stipend: e.target.value }))}
-                  placeholder="Stipend amount (e.g. $5,000)"
-                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder-white/20 focus:outline-hidden focus:border-[#22d3a5]/50 transition" />
-              )}
-
-              {/* Separate from the stipend checkbox on purpose: not paying the
-                  student says nothing about whether the student pays. */}
-              <div className="space-y-2">
-                <label htmlFor="pm-cost" className="text-sm text-white/70">What the student pays</label>
-                <select id="pm-cost" value={form.cost ?? 'unconfirmed'} onChange={e => setForm(f => ({ ...f, cost: e.target.value as typeof f.cost }))}
-                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white focus:outline-hidden focus:border-[#22d3a5]/50 transition">
-                  <option value="unconfirmed">Not checked yet</option>
-                  <option value="free">Nothing, the program is free</option>
-                  <option value="fee">A fee</option>
-                  <option value="varies">Varies</option>
-                </select>
-                {(form.cost === 'fee' || form.cost === 'varies') && (
-                  <input aria-label="Program fee details" type="text" value={form.costNote ?? ''} onChange={e => setForm(f => ({ ...f, costNote: e.target.value }))}
-                    placeholder="The fee in the provider's words (e.g. ~$1,700 per module)"
-                    className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder-white/20 focus:outline-hidden focus:border-[#22d3a5]/50 transition" />
-                )}
-              </div>
-
-              <label className="flex items-center gap-3 cursor-pointer">
-                <input type="checkbox" checked={form.active ?? true} onChange={e => setForm(f => ({ ...f, active: e.target.checked }))} className="accent-[#22d3a5] w-4 h-4" />
-                <span className="text-sm text-white/70">Include on public site when published</span>
-              </label>
-            </div>
-
-            {/* ── Advanced toggle ── */}
-            <button
-              type="button"
-              onClick={() => setShowAdvanced(v => !v)}
-              className="mt-5 text-xs text-white/30 hover:text-white/60 transition flex items-center gap-1"
-            >
-              <span>{showAdvanced ? '▾' : '▸'}</span>
-              {showAdvanced ? 'Hide advanced fields' : 'Show advanced fields'}
-            </button>
-
-            {showAdvanced && (
-              <div className="mt-3 space-y-3 border-t border-white/6 pt-4">
-                <div>
-                  <label htmlFor="pm-category" className="block text-xs text-white/50 mb-1">Category</label>
-                  <select id="pm-category" value={form.category ?? ''} onChange={e => setForm(f => ({ ...f, category: e.target.value }))}
-                    className="w-full bg-[#1a1a24] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-hidden focus:border-[#22d3a5]/50">
-                    <option value="">Select</option>
-                    {CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
-                  </select>
-                </div>
-                <div>
-                  <label htmlFor="pm-duration" className="block text-xs text-white/50 mb-1">Duration</label>
-                  <input id="pm-duration" type="text" value={form.duration ?? ''} onChange={e => setForm(f => ({ ...f, duration: e.target.value }))}
-                    placeholder="e.g. 4 weeks"
-                    className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white placeholder-white/20 focus:outline-hidden focus:border-[#22d3a5]/50 transition" />
-                </div>
-                <div>
-                  <label htmlFor="pm-eligibility-requirements" className="block text-xs text-white/50 mb-1">Eligibility requirements</label>
-                  <input id="pm-eligibility-requirements" type="text" value={form.eligibility ?? ''} onChange={e => setForm(f => ({ ...f, eligibility: e.target.value }))}
-                    className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-hidden focus:border-[#22d3a5]/50 transition" />
-                </div>
-                {textarea('description', 'Description')}
-                <div>
-                  <label htmlFor="pm-emoji-icon" className="block text-xs text-white/50 mb-1">Emoji icon</label>
-                  <input id="pm-emoji-icon" type="text" value={form.emoji ?? ''} onChange={e => setForm(f => ({ ...f, emoji: e.target.value }))}
-                    placeholder="e.g. 🔬"
-                    className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-hidden focus:border-[#22d3a5]/50 transition" />
-                </div>
-              </div>
+      {editing && modal && (
+        <AdminSheet
+          id="pm-dialog"
+          title={modal.type === 'edit' ? (form.name || 'Edit program') : 'Add a program'}
+          sub="Saved as a draft until you publish."
+          onClose={closeModal}
+          footer={<>
+            {modal.type === 'edit' && modal.item && (
+              <button type="button" className="adm-btn adm-btn-danger" onClick={() => openDelete(modal.item!)} disabled={saving}>Delete</button>
             )}
-
-            <div className="flex gap-3 mt-6 justify-end">
-              <button onClick={closeModal} disabled={saving} className="px-4 py-2 rounded-lg text-sm text-white/50 hover:text-white border border-white/10 transition disabled:opacity-50">Cancel</button>
-              <button onClick={handleSave} disabled={saving} className="px-4 py-2 rounded-lg text-sm font-medium text-[#0a0a0f] disabled:opacity-50" style={{background:'#22d3a5'}}>
-                {saving ? 'Saving…' : 'Save program'}
-              </button>
+            <span className="adm-spacer" />
+            <button type="button" onClick={closeModal} disabled={saving} className="adm-btn adm-btn-ghost">Cancel</button>
+            <button type="button" onClick={handleSave} disabled={saving} className="adm-btn adm-btn-primary">{saving ? 'Saving' : 'Save draft'}</button>
+          </>}
+        >
+          <div className="adm-field">
+            <label htmlFor="pm-program-name">Name <em>required</em></label>
+            <input id="pm-program-name" type="text" className="adm-input" value={form.name ?? ''}
+              onChange={e => set({ name: e.target.value })} placeholder="SHAD Canada" />
+          </div>
+          <div className="adm-field">
+            <label htmlFor="pm-organization-institution">Run by</label>
+            <input id="pm-organization-institution" type="text" className="adm-input" value={form.provider ?? ''}
+              onChange={e => set({ provider: e.target.value })} placeholder="University of Alberta" />
+          </div>
+          <div className="adm-field">
+            <label htmlFor="pm-official-website">Official website <em>required</em></label>
+            <input id="pm-official-website" type="url" className="adm-input" value={form.url ?? ''}
+              onChange={e => set({ url: e.target.value })}
+              onBlur={e => {
+                const v = e.target.value.trim()
+                if (v && !v.startsWith('http://') && !v.startsWith('https://')) set({ url: 'https://' + v })
+              }}
+              placeholder="https://" />
+          </div>
+          <div className="adm-grid-2">
+            <div className="adm-field">
+              <label htmlFor="pm-application-deadline">Deadline</label>
+              <input id="pm-application-deadline" type="date" className="adm-input" value={form.deadline ?? ''}
+                onChange={e => set({ deadline: e.target.value })} />
+            </div>
+            <div className="adm-field">
+              <label htmlFor="pm-grade-levels">Grades</label>
+              <input id="pm-grade-levels" type="text" className="adm-input" value={form.grades ?? ''}
+                onChange={e => set({ grades: e.target.value })} placeholder="Grades 10 to 12" />
             </div>
           </div>
-        </div>
+          <div className="adm-field">
+            <label htmlFor="pm-location">Location</label>
+            <input id="pm-location" type="text" className="adm-input" value={form.location ?? ''}
+              onChange={e => set({ location: e.target.value })} placeholder="Edmonton, or Online" />
+          </div>
+
+          <label className="adm-check">
+            <input type="checkbox" checked={form.paid ?? false} onChange={e => set({ paid: e.target.checked })} />
+            <span>Students get a paid stipend</span>
+          </label>
+          {form.paid && (
+            <input aria-label="Stipend amount" type="text" className="adm-input" value={form.stipend ?? ''}
+              onChange={e => set({ stipend: e.target.value })} placeholder="Stipend amount, like $5,000" />
+          )}
+
+          {/* Separate from the stipend checkbox on purpose: not paying the
+              student says nothing about whether the student pays. */}
+          <div className="adm-field">
+            <label htmlFor="pm-cost">What the student pays</label>
+            <select id="pm-cost" className="adm-select" value={form.cost ?? 'unconfirmed'} onChange={e => set({ cost: e.target.value as Program['cost'] })}>
+              <option value="unconfirmed">Not checked yet</option>
+              <option value="free">Nothing, the program is free</option>
+              <option value="fee">A fee</option>
+              <option value="varies">Varies</option>
+            </select>
+            {(form.cost === 'fee' || form.cost === 'varies') && (
+              <input aria-label="Program fee details" type="text" className="adm-input" value={form.costNote ?? ''}
+                onChange={e => set({ costNote: e.target.value })} placeholder="The fee in the provider's words, like ~$1,700 per module" />
+            )}
+          </div>
+
+          <label className="adm-check">
+            <input type="checkbox" checked={form.active ?? true} onChange={e => set({ active: e.target.checked })} />
+            <span>List it on the public site when published</span>
+          </label>
+
+          <AdminSection title="More details" open={showAdvanced} onToggle={() => setShowAdvanced(v => !v)}>
+            <div className="adm-field">
+              <label htmlFor="pm-category">Category</label>
+              <select id="pm-category" className="adm-select" value={form.category ?? ''} onChange={e => set({ category: e.target.value })}>
+                <option value="">Choose</option>
+                {CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
+              </select>
+            </div>
+            <div className="adm-field">
+              <label htmlFor="pm-duration">Duration</label>
+              <input id="pm-duration" type="text" className="adm-input" value={form.duration ?? ''}
+                onChange={e => set({ duration: e.target.value })} placeholder="4 weeks" />
+            </div>
+            <div className="adm-field">
+              <label htmlFor="pm-eligibility-requirements">Who can apply</label>
+              <input id="pm-eligibility-requirements" type="text" className="adm-input" value={form.eligibility ?? ''}
+                onChange={e => set({ eligibility: e.target.value })} />
+            </div>
+            <div className="adm-field">
+              <label htmlFor="pm-description">Description</label>
+              <textarea id="pm-description" className="adm-textarea" rows={4} value={form.description ?? ''}
+                onChange={e => set({ description: e.target.value })} />
+            </div>
+            <div className="adm-field">
+              <label htmlFor="pm-emoji-icon">Emoji</label>
+              <input id="pm-emoji-icon" type="text" className="adm-input" value={form.emoji ?? ''}
+                onChange={e => set({ emoji: e.target.value })} />
+            </div>
+          </AdminSection>
+        </AdminSheet>
       )}
 
-      {/* Delete Modal */}
       {modal?.type === 'delete' && (
-        <AdminDeleteModal idPrefix="pm" entityLabel="program" itemName={modal.item?.name} saving={saving} onCancel={closeModal} onConfirm={handleDelete} />
+        <AdminDeleteModal idPrefix="pm" entityLabel="program" itemName={modal.item?.name} saving={saving} onCancel={cancelDelete} onConfirm={handleDelete} />
       )}
     </div>
   )
