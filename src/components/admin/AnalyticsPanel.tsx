@@ -116,6 +116,11 @@ const SEARCH_COLUMNS: { key: keyof SearchTotals; label: string; format: (v: numb
 const ALL = 'all'
 
 /** "2026-07" → "Jul 2026". Parsed as UTC so the label can't slip a month. */
+/** "2026-10-12" as "Mon, Oct 12", so a weekend dip reads as one. */
+function dayLabel(day: string): string {
+  return new Date(`${day}T12:00:00Z`).toLocaleDateString('en-CA', { weekday: 'short', month: 'short', day: 'numeric', timeZone: 'UTC' })
+}
+
 function monthLabel(month: string): string {
   const [y, m] = month.split('-').map(Number)
   if (!y || !m) return month
@@ -330,8 +335,7 @@ export default function AnalyticsPanel({ data }: Props) {
       merged.set(key, row)
     }
     return [...merged.entries()]
-      .sort((a, b) => b[1].n - a[1].n)
-      .slice(0, 20)
+      .sort((a, b) => b[1].n - a[1].n || a[0].localeCompare(b[0]))
       .map(([q, row]) => ({
         q,
         n: row.n,
@@ -397,9 +401,21 @@ export default function AnalyticsPanel({ data }: Props) {
     }
   }, [data.tourMeta, data.monthly, month])
 
+  // Every calendar day in the period, newest first, quiet days at 0: the
+  // rows only exist for days with events, so a dead day used to vanish
+  // instead of reading as a gap (Ilia, 2026-10-12, "every single day").
   const dailyRows = useMemo(() => {
-    if (month === ALL) return data.daily.slice(-14)
-    return data.daily.filter(d => d.day.startsWith(month))
+    const byDay = new Map(data.daily.map(d => [d.day, d.n]))
+    const days = data.daily.map(d => d.day).filter(d => month === ALL || d.startsWith(month))
+    if (days.length === 0) return []
+    const first = month === ALL ? days[0] : `${month}-01`
+    const last = days[days.length - 1]
+    const out: { day: string; n: number }[] = []
+    for (let t = Date.parse(`${first}T00:00:00Z`); t <= Date.parse(`${last}T00:00:00Z`); t += 86400000) {
+      const day = new Date(t).toISOString().slice(0, 10)
+      out.push({ day, n: byDay.get(day) ?? 0 })
+    }
+    return out.reverse()
   }, [data.daily, month])
 
   if (data.error) {
@@ -630,8 +646,8 @@ export default function AnalyticsPanel({ data }: Props) {
 
       <div className="adm-split">
         <section>
-          <h2 className="adm-h2">Searches with no results <small>{periodLabel}</small></h2>
-          <div className="adm-table-wrap">
+          <h2 className="adm-h2">Searches with no results <small>{periodLabel}{searches.length > 0 && `, ${n(searches.length)} different`}</small></h2>
+          <div className="adm-table-wrap adm-scroll">
             <table className="adm-table">
               <tbody>
                 {searches.length === 0 && (
@@ -639,7 +655,7 @@ export default function AnalyticsPanel({ data }: Props) {
                 )}
                 {searches.map(({ q, n: count, paths }) => (
                   <tr key={q}>
-                    <td>{q}{paths.length > 0 && <small>{paths.slice(0, 3).join('   ')}</small>}</td>
+                    <td>{q}{paths.length > 0 && <small>{paths.join('   ')}</small>}</td>
                     <td data-num data-dim style={{ verticalAlign: 'top' }}>{count}&times;</td>
                   </tr>
                 ))}
@@ -671,13 +687,13 @@ export default function AnalyticsPanel({ data }: Props) {
         <section>
           <div className="adm-block">
             <h2 className="adm-h2">
-              Events per day <small>{month === ALL ? 'today and the last 13 active days' : periodLabel}</small>
+              Events per day <small>{periodLabel}, newest first</small>
             </h2>
-            <div className="adm-bars">
+            <div className="adm-bars adm-scroll">
               {dailyRows.length === 0 && <p className="adm-note">No activity in this period.</p>}
               {dailyRows.map(d => (
-                <div key={d.day}>
-                  <span>{d.day.slice(5)}</span>
+                <div key={d.day} data-zero={d.n === 0 ? '' : undefined}>
+                  <span>{dayLabel(d.day)}</span>
                   <i style={{ width: `${(d.n / maxDaily) * 100}%` }} />
                   <span>{n(d.n)}</span>
                 </div>

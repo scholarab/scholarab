@@ -266,8 +266,11 @@
 .adm-split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; margin-top: 48px; }
 .adm-block + .adm-block, .adm-split section > * + .adm-block { margin-top: 40px; }
 .adm-bars { border-top: 1px solid var(--adm-rule); padding-top: 8px; }
-.adm-bars div { display: grid; grid-template-columns: 52px 1fr 48px; align-items: center; gap: 12px; height: 26px; font-size: 13px; }
+.adm-bars div { display: grid; grid-template-columns: 96px 1fr 48px; align-items: center; gap: 12px; height: 26px; font-size: 13px; }
 .adm-bars span:first-child { color: var(--adm-paper-3); }
+.adm-bars div[data-zero] span { color: var(--adm-paper-3); }
+/* Every search and every day can run to hundreds of rows; they scroll in place. */
+.adm-scroll { max-height: 560px; overflow-y: auto; overscroll-behavior: contain; }
 .adm-bars i { display: block; height: 10px; background: var(--adm-green); min-width: 1px; }
 .adm-bars span:last-child { text-align: right; color: var(--adm-paper); }
 
