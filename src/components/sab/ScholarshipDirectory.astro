@@ -13,8 +13,6 @@ import { saysNoApplication, rowRoute, routeTag } from '../../lib/apply-method.ts
 import { ARROW_REF, BOOKMARK_REF, EXT_REF, ICON_SPRITE } from '../../lib/icons.ts';
 import { eligibilityFacts } from '../../lib/eligibility-facts.ts';
 import SabFilterSelect from './SabFilterSelect.astro';
-import SabHero from './SabHero.astro';
-import type { PhotoCredit } from '../../lib/photo-credits';
 import { schoolOf } from '../../lib/school-awards.ts';
 
 interface Props {
@@ -49,6 +47,11 @@ interface Props {
    * layout like the others"), so every directory page reads the same way.
    */
   railFilters?: boolean;
+  /** The tool layout (2026-10-12, after spacex.com/careers/jobs): from 901px
+      up the title and every filter, sort included, live in one full-height
+      column at the window's left edge, and the search box rides on top of the
+      list. Phones are unchanged. global.css, "Tool layout". */
+  tool?: boolean;
   /** University & college awards: a School picker, biggest school first. */
   schoolFilter?: boolean;
   /** City hubs: the broad lists the reader can also apply from. */
@@ -62,8 +65,6 @@ interface Props {
   towns?: string[];
   /** City hubs: the board's specials, from lib/city-specials.ts. */
   specials?: Array<{ label: string; href: string; title: string; meta: string }>;
-  /** A hub with a photo: it heads the page behind the header (SabHero). */
-  photo?: { backdrop: string; credit?: PhotoCredit };
 }
 // The default standfirst says what a reader cannot see on any row: that the
 // listings are checked, and how recently.
@@ -76,11 +77,11 @@ const {
   hideCategories = false,
   hideScopes = false,
   railFilters = false,
+  tool = false,
   schoolFilter = false,
   alsoOpen,
   step = DIRECTORY_PAGE_SIZE,
   specials = [],
-  photo,
   towns,
 } = Astro.props;
 
@@ -205,19 +206,16 @@ const openNow = openNowCount(initial);
 ---
 
 <Fragment set:html={ICON_SPRITE} />
-<div class:list={['sabl-page', { 'sabl-railed': railFilters }]} data-dir-step={step}>
-  {photo && <SabHero h1={h1} intro={intro} photo={photo} />}
-  {/* Everything above the cards. A hub with a photo puts its heading on the
-      photo above; the rest keep it here, in ink on white. */}
+<div class:list={['sabl-page', { 'sabl-railed': railFilters, 'sabl-tool': tool }]} data-dir-step={step}>
+  {/* Everything above the cards, in ink on white. No photo: a list is a
+      tool page, and spacex.com never puts a photo over one (2026-10-12). */}
   <div class="sabl-head">
-  {!photo && (
-    <div class="sabl-title-row">
-      <div>
-        <h1 class="sabl-h1">{h1}</h1>
-        <p class="sabl-desc">{intro}</p>
-      </div>
+  <div class="sabl-title-row">
+    <div>
+      <h1 class="sabl-h1">{h1}</h1>
+      <p class="sabl-desc">{intro}</p>
     </div>
-  )}
+  </div>
 
   <div class="sabl-toolbar">
     <div class="sabl-search">

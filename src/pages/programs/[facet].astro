@@ -1,5 +1,4 @@
 ---
-import { PHOTO_CREDITS } from '../../lib/photo-credits';
 import { todayDate as albertaToday } from '../../lib/calendar';
 // The program facet hubs, on both axes: the FIELD hubs (/programs/research/,
 // /programs/computing/) and since 2026-09-15 the FORMAT hubs
@@ -80,7 +79,7 @@ const breadcrumbJson = {
   <SabFonts slot="head" chips />
 
   <div class="sabp-header" slot="header">
-    <SabHeader currentPath="/programs" over={!!facet.backdrop} />
+    <SabHeader currentPath="/programs" />
   </div>
 
   <div id="sab-programs" class="sabp sabp-wide">
@@ -98,7 +97,6 @@ const breadcrumbJson = {
         currentField={facet.kind === 'category' ? facet.slug : null}
         currentFormat={facet.kind === 'format' ? facet.slug : null}
         railFilters
-        photo={facet.backdrop ? { backdrop: facet.backdrop, credit: PHOTO_CREDITS[facet.backdrop] } : undefined}
       />
 
       <div class="sabl-hubfoot">

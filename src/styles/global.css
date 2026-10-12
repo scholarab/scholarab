@@ -289,23 +289,20 @@ body {
     box-shadow: 0 10px 30px -12px rgba(0,0,0,0.75);
     border-bottom-color: rgba(102,185,135,0.18);
   }
-  /* The white bar lifts off the page with a soft shadow; a see-through bar
-     still over its photo gets none. */
-  html[data-sab-stuck] body > .sabp-header:not(:has([data-tone='over'])) {
+  /* The white bar lifts off the page with a soft shadow. */
+  html[data-sab-stuck] body > .sabp-header {
     box-shadow: 0 8px 24px -18px rgba(20, 25, 21, 0.45);
   }
 }
 
 /* ── Header tones (2026-10-12) ──
    The banner paints nothing itself; the bar inside it (.sabh) carries one of
-   three tones, set by SabHeader:
+   two tones, set by SabHeader:
    dark   the home page, see-through over its film (index.astro owns that).
    light  every other page: white, ink words, the ink-on-light logo, and a
           white panel under an open menu. No black band anywhere.
-   over   a hub with a photo head: see-through over the photo, like home,
-          with a smoke fall-off so the words read on any photo. Past the photo
-          the script flips it to light. The phone sheet is dark whatever the
-          tone, so every tone rule waits for :not([data-open]). */
+   The phone sheet is dark whatever the tone, so every tone rule waits for
+   :not([data-open]). */
 body > .sabp-header { background: transparent; color: inherit; border-bottom: 0; }
 .sabh { position: relative; }
 .sabh[data-open] { background: #0A1310; }
@@ -329,27 +326,6 @@ body > .sabp-header { background: transparent; color: inherit; border-bottom: 0;
   background: #FFFFFF; border-top-color: rgba(20, 25, 21, 0.08);
   box-shadow: 0 28px 40px -28px rgba(20, 25, 21, 0.35);
 }
-/* Over a photo: the home page's menu, words straight on the picture. */
-.sabh[data-tone='over'] .sabh-drop { display: none; }
-.sabh[data-tone='over'] .sabh-menu-desk a { text-shadow: 0 1px 8px rgba(0, 0, 0, 0.55); }
-.sabh[data-tone='over']:not([data-open])::before,
-.sabh[data-tone='over']:not([data-open])::after {
-  content: ''; position: absolute; left: 0; right: 0; top: 0; z-index: -1;
-  pointer-events: none; transition: opacity 0.25s ease;
-}
-.sabh[data-tone='over']:not([data-open])::before {
-  height: 140px;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.55) 0, rgba(0, 0, 0, 0.25) 45%, rgba(0, 0, 0, 0) 100%);
-}
-.sabh[data-tone='over']:not([data-open])::after {
-  height: 330px; opacity: 0;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.88) 0, rgba(0, 0, 0, 0.72) 40%, rgba(0, 0, 0, 0) 100%);
-}
-@media (min-width: 901px) {
-  .sabh[data-tone='over']:not([data-open])::before { height: 200px; }
-}
-/* data-sab-menu is set by the header script, never by :has(): see syncDrop. */
-html[data-sab-menu] .sabh[data-tone='over']::after { opacity: 1; }
 
 /* Hides on the way down, comes back on the way up (Ilia, 2026-10-02, after
    spacex.com). SabHeader's scroll reader sets data-sab-hidden on <html>.
@@ -857,6 +833,70 @@ html.js .sabl-rail .sabl-scope-select { border-radius: var(--radius); min-height
 /* No JavaScript, no toggle: the attribute it sets would never be read back,
    and a control that does nothing is worse than no control. */
 html:not(.js) .sabl-lean { display: none; }
+
+/* ── Tool layout (Ilia, 2026-10-12, after spacex.com/careers/jobs) ──
+   A list is a tool page: no photo, the list straight under the bar, and one
+   full-height column at the window's left edge holding the title and every
+   filter, sort included. The column's panel is the page's ::before, so it runs
+   from the bar to the end of the list whatever the column holds; the filters
+   ride in it, sticky, with their own scroller. The search box rides on top of
+   the list. Rows: the title spans 1 and 2 beside the search box (row 1) and
+   the top of the list (row 2), so the list starts right under the search box
+   however tall the title is; the filters take row 3. Phones are unchanged. */
+@media (min-width: 901px) {
+  .sabp-wide .sabp-body:has(.sabl-tool) { padding-top: 0; }
+  .sabl-tool, html[data-lean] .sabl-tool {
+    --tool-col: 300px;
+    --tool-bar: 72px;
+    display: grid; grid-template-columns: var(--tool-col) minmax(0, 1fr);
+    grid-template-rows: var(--tool-bar) auto 1fr; gap: 0 36px; align-items: start;
+    position: relative; isolation: isolate;
+  }
+  .sabl-tool::before {
+    content: ''; grid-column: 1; grid-row: 1 / -1; align-self: stretch; z-index: -1;
+    margin-left: calc(-1 * clamp(20px, 2.2vw, 40px));
+    background: var(--bg-panel); box-shadow: inset -1px 0 rgba(20, 25, 21, 0.1);
+  }
+  .sabl-tool .sabl-head, .sabl-tool .sabl-split { display: contents; }
+  .sabl-tool .sabl-title-row { grid-column: 1; grid-row: 1 / span 2; padding: 28px 24px 8px 0; }
+  .sabl-tool .sabl-title-row .sabl-h1 { font-size: 48px; }
+  .sabl-tool .sabl-desc { font-size: 15px; margin-top: 12px; }
+  .sabl-tool .sabl-toolbar {
+    grid-column: 2; grid-row: 1; align-self: stretch; margin: 0; padding: 0; border-top: 0;
+    position: sticky; top: var(--sab-nav-shown); z-index: 5; transition: top 0.3s ease;
+    display: flex; align-items: center; background: var(--bg-page);
+    box-shadow: 0 1px 0 rgba(20, 25, 21, 0.1);
+  }
+  .sabl-tool .sabl-search { flex: 1; max-width: none; }
+  .sabl-tool .sabl-toolbar .sabl-sort, .sabl-tool .sabl-lean { display: none; }
+  .sabl-tool .sabl-col { grid-column: 2; grid-row: 2 / span 2; padding-top: 8px; }
+  html[data-lean] .sabl-tool .sabl-rail, .sabl-tool .sabl-rail {
+    grid-column: 1; grid-row: 3; display: flex; flex-direction: column;
+    position: sticky; top: var(--sab-nav-shown);
+    max-height: calc(100vh - var(--sab-nav-shown));
+    max-height: calc(100svh - var(--sab-nav-shown));
+    border-radius: 0; padding: 20px 24px 24px 0; background: none;
+  }
+  .sabl-tool .sabl-rail-sort { display: flex; }
+  /* The column's own head: what it is, and SpaceX's Clear all. */
+  .sabl-tool .sabl-sheet-head {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+    margin: 0 0 16px; padding-top: 16px; border-top: 1px solid rgba(20, 25, 21, 0.12);
+  }
+  .sabl-tool .sabl-sheet-title { font: 800 22px/1 var(--font-display); text-transform: uppercase; margin: 0; }
+  .sabl-tool .sabl-sheet-clear {
+    border: 0; background: none; padding: 0; cursor: pointer;
+    font: 600 14px var(--font-body); color: var(--text-primary);
+    text-decoration: underline; text-underline-offset: 3px;
+  }
+  .sabl-tool .sabl-sheet-clear[hidden] { display: none; }
+  .sabl-tool .sabl-rail .sabl-filter-row { flex-direction: column; align-items: stretch; gap: 8px; }
+  .sabl-tool .sabl-rail .sabl-row-label { width: auto; padding-top: 0; }
+  .sabl-tool .sabl-rail select, html.js .sabl-tool .sabl-rail .sabl-scope-select { width: 100%; max-width: none; min-width: 0; box-sizing: border-box; }
+}
+@media (min-width: 901px) and (max-width: 1179px) {
+  .sabl-tool, html[data-lean] .sabl-tool { --tool-col: 250px; gap: 0 24px; }
+}
 
 /* ── Phone filters ──
    On a phone, sort and the chip rows sat between the search box and the
@@ -1477,7 +1517,7 @@ html:not(.js) .sabl-more { display: none; }
    only long line here is the standfirst, which is capped at 560px by
    .sabl-desc; the cards and the filter rail were paying for it in empty margin
    on both sides. A wider window now buys cards rather than gutters. */
-.sabp-wide .sabp-body { --sabp-pad: clamp(20px, 2.2vw, 40px); max-width: none; padding-left: var(--sabp-pad); padding-right: var(--sabp-pad); }
+.sabp-wide .sabp-body { max-width: none; padding-left: clamp(20px, 2.2vw, 40px); padding-right: clamp(20px, 2.2vw, 40px); }
 @media (max-width: 900px) {
   .sabp-body { padding: 28px 20px 64px; }
 }
@@ -2011,73 +2051,9 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
    Mustard (#FFC700) is only ever a sticker or a link hover on ink, never text on white.
    The mustard kicker over the heading left 2026-10-01 (critique: "Now serving"
    was a metaphor to decode, and the heading already names the place). */
-/* ── Photo head (Ilia, 2026-10-12, after spacex.com) ──
-   A hub with a photo opens on it: the whole window wide, starting behind the
-   see-through header, the heading in white at its foot. Fixed height, so
-   every photo hub puts its toolbar at one height, and short enough that the
-   first rows still show on a laptop's first screen. SabHero renders it. */
-.sabp-body:has(> .sabl-page > .sabl-hero) { padding-top: 0; }
-.sabl-hero {
-  position: relative; isolation: isolate; overflow: hidden; box-sizing: border-box;
-  display: flex; flex-direction: column; justify-content: flex-end;
-  height: clamp(340px, 44vh, 480px);
-  /* Up under the bar (and the banner's 1px rule) and out to both window edges. */
-  margin: calc(-1 * var(--sab-nav-h) - 1px) calc(-1 * var(--sabp-pad)) 28px;
-  /* The text lines up with the logo. */
-  padding: calc(var(--sab-nav-h) + 32px) clamp(20px, 4vw, 56px) 44px;
-  background: #0A1310; color: #FFFFFF;
-}
-.sabl-hero-photo img {
-  position: absolute; inset: 0; z-index: -2;
-  width: 100%; height: 100%; object-fit: cover;
-}
-/* Dark at the foot, where the words are, and clear above it: the photo is
-   the point. A light wash at the top keeps a phone's bar readable, which has
-   no smoke of its own over a bright sky. */
-.sabl-hero::before {
-  content: ''; position: absolute; inset: 0; z-index: -1;
-  background:
-    linear-gradient(0deg, rgba(5, 10, 8, 0.8) 0, rgba(5, 10, 8, 0.45) 32%, rgba(5, 10, 8, 0) 62%),
-    linear-gradient(180deg, rgba(5, 10, 8, 0.35) 0, rgba(5, 10, 8, 0) 26%);
-}
-.sabl-hero-text { max-width: 980px; }
-.sabl-hero .sabl-h1 {
-  color: #FFFFFF; font-size: clamp(56px, 6.6vw, 108px);
-  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.35);
-}
-.sabl-hero .sabl-desc {
-  color: rgba(255, 255, 255, 0.9); min-height: 0; max-width: 62ch; margin-top: 16px;
-  font-size: 18px; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-}
-.sabl-hero-credit {
-  position: absolute; right: 18px; bottom: 10px;
-  font-size: 11px; line-height: 1.3; color: rgba(255, 255, 255, 0.78); text-decoration: none;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
-}
-.sabl-hero-credit:hover { color: #FFFFFF; text-decoration: underline; }
-/* The head spans both columns of a railed hub; the rail and the rows start
-   together under it. */
-@media (min-width: 1180px) {
-  .sabl-railed > .sabl-hero { grid-column: 1 / -1; grid-row: 1; }
-  .sabl-railed:has(> .sabl-hero) .sabl-head { grid-row: 2; }
-  .sabl-railed:has(> .sabl-hero) .sabl-rail { grid-row: 2 / span 2; }
-  .sabl-railed:has(> .sabl-hero) .sabl-col { grid-row: 3; }
-}
-@media (max-width: 900px) {
-  .sabl-hero { height: auto; min-height: 270px; padding: calc(var(--sab-nav-h) + 20px) 20px 22px; margin-bottom: 16px; }
-  /* The words fill most of a phone's head, so the shade climbs with them
-     (Calgary's sky measured 2.8:1 under the heading without it). */
-  .sabl-hero::before {
-    background: linear-gradient(0deg, rgba(5, 10, 8, 0.82) 0, rgba(5, 10, 8, 0.6) 55%, rgba(5, 10, 8, 0.4) 100%);
-  }
-  .sabl-hero .sabl-desc { font-size: 15px; line-height: 1.45; margin-top: 10px; }
-  .sabl-hero-credit { right: 10px; bottom: 4px; font-size: 10px; }
-}
-
 /* The heading is big ink type straight on the white page (2026-10-12): the
-   ink board it sat on read as a second black header under the bar. Hubs with
-   a photo set the same heading in white on the photo instead (Photo head). */
-.sabl-title-row .sabl-h1, .sabl-hero .sabl-h1 {
+   ink board it sat on read as a second black header under the bar. */
+.sabl-title-row .sabl-h1 {
   font-weight: 800; text-transform: uppercase;
   font-size: clamp(44px, 4.8vw, 68px); line-height: 0.9;
 }
@@ -2127,7 +2103,7 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
   /* Kept tight: the first listing on a phone was fought up to 330px of 844
      (critique 2026-09-29), and the heading may only cost it a little. */
   .sabl-title-row { gap: 0; }
-  .sabl-title-row .sabl-h1, .sabl-hero .sabl-h1 { font-size: 36px; }
+  .sabl-title-row .sabl-h1 { font-size: 36px; }
   .sabl-title-row .sabs-toggle { margin-top: 14px; }
   .sabl-toolbar { margin-top: 14px; }
   .sabl-group-count { min-width: 36px; height: 36px; font-size: 18px; }
@@ -2166,9 +2142,6 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
 .sabh-saved-n[hidden] { display: none; }
 @media print {
   .sabl-card .sabl-name-h::after { content: none; }
-  .sabl-hero { color: #141915; height: auto; margin: 0 0 12pt; padding: 0; background: none; }
-  .sabl-hero-photo, .sabl-hero::before, .sabl-hero-credit { display: none; }
-  .sabl-hero .sabl-h1, .sabl-hero .sabl-desc { color: #141915; text-shadow: none; }
   .sabl-group-count { background: none; color: inherit; transform: none; }
 }
 
