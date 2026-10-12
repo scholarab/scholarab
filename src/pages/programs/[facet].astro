@@ -83,7 +83,7 @@ const breadcrumbJson = {
     <SabHeader currentPath="/programs" over={!!facet.backdrop} />
   </div>
 
-  <div id="sab-programs" class="sabp sabp-wide">
+  <div id="sab-programs" class:list={['sabp', 'sabp-wide', { 'sabp-photo': facet.backdrop }]}>
     <div class="sabp-body">
       {/* No visible breadcrumb (Ilia, 2026-09-15). The header names the
           section, the h1 names the facet, and the hub footer links back to the

@@ -146,7 +146,7 @@ const breadcrumbJson = {
   <div
     id="sab-scholarships"
     data-remember-city={isCity ? facet.slug : undefined}
-    class="sabp sabp-wide"
+    class:list={['sabp', 'sabp-wide', { 'sabp-photo': facet.backdrop }]}
   >
     <div class="sabp-body">
       {/* No visible breadcrumb (Ilia, 2026-09-15). The header names the
