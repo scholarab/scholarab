@@ -2179,3 +2179,15 @@ Repair record: the fixed photo first painted over the footer (the footer is now 
 Measurements (local, built site): first listing row after See the list unchanged, 199px at 1440x900 and 167px at 390x844. Contrast of list text was computed, not measured: at 86% ink over a white photo pixel the background is about #2B332F, giving the body text above 10:1 and the lightest text (70% white) above 6:1. src and e2e 115 lines added, 23 removed.
 
 Validation: npm run ci passes lint, 1,271 Vitest tests and the build; astro check's 11 errors are the pre-existing private/counsellor-drafts-50-2026-10-09/gate symlink. Playwright 176 passed, 20 skipped. Built site checked at 1440 and 390: head, list, bar fill and open menu deep in the list, status help, phone filter sheet, guide links and footer.
+
+## Market cards on the directories, October 12, 2026
+
+Outcome: Ilia did not like the dark photo list and asked to try polymarket.com's system on the scholarship and program lists. The directories (/scholarships/, /programs/ and every hub) are now a grid of filled tiles, three across at 1440 beside the filter column and one on a phone: the name, who it is for and the requirements on top, the money and the date as the two figures on one line, then Save and Apply as two filled halves along the foot, like a market's Yes and No. The page is white again, with the plain ink heading. /saved, /deadlines and the home closing list keep the row.
+
+Removal: the photo behind the list (9395c9a, reversed), the full-screen photo head, SabHero, the header's see-through over tone and its scroll flip, the hub photo-head contrast test, and the arrow click in the phone filter test. The photo files stay; the home carousel and the menu tiles use them. Candidates 1 (the photo pages), added back 0 (0%). No failure was invented for the 10% target.
+
+Repair record: on a phone the cards bled to the window edges, because the row rule's -20px side margins still applied (fixed with margin 0 on the card). The title kept the menu-board dotted leader, which pointed at nothing in a card (removed in cards). Three e2e tests pinned the row layout (date left of the title, Apply's underline, stripes) and were rewritten to pin the card (Save and Apply equal halves at least 40px tall, money left of the date under the name, no stripes, side by side on a laptop and stacked on a phone); the home closing list keeps its own row test.
+
+Measurements (local, built site, CSS px, page top): first card at 583 on Calgary and 425 on /scholarships/ and /programs/ at 1440x900; 587 on Calgary at 390x844. The first Calgary card is about 256px tall at 1440 (read off the screenshot), three to a line. Rows were not re-measured for comparison. src and e2e 164 lines added, 408 removed.
+
+Validation: npm run ci passes lint, 1,271 Vitest tests and the build; astro check's 11 errors are the pre-existing private/counsellor-drafts-50-2026-10-09/gate symlink. Playwright 176 passed, 20 skipped. Built site checked at 1440 and 375 in the browser pane (Calgary, /scholarships/, /programs/).

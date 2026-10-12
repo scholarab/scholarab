@@ -129,27 +129,19 @@ test('every hub puts its filter chips at the same height', async ({ page }, test
   test.skip(testInfo.project.name === 'mobile', 'desktop layout');
   await page.setViewportSize({ width: 1440, height: 900 });
 
-  const seen = new Map<string, { photo: boolean; y: number }>();
+  const seen = new Map<string, number>();
   for (const path of HUBS) {
     await page.goto(path);
     // Measured before the webfont lands, the standfirst wraps on fallback
     // metrics and the number is not the one anybody sees.
     await page.evaluate(() => document.fonts.ready);
-    // A hub with a photo head puts it at one fixed height, so photo hubs
-    // share one toolbar height and plain hubs another (2026-10-12).
-    const [photo, y] = await page.evaluate(() => {
+    seen.set(path, await page.evaluate(() => {
       const body = document.querySelector('.sabp-body')!.getBoundingClientRect().top;
-      return [!!document.querySelector('.sabl-hero'), Math.round(document.querySelector('.sabl-toolbar')!.getBoundingClientRect().top - body)] as const;
-    });
-    seen.set(path, { photo, y });
+      return Math.round(document.querySelector('.sabl-toolbar')!.getBoundingClientRect().top - body);
+    }));
   }
-  for (const photo of [true, false]) {
-    const group = [...seen].filter(([, v]) => v.photo === photo).map(([k, v]) => [k, v.y] as const);
-    expect(group.length, `some hubs ${photo ? 'with' : 'without'} a photo`).toBeGreaterThan(0);
-    expect(Object.fromEntries(group), `one shared toolbar height (photo: ${photo})`).toEqual(
-      Object.fromEntries(group.map(([k]) => [k, group[0]![1]])),
-    );
-  }
+  const first = [...seen.values()][0];
+  expect(Object.fromEntries(seen)).toEqual(Object.fromEntries([...seen.keys()].map(k => [k, first])));
 });
 
 // The SCOPE row left the scholarship hubs on 2026-09-15 (a reader who picked
@@ -402,67 +394,75 @@ test('on a phone, no field makes Safari zoom and every picker draws its own box'
   expect(problems).toEqual([]);
 });
 
-// Save and Apply share one centre line on every row, and Apply's underline
-// sits under its word. The line was the link's bottom border, which lifted the
-// word 2px above "Save" and, on a phone that stretched the link to 44px, hung
-// 15px below it (reader feedback, 2026-09-29). The shaded rows alternate over
-// the rows a search leaves on screen, not over every row in the document.
-test('rows: Save and Apply on one line, underline under the word, stripes alternate', async ({ page }) => {
+// The directories are a grid of cards (Ilia, 2026-10-12, after
+// polymarket.com): Save and Apply are two filled halves along each card's
+// foot, the same height on one line, before and after a search, and no card
+// is striped the way the rows were.
+test('cards: Save and Apply split the foot of every card, no stripes', async ({ page }) => {
   for (const [path, term] of [['/scholarships/', 'engineering'], ['/programs/', 'math']] as const) {
     await page.goto(path);
     const measure = () => page.locator('[data-dir-card]:visible').evaluateAll(cards => cards.slice(0, 10).map(c => {
-      const firstText = (el: Element) => {
-        const walk = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, { acceptNode: n => (n.textContent ?? '').trim() ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP });
-        const r = document.createRange(); r.selectNodeContents(walk.nextNode()!); return r.getBoundingClientRect();
-      };
-      const save = firstText(c.querySelector('.sabl-save-label')!);
-      const apply = c.querySelector('.sabl-apply')!;
-      const word = firstText(apply);
-      const bar = getComputedStyle(apply, '::before');
-      const barTop = apply.getBoundingClientRect().bottom - parseFloat(bar.bottom) - parseFloat(bar.height);
-      return {
-        off: Math.abs((save.top + save.height / 2) - (word.top + word.height / 2)),
-        gap: barTop - word.bottom,
-        bg: getComputedStyle(c).backgroundColor,
-      };
+      const save = c.querySelector('.sabl-save')!.getBoundingClientRect();
+      const apply = c.querySelector('.sabl-apply')!.getBoundingClientRect();
+      return { top: Math.abs(save.top - apply.top), h: [save.height, apply.height], w: Math.abs(save.width - apply.width), order: apply.left > save.right, bg: getComputedStyle(c).backgroundColor };
     }));
-    for (const rows of [await measure(), await (async () => {
+    for (const cards of [await measure(), await (async () => {
       await page.locator('[data-dir-search]').fill(term);
       await page.waitForTimeout(400);
       return measure();
     })()]) {
-      expect(rows.length).toBeGreaterThan(3);
-      for (const r of rows) {
-        expect(r.off).toBeLessThanOrEqual(1);
-        expect(r.gap).toBeGreaterThanOrEqual(0);
-        expect(r.gap).toBeLessThanOrEqual(5);
+      expect(cards.length).toBeGreaterThan(3);
+      for (const c of cards) {
+        expect(c.top).toBeLessThanOrEqual(1);
+        for (const h of c.h) expect(h).toBeGreaterThanOrEqual(40);
+        expect(c.w).toBeLessThanOrEqual(1);
+        expect(c.order).toBe(true);
       }
-      const shaded = rows.map(r => r.bg !== 'rgba(0, 0, 0, 0)');
-      expect(shaded).toEqual(rows.map((_, i) => i % 2 === 1));
+      expect(new Set(cards.map(c => c.bg)).size).toBe(1);
     }
   }
 });
 
-// A row reads in the order a student decides (critique 2026-09-29): the
-// date, a figure down the left edge on every width; then the title with the
-// money on its line. The date was 14px on a phone, under the amount.
-test('rows lead with a date figure left of the title, money on the title line', async ({ page }, testInfo) => {
-  for (const path of ['/scholarships/', '/programs/', '/']) {
+// A card reads top to bottom: the name, then the money and the date as its
+// two figures on one line, money left, date right. On a laptop the cards
+// sit side by side; on a phone they stack.
+test('cards: name first, then money left and date right on one line', async ({ page }, testInfo) => {
+  for (const path of ['/scholarships/', '/programs/']) {
     await page.goto(path);
-    const rows = await page.locator(path === '/' ? '#closing .sab-closing-row' : '[data-dir-card]:visible').evaluateAll(cards => cards.slice(0, 6).map(c => {
+    const cards = await page.locator('[data-dir-card]:visible').evaluateAll(cs => cs.slice(0, 6).map(c => {
       const date = c.querySelector('[data-when-main]')!;
-      const title = c.querySelector('.sabl-name, .sab-row-name')!.getBoundingClientRect();
-      const money = c.querySelector('.sabl-amount, .sabl-card-top-left, .sab-row-amount')!.getBoundingClientRect();
       const d = date.getBoundingClientRect();
-      return { dateRight: d.right, titleLeft: title.left, size: parseFloat(getComputedStyle(date).fontSize), quiet: !!date.closest('.is-quiet'), moneyTop: money.top, titleTop: title.top, moneyH: money.height };
+      const title = c.querySelector('.sabl-name')!.getBoundingClientRect();
+      const money = c.querySelector('.sabl-amount, .sabl-card-top-left')!.getBoundingClientRect();
+      const box = c.getBoundingClientRect();
+      return { top: box.top, titleBottom: title.bottom, dateTop: d.top, dateLeft: d.left, size: parseFloat(getComputedStyle(date).fontSize), quiet: !!date.closest('.is-quiet'), moneyTop: money.top, moneyRight: money.right, moneyH: money.height };
     }));
-    expect(rows.length).toBeGreaterThan(2);
-    for (const r of rows) {
-      expect(r.dateRight).toBeLessThanOrEqual(r.titleLeft);
-      if (!r.quiet) expect(r.size).toBeGreaterThanOrEqual(24);
-      // Desktop directory rows carry the money on the title's line.
-      if (testInfo.project.name !== 'mobile' && path !== '/' && r.moneyH > 0) expect(Math.abs(r.moneyTop - r.titleTop)).toBeLessThan(14);
+    expect(cards.length).toBeGreaterThan(2);
+    for (const c of cards) {
+      expect(c.dateTop).toBeGreaterThan(c.titleBottom);
+      if (!c.quiet) expect(c.size).toBeGreaterThanOrEqual(20);
+      if (c.moneyH > 0) {
+        expect(c.moneyTop).toBeGreaterThan(c.titleBottom);
+        expect(c.moneyRight).toBeLessThanOrEqual(c.dateLeft);
+      }
     }
+    if (testInfo.project.name === 'mobile') expect(cards[1]!.top).toBeGreaterThan(cards[0]!.top);
+    else expect(cards[1]!.top).toBe(cards[0]!.top);
+  }
+});
+
+// The home page's closing list keeps the row: the date, a figure down the
+// left edge, then the title (critique 2026-09-29).
+test('home closing rows lead with a date figure left of the title', async ({ page }) => {
+  await page.goto('/');
+  const rows = await page.locator('#closing .sab-closing-row').evaluateAll(cs => cs.slice(0, 6).map(c => {
+    const date = c.querySelector('[data-when-main]')!;
+    return { dateRight: date.getBoundingClientRect().right, titleLeft: c.querySelector('.sab-row-name')!.getBoundingClientRect().left, size: parseFloat(getComputedStyle(date).fontSize), quiet: !!date.closest('.is-quiet') };
+  }));
+  expect(rows.length).toBeGreaterThan(2);
+  for (const r of rows) {
+    expect(r.dateRight).toBeLessThanOrEqual(r.titleLeft);
+    if (!r.quiet) expect(r.size).toBeGreaterThanOrEqual(24);
   }
 });
 

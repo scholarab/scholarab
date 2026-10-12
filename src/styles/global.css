@@ -289,23 +289,20 @@ body {
     box-shadow: 0 10px 30px -12px rgba(0,0,0,0.75);
     border-bottom-color: rgba(102,185,135,0.18);
   }
-  /* The white bar lifts off the page with a soft shadow; a see-through bar
-     still over its photo gets none. */
-  html[data-sab-stuck] body > .sabp-header:not(:has([data-tone='over'])) {
+  /* The white bar lifts off the page with a soft shadow. */
+  html[data-sab-stuck] body > .sabp-header {
     box-shadow: 0 8px 24px -18px rgba(20, 25, 21, 0.45);
   }
 }
 
 /* ── Header tones (2026-10-12) ──
    The banner paints nothing itself; the bar inside it (.sabh) carries one of
-   three tones, set by SabHeader:
+   two tones, set by SabHeader:
    dark   the home page, see-through over its film (index.astro owns that).
    light  every other page: white, ink words, the ink-on-light logo, and a
           white panel under an open menu. No black band anywhere.
-   over   a page on a photo (Photo pages): see-through over it all the way
-          down, like home, with a smoke fall-off so the words read on any
-          photo. The phone sheet is dark whatever the tone, so every tone
-          rule waits for :not([data-open]). */
+   The phone sheet is dark whatever the tone, so every tone rule waits for
+   :not([data-open]). */
 body > .sabp-header { background: transparent; color: inherit; border-bottom: 0; }
 .sabh { position: relative; }
 .sabh[data-open] { background: #0A1310; }
@@ -329,28 +326,6 @@ body > .sabp-header { background: transparent; color: inherit; border-bottom: 0;
   background: #FFFFFF; border-top-color: rgba(20, 25, 21, 0.08);
   box-shadow: 0 28px 40px -28px rgba(20, 25, 21, 0.35);
 }
-/* Over a photo: the home page's menu, words straight on the picture. */
-.sabh[data-tone='over'] .sabh-drop { display: none; }
-.sabh[data-tone='over'] .sabh-menu-desk a { text-shadow: 0 1px 8px rgba(0, 0, 0, 0.55); }
-.sabh[data-tone='over']:not([data-open])::before,
-.sabh[data-tone='over']:not([data-open])::after {
-  content: ''; position: absolute; left: 0; right: 0; top: 0; z-index: -1;
-  pointer-events: none; transition: opacity 0.25s ease;
-}
-.sabh[data-tone='over']:not([data-open])::before {
-  height: 140px;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.55) 0, rgba(0, 0, 0, 0.25) 45%, rgba(0, 0, 0, 0) 100%);
-}
-.sabh[data-tone='over']:not([data-open])::after {
-  height: 330px; opacity: 0;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.88) 0, rgba(0, 0, 0, 0.72) 40%, rgba(0, 0, 0, 0) 100%);
-}
-@media (min-width: 901px) {
-  .sabh[data-tone='over']:not([data-open])::before { height: 200px; }
-}
-/* data-sab-menu is set by the header script, never by :has(): see syncDrop. */
-html[data-sab-menu] .sabh[data-tone='over']::after { opacity: 1; }
-
 /* Hides on the way down, comes back on the way up (Ilia, 2026-10-02, after
    spacex.com). SabHeader's scroll reader sets data-sab-hidden on <html>.
    Only the banner moves: title bands inside <main> reuse .sabp-header, and
@@ -1260,6 +1235,79 @@ html.js .sabl-group-toggle { display: inline-flex; }
 .sabl-save::after, .sabl-apply::after { content: ''; position: absolute; inset: -5px -3px; }
 .sabl-apply::after { inset: -12px -4px -11px; }
 
+/* ── Market cards (Ilia, 2026-10-12, after polymarket.com) ──
+   The two directories show a grid of tiles instead of rows: the name, who
+   it is for and the requirements on top, then the money and the date as the
+   two figures, then Save and Apply as two filled halves, like a market's Yes
+   and No. Same markup as the rows, so search, filters, paging and Save are
+   untouched; /saved and the other lists keep the row. The ID scope is what
+   lets one block beat every row rule at every width. */
+:is(#sab-scholarships, #sab-programs) [data-dir-grid] {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+  gap: 14px; padding-top: 14px;
+}
+:is(#sab-scholarships, #sab-programs) [data-dir-grid] > .sabl-card {
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-rows: auto auto auto 1fr auto auto;
+  grid-template-areas: "title title" "blurb blurb" "facts facts" "gap gap" "amount when" "actions actions";
+  align-items: start; gap: 0 12px;
+  margin: 0; padding: 16px 16px 14px; border: 0; border-radius: 14px;
+  --row-bg: #F3F5F2;
+  transition: background-color 0.14s ease, box-shadow 0.14s ease;
+}
+@media (hover: hover) {
+  :is(#sab-scholarships, #sab-programs) [data-dir-grid] > .sabl-card:hover {
+    background-color: #EBEEEA; box-shadow: 0 10px 24px -18px rgba(20, 25, 21, 0.5);
+  }
+}
+:is(#sab-scholarships, #sab-programs) .sabl-card > .sabl-row-main { display: contents; }
+:is(#sab-scholarships, #sab-programs) .sabl-card .sabl-name-h { grid-area: title; display: block; }
+/* No menu-board leader: the money is two lines down, not across. */
+:is(#sab-scholarships, #sab-programs) .sabl-card .sabl-name-h::after { content: none; }
+:is(#sab-scholarships, #sab-programs) .sabl-card .sabl-name {
+  font-size: 16px; line-height: 1.3;
+  display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden;
+}
+:is(#sab-scholarships, #sab-programs) .sabl-card :is(.sabl-blurb, .sabl-org) { grid-area: blurb; margin-top: 4px; font-size: 14px; }
+:is(#sab-scholarships, #sab-programs) .sabl-card :is(.sabl-facts, .sabl-meta-row) { grid-area: facts; margin-top: 10px; gap: 4px 12px; }
+:is(#sab-scholarships, #sab-programs) .sabl-card .sabl-facts li { font-size: 12px; }
+/* The two figures: the money on the left, the date on the right. */
+:is(#sab-scholarships, #sab-programs) .sabl-card > :is(.sabl-amount, .sabl-card-top-left) {
+  grid-area: amount; align-self: end; justify-self: start; text-align: left; margin-top: 16px;
+}
+:is(#sab-scholarships, #sab-programs) .sabl-card > .sabl-amount { font-size: 28px; line-height: 1; }
+:is(#sab-scholarships, #sab-programs) .sabl-card > .sabl-amount.is-long { font-size: 18px; line-height: 1.15; }
+:is(#sab-scholarships, #sab-programs) .sabl-card > .sabl-amount.is-varies { font-size: 14px; }
+:is(#sab-scholarships, #sab-programs) .sabl-card > .sabl-row-when {
+  grid-area: when; align-self: end; justify-self: end; align-items: flex-end; text-align: right;
+  margin-top: 16px; padding: 0;
+}
+:is(#sab-scholarships, #sab-programs) .sabl-card .sabl-when { align-items: flex-end; }
+:is(#sab-scholarships, #sab-programs) .sabl-card .sabl-when:not(.is-quiet) [data-when-main] { font-size: 20px; }
+:is(#sab-scholarships, #sab-programs) .sabl-card .sabl-when.is-quiet [data-when-main] { font-size: 13px; }
+/* Save and Apply, two halves of one bar along the foot. */
+:is(#sab-scholarships, #sab-programs) .sabl-card > .sabl-card-actions {
+  grid-area: actions; justify-self: stretch; margin-top: 14px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+}
+:is(#sab-scholarships, #sab-programs) .sabl-card :is(.sabl-save, .sabl-apply) {
+  height: 40px; border-radius: 8px; justify-content: center; font-size: 14px;
+  transition: background-color 0.14s ease, color 0.14s ease;
+}
+:is(#sab-scholarships, #sab-programs) .sabl-card .sabl-save { background: rgba(20, 25, 21, 0.07); width: 100%; }
+:is(#sab-scholarships, #sab-programs) .sabl-card .sabl-save:hover { background: rgba(20, 25, 21, 0.13); }
+:is(#sab-scholarships, #sab-programs) .sabl-card .sabl-save.on { background: rgba(74, 168, 115, 0.18); }
+:is(#sab-scholarships, #sab-programs) .sabl-card .sabl-apply { background: rgba(10, 86, 50, 0.12); color: var(--cta); }
+:is(#sab-scholarships, #sab-programs) .sabl-card .sabl-apply:hover { background: var(--cta); color: #FFFFFF; }
+:is(#sab-scholarships, #sab-programs) .sabl-card .sabl-apply::before { content: none; }
+:is(#sab-scholarships, #sab-programs) .sabl-card :is(.sabl-save, .sabl-apply)::after { inset: 0; }
+/* Paper keeps the printed list a list. */
+@media print { :is(#sab-scholarships, #sab-programs) [data-dir-grid] { display: block; } }
+@media (prefers-reduced-motion: reduce) {
+  :is(#sab-scholarships, #sab-programs) [data-dir-grid] > .sabl-card,
+  :is(#sab-scholarships, #sab-programs) .sabl-card :is(.sabl-save, .sabl-apply) { transition: none; }
+}
+
 /* "Show more" under a directory grid. The count line says what is left, the
    filled button takes the next step, the underlined link takes all of it. */
 .sabl-more {
@@ -2011,183 +2059,8 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
    Mustard (#FFC700) is only ever a sticker or a link hover on ink, never text on white.
    The mustard kicker over the heading left 2026-10-01 (critique: "Now serving"
    was a metaphor to decode, and the heading already names the place). */
-/* ── Photo head (Ilia, 2026-10-12, after spacex.com and the home page) ──
-   A hub with a photo opens on it: the whole first screen, starting behind
-   the see-through header, the heading in white at its foot and an arrow down
-   to the list. The half-screen version was rejected the same day ("I don't
-   like the half page photo"). SabHero renders it. */
-.sabp-body:has(> .sabl-page > .sabl-hero) { padding-top: 0; }
-.sabl-hero {
-  /* Not a stacking context: the photo is fixed behind the whole page (see
-     Photo pages), so it must paint in the page's own context, under the list. */
-  position: relative; box-sizing: border-box;
-  display: flex; flex-direction: column; justify-content: flex-end;
-  height: 100vh; height: 100svh; min-height: 520px;
-  /* Up under the bar (and the banner's 1px rule) and out to both window edges. */
-  margin: calc(-1 * var(--sab-nav-h) - 1px) calc(-1 * var(--sabp-pad)) 28px;
-  /* The text lines up with the logo. */
-  padding: calc(var(--sab-nav-h) + 32px) clamp(20px, 4vw, 56px) clamp(72px, 12vh, 120px);
-  color: #FFFFFF;
-}
-.sabl-hero-photo img {
-  position: fixed; left: 0; top: 0; z-index: -2;
-  width: 100%; height: 100vh; height: 100lvh; object-fit: cover;
-}
-/* The home page's scrim: a light veil over the whole photo, a band under
-   the bar, and a fall-off behind the words at the foot and the left. */
-.sabl-hero::before {
-  content: ''; position: absolute; inset: 0; z-index: -1;
-  background:
-    linear-gradient(180deg, rgba(10, 19, 16, 0.5) 0, rgba(10, 19, 16, 0) calc(160px + var(--sab-nav-h))),
-    linear-gradient(180deg, rgba(10, 19, 16, 0) 40%, rgba(10, 19, 16, 0.55) 72%, rgba(10, 19, 16, 0.85) 100%),
-    linear-gradient(90deg, rgba(10, 19, 16, 0.42) 0, rgba(10, 19, 16, 0.2) 45%, rgba(10, 19, 16, 0) 75%),
-    rgba(10, 19, 16, 0.12);
-}
-.sabl-hero-text { max-width: 1100px; }
-.sabl-hero .sabl-h1 {
-  font-weight: 800; text-transform: uppercase; line-height: 0.9;
-  color: #FFFFFF; font-size: clamp(64px, 9vw, 160px);
-  text-shadow: 0 1px 2px rgba(5, 10, 8, 0.55);
-}
-.sabl-hero .sabl-desc {
-  color: rgba(255, 255, 255, 0.9); min-height: 0; max-width: 62ch; margin-top: 16px;
-  font-size: 18px; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-}
-.sabl-hero-credit {
-  position: absolute; right: 18px; bottom: 10px;
-  font-size: 11px; line-height: 1.3; color: rgba(255, 255, 255, 0.78); text-decoration: none;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
-}
-.sabl-hero-credit:hover { color: #FFFFFF; text-decoration: underline; }
-/* ── Photo pages (Ilia, 2026-10-12: "just put the photo as a background for
-   everything") ──
-   On a page with a photo head (.sabp-photo, set by the page next to the
-   photo prop; a class, not :has(), which re-ran across 900 rows when the
-   list was revealed) the photo stays fixed behind the whole page
-   and the list sits on it in light type, as spacex.com's pages are light on
-   dark. Past the head the photo darkens behind the list (the page's ::before,
-   which scrolls with it), so every line keeps its contrast whatever the
-   photo. No backdrop blur: it stuttered in Firefox over the home film
-   (2026-10-06). The light page's colour tokens are swapped here, so every
-   directory rule that reads a token turns light by itself; the rules below
-   cover the colours written out by hand. */
-body:has(#sab-scholarships.sabp-photo), body:has(#sab-programs.sabp-photo) { background: #0A1310; }
-.sabp.sabp-photo {
-  position: relative; background: transparent;
-  --text-primary: #F0F2EE;
-  --ink-soft: rgba(240, 242, 238, 0.86);
-  --ink-muted: rgba(240, 242, 238, 0.8);
-  --ink-faint: rgba(240, 242, 238, 0.7);
-  --green: #6CC492;
-  --rust: #F39A68;
-  --cta: #4AA873; --cta-hover: #5BB884; --text-on-cta: #08120E;
-  --paper: #141915;
-  --bg-page: #0A1310;
-  --bg-panel: rgba(10, 19, 16, 0.6);
-  --focus-ring: #4AA873;
-  --select-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23F0F2EE' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-  color: var(--text-primary);
-}
-.sabp.sabp-photo::before {
-  content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none;
-  background: linear-gradient(180deg, rgba(10, 19, 16, 0) 0, rgba(10, 19, 16, 0) 70vh, rgba(10, 19, 16, 0.86) 100vh, rgba(10, 19, 16, 0.86) 100%);
-}
-.sabp.sabp-photo :is(.sabp-body, .sabl-page) { background: transparent; }
-/* Hairlines and stripes, light on dark. */
-.sabp.sabp-photo .sabl-card { border-top-color: rgba(240, 242, 238, 0.16); }
-.sabp.sabp-photo .sabl-card:last-of-type { border-bottom-color: rgba(240, 242, 238, 0.16); }
-@supports selector(:nth-child(1 of .a)) {
-  .sabp.sabp-photo [data-dir-grid] > .sabl-card { border-top-color: transparent; border-bottom-color: transparent; }
-  .sabp.sabp-photo [data-dir-grid] > .sabl-card:nth-child(even of .sabl-card:not([hidden], [data-dir-later], [data-dir-shut])) {
-    --row-bg: rgba(240, 242, 238, 0.06);
-  }
-}
-@media (hover: hover) { .sabp.sabp-photo .sabl-card:hover { background-color: rgba(74, 168, 115, 0.2); } }
-/* Fields: see-through on the photo, a light outline. */
-.sabp.sabp-photo :is(.sabl-sort-select, .sabl-filter-select, .sabl-scope-select, .sabl-filters-btn) {
-  background-color: rgba(10, 19, 16, 0.55); color: var(--text-primary); border-color: rgba(240, 242, 238, 0.7);
-}
-.sabp.sabp-photo :is(.sabl-sort-select, .sabl-filter-select, .sabl-scope-select) option { background: #0A1310; color: #F0F2EE; }
-.sabp.sabp-photo .sabl-search input { background: transparent; color: var(--text-primary); }
-.sabp.sabp-photo .sabl-search input::placeholder { color: var(--ink-faint); }
-.sabp.sabp-photo .sabl-toolbar { border-color: rgba(240, 242, 238, 0.85); }
-/* The run headings' rule and their count stickers. */
-.sabp.sabp-photo .sabl-group { border-bottom-color: rgba(240, 242, 238, 0.85); }
-.sabp.sabp-photo .sabl-group-count { background: #F0F2EE; color: #0A1310; }
-.sabp.sabp-photo [data-dir-group='active'] .sabl-group-count { background: #4AA873; color: #08120E; }
-.sabp.sabp-photo .sabl-name-h::after { border-bottom-color: rgba(240, 242, 238, 0.3); }
-.sabp.sabp-photo :is(.sabl-hubfoot, .sabl-special + .sabl-special) { border-color: rgba(240, 242, 238, 0.16); }
-.sabp.sabp-photo .sabl-special-k { background: #F0F2EE; color: #0A1310; }
-.sabp.sabp-photo :is(.sabl-also a, .sabl-special-name, .sabl-hubfoot a) { color: var(--green); }
-.sabp.sabp-photo :is(.sabl-also a, .sabl-special-name, .sabl-hubfoot a):hover { color: #FFFFFF; }
-/* Outlines, tags, bullets, the status help's terms and the empty state. */
-.sabp.sabp-photo :is(.sabl-more-btn, .sabl-tag) { border-color: rgba(240, 242, 238, 0.4); }
-.sabp.sabp-photo .sabl-more-btn:hover { border-color: var(--text-primary); background: rgba(240, 242, 238, 0.08); }
-.sabp.sabp-photo .sabl-save:hover { background: rgba(240, 242, 238, 0.1); }
-.sabp.sabp-photo .sabl-meta::before { background: rgba(240, 242, 238, 0.45); }
-.sabp.sabp-photo .sabl-facts li.is-route::before { box-shadow: inset 0 0 0 1.5px rgba(240, 242, 238, 0.7); }
-.sabp.sabp-photo .sabl-empty { border-color: rgba(240, 242, 238, 0.3); }
-/* .sabl-page as well: the component's scoped hover colour ties the plain form. */
-.sabp.sabp-photo .sabl-page .sabl-status-help :is(dt, summary:hover) { color: var(--text-primary); }
-.sabp.sabp-photo .sabl-status-help summary { text-decoration-color: rgba(240, 242, 238, 0.4); }
-.sabp.sabp-photo .sabl-chips { scrollbar-color: rgba(240, 242, 238, 0.3) transparent; }
-
-/* The footer sits outside .sabp and would paint under the fixed photo.
-   Positioned everywhere, which changes nothing on a page without one. */
-.sabf-footer { position: relative; z-index: 1; }
-/* /scholarships/' guide links under the list. */
-.sabp.sabp-photo .sabgr { border-top-color: rgba(240, 242, 238, 0.16); }
-.sabp.sabp-photo :is(.sabgr-heading, .sabgr-row) { color: var(--text-primary); }
-.sabp.sabp-photo .sabgr-list { border-top-color: rgba(240, 242, 238, 0.85); }
-.sabp.sabp-photo .sabgr-list li:nth-child(even) .sabgr-row { background: rgba(240, 242, 238, 0.06); }
-.sabp.sabp-photo .sabgr-list li .sabgr-row:hover { background: rgba(74, 168, 115, 0.2); }
-.sabp.sabp-photo :is(.sabgr-all, .sabgr-meta) { color: var(--green); }
-/* Past the photo head the bar gets a fill, or the rows scroll through its
-   words, and an open menu gets the dark panel under it, or its links sit on
-   the rows. SabHeader's scroll reader sets data-past. */
-@media (min-width: 901px) { .sabh[data-tone='over'][data-past] .sabh-drop { display: block; } }
-.sabh[data-tone='over'][data-past]:not([data-open]) { background: #0A1310; }
-.sabh[data-tone='over'][data-past]:not([data-open])::before { opacity: 0; }
-
-/* The phone's filter sheet floats over the list: solid, not the rail's
-   see-through panel. */
-html.js[data-filters] .sabp.sabp-photo .sabl-rail { background-color: #0A1310; box-shadow: 0 -14px 40px -12px rgba(0, 0, 0, 0.7); }
-
-/* SpaceX has no cue; a list page does, or a reader on a full screen of photo
-   has no sign the scholarships are under it. */
-.sabl-hero-down {
-  position: absolute; left: 50%; bottom: clamp(18px, 4vh, 36px); transform: translateX(-50%);
-  display: inline-flex; flex-direction: column; align-items: center; gap: 6px;
-  min-height: 44px; justify-content: flex-end;
-  font: 600 14px var(--font-body); letter-spacing: 0.04em; color: #FFFFFF; text-decoration: none;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
-}
-.sabl-hero-down:hover { color: #4AA873; }
-#sabl-list { scroll-margin-top: 28px; }
-/* The head spans both columns of a railed hub; the rail and the rows start
-   together under it. */
-@media (min-width: 1180px) {
-  .sabl-railed > .sabl-hero { grid-column: 1 / -1; grid-row: 1; }
-  .sabl-railed:has(> .sabl-hero) .sabl-head { grid-row: 2; }
-  .sabl-railed:has(> .sabl-hero) .sabl-rail { grid-row: 2 / span 2; }
-  .sabl-railed:has(> .sabl-hero) .sabl-col { grid-row: 3; }
-}
-@media (max-width: 900px) {
-  .sabl-hero { padding: calc(var(--sab-nav-h) + 20px) 20px 96px; margin-bottom: 16px; min-height: 480px; }
-  /* Calgary's sky measured 2.8:1 under the heading without the climb. */
-  .sabl-hero::before {
-    background:
-      linear-gradient(180deg, rgba(10, 19, 16, 0.45) 0, rgba(10, 19, 16, 0) 180px),
-      linear-gradient(0deg, rgba(10, 19, 16, 0.85) 0, rgba(10, 19, 16, 0.6) 45%, rgba(10, 19, 16, 0.2) 75%);
-  }
-  .sabl-hero .sabl-h1 { font-size: clamp(48px, 14vw, 72px); }
-  .sabl-hero .sabl-desc { font-size: 15px; line-height: 1.45; margin-top: 10px; }
-  .sabl-hero-credit { right: 10px; bottom: 4px; font-size: 10px; }
-}
-
 /* The heading is big ink type straight on the white page (2026-10-12): the
-   ink board it sat on read as a second black header under the bar. Hubs with
-   a photo set the same heading in white on the photo instead (Photo head). */
+   ink board it sat on read as a second black header under the bar. */
 .sabl-title-row .sabl-h1 {
   font-weight: 800; text-transform: uppercase;
   font-size: clamp(44px, 4.8vw, 68px); line-height: 0.9;
@@ -2277,9 +2150,6 @@ html.js[data-filters] .sabp.sabp-photo .sabl-rail { background-color: #0A1310; b
 .sabh-saved-n[hidden] { display: none; }
 @media print {
   .sabl-card .sabl-name-h::after { content: none; }
-  .sabl-hero { color: #141915; height: auto; margin: 0 0 12pt; padding: 0; background: none; }
-  .sabl-hero-photo, .sabl-hero::before, .sabl-hero-credit { display: none; }
-  .sabl-hero .sabl-h1, .sabl-hero .sabl-desc { color: #141915; text-shadow: none; }
   .sabl-group-count { background: none; color: inherit; transform: none; }
 }
 

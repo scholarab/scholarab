@@ -158,7 +158,9 @@ test('one responsive list keeps facts and direct navigation even with an old vie
   const cards = page.locator('[data-dir-card]:visible');
   const first = cards.first();
   const second = cards.nth(1);
-  expect((await second.boundingBox())!.y).toBeGreaterThan((await first.boundingBox())!.y);
+  // Cards sit side by side or stack, never on top of each other.
+  const [a, b] = [(await first.boundingBox())!, (await second.boundingBox())!];
+  expect(b.y >= a.y + a.height || b.x >= a.x + a.width).toBe(true);
   await expect(first.locator('.sabl-amount')).toBeVisible();
   await expect(first.locator('[data-when]')).toBeVisible();
   const title = await first.locator('.sabl-name').textContent();
@@ -180,9 +182,6 @@ test('on a phone, filters fold behind one button that counts them', async ({ pag
   await expect(page.locator('.sabl-rail')).toBeHidden();
   await expect(page.locator('[data-fselect="sort"]:visible')).toHaveCount(0);
   await expect(page.locator('[data-dir-filter-n]')).toHaveText('1');
-  // The photo head fills the first screen (Ilia, 2026-10-12); its arrow
-  // brings the first card into view.
-  await page.locator('.sabl-hero-down').click();
   await expect(page.locator('[data-dir-card]:visible').first()).toBeInViewport();
   await btn.click();
   await expect(btn).toHaveAttribute('aria-expanded', 'true');

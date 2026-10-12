@@ -1,5 +1,4 @@
 ---
-import { PHOTO_CREDITS } from '../lib/photo-credits';
 import SabFooter from '../components/sab/SabFooter.astro';
 import SabFonts from '../components/sab/SabFonts.astro';
 import Layout from '../layouts/Layout.astro';
@@ -54,10 +53,10 @@ const listJson = itemListJson(
   <SabFonts slot="head" chips />
 
   <div class="sabp-header" slot="header">
-    <SabHeader currentPath="/scholarships" over />
+    <SabHeader currentPath="/scholarships" />
   </div>
 
-  <div id="sab-scholarships" class="sabp sabp-wide sabp-photo">
+  <div id="sab-scholarships" class="sabp sabp-wide">
     <div class="sabp-body">
       {loadError ? (
         <div class="sabl-empty" style="margin-top:64px;">
@@ -66,7 +65,7 @@ const listJson = itemListJson(
           <a href="/scholarships/" class="sabl-empty-btn" style="display:inline-block;text-decoration:none;">Try again</a>
         </div>
       ) : (
-        <ScholarshipDirectory items={scholarships} railFilters photo={{ backdrop: 'alberta', credit: PHOTO_CREDITS.alberta }} />
+        <ScholarshipDirectory items={scholarships} railFilters />
       )}
     </div>
 

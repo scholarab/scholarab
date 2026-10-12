@@ -21,14 +21,11 @@ import { SCHOLARSHIP_FACETS, PROGRAM_FACETS, PROGRAM_FORMATS, MENU_SCOPES, facet
 
 interface Props {
   currentPath: string;
-  /** The page sits on a photo (SabHero and global.css "Photo pages"): the
-      bar is see-through over it all the way down. */
-  over?: boolean;
 }
-const { currentPath, over = false } = Astro.props;
+const { currentPath } = Astro.props;
 // The bar's tone (global.css, "Header tones"): home owns its own dark film
-// look; a page on a photo is see-through over it; every other page is white.
-const tone = currentPath === '/' ? 'dark' : over ? 'over' : 'light';
+// look; every other page is white.
+const tone = currentPath === '/' ? 'dark' : 'light';
 
 // Counts shown beside two links in the mobile sheet. Same definitions the
 // home hero uses: every scholarship in the directory, and the programs
@@ -927,10 +924,6 @@ const isActive = (href: string, also: string[] = []) =>
     const y = window.scrollY;
     if (!stuck && y > STICK_DOWN) root.setAttribute('data-sab-stuck', '');
     else if (stuck && y < STICK_UP) root.removeAttribute('data-sab-stuck');
-    // A photo page's bar takes a fill once the list is under it.
-    const bar = document.querySelector<HTMLElement>('[data-sab-header][data-tone="over"]');
-    const hero = bar && document.querySelector('.sabl-hero');
-    if (bar && hero) bar.toggleAttribute('data-past', hero.getBoundingClientRect().bottom <= bar.offsetHeight);
     const dy = y - lastY;
     if (y <= STICK_UP || headerBusy()) {
       root.removeAttribute('data-sab-hidden');

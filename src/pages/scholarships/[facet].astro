@@ -21,7 +21,6 @@ import { DEFAULT_SCHOLARSHIP_STATE, filterSortScholarships } from '../../lib/lis
 import { itemListJson } from '../../lib/ld';
 import { scholarshipIsIndexable, scholarshipStatusOf, STATUS_WORDS } from '../../lib/status';
 import { citySpecials } from '../../lib/city-specials';
-import { PHOTO_CREDITS } from '../../lib/photo-credits';
 import { isAfterHighSchool } from '../../lib/list-core';
 import { getGuide } from '../../lib/guides';
 import { comboCities } from '../../lib/combos';
@@ -140,13 +139,13 @@ const breadcrumbJson = {
   <SabFonts slot="head" chips />
 
   <div class="sabp-header" slot="header">
-    <SabHeader currentPath="/scholarships" over={!!facet.backdrop} />
+    <SabHeader currentPath="/scholarships" />
   </div>
 
   <div
     id="sab-scholarships"
     data-remember-city={isCity ? facet.slug : undefined}
-    class:list={['sabp', 'sabp-wide', { 'sabp-photo': facet.backdrop }]}
+    class="sabp sabp-wide"
   >
     <div class="sabp-body">
       {/* No visible breadcrumb (Ilia, 2026-09-15). The header names the
@@ -167,7 +166,6 @@ const breadcrumbJson = {
         alsoOpen={broadCounts.length === 2 ? { place: facet.label, lists: broadCounts } : undefined}
         step={isCity ? 12 : undefined}
         specials={specials}
-        photo={facet.backdrop ? { backdrop: facet.backdrop, credit: PHOTO_CREDITS[facet.backdrop] } : undefined}
       />
 
       <div class="sabl-hubfoot">
