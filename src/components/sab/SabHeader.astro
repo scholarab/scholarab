@@ -183,7 +183,7 @@ const isActive = (href: string, also: string[] = []) =>
 <header class="sabh" data-sab-header>
   <div class="sabh-nav">
     <a href="/" class="sabh-logo" aria-label="ScholarAB home">
-      <img src="/brand/scholarab-logo-on-dark.svg" alt="" width="107" height="24" />
+      <img src="/brand/scholarab-logo-on-dark.svg" alt="" width="124" height="28" />
     </a>
     <div class="sabh-actions">
       <!-- The site nav is a real landmark: it is the only way to jump past
@@ -328,8 +328,9 @@ const isActive = (href: string, also: string[] = []) =>
      out of a green plate, one SVG drawn for dark backgrounds. Its size is fixed in the markup, so it
      never shifts the bar. */
   .sabh-logo { display: flex; align-items: center; text-decoration: none; justify-self: start; }
-  /* 24px tall at every width, so the lowercase reads at 16px, and no wider than the
-     old logo. */
+  /* 28px tall at every width (2026-10-11, measured against 24 to 32): the AB in the plate
+     reads, and the 52px bar keeps 12px above and below. Centred on the links' cap height and
+     flush with the headline's left edge to within 1.5px. */
   .sabh-logo img { display: block; }
   /* The wrapper only exists so the burger can sit beside the links in the
      markup; on desktop the links take the middle column and the burger the
