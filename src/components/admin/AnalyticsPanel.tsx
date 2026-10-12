@@ -438,7 +438,7 @@ export default function AnalyticsPanel({ data }: Props) {
           ? `Not counted until ${monthLabel(from!)}`
           : event === 'quiz_complete' && starts > 0
             ? `${Math.round((value / starts) * 100)}% of ${n(starts)} starts`
-            : prev !== null ? `${n(prev)} in ${monthLabel(prevMonth!)}` : periodLabel,
+            : prev !== null ? `${n(prev)} in ${monthLabel(prevMonth!)}` : '',
         trend: !uncounted && prev !== null && prev > 0 ? (value >= prev ? 'up' : 'down') : null,
       }
     }),
@@ -451,7 +451,7 @@ export default function AnalyticsPanel({ data }: Props) {
         key: col.key,
         label: col.key === 'clicks' ? 'Google clicks' : 'Google impressions',
         value,
-        note: prev !== null ? `${col.format(prev)} in ${monthLabel(prevMonth!)}` : periodLabel,
+        note: prev !== null ? `${col.format(prev)} in ${monthLabel(prevMonth!)}` : '',
         trend: prev !== null && prev > 0 ? (value >= prev ? 'up' : 'down') : null,
       }
     }),

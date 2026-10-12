@@ -2,7 +2,7 @@ import { useAdminList, type AdminPage, type AdminRecord } from '../../lib/use-ad
 import { useState } from 'react'
 import { toast } from 'sonner'
 import { ADMIN_PAGE_SIZE as PAGE_SIZE } from '../../lib/constants'
-import { AdminTabBar, AdminPagination, AdminDeleteModal, AdminSearch, AdminSheet, AdminSection, DeadlineFigure, Icon, albertaToday } from './primitives'
+import { AdminFacetSelect, AdminPagination, AdminDeleteModal, AdminSearch, AdminSheet, AdminSection, DeadlineFigure, albertaToday } from './primitives'
 
 import type { Program as BaseProgram } from '../../lib/data-loader'
 import { PROGRAM_CATEGORIES } from '../../lib/facets'
@@ -110,7 +110,6 @@ export default function ProgramManager({ initialData }: Props) {
       <div className="adm-head">
         <div>
           <h1 className="adm-title">Programs <small>{(categoryCounts.All ?? total).toLocaleString('en-CA')}</small></h1>
-          <p className="adm-sub">Research programs, camps and competitions. Click a row to edit it.</p>
         </div>
         <div className="adm-actions">
           <button type="button" onClick={openAdd} className="adm-btn adm-btn-ghost">Add program</button>
@@ -119,8 +118,8 @@ export default function ProgramManager({ initialData }: Props) {
 
       <div className="adm-tools">
         <AdminSearch label="Search programs" value={search} onChange={handleSearch} />
+        <AdminFacetSelect label="Category" all="All categories" tabs={['All', ...CATEGORIES, 'No category']} counts={categoryCounts} active={categoryTab} onSelect={handleCategoryTab} />
       </div>
-      <AdminTabBar label="Category" tabs={['All', ...CATEGORIES, 'No category']} counts={categoryCounts} active={categoryTab} onSelect={handleCategoryTab} />
 
       <div className="adm-list">
         {paginated.map(p => (
@@ -132,18 +131,16 @@ export default function ProgramManager({ initialData }: Props) {
                 {p.paid && p.stipend && <span className="adm-money">{p.stipend}</span>}
               </div>
               <div className="adm-meta">
-                {[p.provider, p.grades, p.location].filter(Boolean).join(', ')}
+                {[p.provider, p.grades, p.location, p.paid ? null : costWord[p.cost ?? 'unconfirmed']].filter(Boolean).join(', ')}
               </div>
             </div>
             <div className="adm-state">
-              {p.active !== false
-                ? <span className="adm-mark" data-tone="on">Listed</span>
-                : <span className="adm-mark" data-tone="off">Unlisted</span>}
               {p.unpublished
-                ? <span className="adm-mark" data-tone="draft">Draft, not published</span>
-                : <span className="adm-mark" data-tone={p.paid ? 'on' : 'off'}>{p.paid ? 'Paid stipend' : costWord[p.cost ?? 'unconfirmed'] ?? 'Unpaid'}</span>}
+                ? <span className="adm-mark" data-tone="draft">Draft</span>
+                : p.active !== false
+                  ? <span className="adm-mark" data-tone="on">Listed</span>
+                  : <span className="adm-mark" data-tone="off">Unlisted</span>}
             </div>
-            <span className="adm-open">Edit<Icon name="open" size={14} /></span>
           </button>
         ))}
         {paginated.length === 0 && <p className="adm-empty">No programs match.</p>}

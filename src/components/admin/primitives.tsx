@@ -4,14 +4,13 @@ import { useEffect, useRef, type ReactNode } from 'react'
 import type { Scoreboard as ScoreboardData, ScoreCell } from '../../lib/admin-scoreboard'
 
 /** One stroke, one weight, drawn here rather than pulled in for four glyphs. */
-export function Icon({ name, size = 16 }: { name: 'search' | 'close' | 'chevron' | 'prev' | 'next' | 'open'; size?: number }) {
+export function Icon({ name, size = 16 }: { name: 'search' | 'close' | 'chevron' | 'prev' | 'next'; size?: number }) {
   const d = {
     search: <><circle cx="7" cy="7" r="4.6" /><path d="M10.6 10.6 14 14" /></>,
     close: <path d="M3.5 3.5l9 9M12.5 3.5l-9 9" />,
     chevron: <path d="M6 3.5 10.5 8 6 12.5" />,
     prev: <path d="M10 3.5 5.5 8 10 12.5" />,
     next: <path d="M6 3.5 10.5 8 6 12.5" />,
-    open: <path d="M3 8h9.5M8.5 4l4 4-4 4" />,
   }[name]
   return (
     <svg viewBox="0 0 16 16" width={size} height={size} fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -36,7 +35,11 @@ export function AdminSearch({ label, value, onChange }: { label: string; value: 
   )
 }
 
-export function AdminTabBar({ tabs, counts, active, onSelect, label }: {
+/** Region or category as one dropdown beside the search: 36 regions as
+    links took three rows (Ilia, 2026-10-12, "too complicated"). */
+export function AdminFacetSelect({ tabs, counts, active, onSelect, label, all }: {
+  /** The first option's words, like "All regions". */
+  all: string
   tabs: string[]
   counts: Record<string, number>
   active: string
@@ -44,13 +47,11 @@ export function AdminTabBar({ tabs, counts, active, onSelect, label }: {
   label: string
 }) {
   return (
-    <div className="adm-facets" role="group" aria-label={label}>
+    <select className="adm-select adm-facet-select" aria-label={label} value={active} onChange={e => onSelect(e.target.value)}>
       {tabs.map(t => (
-        <button key={t} type="button" className="adm-facet" onClick={() => onSelect(t)} aria-pressed={active === t}>
-          {t}<span>{(counts[t] ?? 0).toLocaleString('en-CA')}</span>
-        </button>
+        <option key={t} value={t}>{t === 'All' ? all : t} ({(counts[t] ?? 0).toLocaleString('en-CA')})</option>
       ))}
-    </div>
+    </select>
   )
 }
 

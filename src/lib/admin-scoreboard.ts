@@ -18,6 +18,8 @@ export interface ScoreCell {
 export interface Scoreboard {
   /** "Oct 1 to 12", the window every event figure covers. */
   period: string
+  /** "Sep 1 to 12", what the changes are measured against. */
+  against: string
   cells: ScoreCell[]
 }
 
@@ -82,21 +84,21 @@ export async function loadScoreboard(now = new Date()): Promise<Scoreboard> {
       cells.push({
         key, label, value: now,
         note: before > 0
-          ? `${now >= before ? '+' : ''}${Math.round(((now - before) / before) * 100)}% on ${prevPeriod}`
-          : `${prevPeriod} had none`,
+          ? `${now >= before ? '+' : ''}${Math.round(((now - before) / before) * 100)}%`
+          : 'none before',
         trend: before > 0 ? (now >= before ? 'up' : 'down') : null,
       })
     }
     const s = subs[0]
     cells.push({
       key: 'email', label: 'On email', value: s?.people ?? 0,
-      note: `${s?.joined ?? 0} joined since ${monthName(cur)} 1`,
+      note: `+${s?.joined ?? 0} this month`,
       trend: null,
     })
   } catch (e) {
     console.error('Scoreboard DB error:', e)
-    for (const [key, label] of EVENT_CELLS) cells.push({ key, label, value: null, note: 'Database unreachable', trend: null })
-    cells.push({ key: 'email', label: 'On email', value: null, note: 'Database unreachable', trend: null })
+    for (const [key, label] of EVENT_CELLS) cells.push({ key, label, value: null, note: 'No data', trend: null })
+    cells.push({ key: 'email', label: 'On email', value: null, note: 'No data', trend: null })
   }
 
   // Search Console is a committed snapshot (npm run gsc-months), so it is
@@ -105,9 +107,9 @@ export async function loadScoreboard(now = new Date()): Promise<Scoreboard> {
   const latest = snap.months.at(-1)
   cells.splice(4, 0, {
     key: 'google', label: 'Google clicks', value: latest?.clicks ?? null,
-    note: latest ? `${monthName(latest.month)} 1 to ${latest.days}, pulled ${monthName(snap.generated.slice(0, 7))} ${Number(snap.generated.slice(8, 10))}` : 'No snapshot',
+    note: latest ? `${monthName(latest.month)} 1 to ${latest.days}` : 'No snapshot',
     trend: null,
   })
 
-  return { period, cells }
+  return { period, against: prevPeriod, cells }
 }

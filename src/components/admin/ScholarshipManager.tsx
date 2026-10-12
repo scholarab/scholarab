@@ -3,7 +3,7 @@ import { useState, useMemo } from 'react'
 import { toast } from 'sonner'
 import { EMPTY_ELIGIBILITY } from '../../lib/eligibility-types'
 import { EligibilityEditor } from './EligibilityEditor'
-import { AdminTabBar, AdminPagination, AdminDeleteModal, AdminSearch, AdminSheet, AdminSection, DeadlineFigure, Icon, albertaToday } from './primitives'
+import { AdminFacetSelect, AdminPagination, AdminDeleteModal, AdminSearch, AdminSheet, AdminSection, DeadlineFigure, albertaToday } from './primitives'
 import { ADMIN_PAGE_SIZE as PAGE_SIZE } from '../../lib/constants'
 
 import type { Scholarship as BaseScholarship } from '../../lib/data-loader'
@@ -221,7 +221,7 @@ export default function ScholarshipManager({ initialData }: Props) {
   const ALL_TABS = ['All', ...REGIONS, 'No region']
 
   const today = albertaToday()
-  const tagged = items.filter(s => s.eligibility).length
+  const untagged = items.filter(s => !s.eligibility && s.audience?.trim()).length
   const set = (patch: Partial<Scholarship>) => setForm(f => ({ ...f, ...patch }))
   const editing = modal?.type === 'edit' || modal?.type === 'add'
 
@@ -230,13 +230,12 @@ export default function ScholarshipManager({ initialData }: Props) {
       <div className="adm-head">
         <div>
           <h1 className="adm-title">Scholarships <small>{(regionCounts.All ?? total).toLocaleString('en-CA')}</small></h1>
-          <p className="adm-sub">{tagged} of {items.length} on this page have eligibility tagged. Click a row to edit it.</p>
         </div>
         <div className="adm-actions">
           {bulkProgress ? (
             <span className="adm-progress" role="status">Parsing {bulkProgress.done} of {bulkProgress.total}</span>
-          ) : (
-            <button type="button" onClick={handleBulkParse} className="adm-btn adm-btn-ghost">Parse untagged on this page</button>
+          ) : untagged > 0 && (
+            <button type="button" onClick={handleBulkParse} className="adm-btn adm-btn-ghost">Tag {untagged} untagged with AI</button>
           )}
           <button type="button" onClick={openAdd} className="adm-btn adm-btn-ghost">Add scholarship</button>
         </div>
@@ -244,8 +243,8 @@ export default function ScholarshipManager({ initialData }: Props) {
 
       <div className="adm-tools">
         <AdminSearch label="Search scholarships" value={search} onChange={handleSearch} />
+        <AdminFacetSelect label="Region" all="All regions" tabs={ALL_TABS} counts={regionCounts} active={regionTab} onSelect={handleRegionTab} />
       </div>
-      <AdminTabBar label="Region" tabs={ALL_TABS} counts={regionCounts} active={regionTab} onSelect={handleRegionTab} />
 
       <div className="adm-list">
         {paginated.map(s => (
@@ -258,18 +257,17 @@ export default function ScholarshipManager({ initialData }: Props) {
               </div>
               <div className="adm-meta">
                 {[s.region || 'No region', s.category || null].filter(Boolean).join(', ')}
+                {!s.eligibility && <>. <b className="adm-flag">Not tagged</b></>}
                 {s.audience ? <>. <i>{s.audience}</i></> : null}
               </div>
             </div>
             <div className="adm-state">
-              {s.active
-                ? <span className="adm-mark" data-tone="on">Active cycle</span>
-                : <span className="adm-mark" data-tone="off">Between cycles</span>}
               {s.unpublished
-                ? <span className="adm-mark" data-tone="draft">Draft, not published</span>
-                : <span className="adm-mark" data-tone={s.eligibility ? 'on' : 'off'}>{s.eligibility ? 'Eligibility tagged' : 'Not tagged'}</span>}
+                ? <span className="adm-mark" data-tone="draft">Draft</span>
+                : s.active
+                  ? <span className="adm-mark" data-tone="on">Active cycle</span>
+                  : <span className="adm-mark" data-tone="off">Between cycles</span>}
             </div>
-            <span className="adm-open">Edit<Icon name="open" size={14} /></span>
           </button>
         ))}
         {paginated.length === 0 && <p className="adm-empty">No scholarships match.</p>}

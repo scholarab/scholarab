@@ -37,7 +37,7 @@ it('does not mark a successful parse as saved when its PUT fails', async () => {
   render(
     <ScholarshipManager initialData={{ items: [], total: 0, counts: {}, page: 0, pageSize: 25 }} />
   );
-  fireEvent.click(screen.getByRole('button', { name: /Parse untagged on this page/ }));
+  fireEvent.click(screen.getByRole('button', { name: /Tag \d+ untagged with AI/ }));
   await waitFor(() =>
     expect(mocks.error).toHaveBeenCalledWith(expect.stringContaining('1 failed'))
   );
@@ -56,7 +56,7 @@ it('uses the saved server row and its new revision', async () => {
   render(
     <ScholarshipManager initialData={{ items: [], total: 0, counts: {}, page: 0, pageSize: 25 }} />
   );
-  fireEvent.click(screen.getByRole('button', { name: /Parse untagged on this page/ }));
+  fireEvent.click(screen.getByRole('button', { name: /Tag \d+ untagged with AI/ }));
   await waitFor(() => expect(mocks.setItems).toHaveBeenCalledOnce());
   expect(mocks.setItems.mock.calls[0]![0]([record])).toEqual([saved]);
 });

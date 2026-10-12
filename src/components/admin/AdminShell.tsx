@@ -139,23 +139,21 @@ export default function AdminShell({ user, page, data, scoreboard }: Props) {
           ))}
         </nav>
         <div className="adm-bar-end">
-          <p role="status" className="adm-pub-status" data-state={publication.status}>
-            {settled
-              ? (drafts > 0 ? <><strong>{drafts} {drafts === 1 ? 'draft' : 'drafts'}</strong> waiting to publish</> : 'Everything is published')
-              : <strong>{publication.message ?? publication.status}</strong>}
-          </p>
-          <button type="button" className="adm-btn adm-btn-primary" onClick={handlePreview} disabled={deploying}>
-            {deploying ? 'Queuing' : 'Review and publish'}
+          {/* Only an in-flight or failed publication has something to say. */}
+          {!settled && (
+            <p role="status" className="adm-pub-status" data-state={publication.status}>
+              <strong>{publication.message ?? publication.status}</strong>
+            </p>
+          )}
+          <button type="button" className={`adm-btn ${drafts > 0 ? 'adm-btn-primary' : 'adm-btn-ghost'}`} onClick={handlePreview} disabled={deploying}>
+            {deploying ? 'Queuing' : drafts > 0 ? `Publish ${drafts} ${drafts === 1 ? 'draft' : 'drafts'}` : 'Publish'}
           </button>
-          <div className="adm-user">
-            <span>{user.email}</span>
-            <button type="button" onClick={handleLogout}>Sign out</button>
-          </div>
+          <button type="button" className="adm-link" onClick={handleLogout} title={user.email}>Sign out</button>
         </div>
       </header>
 
       {page !== 'analytics' && scoreboard && (
-        <Scoreboard title={scoreboard.period} sub="So far this month" cells={scoreboard.cells} />
+        <Scoreboard title={scoreboard.period} sub={`Change on ${scoreboard.against}`} cells={scoreboard.cells} />
       )}
 
       {reviewing && (
