@@ -1261,11 +1261,25 @@ html.js .sabl-group-toggle { display: inline-flex; }
   }
 }
 :is(#sab-scholarships, #sab-programs) .sabl-card > .sabl-row-main { display: contents; }
+/* Scholarship cards lead with who runs the application (lib/providers.ts):
+   the mark top left, the name beside it, as a market leads with its flag. */
+#sab-scholarships [data-dir-grid] > .sabl-card {
+  grid-template-columns: 44px minmax(0, 1fr) auto;
+  grid-template-areas: "logo title title" "blurb blurb blurb" "facts facts facts" "gap gap gap" "amount amount when" "actions actions actions";
+}
+.sabl-logo { display: none; }
+#sab-scholarships .sabl-card .sabl-logo {
+  display: block; grid-area: logo; align-self: center; width: 44px; height: 44px;
+  border-radius: 10px; object-fit: cover; background: #FFFFFF;
+  box-shadow: 0 0 0 1px rgba(20, 25, 21, 0.08);
+}
+#sab-scholarships .sabl-card .sabl-name-h { align-self: center; }
+#sab-scholarships .sabl-card :is(.sabl-blurb, .sabl-org) { margin-top: 10px; }
 :is(#sab-scholarships, #sab-programs) .sabl-card .sabl-name-h { grid-area: title; display: block; }
 /* No menu-board leader: the money is two lines down, not across. */
 :is(#sab-scholarships, #sab-programs) .sabl-card .sabl-name-h::after { content: none; }
 :is(#sab-scholarships, #sab-programs) .sabl-card .sabl-name {
-  font-size: 16px; line-height: 1.3;
+  font-size: 16px; line-height: 1.3; padding-block: 0; margin-block: 0; max-height: 2.6em;
   display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden;
 }
 :is(#sab-scholarships, #sab-programs) .sabl-card :is(.sabl-blurb, .sabl-org) { grid-area: blurb; margin-top: 4px; font-size: 14px; }
