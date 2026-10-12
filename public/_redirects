@@ -128,8 +128,8 @@
 # Repointed past the fem+ duplicate below, which used to be this rule's target:
 # a redirect to a redirect costs a hop and loses a little of whatever the first
 # one was passing on.
-/programs/discovere-high-school-initiatives-university-of-alberta  /programs/fem-engineering-mentorship-program/ 301
-/programs/discovere-high-school-initiatives-university-of-alberta/ /programs/fem-engineering-mentorship-program/ 301
+/programs/discovere-high-school-initiatives-university-of-alberta  /programs/engineering/ 301
+/programs/discovere-high-school-initiatives-university-of-alberta/ /programs/engineering/ 301
 
 # 2026-08-23: the five listings the curation pass left for a decision. All five
 # were real; three were describing the wrong thing. 4-H has no programme called
@@ -206,8 +206,8 @@
 # The second of two listings for the same U of A DiscoverE fem+ mentorship:
 # same provider, same URL, same seven months, same audience. The March record
 # kept its page; this one was added in April and duplicated it.
-/programs/discovere-fem-mentorship-university-of-alberta  /programs/fem-engineering-mentorship-program/ 301
-/programs/discovere-fem-mentorship-university-of-alberta/ /programs/fem-engineering-mentorship-program/ 301
+/programs/discovere-fem-mentorship-university-of-alberta  /programs/engineering/ 301
+/programs/discovere-fem-mentorship-university-of-alberta/ /programs/engineering/ 301
 
 # Duplicate of the Rural Municipalities of Alberta award already in the corpus.
 # Added during the Cochrane pass without spotting the existing record, and it
@@ -336,3 +336,5 @@
 /programs/picoctf-carnegie-mellon-cybersecurity-competition/ /programs/cylab-security-academy-formerly-picoctf/ 301
 /programs/canadian-music-competition-cmc-calgary-chapter  /programs/pathways-program-music-festival/ 301
 /programs/canadian-music-competition-cmc-calgary-chapter/ /programs/pathways-program-music-festival/ 301
+/programs/fem-engineering-mentorship-program  /programs/engineering/ 301
+/programs/fem-engineering-mentorship-program/ /programs/engineering/ 301
