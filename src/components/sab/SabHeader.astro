@@ -152,9 +152,10 @@ const MENUS: Record<string, { label: string; tiles: Tile[]; links: MenuLink[]; d
 };
 for (const m of Object.values(MENUS)) m.desk = m.desk.slice(0, DESK_MAX);
 
-// Five in the bar. Deadlines, the quiz and the guides live under Explore,
-// whose own link opens the quiz: the one first step every visitor can take.
-// `also` lights Explore on the pages it holds.
+// Five in the bar. Deadlines, the quiz and the guides live under Explore.
+// A row with a menu only opens it, so its href is the key into MENUS and the
+// path it lights up on, not a destination. `also` lights Explore on the pages
+// it holds.
 const navItems: { label: string; href: string; count: number | null; also?: string[]; hint?: string }[] = [
   { label: 'Scholarships', href: '/scholarships/', count: scholarshipCount },
   { label: 'Programs', href: '/programs/', count: programCount },
@@ -198,29 +199,34 @@ const isActive = (href: string, also: string[] = []) =>
         <span class="sabh-drop" aria-hidden="true"></span>
         {navItems.map(n => (
           <div class={`sabh-item${MENUS[n.href] ? ' sabh-has-menu' : ''}`}>
-            <a
-              href={n.href}
-              class={`sabh-link${isActive(n.href, n.also) ? ' sabh-link-active' : ''}`}
-              aria-current={isActive(n.href) ? 'page' : undefined}
-            >
-              <span class="sabh-link-label">{n.label}</span>
-              {n.count !== null && <span class="sabh-link-count" aria-hidden="true">{n.count.toLocaleString('en-CA')}</span>}
-              {n.hint && <span class="sabh-link-hint" aria-hidden="true">{n.hint}</span>}
-              {/* How many listings are on the reader's list, filled from the
-                  browser by the script below; the tray count on a menu board. */}
-              {n.href === '/saved/' && <span class="sabh-saved-n" data-saved-n hidden></span>}
-            </a>
-            {MENUS[n.href] && (
-              /* Desktop keyboard: one stop, not twenty. The panel's links are
-                 out of the tab order until this button opens it, so Tab walks
-                 Scholarships, this toggle, Programs. Invisible until focused,
-                 so the pointer look is unchanged. Hidden in the phone sheet,
-                 where tapping the row opens the panel instead. */
-              <button type="button" class="sabh-menu-toggle" data-sabh-toggle
-                aria-expanded="false" aria-controls={`sabh-menu-${n.label.toLowerCase()}`}
-                aria-label={`Show ${n.label} menu`}>
-                <svg viewBox="0 0 10 6" width="10" height="6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            {/* A row with a menu is a button, not a link (Ilia, 2026-10-12,
+                after spacex.com): its first entry already goes where the link
+                did, so the label only opens the list. One control for pointer,
+                keyboard and the phone sheet. */}
+            {MENUS[n.href] ? (
+              <button
+                type="button"
+                class={`sabh-link${isActive(n.href, n.also) ? ' sabh-link-active' : ''}`}
+                data-sabh-toggle
+                aria-expanded="false"
+                aria-controls={`sabh-menu-${n.label.toLowerCase()}`}
+              >
+                <span class="sabh-link-label">{n.label}</span>
+                {n.count !== null && <span class="sabh-link-count" aria-hidden="true">{n.count.toLocaleString('en-CA')}</span>}
+                {n.hint && <span class="sabh-link-hint" aria-hidden="true">{n.hint}</span>}
+                <svg class="sabh-chev" viewBox="0 0 10 6" width="10" height="6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </button>
+            ) : (
+              <a
+                href={n.href}
+                class={`sabh-link${isActive(n.href, n.also) ? ' sabh-link-active' : ''}`}
+                aria-current={isActive(n.href) ? 'page' : undefined}
+              >
+                <span class="sabh-link-label">{n.label}</span>
+                {/* How many listings are on the reader's list, filled from the
+                    browser by the script below; the tray count on a menu board. */}
+                {n.href === '/saved/' && <span class="sabh-saved-n" data-saved-n hidden></span>}
+              </a>
             )}
             {MENUS[n.href] && (
               /* Desktop: opens on hover (pointer devices) or from the toggle
@@ -483,17 +489,11 @@ const isActive = (href: string, also: string[] = []) =>
   /* Sheet-only furniture: the section label, the per-link counts and the
      footnote are all invisible on desktop. */
   .sabh-sheet-label, .sabh-link-count, .sabh-link-hint, .sabh-sub-back, .sabh-menu-desk { display: none; }
-  /* Clipped to nothing without the desktop block below, which shows it as
-     the chevron beside its link. */
-  .sabh-menu-toggle {
-    position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%);
-    padding: 0; border: 0; background: transparent; color: rgba(238, 241, 236, 0.78); cursor: pointer;
-  }
-  .sabh-menu-toggle:focus-visible, .sabh-has-menu[data-menu-open] .sabh-menu-toggle:focus {
-    position: static; width: 24px; height: 24px; overflow: visible; clip-path: none;
-    display: inline-flex; align-items: center; justify-content: center; border-radius: var(--radius);
-  }
-  .sabh-has-menu[data-menu-open] .sabh-menu-toggle svg { transform: rotate(180deg); }
+  /* The menu rows and How it works are buttons wearing the link's look. */
+  :where(button).sabh-link { border: 0; background: none; font-family: inherit; line-height: inherit; cursor: pointer; text-align: left; }
+  /* The chevron is desktop only; the phone sheet row shows its count. */
+  .sabh-chev { display: none; }
+  .sabh-has-menu[data-menu-open] .sabh-chev { transform: rotate(180deg); }
   /* The right-hand column, balancing the logo: the same three destinations
      the footer carries, as quiet glyphs in the links' colour. */
   /* :global on the children: the email link is injected with set:html (for
@@ -513,7 +513,7 @@ const isActive = (href: string, also: string[] = []) =>
   }
   /* The sheet row only exists on phones; desktop has the button above. */
   .sabh-how-row { display: none; }
-  .sabh-how-row .sabh-link { border: 0; background: none; font: inherit; cursor: pointer; text-align: left; width: 100%; }
+  .sabh-how-row .sabh-link { font: inherit; border: 0; width: 100%; }
   @media (min-width: 901px) and (max-width: 1100px) {
     .sabh-right .sabh-how { padding: 0; width: 36px; justify-content: center; }
     .sabh-right .sabh-how-text { display: none; }
@@ -564,7 +564,6 @@ const isActive = (href: string, also: string[] = []) =>
        panel the desktop dropdown shows (Ilia, 2026-09-15): photo tiles two
        across, the topic list under them, and a Back button above. */
     .sabh-menu { display: none; }
-    .sabh-menu-toggle, .sabh-menu-toggle:focus-visible { display: none; }
     .sabh-item { display: block; }
     .sabh[data-sub] .sabh-item:not([data-sub-open]),
     .sabh[data-sub] [data-sub-open] > .sabh-link,
@@ -624,7 +623,7 @@ const isActive = (href: string, also: string[] = []) =>
     .sabh-sheet-label { display: block; padding-top: 6px; border-top: 1px solid rgba(238, 241, 236,0.18); }
     .sabh-link {
       display: flex; align-items: center; justify-content: space-between; gap: 12px;
-      min-height: 56px; font-size: 22px; font-weight: 600; letter-spacing: -0.01em;
+      width: 100%; min-height: 56px; font-size: 22px; font-weight: 600; letter-spacing: -0.01em;
       padding-bottom: 0; border-bottom: 1px solid rgba(238, 241, 236,0.12);
     }
     /* The sheet keeps an accent dot on the current page: at 22px in a list,
@@ -648,14 +647,10 @@ const isActive = (href: string, also: string[] = []) =>
   @media (min-width: 901px) {
     .sabh-item { position: relative; }
     .sabh-link:hover, .sabh-has-menu:hover .sabh-link { background: none; }
-    /* The chevron is the keyboard toggle, now shown to everyone, tucked into
-       the link's own right padding. */
-    .sabh-menu-toggle, .sabh-menu-toggle:focus-visible, .sabh-has-menu[data-menu-open] .sabh-menu-toggle:focus {
-      position: static; display: inline-flex; align-items: center; justify-content: center;
-      width: 18px; height: 24px; margin: 0 6px 0 -12px; overflow: visible; clip-path: none;
-      border-radius: var(--radius); color: rgba(238, 241, 236, 0.7);
-    }
-    .sabh-menu-toggle svg { transition: transform 0.16s ease; }
+    /* The chevron sits inside the button, where the old separate toggle
+       sat beside the link: the row keeps its width. */
+    .sabh-has-menu .sabh-link { display: inline-flex; align-items: center; gap: 8px; padding-right: 11px; }
+    .sabh-chev { display: block; flex: none; transition: transform 0.16s ease; }
     /* Compact, as on spacex.com: the list starts just under its label (inside
        the bar, which the item fills, so the pointer never crosses a gap) and
        the rows sit 26px apart. */
@@ -731,10 +726,7 @@ const isActive = (href: string, also: string[] = []) =>
     // One panel at a time: opening Programs is a switch, not a second panel.
     if (open) header?.querySelectorAll<HTMLElement>('.sabh-has-menu[data-menu-open]').forEach(o => { if (o !== item) setDropdown(o, false); });
     item.toggleAttribute('data-menu-open', open);
-    const toggle = item.querySelector<HTMLElement>('[data-sabh-toggle]');
-    toggle?.setAttribute('aria-expanded', String(open));
-    const label = item.querySelector('.sabh-link-label')?.textContent;
-    if (label) toggle?.setAttribute('aria-label', `${open ? 'Hide' : 'Show'} ${label} menu`);
+    item.querySelector<HTMLElement>('[data-sabh-toggle]')?.setAttribute('aria-expanded', String(open));
     syncDrop();
   }
 
@@ -805,11 +797,17 @@ const isActive = (href: string, also: string[] = []) =>
 
     initHoverMenus(sheet);
 
-    // Desktop dropdown toggles. Focus leaving the item closes its panel, so a
-    // Tab past the last link, or a click elsewhere, never leaves it hanging.
+    // Desktop dropdown toggles. A mouse click only opens, since hover has
+    // usually opened the list already and a toggle would shut it under the
+    // pointer; the keyboard (detail 0) and touch toggle. The phone sheet
+    // handles its own rows below. Focus leaving the item closes its panel, so
+    // a Tab past the last link, or a click elsewhere, never leaves it hanging.
     header.querySelectorAll<HTMLElement>('.sabh-has-menu').forEach(item => {
-      item.querySelector('[data-sabh-toggle]')?.addEventListener('click', () => {
-        setDropdown(item, !item.hasAttribute('data-menu-open'));
+      item.querySelector<HTMLElement>('[data-sabh-toggle]')?.addEventListener('click', e => {
+        if (phone.matches) return;
+        const open = item.hasAttribute('data-menu-open');
+        const mouse = (e as PointerEvent).pointerType === 'mouse' && e.detail > 0;
+        setDropdown(item, mouse || !open);
       });
       item.addEventListener('focusout', e => {
         if (!item.contains(e.relatedTarget as Node | null)) setDropdown(item, false);
@@ -824,12 +822,10 @@ const isActive = (href: string, also: string[] = []) =>
         closeSub();
         return;
       }
-      // In the sheet, a row with a panel opens it instead of navigating; the
-      // panel's own "All scholarships" or "All programs" link goes to the
-      // directory. The ClientRouter skips clicks already default-prevented.
+      // In the sheet, a row with a panel opens it; the panel's own "All
+      // scholarships" or "All programs" link goes to the directory.
       const item = target.closest<HTMLElement>('.sabh-has-menu');
       if (isOpen() && phone.matches && item && target.closest('.sabh-link')) {
-        e.preventDefault();
         openSub(item);
         return;
       }
@@ -873,7 +869,7 @@ const isActive = (href: string, also: string[] = []) =>
     // In the Scholarships panel the stops are its Back button and links instead.
     const stops = isSub()
       ? [...(openItem()?.querySelectorAll<HTMLElement>('.sabh-menu button, .sabh-menu a[href]') ?? []), burger]
-      : [...sheet.querySelectorAll<HTMLElement>('a.sabh-link[href]'), burger];
+      : [...sheet.querySelectorAll<HTMLElement>('.sabh-link'), burger];
     const first = stops[0];
     const last = stops[stops.length - 1];
     if (!first || !last) return;

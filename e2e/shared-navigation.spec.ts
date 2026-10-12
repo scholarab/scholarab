@@ -7,7 +7,7 @@ test('Explore keeps every tool reachable by keyboard and phone menu', async ({ p
   const open = async () => {
     if (mobile) {
       await page.getByRole('button', { name: 'Open menu', exact: true }).click();
-      await page.getByRole('link', { name: 'Explore', exact: true }).click();
+      await page.getByRole('button', { name: 'Explore', exact: true }).click();
     } else {
       await toggle.focus();
       await toggle.press('Enter');
@@ -34,7 +34,7 @@ test('Explore keeps every tool reachable by keyboard and phone menu', async ({ p
   await page.keyboard.press('Escape');
   await expect(menu).toBeHidden();
   if (mobile) {
-    await expect(page.getByRole('link', { name: 'Explore', exact: true })).toBeFocused();
+    await expect(page.getByRole('button', { name: 'Explore', exact: true })).toBeFocused();
     await page.getByRole('button', { name: 'Close menu', exact: true }).click();
   } else {
     await expect(toggle).toBeFocused();

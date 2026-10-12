@@ -238,7 +238,7 @@ test('header dropdowns hang under their label, five rows at most', async ({ page
   await page.goto('/about/');
   const width = page.viewportSize()!.width;
   for (const label of ['Scholarships', 'Programs', 'Explore']) {
-    // By what it controls: its accessible name flips to "Hide" once open.
+    // The label itself is the toggle (2026-10-12).
     const toggle = page.locator(`[aria-controls="sabh-menu-${label.toLowerCase()}"]`);
     await toggle.focus();
     await toggle.press('Enter');
@@ -252,6 +252,18 @@ test('header dropdowns hang under their label, five rows at most', async ({ page
     await expect(page.locator('.sabh-drop')).toHaveAttribute('data-on', '');
     expect((await page.locator('.sabh-drop').boundingBox())!.width).toBeGreaterThan(width * 0.9);
     await toggle.press('Enter');
+  }
+});
+
+// Scholarships, Programs and Explore only open their lists (Ilia, 2026-10-12,
+// after spacex.com); the first row in each goes where the label used to.
+test('clicking a menu label opens its list and stays on the page', async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name === 'mobile', 'desktop layout');
+  await page.goto('/about/');
+  for (const label of ['Scholarships', 'Programs', 'Explore']) {
+    await page.getByRole('button', { name: label, exact: true }).click();
+    await expect(page.locator(`#sabh-menu-${label.toLowerCase()}`)).toBeVisible();
+    await expect(page).toHaveURL(/\/about\/$/);
   }
 });
 

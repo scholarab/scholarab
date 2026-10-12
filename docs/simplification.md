@@ -2119,3 +2119,14 @@ Final verification: `npm run ci` passed with 1,268 tests and completed Astro
 and script type checks. `npm run test:e2e` passed 173 checks, with 19 existing
 platform/opt-in skips. `npm run ship-check -- origin/main` passed the URL check
 and its two RUN commands were completed. No push or hosted operation occurred.
+
+
+## Header menus open only, directory star deleted, October 12, 2026
+
+Outcome: a reader picks a destination from the Scholarships, Programs or Explore list instead of the label silently sending them to the first entry (Ilia, after spacex.com), and the directory heading loses a sticker Ilia judged generated. My combo and About stay links. Plan for the rest of the header, photo head and filter column work: private/header-plan/PLAN.md.
+
+Removal: the FREE NO SIGN-UP burst on every scholarship and program directory (markup in two components, four CSS rules, the 150px padding kept for it); the separate keyboard toggle button beside each menu label, its clipped and shown states, and its aria-label rewriting, since the label itself is now the toggle; the phone sheet's preventDefault on menu rows, which buttons do not need. Candidates 3, added back 0 (0%). The combo page burst is a different sticker and stays until Ilia decides. No failure was invented for the 10% target.
+
+Measurements (local): src 61 lines added, 95 removed across the three components and global.css; 0 built pages still contain the sticker markup. No timing claim.
+
+Validation: npm run ci passes lint, 1,271 Vitest tests and the build; astro check reports 11 errors, all in private/counsellor-drafts-50-2026-10-09/gate, whose src symlink points back at this repo and whose scripts are missing (present before this change). Playwright 174 passed, 20 skipped, including a new test that clicking each label opens its list and keeps the URL. Built site checked at 1440 and 375: the list opens on click and hover, the page does not change, the phone sheet still opens the photo panel.

@@ -10,7 +10,7 @@ import { generateSlug, formatVerifiedMonth, isCheckStale, checkedSince } from '.
 import { scholarshipSearchBlob } from '../../lib/search-text.ts';
 import { SCHOLARSHIP_FACETS, MIN_FACET_ITEMS, facetItems, facetMatches } from '../../lib/facets.ts';
 import { saysNoApplication, rowRoute, routeTag } from '../../lib/apply-method.ts';
-import { ARROW_REF, BOOKMARK_REF, EXT_REF, ICON_SPRITE, BURST_PATH } from '../../lib/icons.ts';
+import { ARROW_REF, BOOKMARK_REF, EXT_REF, ICON_SPRITE } from '../../lib/icons.ts';
 import { eligibilityFacts } from '../../lib/eligibility-facts.ts';
 import SabFilterSelect from './SabFilterSelect.astro';
 import { schoolOf } from '../../lib/school-awards.ts';
@@ -215,14 +215,7 @@ import { needsCredit, type PhotoCredit } from '../../lib/photo-credits';
       {/* The quiz was reachable only from a zero-results state (critique
           2026-09-23); a first-time applicant facing 1,500 rows is who it is for. */}
     </div>
-    {/* The promo sticker (Ilia, 2026-09-30: the directories get the combo
-        page's fast-food treatment). A promise, not a figure: the count
-        figures left this header on purpose (36c0f2a). */}
-    <div class="sabl-promo" aria-hidden="true">
-      <svg viewBox="0 0 120 120"><path d={BURST_PATH} /></svg>
-      <span>Free<br />No sign-up</span>
-    </div>
-    {/* After the text and the sticker, so `> div:first-child` still finds the
+    {/* After the text, so `> div:first-child` still finds the
         text. The city's own photo, full strength on the board's right, meeting the
         ink the way the home carousel's slides do (2026-10-02). Desktop only:
         on a phone the board is all text, and a photo there either sits under
