@@ -39,14 +39,6 @@ export async function getStaticPaths() {
 
 const { facet, items, allItems } = Astro.props;
 
-// Full-page photo backdrops are OFF (Ilia, 2026-09-15: "looks broke ... maybe
-// we will put them back eventually"). Flip this to false and the hubs render
-// their photo again; the images, the facets' `backdrop` values and the
-// `.sabl-has-backdrop` CSS below all stay in place for that. The header's
-// square photo tiles are a separate surface and are unaffected.
-const BACKDROPS_OFF = true;
-const backdrop = BACKDROPS_OFF ? null : facet.backdrop;
-
 const today = albertaToday();
 
 const ordered = filterSortScholarships(items, DEFAULT_SCHOLARSHIP_STATE);
@@ -148,16 +140,13 @@ const breadcrumbJson = {
   <SabFonts slot="head" chips />
 
   <div class="sabp-header" slot="header">
-    <SabHeader currentPath="/scholarships" />
+    <SabHeader currentPath="/scholarships" over={!!facet.backdrop} />
   </div>
 
   <div
     id="sab-scholarships"
     data-remember-city={isCity ? facet.slug : undefined}
-    class:list={['sabp', 'sabp-wide', { 'sabl-has-backdrop': backdrop }]}
-    style={backdrop
-      ? `--sabl-wide: url(/photos/backdrops/${backdrop}-wide-1672.webp); --sabl-wide-2x: url(/photos/backdrops/${backdrop}-wide-3344.webp); --sabl-tall: url(/photos/backdrops/${backdrop}-tall-1000.webp); --sabl-tall-2x: url(/photos/backdrops/${backdrop}-tall-2000.webp)`
-      : undefined}
+    class="sabp sabp-wide"
   >
     <div class="sabp-body">
       {/* No visible breadcrumb (Ilia, 2026-09-15). The header names the
@@ -178,7 +167,7 @@ const breadcrumbJson = {
         alsoOpen={broadCounts.length === 2 ? { place: facet.label, lists: broadCounts } : undefined}
         step={isCity ? 12 : undefined}
         specials={specials}
-        photo={isCity && facet.backdrop ? { backdrop: facet.backdrop, credit: PHOTO_CREDITS[facet.backdrop] } : undefined}
+        photo={facet.backdrop ? { backdrop: facet.backdrop, credit: PHOTO_CREDITS[facet.backdrop] } : undefined}
       />
 
       <div class="sabl-hubfoot">
@@ -224,153 +213,9 @@ const breadcrumbJson = {
     const slug = document.querySelector<HTMLElement>('[data-remember-city]')?.dataset.rememberCity;
     if (slug) rememberCity(slug);
   });
-
-  // Drives the backdrop's scroll fade: 0 while the header panel is on screen,
-  // 1 once the reader is a screen's height into the listings. A custom property
-  // on one element, written at most once a frame, so scrolling stays cheap.
-  const page = document.querySelector<HTMLElement>('.sabl-has-backdrop');
-  const grid = document.querySelector<HTMLElement>('[data-dir-grid]');
-  if (page && grid) {
-    let queued = false;
-    const update = () => {
-      queued = false;
-      const start = grid.getBoundingClientRect().top + window.scrollY - window.innerHeight * 0.6;
-      const t = (window.scrollY - start) / window.innerHeight;
-      page.style.setProperty('--sabl-fade', Math.min(1, Math.max(0, t)).toFixed(3));
-    };
-    const onScroll = () => { if (!queued) { queued = true; requestAnimationFrame(update); } };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll, { passive: true });
-    update();
-  }
 </script>
 
 <style is:global>
   /* The directory design is fixed light regardless of site theme */
   body:has(#sab-scholarships) { background: var(--bg-page); }
-
-  /* A scope's full-page photo backdrop. A fixed pseudo-element rather than
-     background-attachment: fixed, which iOS Safari ignores (it scrolls the
-     image with the page and blows it up to the page's full 18,000px height).
-     The photo stays at full strength; readability comes from the frosted
-     panels below, never from fading the photo. Anchored to the bottom, so the
-     calm sky sits behind the top of the screen, where the text is, and the
-     skyline along the bottom edge. */
-  /* .sabp paints solid cream (global.css), which would cover the layer. */
-  #sab-scholarships.sabl-has-backdrop { background: transparent; }
-  .sabl-has-backdrop::before {
-    content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
-    background-color: #E6E8EB;
-    background-position: center bottom;
-    background-size: cover;
-    background-repeat: no-repeat;
-  }
-  /* Portrait screens (phones, an upright iPad) get a tall crop of the same
-     photo instead of a thin slice of the wide one. The towers sit right of
-     centre, so the crop leans right to keep them in frame. */
-  @media (orientation: portrait) {
-    .sabl-has-backdrop::before { background-position: 62% bottom; }
-  }
-  /* Browsers without image-set get the 1x files. Kept out of the cascade
-     everywhere else, or a 2x screen downloads both sizes. */
-  @supports not (background-image: image-set(url("a.webp") 1x)) {
-    .sabl-has-backdrop::before { background-image: var(--sabl-wide); }
-    @media (orientation: portrait) {
-      .sabl-has-backdrop::before { background-image: var(--sabl-tall); }
-    }
-  }
-  /* Behind @supports, not as a second declaration: a var() inside an
-     image-set the browser cannot parse would not fall back to the url above,
-     it would blank the background. Each orientation names only its own pair,
-     so a screen fetches one file. */
-  @supports (background-image: image-set(url("a.webp") 1x)) {
-    .sabl-has-backdrop::before { background-image: image-set(var(--sabl-wide) 1x, var(--sabl-wide-2x) 2x); }
-    @media (orientation: portrait) {
-      .sabl-has-backdrop::before { background-image: image-set(var(--sabl-tall) 1x, var(--sabl-tall-2x) 2x); }
-    }
-  }
-
-  /* The scroll fade. A cream layer over the photo, painted after ::before, so
-     it sits above the photo and under the page. Clear at the top, where the
-     photo is the point; it thickens as the reader scrolls into the listings
-     (the script below sets --sabl-fade from 0 to 1). */
-  .sabl-has-backdrop::after {
-    content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
-    background: var(--bg-page); opacity: calc(var(--sabl-fade, 0) * 0.6);
-  }
-
-  /* ── Frosted panels ──
-     Every piece of text sits on cream glass, and the photo shows in the
-     margins and the gaps between cards. The cards are already solid white. */
-  .sabl-has-backdrop {
-    --sabl-glass: rgba(255, 255, 255, 0.84);
-    --sabl-glass-edge: rgba(255,255,255,0.55);
-  }
-  .sabl-has-backdrop .sabl-head,
-  .sabl-has-backdrop .sabl-rail,
-  .sabl-has-backdrop .sabl-hubfoot,
-  .sabl-has-backdrop .sabl-group,
-  .sabl-has-backdrop .sabl-more,
-  .sabl-has-backdrop .sabl-empty {
-    background: var(--sabl-glass);
-    border: 1px solid var(--sabl-glass-edge);
-    -webkit-backdrop-filter: blur(20px) saturate(1.15);
-    backdrop-filter: blur(20px) saturate(1.15);
-    box-shadow: 0 10px 30px -18px rgba(20,25,21,0.45);
-  }
-  /* No blur support: the glass goes nearly opaque instead, so the text over
-     it keeps its contrast. */
-  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-    .sabl-has-backdrop { --sabl-glass: rgba(255, 255, 255, 0.96); }
-  }
-  /* e2e/smoke.spec.ts checks that every hub puts its toolbar at the same
-     height, so hopping from Calgary to Edmonton does not move the chips under
-     the cursor. These offsets used to be tuned against a plain hub's 72px body
-     padding plus a 42px breadcrumb row; the breadcrumb is gone (2026-09-15) and
-     backdrops are off, so nothing exercises this block today. Re-measure the
-     sum against the plain hubs before turning BACKDROPS_OFF back to false. */
-  .sabl-has-backdrop .sabp-body { padding-top: 32px; }
-  .sabl-has-backdrop .sabl-head {
-    margin-top: 11px; padding: 36px 40px 6px; border-radius: var(--radius);
-  }
-  .sabl-has-backdrop .sabl-group {
-    padding: 10px 16px; border-radius: var(--radius); margin-top: 10px;
-  }
-  /* The rail left .sabl-head when the filters moved into a column
-     (2026-09-15), so it needs its own glass: chips straight on a photographed
-     lake are unreadable. The count line that used to sit here with it is gone
-     from the page entirely. */
-  @media (min-width: 1100px) {
-    .sabl-has-backdrop .sabl-railed .sabl-rail {
-      padding: 18px 16px; border-radius: var(--radius);
-    }
-  }
-  .sabl-has-backdrop .sabl-group:first-child { padding-top: 10px; margin-top: 0; }
-  .sabl-has-backdrop .sabl-hubfoot {
-    padding: 28px 32px; border-radius: var(--radius); margin-bottom: 8px;
-  }
-  .sabl-has-backdrop .sabl-empty { border-style: solid; }
-  .sabl-has-backdrop .sabl-more { border-radius: var(--radius); }
-  @media (max-width: 900px) {
-    .sabl-has-backdrop .sabp-body { padding-top: 20px; }
-    /* Nearly edge to edge on a phone: 8px of photo each side is enough to
-       read as a panel without costing the chips their width. */
-    .sabl-has-backdrop .sabl-head {
-      margin-left: -12px; margin-right: -12px; padding: 24px 16px 4px; border-radius: var(--radius);
-      overflow: clip;
-    }
-    /* Under 1100px the rail is not a column; it is the chip rows again, in
-       their own panel under the title one. */
-    .sabl-has-backdrop .sabl-rail {
-      margin: 10px -12px 0; padding: 4px 16px 16px; border-radius: var(--radius); overflow: clip;
-    }
-    /* The chip rows bleed to the edge they scroll under, which is now the
-       panel's edge rather than the screen's. */
-    .sabl-has-backdrop .sabl-head .sabl-sort-chips,
-    .sabl-has-backdrop .sabl-rail .sabl-chips {
-      margin-left: -16px; margin-right: -16px; padding-left: 16px; padding-right: 16px;
-    }
-    .sabl-has-backdrop .sabl-hubfoot { margin-left: -12px; margin-right: -12px; padding: 22px 16px; }
-  }
-
 </style>

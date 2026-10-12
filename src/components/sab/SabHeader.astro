@@ -21,8 +21,14 @@ import { SCHOLARSHIP_FACETS, PROGRAM_FACETS, PROGRAM_FORMATS, MENU_SCOPES, facet
 
 interface Props {
   currentPath: string;
+  /** The page opens on a photo head (SabHero): the bar starts see-through
+      over it and turns white past it. */
+  over?: boolean;
 }
-const { currentPath } = Astro.props;
+const { currentPath, over = false } = Astro.props;
+// The bar's tone (global.css, "Header tones"): home owns its own dark film
+// look; a photo hub starts over its photo; every other page is white.
+const tone = currentPath === '/' ? 'dark' : over ? 'over' : 'light';
 
 // Counts shown beside two links in the mobile sheet. Same definitions the
 // home hero uses: every scholarship in the directory, and the programs
@@ -181,10 +187,11 @@ const isActive = (href: string, also: string[] = []) =>
     of snippets and AI summaries; links are still crawled. Google honours it on
     div, span and section only, hence the display: contents wrapper. */}
 <div class="sab-nosnippet" data-nosnippet>
-<header class="sabh" data-sab-header>
+<header class="sabh" data-sab-header data-tone={tone} data-over={over ? '' : undefined}>
   <div class="sabh-nav">
     <a href="/" class="sabh-logo" aria-label="ScholarAB home">
-      <img src="/brand/scholarab-logo-on-dark.svg" alt="" width="124" height="28" />
+      <img class="sabh-logo-dark" src="/brand/scholarab-logo-on-dark.svg" alt="" width="124" height="28" />
+      {tone !== 'dark' && <img class="sabh-logo-light" src="/brand/scholarab-logo.svg" alt="" width="124" height="28" />}
     </a>
     <div class="sabh-actions">
       <!-- The site nav is a real landmark: it is the only way to jump past
@@ -337,7 +344,7 @@ const isActive = (href: string, also: string[] = []) =>
   /* 28px tall at every width (2026-10-11, measured against 24 to 32): the AB in the plate
      reads, and the 52px bar keeps 12px above and below. Centred on the links' cap height and
      flush with the headline's left edge to within 1.5px. */
-  .sabh-logo img { display: block; }
+  .sabh-logo img { flex: none; }
   /* The wrapper only exists so the burger can sit beside the links in the
      markup; on desktop the links take the middle column and the burger the
      last, as if the wrapper were not there. */
@@ -920,6 +927,14 @@ const isActive = (href: string, also: string[] = []) =>
     const y = window.scrollY;
     if (!stuck && y > STICK_DOWN) root.setAttribute('data-sab-stuck', '');
     else if (stuck && y < STICK_UP) root.removeAttribute('data-sab-stuck');
+    // A photo hub's bar is see-through only while its photo is under it.
+    const bar = document.querySelector<HTMLElement>('[data-sab-header][data-over]');
+    if (bar) {
+      const hero = document.querySelector('.sabl-hero');
+      const past = !hero || hero.getBoundingClientRect().bottom <= bar.offsetHeight;
+      const tone = past ? 'light' : 'over';
+      if (bar.dataset.tone !== tone) bar.dataset.tone = tone;
+    }
     const dy = y - lastY;
     if (y <= STICK_UP || headerBusy()) {
       root.removeAttribute('data-sab-hidden');

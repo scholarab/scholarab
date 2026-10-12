@@ -129,22 +129,27 @@ test('every hub puts its filter chips at the same height', async ({ page }, test
   test.skip(testInfo.project.name === 'mobile', 'desktop layout');
   await page.setViewportSize({ width: 1440, height: 900 });
 
-  const seen = new Map<string, number>();
+  const seen = new Map<string, { photo: boolean; y: number }>();
   for (const path of HUBS) {
     await page.goto(path);
     // Measured before the webfont lands, the standfirst wraps on fallback
     // metrics and the number is not the one anybody sees.
     await page.evaluate(() => document.fonts.ready);
-    const y = await page.evaluate(() => {
+    // A hub with a photo head puts it at one fixed height, so photo hubs
+    // share one toolbar height and plain hubs another (2026-10-12).
+    const [photo, y] = await page.evaluate(() => {
       const body = document.querySelector('.sabp-body')!.getBoundingClientRect().top;
-      return Math.round(document.querySelector('.sabl-toolbar')!.getBoundingClientRect().top - body);
+      return [!!document.querySelector('.sabl-hero'), Math.round(document.querySelector('.sabl-toolbar')!.getBoundingClientRect().top - body)] as const;
     });
-    seen.set(path, y);
+    seen.set(path, { photo, y });
   }
-  const heights = [...new Set(seen.values())];
-  expect(Object.fromEntries(seen), 'one shared toolbar height').toEqual(
-    Object.fromEntries([...seen.keys()].map(k => [k, heights[0]])),
-  );
+  for (const photo of [true, false]) {
+    const group = [...seen].filter(([, v]) => v.photo === photo).map(([k, v]) => [k, v.y] as const);
+    expect(group.length, `some hubs ${photo ? 'with' : 'without'} a photo`).toBeGreaterThan(0);
+    expect(Object.fromEntries(group), `one shared toolbar height (photo: ${photo})`).toEqual(
+      Object.fromEntries(group.map(([k]) => [k, group[0]![1]])),
+    );
+  }
 });
 
 // The SCOPE row left the scholarship hubs on 2026-09-15 (a reader who picked

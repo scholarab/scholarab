@@ -83,14 +83,12 @@ export interface Facet {
   /** Guide slug that explains this facet, cross-linked both ways. */
   guide?: string;
   /**
-   * A full-page photo background for the hub, fixed behind everything while
-   * the page scrolls. Needs five files in public/photos/backdrops/:
-   * <name>-wide-{1672,3344}.webp, <name>-tall-{1000,2000}.webp and
-   * <name>-tile.webp (the header menu tile). Placement is in the hub page's CSS;
-   * credits in public/photos/CREDITS.md and src/lib/photo-credits.ts.
-   *
-   * A program FORMAT hub's photo shows in the header's Programs menu and the
-   * home page's program carousel (Ilia, 2026-09-23); its hub page has none.
+   * The hub's photo: the page's photo head under the see-through header
+   * (SabHero, 2026-10-12), its header menu tile and its home carousel card.
+   * Needs five files in public/photos/backdrops/: <name>-wide-{1672,3344}.webp
+   * (desktop head), <name>-tall-{1000,2000}.webp (phone head, home carousel)
+   * and <name>-tile.webp (the menu tile). Credits in public/photos/CREDITS.md
+   * and src/lib/photo-credits.ts.
    */
   backdrop?: string;
   /**
