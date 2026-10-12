@@ -18,8 +18,15 @@ test('a closed listing page offers three open listings above the fold', async ({
 });
 
 test('the reminder form names the problem next to the field, in a readable colour', async ({ page }) => {
+  // The first closing listing within 3 days of its deadline shows "too late
+  // for reminders" instead of the form (Loran on 2026-10-12), so take the
+  // first one whose form is open.
   await page.goto('/');
-  await page.goto((await page.locator('.sab-biggest .sab-closing-row').first().getAttribute('href'))!);
+  const hrefs = await page.locator('.sab-closing-row').evaluateAll(els => els.map(e => e.getAttribute('href')!));
+  for (const href of hrefs) {
+    await page.goto(href);
+    if (await page.locator('[data-remind-open]').isVisible()) break;
+  }
   const form = page.locator('[data-sabd-alert-form]');
   const input = form.locator('input[name="email"]');
   const msg = page.locator('[data-sabd-alert-msg]');

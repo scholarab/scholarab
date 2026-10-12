@@ -288,7 +288,7 @@ const carousels = [
             <form action="/scholarships/" method="get" class="sab-hero-search" role="search" data-scope-search data-scope-hubs={JSON.stringify(scopeMap)}>
               <label for="sab-hero-q" class="sr-only">Search scholarships</label>
               <svg class="sab-hero-search-icon" viewBox="0 0 16 16" width="16" height="16" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="4.6" stroke="currentColor" stroke-width="1.5"/><path d="M10.6 10.6L14 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-              <input id="sab-hero-q" name="q" type="search" enterkeyhint="search" placeholder="Search, e.g. nursing" class="sab-hero-search-input" />
+              <input id="sab-hero-q" name="q" type="search" enterkeyhint="search" placeholder="Nursing, trades, music" class="sab-hero-search-input" />
               <button type="submit" class="sab-hero-search-btn">Search</button>
             </form>
             <div class="sab-hero-ctas">
@@ -334,20 +334,6 @@ const carousels = [
             headline and pushed it up 48px when they arrived (CLS 0.024, the
             "hold still" e2e flake, traced 2026-10-07). */}
         <span id="sab-hero-end" hidden></span>
-        {/* The example in the box rotates through fields so students see
-            it searches more than one subject. Stops once they type. Out of
-            the hero, so the parser never stops inside it. */}
-        <script is:inline>(function () {
-          const input = document.getElementById('sab-hero-q');
-          if (!input) return;
-          const terms = ['nursing', 'business', 'engineering', 'music', 'agriculture', 'medicine', 'trades', 'science'];
-          let i = 0;
-          setInterval(function () {
-            if (document.activeElement === input || input.value) return;
-            i = (i + 1) % terms.length;
-            input.placeholder = 'Search, e.g. ' + terms[i];
-          }, 2500);
-        })();</script>
       </div>
 
     </div>
@@ -1025,27 +1011,39 @@ const carousels = [
   .sab-hero-p-l1 { display: block; }
   .sab-hero-p-l1 { white-space: nowrap; }
   .sab-hero-copy p { font-size: 18px; line-height: 1.55; color: rgba(238, 241, 236, 0.8); margin: 0 0 clamp(16px, 3.4vh, 30px); }
-  /* No backdrop blur: over the playing film Firefox re-blurred the box on
-     every repaint anywhere in the hero, and it tripled the stutter of moving
-     across an open header menu (2026-10-06). It sits on the darkest part of
-     the scrim, so the tint alone carries the words. */
+  /* The search is a solid paper bar with a green plate for its button, the
+     same plate as the AB in the logo (2026-10-12, from Refero research: the
+     dim outlined box read as generated). Solid, so no blur is needed over
+     the film (Firefox stutter, 2026-10-06). */
   .sab-hero-search {
-    position: relative; display: flex; align-items: center; max-width: 480px; margin: 0 0 16px;
-    border: 1px solid rgba(238, 241, 236, 0.32); border-radius: var(--radius);
-    background: rgba(10, 19, 16, 0.55);
+    position: relative; display: flex; align-items: center; max-width: 520px; margin: 0 0 16px;
+    border-radius: 3px; background: #EEF1EC;
   }
-  .sab-hero-search:focus-within { border-color: #4AA873; }
-  .sab-hero-search-icon { position: absolute; left: 18px; color: rgba(238, 241, 236, 0.7); pointer-events: none; }
+  .sab-hero-search:focus-within { box-shadow: 0 0 0 3px #4AA873; }
+  .sab-hero-search-icon { position: absolute; left: 20px; color: #0B140E; pointer-events: none; }
   .sab-hero-search-input {
-    flex: 1; min-width: 0; height: 50px; padding: 0 8px 0 44px; border: 0; background: none;
-    font: 16px var(--font-body); color: #FFFFFF; outline: none;
+    flex: 1; min-width: 0; height: 58px; padding: 0 8px 0 48px; border: 0; background: none;
+    font: 17px var(--font-body); color: #0B140E; outline: none;
   }
-  .sab-hero-search-input::placeholder { color: rgba(238, 241, 236, 0.66); }
+  .sab-hero-search-input::placeholder { color: rgba(11, 20, 14, 0.62); }
   .sab-hero-search-btn {
-    height: 40px; margin-right: 5px; padding: 0 18px; border: 0; border-radius: var(--radius); cursor: pointer;
-    font: 600 15px var(--font-body); color: #EEF1EC; background: rgba(238, 241, 236, 0.12);
+    height: 48px; margin-right: 5px; padding: 0 22px; border: 0; border-radius: 2px; cursor: pointer;
+    font: 800 22px/1 var(--font-display); text-transform: uppercase; letter-spacing: 0.02em;
+    color: #0B140E; background: #4AA873;
   }
-  .sab-hero-search-btn:hover { background: rgba(238, 241, 236, 0.22); }
+  .sab-hero-search-btn:hover { background: #66B987; }
+  /* Chrome's clear button is a blue cross; this one is the bar's ink. */
+  .sab-hero-search-input::-webkit-search-cancel-button {
+    -webkit-appearance: none; width: 14px; height: 14px; cursor: pointer;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M2 2l10 10M12 2 2 12' stroke='%230B140E' stroke-width='2'/%3E%3C/svg%3E") center / 14px no-repeat;
+  }
+  /* Under 360px the three fields overran the box: the magnifier goes (the
+     button says Search) and the box gives its room to the words. */
+  @media (max-width: 359px) {
+    .sab-hero-search-icon { display: none; }
+    .sab-hero-search-input { padding: 0 2px 0 12px; font-size: 16px; }
+    .sab-hero-search-btn { padding: 0 11px; }
+  }
   .sab-hero-ctas { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
   /* One sentence, one line: a 62ch cap broke its last words onto their own row. Phones wrap. */
   .sab-hero .sab-hero-quiz { margin: 18px 0 0; font-size: var(--fs-body); line-height: 1.5; color: rgba(238, 241, 236, 0.88); white-space: nowrap; }
@@ -1412,7 +1410,9 @@ const carousels = [
     .sab-h1 { font-size: clamp(38px, 11.5vw, 48px); margin-left: -0.043em; text-wrap: balance; }
     .sab-h1-l { display: inline; white-space: normal; }
     .sab-h1-l1, .sab-h1-l2 { margin-left: 0; }
-    .sab-hero-bottom { flex-direction: column; align-items: stretch; gap: 0; margin-top: 16px; padding-bottom: 20px; }
+    /* nowrap: a wrapping column sizes its line to its widest content, so the
+       search and buttons ran 34px past a 320px screen (2026-10-12). */
+    .sab-hero-bottom { flex-direction: column; flex-wrap: nowrap; align-items: stretch; gap: 0; margin-top: 16px; padding-bottom: 20px; }
     .sab-hero-copy { max-width: none; }
     .sab-hero .sab-hero-quiz { white-space: normal; }
     .sab-hero-p-l1 { display: inline; white-space: normal; }
