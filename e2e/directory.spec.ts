@@ -180,7 +180,9 @@ test('on a phone, filters fold behind one button that counts them', async ({ pag
   await expect(page.locator('.sabl-rail')).toBeHidden();
   await expect(page.locator('[data-fselect="sort"]:visible')).toHaveCount(0);
   await expect(page.locator('[data-dir-filter-n]')).toHaveText('1');
-  // The first card is on the first screen.
+  // The photo head fills the first screen (Ilia, 2026-10-12); its arrow
+  // brings the first card into view.
+  await page.locator('.sabl-hero-down').click();
   await expect(page.locator('[data-dir-card]:visible').first()).toBeInViewport();
   await btn.click();
   await expect(btn).toHaveAttribute('aria-expanded', 'true');

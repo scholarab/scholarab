@@ -2155,3 +2155,15 @@ Repair record: the column first started 32px below the bar, because the director
 Measurements (local, built site against production, first listing row top in CSS px): 1440x900 /scholarships/ 407 to 213, /scholarships/calgary/ 752 to 565 (630 before the photo head); 1100x760 /scholarships/ 632 to 213; 390x844 /scholarships/ 327 unchanged, /scholarships/calgary/ 585 to 569. Hub pages no longer fetch a photo (Calgary was 79 KB on a phone, 370 KB on a 2x laptop). src and e2e 132 lines added, 215 removed.
 
 Validation: npm run ci passes lint, 1,271 Vitest tests and the build; astro check's 11 errors are the pre-existing private/counsellor-drafts-50-2026-10-09/gate symlink. Playwright passes with a new test that holds the layout (first row under 260px at 1440x900, the search box and the filters still on screen after scrolling); the shared toolbar-height test leaves tool-layout pages out. Built site checked at 1440, 1100 and 390, and in the browser pane: Type, Sort and Clear filters from the column (sort stays in step with the toolbar's copy, the URL updates).
+
+## Full-screen photo heads, October 12, 2026
+
+Outcome: Ilia did not like the jobs-style column on /scholarships/ and asked for the photo the way spacex.com and the home page have it, the whole first screen. Every hub with a photo (12 scholarship scopes, 8 program formats) and now /scholarships/ itself (the Province-wide Lake Louise photo) opens on a full-screen photo under the see-through bar, the heading in big white type at its foot, the standfirst under it and a See the list arrow that lands on the search box. The scrim is the home page's. Topic hubs without a photo keep the white heading.
+
+Removal: the tool layout on /scholarships/ (its prop, about 70 lines of CSS and its test), reverted to the photo head code of c19f4de rather than rebuilt. The photo head CSS lost its fixed short height. Candidates 1, added back 0 (0%). No failure was invented for the 10% target.
+
+Repair record: the hero heading had never reached its own size. A later shared rule for the white page heading set it to 68px on desktop and 36px on phones; the hero is now out of that rule.
+
+Measurements (local, built site, CSS px): on load the first listing is below the first screen on every photo page, by design. After See the list, /scholarships/ first row at 199 (1440x900) and 167 (390x844). Bytes: /scholarships/ now fetches the Lake Louise crop (tall 1000 on phones, wide 1672 or 3344 on laptops), as the hubs already did.
+
+Validation: npm run ci passes lint, 1,271 Vitest tests and the build; astro check's 11 errors are the pre-existing private/counsellor-drafts-50-2026-10-09/gate symlink. Playwright passes, including the pixel-measured contrast test over every photo head, /scholarships/ added (heading 3:1, standfirst 4.5:1, laptop and phone). The phone filter test now reaches the first card through the arrow instead of expecting it on the first screen.

@@ -2,6 +2,8 @@
 // Server-rendered replacement for the old ProgramList React island.
 // All cards are in the HTML (build-time closed ones hidden); directory-client
 // shows/hides/reorders them, so the page ships no React.
+import SabHero from './SabHero.astro';
+import type { PhotoCredit } from '../../lib/photo-credits';
 import SabStatusHelp from './SabStatusHelp.astro';
 import { STATUS_WORDS } from '../../lib/status.ts';
 import { showingLine, DEFAULT_PROGRAM_STATE, DIRECTORY_PAGE_SIZE, PROGRAM_GROUP_LABELS, directoryCountLine, filterSortPrograms, groupRuns, programGroupKey, programOpenNowCount, programWhen } from '../../lib/list-core.ts';
@@ -29,6 +31,8 @@ interface Props {
       top of the page; hubs and /programs alike. The scholarship twin; see the
       note there. */
   railFilters?: boolean;
+  /** A format hub with a photo: it heads the page behind the header (SabHero). */
+  photo?: { backdrop: string; credit?: PhotoCredit };
 }
 const {
   items,
@@ -38,6 +42,7 @@ const {
   currentField = null,
   currentFormat = null,
   railFilters = false,
+  photo,
 } = Astro.props;
 
 // A hub named by a jargon word says what the word means under its heading.
@@ -83,13 +88,16 @@ const openNow = programOpenNowCount(initial);
   {/* The scholarship twin's wrapper, and load-bearing on a railed hub: it is
       what puts the heading and the toolbar in the right-hand column beside the
       filter rail. Without it both would auto-place into the rail's column. */}
-  <div class="sabl-head">
-  <div class="sabl-title-row">
-    <div>
-      <h1 class="sabl-h1">{h1}</h1>
-      <p class="sabl-desc">{intro}</p>
+  {photo && <SabHero h1={h1} intro={intro} photo={photo} />}
+  <div class="sabl-head" id="sabl-list">
+  {!photo && (
+    <div class="sabl-title-row">
+      <div>
+        <h1 class="sabl-h1">{h1}</h1>
+        <p class="sabl-desc">{intro}</p>
+      </div>
     </div>
-  </div>
+  )}
 
   <div class="sabl-toolbar">
     <div class="sabl-search">

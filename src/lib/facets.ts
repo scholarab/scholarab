@@ -83,11 +83,12 @@ export interface Facet {
   /** Guide slug that explains this facet, cross-linked both ways. */
   guide?: string;
   /**
-   * The hub's photo: its header menu tile and its home carousel card. The
-   * hub page itself has none (a list is a tool page, 2026-10-12). Needs five
-   * files in public/photos/backdrops/: <name>-wide-{1672,3344}.webp,
-   * <name>-tall-{1000,2000}.webp (home carousel) and <name>-tile.webp (the
-   * menu tile). Credits in public/photos/CREDITS.md and src/lib/photo-credits.ts.
+   * The hub's photo: the page's photo head under the see-through header
+   * (SabHero, 2026-10-12), its header menu tile and its home carousel card.
+   * Needs five files in public/photos/backdrops/: <name>-wide-{1672,3344}.webp
+   * (desktop head), <name>-tall-{1000,2000}.webp (phone head, home carousel)
+   * and <name>-tile.webp (the menu tile). Credits in public/photos/CREDITS.md
+   * and src/lib/photo-credits.ts.
    */
   backdrop?: string;
   /**
