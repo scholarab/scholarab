@@ -183,7 +183,7 @@ const isActive = (href: string, also: string[] = []) =>
 <header class="sabh" data-sab-header>
   <div class="sabh-nav">
     <a href="/" class="sabh-logo" aria-label="ScholarAB home">
-      <img src="/brand/scholarab-logo-on-dark.svg" alt="" width="179" height="36" />
+      <img src="/brand/scholarab-logo-on-dark.svg" alt="" width="107" height="24" />
     </a>
     <div class="sabh-actions">
       <!-- The site nav is a real landmark: it is the only way to jump past
@@ -324,16 +324,13 @@ const isActive = (href: string, also: string[] = []) =>
        fold, and a height that moves with a font metric would move the fold. */
     height: var(--sab-nav-h);
   }
-  /* The logo (2026-10-07): Alberta in a cap + the lettered name, one SVG drawn for dark
-     backgrounds. Its size is fixed in the markup, so it never shifts the bar. */
+  /* The logo (2026-10-11): Scholar in Big Shoulders, the site's headline face, with AB cut
+     out of a green plate, one SVG drawn for dark backgrounds. Its size is fixed in the markup, so it
+     never shifts the bar. */
   .sabh-logo { display: flex; align-items: center; text-decoration: none; justify-self: start; }
-  /* 36px tall in the 52px bar: at 24px a first-time visitor could not make out
-     the cap or the name (Ilia, 2026-10-07, against spacex.com's bar). Narrower
-     where the centred links need the room, and on phones beside the menu button. */
+  /* 24px tall at every width, so the lowercase reads at 16px, and no wider than the
+     old logo. */
   .sabh-logo img { display: block; }
-  @media (min-width: 901px) and (max-width: 1100px) { .sabh-logo img { width: 150px; height: 30px; } }
-  @media (min-width: 901px) and (max-width: 1000px) { .sabh-logo img { width: 130px; height: 26px; } }
-  @media (max-width: 900px) { .sabh-logo img { width: 159px; height: 32px; } }
   /* The wrapper only exists so the burger can sit beside the links in the
      markup; on desktop the links take the middle column and the burger the
      last, as if the wrapper were not there. */
