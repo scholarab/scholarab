@@ -174,9 +174,10 @@ const font = (name: string) => readFileSync(join(__dirname, 'og-fonts', name));
 const fonts = [
   { name: 'Big Shoulders', data: font('big-shoulders-800.ttf'), weight: 800 as const, style: 'normal' as const },
   { name: 'Big Shoulders Label', data: font('big-shoulders-700.ttf'), weight: 700 as const, style: 'normal' as const },
-  { name: 'Public Sans', data: font('public-sans-700.ttf'), weight: 700 as const, style: 'normal' as const },
 ];
 
+// The dark-background logo, as the header and the OG images use it.
+const LOGO = 'data:image/svg+xml;base64,' + readFileSync(join(__dirname, '../public/brand/scholarab-logo-on-dark.svg')).toString('base64');
 const INK = '#EEF1EC';
 const GREEN = '#4AA873';
 const BG = '#0B1512';
@@ -216,10 +217,7 @@ function card(p: Post, height: number) {
       ]),
     ]),
     el('div', { display: 'flex', flexDirection: 'column', gap: 22, borderTop: '1px solid rgba(238,241,236,0.2)', paddingTop: 34 }, [
-      el('div', { display: 'flex', fontFamily: 'Public Sans', fontSize: 46, fontWeight: 700 }, [
-        el('span', {}, 'Scholar'),
-        el('span', { color: GREEN }, 'AB'),
-      ]),
+      { type: 'img', props: { src: LOGO, width: 213, height: 48 } },
       el('div', { fontFamily: 'Big Shoulders Label', fontWeight: 700, fontSize: 26, letterSpacing: 2, color: 'rgba(238,241,236,0.6)' },
         'LINK IN BIO · SCHOLARAB.CA'),
     ]),
