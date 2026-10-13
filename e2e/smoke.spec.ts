@@ -233,7 +233,6 @@ test('every field hub links to every other field', async ({ page }, testInfo) =>
 test('header dropdowns hang under their label, five rows at most', async ({ page }, testInfo) => {
   test.skip(testInfo.project.name === 'mobile', 'desktop layout');
   await page.goto('/about/');
-  const width = page.viewportSize()!.width;
   for (const label of ['Scholarships', 'Programs', 'Explore']) {
     // The label itself is the toggle (2026-10-12).
     const toggle = page.locator(`[aria-controls="sabh-menu-${label.toLowerCase()}"]`);
@@ -246,8 +245,8 @@ test('header dropdowns hang under their label, five rows at most', async ({ page
     expect(await rows.count()).toBeLessThanOrEqual(5);
     const labelLeft = (await page.locator('.sabh-has-menu .sabh-link-label', { hasText: label }).boundingBox())!.x;
     expect(Math.abs((await rows.first().boundingBox())!.x - labelLeft)).toBeLessThan(2);
-    await expect(page.locator('.sabh-drop')).toHaveAttribute('data-on', '');
-    expect((await page.locator('.sabh-drop').boundingBox())!.width).toBeGreaterThan(width * 0.9);
+    // Words over the page, as on home: no panel behind the list (2026-10-12).
+    expect(await menu.evaluate(el => getComputedStyle(el).backgroundColor)).toBe('rgba(0, 0, 0, 0)');
     await toggle.press('Enter');
   }
 });
@@ -264,8 +263,6 @@ test('clicking a menu label opens its list and stays on the page', async ({ page
   }
 });
 
-// Moving from Scholarships to Programs switches the panel in place: the shared
-// background stays open and only the contents change.
 // The home bar has no background at all, even with a menu open (Ilia,
 // 2026-10-03): the open menu is words over the film, as on spacex.com.
 test('home header stays see-through with a menu open', async ({ page }, testInfo) => {
@@ -273,30 +270,31 @@ test('home header stays see-through with a menu open', async ({ page }, testInfo
   await page.goto('/');
   await page.locator('.sabh-has-menu .sabh-link').first().hover();
   await expect(page.locator('#sabh-menu-scholarships')).toBeVisible();
-  await expect(page.locator('.sabh-drop')).toBeHidden();
   const ground = await page.locator('.sab-hero-band').evaluate(el => getComputedStyle(el).backgroundColor);
   expect(ground).toBe('rgba(0, 0, 0, 0)');
 });
 
+// Moving from Scholarships to Programs switches the list in place: the fade
+// behind it stays on and only the words change.
 test('header dropdown switches without closing', async ({ page }, testInfo) => {
   test.skip(testInfo.project.name === 'mobile', 'desktop layout');
   await page.goto('/about/');
-  const drop = page.locator('.sabh-drop');
   await page.locator('.sabh-has-menu .sabh-link').first().hover();
-  await expect(drop).toHaveAttribute('data-on', '');
+  await expect(page.locator('html')).toHaveAttribute('data-sab-menu', '');
   await expect(page.locator('#sabh-menu-scholarships')).toBeVisible();
-  // Record every time the background turns off during the move.
-  await drop.evaluate(el => {
+  // Record every time the page's fade behind the menu turns off during the move.
+  await page.evaluate(() => {
     (window as unknown as { dropOff: number }).dropOff = 0;
-    new MutationObserver(() => { if (!el.hasAttribute('data-on')) (window as unknown as { dropOff: number }).dropOff++; })
-      .observe(el, { attributes: true, attributeFilter: ['data-on'] });
+    const el = document.documentElement;
+    new MutationObserver(() => { if (!el.hasAttribute('data-sab-menu')) (window as unknown as { dropOff: number }).dropOff++; })
+      .observe(el, { attributes: true, attributeFilter: ['data-sab-menu'] });
   });
   await page.locator('.sabh-has-menu .sabh-link').nth(1).hover();
   await expect(page.locator('#sabh-menu-programs')).toBeVisible();
   await expect(page.locator('#sabh-menu-scholarships')).toBeHidden();
   expect(await page.evaluate(() => (window as unknown as { dropOff: number }).dropOff)).toBe(0);
   await page.mouse.move(5, 600);
-  await expect(drop).not.toHaveAttribute('data-on', '');
+  await expect(page.locator('html')).not.toHaveAttribute('data-sab-menu', '');
 });
 
 // The scope carousel under the hero: one photo card per scope with a hub

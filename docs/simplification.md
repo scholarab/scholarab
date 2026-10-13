@@ -2338,3 +2338,12 @@ Outcome: a student landing on any scholarship list sees the largest open awards 
 - Changed: the panel ends on one 1px edge; the shared background's base height 400 to 150 so the edge is not squashed by the scale (desk lists are about 150px now); desk links use --ink-soft with a Lodgepole hover; the no-script light panel gets a white background.
 - Add-back: 0 of 3 removals.
 - Measured: 1,278 unit, 177 e2e passing; the 11 baseline private type errors unchanged.
+
+## 2026-10-12 Header menu works as on home, on every page
+
+- Outcome: an open header menu on a white page looks like the home page's, words over the page with no panel.
+- Removed: the shared .sabh-drop panel (markup, its CSS, and the script that sized it). Home already hid it, so after this change nothing drew it. The light panel rules from the earlier pass went with it.
+- Added: a white fall-off under the light bar while a menu is open, the mirror of home's black smoke, keyed off the existing html[data-sab-menu] flag. A no-script white panel stays so the list is readable without the fade.
+- Tests: the dropdown e2e now checks the list has no background, and the switch test watches data-sab-menu instead of the removed panel.
+- Add-back: 0 of 1 removal.
+- Measured: 1,278 unit, 177 e2e passing; the 11 baseline private type errors unchanged.

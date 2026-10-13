@@ -195,12 +195,6 @@ const isActive = (href: string, also: string[] = []) =>
            these links, or straight to them, without walking the whole page. -->
       <nav class="sabh-links" id="sabh-links" aria-label="Main">
         <div class="sabh-sheet-label" aria-hidden="true"></div>
-        {/* The dropdown's background, shared by every panel (desktop): the
-            dark bar grows down into one band and stays open from one menu to
-            the next while only the list changes. Not drawn on the home page,
-            whose bar has no background at all (spacex.com). The script sets
-            its height. */}
-        <span class="sabh-drop" aria-hidden="true"></span>
         {navItems.map(n => (
           <div class={`sabh-item${MENUS[n.href] ? ' sabh-has-menu' : ''}`}>
             {/* A row with a menu is a button, not a link (Ilia, 2026-10-12,
@@ -370,25 +364,11 @@ const isActive = (href: string, also: string[] = []) =>
     .sabh-has-menu:hover .sabh-link { color: #EEF1EC; background: rgba(238, 241, 236,0.08); }
   }
   /* With the script running (data-drop), the panels lose their own
-     background and slide, and sit on one shared .sabh-drop instead, so moving
-     between Scholarships and Programs is a crossfade on a panel that never
-     closes. The old panel fades out quickly; the new one fades in just behind
-     it. Without the script, each panel keeps its own look above. */
-  .sabh-drop { display: none; }
+     background and slide, so moving between Scholarships and Programs is a
+     crossfade: the old list fades out quickly, the new one just behind it.
+     No panel sits behind them on any page (Ilia, 2026-10-12, as on home).
+     Without the script, each panel keeps its own look above. */
   @media (min-width: 901px) {
-    .sabh-drop {
-      display: block; position: absolute; left: 0; right: 0; top: 100%; z-index: 4;
-      /* Sized by transform, not height (compositor only). The base height sits
-         inside the panels' range, so the scale stays near 1 and the 1px rule
-         and the shadow never visibly stretch. */
-      height: 150px; transform-origin: top; transform: scaleY(0); pointer-events: none;
-      background: #0A1310; border-top: 1px solid rgba(238, 241, 236,0.08);
-      box-shadow: 0 24px 40px -20px rgba(0,0,0,0.6);
-      opacity: 0; visibility: hidden;
-      transition: opacity 0.22s ease, transform 0.32s cubic-bezier(0.4, 0, 0.2, 1), visibility 0s linear 0.22s;
-    }
-    .sabh-drop[data-on] { opacity: 1; visibility: visible; transition-delay: 0s; }
-    .sabh-drop[data-snap] { transition: opacity 0.22s ease, visibility 0s; }
     .sabh[data-drop] .sabh-menu {
       background: transparent; border-top-color: transparent; box-shadow: none; transform: none;
       transition: opacity 0.14s ease, visibility 0s linear 0.14s;
@@ -396,9 +376,6 @@ const isActive = (href: string, also: string[] = []) =>
     .sabh[data-drop] .sabh-has-menu[data-menu-open] .sabh-menu {
       transition: opacity 0.24s ease 0.06s, visibility 0s linear 0s;
     }
-  }
-  @media (min-width: 901px) and (prefers-reduced-motion: reduce) {
-    .sabh-drop { transition: opacity 0.12s ease, visibility 0s linear 0.12s; }
   }
   .sabh-menu-inner {
     max-width: var(--sab-measure); margin: 0 auto; box-sizing: border-box;
@@ -731,32 +708,16 @@ const isActive = (href: string, also: string[] = []) =>
     if (open) header?.querySelectorAll<HTMLElement>('.sabh-has-menu[data-menu-open]').forEach(o => { if (o !== item) setDropdown(o, false); });
     item.toggleAttribute('data-menu-open', open);
     item.querySelector<HTMLElement>('[data-sabh-toggle]')?.setAttribute('aria-expanded', String(open));
-    syncDrop();
+    syncMenuFlag();
   }
 
-  // Sizes the shared background to whichever panel is open. Opening from
-  // closed takes the height at once and fades in; a switch between panels
-  // animates the height, so the background itself never closes.
-  const DROP_BASE = 150; // .sabh-drop's CSS height
-  function syncDrop() {
+  function syncMenuFlag() {
     const panel = header?.querySelector<HTMLElement>('.sabh-has-menu[data-menu-open] .sabh-menu') ?? null;
-    // What the home page dims and darkens under an open menu keys off this
-    // attribute. An `html:has([data-menu-open])` rule did the same, but
-    // Firefox then restyled the whole page on every pointer move over the
-    // open list, and the film and the page stalled (2026-10-06).
+    // What every page dims under an open menu keys off this attribute. An
+    // `html:has([data-menu-open])` rule did the same, but Firefox then
+    // restyled the whole page on every pointer move over the open list, and
+    // the film and the page stalled (2026-10-06).
     document.documentElement.toggleAttribute('data-sab-menu', !!panel);
-    const drop = header?.querySelector<HTMLElement>('.sabh-drop');
-    if (!drop) return;
-    if (!panel) {
-      drop.removeAttribute('data-on');
-      return;
-    }
-    const first = !drop.hasAttribute('data-on');
-    drop.toggleAttribute('data-snap', first);
-    drop.style.transform = `scaleY(${panel.offsetHeight / DROP_BASE})`;
-    if (first) void drop.offsetHeight;
-    drop.removeAttribute('data-snap');
-    drop.setAttribute('data-on', '');
   }
 
   // Desktop hover drives the same open state the keyboard toggle does. A

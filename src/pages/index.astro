@@ -840,7 +840,6 @@ const carousels = [
     box-shadow: none;
     border-bottom-color: transparent;
   }
-  .sab-hero-band .sabh-drop { display: none; }
   .sab-hero-band .sabh-menu-desk a { text-shadow: 0 1px 8px rgba(0, 0, 0, 0.55); }
   /* Desktop: the smoke behind spacex.com's bar (Ilia, 2026-10-03). A soft
      black fall-off under the see-through header, and a deeper, taller one
@@ -860,7 +859,7 @@ const carousels = [
       height: 330px; opacity: 0;
       background: linear-gradient(180deg, rgba(0, 0, 0, 0.88) 0, rgba(0, 0, 0, 0.72) 40%, rgba(0, 0, 0, 0) 100%);
     }
-    /* data-sab-menu is set by the header script, never by :has(): see syncDrop. */
+    /* data-sab-menu is set by the header script, never by :has(): see syncMenuFlag. */
     html[data-sab-menu] .sab-hero-band::after { opacity: 1; }
     /* On a short window the open list lands on the headline, which is
        centred in the fold; it fades back while a menu is open so the list

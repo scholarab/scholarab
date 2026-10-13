@@ -322,17 +322,24 @@ body > .sabp-header { background: transparent; color: inherit; border-bottom: 0;
 .sabh[data-tone='light']:not([data-open]) :is(.sabh-how:hover, .sabh-social a:hover) { background: rgba(20, 25, 21, 0.06); }
 .sabh[data-tone='light']:not([data-open]) .sabh-how-i { background: rgba(20, 25, 21, 0.08); }
 .sabh[data-tone='light']:not([data-open]) .sabh-burger span { background: #141915; }
-/* An open menu and the bar read as one white sheet: the bar's hairline steps
-   down to the panel's bottom edge instead of running between the label and
-   its list. */
-html[data-sab-menu] .sabh[data-tone='light']:not([data-open]) { box-shadow: none; }
-.sabh[data-tone='light']:not([data-open]) .sabh-drop {
-  background: #FFFFFF; border-top-color: transparent;
-  box-shadow: 0 1px 0 rgba(20, 25, 21, 0.1), 0 20px 32px -24px rgba(20, 25, 21, 0.3);
-}
+/* An open menu works as on the home page (Ilia, 2026-10-12): no panel, the
+   list is words over the page, with a soft white fall-off under the bar in
+   place of home's black smoke. The bar's hairline goes while a menu is open
+   so nothing runs between a label and its list. data-sab-menu comes from the
+   header script (see syncMenuFlag). */
+/* Without the script there is no fade, so the list keeps a white panel. */
 .sabh[data-tone='light']:not([data-open]):not([data-drop]) .sabh-menu { background: #FFFFFF; }
+html[data-sab-menu] .sabh[data-tone='light']:not([data-open]) { box-shadow: none; }
 .sabh[data-tone='light']:not([data-open]) .sabh-menu-desk a { color: var(--ink-soft); }
 .sabh[data-tone='light']:not([data-open]) .sabh-menu-desk a:hover { color: #0A5632; }
+@media (min-width: 901px) {
+  .sabh[data-tone='light']::after {
+    content: ''; position: absolute; left: 0; right: 0; top: 100%; z-index: 4;
+    height: 260px; pointer-events: none; opacity: 0; transition: opacity 0.25s ease;
+    background: linear-gradient(180deg, #FFFFFF 0, rgba(255, 255, 255, 0.94) 50%, rgba(255, 255, 255, 0) 100%);
+  }
+  html[data-sab-menu] .sabh[data-tone='light']:not([data-open])::after { opacity: 1; }
+}
 /* Hides on the way down, comes back on the way up (Ilia, 2026-10-02, after
    spacex.com). SabHeader's scroll reader sets data-sab-hidden on <html>.
    Only the banner moves: title bands inside <main> reuse .sabp-header, and
