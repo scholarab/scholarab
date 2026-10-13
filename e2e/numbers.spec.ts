@@ -10,6 +10,8 @@ const num = (s: string | null | undefined) => Number((s ?? '').replace(/[^\d]/g,
 
 // A hub's own figures: every listing on it, and its OPEN NOW heading.
 async function hubCounts(page: Page): Promise<{ total: number; open: number }> {
+  // A split page has every card once its rest is in (scripts/split-directories.ts).
+  await expect(page.locator('[data-dir-rest]')).toHaveCount(0);
   const open = page.locator('.sabl-group-name', { has: page.locator('.sabl-group-label', { hasText: /^open now$/i }) }).locator('.sabl-group-count');
   return { total: await page.locator('[data-dir-card]').count(), open: (await open.count()) ? num(await open.first().textContent()) : 0 };
 }

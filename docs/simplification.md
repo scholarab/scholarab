@@ -2357,3 +2357,13 @@ Outcome kept: day chips and Apply labels are correct for the visitor's clock on 
 - Kept: the shared SabFonts stylesheet (105KB raw, cached site-wide) and the two sub-1KB blocking files, which share its critical path.
 - Add-back fraction: 2 of 3 candidates restored.
 - Measured locally, Lighthouse 13.5 mobile, brotli static server, 3 runs each. Before: score 72 to 78, TBT 200 to 370ms. After: score 80 every run, TBT 20 to 30ms. FCP 3.0s and LCP 3.3s unchanged. Desktop TBT 40ms to 0ms. Hosted PageSpeed not yet re-measured.
+
+## 2026-10-13: directory pages ship their first screen only (no visual change)
+
+Outcome kept: every listing is on the directory for a reader with JavaScript, and one link away without it. The page looks exactly as before.
+
+- Removed: 1,667 hidden cards from the /scholarships/ HTML (3.6 MB, 358 KiB on the wire), and the same on 31 other directory pages, 13.2 MB of HTML down to 3.4 MB. Lighthouse's slow-4G phone waits for the whole document before first paint, so this was the 3.0s FCP.
+- How: `scripts/split-directories.ts` runs after `astro build`. It copies each page whole to `<page>/all/` (noindex, follow) and keeps only headings and first-step cards in the page. directory-client fetches the rest, appends it 60 cards per task, then renders. Taps and typing during the fetch change state and the first render applies them.
+- No-JS: the page ends in "Show every listing", linking to the full copy. The e2e no-JS test follows that link and still counts every listing.
+- Verified: 72 full-page screenshots (32 pages x 2 widths, plus sort, ?show, Show more, Show all) pixel-identical to the unsplit copy from the same build.
+- Measured locally, Lighthouse 13.5 mobile, brotli static server. /scholarships/ went from 80 to 95-98 (FCP 3.0s to 1.7-1.9s, LCP 3.3s to 2.2-2.5s, SI 7.0s to 1.8-2.9s). Edmonton, Alberta and /programs/ scored 97-98, desktop 100. Hosted PageSpeed to be re-measured after deploy.

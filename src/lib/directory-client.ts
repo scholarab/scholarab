@@ -296,7 +296,7 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
   }
 
   function render() {
-    if (!root) return;
+    if (!root || pending) return;
     if (emptyTimer) { clearTimeout(emptyTimer); emptyTimer = undefined; }
 
     const url = new URL(location.href);
@@ -573,6 +573,9 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     const step = t.closest<HTMLElement>('[data-dir-more-btn], [data-dir-all]');
     if (step) {
       const before = Math.min(shown, visible.length);
+      // Show all needs the match count, which a split page only has once its
+      // rest is in; the load applies a press made before then.
+      if (pending && step.matches('[data-dir-all]')) showAllOnLoad = true;
       shown = step.matches('[data-dir-all]') ? Math.max(pageSize, visible.length) : shown + pageSize;
       render();
       // Once everything is out the block hides, taking the pressed button with
@@ -676,8 +679,17 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
 
   // Fires on first load and after every view-transition swap: re-grab nodes,
   // restore URL filter state, and re-derive anything clock- or storage-dependent.
-  document.addEventListener('astro:page-load', () => {
+  // A split page (scripts/split-directories.ts) holds only its first-step
+  // cards until the rest arrive. Everything else starts at once, so a tap or a
+  // typed word in the meantime still lands: it changes state, and the first
+  // render, held until every card is in, applies it.
+  let pending = false;
+  let showAllOnLoad = false;
+  let loadToken = 0;
+  document.addEventListener('astro:page-load', async () => {
     root = document.querySelector<HTMLElement>(rootSelector);
+    pending = false;
+    showAllOnLoad = false;
     if (!root) return;
     pageSize = Number(root.querySelector<HTMLElement>('[data-dir-step]')?.dataset.dirStep) || config.pageSize || DIRECTORY_PAGE_SIZE;
     // The layout sets this in <head>; repeated here so a page built on another
@@ -712,9 +724,51 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     setSearchOpen(!!query);
     setFiltersOpen(false);
     paintSaved();
+    const rest = root.querySelector<HTMLElement>('[data-dir-rest]');
+    if (rest) {
+      // The cards on screen get their clock paint now, not after the fetch.
+      for (const it of items) { painted.add(it.el); config.paintCard?.(it); }
+      const token = ++loadToken;
+      const here = root;
+      pending = true;
+      await appendRest(rest, rest.dataset.dirRest!);
+      if (token !== loadToken || root !== here || !here.isConnected) return;
+      pending = false;
+      // Gone once every card is in: the signal tests wait on.
+      rest.removeAttribute('data-dir-rest');
+      items = [...here.querySelectorAll<HTMLElement>('[data-dir-card]')].map(config.parseCard);
+      paintSaved();
+      if (showAllOnLoad) { render(); shown = Math.max(pageSize, visible.length); }
+    }
     render();
     restoreScroll();
   });
+
+  /**
+   * Appends a split page's hidden cards from its whole copy, 60 to a task so
+   * no task blocks a tap. A card already on the page (a cached page against a
+   * newer copy) is skipped. A failed fetch leaves the first-step cards, which
+   * still filter and sort among themselves.
+   */
+  async function appendRest(grid: HTMLElement, href: string) {
+    let html: string;
+    try {
+      const res = await fetch(href);
+      if (!res.ok) return;
+      html = await res.text();
+    } catch { return; }
+    const have = new Set([...grid.querySelectorAll<HTMLElement>('[data-dir-card]')].map(el => el.dataset.id));
+    const cards = [...html.matchAll(/<!--c-->([\s\S]*?)<!--\/c-->/g)]
+      .map(m => m[1]!)
+      .filter(c => !have.has(/data-id="([^"]*)"/.exec(c)?.[1] ?? ''));
+    const end = grid.querySelector(':scope > noscript');
+    const tpl = document.createElement('template');
+    for (let i = 0; i < cards.length; i += 60) {
+      tpl.innerHTML = cards.slice(i, i + 60).join('');
+      grid.insertBefore(tpl.content, end);
+      await new Promise(r => setTimeout(r, 0));
+    }
+  }
 
   /** One-shot: put a reader back where they left this exact list. */
   function restoreScroll() {

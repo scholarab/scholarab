@@ -53,7 +53,12 @@ const unique = items.find(s => items.filter(x => scholarshipSearchBlob(x).includ
 const query = unique.title;
 test('all listings and program hub navigation remain accessible without JavaScript', async ({ browser, baseURL, viewport }) => {
   const page = await browser.newPage({ javaScriptEnabled: false, viewport });
+  // The page ships its first step (scripts/split-directories.ts); the rest is
+  // one link away, every listing on one page.
   await page.goto(`${baseURL}/scholarships/`);
+  await expect(page.locator('[data-dir-card]:visible')).toHaveCount(DIRECTORY_PAGE_SIZE);
+  await page.getByRole('link', { name: 'Show every listing' }).click();
+  await expect(page).toHaveURL(/\/scholarships\/all\/$/);
   await expect(page.locator('[data-dir-card]:visible')).toHaveCount(items.length);
 
   // The tab line is plain links, so every program page is one click away.
@@ -74,6 +79,7 @@ test('all listings and program hub navigation remain accessible without JavaScri
 
 test('search preserves results, groups, chips, money, closed awards and history', async ({ page }) => {
   await page.goto('/scholarships/');
+  await expect(page.locator('[data-dir-rest]')).toHaveCount(0);
   await openFilters(page);
   const historyLength = await page.evaluate(() => history.length);
   for (const sortBy of ['highest_pay', 'lowest_pay', 'closest_due'] as const) {
@@ -335,6 +341,7 @@ test('detail arrows walk the filtered search in both directions', async ({ page 
 
 test('program Details links preserve filtered previous and next arrows', async ({ page }) => {
   await page.goto('/programs/');
+  await expect(page.locator('[data-dir-rest]')).toHaveCount(0);
   const total = await page.locator('[data-dir-card]').count();
   // Any filter that leaves several programs will do; GRADE and then STATUS
   // were the ones driven here, both since deleted, so this walks FORMAT.
@@ -364,6 +371,7 @@ test('program Details links preserve filtered previous and next arrows', async (
 
 test('program format and field intersect and survive reload and a detail visit', async ({ page }) => {
   await page.goto('/programs/');
+  await expect(page.locator('[data-dir-rest]')).toHaveCount(0);
   const pair = await page.locator('[data-dir-card]').evaluateAll(cards => {
     const found = cards.find(c => c.getAttribute('data-category') === 'Computing' && c.getAttribute('data-format') === 'research');
     if (!found) throw new Error('Expected a computing research program in the published fixture');

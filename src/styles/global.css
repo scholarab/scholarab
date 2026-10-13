@@ -1312,6 +1312,8 @@ html:not(.js) .sabl-tool[data-dir-search-btn], html:not(.js) .sabl-tool[data-dir
    data-dir-later on its first render and uses `hidden` from then on. */
 html.js .sabl-grid [data-dir-later],
 html.js .sabl-grid [data-dir-shut] { display: none; }
+/* A split page's way to every listing without JS (scripts/split-directories.ts). */
+.sabl-grid > noscript { grid-column: 1 / -1; }
 html:not(.js) .sabl-more { display: none; }
 .sabl-more-line { font-size: 14px; color: var(--ink-muted); margin: 0; }
 .sabl-more-actions { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 10px 22px; }
