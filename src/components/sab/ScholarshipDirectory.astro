@@ -128,16 +128,22 @@ const chipSource = allItems;
 // University & college awards is a page, not a place to live: left out.
 const regionFacets = SCHOLARSHIP_FACETS
   .filter(f => f.kind === 'region' && !f.bySchool && facetItems(f, chipSource).length >= MIN_FACET_ITEMS);
-// The two broad scopes first, then the towns A to Z. Biggest-first put Brooks
-// somewhere in the middle of 27 chips, and a student looks for their town by
-// name, not by how many awards it has.
+// Ilia's order (2026-10-12): National, Province-wide, the cities by 2021
+// census population (the quiz's city order, sources in docs/simplification.md),
+// then the three zones north to south. A place missing here goes last, A to Z.
+const PLACE_ORDER = [
+  'national', 'alberta',
+  'calgary', 'edmonton', 'red-deer', 'lethbridge', 'fort-mcmurray', 'grande-prairie', 'medicine-hat',
+  'northern-alberta', 'central-alberta', 'southern-alberta',
+];
+const placeRank = (slug: string) => { const i = PLACE_ORDER.indexOf(slug); return i < 0 ? PLACE_ORDER.length : i; };
 const regionChips = regionFacets
   .map(f => ({ slug: f.slug, label: f.label, count: facetItems(f, chipSource).length, broad: !!f.broad }))
-  .sort((a, b) => Number(b.broad) - Number(a.broad) || (a.broad ? b.count - a.count : a.label.localeCompare(b.label)));
+  .sort((a, b) => placeRank(a.slug) - placeRank(b.slug) || a.label.localeCompare(b.label));
 // Which hubs a row belongs to, by the hubs' own test (facetMatches counts
 // alsoOpenTo, which the client's regionMatches does not), so the client can
 // recount the SCOPE row under the live filters with the hub's own arithmetic.
-// All, the two broad lists, the places A to Z, the school awards page, then
+// All, the places in PLACE_ORDER, the school awards page, then
 // the kinds of award. The same line on every scholarship page.
 const placeTabs = tabbed ? [
   { slug: '', label: 'All' },

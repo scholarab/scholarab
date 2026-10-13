@@ -2264,3 +2264,12 @@ Outcome: the desktop filter row looks like ScholarAB, not like the operating sys
 - Removed: the 36px select styling added an hour earlier for the desktop row, now unused.
 - Tests: a `pick` helper in directory.spec drives the menu on a desktop and the select on a phone; a new test covers choosing, the check, the keyboard and Escape. The first try hid the menu's focus ring, which the design-tokens test caught, so the items keep the site's ring. 1,276 unit and 176 e2e pass (20 skipped are the phone runs of desktop-only tests, as before plus the new one).
 - Add-back: none.
+
+## Place tabs in Ilia's order (2026-10-12)
+
+Outcome: a student finds their place where they expect it. Ilia's order: National, Province-wide, the cities by population, then the Northern, Central and Southern Alberta zones.
+
+- Changed: `regionChips` in ScholarshipDirectory sorts by one `PLACE_ORDER` list instead of "broad first by count, then A to Z". Cities follow the 2021 census order the quiz already uses (Calgary, Edmonton, Red Deer, Lethbridge, Fort McMurray, Grande Prairie, Medicine Hat). A place missing from the list goes last, A to Z, so a new hub still shows up.
+- Checked on the built Calgary page: All, National, Province-wide, Calgary area, Edmonton area, Red Deer, Lethbridge, Fort McMurray, Grande Prairie, Medicine Hat, Northern Alberta, Central Alberta, Southern Alberta, then Universities & colleges and the kinds of award as before.
+- Tests: 1,276 unit and 176 e2e pass, no test changes.
+- Add-back: none.
