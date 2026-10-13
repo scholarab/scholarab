@@ -3,7 +3,7 @@
 // All cards are in the HTML (build-time closed ones hidden); directory-client
 // shows/hides/reorders them, so the page ships no React.
 import { showingLine, DEFAULT_PROGRAM_STATE, DIRECTORY_PAGE_SIZE, PROGRAM_GROUP_LABELS, directoryCountLine, filterSortPrograms, groupRuns, programGroupKey, programOpenNowCount, programWhen } from '../../lib/list-core.ts';
-import { programSearchBlob } from '../../lib/search-text.ts';
+import { programSearchBlob, searchSuggestions } from '../../lib/search-text.ts';
 import type { ProgramFilterState, ProgramWithMeta } from '../../lib/list-core.ts';
 import { generateSlug, formatVerifiedMonth, isCheckStale } from '../../lib/utils.ts';
 import { PROGRAM_FACETS, PROGRAM_FORMATS, type Facet } from '../../lib/facets.ts';
@@ -11,6 +11,10 @@ import { ARROW_REF, BOOKMARK_REF, ICON_SPRITE } from '../../lib/icons.ts';
 import SabFilterSelect from './SabFilterSelect.astro';
 import SabDirBar from './SabDirBar.astro';
 import { FORMAT_TERMS, GLOSSARY } from '../../lib/glossary.ts';
+
+// Words to try under the empty search box, kept where they find 3 or more
+// programs on this page (searchSuggestions).
+const SEARCH_TRY = ['Summer camp', 'Engineering', 'Coding', 'Health', 'Math', 'Space', 'Writing', 'Robotics'];
 
 interface Props {
   items: ProgramWithMeta[];
@@ -86,7 +90,7 @@ const openNow = programOpenNowCount(initial);
     </div>
   </div>
 
-  <SabDirBar label="Program lists" tabs={tabs} searchPlaceholder="Search programs, universities, fields…" searchLabel="Search programs by name, university, or field" />
+  <SabDirBar label="Program lists" tabs={tabs} searchPlaceholder="Search programs" searchLabel="Search programs by name, university, or field" suggestions={searchSuggestions(items, programSearchBlob, SEARCH_TRY)} />
 
 
   </div>

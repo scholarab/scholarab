@@ -173,7 +173,7 @@ describe('initDirectory', () => {
     expect(visibleCardNames()).toEqual(['Beta Lab', 'Gamma Research'])
     expect(category.value).toBe('Science')
     expect(category.selectedOptions[0]?.textContent).toBe('Science (2)')
-    expect([...category.options].map(option => option.textContent)).toEqual(['All (3)', 'Science (2)', 'Arts (1)'])
+    expect([...category.options].map(option => option.textContent)).toEqual(['All', 'Science (2)', 'Arts (1)'])
     expect($('[data-dir-count]').textContent).toBe('2 OF 3 SHOWN')
     expect(new URL(location.href).searchParams.get('category')).toBe('Science')
   })
@@ -184,7 +184,7 @@ describe('initDirectory', () => {
     const category = selectFilter('category', 'all')
     expect(visibleCardNames()).toHaveLength(3)
     expect(category.value).toBe('all')
-    expect(category.selectedOptions[0]?.textContent).toBe('All (3)')
+    expect(category.selectedOptions[0]?.textContent).toBe('All')
     expect(new URL(location.href).searchParams.has('category')).toBe(false)
   })
 
@@ -195,7 +195,7 @@ describe('initDirectory', () => {
     input.value = 'alpha'
     input.dispatchEvent(new Event('input', { bubbles: true }))
     expect(visibleCardNames()).toEqual([])
-    expect([...category.options].map(option => option.textContent)).toEqual(['All (1)', 'Science (0)', 'Arts (1)'])
+    expect([...category.options].map(option => option.textContent)).toEqual(['All', 'Science (0)', 'Arts (1)'])
     expect(category.value).toBe('Science')
     selectFilter('category', 'Arts')
     expect(visibleCardNames()).toEqual(['Alpha Camp'])

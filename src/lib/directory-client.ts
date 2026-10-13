@@ -75,15 +75,42 @@ export interface DirectoryConfig<T extends DirectoryItem, S extends Record<strin
 const SCROLL_KEY = 'sab:dir-scroll';
 
 /**
- * The search row under the bar (SabDirBar): shut until its icon is pressed,
- * open on arrival when the URL carries a search.
+ * The search box in the bar (SabDirBar), in place of its icon: shut until the
+ * icon is pressed, open on arrival when the URL carries a search, and shut
+ * again when the reader leaves it empty (polymarket.com's box does the same).
  */
 function setSearchOpen(open: boolean, focus = false) {
   const row = document.querySelector<HTMLElement>('[data-dir-search-row]');
   if (!row) return;
   row.hidden = !open;
-  for (const btn of document.querySelectorAll<HTMLElement>('[data-dir-search-btn]')) btn.setAttribute('aria-expanded', String(open));
+  // Into the box before its icon hides: hiding the focused icon first would
+  // leave focus nowhere, and an empty box that loses focus shuts.
   if (open && focus) row.querySelector<HTMLInputElement>('input')?.focus();
+  for (const btn of document.querySelectorAll<HTMLElement>('[data-dir-search-btn]')) {
+    btn.setAttribute('aria-expanded', String(open));
+    btn.hidden = open;
+  }
+  paintFind();
+}
+
+/** The box's × while it holds text, and the words to try while it is empty and in use. */
+function paintFind() {
+  const input = document.querySelector<HTMLInputElement>('[data-dir-search]');
+  if (!input) return;
+  const clear = document.querySelector<HTMLElement>('[data-dir-search-clear]');
+  if (clear) clear.hidden = !input.value;
+  const suggest = document.querySelector<HTMLElement>('[data-dir-suggest]');
+  if (suggest) suggest.hidden = !!input.value || document.activeElement !== input;
+}
+
+/** Puts words in the box as if typed, so the list and the URL follow. */
+function fillSearch(value: string) {
+  const input = document.querySelector<HTMLInputElement>('[data-dir-search]');
+  if (!input) return;
+  input.value = value;
+  input.dispatchEvent(new Event('input', { bubbles: true }));
+  input.focus();
+  paintFind();
 }
 
 /**
@@ -401,7 +428,9 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
       const key = option.closest<HTMLSelectElement>('select')!.dataset.fselect!;
       const next = { ...state, [key]: option.value };
       const count = config.countFor(searched, next, ctx, key);
-      option.textContent = `${option.dataset.filterLabel} (${count.toLocaleString('en-CA')})`;
+      // "All types" goes without a number, as polymarket.com's "All": the
+      // list under the picker is the count.
+      option.textContent = option.value === 'all' ? option.dataset.filterLabel! : `${option.dataset.filterLabel} (${count.toLocaleString('en-CA')})`;
     });
     config.afterCounts?.(root, searched, state, q, ctx);
     root.querySelectorAll<HTMLElement>('[data-dir-filters-done]').forEach(b => {
@@ -548,10 +577,12 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     }
 
     if (t.closest('[data-dir-search-btn]')) {
-      const row = root.querySelector<HTMLElement>('[data-dir-search-row]');
-      setSearchOpen(!!row?.hidden, true);
+      setSearchOpen(true, true);
       return;
     }
+    if (t.closest('[data-dir-search-clear]')) { fillSearch(''); return; }
+    const tryWord = t.closest<HTMLElement>('[data-dir-suggest-q]');
+    if (tryWord) { fillSearch(tryWord.dataset.dirSuggestQ ?? ''); return; }
 
     // A section heading is its own show/hide control: the whole bar toggles,
     // not just the word on the right of it.
@@ -599,6 +630,7 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
       const input = root.querySelector<HTMLInputElement>('[data-dir-search]');
       if (input) input.value = '';
       render();
+      paintFind();
     }
   });
 
@@ -662,6 +694,23 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     query = input.value;
     shown = pageSize;
     render();
+    paintFind();
+  });
+
+  // A press on the × or a word to try must not take focus from the box first,
+  // or the box would shut as empty before the press lands.
+  document.addEventListener('mousedown', e => {
+    if ((e.target as HTMLElement).closest?.('[data-dir-search-clear], [data-dir-suggest-q]')) e.preventDefault();
+  });
+  document.addEventListener('focusin', e => {
+    if ((e.target as HTMLElement).matches?.('[data-dir-search]')) paintFind();
+  });
+  document.addEventListener('focusout', e => {
+    const find = (e.target as HTMLElement).closest?.('[data-dir-find]');
+    if (!find || find.contains(e.relatedTarget as Node | null)) return;
+    const input = find.querySelector<HTMLInputElement>('[data-dir-search]');
+    if (input && !input.value) setSearchOpen(false);
+    else paintFind();
   });
 
   // Fires on first load and after every view-transition swap: re-grab nodes,

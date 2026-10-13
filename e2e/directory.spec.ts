@@ -91,7 +91,10 @@ test('search preserves results, groups, chips, money, closed awards and history'
       // Label and count only: the bar also carries a Hide/Show word, which is
       // state and not part of what the run is called.
       expect(await page.locator('[data-dir-group]:not([hidden])').evaluateAll(els => els.map(e => `${e.querySelector('.sabl-group-label')!.textContent} ${e.querySelector('.sabl-group-count')!.textContent}`))).toEqual(shownRuns(visible, PAGE));
-      const chips = await page.locator('option[data-filter-label]').evaluateAll(els => els.map(e => ({ key: e.parentElement!.getAttribute('data-fselect')!, value: (e as HTMLOptionElement).value, count: Number(e.textContent!.match(/\(([\d,]+)\)$/)![1]!.replace(/,/g, '')) })));
+      // "All types" carries no number, as polymarket.com's "All"; every other
+      // option states its count.
+      await expect(page.locator('option[data-filter-label][value="all"]').first()).toHaveText('All types');
+      const chips = await page.locator('option[data-filter-label]:not([value="all"])').evaluateAll(els => els.map(e => ({ key: e.parentElement!.getAttribute('data-fselect')!, value: (e as HTMLOptionElement).value, count: Number(e.textContent!.match(/\(([\d,]+)\)$/)![1]!.replace(/,/g, '')) })));
       expect(chips.length).toBeGreaterThan(5);
       const keys = { category: 'selectedCategory', status: 'statusFilter', region: 'selectedRegion' };
       // A status chip counts its run, which leaves out the after-high-school
@@ -137,9 +140,28 @@ test('the bar icons open search and the filters under it', async ({ page }) => {
   await page.locator('[data-dir-search-btn]').click();
   await expect(search).toBeFocused();
   await expect(page.locator('[data-dir-search-btn]')).toHaveAttribute('aria-expanded', 'true');
+  // The box takes the icon's place, with words to try while it is empty,
+  // each of which finds listings.
+  await expect(page.locator('[data-dir-search-btn]')).toBeHidden();
+  const tryWord = page.locator('[data-dir-suggest-q]').first();
+  await expect(tryWord).toBeVisible();
+  const word = (await tryWord.textContent())!.trim();
+  await tryWord.click();
+  await expect(search).toHaveValue(word);
+  await expect(search).toBeFocused();
+  await expect(page.locator('[data-dir-suggest]')).toBeHidden();
+  expect(await page.locator('[data-dir-card]:visible').count()).toBeGreaterThan(0);
+  await page.locator('[data-dir-search-clear]').click();
+  await expect(search).toHaveValue('');
+  await expect(search).toBeFocused();
   await search.press('Escape');
   await expect(search).toBeHidden();
+  await expect(page.locator('[data-dir-search-btn]')).toBeVisible();
   expect((await grid.boundingBox())!.y).toBe(top);
+  // Left empty, the box shuts back to its icon.
+  await page.locator('[data-dir-search-btn]').click();
+  await page.locator('h1').click();
+  await expect(search).toBeHidden();
 
   await openFilters(page);
   await expect(page.locator('[data-fselect="sort"]:visible')).toHaveCount(1);

@@ -6,7 +6,7 @@ import { canApplyNow } from '../../lib/status.ts';
 import { showingLine, DEFAULT_SCHOLARSHIP_STATE, DIRECTORY_PAGE_SIZE, SCHOLARSHIP_GROUP_LABELS, SCHOLARSHIP_SHUT_GROUPS, directoryCountLine, openNowCount, filterSortScholarships, getScholarshipStatus, amountCell, groupRuns, isAfterHighSchool, rowAction, scholarshipGroupKey, scholarshipWhen } from '../../lib/list-core.ts';
 import type { ScholarshipWithMeta } from '../../lib/list-core.ts';
 import { generateSlug, formatVerifiedMonth, isCheckStale, checkedSince } from '../../lib/utils.ts';
-import { scholarshipSearchBlob } from '../../lib/search-text.ts';
+import { scholarshipSearchBlob, searchSuggestions } from '../../lib/search-text.ts';
 import { SCHOLARSHIP_FACETS, MIN_FACET_ITEMS, facetItems, facetMatches } from '../../lib/facets.ts';
 import { saysNoApplication, rowRoute, routeTag } from '../../lib/apply-method.ts';
 import { ARROW_REF, BOOKMARK_REF, EXT_REF, ICON_SPRITE } from '../../lib/icons.ts';
@@ -15,6 +15,10 @@ import SabDirBar from './SabDirBar.astro';
 import SabFilterSelect from './SabFilterSelect.astro';
 import { schoolOf } from '../../lib/school-awards.ts';
 import { providerLogo } from '../../lib/providers.ts';
+
+// Words to try under the empty search box, kept where they find 3 or more
+// listings on this page (searchSuggestions).
+const SEARCH_TRY = ['Nursing', 'Engineering', 'Business', 'Leadership', 'Agriculture', 'Music', 'Hockey', 'Trades', 'Medicine', 'Volunteer'];
 
 interface Props {
   items: ScholarshipWithMeta[];
@@ -215,7 +219,7 @@ const openNow = openNowCount(initial);
     </div>
   </div>
 
-  {tabbed && <SabDirBar label="Scholarship lists" searchPlaceholder="Search by name or keyword…" searchLabel="Search scholarships by name or keyword" tabs={placeTabs.map(t => ({ href: t.slug ? `/scholarships/${t.slug}/` : '/scholarships/', label: t.label, current: t.slug === tabs }))} />}
+  {tabbed && <SabDirBar label="Scholarship lists" searchPlaceholder="Search scholarships" searchLabel="Search scholarships by name or keyword" suggestions={searchSuggestions(items, scholarshipSearchBlob, SEARCH_TRY)} tabs={placeTabs.map(t => ({ href: t.slug ? `/scholarships/${t.slug}/` : '/scholarships/', label: t.label, current: t.slug === tabs }))} />}
 
 
   </div>

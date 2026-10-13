@@ -237,3 +237,16 @@ export function correctQuery(ql: string, vocab: Iterable<string>): string | null
   }
   return changed ? out.join(' ') : null;
 }
+
+/**
+ * The words offered under an empty search box (SabDirBar, after
+ * polymarket.com's list under its own). Only words that find at least `min`
+ * of this page's rows, in the order given, so a suggestion never opens on an
+ * empty list. Not "trending": nothing here is measured, so the box says "Try".
+ */
+export function searchSuggestions<T>(
+  rows: readonly T[], blobOf: (row: T) => string, candidates: readonly string[], n = 5, min = 3,
+): string[] {
+  const blobs = rows.map(blobOf);
+  return candidates.filter(c => searchRows(blobs, b => b, normalizeSearchQuery(c)).length >= min).slice(0, n);
+}

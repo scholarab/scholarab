@@ -2242,3 +2242,15 @@ Outcome: the directories open on their cards. Search and the filters wait behind
 - Measured at 1440px on the built site: the first card moved up 129px on /scholarships/ (526 to 397) and /programs/ (526 to 397), and 107px on Calgary (684 to 577). That is above where it sat with the old left rail (425 and 583).
 - Tests: the lean test became "the bar icons open search and the filters under it"; three search tests open the field first; the toolbar-height test measures the bar.
 - Add-back: none.
+
+## Search box and filter buttons as polymarket.com has them (2026-10-12)
+
+Outcome: searching and filtering take no room of their own (Ilia: "make the search like polymarket has it ... same with types"). The search box opens in the bar in place of its icon, and the pickers are small buttons.
+
+- Removed: the search row under the bar (the box now sits in the bar itself), WebKit's own clear button (Firefox never had one; the box draws one ×), the number on "All types", "All fields", "All formats" and "All schools", the 2px ink outline on the pickers in the desktop filter row.
+- Added: the box takes the search icon's place and shuts again when left empty. An × clears it. While it is empty and in use, up to five words to try sit under it, each kept only where it finds 3 or more listings on that page (`searchSuggestions` in search-text.ts, with unit tests). They are headed "Try", not "Trending", because nothing about them is measured. Placeholders are now "Search scholarships" and "Search programs".
+- Changed: on a desktop, Sort and the pickers are 36px buttons with a hairline and an 8px corner. The phone sheet keeps its full-width 44px pickers.
+- Fixed while testing: hiding the focused icon before focusing the box left focus nowhere, so the empty box shut straight away. The box now takes focus first.
+- Not measured: the cards no longer move down when search opens, since the box sits in the bar line. That follows from the layout; no pixel number was taken.
+- Tests: the search e2e test reads counts from every option except All and checks "All types" has none; the bar test now covers a word to try, the ×, and an empty box shutting. 1,276 unit and 175 e2e pass.
+- Add-back: none.

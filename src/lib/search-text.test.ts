@@ -3,6 +3,7 @@ import {
   buildSearchBlob,
   correctQuery,
   searchRows,
+  searchSuggestions,
   normalizeSearchQuery,
   normalizeSearchText,
   programSearchBlob,
@@ -198,5 +199,17 @@ describe('searchRows', () => {
   it('needs every word, short ones too, so a nonsense word finds nothing', () => {
     expect(find('4-h')).toEqual([rows[7]])
     expect(find('zz nursing bursary')).toEqual([])
+  })
+})
+
+describe('searchSuggestions', () => {
+  const rows = ['nursing award', 'nursing bursary', 'rural nursing prize', 'music award', 'hockey award'].map(t => buildSearchBlob([t]))
+
+  it('offers only words that find enough rows, in the order given', () => {
+    expect(searchSuggestions(rows, r => r, ['Music', 'Nursing', 'Award'], 5, 3)).toEqual(['Nursing', 'Award'])
+  })
+
+  it('stops at n', () => {
+    expect(searchSuggestions(rows, r => r, ['Nursing', 'Award'], 1, 1)).toEqual(['Nursing'])
   })
 })
