@@ -398,6 +398,19 @@ describe('filterSortPrograms', () => {
     expect(ids(filterSortPrograms(items, state({ selectedCategory: 'Computing', selectedFormat: 'all', statusFilter: 'active', searchQuery: 'robotics' })))).toEqual([1, 2])
   })
 
+  // A menu holds several picks (2026-10-12): any of them matches, and the
+  // other filters still narrow on top.
+  it('keeps a row matching any of several picks in one filter', () => {
+    const items = [
+      makeProgram({ id: 1, category: 'Computing', format: 'research', deadline: 'Ongoing' }),
+      makeProgram({ id: 2, category: 'Health', format: 'summer', deadline: 'Ongoing' }),
+      makeProgram({ id: 3, category: 'Arts', format: 'research', deadline: 'Ongoing' }),
+    ]
+    expect(ids(filterSortPrograms(items, state({ selectedCategory: 'Computing|Health' }))).sort()).toEqual([1, 2])
+    expect(ids(filterSortPrograms(items, state({ selectedCategory: 'Computing|Arts', selectedFormat: 'research|summer' }))).sort()).toEqual([1, 3])
+    expect(ids(filterSortPrograms(items, state({ selectedCategory: 'Computing|Health', selectedFormat: 'summer' })))).toEqual([2])
+  })
+
   it('always excludes closed programs', () => {
     const items = [
       makeProgram({ id: 1, deadline: '2026-01-01', _deadline_ms: PAST_MS }),

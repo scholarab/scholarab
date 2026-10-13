@@ -121,6 +121,8 @@ const openNow = programOpenNowCount(initial);
       { value: 'all', label: 'All fields', count: items.length },
       ...PROGRAM_FACETS.map(f => ({ value: f.value, label: f.label, count: chipCount({ selectedCategory: f.value }) })).filter(o => o.count > 0),
     ]} />}
+    {/* Every filter back to All, at every width; shown once one is on. */}
+    <button type="button" class="sabl-filters-clear" data-dir-reset hidden>Clear</button>
   </div>
 
   </aside>

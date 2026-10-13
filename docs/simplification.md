@@ -2311,3 +2311,13 @@ Outcome: a phone gets the same filter row and menus as a desktop (Ilia: "make fi
 - Changed: the desktop row rules now apply at every width. Under 641px a menu's list hangs from the whole row, so a menu near the right edge cannot run off the screen (e2e checks the list's box stays inside a 390px viewport).
 - Lost on phones: the sheet's Clear filters. The desktop never had it; picking All in a menu undoes it there too.
 - Measured: 177 e2e pass (the phone fold test rewritten for the row, the menu test no longer desktop-only).
+
+## 2026-10-12 Several picks per filter, and Clear
+
+Outcome: a student can pick several fields, types, formats or schools at once (Computing and Health together), and undo every filter in one tap, on a desktop and a phone alike (Ilia).
+
+- One encoding, no new state shape: a filter's value is its picks joined by "|" ("Computing|Health"), read by `picksOf` in list-core.ts. 'all' still means no filter, so old links and the URL format keep working.
+- The filter selects are `multiple`; the menus tick and untick and stay open, All unticks the rest, Sort still picks one and shuts. The button says "Computing +1".
+- The filters badge counts picks, not menus.
+- Clear came back as one button in the filter row at every width (the phone sheet's Clear went earlier today), shown only while a filter is on. It keeps the sort and the search words.
+- Tests: a list-core unit test for several picks; the e2e menu test now ticks two, checks the URL and badge, ticks All, then Clears. 1,278 unit and 177 e2e pass.

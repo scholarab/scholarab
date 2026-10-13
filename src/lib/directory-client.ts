@@ -302,13 +302,15 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     else url.searchParams.delete('show');
     if (url.href !== location.href) history.replaceState(history.state, '', url);
 
-    // How many filters are on, for the folded phone button. Sort is an order,
-    // not a filter, and it sits inside the same fold, so it does not count.
-    const active = Object.keys(state).filter(k => k !== 'sort' && state[k] !== config.defaultState[k]).length;
+    // How many picks are on, for the folded filters button: Arts and STEM in
+    // one menu are two. Sort is an order, not a filter, so it does not count.
+    const active = Object.keys(state).filter(k => k !== 'sort' && state[k] !== config.defaultState[k])
+      .reduce((n, k) => n + state[k]!.split('|').length, 0);
     root.querySelectorAll<HTMLElement>('[data-dir-filter-n]').forEach(n => {
       n.textContent = String(active);
       n.hidden = active === 0;
     });
+    root.querySelectorAll<HTMLElement>('[data-dir-reset]').forEach(b => { b.hidden = active === 0; });
 
     const q = query.trim();
     // Normalized the same way the cards' blobs were, so punctuation a student
@@ -402,7 +404,10 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     }
 
     root.querySelectorAll<HTMLSelectElement>('select[data-fselect]').forEach(sel => {
-      sel.value = String(state[sel.dataset.fselect!] ?? '');
+      const value = String(state[sel.dataset.fselect!] ?? '');
+      if (!sel.multiple) { sel.value = value; return; }
+      const picks = value.split('|');
+      for (const o of sel.options) o.selected = picks.includes(o.value);
     });
     root.querySelectorAll<HTMLOptionElement>('option[data-filter-label]').forEach(option => {
       const key = option.closest<HTMLSelectElement>('select')!.dataset.fselect!;
@@ -572,6 +577,16 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
       return;
     }
 
+    // The filter row's Clear: every filter back to its default, keeping the
+    // sort and the words in the search box, which are not filters.
+    if (t.closest('[data-dir-reset]')) {
+      state = { ...config.defaultState, sort: state.sort };
+      shown = pageSize;
+      render();
+      root.querySelector<HTMLElement>('[data-menu-for]:not([data-menu-for="sort"])')?.focus({ preventScroll: true });
+      return;
+    }
+
     if (t.closest('[data-dir-clear]')) {
       state = { ...config.defaultState };
       query = '';
@@ -583,11 +598,15 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     }
   });
 
-  // A picker in place of a chip row (sort): same state key, set on change.
+  // A picker sets its state key on change. A filter holds several picks
+  // ("Arts|STEM", list-core picksOf); none is 'all'.
   document.addEventListener('change', e => {
     const sel = (e.target as HTMLElement).closest?.<HTMLSelectElement>('select[data-fselect]');
     if (!root || !sel || !root.contains(sel)) return;
-    state = { ...state, [sel.dataset.fselect as keyof S & string]: sel.value };
+    const value = sel.multiple
+      ? [...sel.selectedOptions].map(o => o.value).filter(v => v !== 'all').join('|') || 'all'
+      : sel.value;
+    state = { ...state, [sel.dataset.fselect as keyof S & string]: value };
     shown = pageSize;
     render();
   });

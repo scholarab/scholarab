@@ -1142,6 +1142,13 @@ html:not(.js) .sabl-tool[data-dir-search-btn], html:not(.js) .sabl-tool[data-dir
   .sabl-tabbed .sabl-menu-list { right: 0; min-width: 0; max-height: min(420px, 60vh); }
 }
 /* The filter row's menus (lib/filter-menu.ts). */
+.sabl-filters-clear {
+  min-height: 40px; padding: 0 6px; border: 0; background: none; cursor: pointer;
+  font: 600 15px var(--font-body); color: var(--text-primary);
+  text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1.5px;
+}
+.sabl-filters-clear:hover { color: var(--cta); }
+.sabl-filters-clear[hidden] { display: none; }
 .sabl-menu { position: relative; }
 .sabl-menu-btn {
   display: none; align-items: center; gap: 8px; min-height: 40px; padding: 0 12px 0 14px;

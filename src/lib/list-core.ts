@@ -70,6 +70,14 @@ export function regionMatches(key: RegionKey, s: ScholarshipWithMeta): boolean {
   if (key === 'National') return s.region === 'National' || s.region === 'International';
   return s.region === key;
 }
+/**
+ * A filter's picks. A menu can hold several (Ilia, 2026-10-12): "Arts|STEM"
+ * keeps a row that matches any of them. 'all', or nothing, is no filter.
+ */
+export function picksOf(value: string | undefined): string[] | null {
+  return !value || value === 'all' ? null : value.split('|');
+}
+
 export type ScholarshipSort = 'closest_due' | 'highest_pay' | 'lowest_pay';
 
 export interface ScholarshipFilterState {
@@ -124,12 +132,14 @@ export function selectScholarships(
         ? initialScholarships.filter(s => canApplyNow(statusCache.get(s.id) ?? 'active'))
         : initialScholarships;
 
-  const afterSchool = selectedSchool === 'all'
+  const schools = picksOf(selectedSchool);
+  const afterSchool = schools === null
     ? pool
-    : pool.filter(s => (s._school ?? schoolOf(s)) === selectedSchool);
-  const afterCategory = selectedCategory === 'all'
+    : pool.filter(s => schools.includes(s._school ?? schoolOf(s) ?? ''));
+  const categories = picksOf(selectedCategory);
+  const afterCategory = categories === null
     ? afterSchool
-    : afterSchool.filter(s => s.category === selectedCategory);
+    : afterSchool.filter(s => categories.includes(s.category ?? ''));
   const afterRegion = selectedRegion === null
     ? afterCategory
     : afterCategory.filter(s => regionMatches(selectedRegion, s));
@@ -448,12 +458,14 @@ export function selectPrograms(
           : statusFilter === 'active' ? status === 'active' || status === 'ongoing'
           : status === statusFilter;
       });
-  const afterCategory = selectedCategory === 'all'
+  const categories = picksOf(selectedCategory);
+  const afterCategory = categories === null
     ? afterStatus
-    : afterStatus.filter(p => p.category === selectedCategory);
-  const afterFormat = selectedFormat === 'all'
+    : afterStatus.filter(p => categories.includes(p.category ?? ''));
+  const formats = picksOf(selectedFormat);
+  const afterFormat = formats === null
     ? afterCategory
-    : afterCategory.filter(p => p.format === selectedFormat);
+    : afterCategory.filter(p => formats.includes(p.format ?? ''));
   // The GRADE row was deleted on 2026-09-15 (Ilia): of 123 programs it held
   // back 10 at Grade 10 and 4 at Grade 12, because most say "High school" or
   // give an age range, and programMatchesGrade counts those as inclusive.

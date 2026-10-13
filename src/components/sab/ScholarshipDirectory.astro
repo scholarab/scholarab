@@ -253,6 +253,8 @@ const openNow = openNowCount(initial);
       { value: 'all', label: 'All types', count: items.length },
       ...categories.map(c => ({ value: c, label: c, count: counts.get(c) ?? 0 })),
     ]} />}
+    {/* Every filter back to All, at every width; shown once one is on. */}
+    <button type="button" class="sabl-filters-clear" data-dir-reset hidden>Clear</button>
     {!hideScopes && !tabbed && (
       <div class="sabl-filter-row sabl-filter-row-wrap">
         <span class="sabl-row-label">Where you live</span>

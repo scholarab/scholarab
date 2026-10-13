@@ -6,7 +6,9 @@
 // Each menu drives a native <select data-fselect>, which stays the single
 // source of state: picking sets its value and fires "change", the same event
 // directory-client already listens to. The same menus at every width since
-// 2026-10-12, when the phone sheet and its native pickers went.
+// 2026-10-12, when the phone sheet and its native pickers went. A filter's
+// select is `multiple` (Ilia, 2026-10-12): a pick ticks or unticks a row and
+// the list stays open, and All unticks the rest. Sort picks one and shuts.
 
 const CHECK = '<svg viewBox="0 0 16 16" width="16" height="16" fill="none" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 const CHEVRON = '<svg class="sabl-menu-chev" viewBox="0 0 10 6" width="10" height="6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
@@ -37,7 +39,7 @@ function fill(wrap: HTMLElement, sel: HTMLSelectElement) {
     item.setAttribute('role', 'option');
     item.tabIndex = -1;
     item.dataset.value = o.value;
-    item.setAttribute('aria-selected', String(o.value === sel.value));
+    item.setAttribute('aria-selected', String(o.selected));
     const name = document.createElement('span');
     name.textContent = nameOf(o);
     item.append(name);
@@ -58,18 +60,36 @@ export function syncFilterMenus(root: ParentNode) {
   root.querySelectorAll<HTMLElement>('[data-menu]').forEach(wrap => {
     const sel = wrap.querySelector<HTMLSelectElement>('select')!;
     const label = wrap.querySelector<HTMLElement>('[data-menu-label]')!;
-    label.textContent = sel.selectedOptions[0] ? nameOf(sel.selectedOptions[0]) : '';
+    const picked = [...sel.selectedOptions];
+    // "Arts", or "Arts +2" for three picks: the button keeps one width-ish.
+    label.textContent = picked[0] ? nameOf(picked[0]) + (picked.length > 1 ? ` +${picked.length - 1}` : '') : '';
     wrap.classList.toggle('is-set', sel.selectedIndex > 0 && sel.dataset.fselect !== 'sort');
   });
 }
 
 function choose(wrap: HTMLElement, value: string) {
   const sel = wrap.querySelector<HTMLSelectElement>('select')!;
-  close(true);
-  if (sel.value === value) return;
-  sel.value = value;
+  if (!sel.multiple) {
+    close(true);
+    if (sel.value === value) return;
+    sel.value = value;
+  } else {
+    const all = sel.options[0]!;
+    const opt = [...sel.options].find(o => o.value === value)!;
+    if (opt === all) for (const o of sel.options) o.selected = o === all;
+    else {
+      opt.selected = !opt.selected;
+      all.selected = sel.selectedOptions.length === (all.selected ? 1 : 0);
+    }
+  }
   sel.dispatchEvent(new Event('change', { bubbles: true }));
   syncFilterMenus(wrap.parentElement ?? wrap);
+  // A multiple menu stays open on the row just picked, its ticks redrawn
+  // from the select (the directory has rewritten the counts by now).
+  if (sel.multiple && open === wrap) {
+    fill(wrap, sel);
+    wrap.querySelector<HTMLElement>(`.sabl-menu-opt[data-value="${CSS.escape(value)}"]`)?.focus();
+  }
 }
 
 function show(wrap: HTMLElement, at: 'selected' | 'first' | 'last' = 'selected') {
@@ -106,6 +126,7 @@ export function initFilterMenus(root: ParentNode) {
     list.className = 'sabl-menu-list';
     list.dataset.menuList = key;
     list.setAttribute('role', 'listbox');
+    if (sel.multiple) list.setAttribute('aria-multiselectable', 'true');
     list.hidden = true;
     wrap.append(sel, btn, list);
   });

@@ -175,30 +175,54 @@ test('the bar icons open search and the filters under it', async ({ page }) => {
 });
 
 // Our own menus in the filter row at every width (2026-10-12, after
-// polymarket.com): a button saying the choice, a list with a check on it,
-// the keyboard working, and Escape shutting only the menu.
-test('the filter menus choose, check and shut', async ({ page }) => {
+// polymarket.com): a button saying the choice, a list with a tick on each
+// pick, several picks in one menu, the keyboard working, Escape shutting only
+// the menu, and Clear putting every filter back.
+test('the filter menus pick several, tick them and clear', async ({ page }) => {
   await page.goto('/scholarships/');
   await openFilters(page);
   const btn = page.locator('[data-menu-for="category"]');
+  const reset = page.locator('[data-dir-reset]');
   await expect(btn).toHaveText('All types');
+  await expect(reset).toBeHidden();
   await btn.click();
   const list = page.locator('[data-menu-list="category"]');
+  await expect(list).toHaveAttribute('aria-multiselectable', 'true');
   await expect(list.locator('[aria-selected="true"]')).toHaveText('All types');
   await expect(list.locator('[aria-selected="true"]')).toBeFocused();
   await page.keyboard.press('ArrowDown');
   const second = list.locator('[role="option"]').nth(1);
   await expect(second).toBeFocused();
-  const value = (await second.getAttribute('data-value'))!;
+  const first = (await second.getAttribute('data-value'))!;
   await page.keyboard.press('Enter');
-  await expect(list).toBeHidden();
-  await expect(btn).toBeFocused();
-  await expect(btn).toHaveText(value);
-  await expect(page).toHaveURL(new RegExp(`category=${encodeURIComponent(value)}`));
-  await expect(page.locator('[data-dir-filters] [data-dir-filter-n]')).toHaveText('1');
-  await btn.click();
+  // The list stays open on the row just ticked.
+  await expect(list).toBeVisible();
+  await expect(list.locator('[role="option"]').nth(1)).toBeFocused();
+  await page.keyboard.press('ArrowDown');
+  const third = list.locator('[role="option"]').nth(2);
+  const next = (await third.getAttribute('data-value'))!;
+  await page.keyboard.press(' ');
+  await expect(list.locator('[aria-selected="true"]')).toHaveCount(2);
+  await expect(btn).toHaveText(`${first} +1`);
+  await expect(page).toHaveURL(new RegExp(`category=${encodeURIComponent(`${first}|${next}`)}`));
+  await expect(page.locator('[data-dir-filters] [data-dir-filter-n]')).toHaveText('2');
   await page.keyboard.press('Escape');
   await expect(list).toBeHidden();
+  await expect(btn).toBeFocused();
+  // Ticking All drops the rest.
+  await btn.click();
+  await list.locator('[data-value="all"]').click();
+  await expect(btn).toHaveText('All types');
+  await expect(page).not.toHaveURL(/category=/);
+  await page.keyboard.press('Escape');
+  // Clear puts every filter back and keeps the sort.
+  await pick(page, 'category', { index: 1 });
+  await page.keyboard.press('Escape');
+  await expect(reset).toBeVisible();
+  await reset.click();
+  await expect(btn).toHaveText('All types');
+  await expect(reset).toBeHidden();
+  await expect(page.locator('[data-dir-filters] [data-dir-filter-n]')).toBeHidden();
   await expect(page.locator('[data-menu-for="sort"]')).toBeVisible();
 });
 
