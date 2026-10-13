@@ -392,18 +392,17 @@ test('on a phone, no field makes Safari zoom and every picker draws its own box'
   expect(problems).toEqual([]);
 });
 
-// The directories are a grid of cards (Ilia, 2026-10-13, ledger cards
-// after the polymarket.com copy was dropped): each card hangs from an ink
-// rule, Save and Apply are worded links sharing one centre line at the foot,
-// before and after a search, and no card is striped the way the rows were.
-test('cards: an ink rule on top, Save and Apply on one line, no stripes', async ({ page }) => {
+// The directories are a grid of cards (Ilia, 2026-10-12, after
+// polymarket.com): Save and Apply are two filled halves along each card's
+// foot, the same height on one line, before and after a search, and no card
+// is striped the way the rows were.
+test('cards: Save and Apply split the foot of every card, no stripes', async ({ page }) => {
   for (const [path, term] of [['/scholarships/', 'engineering'], ['/programs/', 'math']] as const) {
     await page.goto(path);
     const measure = () => page.locator('[data-dir-card]:visible').evaluateAll(cards => cards.slice(0, 10).map(c => {
       const save = c.querySelector('.sabl-save')!.getBoundingClientRect();
       const apply = c.querySelector('.sabl-apply')!.getBoundingClientRect();
-      const cs = getComputedStyle(c);
-      return { mid: Math.abs((save.top + save.bottom) / 2 - (apply.top + apply.bottom) / 2), order: apply.left > save.right, rule: parseFloat(cs.borderTopWidth), bg: cs.backgroundColor };
+      return { top: Math.abs(save.top - apply.top), h: [save.height, apply.height], w: Math.abs(save.width - apply.width), order: apply.left > save.right, bg: getComputedStyle(c).backgroundColor };
     }));
     for (const cards of [await measure(), await (async () => {
       await page.locator('[data-dir-search-btn]').click();
@@ -413,19 +412,20 @@ test('cards: an ink rule on top, Save and Apply on one line, no stripes', async 
     })()]) {
       expect(cards.length).toBeGreaterThan(3);
       for (const c of cards) {
-        expect(c.mid).toBeLessThanOrEqual(2);
+        expect(c.top).toBeLessThanOrEqual(1);
+        for (const h of c.h) expect(h).toBeGreaterThanOrEqual(40);
+        expect(c.w).toBeLessThanOrEqual(1);
         expect(c.order).toBe(true);
-        expect(c.rule).toBeGreaterThanOrEqual(2);
       }
       expect(new Set(cards.map(c => c.bg)).size).toBe(1);
     }
   }
 });
 
-// A card reads top to bottom: the date as its figure, then the name, then
-// the money at the foot, with the provider's picture left of it on a
-// scholarship. On a laptop the cards sit side by side; on a phone they stack.
-test('cards: date first, then the name, then picture and money at the foot', async ({ page }, testInfo) => {
+// A card reads top to bottom: the name, then the money and the date as its
+// two figures on one line, money left, date right. On a laptop the cards
+// sit side by side; on a phone they stack.
+test('cards: name first, then money left and date right on one line', async ({ page }, testInfo) => {
   for (const path of ['/scholarships/', '/programs/']) {
     await page.goto(path);
     const cards = await page.locator('[data-dir-card]:visible').evaluateAll(cs => cs.slice(0, 6).map(c => {
@@ -433,21 +433,18 @@ test('cards: date first, then the name, then picture and money at the foot', asy
       const d = date.getBoundingClientRect();
       const title = c.querySelector('.sabl-name')!.getBoundingClientRect();
       const money = c.querySelector('.sabl-amount, .sabl-card-top-left')!.getBoundingClientRect();
-      const logo = c.querySelector('.sabl-logo')?.getBoundingClientRect();
       const box = c.getBoundingClientRect();
-      return { top: box.top, titleTop: title.top, titleBottom: title.bottom, dateBottom: d.bottom, size: parseFloat(getComputedStyle(date).fontSize), quiet: !!date.closest('.is-quiet'), moneyTop: money.top, moneyLeft: money.left, moneyH: money.height, logoRight: logo && logo.width ? logo.right : null, logoTop: logo && logo.width ? logo.top : null };
+      return { top: box.top, titleBottom: title.bottom, dateTop: d.top, dateLeft: d.left, size: parseFloat(getComputedStyle(date).fontSize), quiet: !!date.closest('.is-quiet'), moneyTop: money.top, moneyRight: money.right, moneyH: money.height };
     }));
     expect(cards.length).toBeGreaterThan(2);
     for (const c of cards) {
-      expect(c.dateBottom).toBeLessThanOrEqual(c.titleTop);
+      expect(c.dateTop).toBeGreaterThan(c.titleBottom);
       if (!c.quiet) expect(c.size).toBeGreaterThanOrEqual(20);
-      if (c.moneyH > 0) expect(c.moneyTop).toBeGreaterThan(c.titleBottom);
-      if (c.logoRight !== null) {
-        expect(c.logoTop!).toBeGreaterThan(c.titleBottom);
-        if (c.moneyH > 0) expect(c.logoRight).toBeLessThanOrEqual(c.moneyLeft);
+      if (c.moneyH > 0) {
+        expect(c.moneyTop).toBeGreaterThan(c.titleBottom);
+        expect(c.moneyRight).toBeLessThanOrEqual(c.dateLeft);
       }
     }
-    if (path === '/scholarships/') expect(cards.some(c => c.logoRight !== null)).toBe(true);
     if (testInfo.project.name === 'mobile') expect(cards[1]!.top).toBeGreaterThan(cards[0]!.top);
     else expect(cards[1]!.top).toBe(cards[0]!.top);
   }
@@ -470,16 +467,15 @@ test('home closing rows lead with a date figure left of the title', async ({ pag
 
 // A finger landing on a row to scroll is not a pointer resting on it: the
 // mint hover tint lit whichever row it touched and jumped from row to row as
-// the list moved (Ilia, 2026-10-03). Rows tint under a mouse only. A
-// directory card has no fill to tint, so its name turns green instead.
+// the list moved (Ilia, 2026-10-03). Rows tint under a mouse only.
 test('rows tint under a pointer, never under a finger', async ({ page }, testInfo) => {
-  for (const [path, row, prop] of [['/', '#closing .sab-closing-row', 'backgroundColor'], ['/scholarships/', '[data-dir-card]:visible', 'color']] as const) {
+  for (const [path, row] of [['/', '#closing .sab-closing-row'], ['/scholarships/', '[data-dir-card]:visible']] as const) {
     await page.goto(path);
     const first = page.locator(row).first();
     await first.scrollIntoViewIfNeeded();
     const touch = await page.evaluate(() => matchMedia('(hover: none)').matches);
     expect(touch, 'the mobile project emulates a touch screen').toBe(testInfo.project.name === 'mobile');
-    const bg = () => first.evaluate((e, p) => getComputedStyle(p === 'color' ? e.querySelector('.sabl-name')! : e)[p], prop);
+    const bg = () => first.evaluate(e => getComputedStyle(e).backgroundColor);
     const resting = await bg();
     await first.hover();
     await expect.poll(bg).not.toBe(touch ? '' : resting);

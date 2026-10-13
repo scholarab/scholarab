@@ -2410,3 +2410,4 @@ Outcome: the scholarship and program cards read as this site's own, with the dat
 - Tests: two e2e card tests described the copied layout and now describe this one. The touch-tint test checks the name colour on cards, which have no fill to tint. test:e2e 177 passed, npm run ci 1,283 passed with only the baseline counsellor-drafts errors.
 - Option B (a ticket stub with the date) was mocked and not chosen.
 - Add-back fraction: 1 of 5 (the picture, at Ilia's call).
+- Reverted the same day (Ilia: "bring back the way polymarket was"). The market cards are back exactly as before. Kept from this pass: the pointer-only `.sabl-name:hover`, a real touch bug, and the impeccable ignore it needed is removed. Add-back fraction for the pass: 5 of 5.
