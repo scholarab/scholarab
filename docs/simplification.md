@@ -2347,3 +2347,13 @@ Outcome: a student landing on any scholarship list sees the largest open awards 
 - Tests: the dropdown e2e now checks the list has no background, and the switch test watches data-sab-menu instead of the removed panel.
 - Add-back: 0 of 1 removal.
 - Measured: 1,278 unit, 177 e2e passing; the 11 baseline private type errors unchanged.
+
+## 2026-10-13: directory load paint made lazy (no visual change)
+
+Outcome kept: day chips and Apply labels are correct for the visitor's clock on every card they see.
+
+- Removed: painting all 1,691 scholarship cards at load (`onCardsParsed`). Replaced by `paintCard`, which paints a card once, the first time it is on screen. Profile at 4x CPU: the load task was 420ms, 208ms of it this paint.
+- Tried and restored: deferring the 1,667 off-screen logos into `<noscript>` (Speed Index 7.2s vs 7.1s, no gain) and a background-image span (6.9s, 0.2s, not worth a second logo path). The idle images were not the cost, the HTML weight is.
+- Kept: the shared SabFonts stylesheet (105KB raw, cached site-wide) and the two sub-1KB blocking files, which share its critical path.
+- Add-back fraction: 2 of 3 candidates restored.
+- Measured locally, Lighthouse 13.5 mobile, brotli static server, 3 runs each. Before: score 72 to 78, TBT 200 to 370ms. After: score 80 every run, TBT 20 to 30ms. FCP 3.0s and LCP 3.3s unchanged. Desktop TBT 40ms to 0ms. Hosted PageSpeed not yet re-measured.

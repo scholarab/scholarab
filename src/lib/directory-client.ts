@@ -66,8 +66,13 @@ export interface DirectoryConfig<T extends DirectoryItem, S extends Record<strin
    * never reached it and it kept the whole-corpus figure under every filter.
    */
   afterCounts?(root: HTMLElement, searched: T[], state: S, query: string, ctx: C): void;
-  /** Runs after cards are (re)parsed on every astro:page-load; e.g. recompute day chips. */
-  onCardsParsed?(items: T[]): void;
+  /**
+   * Repaints a card's clock-dependent parts (day chips, Apply). Runs once per
+   * card per page load, the first time the card is on screen: painting all
+   * 1,691 scholarship cards up front was 208ms of a 420ms load task on a
+   * throttled phone (2026-10-13), for the 24 a reader sees.
+   */
+  paintCard?(item: T): void;
   /** Cards shown before "Show more"; DIRECTORY_PAGE_SIZE unless a test says otherwise. */
   pageSize?: number;
 }
@@ -178,6 +183,9 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
   // nothing, for correctQuery.
   let pageVocab: Set<string> | undefined;
   let page: T[] = [];
+  // Cards already given their clock-dependent paint on this page (see paintCard).
+  // A swap brings new elements, so the set never needs clearing.
+  const painted = new WeakSet<HTMLElement>();
 
   function setSaveState(btn: HTMLElement, saved: boolean) {
     // The drawn bookmark carries the state through `.on` (CSS fills it), so
@@ -347,6 +355,9 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
       ? visible.filter(v => !collapsed.has(g.key(v)))
       : visible;
     page = pool.slice(0, shown);
+    if (config.paintCard) {
+      for (const it of page) if (!painted.has(it.el)) { painted.add(it.el); config.paintCard(it); }
+    }
     const grid = root.querySelector<HTMLElement>('[data-dir-grid]');
     if (grid) {
       const onScreen = new Set(page.map(v => v.el));
@@ -700,7 +711,6 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     initFilterMenus(root);
     setSearchOpen(!!query);
     setFiltersOpen(false);
-    config.onCardsParsed?.(items);
     paintSaved();
     render();
     restoreScroll();

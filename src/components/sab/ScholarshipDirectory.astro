@@ -553,21 +553,19 @@ const openNow = openNowCount(initial);
     saveLabel: (name, saved) => (saved ? `Remove ${name} from saved` : `Save ${name}`),
     // Day chips and Apply/Visit labels depend on the clock, not just the data:
     // recompute them on every load so CDN-cached HTML never shows stale text.
-    onCardsParsed(items) {
-      for (const s of items) {
-        const status = getScholarshipStatus(s);
-        const whenEl = s.el.querySelector<HTMLElement>('[data-when]');
-        if (whenEl) {
-          const when = scholarshipWhen(s);
-          whenEl.className = when.cls;
-          whenEl.querySelector('[data-when-main]')!.textContent = when.main;
-          const sub = whenEl.querySelector<HTMLElement>('[data-when-sub]')!;
-          sub.textContent = when.sub;
-          sub.hidden = !when.sub;
-        }
-        const a = s.el.querySelector<HTMLAnchorElement>('[data-row-action]');
-        if (a) paintRowAction(a, rowAction(canApplyNow(status) && s.el.dataset.noApply === undefined, a.dataset.url, s.el.querySelector<HTMLAnchorElement>('.sabl-name')!.getAttribute('href')!, s.title), { ext: EXT_REF, arrow: ARROW_REF });
+    paintCard(s) {
+      const status = getScholarshipStatus(s);
+      const whenEl = s.el.querySelector<HTMLElement>('[data-when]');
+      if (whenEl) {
+        const when = scholarshipWhen(s);
+        whenEl.className = when.cls;
+        whenEl.querySelector('[data-when-main]')!.textContent = when.main;
+        const sub = whenEl.querySelector<HTMLElement>('[data-when-sub]')!;
+        sub.textContent = when.sub;
+        sub.hidden = !when.sub;
       }
+      const a = s.el.querySelector<HTMLAnchorElement>('[data-row-action]');
+      if (a) paintRowAction(a, rowAction(canApplyNow(status) && s.el.dataset.noApply === undefined, a.dataset.url, s.el.querySelector<HTMLAnchorElement>('.sabl-name')!.getAttribute('href')!, s.title), { ext: EXT_REF, arrow: ARROW_REF });
     },
 
   });

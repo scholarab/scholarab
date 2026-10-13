@@ -312,17 +312,15 @@ const openNow = programOpenNowCount(initial);
     saveLabel: (name, saved) => (saved ? `Remove ${name} from saved` : `Save ${name}`),
     // Day chips depend on the clock, not just the data: recompute them on every
     // load so CDN-cached HTML never shows a stale countdown.
-    onCardsParsed(items) {
-      for (const p of items) {
-        const whenEl = p.el.querySelector<HTMLElement>('[data-when]');
-        if (!whenEl) continue;
-        const when = programWhen(p);
-        whenEl.className = when.cls;
-        whenEl.querySelector('[data-when-main]')!.textContent = when.main;
-        const sub = whenEl.querySelector<HTMLElement>('[data-when-sub]')!;
-        sub.textContent = when.sub;
-        sub.hidden = !when.sub;
-      }
+    paintCard(p) {
+      const whenEl = p.el.querySelector<HTMLElement>('[data-when]');
+      if (!whenEl) return;
+      const when = programWhen(p);
+      whenEl.className = when.cls;
+      whenEl.querySelector('[data-when-main]')!.textContent = when.main;
+      const sub = whenEl.querySelector<HTMLElement>('[data-when-sub]')!;
+      sub.textContent = when.sub;
+      sub.hidden = !when.sub;
     },
   });
 </script>
