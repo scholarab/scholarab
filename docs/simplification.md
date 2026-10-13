@@ -2293,3 +2293,11 @@ Outcome: every tab on the scholarship and program lines wears a photo, not only 
 - Removed rather than added: no `-wide`/`-tall`/`-tile` crops for these, only the 288x104 tab crop (17 files, about 120 KB, lazy-loaded).
 - Swapped once: Social Sciences first got a parliament chamber, which repeated the Conferences photo two tabs away. Add-back fraction 1 of 16 picks.
 - Test: `photo-credits.test.ts` requires the tab crop and a credit record for every TAB_PHOTOS entry.
+
+## 2026-10-12 Topic tabs back to text
+
+Outcome: the photo tabs stand for places and program formats, where the photo shows the real place or activity; the kinds of award and the program fields read as words again (Ilia approved after review).
+
+- Removed 13 topic photos, their credits and their tab crops, plus the reused Enrichment crop: 14 files, about 95 KB. The two All tabs keep their photos.
+- Why: 22 photo tabs in a row made the lit tab hard to find, and photos like Arts, STEM, Community and Trades were stock filler at 104px.
+- Add-back fraction of the earlier photo pass: 14 of 16 tab crops removed. Before/after screenshots at 1440 and 390 px in output/tabs-2026-10-12/ (local, not committed).
