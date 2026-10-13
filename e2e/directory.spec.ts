@@ -223,7 +223,7 @@ test('the list reveals 24 at a time and Back returns to the same card', async ({
 
   // A new filter starts the count over and drops ?show.
   await openFilters(page);
-  await page.locator('[data-fselect="status"]').selectOption('active');
+  await page.locator('[data-fselect="category"]').selectOption({ index: 1 });
   expect(await cards.count()).toBeLessThanOrEqual(PAGE);
   await expect(page).not.toHaveURL(/show=/);
 
@@ -262,9 +262,9 @@ test('detail arrows walk the filtered search in both directions', async ({ page 
 test('program Details links preserve filtered previous and next arrows', async ({ page }) => {
   await page.goto('/programs/');
   const total = await page.locator('[data-dir-card]').count();
-  // Any filter that leaves several programs will do; GRADE used to be the one
-  // driven here and was deleted on 2026-09-15, so this walks STATUS instead.
-  const status = await page.locator('[data-fselect="status"] option').evaluateAll((options, total) => {
+  // Any filter that leaves several programs will do; GRADE and then STATUS
+  // were the ones driven here, both since deleted, so this walks FORMAT.
+  const status = await page.locator('[data-fselect="format"] option').evaluateAll((options, total) => {
     const option = options.find(o => {
       const n = Number(o.textContent!.match(/\(([\d,]+)\)$/)?.[1]?.replace(/,/g, ''));
       return n >= 3 && n < total;
@@ -273,7 +273,7 @@ test('program Details links preserve filtered previous and next arrows', async (
   }, total);
   expect(status, 'choose a status with multiple results from the rendered data').toBeTruthy();
   await openFilters(page);
-  await page.locator('[data-fselect="status"]').selectOption(status!);
+  await page.locator('[data-fselect="format"]').selectOption(status!);
   await closeFilters(page);
   await showEverything(page);
   const paths = await page.locator('[data-dir-card]:not([hidden]) .sabl-name').evaluateAll(links => links.map(link => link.getAttribute('href')!));
@@ -325,11 +325,12 @@ test('program format and field intersect and survive reload and a detail visit',
   await expect(page.locator('[data-dir-card]:visible')).toHaveCount(expected);
 });
 
-// "Open any time" was its own STATUS option until 2026-10-01. Old ?status=ongoing
-// links open the "Open now" list, which holds those listings since.
-test('an old ?status=ongoing link opens the Open now list', async ({ page }) => {
-  await page.goto('/programs/?status=ongoing');
-  await expect(page.locator('[data-fselect="status"]').first()).toHaveValue('active');
-  await expect(page.locator('[data-fselect="status"] option[value="ongoing"]')).toHaveCount(0);
-  await expect(page.locator('.sabl-group-label', { hasText: /open any time/i })).toHaveCount(0);
+// STATUS left the directories 2026-10-12. An old ?status= link shows the
+// whole list rather than hiding listings with nothing on screen to undo it.
+test('an old ?status= link shows the whole list', async ({ page }) => {
+  await page.goto('/programs/');
+  const all = await page.locator('[data-dir-card]:visible').count();
+  await page.goto('/programs/?status=closed');
+  await expect(page.locator('[data-dir-card]:visible')).toHaveCount(all);
+  await expect(page.locator('[data-fselect="status"]')).toHaveCount(0);
 });

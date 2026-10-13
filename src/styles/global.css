@@ -1195,8 +1195,8 @@ html.js .sabl-group-toggle { display: inline-flex; }
     position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
   }
   .sabl-tabbed .sabl-filter-select { width: auto; min-height: 40px; }
-  /* Beside the pickers while shut; open, it takes its own line under them. */
-  .sabl-tabbed .sabl-filters .sabl-status-help:not([open]) { width: auto; flex: none; margin: 0 0 0 4px; }
+  /* A kind-of-award page (STEM, Arts) has no picker left to show or hide. */
+  .sabl-nofilters .sabl-rail, .sabl-nofilters .sabl-lean { display: none; }
 }
 @media (max-width: 900px) {
   /* To the screen edges, the way the cards' gutter would cut it. */

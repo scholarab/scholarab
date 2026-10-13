@@ -8,9 +8,10 @@ import { test, expect, type Page } from '@playwright/test';
 
 const num = (s: string | null | undefined) => Number((s ?? '').replace(/[^\d]/g, '') || 0);
 
-async function chip(page: Page, fval: string): Promise<number> {
-  const el = page.locator(`[data-fselect="status"] option[value="${fval}"]`).first();
-  return (await el.count()) ? num((await el.textContent())?.match(/\(([\d,]+)\)$/)?.[1]) : 0;
+// A hub's own figures: every listing on it, and its OPEN NOW heading.
+async function hubCounts(page: Page): Promise<{ total: number; open: number }> {
+  const open = page.locator('.sabl-group-name', { has: page.locator('.sabl-group-label', { hasText: /^open now$/i }) }).locator('.sabl-group-count');
+  return { total: await page.locator('[data-dir-card]').count(), open: (await open.count()) ? num(await open.first().textContent()) : 0 };
 }
 
 test('home photo slides state the same counts as the hubs they link to', async ({ page }, testInfo) => {
@@ -29,7 +30,7 @@ test('home photo slides state the same counts as the hubs they link to', async (
   expect(slides.length).toBeGreaterThanOrEqual(17);
   for (const s of slides) {
     await page.goto(s.href);
-    const hub = { total: await chip(page, 'all'), open: await chip(page, 'active') };
+    const hub = await hubCounts(page);
     expect.soft({ slide: s.name, total: num(s.total), open: num(s.open) })
       .toEqual({ slide: s.name, ...hub });
   }

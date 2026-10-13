@@ -2223,3 +2223,12 @@ Outcome: every scholarship and program page shows the same line of tabs in the s
 - Measured at 1440px on the built site against www: programs went from 3 to 4 cards per row. The first card moved down 101px (/programs/ 425 to 526, Olympiads 486 to 587), the same cost as on the scholarship pages. Every directory toolbar is again at one height (smoke.spec).
 - Tests: the no-JS test now walks the program tabs, and the toolbar-height test went back to one height for every hub.
 - Add-back: none.
+
+## Status picker and "What these mean" off the directories (2026-10-12)
+
+Outcome: the filter row holds only the pickers a student uses (Ilia: "no need to have it here"). The status sections (Open now, Not open yet, Closed) already sort the list and carry their own counts.
+
+- Removed: the Status picker and the "What these mean" note on both directories, `SabStatusHelp.astro`, `DIRECTORY_TERMS` and its unit test, the status chip counts. On STEM, Arts and the other kind-of-award pages no picker is left, so "Hide filters" and the empty row go too.
+- Changed: a URL filter now applies only when its picker is on the page, so an old `?status=` link shows the whole list instead of hiding listings with nothing on screen to undo it. The home "open right now" links and the listing page "See all open" link point at the plain hub, where Open now is the first section.
+- Tests: three e2e tests that drove the Status picker now drive Type or Format; the numbers test reads the OPEN NOW heading and the card count; the two "explanations fit the panel" tests and the old ?status=ongoing test are deleted, replaced by one that checks an old ?status= link shows the whole list. 1,274 unit and 174 e2e pass.
+- Add-back: none.

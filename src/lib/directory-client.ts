@@ -688,13 +688,13 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     items = [...root.querySelectorAll<HTMLElement>('[data-dir-card]')].map(config.parseCard);
     const params = new URLSearchParams(location.search);
     state = { ...config.defaultState };
-    // Deep links like /scholarships?category=STEM pre-select that track chip.
+    // Deep links like /scholarships?category=STEM pre-select that picker.
+    // Only a filter with a picker on the page: Status left the directories
+    // 2026-10-12, and an old ?status=active link must not hide listings with
+    // nothing on screen saying so or undoing it.
     for (const key of Object.keys(state)) {
-      let value = params.get(key);
-      // ?status=ongoing was the "Open any time" chip until 2026-10-01; it is
-      // part of "Open now" since, so old links land on that list.
-      if (key === 'status' && value === 'ongoing') value = 'active';
-      if (value !== null) state = { ...state, [key]: value };
+      const value = params.get(key);
+      if (value !== null && root.querySelector(`select[data-fselect="${key}"]`)) state = { ...state, [key]: value };
     }
     // ?q= arrives from the other directory's empty state, which offers this
     // page as the wider search. Landing here with an empty box would drop the

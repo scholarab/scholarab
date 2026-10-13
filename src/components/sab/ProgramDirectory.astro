@@ -2,8 +2,6 @@
 // Server-rendered replacement for the old ProgramList React island.
 // All cards are in the HTML (build-time closed ones hidden); directory-client
 // shows/hides/reorders them, so the page ships no React.
-import SabStatusHelp from './SabStatusHelp.astro';
-import { STATUS_WORDS } from '../../lib/status.ts';
 import { showingLine, DEFAULT_PROGRAM_STATE, DIRECTORY_PAGE_SIZE, PROGRAM_GROUP_LABELS, directoryCountLine, filterSortPrograms, groupRuns, programGroupKey, programOpenNowCount, programWhen } from '../../lib/list-core.ts';
 import { programSearchBlob } from '../../lib/search-text.ts';
 import type { ProgramFilterState, ProgramWithMeta } from '../../lib/list-core.ts';
@@ -55,15 +53,6 @@ const SORT_CHIPS = [
   { value: 'closest_due', label: 'Earliest deadline' },
   { value: 'paid_first',  label: 'Pays you first' },
   { value: 'name',        label: 'A–Z' },
-] as const;
-
-// Mirrors the scholarship STATUS row, in the same words: 'active' includes
-// programs open with no deadline, 'tba' is a date not posted yet.
-const STATUS_CHIPS = [
-  { value: 'all',     label: 'All' },
-  { value: 'active',  label: STATUS_WORDS.open },
-  { value: 'tba',     label: STATUS_WORDS.future },
-  { value: 'closed', label: 'Closed' },
 ] as const;
 
 const chipCount = (o: Partial<ProgramFilterState>) =>
@@ -166,10 +155,6 @@ const openNow = programOpenNowCount(initial);
       { value: 'all', label: 'All fields', count: items.length },
       ...PROGRAM_FACETS.map(f => ({ value: f.value, label: f.label, count: chipCount({ selectedCategory: f.value }) })).filter(o => o.count > 0),
     ]} />}
-    <SabFilterSelect label="Status" filterKey="status" options={STATUS_CHIPS
-      .filter(s => s.value === 'all' || chipCount({ statusFilter: s.value }) > 0)
-      .map(s => ({ ...s, label: s.value === 'all' ? 'All statuses' : s.label, count: chipCount({ statusFilter: s.value }) }))} />
-    <SabStatusHelp kind="program" />
   </div>
 
   <button type="button" class="sabl-filters-done" data-dir-filters-done>Show results</button>

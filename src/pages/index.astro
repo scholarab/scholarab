@@ -127,7 +127,7 @@ const scopeCards: PhotoCard[] = SCHOLARSHIP_FACETS
       // After-high-school awards sit in their own run on the hub, so its OPEN
       // NOW heading and status chips leave them out; so does this.
       ...openCounts(items.filter(s => !isAfterHighSchool(s)), s => scholarshipStatusOf(s, today)),
-      openHref: `${href}?status=active`,
+      openHref: href,
       credit: PHOTO_CREDITS[f.backdrop!],
     };
   })

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { DIRECTORY_TERMS, FORMAT_TERMS, GLOSSARY } from './glossary';
+import { FORMAT_TERMS, GLOSSARY } from './glossary';
 import { PROGRAM_FORMATS } from './facets';
 import { STATUS_WORDS } from './status';
 
@@ -18,10 +18,5 @@ describe('glossary', () => {
       expect(e.short.length).toBeLessThanOrEqual(56);
       expect(e.line).toMatch(/\.$/);
     }
-  });
-
-  it('gives each directory note at least one word to define', () => {
-    expect(DIRECTORY_TERMS.scholarship).toContain('bursary');
-    expect(DIRECTORY_TERMS.program).toEqual(expect.arrayContaining(['olympiad', 'dualCredit']));
   });
 });

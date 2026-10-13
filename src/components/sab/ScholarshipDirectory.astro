@@ -2,10 +2,9 @@
 // Server-rendered replacement for the old ScholarshipList React island.
 // Every card is in the HTML; lib/directory-client.ts shows/hides/reorders
 // them and recomputes the clock-dependent bits on load, so no React ships.
-import { STATUS_WORDS, canApplyNow } from '../../lib/status.ts';
-import SabStatusHelp from './SabStatusHelp.astro';
+import { canApplyNow } from '../../lib/status.ts';
 import { showingLine, DEFAULT_SCHOLARSHIP_STATE, DIRECTORY_PAGE_SIZE, SCHOLARSHIP_GROUP_LABELS, SCHOLARSHIP_SHUT_GROUPS, directoryCountLine, openNowCount, filterSortScholarships, getScholarshipStatus, amountCell, groupRuns, isAfterHighSchool, rowAction, scholarshipGroupKey, scholarshipWhen } from '../../lib/list-core.ts';
-import type { ScholarshipFilterState, ScholarshipWithMeta } from '../../lib/list-core.ts';
+import type { ScholarshipWithMeta } from '../../lib/list-core.ts';
 import { generateSlug, formatVerifiedMonth, isCheckStale, checkedSince } from '../../lib/utils.ts';
 import { scholarshipSearchBlob } from '../../lib/search-text.ts';
 import { SCHOLARSHIP_FACETS, MIN_FACET_ITEMS, facetItems, facetMatches } from '../../lib/facets.ts';
@@ -171,13 +170,6 @@ const SORT_CHIPS = [
   { value: 'lowest_pay',  label: 'Lowest $' },
 ] as const;
 
-const STATUS_CHIPS = [
-  { value: 'all',     label: 'All' },
-  { value: 'active',  label: STATUS_WORDS.open },
-  { value: 'opening', label: STATUS_WORDS.future },
-  { value: 'closed',  label: 'Closed' },
-] as const;
-
 const schoolCounts = new Map<string, number>();
 if (schoolFilter) for (const s of items) { const k = schoolOf(s); if (k) schoolCounts.set(k, (schoolCounts.get(k) ?? 0) + 1); }
 const schools = [...schoolCounts.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
@@ -195,12 +187,6 @@ const categories = [...counts.entries()].sort((a, b) => b[1] - a[1]).map(([name]
 // with JS sees are always the ones that match their own filters. The
 // server-rendered pass is what a reader without JS gets, and what fills the
 // row before hydration so nothing reflows.
-// A status chip counts the run its heading counts. Awards for after high
-// school sit in their own run whatever their status, so "Open now" counting
-// them said 594 over an OPEN NOW heading of 467 (critique 2026-09-26).
-const statusChipCount = (statusFilter: ScholarshipFilterState['statusFilter']) =>
-  filterSortScholarships(items, { ...DEFAULT_SCHOLARSHIP_STATE, statusFilter })
-    .filter(s => statusFilter === 'all' || !isAfterHighSchool(s)).length;
 
 const initial = filterSortScholarships(items, DEFAULT_SCHOLARSHIP_STATE);
 
@@ -219,7 +205,7 @@ const openNow = openNowCount(initial);
 ---
 
 <Fragment set:html={ICON_SPRITE} />
-<div class:list={['sabl-page', { 'sabl-tabbed': tabbed }]} data-dir-step={step}>
+<div class:list={['sabl-page', { 'sabl-tabbed': tabbed, 'sabl-nofilters': !schoolFilter && hideCategories }]} data-dir-step={step}>
   {/* Everything above the cards, in ink on white. */}
   <div class="sabl-head">
   <div class="sabl-title-row">
@@ -315,10 +301,6 @@ const openNow = openNowCount(initial);
         </div>
       </div>
     )}
-    <SabFilterSelect label="Status" filterKey="status" options={STATUS_CHIPS
-      .filter(s => s.value === 'all' || statusChipCount(s.value) > 0)
-      .map(s => ({ ...s, label: s.value === 'all' ? 'All statuses' : s.label, count: statusChipCount(s.value) }))} />
-    <SabStatusHelp kind="scholarship" />
   </div>
 
   {/* Deleted from the page 2026-09-15 (Ilia), kept for screen readers. The

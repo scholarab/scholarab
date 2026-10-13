@@ -54,9 +54,3 @@ export const FORMAT_TERMS: Readonly<Record<string, GlossaryKey>> = {
   olympiads: 'olympiad',
   'dual-credit': 'dualCredit',
 };
-
-/** The words each directory prints on its rows, for its "What these mean" note. */
-export const DIRECTORY_TERMS: Readonly<Record<'scholarship' | 'program', readonly GlossaryKey[]>> = {
-  scholarship: ['bursary', 'designated', 'rap'],
-  program: ['olympiad', 'dualCredit'],
-};
