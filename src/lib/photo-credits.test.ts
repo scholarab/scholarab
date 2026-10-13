@@ -5,11 +5,11 @@ import { PROGRAM_FORMATS, SCHOLARSHIP_FACETS } from './facets';
 import { EXPLORE_PHOTOS, PHOTO_CREDITS, needsCredit } from './photo-credits';
 
 const DIR = join(__dirname, '../../public/photos/backdrops');
-const FILES = ['wide-1672', 'wide-3344', 'tall-1000', 'tall-2000', 'tile'];
+const FILES = ['wide-1672', 'wide-3344', 'tall-1000', 'tall-2000', 'tile', 'tab'];
 const backdrops = [...SCHOLARSHIP_FACETS, ...PROGRAM_FORMATS].map(f => f.backdrop).filter((b): b is string => !!b);
 
 describe('scope photos', () => {
-  it('ships all five files for every backdrop', () => {
+  it('ships all six files for every backdrop', () => {
     const missing = backdrops.flatMap(b => FILES.map(f => `${b}-${f}.webp`)).filter(f => !existsSync(join(DIR, f)));
     expect(missing).toEqual([]);
   });

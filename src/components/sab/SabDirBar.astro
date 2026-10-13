@@ -7,7 +7,8 @@
 import { BOOKMARK_REF } from '../../lib/icons.ts';
 interface Props {
   label: string;
-  tabs: Array<{ href: string; label: string; current?: boolean }>;
+  /** photo: a backdrop name (facets.ts); the tab wears its photo crop. */
+  tabs: Array<{ href: string; label: string; current?: boolean; photo?: string }>;
   searchPlaceholder: string;
   searchLabel: string;
   /** Words to try under the empty box (searchSuggestions). */
@@ -22,7 +23,12 @@ const LENS = '<svg viewBox="0 0 16 16" width="16" height="16" fill="none" aria-h
       <svg viewBox="0 0 8 12" width="8" height="12" fill="none" aria-hidden="true"><path d="M6.5 1 1.5 6 6.5 11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </button>
     <div class="sabl-tabs-track" data-tabs-track>
-      {tabs.map(t => <a href={t.href} class="sabl-tab" aria-current={t.current ? 'page' : undefined}>{t.label}</a>)}
+      {tabs.map(t => (
+        <a href={t.href} class:list={['sabl-tab', { 'sabl-tab-photo': t.photo }]} aria-current={t.current ? 'page' : undefined}>
+          {t.photo && <img class="sabl-tab-img" src={`/photos/backdrops/${t.photo}-tab.webp`} alt="" width="144" height="52" loading="lazy" decoding="async" />}
+          <span class="sabl-tab-label">{t.label}</span>
+        </a>
+      ))}
     </div>
     <button type="button" class="sabl-tabs-more" data-tabs-more aria-label="More" hidden>
       <svg viewBox="0 0 8 12" width="8" height="12" fill="none" aria-hidden="true"><path d="M1.5 1 6.5 6 1.5 11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>

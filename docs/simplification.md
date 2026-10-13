@@ -2273,3 +2273,13 @@ Outcome: a student finds their place where they expect it. Ilia's order: Nationa
 - Checked on the built Calgary page: All, National, Province-wide, Calgary area, Edmonton area, Red Deer, Lethbridge, Fort McMurray, Grande Prairie, Medicine Hat, Northern Alberta, Central Alberta, Southern Alberta, then Universities & colleges and the kinds of award as before.
 - Tests: 1,276 unit and 176 e2e pass, no test changes.
 - Add-back: none.
+
+## Photos on the tabs (2026-10-12, a try)
+
+Outcome: a student spots their place by its picture as well as its name (Ilia: "lets try putting a photo of that topic/city as the background on the button").
+
+- Added: a 288x104 `<slug>-tab.webp` crop of every hub backdrop (20 files, 104 KB in all, 2 to 11 KB each), cut from the existing wide crop, so no new photo and no new credit. A tab whose page has a backdrop wears it under a dark wash with a white label; the lit one gets a green ring inside its edge. The images load lazily, so tabs past the edge cost nothing until scrolled to. The scholarship line's 12 photo tabs come to 63 KB if all are loaded.
+- Not covered: All, Universities & colleges, the kinds of award (Indigenous, Trades, Arts...) and the program fields have no photo of their own, so they stay plain text tabs. Making photos for them would mean finding new free photos.
+- Fixed while testing: the ring drawn on the tab itself sat under the photo; it is drawn on the wash now. A type error (the tab list's inferred type had no photo field) showed up under the private/ symlink to src/, not under src/, so it read at first like one of the known private errors.
+- Tests: the photo test now requires the tab crop for every backdrop (six files, was five). 1,276 unit and 176 e2e pass.
+- Add-back: none.

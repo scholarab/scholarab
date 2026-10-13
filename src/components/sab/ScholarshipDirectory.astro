@@ -138,16 +138,16 @@ const PLACE_ORDER = [
 ];
 const placeRank = (slug: string) => { const i = PLACE_ORDER.indexOf(slug); return i < 0 ? PLACE_ORDER.length : i; };
 const regionChips = regionFacets
-  .map(f => ({ slug: f.slug, label: f.label, count: facetItems(f, chipSource).length, broad: !!f.broad }))
+  .map(f => ({ slug: f.slug, label: f.label, count: facetItems(f, chipSource).length, broad: !!f.broad, photo: f.backdrop }))
   .sort((a, b) => placeRank(a.slug) - placeRank(b.slug) || a.label.localeCompare(b.label));
 // Which hubs a row belongs to, by the hubs' own test (facetMatches counts
 // alsoOpenTo, which the client's regionMatches does not), so the client can
 // recount the SCOPE row under the live filters with the hub's own arithmetic.
 // All, the places in PLACE_ORDER, the school awards page, then
 // the kinds of award. The same line on every scholarship page.
-const placeTabs = tabbed ? [
+const placeTabs: { slug: string; label: string; photo?: string }[] = tabbed ? [
   { slug: '', label: 'All' },
-  ...regionChips.map(c => ({ slug: c.slug, label: c.label })),
+  ...regionChips.map(c => ({ slug: c.slug, label: c.label, photo: c.photo })),
   ...SCHOLARSHIP_FACETS.filter(f => f.kind === 'region' && f.bySchool && facetItems(f, chipSource).length >= MIN_FACET_ITEMS)
     .map(f => ({ slug: f.slug, label: 'Universities & colleges' })),
   ...SCHOLARSHIP_FACETS.filter(f => f.kind === 'category' && facetItems(f, chipSource).length >= MIN_FACET_ITEMS)
@@ -225,7 +225,7 @@ const openNow = openNowCount(initial);
     </div>
   </div>
 
-  {tabbed && <SabDirBar label="Scholarship lists" searchPlaceholder="Search scholarships" searchLabel="Search scholarships by name or keyword" suggestions={searchSuggestions(items, scholarshipSearchBlob, SEARCH_TRY)} tabs={placeTabs.map(t => ({ href: t.slug ? `/scholarships/${t.slug}/` : '/scholarships/', label: t.label, current: t.slug === tabs }))} />}
+  {tabbed && <SabDirBar label="Scholarship lists" searchPlaceholder="Search scholarships" searchLabel="Search scholarships by name or keyword" suggestions={searchSuggestions(items, scholarshipSearchBlob, SEARCH_TRY)} tabs={placeTabs.map(t => ({ href: t.slug ? `/scholarships/${t.slug}/` : '/scholarships/', label: t.label, photo: t.photo, current: t.slug === tabs }))} />}
 
 
   </div>

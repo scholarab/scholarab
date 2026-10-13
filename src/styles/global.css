@@ -1132,7 +1132,7 @@ html.js .sabl-group-toggle { display: inline-flex; }
 html:not(.js) .sabl-tool[data-dir-search-btn], html:not(.js) .sabl-tool[data-dir-filters] { display: none; }
 .sabl-search[hidden], .sabl-tool[hidden] { display: none; }
 .sabl-tabs-track {
-  display: flex; gap: 2px; flex: 1; min-width: 0;
+  display: flex; align-items: center; gap: 6px; flex: 1; min-width: 0;
   overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: none;
 }
 .sabl-tabs-track::-webkit-scrollbar { display: none; }
@@ -1143,6 +1143,26 @@ html:not(.js) .sabl-tool[data-dir-search-btn], html:not(.js) .sabl-tool[data-dir
 }
 .sabl-tab:hover { color: var(--text-primary); background: rgba(20,25,21,0.05); }
 .sabl-tab[aria-current='page'] { color: var(--cta); background: rgba(10,86,50,0.1); }
+/* A tab whose page has a photo wears it (Ilia, 2026-10-12): a small crop
+   of the hub's own backdrop (<slug>-tab.webp, 288x104), lazy so the tabs
+   past the edge cost nothing until scrolled to, under a dark wash so the
+   white label reads on any photo. The lit one takes a green ring inside
+   its edge, since the scrolling line clips anything outside it. */
+.sabl-tab-photo {
+  position: relative; isolation: isolate; overflow: hidden; min-height: 44px; padding: 0 16px;
+  color: #FFFFFF; background: var(--text-primary);
+}
+.sabl-tab-img { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; }
+.sabl-tab-photo::after {
+  content: ''; position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(rgba(12,16,13,0.38), rgba(12,16,13,0.62));
+}
+.sabl-tab-photo .sabl-tab-label { text-shadow: 0 1px 2px rgba(0,0,0,0.45); }
+.sabl-tab-photo:hover { color: #FFFFFF; background: var(--text-primary); }
+.sabl-tab-photo:hover::after { background: linear-gradient(rgba(12,16,13,0.2), rgba(12,16,13,0.5)); }
+.sabl-tab-photo[aria-current='page'] { color: #FFFFFF; background: var(--text-primary); }
+/* On the wash, not the box: the photo would cover a ring drawn on the box. */
+.sabl-tab-photo[aria-current='page']::after { border-radius: inherit; box-shadow: inset 0 0 0 3px #4AA873; }
 .sabl-tabs-more {
   position: absolute; right: 0; top: 0; bottom: 0; width: 64px;
   display: flex; align-items: center; justify-content: flex-end; padding: 0 8px 0 0;

@@ -47,6 +47,7 @@ const tabs = [
     href: `/programs/${f.slug}/`,
     label: f.slug === 'research-placements' ? 'Research placements' : f.label,
     current: f.slug === here,
+    photo: PROGRAM_FORMATS.find(x => x.slug === f.slug)?.backdrop,
   }))),
 ];
 
