@@ -2203,3 +2203,13 @@ Repair record: shared hosts hid the organisation (72 links on a government file 
 Measurements (local, built site): marks on 63% of cards on /scholarships/, 83% on Calgary, 89% on Central Alberta. Icon bytes for the first 24 cards: 13.5 KB (6 files) on /scholarships/, 7.2 KB on Calgary, 7.1 KB on Central Alberta; every icon in the whole /scholarships/ list is 59 files, 101 KB, loaded lazily. public/logos is 59 files, 240 KB on disk.
 
 Validation: npm run ci passes lint, 1,275 Vitest tests (4 new in providers.test.ts: a file for exactly the providers that claim one, path matching on shared hosts, no lookalike hosts, over 55% of listings with a mark) and the build; astro check's 11 errors are the pre-existing private/counsellor-drafts-50-2026-10-09/gate symlink. Playwright 176 passed, 20 skipped; the directory and smoke specs rerun after the last CSS change, 73 passed. Every mark checked by eye on a contact sheet and on Calgary, Central Alberta, university awards and a phone.
+
+## Place tabs instead of the filter rail (2026-10-12)
+
+Outcome: a student picks their place from one line of tabs under the heading, the way polymarket.com lays out its topics, and the list gets the full width.
+
+- Removed on the scholarship pages: the left filter rail and the Where you live picker (both replaced by the tabs, which link to the same hubs). Type and Status stay, as one row of pickers under the search box. The program pages keep their rail for now.
+- Added: `.sabl-tabs` in ScholarshipDirectory (All, Province-wide, National, the places A to Z, Universities & colleges), the lit tab scrolled into view, an arrow at the right edge while more tabs sit past it.
+- Measured on the built site at 1440px: the grid went from 3 to 4 cards per row (1,377px wide). The first card moved down 101px on both pages (/scholarships/ 425 to 526, Calgary 583 to 684), the cost of the tab line and the filter row.
+- Tests: two e2e tests pinned the rail (grid widens when filters hide, one toolbar height across both directories) and now check the new layout (grid lifts, one height per directory). One new test checks that the lit tab is right and every tab returns 200.
+- Add-back: none so far.

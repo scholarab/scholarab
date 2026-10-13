@@ -61,6 +61,10 @@ interface Props {
   towns?: string[];
   /** City hubs: the board's specials, from lib/city-specials.ts. */
   specials?: Array<{ label: string; href: string; title: string; meta: string }>;
+  /** The place tabs (Ilia, 2026-10-12, after polymarket.com): every hub in
+      one line under the heading, this page's slug lit, '' for All. Replaces
+      the left rail and the Where you live picker. */
+  tabs?: string;
 }
 // The card's icon (Ilia, 2026-10-12, after polymarket.com): the mark of the
 // organisation that runs the application, so the same mark on several cards
@@ -91,7 +95,9 @@ const {
   step = DIRECTORY_PAGE_SIZE,
   specials = [],
   towns,
+  tabs,
 } = Astro.props;
+const tabbed = tabs !== undefined;
 
 // "Airdrie only", or "Calgary, Airdrie" for an award several of the page's
 // towns share. Nothing on a single-town page, or for a province-wide or
@@ -139,8 +145,15 @@ const regionChips = regionFacets
 // Which hubs a row belongs to, by the hubs' own test (facetMatches counts
 // alsoOpenTo, which the client's regionMatches does not), so the client can
 // recount the SCOPE row under the live filters with the hub's own arithmetic.
+// All, the two broad lists, the places A to Z, then the school awards page.
+const placeTabs = tabbed ? [
+  { slug: '', label: 'All' },
+  ...regionChips.map(c => ({ slug: c.slug, label: c.label })),
+  ...SCHOLARSHIP_FACETS.filter(f => f.kind === 'region' && f.bySchool && facetItems(f, chipSource).length >= MIN_FACET_ITEMS)
+    .map(f => ({ slug: f.slug, label: 'Universities & colleges' })),
+] : [];
 const scopesOf = (s: ScholarshipWithMeta) =>
-  hideScopes ? undefined : regionFacets.filter(f => facetMatches(f, s)).map(f => f.slug).join(' ') || undefined;
+  hideScopes || tabbed ? undefined : regionFacets.filter(f => facetMatches(f, s)).map(f => f.slug).join(' ') || undefined;
 
 // The row appears on /scholarships only; see `hideScopes`. There, a scope chip
 // navigates to that scope's hub rather than filtering in place. The hub is the
@@ -214,7 +227,7 @@ const openNow = openNowCount(initial);
 ---
 
 <Fragment set:html={ICON_SPRITE} />
-<div class:list={['sabl-page', { 'sabl-railed': railFilters }]} data-dir-step={step}>
+<div class:list={['sabl-page', { 'sabl-railed': railFilters && !tabbed, 'sabl-tabbed': tabbed }]} data-dir-step={step}>
   {/* Everything above the cards, in ink on white. */}
   <div class="sabl-head">
   <div class="sabl-title-row">
@@ -223,6 +236,23 @@ const openNow = openNowCount(initial);
       <p class="sabl-desc">{intro}</p>
     </div>
   </div>
+
+  {tabbed && (
+    <nav class="sabl-tabs" aria-label="Scholarships by place">
+      <div class="sabl-tabs-track" data-tabs-track>
+        {placeTabs.map(t => (
+          <a
+            href={t.slug ? `/scholarships/${t.slug}/` : '/scholarships/'}
+            class="sabl-tab"
+            aria-current={t.slug === tabs ? 'page' : undefined}
+          >{t.label}</a>
+        ))}
+      </div>
+      <button type="button" class="sabl-tabs-more" data-tabs-more aria-label="More places" hidden>
+        <svg viewBox="0 0 8 12" width="8" height="12" fill="none" aria-hidden="true"><path d="M1.5 1 6.5 6 1.5 11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </nav>
+  )}
 
   <div class="sabl-toolbar">
     <div class="sabl-search">
@@ -291,7 +321,7 @@ const openNow = openNowCount(initial);
       { value: 'all', label: 'All types', count: items.length },
       ...categories.map(c => ({ value: c, label: c, count: counts.get(c) ?? 0 })),
     ]} />}
-    {!hideScopes && (
+    {!hideScopes && !tabbed && (
       <div class="sabl-filter-row sabl-filter-row-wrap">
         <span class="sabl-row-label">Where you live</span>
         {/* One native picker instead of 27 chips (the chips stay for no-JS).
@@ -628,5 +658,24 @@ const openNow = openNowCount(initial);
     if (link && link.closest('#sab-scholarships')) {
       sendEvent('apply_click', 'scholarship', Number(link.closest<HTMLElement>('[data-dir-card]')?.dataset.id));
     }
+  });
+</script>
+
+<script>
+  // The place tabs: the lit tab scrolled into view, and an arrow at the right
+  // edge while more places sit past it, as on polymarket.com.
+  let sync = () => {};
+  addEventListener('resize', () => sync(), { passive: true });
+  document.addEventListener('astro:page-load', () => {
+    sync = () => {};
+    const track = document.querySelector<HTMLElement>('[data-tabs-track]');
+    const more = document.querySelector<HTMLButtonElement>('[data-tabs-more]');
+    if (!track || !more) return;
+    const lit = track.querySelector<HTMLElement>('[aria-current="page"]');
+    if (lit && lit.offsetLeft + lit.offsetWidth > track.clientWidth) track.scrollLeft = lit.offsetLeft - 48;
+    sync = () => { more.hidden = track.scrollLeft + track.clientWidth >= track.scrollWidth - 4; };
+    more.addEventListener('click', () => track.scrollBy({ left: track.clientWidth * 0.7, behavior: 'smooth' }));
+    track.addEventListener('scroll', () => sync(), { passive: true });
+    sync();
   });
 </script>

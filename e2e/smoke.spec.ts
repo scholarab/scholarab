@@ -140,8 +140,13 @@ test('every hub puts its filter chips at the same height', async ({ page }, test
       return Math.round(document.querySelector('.sabl-toolbar')!.getBoundingClientRect().top - body);
     }));
   }
-  const first = [...seen.values()][0];
-  expect(Object.fromEntries(seen)).toEqual(Object.fromEntries([...seen.keys()].map(k => [k, first])));
+  // One height per directory: the scholarship pages carry the place tabs
+  // above the toolbar (2026-10-12), the program pages their rail beside it.
+  for (const family of ['/scholarships/', '/programs/']) {
+    const paths = [...seen.keys()].filter(k => k.startsWith(family));
+    const first = seen.get(paths[0]);
+    expect(Object.fromEntries(paths.map(k => [k, seen.get(k)]))).toEqual(Object.fromEntries(paths.map(k => [k, first])));
+  }
 });
 
 // The SCOPE row left the scholarship hubs on 2026-09-15 (a reader who picked
@@ -530,4 +535,19 @@ test('the reminder form promises only reminders that can still arrive', async ({
   await page.goto(listing!.href);
   await expect(page.locator('[data-remind-open]')).toBeHidden();
   await expect(page.locator('[data-remind-late]')).toContainText('Closes tomorrow');
+});
+
+// The place tabs (2026-10-12, after polymarket.com): one line of every
+// scholarship hub, this page's lit, and each one a page that exists.
+test('scholarship pages light their own place tab and every tab is a page', async ({ page, request }) => {
+  await page.goto('/scholarships/calgary/');
+  const tabs = page.locator('.sabl-tab');
+  await expect(page.locator('.sabl-tab[aria-current="page"]')).toHaveText('Calgary area');
+  await expect(page.locator('.sabl-rail .sabl-scope-select')).toHaveCount(0);
+  const hrefs = await tabs.evaluateAll(as => as.map(a => a.getAttribute('href')!));
+  expect(hrefs[0]).toBe('/scholarships/');
+  expect(hrefs.length).toBeGreaterThan(10);
+  for (const h of hrefs) expect((await request.get(h)).status(), h).toBe(200);
+  await page.goto('/scholarships/');
+  await expect(page.locator('.sabl-tab[aria-current="page"]')).toHaveText('All');
 });

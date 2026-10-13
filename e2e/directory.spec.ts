@@ -122,15 +122,18 @@ test('search preserves results, groups, chips, money, closed awards and history'
   await expect(page.locator('[data-dir-card]:visible')).toHaveCount(1);
 });
 
-test('hiding the filters widens the grid and survives a reload', async ({ page }, testInfo) => {
-  test.skip(testInfo.project.name === 'mobile', 'the rail is a desktop column');
+// The scholarship pages carry their filters as one row under the search box
+// since the place tabs (2026-10-12), so hiding them lifts the grid rather than
+// widening it.
+test('hiding the filters lifts the grid and survives a reload', async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name === 'mobile', 'the filter row is a desktop control');
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.goto('/scholarships/alberta/');
   const rail = page.locator('.sabl-rail');
   const desc = page.locator('.sabl-desc');
   const grid = page.locator('.sabl-grid');
   await expect(rail).toBeVisible();
-  const narrow = (await grid.boundingBox())!.width;
+  const low = (await grid.boundingBox())!.y;
 
   await page.locator('[data-dir-lean]').click();
   await expect(rail).toBeHidden();
@@ -139,7 +142,7 @@ test('hiding the filters widens the grid and survives a reload', async ({ page }
   await expect(page.locator('.sabl-h1')).toBeVisible();
   await expect(page.locator('[data-dir-search]')).toBeVisible();
   await expect(page.locator('[data-fselect="sort"]').first()).toBeVisible();
-  expect((await grid.boundingBox())!.width).toBeGreaterThan(narrow);
+  expect((await grid.boundingBox())!.y).toBeLessThan(low);
 
   // Set in <head> from localStorage, so the wide layout is in the first paint.
   await page.reload();
@@ -149,7 +152,7 @@ test('hiding the filters widens the grid and survives a reload', async ({ page }
 
   await page.locator('[data-dir-lean]').click();
   await expect(rail).toBeVisible();
-  expect((await grid.boundingBox())!.width).toBe(narrow);
+  expect((await grid.boundingBox())!.y).toBe(low);
 });
 
 test('one responsive list keeps facts and direct navigation even with an old view preference', async ({ page }) => {

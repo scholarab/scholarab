@@ -160,7 +160,7 @@ const breadcrumbJson = {
         allItems={allItems}
         hideCategories={facet.kind === 'category'}
         hideScopes
-        railFilters
+        tabs={facet.slug}
         schoolFilter={facet.bySchool}
         towns={facet.members ? [facet.value, ...facet.members] : undefined}
         alsoOpen={broadCounts.length === 2 ? { place: facet.label, lists: broadCounts } : undefined}

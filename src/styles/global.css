@@ -1235,6 +1235,51 @@ html.js .sabl-group-toggle { display: inline-flex; }
 .sabl-save::after, .sabl-apply::after { content: ''; position: absolute; inset: -5px -3px; }
 .sabl-apply::after { inset: -12px -4px -11px; }
 
+/* ── Place tabs (Ilia, 2026-10-12, after polymarket.com) ──
+   Every hub in one line under the heading, this page's lit, in place of the
+   left rail. The line scrolls sideways and an arrow at its right edge says
+   more places sit past it. Type and Status move under the search box. */
+.sabl-tabs { position: relative; display: flex; align-items: center; margin-top: 18px; }
+.sabl-tabs-track {
+  display: flex; gap: 2px; flex: 1; min-width: 0;
+  overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: none;
+}
+.sabl-tabs-track::-webkit-scrollbar { display: none; }
+.sabl-tab {
+  flex: none; display: inline-flex; align-items: center; min-height: 40px; padding: 0 14px;
+  border-radius: 8px; white-space: nowrap; text-decoration: none;
+  font: 600 15px var(--font-body); color: var(--ink-muted);
+}
+.sabl-tab:hover { color: var(--text-primary); background: rgba(20,25,21,0.05); }
+.sabl-tab[aria-current='page'] { color: var(--cta); background: rgba(10,86,50,0.1); }
+.sabl-tabs-more {
+  position: absolute; right: 0; top: 0; bottom: 0; width: 64px;
+  display: flex; align-items: center; justify-content: flex-end; padding: 0 8px 0 0;
+  border: 0; cursor: pointer; color: var(--ink-muted);
+  background: linear-gradient(to right, rgba(255,255,255,0), var(--bg-page) 55%);
+}
+.sabl-tabs-more:hover { color: var(--text-primary); }
+.sabl-tabs-more[hidden] { display: none; }
+.sabl-tabbed .sabl-toolbar { margin-top: 14px; }
+@media (min-width: 901px) {
+  /* The filters as one line of pickers, no panel and no labels: each picker's
+     first option already says what it is ("All types", "All statuses"). */
+  .sabl-tabbed .sabl-rail { background: none; padding: 0 0 8px; border-radius: 0; }
+  .sabl-tabbed .sabl-filters { flex-direction: row; flex-wrap: wrap; align-items: center; gap: 10px 12px; padding: 0; }
+  .sabl-tabbed .sabl-filter-row .sabl-row-label {
+    position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+  }
+  .sabl-tabbed .sabl-filter-select { width: auto; min-height: 40px; }
+  /* Beside the pickers while shut; open, it takes its own line under them. */
+  .sabl-tabbed .sabl-filters .sabl-status-help:not([open]) { width: auto; flex: none; margin: 0 0 0 4px; }
+}
+@media (max-width: 900px) {
+  /* To the screen edges, the way the cards' gutter would cut it. */
+  .sabl-tabs { margin-left: -16px; margin-right: -16px; }
+  .sabl-tabs-track { padding: 0 16px; scroll-padding: 0 16px; }
+  .sabl-tab { font-size: 14px; padding: 0 12px; }
+}
+
 /* ── Market cards (Ilia, 2026-10-12, after polymarket.com) ──
    The two directories show a grid of tiles instead of rows: the name, who
    it is for and the requirements on top, then the money and the date as the
