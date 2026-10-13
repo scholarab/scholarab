@@ -12,6 +12,7 @@ import { SCHOLARSHIP_FACETS, MIN_FACET_ITEMS, facetItems, facetMatches } from '.
 import { saysNoApplication, rowRoute, routeTag } from '../../lib/apply-method.ts';
 import { ARROW_REF, BOOKMARK_REF, EXT_REF, ICON_SPRITE } from '../../lib/icons.ts';
 import { eligibilityFacts } from '../../lib/eligibility-facts.ts';
+import SabTabs from './SabTabs.astro';
 import SabFilterSelect from './SabFilterSelect.astro';
 import { schoolOf } from '../../lib/school-awards.ts';
 import { providerLogo } from '../../lib/providers.ts';
@@ -37,17 +38,6 @@ interface Props {
   /** A category hub has already applied a track, so TRACK would only offer the
       reader ways to empty their own page. */
   hideCategories?: boolean;
-  /**
-   * Hubs only (Ilia, 2026-09-15). A reader who has already chosen Calgary is
-   * past the chips, and on a hub they were four stacked rows of them between
-   * the title and the first card: on a laptop the page opened on filters the
-   * reader had just used. Railed, the rows move into a sticky left column and
-   * the cards start under the toolbar. Below 1180px there is no room for a
-   * column, so the rail unwraps back into the rows above the grid.
-   * /scholarships took the rail too on 2026-09-23 (Ilia: "the same left side
-   * layout like the others"), so every directory page reads the same way.
-   */
-  railFilters?: boolean;
   /** University & college awards: a School picker, biggest school first. */
   schoolFilter?: boolean;
   /** City hubs: the broad lists the reader can also apply from. */
@@ -89,7 +79,6 @@ const {
   allItems = items,
   hideCategories = false,
   hideScopes = false,
-  railFilters = false,
   schoolFilter = false,
   alsoOpen,
   step = DIRECTORY_PAGE_SIZE,
@@ -145,12 +134,15 @@ const regionChips = regionFacets
 // Which hubs a row belongs to, by the hubs' own test (facetMatches counts
 // alsoOpenTo, which the client's regionMatches does not), so the client can
 // recount the SCOPE row under the live filters with the hub's own arithmetic.
-// All, the two broad lists, the places A to Z, then the school awards page.
+// All, the two broad lists, the places A to Z, the school awards page, then
+// the kinds of award. The same line on every scholarship page.
 const placeTabs = tabbed ? [
   { slug: '', label: 'All' },
   ...regionChips.map(c => ({ slug: c.slug, label: c.label })),
   ...SCHOLARSHIP_FACETS.filter(f => f.kind === 'region' && f.bySchool && facetItems(f, chipSource).length >= MIN_FACET_ITEMS)
     .map(f => ({ slug: f.slug, label: 'Universities & colleges' })),
+  ...SCHOLARSHIP_FACETS.filter(f => f.kind === 'category' && facetItems(f, chipSource).length >= MIN_FACET_ITEMS)
+    .map(f => ({ slug: f.slug, label: f.label })),
 ] : [];
 const scopesOf = (s: ScholarshipWithMeta) =>
   hideScopes || tabbed ? undefined : regionFacets.filter(f => facetMatches(f, s)).map(f => f.slug).join(' ') || undefined;
@@ -227,7 +219,7 @@ const openNow = openNowCount(initial);
 ---
 
 <Fragment set:html={ICON_SPRITE} />
-<div class:list={['sabl-page', { 'sabl-railed': railFilters && !tabbed, 'sabl-tabbed': tabbed }]} data-dir-step={step}>
+<div class:list={['sabl-page', { 'sabl-tabbed': tabbed }]} data-dir-step={step}>
   {/* Everything above the cards, in ink on white. */}
   <div class="sabl-head">
   <div class="sabl-title-row">
@@ -237,22 +229,7 @@ const openNow = openNowCount(initial);
     </div>
   </div>
 
-  {tabbed && (
-    <nav class="sabl-tabs" aria-label="Scholarships by place">
-      <div class="sabl-tabs-track" data-tabs-track>
-        {placeTabs.map(t => (
-          <a
-            href={t.slug ? `/scholarships/${t.slug}/` : '/scholarships/'}
-            class="sabl-tab"
-            aria-current={t.slug === tabs ? 'page' : undefined}
-          >{t.label}</a>
-        ))}
-      </div>
-      <button type="button" class="sabl-tabs-more" data-tabs-more aria-label="More places" hidden>
-        <svg viewBox="0 0 8 12" width="8" height="12" fill="none" aria-hidden="true"><path d="M1.5 1 6.5 6 1.5 11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </button>
-    </nav>
-  )}
+  {tabbed && <SabTabs label="Scholarship lists" tabs={placeTabs.map(t => ({ href: t.slug ? `/scholarships/${t.slug}/` : '/scholarships/', label: t.label, current: t.slug === tabs }))} />}
 
   <div class="sabl-toolbar">
     <div class="sabl-search">
@@ -289,9 +266,7 @@ const openNow = openNowCount(initial);
 
   </div>
 
-  {/* Rail or rows, one DOM: .sabl-split is display:contents unless the page is
-      railed and wide, so the filters sit exactly where they always did on
-      /scholarships and on any narrow window. */}
+  {/* The filter row under the toolbar, and the phone's Filters sheet. */}
   <div class="sabl-split">
   {/* -dense: ten TRACK chips now that each carries a count, which is 90px more
       than the measure holds at the default metrics. The rows scroll rather than
@@ -661,21 +636,3 @@ const openNow = openNowCount(initial);
   });
 </script>
 
-<script>
-  // The place tabs: the lit tab scrolled into view, and an arrow at the right
-  // edge while more places sit past it, as on polymarket.com.
-  let sync = () => {};
-  addEventListener('resize', () => sync(), { passive: true });
-  document.addEventListener('astro:page-load', () => {
-    sync = () => {};
-    const track = document.querySelector<HTMLElement>('[data-tabs-track]');
-    const more = document.querySelector<HTMLButtonElement>('[data-tabs-more]');
-    if (!track || !more) return;
-    const lit = track.querySelector<HTMLElement>('[aria-current="page"]');
-    if (lit && lit.offsetLeft + lit.offsetWidth > track.clientWidth) track.scrollLeft = lit.offsetLeft - 48;
-    sync = () => { more.hidden = track.scrollLeft + track.clientWidth >= track.scrollWidth - 4; };
-    more.addEventListener('click', () => track.scrollBy({ left: track.clientWidth * 0.7, behavior: 'smooth' }));
-    track.addEventListener('scroll', () => sync(), { passive: true });
-    sync();
-  });
-</script>

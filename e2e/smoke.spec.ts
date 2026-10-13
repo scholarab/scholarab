@@ -140,13 +140,8 @@ test('every hub puts its filter chips at the same height', async ({ page }, test
       return Math.round(document.querySelector('.sabl-toolbar')!.getBoundingClientRect().top - body);
     }));
   }
-  // One height per directory: the scholarship pages carry the place tabs
-  // above the toolbar (2026-10-12), the program pages their rail beside it.
-  for (const family of ['/scholarships/', '/programs/']) {
-    const paths = [...seen.keys()].filter(k => k.startsWith(family));
-    const first = seen.get(paths[0]);
-    expect(Object.fromEntries(paths.map(k => [k, seen.get(k)]))).toEqual(Object.fromEntries(paths.map(k => [k, first])));
-  }
+  const first = [...seen.values()][0];
+  expect(Object.fromEntries(seen)).toEqual(Object.fromEntries([...seen.keys()].map(k => [k, first])));
 });
 
 // The SCOPE row left the scholarship hubs on 2026-09-15 (a reader who picked

@@ -2213,3 +2213,13 @@ Outcome: a student picks their place from one line of tabs under the heading, th
 - Measured on the built site at 1440px: the grid went from 3 to 4 cards per row (1,377px wide). The first card moved down 101px on both pages (/scholarships/ 425 to 526, Calgary 583 to 684), the cost of the tab line and the filter row.
 - Tests: two e2e tests pinned the rail (grid widens when filters hide, one toolbar height across both directories) and now check the new layout (grid lifts, one height per directory). One new test checks that the lit tab is right and every tab returns 200.
 - Add-back: none so far.
+
+## One tab line on every directory page (2026-10-12)
+
+Outcome: every scholarship and program page shows the same line of tabs in the same place, starting at All, with that page's tab lit (Ilia: "for every single page the same").
+
+- Removed: the left filter rail everywhere, its CSS (the 1180px two-column grid, the sticky column, its lean-mode and print rules) and the `railFilters` prop on both directories. The auto-scroll to the lit tab (the line now reads the same on every page). The no-JS "Browse programs by field or format" list and its styles, and the "Browse all programs" link (the tabs are plain links and include All).
+- Added: `SabTabs.astro`, one component for both directories. Scholarships run All, Province-wide, National, the places, Universities & colleges, then Indigenous, Trades, Arts, STEM, Community, Sports. Programs run All, the 8 formats, then the 8 fields. A back arrow appears once the line is scrolled.
+- Measured at 1440px on the built site against www: programs went from 3 to 4 cards per row. The first card moved down 101px (/programs/ 425 to 526, Olympiads 486 to 587), the same cost as on the scholarship pages. Every directory toolbar is again at one height (smoke.spec).
+- Tests: the no-JS test now walks the program tabs, and the toolbar-height test went back to one height for every hub.
+- Add-back: none.

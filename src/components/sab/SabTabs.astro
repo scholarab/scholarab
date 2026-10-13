@@ -1,0 +1,45 @@
+---
+// The tab line under a directory's heading (Ilia, 2026-10-12, after
+// polymarket.com): every page of that directory in one line, the same line on
+// every one of them, always starting at All (Ilia: "for every single page the
+// same"), this page's tab lit. It replaced the left filter rail.
+interface Props {
+  label: string;
+  tabs: Array<{ href: string; label: string; current?: boolean }>;
+}
+const { label, tabs } = Astro.props;
+---
+<nav class="sabl-tabs" aria-label={label}>
+  <button type="button" class="sabl-tabs-more sabl-tabs-back" data-tabs-back aria-label="Back" hidden>
+    <svg viewBox="0 0 8 12" width="8" height="12" fill="none" aria-hidden="true"><path d="M6.5 1 1.5 6 6.5 11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+  <div class="sabl-tabs-track" data-tabs-track>
+    {tabs.map(t => <a href={t.href} class="sabl-tab" aria-current={t.current ? 'page' : undefined}>{t.label}</a>)}
+  </div>
+  <button type="button" class="sabl-tabs-more" data-tabs-more aria-label="More" hidden>
+    <svg viewBox="0 0 8 12" width="8" height="12" fill="none" aria-hidden="true"><path d="M1.5 1 6.5 6 1.5 11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+</nav>
+
+<script>
+  // Arrows at either edge while more tabs sit past it. The line is never
+  // scrolled for the reader, so it reads the same on every page.
+  let sync = () => {};
+  addEventListener('resize', () => sync(), { passive: true });
+  document.addEventListener('astro:page-load', () => {
+    sync = () => {};
+    const track = document.querySelector<HTMLElement>('[data-tabs-track]');
+    const more = document.querySelector<HTMLButtonElement>('[data-tabs-more]:not([data-tabs-back])');
+    const back = document.querySelector<HTMLButtonElement>('[data-tabs-back]');
+    if (!track || !more || !back) return;
+    sync = () => {
+      back.hidden = track.scrollLeft <= 4;
+      more.hidden = track.scrollLeft + track.clientWidth >= track.scrollWidth - 4;
+    };
+    const step = (dir: number) => track.scrollBy({ left: dir * track.clientWidth * 0.7, behavior: 'smooth' });
+    more.addEventListener('click', () => step(1));
+    back.addEventListener('click', () => step(-1));
+    track.addEventListener('scroll', () => sync(), { passive: true });
+    sync();
+  });
+</script>

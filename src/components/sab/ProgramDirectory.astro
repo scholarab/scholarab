@@ -11,6 +11,7 @@ import { generateSlug, formatVerifiedMonth, isCheckStale } from '../../lib/utils
 import { PROGRAM_FACETS, PROGRAM_FORMATS, type Facet } from '../../lib/facets.ts';
 import { ARROW_REF, BOOKMARK_REF, ICON_SPRITE } from '../../lib/icons.ts';
 import SabFilterSelect from './SabFilterSelect.astro';
+import SabTabs from './SabTabs.astro';
 import { FORMAT_TERMS, GLOSSARY } from '../../lib/glossary.ts';
 
 interface Props {
@@ -25,10 +26,6 @@ interface Props {
   currentField?: string | null;
   /** The same, on the FORMAT axis. Exactly one of the two is ever set. */
   currentFormat?: string | null;
-  /** The chip rows move into a sticky left column so the cards start at the
-      top of the page; hubs and /programs alike. The scholarship twin; see the
-      note there. */
-  railFilters?: boolean;
 }
 const {
   items,
@@ -37,8 +34,19 @@ const {
   intro = 'Programs for Alberta students, from competitions to research placements.',
   currentField = null,
   currentFormat = null,
-  railFilters = false,
 } = Astro.props;
+
+// The tab line (SabTabs), the same on every program page: All, the formats,
+// then the fields. "Research placements", since a field is called Research too.
+const here = currentField ?? currentFormat ?? '';
+const tabs = [
+  { href: '/programs/', label: 'All', current: here === '' },
+  ...(['format', 'category'] as const).flatMap(kind => browseFacets.filter(f => f.kind === kind).map(f => ({
+    href: `/programs/${f.slug}/`,
+    label: f.slug === 'research-placements' ? 'Research placements' : f.label,
+    current: f.slug === here,
+  }))),
+];
 
 // A hub named by a jargon word says what the word means under its heading.
 const defined = currentFormat && FORMAT_TERMS[currentFormat] ? GLOSSARY[FORMAT_TERMS[currentFormat]!] : null;
@@ -79,10 +87,8 @@ const openNow = programOpenNowCount(initial);
 ---
 
 <Fragment set:html={ICON_SPRITE} />
-<div class:list={['sabl-page', { 'sabl-railed': railFilters }]}>
-  {/* The scholarship twin's wrapper, and load-bearing on a railed hub: it is
-      what puts the heading and the toolbar in the right-hand column beside the
-      filter rail. Without it both would auto-place into the rail's column. */}
+<div class="sabl-page sabl-tabbed">
+  {/* The scholarship twin's wrapper: the heading, the tabs and the toolbar. */}
   <div class="sabl-head">
   <div class="sabl-title-row">
     <div>
@@ -90,6 +96,8 @@ const openNow = programOpenNowCount(initial);
       <p class="sabl-desc">{intro}</p>
     </div>
   </div>
+
+  <SabTabs label="Program lists" tabs={tabs} />
 
   <div class="sabl-toolbar">
     <div class="sabl-search">
@@ -126,7 +134,7 @@ const openNow = programOpenNowCount(initial);
 
   </div>
 
-  {/* Rail or rows, one DOM; see the twin in ScholarshipDirectory. */}
+  {/* The filter row under the toolbar, and the phone's Filters sheet. */}
   <div class="sabl-split">
   <aside class="sabl-rail" id="dir-filters" aria-label="Filters">
   {/* Phones only (global.css): the sheet's own heading and a way to undo
@@ -161,24 +169,6 @@ const openNow = programOpenNowCount(initial);
     <SabFilterSelect label="Status" filterKey="status" options={STATUS_CHIPS
       .filter(s => s.value === 'all' || chipCount({ statusFilter: s.value }) > 0)
       .map(s => ({ ...s, label: s.value === 'all' ? 'All statuses' : s.label, count: chipCount({ statusFilter: s.value }) }))} />
-    {(currentField || currentFormat) && <a class="sabl-all-programs" href="/programs/">Browse all programs</a>}
-    <noscript>
-      <details class="sabl-noscript-browse">
-        <summary>Browse programs by field or format</summary>
-        <nav aria-label="Program hubs">
-          {(['format', 'category'] as const).map(kind => (
-            <div>
-              <h2>{kind === 'format' ? 'Format' : 'Field'}</h2>
-              <ul>
-                {browseFacets.filter(f => f.kind === kind).map(f => (
-                  <li><a href={`/programs/${f.slug}/`} aria-current={f.slug === currentField || f.slug === currentFormat ? 'page' : undefined}>{f.slug === 'research-placements' ? 'Research placement' : f.label}</a></li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </nav>
-      </details>
-    </noscript>
     <SabStatusHelp kind="program" />
   </div>
 
@@ -384,13 +374,3 @@ const openNow = programOpenNowCount(initial);
     },
   });
 </script>
-
-<style is:global>
-  .sabl-noscript-browse { font-size: 15px; line-height: 1.5; }
-  .sabl-noscript-browse summary { cursor: pointer; padding: 10px 0; }
-  .sabl-noscript-browse nav { display: flex; flex-wrap: wrap; gap: 16px 32px; padding: 12px 0; }
-  .sabl-noscript-browse h2 { font: inherit; font-weight: 600; margin: 0 0 6px; }
-  .sabl-noscript-browse ul { list-style: none; padding: 0; margin: 0; }
-  .sabl-noscript-browse a { display: inline-block; padding: 8px 0; color: var(--text-primary); text-underline-offset: 3px; }
-  .sabl-noscript-browse a[aria-current] { font-weight: 600; }
-</style>

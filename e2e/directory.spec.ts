@@ -48,24 +48,18 @@ test('all listings and program hub navigation remain accessible without JavaScri
   await page.goto(`${baseURL}/scholarships/`);
   await expect(page.locator('[data-dir-card]:visible')).toHaveCount(items.length);
 
+  // The tab line is plain links, so every program page is one click away.
   await page.goto(`${baseURL}/programs/`);
-  const browse = page.locator('.sabl-noscript-browse');
-  await browse.locator('summary').click();
-  await expect(browse.getByRole('heading', { name: 'Format', exact: true })).toBeVisible();
-  await expect(browse.getByRole('heading', { name: 'Field', exact: true })).toBeVisible();
-  const rootLinks = await browse.getByRole('link').evaluateAll(links => links.map(a => a.getAttribute('href')));
+  const tabs = page.locator('.sabl-tabs');
+  const rootLinks = await tabs.getByRole('link').evaluateAll(links => links.map(a => a.getAttribute('href')));
   expect(rootLinks).toContain('/programs/research/');
   expect(rootLinks).toContain('/programs/summer-programs/');
-  await browse.locator('a[href="/programs/research/"]').click();
+  await tabs.locator('a[href="/programs/research/"]').click();
   await expect(page).toHaveURL(/\/programs\/research\/$/);
   await expect(page.locator('[data-dir-card]:visible').first()).toBeVisible();
-  await browse.locator('summary').click();
-  expect(await browse.getByRole('link').evaluateAll(links => links.map(a => a.getAttribute('href')))).toEqual(rootLinks);
-  await expect(browse.locator('a[href="/programs/research/"]')).toHaveAttribute('aria-current', 'page');
-  await browse.locator('a[href="/programs/summer-programs/"]').click();
-  await expect(page).toHaveURL(/\/programs\/summer-programs\/$/);
-  await expect(page.locator('[data-dir-card]:visible').first()).toBeVisible();
-  await page.getByRole('link', { name: 'Browse all programs', exact: true }).click();
+  expect(await tabs.getByRole('link').evaluateAll(links => links.map(a => a.getAttribute('href')))).toEqual(rootLinks);
+  await expect(tabs.locator('a[href="/programs/research/"]')).toHaveAttribute('aria-current', 'page');
+  await tabs.locator('a[href="/programs/"]').click();
   await expect(page).toHaveURL(/\/programs\/$/);
   await page.close();
 });
