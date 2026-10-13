@@ -253,6 +253,30 @@ describe('initSaved', () => {
     expect(document.querySelector('[data-cal-add]')).toBeNull()
     expect(downloadICS).not.toHaveBeenCalled()
   })
+
+  it('fetches the catalogue only for a saved row the page does not carry', async () => {
+    const fetchMock = vi.fn(async () => new Response(JSON.stringify([
+      { type: 'scholarship', id: 1, name: 'Big Award', deadline: '2026-05-01', url: 'https://x.example', href: '/scholarships/big-award/' },
+      { type: 'scholarship', id: 5, name: 'Fetched Award', deadline: '2026-05-20', url: 'https://x.example', href: '/scholarships/fetched-award/' },
+    ])))
+    vi.stubGlobal('fetch', fetchMock)
+    savedSch = [1]
+    mount()
+    $('[data-sv-items]').dataset.src = '/saved-items.json'
+    document.dispatchEvent(new Event('astro:page-load'))
+    expect(fetchMock).not.toHaveBeenCalled()
+    expect($('[data-sv-content]').hidden).toBe(false)
+
+    savedSch = [1, 5]
+    mount()
+    $('[data-sv-items]').dataset.src = '/saved-items.json'
+    document.dispatchEvent(new Event('astro:page-load'))
+    expect($('[data-sv-content]').hidden).toBe(true)
+    await vi.waitFor(() => expect($('[data-sv-content]').hidden).toBe(false))
+    expect(fetchMock).toHaveBeenCalledTimes(1)
+    expect($$('[data-sv-wrap]').map(w => w.dataset.id)).toEqual(['1', '5'])
+    vi.unstubAllGlobals()
+  })
 })
 
 describe('savedOrder', () => {

@@ -1,35 +1,20 @@
 ---
 import type { SavedItem } from '../../lib/saved-client.ts';
-import { generateSlug } from '../../lib/utils.ts';
-import type { Scholarship, Program } from '../../lib/data-loader.ts';
-import type { PlanKit } from '../../lib/saved-plan.ts';
-import { saysNoApplication, rowRoute } from '../../lib/apply-method.ts';
+import type { Scholarship } from '../../lib/data-loader.ts';
+import { savedItems } from '../../lib/saved-items.ts';
+import { STARTER_PACK_IDS } from '../../lib/starter-pack.ts';
 import { scholarshipStatusOf } from '../../lib/status.ts';
 import { isAfterHighSchool } from '../../lib/list-core.ts';
 import { todayDate } from '../../lib/calendar';
 
 interface Props {
   initialScholarships: Scholarship[];
-  initialPrograms: Program[];
 }
-const { initialScholarships, initialPrograms } = Astro.props;
-// Keep the card fields inline so every bookmark works with the cached page.
-// toApply travels as kinds and a letter count only: the plan adds them up,
-// and the full text is one click away on the award's page.
-const kitOf = (t: Scholarship['toApply']): PlanKit | undefined => t ? {
-  k: t.items.map(i => i.kind),
-  r: t.items.reduce((n, i) => n + (i.kind === 'reference' ? i.count ?? 1 : 0), 0),
-  c: t.complete,
-} : undefined;
-const items: SavedItem[] = [
-  ...initialScholarships.map(({ id, title: name, amount, audience, deadline, openDate, active, concluded, deadlineEstimated, rolling, url, toApply, applyRoute, notes, metaDetail, ...rest }) => {
-    // The route as its key, not its words: a few bytes on the 194 that have one.
-    const via = rowRoute(applyRoute, saysNoApplication(notes, metaDetail, (rest as { description?: string }).description));
-    return { type: 'scholarship' as const, id, name, amount, audience, deadline, openDate, active, concluded, deadlineEstimated, rolling, url, href: `/scholarships/${generateSlug(name)}/`, ...(toApply ? { kit: kitOf(toApply) } : {}), ...(via ? { via } : {}) };
-  }),
-  ...initialPrograms.map(({ id, name, eligibility: audience, paid, cost, deadline, openDate, active, url }) =>
-    ({ type: 'program' as const, id, name, audience, paid, cost, deadline, ...(openDate ? { openDate } : {}), ...(active === false ? { active: false } : {}), url, href: `/programs/${generateSlug(name)}/` })),
-];
+const { initialScholarships } = Astro.props;
+// The page carries only the starter pack, the rows a first visit shows. Any
+// other saved row comes from /saved-items.json, fetched when one is needed.
+const starter = new Set<number>(STARTER_PACK_IDS);
+const items: SavedItem[] = savedItems(initialScholarships.filter(s => starter.has(s.id)), []);
 
 // The empty page leads with a real count rather than a dashed box (flow plan,
 // 2026-10-02). Not three picked awards: by date the first three included a
@@ -109,7 +94,7 @@ const openNow = initialScholarships.filter(s => {
   <div data-sv-cal hidden></div>
 </div>
 
-<script is:inline type="application/json" data-sv-items set:html={JSON.stringify(items).replace(/</g, '\\u003c')} />
+<script is:inline type="application/json" data-sv-items data-src="/saved-items.json" set:html={JSON.stringify(items).replace(/</g, '\\u003c')} />
 
 <script>
   import { initSaved } from '../../lib/saved-client.ts';

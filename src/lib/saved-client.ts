@@ -106,6 +106,30 @@ export function initSaved() {
   let calMonth = new Date();
   let calAdded = false;
   let items: SavedItem[] = [];
+  // The whole catalogue, fetched once when a saved row is not among the few
+  // the page carries (SavedDirectory.astro).
+  let all: Promise<SavedItem[] | null> | null = null;
+  let src = '';
+
+  function missing(): boolean {
+    const have = new Set(items.map(s => `${s.type}:${s.id}`));
+    return getSaved().some(id => !have.has(`scholarship:${id}`))
+      || getSavedPrograms().some(id => !have.has(`program:${id}`));
+  }
+
+  /** Repaints once every saved row has its data, at once when the page has it. A failed fetch paints what is here. */
+  function repaintWhenLoaded(then?: () => void) {
+    if (!missing() || !src) { repaint(); then?.(); return; }
+    const here = root;
+    all ??= fetch(src).then(r => r.ok ? r.json() as Promise<SavedItem[]> : null).catch(() => null);
+    void all.then(loaded => {
+      if (!loaded) all = null;
+      if (root !== here) return;
+      if (loaded) items = loaded;
+      repaint();
+      then?.();
+    });
+  }
 
   const wraps = () => root ? [...root.querySelectorAll<HTMLElement>('[data-sv-wrap]')] : [];
 
@@ -542,22 +566,26 @@ export function initSaved() {
 
   window.addEventListener('storage', e => {
     if (e.key === 'scholarab_status') paintPlan();
-    if (e.key === 'scholarab_saved' || e.key === 'scholarab_saved_programs') repaint();
+    if (e.key === 'scholarab_saved' || e.key === 'scholarab_saved_programs') repaintWhenLoaded();
   });
 
   document.addEventListener('astro:page-load', () => {
     root = document.querySelector<HTMLElement>('#sab-saved');
     if (!root) return;
-    items = JSON.parse(root.querySelector('[data-sv-items]')?.textContent ?? '[]');
+    const here = root;
+    const data = root.querySelector<HTMLElement>('[data-sv-items]');
+    items = JSON.parse(data?.textContent ?? '[]');
+    src = data?.dataset.src ?? '';
     view = 'list';
     calAdded = false;
-    repaint();
-    setView('list');
-    // Content is ready: swap the skeleton for the real page (same visible
-    // sequence as the old React island, just resolved sooner).
-    const skeleton = root.querySelector<HTMLElement>('[data-sv-skeleton]');
-    const content = root.querySelector<HTMLElement>('[data-sv-content]');
-    if (skeleton) skeleton.hidden = true;
-    if (content) content.hidden = false;
+    repaintWhenLoaded(() => {
+      setView('list');
+      // Content is ready: swap the skeleton for the real page (same visible
+      // sequence as the old React island, just resolved sooner).
+      const skeleton = here.querySelector<HTMLElement>('[data-sv-skeleton]');
+      const content = here.querySelector<HTMLElement>('[data-sv-content]');
+      if (skeleton) skeleton.hidden = true;
+      if (content) content.hidden = false;
+    });
   });
 }

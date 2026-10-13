@@ -3,10 +3,9 @@ import SabFooter from '../components/sab/SabFooter.astro';
 import SabFonts from '../components/sab/SabFonts.astro';
 import Layout from '../layouts/Layout.astro';
 import SabHeader from '../components/sab/SabHeader.astro';
-import { loadScholarships, loadPrograms } from '../lib/data-loader';
+import { loadScholarships } from '../lib/data-loader';
 import SavedDirectory from '../components/sab/SavedDirectory.astro';
 const scholarships = await loadScholarships();
-const programs = await loadPrograms();
 ---
 
 <Layout
@@ -24,7 +23,7 @@ const programs = await loadPrograms();
 
   <div id="sab-saved" class="sabp" style="display:flex;flex-direction:column;min-height:100%;">
     <div class="sabp-body" style="flex:1;">
-      <SavedDirectory initialScholarships={scholarships} initialPrograms={programs} />
+      <SavedDirectory initialScholarships={scholarships} />
     </div>
 
   </div>

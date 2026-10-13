@@ -5,11 +5,10 @@ import { gzipSync } from 'node:zlib';
 test('Saved stays small while retaining bookmarks, cross-tab updates and calendar export', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' });
   const response = await page.goto('/saved/');
-  // Budget the bytes a student downloads (the page is served compressed), not
-  // the raw HTML: every listing is inlined so any bookmark renders from the
-  // cached page, and the raw size grows with the catalogue while the transfer
-  // barely moves. 200 KB still catches a return to rendering every card.
-  expect(gzipSync(await response!.text()).length).toBeLessThan(200_000);
+  // The page carries the starter pack only and fetches /saved-items.json for
+  // any other saved row: the whole catalogue inline was 754 KB of HTML that
+  // held the first paint on a slow phone. 40 KB catches it coming back.
+  expect(gzipSync(await response!.text()).length).toBeLessThan(40_000);
   await expect(page.locator('[data-sv-content]')).toBeVisible();
   await expect(page.locator('[data-sv-wrap]')).toHaveCount(0);
   await page.evaluate(() => {

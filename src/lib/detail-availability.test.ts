@@ -9,6 +9,7 @@ import { experimental_AstroContainer } from 'astro/container'
 import scholarships from '../data/scholarships.json'
 import programs from '../data/research-programs.json'
 import { saysNoApplication } from './apply-method'
+import { savedItems } from './saved-items'
 
 const routePath = resolve('src/pages/[type]/[slug].astro')
 const componentPath = resolve('src/components/sab/SabDetail.astro')
@@ -31,7 +32,6 @@ async function moduleFrom(source: string, directory: string) {
 let prepare: (props: Record<string, unknown>) => Record<string, unknown>
 let render: (data: Record<string, unknown>) => Promise<void>
 let refresh: () => void
-let prepareSaved: (props: Record<string, unknown>) => Array<{ type: string; id: number; active?: boolean }>
 
 beforeAll(async () => {
   const imports = route.match(/^import .*;$/gm)!.filter(line => !/\.astro|data-loader/.test(line)).join('\n')
@@ -57,10 +57,6 @@ beforeAll(async () => {
     import { URGENT_DAYS, SOON_DAYS } from '../../lib/list-core';
     import { LIKELY_DATE, STATUS_WORDS } from '../../lib/status';
     ${clock}\nexport { refreshStatusChip };`, dirname(componentPath))).refreshStatusChip
-  const savedSource = readFileSync(resolve('src/components/sab/SavedDirectory.astro'), 'utf8').split('---')[1]!
-  const savedImports = savedSource.match(/^import .*;$/gm)!.join('\n')
-  const savedPreparation = savedSource.slice(savedSource.indexOf('const { initialScholarships,'))
-  prepareSaved = (await moduleFrom(`${savedImports}\nexport function prepare(props) { const Astro = { props }; ${savedPreparation}\nreturn items; }`, dirname(componentPath))).prepare
 })
 
 afterEach(() => { vi.useRealTimers(); document.body.innerHTML = '' })
@@ -73,7 +69,7 @@ function data(kind: 'scholarship' | 'program', record: object) {
 
 describe('detail availability', () => {
   it('carries all inactive program flags into the saved payload without adding active defaults', () => {
-    const payload = prepareSaved({ initialScholarships: [], initialPrograms: programs })
+    const payload = savedItems([], programs as Parameters<typeof savedItems>[1])
     expect(payload).toHaveLength(285)
     expect(payload.filter(p => p.active === false).map(p => p.id)).toEqual(programs.filter(p => p.active === false).map(p => p.id))
     expect(payload.filter(p => p.active !== false).every(p => !('active' in p))).toBe(true)

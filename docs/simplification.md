@@ -2367,3 +2367,14 @@ Outcome kept: every listing is on the directory for a reader with JavaScript, an
 - No-JS: the page ends in "Show every listing", linking to the full copy. The e2e no-JS test follows that link and still counts every listing.
 - Verified: 72 full-page screenshots (32 pages x 2 widths, plus sort, ?show, Show more, Show all) pixel-identical to the unsplit copy from the same build.
 - Measured locally, Lighthouse 13.5 mobile, brotli static server. /scholarships/ went from 80 to 95-98 (FCP 3.0s to 1.7-1.9s, LCP 3.3s to 2.2-2.5s, SI 7.0s to 1.8-2.9s). Edmonton, Alberta and /programs/ scored 97-98, desktop 100. Hosted PageSpeed to be re-measured after deploy.
+
+## 2026-10-13: My combo fetches the catalogue only when it needs it (no visual change)
+
+Outcome kept: every saved scholarship and program shows on /saved/, a first visit included. The page looks exactly as before.
+
+- Removed: the whole catalogue inlined in /saved/ as JSON (754 KB of a 799 KB page). The page now carries only the three starter-pack awards a first visit shows, 46 KB in all. Every other row comes from `/saved-items.json`, fetched once, and only when a saved id is not on the page.
+- Simplified: the payload code moved out of the component into `src/lib/saved-items.ts`, used by both the page and the JSON. detail-availability.test.ts calls it directly instead of compiling it out of the .astro source.
+- Kept: the noindex. My combo is one device's list, so it has nothing for a searcher. That is the only thing holding PageSpeed SEO at 69 on this page.
+- Verified: full-page screenshots at 390 and 1280 are pixel-identical to live. The e2e saved test now saves non-starter rows, so it takes the fetch path. The page budget is down from 200 KB gzip to 40 KB.
+- Measured locally, Lighthouse 13.5 mobile, brotli static server. Live before: 96 locally (FCP 2.0s), 94 on hosted PageSpeed. After: 98-99, FCP 1.0-1.3s, LCP 2.3s, CLS 0, Accessibility 100. Hosted PageSpeed to be re-measured after deploy.
+- Add-back fraction: 0 of 1.
