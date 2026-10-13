@@ -2,10 +2,11 @@ import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { PROGRAM_FORMATS, SCHOLARSHIP_FACETS } from './facets';
-import { EXPLORE_PHOTOS, PHOTO_CREDITS, needsCredit } from './photo-credits';
+import { EXPLORE_PHOTOS, PHOTO_CREDITS, TAB_PHOTOS, needsCredit } from './photo-credits';
 
 const DIR = join(__dirname, '../../public/photos/backdrops');
 const FILES = ['wide-1672', 'wide-3344', 'tall-1000', 'tall-2000', 'tile', 'tab'];
+const tabPhotos = [...new Set(Object.values(TAB_PHOTOS).map(t => t.photo))];
 const backdrops = [...SCHOLARSHIP_FACETS, ...PROGRAM_FORMATS].map(f => f.backdrop).filter((b): b is string => !!b);
 
 describe('scope photos', () => {
@@ -19,9 +20,14 @@ describe('scope photos', () => {
     expect(missing).toEqual([]);
   });
 
+  it('ships the tab crop for every tab photo', () => {
+    const missing = tabPhotos.map(k => `${k}-tab.webp`).filter(f => !existsSync(join(DIR, f)));
+    expect(missing).toEqual([]);
+  });
+
   // A CC BY or CC BY-SA photo used without its credit breaks its license.
   it('credits every backdrop, and only backdrops that exist', () => {
-    const used = [...backdrops, ...Object.keys(EXPLORE_PHOTOS)];
+    const used = [...backdrops, ...Object.keys(EXPLORE_PHOTOS), ...tabPhotos];
     expect(used.filter(b => !PHOTO_CREDITS[b])).toEqual([]);
     expect(Object.keys(PHOTO_CREDITS).filter(k => !used.includes(k))).toEqual([]);
   });

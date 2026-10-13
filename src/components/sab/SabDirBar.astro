@@ -5,16 +5,18 @@
 // opens a box in its own place, with a few words to try under it while it is
 // empty; the filters open as a row under the bar.
 import { BOOKMARK_REF } from '../../lib/icons.ts';
+import { TAB_PHOTOS } from '../../lib/photo-credits.ts';
 interface Props {
   label: string;
-  /** photo: a backdrop name (facets.ts); the tab wears its photo crop. */
+  /** photo: a backdrop name (facets.ts); the tab wears its photo crop. Without one, TAB_PHOTOS by href. */
   tabs: Array<{ href: string; label: string; current?: boolean; photo?: string }>;
   searchPlaceholder: string;
   searchLabel: string;
   /** Words to try under the empty box (searchSuggestions). */
   suggestions?: string[];
 }
-const { label, tabs, searchPlaceholder, searchLabel, suggestions = [] } = Astro.props;
+const { label, tabs: given, searchPlaceholder, searchLabel, suggestions = [] } = Astro.props;
+const tabs = given.map(t => ({ ...t, photo: t.photo ?? TAB_PHOTOS[t.href]?.photo }));
 const LENS = '<svg viewBox="0 0 16 16" width="16" height="16" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="4.6" stroke="currentColor" stroke-width="1.5"/><path d="M10.6 10.6L14 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>';
 ---
 <div class="sabl-bar">

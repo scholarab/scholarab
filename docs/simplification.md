@@ -2283,3 +2283,13 @@ Outcome: a student spots their place by its picture as well as its name (Ilia: "
 - Fixed while testing: the ring drawn on the tab itself sat under the photo; it is drawn on the wash now. A type error (the tab list's inferred type had no photo field) showed up under the private/ symlink to src/, not under src/, so it read at first like one of the known private errors.
 - Tests: the photo test now requires the tab crop for every backdrop (six files, was five). 1,276 unit and 176 e2e pass.
 - Add-back: none.
+
+## 2026-10-12 Photos on every tab
+
+Outcome: every tab on the scholarship and program lines wears a photo, not only the places and formats (Ilia: "some photo for All. and photos for others").
+
+- One map, `TAB_PHOTOS` in `src/lib/photo-credits.ts`, keyed by the tab's link. SabDirBar falls back to it when a tab has no backdrop of its own, so neither directory gained code. /credits/ reads the same map.
+- 15 new public domain or CC0 photos from Wikimedia Commons (no credit needed, listed on /credits/ anyway). Programs All and Enrichment reuse the Explore quiz and guides photos rather than adding two more.
+- Removed rather than added: no `-wide`/`-tall`/`-tile` crops for these, only the 288x104 tab crop (17 files, about 120 KB, lazy-loaded).
+- Swapped once: Social Sciences first got a parliament chamber, which repeated the Conferences photo two tabs away. Add-back fraction 1 of 16 picks.
+- Test: `photo-credits.test.ts` requires the tab crop and a credit record for every TAB_PHOTOS entry.

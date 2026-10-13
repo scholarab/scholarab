@@ -4,7 +4,7 @@ import SabFonts from '../components/sab/SabFonts.astro';
 import Layout from '../layouts/Layout.astro';
 import SabHeader from '../components/sab/SabHeader.astro';
 import { PROGRAM_FORMATS, SCHOLARSHIP_FACETS } from '../lib/facets';
-import { EXPLORE_PHOTOS, PHOTO_CREDITS } from '../lib/photo-credits';
+import { EXPLORE_PHOTOS, PHOTO_CREDITS, TAB_PHOTOS } from '../lib/photo-credits';
 
 // The attribution page for the scope and program-format photos (header menu
 // tiles and the home carousel). CC BY and CC BY-SA photos need their author, license and source
@@ -19,10 +19,11 @@ const rowsOf = (facets: typeof SCHOLARSHIP_FACETS, name: (f: (typeof facets)[num
   .map(f => ({ scope: name(f), ...PHOTO_CREDITS[f.backdrop!]! }))
   .sort((a, b) => a.scope.localeCompare(b.scope, 'en-CA'));
 // Places first, then the program formats under their hub names, then the
-// Explore tiles in menu order.
+// Explore tiles in menu order, then the tab line's topic tabs.
 const rows = [
   ...rowsOf(SCHOLARSHIP_FACETS, f => f.label), ...rowsOf(PROGRAM_FORMATS, f => f.h1),
   ...Object.entries(EXPLORE_PHOTOS).map(([k, scope]) => ({ scope, ...PHOTO_CREDITS[k]! })),
+  ...Object.values(TAB_PHOTOS).map(t => ({ scope: t.usedFor, ...PHOTO_CREDITS[t.photo]! })),
 ];
 ---
 
