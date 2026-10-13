@@ -2398,3 +2398,15 @@ Outcome: a student can see who has won an award before, on the provider's own pa
 - Added: a "Past winners" card in the rail under the guide card, reusing the guide card's styles. 10 listings have one (Loran, Schulich, Terry Fox, Horatio Alger x2, RE/MAX, TD Indigenous, French for the Future, Burns x2). Left out where the provider keeps no current page or only a stale one.
 - Checks: npm run ci (1,283 tests, only the baseline counsellor-drafts errors), test:e2e 177 passed.
 - Add-back fraction: 0 of 1.
+
+## 2026-10-13: directory cards stop copying polymarket.com (Ilia: "less like polymarket copy-cat")
+
+Outcome: the scholarship and program cards read as this site's own, with the date first, and the provider's picture stays (Ilia: "we need the picture. picture in the left bottom corner").
+
+- Removed: the grey rounded tile fill, the hover lift and shadow, the two filled Save and Apply halves (Polymarket's Yes and No), and their transitions with the reduced-motion block that only existed for them. The card block went from 5,462 to 4,541 bytes of CSS.
+- Kept and reused: the rows' own pieces. An ink rule on top like the section heading, the date figure leading, the worded Save and underlined Apply with their 44px hit areas.
+- Moved: the picture from beside the title to the bottom left, beside the money.
+- Found on the way: `.sabl-name:hover` was not gated to pointers, and the name link covers the whole card, so a finger scrolling turned the title green. Now gated like the card hover rule. The e2e touch test caught it.
+- Tests: two e2e card tests described the copied layout and now describe this one. The touch-tint test checks the name colour on cards, which have no fill to tint. test:e2e 177 passed, npm run ci 1,283 passed with only the baseline counsellor-drafts errors.
+- Option B (a ticket stub with the date) was mocked and not chosen.
+- Add-back fraction: 1 of 5 (the picture, at Ilia's call).

@@ -895,7 +895,7 @@ html.js .sabl-group-toggle { display: inline-flex; }
 /* A one-line title was a 22px-tall target; 4px each way that the negative
    margin gives back, so the row does not move (critique 2026-09-23). */
 .sabl-name { padding-block: 4px; margin-block: -4px; }
-.sabl-name:hover { color: var(--green); }
+@media (hover: hover) { .sabl-name:hover { color: var(--green); } }
 /* Card titles are headings so a screen reader can walk a directory card by
    card; the heading itself adds nothing visual. Tight leading 1.25 became
    1.3: two-line award names were touching descender to ascender. */
@@ -1210,92 +1210,73 @@ html:not(.js) .sabl-tool[data-dir-search-btn], html:not(.js) .sabl-tool[data-dir
   .sabl-tab { font-size: 14px; padding: 0 12px; }
 }
 
-/* ── Market cards (Ilia, 2026-10-12, after polymarket.com) ──
-   The two directories show a grid of tiles instead of rows: the name, who
-   it is for and the requirements on top, then the money and the date as the
-   two figures, then Save and Apply as two filled halves, like a market's Yes
-   and No. Same markup as the rows, so search, filters, paging and Save are
-   untouched; /saved and the other lists keep the row. The ID scope is what
-   lets one block beat every row rule at every width. */
+/* ── Ledger cards (Ilia, 2026-10-13) ──
+   The two directories show a grid of cards instead of rows. From 2026-10-12
+   to 10-13 they copied polymarket.com (grey rounded tiles, a picture beside
+   the title, Save and Apply as filled Yes and No halves), and Ilia asked for
+   them to look less like it. Now each card hangs from an ink rule like the
+   one under the section heading, the date leads as the rows' figure does,
+   the picture sits in the bottom left beside the money (Ilia: "we need the
+   picture"), and Save and Apply are the rows' worded links. Same markup as
+   the rows, so search, filters, paging and Save are untouched; /saved and
+   the other lists keep the row. The ID scope is what lets one block beat
+   every row rule at every width. */
 :is(#sab-scholarships, #sab-programs) [data-dir-grid] {
   display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
-  gap: 14px; padding-top: 14px;
+  gap: 8px 32px; padding-top: 14px;
 }
 :is(#sab-scholarships, #sab-programs) [data-dir-grid] > .sabl-card {
   grid-template-columns: minmax(0, 1fr) auto;
-  grid-template-rows: auto auto auto 1fr auto auto;
-  grid-template-areas: "title title" "blurb blurb" "facts facts" "gap gap" "amount when" "actions actions";
+  grid-template-rows: auto auto auto auto 1fr auto;
+  grid-template-areas: "when when" "title title" "blurb blurb" "facts facts" "gap gap" "amount actions";
   align-items: start; gap: 0 12px;
-  margin: 0; padding: 16px 16px 14px; border: 0; border-radius: 14px;
-  --row-bg: #F3F5F2;
-  transition: background-color 0.14s ease, box-shadow 0.14s ease;
-}
-@media (hover: hover) {
-  :is(#sab-scholarships, #sab-programs) [data-dir-grid] > .sabl-card:hover {
-    background-color: #EBEEEA; box-shadow: 0 10px 24px -18px rgba(20, 25, 21, 0.5);
-  }
+  margin: 0; padding: 14px 0 22px; border: 0; border-top: 3px solid var(--text-primary); border-radius: 0;
+  --row-bg: transparent; background-color: transparent;
 }
 :is(#sab-scholarships, #sab-programs) .sabl-card > .sabl-row-main { display: contents; }
-/* Scholarship cards lead with who runs the application (lib/providers.ts):
-   the mark top left, the name beside it, as a market leads with its flag. */
 #sab-scholarships [data-dir-grid] > .sabl-card {
   grid-template-columns: 44px minmax(0, 1fr) auto;
-  grid-template-areas: "logo title title" "blurb blurb blurb" "facts facts facts" "gap gap gap" "amount amount when" "actions actions actions";
+  grid-template-areas: "when when when" "title title title" "blurb blurb blurb" "facts facts facts" "gap gap gap" "logo amount actions";
 }
 .sabl-logo { display: none; }
 #sab-scholarships .sabl-card .sabl-logo {
-  display: block; grid-area: logo; align-self: center; width: 44px; height: 44px;
+  display: block; grid-area: logo; align-self: end; width: 44px; height: 44px; margin-top: 16px;
   border-radius: 10px; object-fit: cover; background: #FFFFFF;
   box-shadow: 0 0 0 1px rgba(20, 25, 21, 0.08);
 }
-#sab-scholarships .sabl-card .sabl-name-h { align-self: center; }
-#sab-scholarships .sabl-card :is(.sabl-blurb, .sabl-org) { margin-top: 10px; }
 :is(#sab-scholarships, #sab-programs) .sabl-card .sabl-name-h { grid-area: title; display: block; }
-/* No menu-board leader: the money is two lines down, not across. */
+/* No menu-board leader: the money is at the foot, not across. */
 :is(#sab-scholarships, #sab-programs) .sabl-card .sabl-name-h::after { content: none; }
 :is(#sab-scholarships, #sab-programs) .sabl-card .sabl-name {
-  font-size: 16px; line-height: 1.3; padding-block: 0; margin-block: 0; max-height: 2.6em;
+  font-size: 18px; line-height: 1.3; padding-block: 0; margin-block: 0; max-height: 2.6em;
   display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden;
 }
-:is(#sab-scholarships, #sab-programs) .sabl-card :is(.sabl-blurb, .sabl-org) { grid-area: blurb; margin-top: 4px; font-size: 14px; }
+:is(#sab-scholarships, #sab-programs) .sabl-card :is(.sabl-blurb, .sabl-org) { grid-area: blurb; margin-top: 6px; font-size: 14px; }
 :is(#sab-scholarships, #sab-programs) .sabl-card :is(.sabl-facts, .sabl-meta-row) { grid-area: facts; margin-top: 10px; gap: 4px 12px; }
 :is(#sab-scholarships, #sab-programs) .sabl-card .sabl-facts li { font-size: 12px; }
-/* The two figures: the money on the left, the date on the right. */
+/* The date leads, its countdown beside it. */
+:is(#sab-scholarships, #sab-programs) .sabl-card > .sabl-row-when {
+  grid-area: when; justify-self: start; margin: 0 0 12px; padding: 0;
+}
+:is(#sab-scholarships, #sab-programs) .sabl-card .sabl-when { flex-direction: row; align-items: baseline; gap: 10px; }
+:is(#sab-scholarships, #sab-programs) .sabl-card .sabl-when:not(.is-quiet) [data-when-main] { font-size: 30px; }
+:is(#sab-scholarships, #sab-programs) .sabl-card .sabl-when.is-quiet [data-when-main] { font-size: 14px; }
+/* The money at the foot, beside the picture. */
 :is(#sab-scholarships, #sab-programs) .sabl-card > :is(.sabl-amount, .sabl-card-top-left) {
   grid-area: amount; align-self: end; justify-self: start; text-align: left; margin-top: 16px;
 }
-:is(#sab-scholarships, #sab-programs) .sabl-card > .sabl-amount { font-size: 28px; line-height: 1; }
-:is(#sab-scholarships, #sab-programs) .sabl-card > .sabl-amount.is-long { font-size: 18px; line-height: 1.15; }
+#sab-scholarships .sabl-card > :is(.sabl-amount, .sabl-card-top-left) { align-self: center; margin-top: 16px; }
+:is(#sab-scholarships, #sab-programs) .sabl-card > .sabl-amount { font-size: 24px; line-height: 1; color: var(--cta); }
+:is(#sab-scholarships, #sab-programs) .sabl-card > .sabl-amount.is-long { font-size: 16px; line-height: 1.15; }
 :is(#sab-scholarships, #sab-programs) .sabl-card > .sabl-amount.is-varies { font-size: 14px; }
-:is(#sab-scholarships, #sab-programs) .sabl-card > .sabl-row-when {
-  grid-area: when; align-self: end; justify-self: end; align-items: flex-end; text-align: right;
-  margin-top: 16px; padding: 0;
-}
-:is(#sab-scholarships, #sab-programs) .sabl-card .sabl-when { align-items: flex-end; }
-:is(#sab-scholarships, #sab-programs) .sabl-card .sabl-when:not(.is-quiet) [data-when-main] { font-size: 20px; }
-:is(#sab-scholarships, #sab-programs) .sabl-card .sabl-when.is-quiet [data-when-main] { font-size: 13px; }
-/* Save and Apply, two halves of one bar along the foot. */
+/* Save and Apply as the rows have them, worded, Apply underlined. */
 :is(#sab-scholarships, #sab-programs) .sabl-card > .sabl-card-actions {
-  grid-area: actions; justify-self: stretch; margin-top: 14px;
-  display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+  grid-area: actions; justify-self: end; align-self: end; margin: 16px 0 0; gap: 18px;
 }
-:is(#sab-scholarships, #sab-programs) .sabl-card :is(.sabl-save, .sabl-apply) {
-  height: 40px; border-radius: 8px; justify-content: center; font-size: 14px;
-  transition: background-color 0.14s ease, color 0.14s ease;
-}
-:is(#sab-scholarships, #sab-programs) .sabl-card .sabl-save { background: rgba(20, 25, 21, 0.07); width: 100%; }
-:is(#sab-scholarships, #sab-programs) .sabl-card .sabl-save:hover { background: rgba(20, 25, 21, 0.13); }
-:is(#sab-scholarships, #sab-programs) .sabl-card .sabl-save.on { background: rgba(74, 168, 115, 0.18); }
-:is(#sab-scholarships, #sab-programs) .sabl-card .sabl-apply { background: rgba(10, 86, 50, 0.12); color: var(--cta); }
-:is(#sab-scholarships, #sab-programs) .sabl-card .sabl-apply:hover { background: var(--cta); color: #FFFFFF; }
-:is(#sab-scholarships, #sab-programs) .sabl-card .sabl-apply::before { content: none; }
-:is(#sab-scholarships, #sab-programs) .sabl-card :is(.sabl-save, .sabl-apply)::after { inset: 0; }
+#sab-scholarships .sabl-card > .sabl-card-actions { align-self: center; }
+:is(#sab-scholarships, #sab-programs) .sabl-card .sabl-save { padding: 0 4px; }
 /* Paper keeps the printed list a list. */
 @media print { :is(#sab-scholarships, #sab-programs) [data-dir-grid] { display: block; } }
-@media (prefers-reduced-motion: reduce) {
-  :is(#sab-scholarships, #sab-programs) [data-dir-grid] > .sabl-card,
-  :is(#sab-scholarships, #sab-programs) .sabl-card :is(.sabl-save, .sabl-apply) { transition: none; }
-}
 
 /* "Show more" under a directory grid. The count line says what is left, the
    filled button takes the next step, the underlined link takes all of it. */
