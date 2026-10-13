@@ -24,7 +24,8 @@ import { saysNoApplication, howYouApply } from '../../lib/apply-method.ts';
 import { oneFormBlock } from '../../lib/one-form.ts';
 import { feeFigure } from '../../lib/fee-figure.ts';
 import { eligibilityFacts } from '../../lib/eligibility-facts';
-import { SCHOLARSHIP_FACETS, PROGRAM_FACETS, PROGRAM_FORMATS, facetForListing } from '../../lib/facets.ts';
+import { SCHOLARSHIP_FACETS, PROGRAM_FACETS, PROGRAM_FORMATS, facetForListing, facetMatches } from '../../lib/facets.ts';
+import { providerLogo } from '../../lib/providers.ts';
 import type { Scholarship, Program } from '../../lib/data-loader';
 
 // A related listing as a row: name, where/what, amount, deadline. The cards
@@ -633,6 +634,16 @@ const facet = kind === 'scholarship'
   : facetForListing(program!, PROGRAM_FACETS);
 const facetHref = facet ? `${d.currentPath}${facet.slug}/` : null;
 
+// The photo beside the title: the place the award is for, from the hubs' own
+// photos, as the directory row picks its icon, or a program's format. Never a
+// stock picture of "a scholarship". The logo is the provider's real mark.
+const photo = kind === 'scholarship'
+  ? (SCHOLARSHIP_FACETS.filter(f => f.kind === 'region' && f.backdrop).sort((a, b) => Number(!!a.broad) - Number(!!b.broad))
+      .find(f => facetMatches(f, scholarship!, { primaryOnly: true }))?.backdrop
+    ?? (scholarship!.region === 'National' ? 'national' : 'alberta'))
+  : (PROGRAM_FORMATS.find(f => f.value === program!.format)?.backdrop ?? 'research-placements');
+const logo = providerLogo(kind === 'scholarship' ? scholarship!.url : program!.url);
+
 // Positions have to be contiguous, so the facet crumb is spliced in rather
 // than written as a fixed fourth entry: a breadcrumb that jumps 2 -> 4 is
 // invalid markup, and the trail is two, three or four deep depending on the
@@ -686,6 +697,8 @@ const breadcrumbJson = {
       opensLabel={d.opensLabel}
       facetHref={facetHref}
       facetLabel={facet?.label ?? null}
+      photo={photo}
+      logo={logo}
       backHref={d.currentPath}
       backLabel={`Back to ${d.breadcrumbName === 'Programs' ? 'Programs' : 'Scholarships'}`}
       facts={d.facts}

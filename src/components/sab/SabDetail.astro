@@ -50,6 +50,10 @@ interface Props {
   /** The facet hub this listing sits under, when it has one. */
   facetHref?: string | null;
   facetLabel?: string | null;
+  /** A backdrop name in public/photos/backdrops: the place or format, never a stock picture. */
+  photo?: string;
+  /** The provider's own mark, when lib/providers.ts has one. */
+  logo?: { src: string; name: string } | null;
   facts: Fact[];
   /** Hard requirements ("88% average"), beside the deadline and above Apply. */
   needs?: string[];
@@ -86,7 +90,7 @@ interface Props {
 const {
   itemType, itemId, typeLabel, name, subline,
   status: datedStatus, availability = null, daysLeft, deadlineIso, openDateIso, inactive, estimated = false, rolling = false, dueLong, opensLabel,
-  backHref, backLabel, facetHref = null, facetLabel = null,
+  backHref, backLabel, facetHref = null, facetLabel, photo, logo = null,
   facts, needs = [], eligibility, howApply = null, about, notes, oneForm = null, steps, toApply = null,
   valueLabel, valueBig, valueNote, checkedLabel = null, valueQuiet = false,
   ctaLabel, url, reminder, guideHref, guideTitle,
@@ -160,7 +164,8 @@ const chip: { text: string; tone: Tone } =
   </div>
 </div>
 
-<div class="sabd-title-block" data-detail-view data-item-type={itemType} data-item-id={itemId}>
+<div class:list={['sabd-title-block', photo && 'has-photo']} data-detail-view data-item-type={itemType} data-item-id={itemId}>
+  <div class="sabd-title-text">
   <div class="sabd-chips">
     {/* Status only. The type and topic pills restated the breadcrumb and
         read as template tags over the title (critique 2026-09-23). */}
@@ -191,6 +196,26 @@ const chip: { text: string; tone: Tone } =
       your school" for clubs, nominations and campus offices alike. */}
   {howApply && (
     <p class="sabd-who sabd-how"><span class="sabd-who-label">How you apply:</span> {howApply}</p>
+  )}
+  </div>
+  {/* Desktop only: the right of the title was empty white. The place the
+      award is for (or the program's format), from the hubs' own photos, with
+      the provider's mark on it when there is one. */}
+  {photo && (
+    <figure class="sabd-photo">
+      {/* The figure is hidden under 1100px, and a hidden <img> still
+          downloads, so phones get a one-pixel stand-in, not the photo. */}
+      <picture>
+        <source media="(min-width: 1100px)" srcset={`/photos/backdrops/${photo}-wide-1672.webp`} />
+        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" width="1672" height="1180" decoding="async" fetchpriority="low" />
+      </picture>
+      {logo && (
+        <figcaption class="sabd-photo-by">
+          <img src={logo.src} alt="" width="48" height="48" decoding="async" />
+          <span><span class="sabd-photo-by-label">Run by</span> {logo.name}</span>
+        </figcaption>
+      )}
+    </figure>
   )}
 </div>
 
@@ -776,6 +801,30 @@ const chip: { text: string; tone: Tone } =
        and leaves it zoomed (critique 2026-09-27). */
     .sabd-remind-input { font-size: 16px; }
     .sabd-remind-how summary { min-height: 44px; }
+  }
+  /* Wide screens: the title shares its row with a photo, and the prose under
+     it runs in two columns, so the page fills the width the rail leaves. */
+  .sabd-photo { display: none; }
+  @media (min-width: 1100px) {
+    .sabd-title-block.has-photo { display: grid; grid-template-columns: minmax(0, 1fr) minmax(360px, 44%); gap: 40px; align-items: stretch; }
+    .sabd-photo { display: block; position: relative; margin: 0; min-height: 260px; border-radius: var(--radius); overflow: hidden; background: rgba(20,25,21,0.06); }
+    .sabd-photo > picture > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .sabd-photo-by {
+      position: absolute; left: 16px; bottom: 16px; display: flex; align-items: center; gap: 12px;
+      background: rgba(255,255,255,0.92); border-radius: var(--radius); padding: 8px 16px 8px 8px;
+      font-size: 15px; font-weight: 600; color: #141915; max-width: calc(100% - 32px);
+    }
+    .sabd-photo-by img { width: 48px; height: 48px; border-radius: var(--radius); flex: none; }
+    .sabd-photo-by-label { display: block; font-size: 13px; font-weight: 400; color: var(--ink-muted); }
+  }
+  @media (min-width: 1280px) {
+    /* Balanced columns rather than a grid: grid rows lined up across both
+       columns and left a hole under the short notes box. Reading order stays
+       the source order, down one column and then the next. */
+    .sabd-left { display: block; columns: 2; column-gap: 48px; }
+    .sabd-left > * { break-inside: avoid; margin-bottom: 40px; }
+    .sabd-left > * { max-width: none; }
+    .sabd-left .sabd-about, .sabd-left .sabd-steps { max-width: none; }
   }
 </style>
 

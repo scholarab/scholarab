@@ -2379,3 +2379,13 @@ Outcome kept: every saved scholarship and program shows on /saved/, a first visi
 - Measured locally, Lighthouse 13.5 mobile, brotli static server. Live before: 96 locally (FCP 2.0s), 94 on hosted PageSpeed. After: 98-99, FCP 1.0-1.3s, LCP 2.3s, CLS 0, Accessibility 100. Hosted PageSpeed to be re-measured after deploy.
 - Add-back fraction: 0 of 1.
 - Follow-up, same day: the noindex came off too, at Ilia's call ("we need to fix SEO though"). Lighthouse SEO went from 69 to 100 locally. /saved/ is still not in the sitemap.
+
+## 2026-10-13: listing pages use the width they have (Ilia: "doesn't utilize all space")
+
+Outcome: on a desktop the listing fills the width beside the Apply card, and the empty white beside the title shows the place the award is for. Phones are unchanged.
+
+- Removed: the empty strip between the 640px prose column and the rail (about 500px at 1440). From 1280px up the prose runs in two balanced CSS columns. A two-row grid was tried first and dropped, because it lined rows up and left a hole under the short notes box. Reading order stays the source order.
+- Added: a photo beside the title from 1100px up. It is the listing's region or program-format backdrop, the same photos and choice the directory rows use. The provider's logo and "Run by" go on it when lib/providers.ts has one. There are no stock "scholarship" pictures.
+- Kept off phones: the figure is hidden under 1100px. A hidden img still downloads, so the photo sits in a picture source with a min-width media query, and phones get a 1px stand-in.
+- Measured locally, Lighthouse 13.5, brotli static server, /scholarships/loran-scholarship/. Mobile 99/100/100/100, photo not fetched. Desktop 100/100/100/100, LCP 0.6s.
+- Add-back fraction: 1 of 2 layouts restored (grid replaced by columns).
