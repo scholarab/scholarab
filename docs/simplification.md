@@ -2232,3 +2232,13 @@ Outcome: the filter row holds only the pickers a student uses (Ilia: "no need to
 - Changed: a URL filter now applies only when its picker is on the page, so an old `?status=` link shows the whole list instead of hiding listings with nothing on screen to undo it. The home "open right now" links and the listing page "See all open" link point at the plain hub, where Open now is the first section.
 - Tests: three e2e tests that drove the Status picker now drive Type or Format; the numbers test reads the OPEN NOW heading and the card count; the two "explanations fit the panel" tests and the old ?status=ongoing test are deleted, replaced by one that checks an old ?status= link shows the whole list. 1,274 unit and 174 e2e pass.
 - Add-back: none.
+
+## Search, filters and My combo as icons in the bar (2026-10-12)
+
+Outcome: the directories open on their cards. Search and the filters wait behind icons at the end of the tab line, as on polymarket.com, instead of a search row and a filter row taking the space above the first card every time.
+
+- Removed: the toolbar row (search field, Sort label and picker, "Hide filters"), lean mode with its `sa_lean` key, the inline head script reading it and the CSS for both, the phone Filters button and its separate count badge, the phone toolbar grid. Sort lives with the other pickers now, at every width.
+- Added: `SabDirBar.astro` (replaces SabTabs) with the tab line and three icons. Search opens a field under the bar (open on arrival when the URL carries ?q=, Escape in an empty field shuts it). Filters opens Sort and the pickers as a row on a desktop and the existing sheet on a phone, with the number of filters on. The bookmark goes to My combo with the saved count. On a phone the icons take their own line over the tabs.
+- Measured at 1440px on the built site: the first card moved up 129px on /scholarships/ (526 to 397) and /programs/ (526 to 397), and 107px on Calgary (684 to 577). That is above where it sat with the old left rail (425 and 583).
+- Tests: the lean test became "the bar icons open search and the filters under it"; three search tests open the field first; the toolbar-height test measures the bar.
+- Add-back: none.
