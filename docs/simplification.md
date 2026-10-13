@@ -2254,3 +2254,13 @@ Outcome: searching and filtering take no room of their own (Ilia: "make the sear
 - Not measured: the cards no longer move down when search opens, since the box sits in the bar line. That follows from the layout; no pixel number was taken.
 - Tests: the search e2e test reads counts from every option except All and checks "All types" has none; the bar test now covers a word to try, the ×, and an empty box shutting. 1,276 unit and 175 e2e pass.
 - Add-back: none.
+
+## Our own filter menus in place of the browser's list (2026-10-12)
+
+Outcome: the desktop filter row looks like ScholarAB, not like the operating system (Ilia, after polymarket.com: "i dont like that ours is just common column ... not common. ours."). The browser's grey list could not be styled.
+
+- Added: `src/lib/filter-menu.ts`. On a desktop each picker in the filter row becomes a small button saying the current choice (Sort with a sort icon) and opens a white rounded list under it, with counts in grey and a green check on the choice. A set filter turns its button green. Arrow keys, Home, End, Enter and Escape work, and Escape shuts only the menu, not the filter row.
+- Kept: the native `<select data-fselect>` stays as the one source of state. The menu sets its value and fires the same change event, so the URL, counts, Clear filters and the filters badge needed no change. The phone sheet keeps the native pickers, where the system wheel suits a thumb.
+- Removed: the 36px select styling added an hour earlier for the desktop row, now unused.
+- Tests: a `pick` helper in directory.spec drives the menu on a desktop and the select on a phone; a new test covers choosing, the check, the keyboard and Escape. The first try hid the menu's focus ring, which the design-tokens test caught, so the items keep the site's ring. 1,276 unit and 176 e2e pass (20 skipped are the phone runs of desktop-only tests, as before plus the new one).
+- Add-back: none.

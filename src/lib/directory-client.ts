@@ -5,6 +5,7 @@ import { sendEvent } from './events.ts';
 import { normalizeSearchQuery, tokenIndexMayMatch, correctQuery, searchTokens, searchRows } from './search-text.ts';
 import { writeListContext } from './list-context.ts';
 import { DIRECTORY_PAGE_SIZE, showingLine } from './list-core.ts';
+import { initFilterMenus, syncFilterMenus } from './filter-menu.ts';
 
 export interface DirectoryItem {
   el: HTMLElement;
@@ -432,6 +433,7 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
       // list under the picker is the count.
       option.textContent = option.value === 'all' ? option.dataset.filterLabel! : `${option.dataset.filterLabel} (${count.toLocaleString('en-CA')})`;
     });
+    syncFilterMenus(root);
     config.afterCounts?.(root, searched, state, q, ctx);
     root.querySelectorAll<HTMLElement>('[data-dir-filters-done]').forEach(b => {
       b.textContent = visible.length === 0 ? 'No results. Change a filter'
@@ -747,6 +749,7 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     shown = Number.isFinite(showParam) && showParam > pageSize ? Math.floor(showParam) : pageSize;
     const input = root.querySelector<HTMLInputElement>('[data-dir-search]');
     if (input) input.value = query;
+    initFilterMenus(root);
     setSearchOpen(!!query);
     setFiltersOpen(false);
     config.onCardsParsed?.(items);

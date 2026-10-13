@@ -1163,16 +1163,42 @@ html:not(.js) .sabl-tool[data-dir-search-btn], html:not(.js) .sabl-tool[data-dir
   .sabl-tabbed .sabl-filter-row .sabl-row-label {
     position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
   }
-  /* Small rounded buttons, as polymarket.com's "24hr Volume" and "All":
-     a hairline, not the 2px ink outline the pickers wear elsewhere. */
-  .sabl-tabbed .sabl-rail :is(.sabl-sort-select, .sabl-filter-select) {
-    width: auto; min-height: 36px; padding: 0 32px 0 12px;
-    border: 1px solid rgba(20,25,21,0.16); border-radius: 8px;
-    font: 600 14px var(--font-body);
-    background: #FFFFFF var(--select-arrow) right 12px center / 10px 6px no-repeat;
-  }
-  .sabl-tabbed .sabl-rail :is(.sabl-sort-select, .sabl-filter-select):hover { border-color: rgba(20,25,21,0.45); }
+  /* Our own menus in place of the browser's grey list (lib/filter-menu.ts),
+     as polymarket.com's "24hr Volume" and "All": a small button with a
+     hairline, and a rounded list under it with a check on the choice. */
+  .sabl-tabbed .sabl-menu select { display: none; }
+  .sabl-tabbed .sabl-menu-btn { display: inline-flex; }
 }
+/* The filter row's menus (lib/filter-menu.ts). Desktop only: the phone
+   sheet keeps the native pickers, whose system wheel suits a thumb. */
+.sabl-menu { position: relative; }
+.sabl-menu-btn {
+  display: none; align-items: center; gap: 8px; min-height: 40px; padding: 0 12px 0 14px;
+  border: 1px solid rgba(20,25,21,0.16); border-radius: 10px; background: #FFFFFF; cursor: pointer;
+  font: 600 15px var(--font-body); color: var(--text-primary); white-space: nowrap;
+}
+.sabl-menu-btn:hover { border-color: rgba(20,25,21,0.4); }
+.sabl-menu-btn[aria-expanded='true'] { background: rgba(20,25,21,0.05); border-color: rgba(20,25,21,0.4); }
+.sabl-menu.is-set .sabl-menu-btn { color: var(--cta); background: rgba(10,86,50,0.08); border-color: rgba(10,86,50,0.35); }
+.sabl-menu-chev { color: var(--ink-muted); transition: transform 0.15s; }
+.sabl-menu-btn[aria-expanded='true'] .sabl-menu-chev { transform: rotate(180deg); }
+.sabl-menu-list {
+  position: absolute; top: calc(100% + 8px); left: 0; z-index: 40; min-width: 240px; max-height: 420px;
+  overflow-y: auto; overscroll-behavior: contain; box-sizing: border-box; padding: 8px;
+  background: #FFFFFF; border: 1px solid rgba(20,25,21,0.12); border-radius: 14px;
+  box-shadow: 0 18px 40px -16px rgba(20,25,21,0.35);
+}
+.sabl-menu-list[hidden] { display: none; }
+.sabl-menu-opt {
+  display: flex; align-items: center; gap: 12px; min-height: 46px; padding: 0 14px; border-radius: 8px;
+  cursor: pointer; font: 600 16px var(--font-body); color: var(--text-primary); white-space: nowrap;
+}
+.sabl-menu-opt:hover, .sabl-menu-opt:focus { background: rgba(20,25,21,0.05); }
+.sabl-menu-opt:focus-visible { outline-offset: -2px; }
+.sabl-menu-n { margin-left: auto; font: 500 14px var(--font-body); color: var(--ink-muted); font-variant-numeric: tabular-nums; }
+.sabl-menu-check { display: inline-flex; width: 16px; margin-left: auto; color: var(--cta); visibility: hidden; }
+.sabl-menu-n + .sabl-menu-check { margin-left: 0; }
+.sabl-menu-opt[aria-selected='true'] .sabl-menu-check { visibility: visible; }
 @media (max-width: 640px) {
   /* The icons take their own line on a phone, over the tabs, as
      polymarket.com puts them on its title line: beside the tabs they left

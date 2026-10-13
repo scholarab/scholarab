@@ -25,6 +25,18 @@ async function openFilters(page: Page) {
 }
 
 /** The search row sits behind its icon in the bar (SabDirBar); open it. */
+/**
+ * Chooses in a filter picker: our own menu on a desktop (lib/filter-menu.ts),
+ * the native select in the phone sheet.
+ */
+async function pick(page: Page, key: string, choice: string | { index: number }) {
+  const sel = page.locator(`select[data-fselect="${key}"]`);
+  if (await sel.isVisible()) { await sel.selectOption(choice); return; }
+  const value = typeof choice === 'string' ? choice : await sel.locator('option').nth(choice.index).getAttribute('value');
+  await page.locator(`[data-menu-for="${key}"]`).click();
+  await page.locator(`[data-menu-list="${key}"] [data-value="${value}"]`).click();
+}
+
 async function openSearch(page: Page) {
   const btn = page.locator('[data-dir-search-btn]');
   if ((await btn.getAttribute('aria-expanded')) !== 'true') await btn.click();
@@ -76,7 +88,7 @@ test('search preserves results, groups, chips, money, closed awards and history'
   const historyLength = await page.evaluate(() => history.length);
   for (const sortBy of ['highest_pay', 'lowest_pay', 'closest_due'] as const) {
     await openFilters(page);
-    await page.locator('[data-fselect="sort"]:visible').selectOption(sortBy);
+    await pick(page, 'sort', sortBy);
     // On a phone the sheet holds the sort and the page behind it is inert.
     await closeFilters(page);
     await openSearch(page);
@@ -112,7 +124,7 @@ test('search preserves results, groups, chips, money, closed awards and history'
   await expect(page.locator('[data-dir-card]:visible')).toHaveCount(Math.min(PAGE, items.length));
   expect(await page.evaluate(() => history.length)).toBe(historyLength);
   await openFilters(page);
-  await page.locator('[data-fselect="category"]').selectOption(unique.category!);
+  await pick(page, 'category', unique.category!);
   await closeFilters(page);
   await openSearch(page);
   await page.locator('[data-dir-search]').fill(query);
@@ -133,7 +145,7 @@ test('the bar icons open search and the filters under it', async ({ page }) => {
   await page.goto('/scholarships/alberta/');
   const search = page.locator('[data-dir-search]');
   await expect(search).toBeHidden();
-  await expect(page.locator('[data-fselect="sort"]:visible')).toHaveCount(0);
+  await expect(page.locator(':is([data-fselect="sort"], [data-menu-for="sort"]):visible')).toHaveCount(0);
   const grid = page.locator('.sabl-grid');
   const top = (await grid.boundingBox())!.y;
 
@@ -164,8 +176,8 @@ test('the bar icons open search and the filters under it', async ({ page }) => {
   await expect(search).toBeHidden();
 
   await openFilters(page);
-  await expect(page.locator('[data-fselect="sort"]:visible')).toHaveCount(1);
-  await page.locator('[data-fselect="category"]').selectOption({ index: 1 });
+  await expect(page.locator(':is([data-fselect="sort"], [data-menu-for="sort"]):visible')).toHaveCount(1);
+  await pick(page, 'category', { index: 1 });
   await expect(page.locator('[data-dir-filters] [data-dir-filter-n]')).toHaveText('1');
   await closeFilters(page);
 
@@ -173,6 +185,35 @@ test('the bar icons open search and the filters under it', async ({ page }) => {
   await page.goto('/scholarships/alberta/?q=nursing');
   await expect(search).toBeVisible();
   await expect(search).toHaveValue('nursing');
+});
+
+// Our own menus in the desktop filter row (2026-10-12, after
+// polymarket.com): a button saying the choice, a list with a check on it,
+// the keyboard working, and Escape shutting only the menu.
+test('the desktop filter menus choose, check and shut', async ({ page, isMobile }) => {
+  test.skip(isMobile, 'the phone sheet keeps the native pickers');
+  await page.goto('/scholarships/');
+  await openFilters(page);
+  const btn = page.locator('[data-menu-for="category"]');
+  await expect(btn).toHaveText('All types');
+  await btn.click();
+  const list = page.locator('[data-menu-list="category"]');
+  await expect(list.locator('[aria-selected="true"]')).toHaveText('All types');
+  await expect(list.locator('[aria-selected="true"]')).toBeFocused();
+  await page.keyboard.press('ArrowDown');
+  const second = list.locator('[role="option"]').nth(1);
+  await expect(second).toBeFocused();
+  const value = (await second.getAttribute('data-value'))!;
+  await page.keyboard.press('Enter');
+  await expect(list).toBeHidden();
+  await expect(btn).toBeFocused();
+  await expect(btn).toHaveText(value);
+  await expect(page).toHaveURL(new RegExp(`category=${encodeURIComponent(value)}`));
+  await expect(page.locator('[data-dir-filters] [data-dir-filter-n]')).toHaveText('1');
+  await btn.click();
+  await page.keyboard.press('Escape');
+  await expect(list).toBeHidden();
+  await expect(page.locator('[data-menu-for="sort"]')).toBeVisible();
 });
 
 test('one responsive list keeps facts and direct navigation even with an old view preference', async ({ page }) => {
@@ -203,7 +244,7 @@ test('on a phone, filters fold behind one button that counts them', async ({ pag
   await page.goto('/scholarships/calgary/?category=Arts');
   const btn = page.locator('[data-dir-filters]');
   await expect(page.locator('.sabl-rail')).toBeHidden();
-  await expect(page.locator('[data-fselect="sort"]:visible')).toHaveCount(0);
+  await expect(page.locator(':is([data-fselect="sort"], [data-menu-for="sort"]):visible')).toHaveCount(0);
   await expect(page.locator('[data-dir-filter-n]')).toHaveText('1');
   await expect(page.locator('[data-dir-card]:visible').first()).toBeInViewport();
   await btn.click();
@@ -249,7 +290,7 @@ test('the list reveals 24 at a time and Back returns to the same card', async ({
 
   // A new filter starts the count over and drops ?show.
   await openFilters(page);
-  await page.locator('[data-fselect="category"]').selectOption({ index: 1 });
+  await pick(page, 'category', { index: 1 });
   expect(await cards.count()).toBeLessThanOrEqual(PAGE);
   await expect(page).not.toHaveURL(/show=/);
 
@@ -299,7 +340,7 @@ test('program Details links preserve filtered previous and next arrows', async (
   }, total);
   expect(status, 'choose a status with multiple results from the rendered data').toBeTruthy();
   await openFilters(page);
-  await page.locator('[data-fselect="format"]').selectOption(status!);
+  await pick(page, 'format', status!);
   await closeFilters(page);
   await showEverything(page);
   const paths = await page.locator('[data-dir-card]:not([hidden]) .sabl-name').evaluateAll(links => links.map(link => link.getAttribute('href')!));
@@ -323,8 +364,8 @@ test('program format and field intersect and survive reload and a detail visit',
     return { category: found.getAttribute('data-category')!, format: found.getAttribute('data-format')! };
   });
   await openFilters(page);
-  await page.locator('[data-fselect="format"]').selectOption(pair.format);
-  await page.locator('[data-fselect="category"]').selectOption(pair.category);
+  await pick(page, 'format', pair.format);
+  await pick(page, 'category', pair.category);
   await closeFilters(page);
   await expect(page).toHaveURL(/format=research/);
   await expect(page).toHaveURL(/category=Computing/);
@@ -345,7 +386,7 @@ test('program format and field intersect and survive reload and a detail visit',
   // On a format hub the remaining Field filter refines that hub in place.
   await page.goto('/programs/research-placements/');
   await openFilters(page);
-  await page.locator('[data-fselect="category"]').selectOption(pair.category);
+  await pick(page, 'category', pair.category);
   await closeFilters(page);
   await expect(page).toHaveURL(/programs\/research-placements\/\?category=Computing/);
   await expect(page.locator('[data-dir-card]:visible')).toHaveCount(expected);
