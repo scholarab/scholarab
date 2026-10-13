@@ -54,6 +54,8 @@ interface Props {
   photo?: string;
   /** The provider's own mark, when lib/providers.ts has one. */
   logo?: { src: string; name: string } | null;
+  /** The provider's own page of past winners. A link, never the names. */
+  pastWinners?: { url: string; label: string } | null;
   facts: Fact[];
   /** Hard requirements ("88% average"), beside the deadline and above Apply. */
   needs?: string[];
@@ -90,7 +92,7 @@ interface Props {
 const {
   itemType, itemId, typeLabel, name, subline,
   status: datedStatus, availability = null, daysLeft, deadlineIso, openDateIso, inactive, estimated = false, rolling = false, dueLong, opensLabel,
-  backHref, backLabel, facetHref = null, facetLabel, photo, logo = null,
+  backHref, backLabel, facetHref = null, facetLabel, photo, logo, pastWinners = null,
   facts, needs = [], eligibility, howApply = null, about, notes, oneForm = null, steps, toApply = null,
   valueLabel, valueBig, valueNote, checkedLabel = null, valueQuiet = false,
   ctaLabel, url, reminder, guideHref, guideTitle,
@@ -436,6 +438,16 @@ const chip: { text: string; tone: Tone } =
       </a>
     )}
 
+    {/* Who has won it, on the provider's own page: names stay there, most
+        winners are teenagers (Ilia, 2026-10-13). */}
+    {pastWinners && (
+      <a href={pastWinners.url} target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer" class="sabd-guide">
+        <span class="sabd-guide-label">Past winners</span>
+        <span class="sabd-guide-title">{pastWinners.label}<span class="sabl-ext" aria-hidden="true">{'\u00A0'}↗</span></span>
+        <span class="sabd-guide-sub">On the provider's own site</span>
+      </a>
+    )}
+
     {!availability && reminder && (
       <div class="sabd-remind" data-remind data-reminder-state={reminder} data-item-type={itemType} data-deadline={deadlineIso ?? undefined} data-open-date={openDateIso ?? undefined} data-inactive={inactive ? 'true' : undefined} data-estimated={estimated ? 'true' : undefined} data-rolling={rolling ? 'true' : undefined}>
       {/* Once no milestone is ahead, the form promised mail the mailer never
@@ -516,6 +528,8 @@ const chip: { text: string; tone: Tone } =
     display: block; margin-top: 6px; font-family: var(--font-display);
     font-size: 19px; line-height: 1.25; color: #141915;
   }
+  .sabd-guide + .sabd-guide { margin-top: 0; }
+  .sabd-guide-sub { display: block; margin-top: 4px; font-size: var(--fs-meta); color: var(--ink-muted); }
 
   .sabd-crumb-row {
     padding: 40px var(--sab-gutter) 0;

@@ -78,6 +78,13 @@ export type Scholarship = {
   applyRoute?: ApplyRoute | null
   /** The shared form this award goes through, when its notes said so. JSON-only. See lib/one-form.ts. */
   oneForm?: OneFormKey | null
+  /**
+   * The provider's own page of past winners, when it keeps one. A link, never
+   * the names: most winners are teenagers, and a copied list would sit in
+   * search results under this site's name. `label` says which years the page
+   * covers ("The 2026 recipients"). JSON-only.
+   */
+  pastWinners?: { url: string; label: string } | null
 }
 
 export type Program = {

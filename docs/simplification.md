@@ -2389,3 +2389,12 @@ Outcome: on a desktop the listing fills the width beside the Apply card, and the
 - Kept off phones: the figure is hidden under 1100px. A hidden img still downloads, so the photo sits in a picture source with a min-width media query, and phones get a 1px stand-in.
 - Measured locally, Lighthouse 13.5, brotli static server, /scholarships/loran-scholarship/. Mobile 99/100/100/100, photo not fetched. Desktop 100/100/100/100, LCP 0.6s.
 - Add-back fraction: 1 of 2 layouts restored (grid replaced by columns).
+
+## 2026-10-13: past winners on listing pages (Ilia: "maybe previous winners if available")
+
+Outcome: a student can see who has won an award before, on the provider's own page, from the listing.
+
+- Removed before adding: copying winner names onto the site. Most winners are teenagers, and a copied list would sit in search results under this site's name. Each listing links to the provider's page instead, as one optional `pastWinners` field (url and label) on the JSON, checked by validate-data.
+- Added: a "Past winners" card in the rail under the guide card, reusing the guide card's styles. 10 listings have one (Loran, Schulich, Terry Fox, Horatio Alger x2, RE/MAX, TD Indigenous, French for the Future, Burns x2). Left out where the provider keeps no current page or only a stale one.
+- Checks: npm run ci (1,283 tests, only the baseline counsellor-drafts errors), test:e2e 177 passed.
+- Add-back fraction: 0 of 1.

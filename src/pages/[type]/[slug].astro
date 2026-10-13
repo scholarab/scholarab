@@ -699,6 +699,7 @@ const breadcrumbJson = {
       facetLabel={facet?.label ?? null}
       photo={photo}
       logo={logo}
+      pastWinners={kind === 'scholarship' ? scholarship!.pastWinners ?? null : null}
       backHref={d.currentPath}
       backLabel={`Back to ${d.breadcrumbName === 'Programs' ? 'Programs' : 'Scholarships'}`}
       facts={d.facts}

@@ -297,6 +297,12 @@ for (const s of scholarships) {
     console.error(`${tag}: applyRoute is set but applyViaGuidance is not`);
     failed = true;
   }
+  // A link to the provider's own winners page. The label says which years it covers.
+  const past = (s as { pastWinners?: { url?: unknown; label?: unknown } | null }).pastWinners;
+  if (past != null && (typeof past.url !== 'string' || !past.url.startsWith('https://') || typeof past.label !== 'string' || /[:;]/.test(past.label))) {
+    console.error(`${tag}: pastWinners needs an https url and a label with no colon or semicolon`);
+    failed = true;
+  }
   const form = (s as { oneForm?: unknown }).oneForm;
   if (form !== undefined && !(ONE_FORM_KEYS as readonly unknown[]).includes(form)) {
     console.error(`${tag}: oneForm "${String(form)}" is not one of ${ONE_FORM_KEYS.join(', ')}`);

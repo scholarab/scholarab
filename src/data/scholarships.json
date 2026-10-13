@@ -167,7 +167,11 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "metaDetail": "Forty $1,000 awards, drawn at random from eligible entries."
+    "metaDetail": "Forty $1,000 awards, drawn at random from eligible entries.",
+    "pastWinners": {
+      "url": "https://agentbrokerhub.remax.ca/quest-for-excellence-scholarship-recipients/",
+      "label": "The 2026 winners"
+    }
   },
   {
     "id": 14,
@@ -1301,7 +1305,11 @@
       "extracurriculars": []
     },
     "openDate": "2027-01-01",
-    "notes": "The window is January 1 to March 31 of your Grade 11 year, for study beginning after you graduate, so this is a Grade 11 application. Household net income must be $80,000 or less and you need a 70 percent average. Horatio Alger Canada runs several programs off related applications, so check the others before you settle on this one: the National Entrepreneurial Scholarships pay $25,000, and the Indigenous Achievement Scholarships take Grade 12 applicants. Quebec CEGEP students apply on a separate stream."
+    "notes": "The window is January 1 to March 31 of your Grade 11 year, for study beginning after you graduate, so this is a Grade 11 application. Household net income must be $80,000 or less and you need a 70 percent average. Horatio Alger Canada runs several programs off related applications, so check the others before you settle on this one: the National Entrepreneurial Scholarships pay $25,000, and the Indigenous Achievement Scholarships take Grade 12 applicants. Quebec CEGEP students apply on a separate stream.",
+    "pastWinners": {
+      "url": "https://horatioalger.ca/scholarship-recipients/",
+      "label": "The 2026 scholars"
+    }
   },
   {
     "id": 54,
@@ -1495,6 +1503,10 @@
           "text": "Interviews if you are shortlisted"
         }
       ]
+    },
+    "pastWinners": {
+      "url": "https://loranscholar.ca/our-community/meet-the-scholars/",
+      "label": "Meet the current Loran Scholars"
     }
   },
   {
@@ -1535,7 +1547,11 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "metaDetail": "100 awards a year."
+    "metaDetail": "100 awards a year.",
+    "pastWinners": {
+      "url": "https://schulichleaders.com/scholars/",
+      "label": "Schulich Leaders by year since 2012"
+    }
   },
   {
     "id": 59,
@@ -1614,7 +1630,11 @@
       ]
     },
     "metaDetail": "The committee looks for years of service, not one project.",
-    "openDate": "2026-11-01"
+    "openDate": "2026-11-01",
+    "pastWinners": {
+      "url": "https://terryfoxawards.ca/2026-recipients/",
+      "label": "The 2026 recipients"
+    }
   },
   {
     "id": 62,
@@ -39357,7 +39377,11 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "active": false
+    "active": false,
+    "pastWinners": {
+      "url": "https://burnsfund.com/news-and-events/grant-and-scholarship-recipients/",
+      "label": "The 2024 recipients"
+    }
   },
   {
     "id": 987,
@@ -39394,7 +39418,11 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "active": false
+    "active": false,
+    "pastWinners": {
+      "url": "https://burnsfund.com/news-and-events/grant-and-scholarship-recipients/",
+      "label": "The 2024 recipients"
+    }
   },
   {
     "id": 988,
@@ -41892,7 +41920,11 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "active": true
+    "active": true,
+    "pastWinners": {
+      "url": "https://french-future.org/news/announcing-the-winners-of-the-2023-2024-national-essay-contest",
+      "label": "The 2023-24 winners"
+    }
   },
   {
     "id": 1051,
@@ -43268,7 +43300,11 @@
       "extracurriculars": []
     },
     "lastVerified": "2026-10",
-    "active": true
+    "active": true,
+    "pastWinners": {
+      "url": "https://horatioalger.ca/scholarship-recipients/",
+      "label": "The 2026 scholars"
+    }
   },
   {
     "id": 1087,
@@ -46421,7 +46457,11 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "applyViaGuidance": false
+    "applyViaGuidance": false,
+    "pastWinners": {
+      "url": "https://afoa.ca/td-scholarship-2024-recipients/",
+      "label": "The 2024 recipients"
+    }
   },
   {
     "id": 1249,
