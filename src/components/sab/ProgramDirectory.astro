@@ -9,7 +9,7 @@ import { generateSlug, formatVerifiedMonth, isCheckStale } from '../../lib/utils
 import { PROGRAM_FACETS, PROGRAM_FORMATS, type Facet } from '../../lib/facets.ts';
 import { ARROW_REF, BOOKMARK_REF, ICON_SPRITE } from '../../lib/icons.ts';
 import SabFilterSelect from './SabFilterSelect.astro';
-import SabTabs from './SabTabs.astro';
+import SabDirBar from './SabDirBar.astro';
 import { FORMAT_TERMS, GLOSSARY } from '../../lib/glossary.ts';
 
 interface Props {
@@ -86,40 +86,8 @@ const openNow = programOpenNowCount(initial);
     </div>
   </div>
 
-  <SabTabs label="Program lists" tabs={tabs} />
+  <SabDirBar label="Program lists" tabs={tabs} searchPlaceholder="Search programs, universities, fields…" searchLabel="Search programs by name, university, or field" />
 
-  <div class="sabl-toolbar">
-    <div class="sabl-search">
-      <span class="sabl-search-icon" aria-hidden="true"><svg viewBox="0 0 16 16" width="16" height="16" fill="none"><circle cx="7" cy="7" r="4.6" stroke="currentColor" stroke-width="1.5"/><path d="M10.6 10.6L14 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
-      <input
-        type="search"
-        data-dir-search
-        placeholder="Search programs, universities, fields…"
-        aria-label="Search programs by name, university, or field"
-      />
-    </div>
-    <div class="sabl-sort" id="dir-sort">
-      <span class="sabl-row-label">Sort</span>
-      {/* One picker, not three chips (critique 2026-09-23: the toolbar held
-          nine controls). directory-client reads [data-fselect] on change. */}
-      <select class="sabl-sort-select" data-fselect="sort" aria-label="Sort">
-        {SORT_CHIPS.map(s => <option value={s.value} selected={s.value === 'closest_due'}>{s.label}</option>)}
-      </select>
-    </div>
-    {/* TRACK and STATUS put away from here, and on a hub the cards take the
-        rail's column with them (Ilia, 2026-09-15). Only the filters: the
-        heading, the standfirst, the money, the search box and these chips all
-        stay whichever way it is set. */}
-    {/* Phones only: sort and every chip row fold behind this, so the first
-        card is on the first screen. Desktop keeps the lean toggle below. */}
-    <button type="button" class="sabl-filters-btn" data-dir-filters aria-expanded="false" aria-controls="dir-sort dir-filters">
-      Filters<span class="sabl-mono sabl-filters-n" data-dir-filter-n hidden></span>
-    </button>
-    <button type="button" class="sabl-lean" data-dir-lean aria-pressed="false">
-      <span data-dir-lean-word>Hide filters</span>
-      <svg class="sabl-lean-caret" viewBox="0 0 12 8" width="12" height="8" fill="none" aria-hidden="true"><path d="M1 1.5 6 6.5 11 1.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </button>
-  </div>
 
   </div>
 
@@ -139,8 +107,7 @@ const openNow = programOpenNowCount(initial);
       three rows here, not just FIELD, so the block still reads as one set of
       controls. */}
   <div class="sabl-filters sabl-filters-dense">
-    {/* Phones only: the sheet holds the sort too, so one surface shapes the
-        list (critique 2026-09-29). directory-client keeps both pickers in step. */}
+    {/* Sort sits with the filters behind the one icon (SabDirBar). */}
     <div class="sabl-filter-row sabl-rail-sort">
       <span class="sabl-row-label">Sort</span>
       <select class="sabl-sort-select" data-fselect="sort" aria-label="Sort">

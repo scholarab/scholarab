@@ -24,6 +24,12 @@ async function openFilters(page: Page) {
   if (await btn.isVisible() && (await btn.getAttribute('aria-expanded')) !== 'true') await btn.click();
 }
 
+/** The search row sits behind its icon in the bar (SabDirBar); open it. */
+async function openSearch(page: Page) {
+  const btn = page.locator('[data-dir-search-btn]');
+  if ((await btn.getAttribute('aria-expanded')) !== 'true') await btn.click();
+}
+
 /** On a phone the open filters are a sheet over the list; put it away. */
 async function closeFilters(page: Page) {
   const done = page.locator('[data-dir-filters-done]');
@@ -73,6 +79,7 @@ test('search preserves results, groups, chips, money, closed awards and history'
     await page.locator('[data-fselect="sort"]:visible').selectOption(sortBy);
     // On a phone the sheet holds the sort and the page behind it is inert.
     await closeFilters(page);
+    await openSearch(page);
     for (const searchQuery of [query, '', 'zz-no-matching-student-award']) {
       await page.locator('[data-dir-search]').fill(searchQuery);
       const state = { ...DEFAULT_SCHOLARSHIP_STATE, sortBy, searchQuery };
@@ -104,6 +111,7 @@ test('search preserves results, groups, chips, money, closed awards and history'
   await openFilters(page);
   await page.locator('[data-fselect="category"]').selectOption(unique.category!);
   await closeFilters(page);
+  await openSearch(page);
   await page.locator('[data-dir-search]').fill(query);
   await page.locator('[data-dir-card]:visible .sabl-name').press('Enter');
   await expect(page.locator('[data-sabd-position]')).toHaveText('FILTERED · 1 OF 1');
@@ -116,37 +124,33 @@ test('search preserves results, groups, chips, money, closed awards and history'
   await expect(page.locator('[data-dir-card]:visible')).toHaveCount(1);
 });
 
-// The scholarship pages carry their filters as one row under the search box
-// since the place tabs (2026-10-12), so hiding them lifts the grid rather than
-// widening it.
-test('hiding the filters lifts the grid and survives a reload', async ({ page }, testInfo) => {
-  test.skip(testInfo.project.name === 'mobile', 'the filter row is a desktop control');
-  await page.setViewportSize({ width: 1440, height: 1000 });
+// Polymarket's bar (2026-10-12): search and the filters stay behind their
+// icons until asked for, so the cards start under the tab line.
+test('the bar icons open search and the filters under it', async ({ page }) => {
   await page.goto('/scholarships/alberta/');
-  const rail = page.locator('.sabl-rail');
-  const desc = page.locator('.sabl-desc');
+  const search = page.locator('[data-dir-search]');
+  await expect(search).toBeHidden();
+  await expect(page.locator('[data-fselect="sort"]:visible')).toHaveCount(0);
   const grid = page.locator('.sabl-grid');
-  await expect(rail).toBeVisible();
-  const low = (await grid.boundingBox())!.y;
+  const top = (await grid.boundingBox())!.y;
 
-  await page.locator('[data-dir-lean]').click();
-  await expect(rail).toBeHidden();
-  // Filters only: everything else on the head stays, the standfirst included.
-  await expect(desc).toBeVisible();
-  await expect(page.locator('.sabl-h1')).toBeVisible();
-  await expect(page.locator('[data-dir-search]')).toBeVisible();
-  await expect(page.locator('[data-fselect="sort"]').first()).toBeVisible();
-  expect((await grid.boundingBox())!.y).toBeLessThan(low);
+  await page.locator('[data-dir-search-btn]').click();
+  await expect(search).toBeFocused();
+  await expect(page.locator('[data-dir-search-btn]')).toHaveAttribute('aria-expanded', 'true');
+  await search.press('Escape');
+  await expect(search).toBeHidden();
+  expect((await grid.boundingBox())!.y).toBe(top);
 
-  // Set in <head> from localStorage, so the wide layout is in the first paint.
-  await page.reload();
-  await expect(page.locator('html')).toHaveAttribute('data-lean', '');
-  await expect(rail).toBeHidden();
-  await expect(page.locator('[data-dir-lean]')).toHaveAttribute('aria-pressed', 'true');
+  await openFilters(page);
+  await expect(page.locator('[data-fselect="sort"]:visible')).toHaveCount(1);
+  await page.locator('[data-fselect="category"]').selectOption({ index: 1 });
+  await expect(page.locator('[data-dir-filters] [data-dir-filter-n]')).toHaveText('1');
+  await closeFilters(page);
 
-  await page.locator('[data-dir-lean]').click();
-  await expect(rail).toBeVisible();
-  expect((await grid.boundingBox())!.y).toBe(low);
+  // A search in the URL opens the row on arrival.
+  await page.goto('/scholarships/alberta/?q=nursing');
+  await expect(search).toBeVisible();
+  await expect(search).toHaveValue('nursing');
 });
 
 test('one responsive list keeps facts and direct navigation even with an old view preference', async ({ page }) => {

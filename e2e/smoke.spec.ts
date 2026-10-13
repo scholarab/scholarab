@@ -137,7 +137,7 @@ test('every hub puts its filter chips at the same height', async ({ page }, test
     await page.evaluate(() => document.fonts.ready);
     seen.set(path, await page.evaluate(() => {
       const body = document.querySelector('.sabp-body')!.getBoundingClientRect().top;
-      return Math.round(document.querySelector('.sabl-toolbar')!.getBoundingClientRect().top - body);
+      return Math.round(document.querySelector('.sabl-bar')!.getBoundingClientRect().top - body);
     }));
   }
   const first = [...seen.values()][0];
@@ -407,6 +407,7 @@ test('cards: Save and Apply split the foot of every card, no stripes', async ({ 
       return { top: Math.abs(save.top - apply.top), h: [save.height, apply.height], w: Math.abs(save.width - apply.width), order: apply.left > save.right, bg: getComputedStyle(c).backgroundColor };
     }));
     for (const cards of [await measure(), await (async () => {
+      await page.locator('[data-dir-search-btn]').click();
       await page.locator('[data-dir-search]').fill(term);
       await page.waitForTimeout(400);
       return measure();

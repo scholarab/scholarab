@@ -11,7 +11,7 @@ import { SCHOLARSHIP_FACETS, MIN_FACET_ITEMS, facetItems, facetMatches } from '.
 import { saysNoApplication, rowRoute, routeTag } from '../../lib/apply-method.ts';
 import { ARROW_REF, BOOKMARK_REF, EXT_REF, ICON_SPRITE } from '../../lib/icons.ts';
 import { eligibilityFacts } from '../../lib/eligibility-facts.ts';
-import SabTabs from './SabTabs.astro';
+import SabDirBar from './SabDirBar.astro';
 import SabFilterSelect from './SabFilterSelect.astro';
 import { schoolOf } from '../../lib/school-awards.ts';
 import { providerLogo } from '../../lib/providers.ts';
@@ -205,7 +205,7 @@ const openNow = openNowCount(initial);
 ---
 
 <Fragment set:html={ICON_SPRITE} />
-<div class:list={['sabl-page', { 'sabl-tabbed': tabbed, 'sabl-nofilters': !schoolFilter && hideCategories }]} data-dir-step={step}>
+<div class:list={['sabl-page', { 'sabl-tabbed': tabbed }]} data-dir-step={step}>
   {/* Everything above the cards, in ink on white. */}
   <div class="sabl-head">
   <div class="sabl-title-row">
@@ -215,40 +215,8 @@ const openNow = openNowCount(initial);
     </div>
   </div>
 
-  {tabbed && <SabTabs label="Scholarship lists" tabs={placeTabs.map(t => ({ href: t.slug ? `/scholarships/${t.slug}/` : '/scholarships/', label: t.label, current: t.slug === tabs }))} />}
+  {tabbed && <SabDirBar label="Scholarship lists" searchPlaceholder="Search by name or keyword…" searchLabel="Search scholarships by name or keyword" tabs={placeTabs.map(t => ({ href: t.slug ? `/scholarships/${t.slug}/` : '/scholarships/', label: t.label, current: t.slug === tabs }))} />}
 
-  <div class="sabl-toolbar">
-    <div class="sabl-search">
-      <span class="sabl-search-icon" aria-hidden="true"><svg viewBox="0 0 16 16" width="16" height="16" fill="none"><circle cx="7" cy="7" r="4.6" stroke="currentColor" stroke-width="1.5"/><path d="M10.6 10.6L14 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
-      <input
-        type="search"
-        data-dir-search
-        placeholder="Search by name or keyword…"
-        aria-label="Search scholarships by name or keyword"
-      />
-    </div>
-    <div class="sabl-sort" id="dir-sort">
-      <span class="sabl-row-label">Sort</span>
-      {/* One picker, not three chips (critique 2026-09-23: the toolbar held
-          nine controls). directory-client reads [data-fselect] on change. */}
-      <select class="sabl-sort-select" data-fselect="sort" aria-label="Sort">
-        {SORT_CHIPS.map(s => <option value={s.value} selected={s.value === 'closest_due'}>{s.label}</option>)}
-      </select>
-    </div>
-    {/* TRACK and STATUS put away from here, and on a hub the cards take the
-        rail's column with them (Ilia, 2026-09-15). Only the filters: the
-        heading, the standfirst, the money, the search box and these chips all
-        stay whichever way it is set. */}
-    {/* Phones only: sort and every chip row fold behind this, so the first
-        card is on the first screen. Desktop keeps the lean toggle below. */}
-    <button type="button" class="sabl-filters-btn" data-dir-filters aria-expanded="false" aria-controls="dir-sort dir-filters">
-      Filters<span class="sabl-mono sabl-filters-n" data-dir-filter-n hidden></span>
-    </button>
-    <button type="button" class="sabl-lean" data-dir-lean aria-pressed="false">
-      <span data-dir-lean-word>Hide filters</span>
-      <svg class="sabl-lean-caret" viewBox="0 0 12 8" width="12" height="8" fill="none" aria-hidden="true"><path d="M1 1.5 6 6.5 11 1.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </button>
-  </div>
 
   </div>
 
@@ -266,8 +234,7 @@ const openNow = openNowCount(initial);
     <button type="button" class="sabl-sheet-clear" data-dir-reset hidden>Clear filters</button>
   </div>
   <div class="sabl-filters sabl-filters-dense">
-    {/* Phones only: the sheet holds the sort too, so one surface shapes the
-        list (critique 2026-09-29). directory-client keeps both pickers in step. */}
+    {/* Sort sits with the filters behind the one icon (SabDirBar). */}
     <div class="sabl-filter-row sabl-rail-sort">
       <span class="sabl-row-label">Sort</span>
       <select class="sabl-sort-select" data-fselect="sort" aria-label="Sort">

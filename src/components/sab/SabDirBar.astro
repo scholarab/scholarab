@@ -1,28 +1,51 @@
 ---
-// The tab line under a directory's heading (Ilia, 2026-10-12, after
-// polymarket.com): every page of that directory in one line, the same line on
-// every one of them, always starting at All (Ilia: "for every single page the
-// same"), this page's tab lit. It replaced the left filter rail.
+// A directory's bar (Ilia, 2026-10-12, after polymarket.com): the tab line,
+// every page of that directory, the same on every one of them and always
+// starting at All, this page's tab lit; then three icons. Search and the
+// filters open under the bar when asked for, instead of a search row and a
+// filter row taking the space above the first card every time.
+import { BOOKMARK_REF } from '../../lib/icons.ts';
 interface Props {
   label: string;
   tabs: Array<{ href: string; label: string; current?: boolean }>;
+  searchPlaceholder: string;
+  searchLabel: string;
 }
-const { label, tabs } = Astro.props;
+const { label, tabs, searchPlaceholder, searchLabel } = Astro.props;
 ---
-<nav class="sabl-tabs" aria-label={label}>
-  <button type="button" class="sabl-tabs-more sabl-tabs-back" data-tabs-back aria-label="Back" hidden>
-    <svg viewBox="0 0 8 12" width="8" height="12" fill="none" aria-hidden="true"><path d="M6.5 1 1.5 6 6.5 11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-  </button>
-  <div class="sabl-tabs-track" data-tabs-track>
-    {tabs.map(t => <a href={t.href} class="sabl-tab" aria-current={t.current ? 'page' : undefined}>{t.label}</a>)}
+<div class="sabl-bar">
+  <nav class="sabl-tabs" aria-label={label}>
+    <button type="button" class="sabl-tabs-more sabl-tabs-back" data-tabs-back aria-label="Back" hidden>
+      <svg viewBox="0 0 8 12" width="8" height="12" fill="none" aria-hidden="true"><path d="M6.5 1 1.5 6 6.5 11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <div class="sabl-tabs-track" data-tabs-track>
+      {tabs.map(t => <a href={t.href} class="sabl-tab" aria-current={t.current ? 'page' : undefined}>{t.label}</a>)}
+    </div>
+    <button type="button" class="sabl-tabs-more" data-tabs-more aria-label="More" hidden>
+      <svg viewBox="0 0 8 12" width="8" height="12" fill="none" aria-hidden="true"><path d="M1.5 1 6.5 6 1.5 11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+  </nav>
+  <div class="sabl-tools">
+    <button type="button" class="sabl-tool" data-dir-search-btn aria-label="Search" aria-expanded="false" aria-controls="dir-search">
+      <svg viewBox="0 0 20 20" width="20" height="20" fill="none" aria-hidden="true"><circle cx="8.6" cy="8.6" r="5.8" stroke="currentColor" stroke-width="1.8"/><path d="M13 13l4.5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+    </button>
+    <button type="button" class="sabl-tool" data-dir-filters aria-label="Sort and filters" aria-expanded="false" aria-controls="dir-filters">
+      <svg viewBox="0 0 20 20" width="20" height="20" fill="none" aria-hidden="true"><path d="M3 6h14M3 14h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="7.5" cy="6" r="2.3" fill="var(--bg-page)" stroke="currentColor" stroke-width="1.8"/><circle cx="12.5" cy="14" r="2.3" fill="var(--bg-page)" stroke="currentColor" stroke-width="1.8"/></svg>
+      <span class="sabl-mono sabl-tool-n" data-dir-filter-n hidden></span>
+    </button>
+    <a class="sabl-tool" href="/saved/" aria-label="My combo">
+      <Fragment set:html={BOOKMARK_REF} />
+      <span class="sabl-mono sabl-tool-n" data-saved-n hidden></span>
+    </a>
   </div>
-  <button type="button" class="sabl-tabs-more" data-tabs-more aria-label="More" hidden>
-    <svg viewBox="0 0 8 12" width="8" height="12" fill="none" aria-hidden="true"><path d="M1.5 1 6.5 6 1.5 11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-  </button>
-</nav>
+</div>
+<div class="sabl-search" id="dir-search" data-dir-search-row hidden>
+  <span class="sabl-search-icon" aria-hidden="true"><svg viewBox="0 0 16 16" width="16" height="16" fill="none"><circle cx="7" cy="7" r="4.6" stroke="currentColor" stroke-width="1.5"/><path d="M10.6 10.6L14 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+  <input type="search" data-dir-search placeholder={searchPlaceholder} aria-label={searchLabel} />
+</div>
 
 <script>
-  // Arrows at either edge while more tabs sit past it. The line is never
+  // Arrows at either edge while more tabs sit past them. The line is never
   // scrolled for the reader, so it reads the same on every page.
   let sync = () => {};
   addEventListener('resize', () => sync(), { passive: true });
