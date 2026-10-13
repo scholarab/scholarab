@@ -313,19 +313,26 @@ body > .sabp-header { background: transparent; color: inherit; border-bottom: 0;
 .sabh-logo-light { display: none; }
 .sabh[data-tone='light']:not([data-open]) .sabh-logo-light { display: block; }
 .sabh[data-tone='light']:not([data-open]) .sabh-logo-dark { display: none; }
-.sabh[data-tone='light']:not([data-open]) :is(.sabh-link, .sabh-how, .sabh-social a, .sabh-menu-desk a) {
+.sabh[data-tone='light']:not([data-open]) :is(.sabh-link, .sabh-how, .sabh-social a) {
   color: var(--ink-muted);
 }
-.sabh[data-tone='light']:not([data-open]) :is(.sabh-link-active, .sabh-link:hover, .sabh-has-menu:hover .sabh-link, .sabh-has-menu[data-menu-open] .sabh-link, .sabh-how:hover, .sabh-social a:hover, .sabh-menu-desk a:hover) {
+.sabh[data-tone='light']:not([data-open]) :is(.sabh-link-active, .sabh-link:hover, .sabh-has-menu:hover .sabh-link, .sabh-has-menu[data-menu-open] .sabh-link, .sabh-how:hover, .sabh-social a:hover) {
   color: #141915;
 }
 .sabh[data-tone='light']:not([data-open]) :is(.sabh-how:hover, .sabh-social a:hover) { background: rgba(20, 25, 21, 0.06); }
 .sabh[data-tone='light']:not([data-open]) .sabh-how-i { background: rgba(20, 25, 21, 0.08); }
 .sabh[data-tone='light']:not([data-open]) .sabh-burger span { background: #141915; }
+/* An open menu and the bar read as one white sheet: the bar's hairline steps
+   down to the panel's bottom edge instead of running between the label and
+   its list. */
+html[data-sab-menu] .sabh[data-tone='light']:not([data-open]) { box-shadow: none; }
 .sabh[data-tone='light']:not([data-open]) .sabh-drop {
-  background: #FFFFFF; border-top-color: rgba(20, 25, 21, 0.08);
-  box-shadow: 0 28px 40px -28px rgba(20, 25, 21, 0.35);
+  background: #FFFFFF; border-top-color: transparent;
+  box-shadow: 0 1px 0 rgba(20, 25, 21, 0.1), 0 20px 32px -24px rgba(20, 25, 21, 0.3);
 }
+.sabh[data-tone='light']:not([data-open]):not([data-drop]) .sabh-menu { background: #FFFFFF; }
+.sabh[data-tone='light']:not([data-open]) .sabh-menu-desk a { color: var(--ink-soft); }
+.sabh[data-tone='light']:not([data-open]) .sabh-menu-desk a:hover { color: #0A5632; }
 /* Hides on the way down, comes back on the way up (Ilia, 2026-10-02, after
    spacex.com). SabHeader's scroll reader sets data-sab-hidden on <html>.
    Only the banner moves: title bands inside <main> reuse .sabp-header, and

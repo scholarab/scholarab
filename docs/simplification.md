@@ -2330,3 +2330,11 @@ Outcome: a student landing on any scholarship list sees the largest open awards 
 - `SCHOLARSHIP_SHUT_GROUPS` adds `future`: OPENS LATER folds away with CLOSED and FOR AFTER HIGH SCHOOL, headings and counts still showing. If nothing is open, everything still shows (unchanged client rule).
 - Kept by deadline on purpose: the city combo pages, since a combo is a plan (pinned to `closest_due`). Programs unchanged (no amounts).
 - Measured on the build: /scholarships/ opens on Highest $, OPEN NOW 478 open, OPENS LATER 986, CLOSED 42 and AFTER HIGH SCHOOL 185 shut; first rows ~$150,000, $100,000, $80,000. 1,278 unit and 177 e2e pass.
+
+## 2026-10-12 Header menu on white pages
+
+- Outcome: on every page except home, an open header menu reads as part of the bar, not a detached white sheet.
+- Removed: the bar's hairline while a menu is open (it ran between the label and its list), the long fading shadow under the panel, and the duplicate desk-link colour rules in the shared tone selectors.
+- Changed: the panel ends on one 1px edge; the shared background's base height 400 to 150 so the edge is not squashed by the scale (desk lists are about 150px now); desk links use --ink-soft with a Lodgepole hover; the no-script light panel gets a white background.
+- Add-back: 0 of 3 removals.
+- Measured: 1,278 unit, 177 e2e passing; the 11 baseline private type errors unchanged.

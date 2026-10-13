@@ -381,7 +381,7 @@ const isActive = (href: string, also: string[] = []) =>
       /* Sized by transform, not height (compositor only). The base height sits
          inside the panels' range, so the scale stays near 1 and the 1px rule
          and the shadow never visibly stretch. */
-      height: 400px; transform-origin: top; transform: scaleY(0); pointer-events: none;
+      height: 150px; transform-origin: top; transform: scaleY(0); pointer-events: none;
       background: #0A1310; border-top: 1px solid rgba(238, 241, 236,0.08);
       box-shadow: 0 24px 40px -20px rgba(0,0,0,0.6);
       opacity: 0; visibility: hidden;
@@ -737,7 +737,7 @@ const isActive = (href: string, also: string[] = []) =>
   // Sizes the shared background to whichever panel is open. Opening from
   // closed takes the height at once and fades in; a switch between panels
   // animates the height, so the background itself never closes.
-  const DROP_BASE = 400; // .sabh-drop's CSS height
+  const DROP_BASE = 150; // .sabh-drop's CSS height
   function syncDrop() {
     const panel = header?.querySelector<HTMLElement>('.sabh-has-menu[data-menu-open] .sabh-menu') ?? null;
     // What the home page dims and darkens under an open menu keys off this
