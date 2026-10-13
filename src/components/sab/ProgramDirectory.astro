@@ -96,15 +96,9 @@ const openNow = programOpenNowCount(initial);
 
   </div>
 
-  {/* The filter row under the toolbar, and the phone's Filters sheet. */}
+  {/* The filter row under the toolbar, at every width. */}
   <div class="sabl-split">
   <aside class="sabl-rail" id="dir-filters" aria-label="Filters">
-  {/* Phones only (global.css): the sheet's own heading and a way to undo
-      every filter at once, which it had neither of (critique 2026-10-02). */}
-  <div class="sabl-sheet-head">
-    <h2 class="sabl-sheet-title">Filters</h2>
-    <button type="button" class="sabl-sheet-clear" data-dir-reset hidden>Clear filters</button>
-  </div>
   {/* -dense: FIELD is nine chips wide and only holds one line on the tighter
       metrics: 995px of the 1020 the measure gives it, where the default chip
       padding would put it well over. The row was ten and scrolling before
@@ -129,7 +123,6 @@ const openNow = programOpenNowCount(initial);
     ]} />}
   </div>
 
-  <button type="button" class="sabl-filters-done" data-dir-filters-done>Show results</button>
   </aside>
 
   <div class="sabl-col">

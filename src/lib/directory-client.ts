@@ -115,37 +115,17 @@ function fillSearch(value: string) {
 }
 
 /**
- * Sort and the filters fold behind one icon at every width (SabDirBar): a row
- * under the bar on a desktop, a sheet over the page on a phone. Not
- * persisted: a disclosure a reader opens, uses and forgets.
+ * Sort and the filters fold behind one icon (SabDirBar), a row under the bar
+ * at every width: the phone sheet went 2026-10-12 so a phone gets the same
+ * menus as a desktop (Ilia). Not persisted: a disclosure a reader opens, uses
+ * and forgets.
  */
-const NARROW = '(max-width: 900px)';
-
 function setFiltersOpen(open: boolean) {
   const root = document.documentElement;
-  const was = root.hasAttribute('data-filters');
   if (open) root.setAttribute('data-filters', '');
   else root.removeAttribute('data-filters');
   for (const btn of document.querySelectorAll<HTMLElement>('[data-dir-filters]')) {
     btn.setAttribute('aria-expanded', String(open));
-  }
-  // On a phone the panel is a sheet over the page (global.css), so focus
-  // goes into it and stays there (the rest of the directory is inert while it
-  // is up), then comes back to the button that opened it.
-  if (open === was) return;
-  const narrow = matchMedia(NARROW).matches;
-  // The header and footer too: a screen reader's cursor walked out of the
-  // sheet into them. And the sheet says what it is while it is one.
-  for (const el of document.querySelectorAll<HTMLElement>('.sabl-head, .sabl-col, .sabh, .sabf-footer')) el.inert = open && narrow;
-  const rail = document.querySelector<HTMLElement>('.sabl-rail');
-  if (open && narrow) { rail?.setAttribute('role', 'dialog'); rail?.setAttribute('aria-modal', 'true'); }
-  else { rail?.removeAttribute('role'); rail?.removeAttribute('aria-modal'); }
-  if (!narrow) return;
-  // The first picker, not the sheet's Clear filters above it: opening the
-  // sheet is for choosing, and Clear sits one Shift+Tab away.
-  if (open) (rail?.querySelector<HTMLElement>('select') ?? rail?.querySelector<HTMLElement>('button, a[href]'))?.focus({ preventScroll: true });
-  else if (!document.activeElement || rail?.contains(document.activeElement)) {
-    document.querySelector<HTMLElement>('[data-dir-filters]')?.focus({ preventScroll: true });
   }
 }
 
@@ -329,7 +309,6 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
       n.textContent = String(active);
       n.hidden = active === 0;
     });
-    root.querySelectorAll<HTMLElement>('[data-dir-reset]').forEach(b => { b.hidden = active === 0; });
 
     const q = query.trim();
     // Normalized the same way the cards' blobs were, so punctuation a student
@@ -435,10 +414,6 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     });
     syncFilterMenus(root);
     config.afterCounts?.(root, searched, state, q, ctx);
-    root.querySelectorAll<HTMLElement>('[data-dir-filters-done]').forEach(b => {
-      b.textContent = visible.length === 0 ? 'No results. Change a filter'
-        : `Show ${visible.length.toLocaleString('en-CA')} result${visible.length === 1 ? '' : 's'}`;
-    });
 
     const empty = root.querySelector<HTMLElement>('[data-dir-empty]');
     if (empty) empty.hidden = visible.length > 0;
@@ -543,15 +518,6 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     const t = e.target as Element | null;
     if (!root || !t?.closest || !root.contains(t)) return;
 
-    // A tap on the scrim around the phone sheet puts the sheet away. The
-    // scrim is the page's ::after, so a tap on it lands on .sabl-page itself;
-    // a click a keyboard sends to a control behind the sheet still works.
-    if (document.documentElement.hasAttribute('data-filters') && matchMedia(NARROW).matches
-      && t.matches('.sabl-page')) {
-      setFiltersOpen(false);
-      return;
-    }
-
     const save = t.closest<HTMLElement>('[data-dir-save]');
     if (save) {
       const id = Number(save.closest<HTMLElement>('[data-dir-card]')?.dataset.id);
@@ -566,15 +532,6 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
 
     if (t.closest('[data-dir-filters]')) {
       setFiltersOpen(!document.documentElement.hasAttribute('data-filters'));
-      return;
-    }
-
-    // The phone panel's way out: fold it and land on the list it just shaped.
-    // Inline, the results changed about 1,000px below the chip being tapped.
-    if (t.closest('[data-dir-filters-done]')) {
-      setFiltersOpen(false);
-      root.querySelector<HTMLElement>('[data-dir-grid], [data-dir-empty]:not([hidden])')
-        ?.scrollIntoView({ block: 'start', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
       return;
     }
 
@@ -615,16 +572,6 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
       return;
     }
 
-    // The sheet's Clear filters: every filter back to its default, keeping
-    // the sort and the words in the search box, which are not filters.
-    if (t.closest('[data-dir-reset]')) {
-      state = { ...config.defaultState, sort: state.sort };
-      shown = pageSize;
-      render();
-      root.querySelector<HTMLElement>('.sabl-rail select')?.focus({ preventScroll: true });
-      return;
-    }
-
     if (t.closest('[data-dir-clear]')) {
       state = { ...config.defaultState };
       query = '';
@@ -645,8 +592,6 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     render();
   });
 
-  // The phone sheet keeps the keyboard: Escape closes it, and Tab cycles
-  // through its own controls instead of wandering to the footer behind it.
   document.addEventListener('keydown', e => {
     // Escape in an empty search box puts the row away, back to its icon.
     const field = e.target as HTMLInputElement | null;
@@ -655,18 +600,7 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
       document.querySelector<HTMLElement>('[data-dir-search-btn]')?.focus();
       return;
     }
-    if (!root?.isConnected || !document.documentElement.hasAttribute('data-filters')) return;
-    if (e.key === 'Escape') { setFiltersOpen(false); return; }
-    if (e.key !== 'Tab' || !matchMedia(NARROW).matches) return;
-    const rail = root.querySelector<HTMLElement>('.sabl-rail');
-    // summary too: the glossary under the pickers ("What these mean") was
-    // skipped, so a keyboard could not open it inside the sheet (critique 2026-10-02).
-    const stops = [...(rail?.querySelectorAll<HTMLElement>('select, button, a[href], input, summary') ?? [])].filter(el => el.offsetParent !== null);
-    if (!stops.length) return;
-    const at = stops.indexOf(document.activeElement as HTMLElement);
-    const next = e.shiftKey ? (at <= 0 ? stops.length - 1 : at - 1) : (at === -1 || at === stops.length - 1 ? 0 : at + 1);
-    e.preventDefault();
-    stops[next]!.focus();
+    if (e.key === 'Escape' && root?.isConnected && document.documentElement.hasAttribute('data-filters')) setFiltersOpen(false);
   });
 
   // Print every row of the current result, not the first step of it: a
@@ -683,11 +617,6 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     shown = beforePrint;
     beforePrint = null;
     if (root?.isConnected) render();
-  });
-
-  // A sheet opened on a phone must not leave the desktop list inert.
-  matchMedia(NARROW).addEventListener('change', () => {
-    if (root?.isConnected && !matchMedia(NARROW).matches) setFiltersOpen(false);
   });
 
   document.addEventListener('input', e => {

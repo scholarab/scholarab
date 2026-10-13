@@ -230,19 +230,13 @@ const openNow = openNowCount(initial);
 
   </div>
 
-  {/* The filter row under the toolbar, and the phone's Filters sheet. */}
+  {/* The filter row under the toolbar, at every width. */}
   <div class="sabl-split">
   {/* -dense: ten TRACK chips now that each carries a count, which is 90px more
       than the measure holds at the default metrics. The rows scroll rather than
       wrap, so this is not load-bearing; it just buys back enough width that
       nobody has to scroll the row on a desktop. See the modifier in global.css. */}
   <aside class="sabl-rail" id="dir-filters" aria-label="Filters">
-  {/* Phones only (global.css): the sheet's own heading and a way to undo
-      every filter at once, which it had neither of (critique 2026-10-02). */}
-  <div class="sabl-sheet-head">
-    <h2 class="sabl-sheet-title">Filters</h2>
-    <button type="button" class="sabl-sheet-clear" data-dir-reset hidden>Clear filters</button>
-  </div>
   <div class="sabl-filters sabl-filters-dense">
     {/* Sort sits with the filters behind the one icon (SabDirBar). */}
     <div class="sabl-filter-row sabl-rail-sort">
@@ -287,7 +281,6 @@ const openNow = openNowCount(initial);
       cards simply stop existing -- so the line stays as a polite live region.
       role="status" is implicitly atomic, which is right: it is replaced
       wholesale on every keystroke, not appended to. */}
-  <button type="button" class="sabl-filters-done" data-dir-filters-done>Show results</button>
   </aside>
 
   <div class="sabl-col">

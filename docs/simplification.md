@@ -2301,3 +2301,13 @@ Outcome: the photo tabs stand for places and program formats, where the photo sh
 - Removed 13 topic photos, their credits and their tab crops, plus the reused Enrichment crop: 14 files, about 95 KB. The two All tabs keep their photos.
 - Why: 22 photo tabs in a row made the lit tab hard to find, and photos like Arts, STEM, Community and Trades were stock filler at 104px.
 - Add-back fraction of the earlier photo pass: 14 of 16 tab crops removed. Before/after screenshots at 1440 and 390 px in output/tabs-2026-10-12/ (local, not committed).
+
+## 2026-10-12 Phone filters match the desktop
+
+Outcome: a phone gets the same filter row and menus as a desktop (Ilia: "make filters the same on mobile"), instead of a bottom sheet of native pickers.
+
+- Removed: the phone sheet (fixed panel, scrim, "Filters" heading, Clear filters, "Show N results" button), its focus trap, inert handling, dialog role and media-query listener in directory-client.ts, and the e2e closeFilters helper with its 6 calls. directory-client.ts lost 76 lines, gained 5.
+- Kept: the 16px field rule on phones (Safari zoom), the filter count badge, Escape to fold the row.
+- Changed: the desktop row rules now apply at every width. Under 641px a menu's list hangs from the whole row, so a menu near the right edge cannot run off the screen (e2e checks the list's box stays inside a 390px viewport).
+- Lost on phones: the sheet's Clear filters. The desktop never had it; picking All in a menu undoes it there too.
+- Measured: 177 e2e pass (the phone fold test rewritten for the row, the menu test no longer desktop-only).

@@ -25,13 +25,9 @@ async function openFilters(page: Page) {
 }
 
 /** The search row sits behind its icon in the bar (SabDirBar); open it. */
-/**
- * Chooses in a filter picker: our own menu on a desktop (lib/filter-menu.ts),
- * the native select in the phone sheet.
- */
+/** Chooses in a filter picker, our own menu at every width (lib/filter-menu.ts). */
 async function pick(page: Page, key: string, choice: string | { index: number }) {
   const sel = page.locator(`select[data-fselect="${key}"]`);
-  if (await sel.isVisible()) { await sel.selectOption(choice); return; }
   const value = typeof choice === 'string' ? choice : await sel.locator('option').nth(choice.index).getAttribute('value');
   await page.locator(`[data-menu-for="${key}"]`).click();
   await page.locator(`[data-menu-list="${key}"] [data-value="${value}"]`).click();
@@ -40,12 +36,6 @@ async function pick(page: Page, key: string, choice: string | { index: number })
 async function openSearch(page: Page) {
   const btn = page.locator('[data-dir-search-btn]');
   if ((await btn.getAttribute('aria-expanded')) !== 'true') await btn.click();
-}
-
-/** On a phone the open filters are a sheet over the list; put it away. */
-async function closeFilters(page: Page) {
-  const done = page.locator('[data-dir-filters-done]');
-  if (await done.isVisible()) await done.click();
 }
 
 /** The group headers a reader sees: runs that start inside the revealed
@@ -90,7 +80,6 @@ test('search preserves results, groups, chips, money, closed awards and history'
     await openFilters(page);
     await pick(page, 'sort', sortBy);
     // On a phone the sheet holds the sort and the page behind it is inert.
-    await closeFilters(page);
     await openSearch(page);
     for (const searchQuery of [query, '', 'zz-no-matching-student-award']) {
       await page.locator('[data-dir-search]').fill(searchQuery);
@@ -125,7 +114,6 @@ test('search preserves results, groups, chips, money, closed awards and history'
   expect(await page.evaluate(() => history.length)).toBe(historyLength);
   await openFilters(page);
   await pick(page, 'category', unique.category!);
-  await closeFilters(page);
   await openSearch(page);
   await page.locator('[data-dir-search]').fill(query);
   await page.locator('[data-dir-card]:visible .sabl-name').press('Enter');
@@ -179,7 +167,6 @@ test('the bar icons open search and the filters under it', async ({ page }) => {
   await expect(page.locator(':is([data-fselect="sort"], [data-menu-for="sort"]):visible')).toHaveCount(1);
   await pick(page, 'category', { index: 1 });
   await expect(page.locator('[data-dir-filters] [data-dir-filter-n]')).toHaveText('1');
-  await closeFilters(page);
 
   // A search in the URL opens the row on arrival.
   await page.goto('/scholarships/alberta/?q=nursing');
@@ -187,11 +174,10 @@ test('the bar icons open search and the filters under it', async ({ page }) => {
   await expect(search).toHaveValue('nursing');
 });
 
-// Our own menus in the desktop filter row (2026-10-12, after
+// Our own menus in the filter row at every width (2026-10-12, after
 // polymarket.com): a button saying the choice, a list with a check on it,
 // the keyboard working, and Escape shutting only the menu.
-test('the desktop filter menus choose, check and shut', async ({ page, isMobile }) => {
-  test.skip(isMobile, 'the phone sheet keeps the native pickers');
+test('the filter menus choose, check and shut', async ({ page }) => {
   await page.goto('/scholarships/');
   await openFilters(page);
   const btn = page.locator('[data-menu-for="category"]');
@@ -239,28 +225,25 @@ test('one responsive list keeps facts and direct navigation even with an old vie
   await expect(page).toHaveURL(new RegExp(`${href}$`));
 });
 
+// The phone gets the desktop's row, not a sheet over the page (Ilia,
+// 2026-10-12); a menu's list stays on the screen.
 test('on a phone, filters fold behind one button that counts them', async ({ page }, testInfo) => {
-  test.skip(testInfo.project.name !== 'mobile', 'the fold is phone-only');
+  test.skip(testInfo.project.name !== 'mobile', 'the phone width');
   await page.goto('/scholarships/calgary/?category=Arts');
   const btn = page.locator('[data-dir-filters]');
   await expect(page.locator('.sabl-rail')).toBeHidden();
-  await expect(page.locator(':is([data-fselect="sort"], [data-menu-for="sort"]):visible')).toHaveCount(0);
   await expect(page.locator('[data-dir-filter-n]')).toHaveText('1');
   await expect(page.locator('[data-dir-card]:visible').first()).toBeInViewport();
   await btn.click();
   await expect(btn).toHaveAttribute('aria-expanded', 'true');
-  await expect(page.locator('.sabl-rail')).toBeVisible();
-  // A sheet over the page, holding the sort; focus goes into it, and Escape
-  // or the scrim puts it away and hands focus back.
-  await expect(page.locator('.sabl-rail [data-fselect="sort"]')).toBeFocused();
-  for (let i = 0; i < 25; i++) await page.keyboard.press('Tab');
-  expect(await page.evaluate(() => !!document.activeElement?.closest('.sabl-rail'))).toBe(true);
-  expect(await page.locator('.sabl-rail').evaluate(el => getComputedStyle(el).position)).toBe('fixed');
+  await expect(page.locator('[data-menu-for="sort"]')).toBeVisible();
+  expect(await page.locator('.sabl-rail').evaluate(el => getComputedStyle(el).position)).not.toBe('fixed');
+  await page.locator('[data-menu-for="sort"]').click();
+  const box = (await page.locator('[data-menu-list="sort"]').boundingBox())!;
+  expect(box.x).toBeGreaterThanOrEqual(0);
+  expect(box.x + box.width).toBeLessThanOrEqual(page.viewportSize()!.width);
   await page.keyboard.press('Escape');
-  await expect(page.locator('.sabl-rail')).toBeHidden();
-  await expect(btn).toBeFocused();
-  await btn.click();
-  await page.mouse.click(10, 120);
+  await page.keyboard.press('Escape');
   await expect(page.locator('.sabl-rail')).toBeHidden();
 });
 
@@ -341,7 +324,6 @@ test('program Details links preserve filtered previous and next arrows', async (
   expect(status, 'choose a status with multiple results from the rendered data').toBeTruthy();
   await openFilters(page);
   await pick(page, 'format', status!);
-  await closeFilters(page);
   await showEverything(page);
   const paths = await page.locator('[data-dir-card]:not([hidden]) .sabl-name').evaluateAll(links => links.map(link => link.getAttribute('href')!));
   await page.locator('[data-dir-card]:visible .sabl-apply').first().click();
@@ -366,7 +348,6 @@ test('program format and field intersect and survive reload and a detail visit',
   await openFilters(page);
   await pick(page, 'format', pair.format);
   await pick(page, 'category', pair.category);
-  await closeFilters(page);
   await expect(page).toHaveURL(/format=research/);
   await expect(page).toHaveURL(/category=Computing/);
   const expected = await page.locator(`[data-dir-card][data-format="${pair.format}"][data-category="${pair.category}"]`).count();
@@ -387,7 +368,6 @@ test('program format and field intersect and survive reload and a detail visit',
   await page.goto('/programs/research-placements/');
   await openFilters(page);
   await pick(page, 'category', pair.category);
-  await closeFilters(page);
   await expect(page).toHaveURL(/programs\/research-placements\/\?category=Computing/);
   await expect(page.locator('[data-dir-card]:visible')).toHaveCount(expected);
 });

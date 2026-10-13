@@ -5,8 +5,8 @@
 //
 // Each menu drives a native <select data-fselect>, which stays the single
 // source of state: picking sets its value and fires "change", the same event
-// directory-client already listens to. The phone sheet keeps the native
-// pickers (global.css), where the system wheel is the better control.
+// directory-client already listens to. The same menus at every width since
+// 2026-10-12, when the phone sheet and its native pickers went.
 
 const CHECK = '<svg viewBox="0 0 16 16" width="16" height="16" fill="none" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 const CHEVRON = '<svg class="sabl-menu-chev" viewBox="0 0 10 6" width="10" height="6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';

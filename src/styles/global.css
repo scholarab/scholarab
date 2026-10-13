@@ -610,8 +610,6 @@ html:not([data-pointer]) .sabl-search:has(input:focus-visible) {
    a narrower window, and the phone's fold. */
 .sabl-rail { background-color: var(--bg-panel); border-radius: var(--radius); padding: 16px 12px 18px; }
 .sabl-rail .sabl-filters { padding-top: 0; }
-/* Phone-only controls; the media block below turns them on. */
-.sabl-filters-done, .sabl-sheet-head { display: none; }
 /* WHERE YOU LIVE is one picker at every width, not 27 chips: on a desktop the
    chips alone took four rows above the first listing. The picker navigates by
    script, so without it the chips stay. */
@@ -725,67 +723,16 @@ html.js .sabl-rail .sabl-scope-select { border-radius: var(--radius); min-height
 .sabl-split { display: contents; }
 
 
-/* ── Phone filters ──
-   Sort and the pickers fold behind the filters icon at every width
-   (SabDirBar): a row under the bar on a desktop, the sheet below on a phone.
-   The icon's number is how many filters are on, so a deep link like
-   ?category=Arts still says it is filtered while folded. */
+/* ── Filters ──
+   Sort and the pickers fold behind the filters icon (SabDirBar), a row under
+   the bar at every width. The phone sheet went 2026-10-12 so a phone gets
+   the desktop's menus (Ilia). The icon's number is how many filters are on,
+   so a deep link like ?category=Arts still says it is filtered while folded. */
 html.js:not([data-filters]) .sabl-rail { display: none; }
-@keyframes sabl-sheet-up { from { transform: translateY(24px); opacity: 0.4; } }
 @media (max-width: 900px) {
-  /* A sheet over the page, not a block pushing the list 1,000px down. It
-     rolls up from the bottom edge on its own surface, over a scrim, so it
-     reads as the list's controls and not the list (reader feedback and
-     critique, 2026-09-29). Escape, the scrim or "Show N results" closes it. */
-  html.js[data-filters] .sabl-rail {
-    display: block; position: fixed; left: 0; right: 0; bottom: 0; z-index: 70;
-    max-height: min(82vh, 680px); max-height: min(82svh, 680px);
-    overflow-y: auto; overscroll-behavior: contain;
-    margin: 0; padding: 22px 20px 0; border-radius: var(--radius) var(--radius) 0 0;
-    background-color: var(--bg-panel);
-    box-shadow: 0 -14px 40px -12px rgba(20,25,21,0.35);
-  }
-  @media (prefers-reduced-motion: no-preference) {
-    html.js[data-filters] .sabl-rail { animation: sabl-sheet-up 0.26s cubic-bezier(0.16, 1, 0.3, 1); }
-  }
-  html.js[data-filters] .sabl-page::after {
-    content: ''; position: fixed; inset: 0; z-index: 69; background: rgba(20,25,21,0.42);
-  }
-  html.js[data-filters] { overflow: hidden; }
-  /* The sheet's head: what it is, and one tap to undo it (critique 2026-10-02). */
-  html.js[data-filters] .sabl-sheet-head {
-    display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 0 0 6px;
-  }
-  .sabl-sheet-title { font: 400 30px/1 var(--font-display); margin: 0; color: var(--text-primary); }
-  .sabl-sheet-clear {
-    min-height: 44px; padding: 0 2px; border: 0; background: none; cursor: pointer;
-    font: 600 15px var(--font-body); color: var(--text-primary);
-    text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1.5px;
-  }
-  .sabl-sheet-clear[hidden] { display: none; }
-  /* One width for every picker in the sheet; they were 335 and 320px. */
-  html.js[data-filters] .sabl-rail select { width: 100%; max-width: none; box-sizing: border-box; }
-  /* Full width and a 44px target inside the phone panel. */
-  html.js .sabl-scope-select { width: 100%; min-height: 44px; border-radius: var(--radius); }
   /* Safari zooms the page into any field under 16px when it takes focus,
      and leaves it zoomed (critique 2026-09-27). */
   .sabl-search input, .sabl-sort-select, .sabl-filter-select, html.js .sabl-scope-select { font-size: 16px; }
-  /* The panel's exit, pinned to the bottom of the screen while it is open. */
-  html.js[data-filters] .sabl-filters-done {
-    display: block; position: sticky; bottom: calc(12px + env(safe-area-inset-bottom, 0px)); z-index: 3;
-    width: 100%; min-height: 50px; margin: 18px 0 12px; border: 0; border-radius: var(--radius);
-    /* The one primary fill, as Apply (critique 2026-10-02: black, dark
-       green and mint pills all played primary). */
-    background: var(--cta); color: var(--text-on-cta); font: 700 16px var(--font-body); cursor: pointer;
-    box-shadow: 0 8px 20px -8px rgba(20,25,21,0.45);
-  }
-  /* Inside the fold the rows wrap instead of scrolling sideways: a clipped
-     row gave no sign there were more chips past the edge, and the fold has
-     the height to spare. */
-  html.js .sabl-rail .sabl-chips, html.js .sabl-sort-chips { flex-wrap: wrap; overflow-x: visible; }
-  /* Inside the panel the rows keep to its padding rather than bleeding to
-     the screen edge the way a bare scrolling row does. */
-  .sabl-rail .sabl-chips { margin-left: 0; margin-right: 0; padding-left: 0; padding-right: 0; }
 }
 
 /* The visible count line ("153 OF 153 LISTINGS · 15 OPEN NOW") was deleted
@@ -1175,22 +1122,26 @@ html:not(.js) .sabl-tool[data-dir-search-btn], html:not(.js) .sabl-tool[data-dir
   background: linear-gradient(to left, rgba(255,255,255,0), var(--bg-page) 55%);
 }
 .sabl-tabs-more[hidden] { display: none; }
-@media (min-width: 901px) {
-  /* The filters as one line of pickers under the bar, no panel and no
-     labels: each picker's first option already says what it is. */
-  .sabl-tabbed .sabl-rail { background: none; padding: 14px 0 4px; border-radius: 0; }
-  .sabl-tabbed .sabl-filters { flex-direction: row; flex-wrap: wrap; align-items: center; gap: 8px; padding: 0; }
-  .sabl-tabbed .sabl-filter-row .sabl-row-label {
-    position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
-  }
-  /* Our own menus in place of the browser's grey list (lib/filter-menu.ts),
-     as polymarket.com's "24hr Volume" and "All": a small button with a
-     hairline, and a rounded list under it with a check on the choice. */
-  .sabl-tabbed .sabl-menu select { display: none; }
-  .sabl-tabbed .sabl-menu-btn { display: inline-flex; }
+/* The filters as one line of pickers under the bar, no panel and no labels:
+   each picker's first option already says what it is. Every width. */
+.sabl-tabbed .sabl-rail { background: none; padding: 14px 0 4px; border-radius: 0; }
+.sabl-tabbed .sabl-filters { flex-direction: row; flex-wrap: wrap; align-items: center; gap: 8px; padding: 0; }
+.sabl-tabbed .sabl-filter-row .sabl-row-label {
+  position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
 }
-/* The filter row's menus (lib/filter-menu.ts). Desktop only: the phone
-   sheet keeps the native pickers, whose system wheel suits a thumb. */
+/* Our own menus in place of the browser's grey list (lib/filter-menu.ts),
+   as polymarket.com's "24hr Volume" and "All": a small button with a
+   hairline, and a rounded list under it with a check on the choice. */
+.sabl-tabbed .sabl-menu select { display: none; }
+.sabl-tabbed .sabl-menu-btn { display: inline-flex; }
+@media (max-width: 640px) {
+  /* A menu near the right edge would run its list off a phone screen, so
+     there the list hangs from the whole row, the row's width. */
+  .sabl-tabbed .sabl-filters { position: relative; }
+  .sabl-tabbed .sabl-menu { position: static; }
+  .sabl-tabbed .sabl-menu-list { right: 0; min-width: 0; max-height: min(420px, 60vh); }
+}
+/* The filter row's menus (lib/filter-menu.ts). */
 .sabl-menu { position: relative; }
 .sabl-menu-btn {
   display: none; align-items: center; gap: 8px; min-height: 40px; padding: 0 12px 0 14px;
@@ -2043,7 +1994,7 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
    width the phone row applies, which is the compact one. */
 @media print {
   .sabh, .sabf-footer, #sab-consent, .sabt-strip, .sabl-tools, .sabl-search, .sabl-rail, .sabl-card-actions,
-  .sabl-more, .sabl-group-toggle, .sabl-filters-done,
+  .sabl-more, .sabl-group-toggle,
   .sabcal-jump, .sabcal-where, .sabl-crumbs, .sabd-remind { display: none !important; }
   body { background: #fff; }
   .sabl-card {
