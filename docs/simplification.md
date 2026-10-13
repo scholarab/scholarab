@@ -2321,3 +2321,12 @@ Outcome: a student can pick several fields, types, formats or schools at once (C
 - The filters badge counts picks, not menus.
 - Clear came back as one button in the filter row at every width (the phone sheet's Clear went earlier today), shown only while a filter is on. It keeps the sort and the search words.
 - Tests: a list-core unit test for several picks; the e2e menu test now ticks two, checks the URL and badge, ticks All, then Clears. 1,278 unit and 177 e2e pass.
+
+## 2026-10-12 Scholarships lead with the biggest money, open only
+
+Outcome: a student landing on any scholarship list sees the largest open awards first, to catch their attention; the keen ones switch to Earliest deadline (Ilia).
+
+- `DEFAULT_SCHOLARSHIP_STATE.sortBy` is now `highest_pay`. The sort menu, the client's default state and the server's first paint all read that one constant, so they cannot disagree. "Highest $" moved to the top of the sort menu.
+- `SCHOLARSHIP_SHUT_GROUPS` adds `future`: OPENS LATER folds away with CLOSED and FOR AFTER HIGH SCHOOL, headings and counts still showing. If nothing is open, everything still shows (unchanged client rule).
+- Kept by deadline on purpose: the city combo pages, since a combo is a plan (pinned to `closest_due`). Programs unchanged (no amounts).
+- Measured on the build: /scholarships/ opens on Highest $, OPEN NOW 478 open, OPENS LATER 986, CLOSED 42 and AFTER HIGH SCHOOL 185 shut; first rows ~$150,000, $100,000, $80,000. 1,278 unit and 177 e2e pass.

@@ -32,7 +32,8 @@ export async function getStaticPaths() {
 const { page, combos } = Astro.props;
 const facet = SCHOLARSHIP_FACETS.find(f => f.slug === page.city)!;
 const canonical = `https://www.scholarab.ca/scholarships/${page.city}/combos/`;
-const sorted = (items: ScholarshipWithMeta[]) => filterSortScholarships(items, DEFAULT_SCHOLARSHIP_STATE);
+// A combo is a plan, so it runs by deadline, whatever the directory leads with.
+const sorted = (items: ScholarshipWithMeta[]) => filterSortScholarships(items, { ...DEFAULT_SCHOLARSHIP_STATE, sortBy: 'closest_due' });
 // Distinct awards: a school award open to two schools sits in both combos.
 const totalAwards = new Set(combos.flatMap(c => [...c.core, ...c.addOns].map(s => s.id))).size;
 // The province-wide hub's combos are its small-town schools.

@@ -175,8 +175,8 @@ const scopesOf = (s: ScholarshipWithMeta) =>
 // match flow, which still wants the rollup.
 
 const SORT_CHIPS = [
-  { value: 'closest_due', label: 'Earliest deadline' },
   { value: 'highest_pay', label: 'Highest $' },
+  { value: 'closest_due', label: 'Earliest deadline' },
   { value: 'lowest_pay',  label: 'Lowest $' },
 ] as const;
 
@@ -242,7 +242,7 @@ const openNow = openNowCount(initial);
     <div class="sabl-filter-row sabl-rail-sort">
       <span class="sabl-row-label">Sort</span>
       <select class="sabl-sort-select" data-fselect="sort" aria-label="Sort">
-        {SORT_CHIPS.map(s => <option value={s.value} selected={s.value === 'closest_due'}>{s.label}</option>)}
+        {SORT_CHIPS.map(s => <option value={s.value} selected={s.value === DEFAULT_SCHOLARSHIP_STATE.sortBy}>{s.label}</option>)}
       </select>
     </div>
     {schoolFilter && <SabFilterSelect label="School" filterKey="school" options={[
@@ -453,7 +453,7 @@ const openNow = openNowCount(initial);
 <script>
   import { canApplyNow } from '../../lib/status.ts';
   import { initDirectory } from '../../lib/directory-client.ts';
-  import { SCHOLARSHIP_GROUP_LABELS, SCHOLARSHIP_SHUT_GROUPS, isAfterHighSchool, buildScholarshipStatusCache, directoryCountLine, openNowCount, filterSortScholarships, getScholarshipStatus, paintRowAction, rowAction, scholarshipGroupKey, scholarshipWhen, selectScholarships } from '../../lib/list-core.ts';
+  import { DEFAULT_SCHOLARSHIP_STATE, SCHOLARSHIP_GROUP_LABELS, SCHOLARSHIP_SHUT_GROUPS, isAfterHighSchool, buildScholarshipStatusCache, directoryCountLine, openNowCount, filterSortScholarships, getScholarshipStatus, paintRowAction, rowAction, scholarshipGroupKey, scholarshipWhen, selectScholarships } from '../../lib/list-core.ts';
   import { ARROW_REF, EXT_REF } from '../../lib/icons.ts';
   import type { ScholarshipWithMeta, ScholarshipSort, ScholarshipStatus, StatusFilter, RegionKey } from '../../lib/list-core.ts';
   import { getSaved, toggleSaved } from '../../lib/tracker.ts';
@@ -477,7 +477,7 @@ const openNow = openNowCount(initial);
 
   initDirectory<Item, State, Cache>('#sab-scholarships', {
     itemType: 'scholarship',
-    defaultState: { sort: 'closest_due', category: 'all', region: '', status: 'all', school: 'all' },
+    defaultState: { sort: DEFAULT_SCHOLARSHIP_STATE.sortBy, category: 'all', region: '', status: 'all', school: 'all' },
     parseCard(el) {
       const d = el.dataset;
       return {

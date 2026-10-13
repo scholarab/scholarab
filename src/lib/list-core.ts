@@ -109,7 +109,9 @@ export const DEFAULT_SCHOLARSHIP_STATE: ScholarshipFilterState = {
   selectedCategory: 'all',
   selectedRegion: null,
   searchQuery: '',
-  sortBy: 'closest_due',
+  // Biggest money first (Ilia, 2026-10-12): the top of the list has to catch
+  // a student's eye; the keen ones switch to Earliest deadline themselves.
+  sortBy: 'highest_pay',
 };
 
 /**
@@ -223,9 +225,10 @@ export const SCHOLARSHIP_GROUP_LABELS: Record<string, string> = {
 
 /** Scholarship status runs shut on every load, heading and count still
  *  showing: the list leads with what can still be applied to (critique
- *  2026-09-25). Programs keep theirs open, since 86 of 121 have no confirmed
- *  date yet. */
-export const SCHOLARSHIP_SHUT_GROUPS = ['closed', 'after'];
+ *  2026-09-25). Since 2026-10-12 that is OPEN NOW alone (Ilia): opening
+ *  later folds away too. Programs keep theirs open, since 86 of 121 have no
+ *  confirmed date yet. */
+export const SCHOLARSHIP_SHUT_GROUPS = ['future', 'closed', 'after'];
 
 export const PROGRAM_GROUP_LABELS: Record<string, string> = {
   active: STATUS_WORDS.open.toUpperCase(),
