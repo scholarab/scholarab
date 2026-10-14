@@ -188,6 +188,23 @@ describe('initDirectory', () => {
     expect(new URL(location.href).searchParams.has('category')).toBe(false)
   })
 
+  it('ticking every option of a multi-pick menu switches it back to All', () => {
+    setup()
+    const select = $('select[data-fselect="category"]') as HTMLSelectElement
+    select.multiple = true
+    const pick = (...values: string[]) => {
+      for (const o of select.options) o.selected = values.includes(o.value)
+      select.dispatchEvent(new Event('change', { bubbles: true }))
+    }
+    pick('Science')
+    expect(visibleCardNames()).toHaveLength(2)
+    expect(location.search).toContain('category=Science')
+    pick('Science', 'Arts')
+    expect(visibleCardNames()).toHaveLength(3)
+    expect([...select.selectedOptions].map(o => o.value)).toEqual(['all'])
+    expect(location.search).not.toContain('category')
+  })
+
   it('updates option counts for the search while retaining alternatives to the selected filter', () => {
     setup()
     const category = selectFilter('category', 'Science')

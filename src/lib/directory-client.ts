@@ -613,12 +613,15 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
   });
 
   // A picker sets its state key on change. A filter holds several picks
-  // ("Arts|STEM", list-core picksOf); none is 'all'.
+  // ("Arts|STEM", list-core picksOf); none is 'all', and so is every one
+  // (Ilia, 2026-10-14): ticking the last option switches back to All.
   document.addEventListener('change', e => {
     const sel = (e.target as HTMLElement).closest?.<HTMLSelectElement>('select[data-fselect]');
     if (!root || !sel || !root.contains(sel)) return;
+    const picks = [...sel.selectedOptions].map(o => o.value).filter(v => v !== 'all');
+    const every = [...sel.options].filter(o => o.value !== 'all').length;
     const value = sel.multiple
-      ? [...sel.selectedOptions].map(o => o.value).filter(v => v !== 'all').join('|') || 'all'
+      ? (picks.length && picks.length < every ? picks.join('|') : 'all')
       : sel.value;
     state = { ...state, [sel.dataset.fselect as keyof S & string]: value };
     shown = pageSize;
