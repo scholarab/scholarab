@@ -82044,5 +82044,2042 @@
         "volunteer"
       ]
     }
+  },
+  {
+    "id": 2193,
+    "title": "UVic National Entrance Scholarship",
+    "amount": "Up to $20,000 ($5,000 a year for four years)",
+    "deadline": "2027-04-30",
+    "audience": "Grade 12 students anywhere in Canada entering a University of Victoria degree",
+    "url": "https://www.uvic.ca/safa/scholarships/entrance-scholarships/national-entrance-scholarship.php",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply in the UVic online scholarship application, under Awards and financial aid in your UVic student account, between February 15 and April 30. You have to apply for admission first. It renews each year you finish 12 units across two terms with a 7.50 GPA on your best 12 units.",
+    "active": true,
+    "description": "A renewable University of Victoria entrance scholarship for top students coming from any Canadian high school, chosen on grades, community service, school involvement and leadership.",
+    "openDate": "2027-02-15",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Victoria"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer",
+        "Leadership"
+      ]
+    }
+  },
+  {
+    "id": 2194,
+    "title": "UVic David H. Turpin National Entrance Scholarship",
+    "amount": "$20,000 ($5,000 a year for four years)",
+    "deadline": "2027-04-30",
+    "audience": "Grade 12 students at a Canadian high school entering a University of Victoria degree",
+    "url": "https://www.uvic.ca/safa/scholarships/entrance-scholarships/david-h-turpin-national-entrance-scholarship.php",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply in the UVic online scholarship application in your UVic student account between February 15 and April 30, after you apply for admission. One award is given. It renews while you keep a 7.50 GPA on your best 12 units each year.",
+    "active": true,
+    "description": "One $20,000 University of Victoria scholarship for a student entering from a Canadian high school, chosen on academic excellence, community service, school involvement and leadership.",
+    "openDate": "2027-02-15",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Victoria"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer",
+        "Leadership"
+      ]
+    }
+  },
+  {
+    "id": 2195,
+    "title": "UVic John Locke Malkin Entrance Scholarship",
+    "amount": "At least $4,000 a year for up to five years",
+    "deadline": "2027-04-30",
+    "audience": "Grade 12 students at a Canadian high school with exceptional marks, entering the University of Victoria",
+    "url": "https://www.uvic.ca/safa/scholarships/entrance-scholarships/john-locke-malkin-entrance-scholarship.php",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply in the UVic online scholarship application in your UVic student account between February 15 and April 30, after you apply for admission. It renews each year you complete 12 units in two terms with a 7.50 GPA on your best 12 units.",
+    "active": true,
+    "description": "A renewable University of Victoria entrance scholarship for students of exceptional academic promise coming from a Canadian high school.",
+    "openDate": "2027-02-15",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Victoria"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2196,
+    "title": "UVic 25th Olympiad Scholarship",
+    "amount": "$2,000",
+    "deadline": "2027-04-30",
+    "audience": "Grade 12 athletes with high marks entering the University of Victoria to compete on a Vikes varsity team",
+    "url": "https://www.uvic.ca/safa/scholarships/entrance-scholarships/25-olympiad-scholarship.php",
+    "category": "Sports",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply in the UVic online scholarship application between February 15 and April 30 and include a reference letter from your coach. Vikes varsity sports are basketball, soccer, swimming, cross country and track, rowing, rugby, field hockey and golf.",
+    "active": true,
+    "description": "A $2,000 University of Victoria entrance scholarship for a student who has excelled in sport while keeping high marks. Athletics staff choose on work ethic, commitment and performance.",
+    "openDate": "2027-02-15",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Victoria"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "sports"
+      ]
+    }
+  },
+  {
+    "id": 2197,
+    "title": "UVic 30 by 30 Women in Engineering Award",
+    "amount": "At least $1,000",
+    "deadline": "2027-04-30",
+    "audience": "Women in Grade 12 entering an engineering program at the University of Victoria",
+    "url": "https://www.uvic.ca/safa/scholarships/entrance-scholarships/30-by-30-women-in-engineering-award.php",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply in the UVic online scholarship application between February 15 and April 30 with a cover letter of up to 500 words on what drew you to engineering and what you want to do with the degree. More than one award may be given.",
+    "active": true,
+    "description": "University of Victoria entrance awards of at least $1,000 for women starting an engineering degree.",
+    "openDate": "2027-02-15",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Victoria"
+      ],
+      "fields": [
+        "Engineering"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": "female",
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2198,
+    "title": "UVic CFUW Saanich Peninsula Myrna Holden Scholarship",
+    "amount": "At least $6,000, up to full winter tuition and fees",
+    "deadline": "2027-04-30",
+    "audience": "Women in Grade 12 with high marks and financial need entering Engineering and Computer Science at the University of Victoria",
+    "url": "https://www.uvic.ca/safa/scholarships/entrance-scholarships/cfuw-saanich-peninsula-myrna-holden-scholarship.php",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply in the UVic online scholarship application between February 15 and April 30, after you apply for admission. You will be asked about financial need. One award is given each year.",
+    "active": true,
+    "description": "A University of Victoria entrance scholarship worth at least $6,000 for an academically outstanding woman entering Engineering and Computer Science who needs the money.",
+    "openDate": "2027-02-15",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Victoria"
+      ],
+      "fields": [
+        "Engineering",
+        "Computer Science"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": "female",
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2199,
+    "title": "UVic Deanna Carter Biochemistry Scholarship",
+    "amount": "At least $1,000",
+    "deadline": "2027-04-30",
+    "audience": "Women in Grade 12 at a Canadian high school entering the Faculty of Science at the University of Victoria",
+    "url": "https://www.uvic.ca/safa/scholarships/entrance-scholarships/deanna-carter-biochemistry-scholarship.php",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply in the UVic online scholarship application between February 15 and April 30. Students entering Biochemistry get first preference and Chemistry second.",
+    "active": true,
+    "description": "A University of Victoria entrance scholarship of at least $1,000 for a woman coming straight from high school into the Faculty of Science.",
+    "openDate": "2027-02-15",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Victoria"
+      ],
+      "fields": [
+        "Biochemistry",
+        "Chemistry",
+        "Science"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": "female",
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2200,
+    "title": "UVic Excellence in Math Scholarship",
+    "amount": "$4,000 to $6,000",
+    "deadline": "2027-04-30",
+    "audience": "Grade 12 students entering the University of Victoria with strong Fermat or Euclid math contest results",
+    "url": "https://www.uvic.ca/safa/scholarships/entrance-scholarships/excellence-in-math-scholarship.php",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply in the UVic online scholarship application between February 15 and April 30 and self-report your Fermat (Grade 11) or Euclid (Grade 12) contest score. The University of Waterloo confirms scores before recipients are chosen.",
+    "active": true,
+    "description": "University of Victoria entrance scholarships for students coming straight from high school who did very well on the Waterloo Fermat or Euclid math contests.",
+    "openDate": "2027-02-15",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Victoria"
+      ],
+      "fields": [
+        "Mathematics"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2201,
+    "title": "UVic George W. Nelms Memorial Scholarship",
+    "amount": "Varies",
+    "deadline": "2027-04-30",
+    "audience": "Grade 12 students from the Peace River district of Alberta or northern BC entering Science at the University of Victoria",
+    "url": "https://www.uvic.ca/safa/scholarships/entrance-scholarships/george-w-nelms-memorial-scholarship.php",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply in the UVic online scholarship application between February 15 and April 30. High school applicants are judged on their high school marks. Grande Prairie, Peace River and the rest of the Alberta Peace Country count.",
+    "active": true,
+    "description": "A University of Victoria entrance scholarship for a high-achieving student from the Peace River district of Alberta or northern British Columbia who plans to study science.",
+    "openDate": "2027-02-15",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Victoria"
+      ],
+      "fields": [
+        "Science"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2202,
+    "title": "UVic Ailsa and Roger Bishop Entrance Scholarship in Theatre",
+    "amount": "At least $4,000 a year for up to four years",
+    "deadline": "2027-04-30",
+    "audience": "Grade 12 students with high marks entering the Department of Theatre at the University of Victoria",
+    "url": "https://www.uvic.ca/safa/scholarships/entrance-scholarships/ailsa-roger-bishop-entrance-scholarship-theatre.php",
+    "category": "Arts",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply in the UVic online scholarship application between February 15 and April 30. Students with financial need get preference. It renews while you stay in Theatre with a 7.50 GPA.",
+    "active": true,
+    "description": "A renewable University of Victoria theatre scholarship for academically outstanding students starting in the Department of Theatre.",
+    "openDate": "2027-02-15",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Victoria"
+      ],
+      "fields": [
+        "Drama",
+        "Performing Arts"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "drama"
+      ]
+    }
+  },
+  {
+    "id": 2203,
+    "title": "UVic Betty Dewick Scholarship in Music",
+    "amount": "Varies",
+    "deadline": "2027-04-30",
+    "audience": "Grade 12 string players entering the School of Music at the University of Victoria",
+    "url": "https://www.uvic.ca/safa/scholarships/entrance-scholarships/betty-dewick-scholarship-in-music.php",
+    "category": "Arts",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply in the UVic online scholarship application between February 15 and April 30. Students with financial need get preference, and the School of Music recommends the winners.",
+    "active": true,
+    "description": "University of Victoria scholarships for string students coming from high school into the School of Music.",
+    "openDate": "2027-02-15",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Victoria"
+      ],
+      "fields": [
+        "Music"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "music"
+      ]
+    }
+  },
+  {
+    "id": 2204,
+    "title": "UVic Alexander and Mary Mackenzie Entrance Scholarship",
+    "amount": "$2,500",
+    "deadline": "2027-04-30",
+    "audience": "Canadian Grade 12 students with high marks who took part in a school or community anti-drug and alcohol program, entering the University of Victoria",
+    "url": "https://www.uvic.ca/safa/scholarships/entrance-scholarships/alexander-and-mary-mackenzie-entrance-scholarship.php",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply in the UVic online scholarship application between February 15 and April 30 and include a reference letter from the program's director. One award is given.",
+    "active": true,
+    "description": "A $2,500 University of Victoria entrance scholarship for a top Canadian student who was involved in an anti-drug and alcohol program at school or in the community.",
+    "openDate": "2027-02-15",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Victoria"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2205,
+    "title": "UVic New Canadian and Immigrant Entrance Scholarship",
+    "amount": "$2,000",
+    "deadline": "2027-04-30",
+    "audience": "Grade 12 students who immigrated to Canada, with an 80% average and financial need, entering the University of Victoria",
+    "url": "https://www.uvic.ca/safa/scholarships/entrance-scholarships/new-canadian-and-immigrant-entrance-scholarship.php",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply in the UVic online scholarship application between February 15 and April 30. You must be a Canadian citizen or permanent resident, coming from a Canadian high school, with at least 80% in your admission courses.",
+    "active": true,
+    "description": "A $2,000 University of Victoria entrance scholarship for an immigrant student with financial need.",
+    "openDate": "2027-02-15",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Victoria"
+      ],
+      "fields": [],
+      "minAverage": 80,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2206,
+    "title": "UVic Kedar Shrikhande Memorial Scholarship for Students with a Disability",
+    "amount": "$1,000 each",
+    "deadline": "2027-04-30",
+    "audience": "Grade 12 students with a physical or learning disability entering the University of Victoria",
+    "url": "https://www.uvic.ca/safa/scholarships/entrance-scholarships/kedar-shrikhandle-memorial-scholarship-disability.php",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply in the UVic online scholarship application between February 15 and April 30. Students entering Engineering and Computer Science get preference, but any program can apply.",
+    "active": true,
+    "description": "University of Victoria scholarships of at least $1,000 for academically outstanding students with a physical or learning disability.",
+    "openDate": "2027-02-15",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Victoria"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2207,
+    "title": "UVic Norah and Calvin Banks Indigenous Science Scholarship",
+    "amount": "Varies",
+    "deadline": "2027-03-15",
+    "audience": "First Nations, Metis and Inuit Grade 12 students with high marks entering the Faculty of Science at the University of Victoria",
+    "url": "https://www.uvic.ca/safa/scholarships/entrance-scholarships/norah-calvin-banks-indigenous-science-scholarship.php",
+    "category": "Indigenous",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply in the UVic online scholarship application between February 15 and March 15, earlier than most UVic awards. You will need to show eligibility under UVic's Indigenous Citizenship Declaration policy.",
+    "active": true,
+    "description": "A University of Victoria entrance scholarship for an academically outstanding Indigenous student starting in the Faculty of Science.",
+    "openDate": "2027-02-15",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Victoria"
+      ],
+      "fields": [
+        "Science"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2208,
+    "title": "USask George and Marsha Ivany President's First and Best Scholarship",
+    "amount": "$40,000 ($10,000 a year for four years)",
+    "deadline": "2026-12-15",
+    "audience": "Grade 12 students at a Canadian high school with a 95% average going straight to the University of Saskatchewan",
+    "url": "https://admissions.usask.ca/money/search-awards.php?award=300098ES02",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply for admission to USask by December 1, then fill in the Best and Brightest Entrance Scholarships application in PAWS by December 15. Offers go out from January to late February. It renews with an 80% average. One of the five is set aside for an Indigenous student as a Circle of Honour award.",
+    "active": true,
+    "description": "USask's top entrance scholarship, five awards of $40,000 chosen on leadership and contributions to school and community life.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Saskatchewan"
+      ],
+      "fields": [],
+      "minAverage": 95,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership",
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2209,
+    "title": "USask Chancellors' Scholarship",
+    "amount": "$30,000 ($7,500 a year for four years)",
+    "deadline": "2026-12-15",
+    "audience": "Grade 12 students at a Canadian high school entering the University of Saskatchewan",
+    "url": "https://admissions.usask.ca/money/search-awards.php?award=300098ES01",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply for admission to USask by December 1, then fill in the Best and Brightest Entrance Scholarships application in PAWS by December 15. Offers go out from January to late February. It renews with an 80% average. Two of the twelve are Circle of Honour awards for Indigenous students.",
+    "active": true,
+    "description": "Twelve renewable $30,000 University of Saskatchewan entrance scholarships chosen on academic achievement.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Saskatchewan"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2210,
+    "title": "USask Best and Brightest Entrance Scholarship",
+    "amount": "$30,000 ($7,500 a year for four years)",
+    "deadline": "2026-12-15",
+    "audience": "Grade 12 students at a Canadian high school with a 95% average going straight to the University of Saskatchewan",
+    "url": "https://admissions.usask.ca/money/search-awards.php?award=301375ES01",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply for admission to USask by December 1, then fill in the Best and Brightest Entrance Scholarships application in PAWS by December 15. Offers go out from January to late February. It renews with an 80% average. Two of the twelve are Circle of Honour awards for Indigenous students.",
+    "active": true,
+    "description": "Twelve renewable $30,000 University of Saskatchewan Entrance Scholarships chosen on leadership and contributions to school and community life.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Saskatchewan"
+      ],
+      "fields": [],
+      "minAverage": 95,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership",
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2211,
+    "title": "USask Edwards Undergraduate Scholarship",
+    "amount": "$36,000 ($9,000 a year for four years)",
+    "deadline": "2026-12-15",
+    "audience": "Grade 12 students entering the Bachelor of Commerce at USask's Edwards School of Business",
+    "url": "https://admissions.usask.ca/money/search-awards.php?award=301494ES01",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply for admission to USask by December 1, then fill in the Best and Brightest Entrance Scholarships application in PAWS by December 15. Offers go out from January to late February. To renew you need 24 credit units and an 80% average each year.",
+    "active": true,
+    "description": "Six renewable $36,000 scholarships for students starting Commerce at the Edwards School of Business, chosen on academic achievement.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Saskatchewan"
+      ],
+      "fields": [
+        "Business",
+        "Commerce"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2212,
+    "title": "USask Torvald and Margaret Tollefson Renewable Entrance Scholarship",
+    "amount": "$24,000 ($6,000 a year for four years)",
+    "deadline": "2026-12-15",
+    "audience": "Grade 12 students entering the Bachelor of Science in Agriculture at the University of Saskatchewan",
+    "url": "https://admissions.usask.ca/money/search-awards.php?award=301434ES03",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply for admission to USask by December 1, then fill in the Best and Brightest Entrance Scholarships application in PAWS by December 15. Offers go out from January to late February. It renews with a 75% average on at least 24 credit units.",
+    "active": true,
+    "description": "Five renewable $24,000 entrance scholarships each year for students starting the agriculture degree at USask, chosen on academic achievement.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Saskatchewan"
+      ],
+      "fields": [
+        "Agriculture"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2213,
+    "title": "USask College of Agriculture and Bioresources Renewable Entrance Scholarship for Indigenous Students",
+    "amount": "$24,000 ($6,000 a year for four years)",
+    "deadline": "2026-12-15",
+    "audience": "Indigenous Grade 12 students entering a degree in USask's College of Agriculture and Bioresources",
+    "url": "https://admissions.usask.ca/money/search-awards.php?award=301434ES05",
+    "category": "Indigenous",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply for admission to USask by December 1, then fill in the Best and Brightest Entrance Scholarships application in PAWS by December 15. Offers go out from January to late February. It renews with a 75% average on at least 24 credit units.",
+    "active": true,
+    "description": "A renewable $24,000 entrance scholarship for an Indigenous student starting an agriculture or bioresources degree at USask.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Saskatchewan"
+      ],
+      "fields": [
+        "Agriculture"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2214,
+    "title": "USask BMO Financial Group Scholarship",
+    "amount": "$16,000 ($4,000 a year for four years)",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students with an 85% average and financial need going straight to the University of Saskatchewan",
+    "url": "https://admissions.usask.ca/money/search-awards.php?award=301345EB01",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply for admission by February 15, then fill in the Competitive Entrance Awards application in the PAWS Scholarships and Bursaries channel by March 1. Offers go out between April 1 and July 1. Bursaries use the PAWS Financial Need Calculator, with parents' tax information if you are a dependent student. It renews for up to three more years.",
+    "active": true,
+    "description": "Two renewable $16,000 USask entrance awards for students with financial need, open to any direct-entry college.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Saskatchewan"
+      ],
+      "fields": [],
+      "minAverage": 85,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2215,
+    "title": "USask Bonnie and Art Dumont Scholarship",
+    "amount": "$20,000 ($5,000 a year for four years)",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students at a Canadian high school entering first year at the University of Saskatchewan",
+    "url": "https://admissions.usask.ca/money/search-awards.php?award=301274ES01",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply for admission by February 15, then fill in the Competitive Entrance Awards application in the PAWS Scholarships and Bursaries channel by March 1. Offers go out between April 1 and July 1. It renews with a 75% average.",
+    "active": true,
+    "description": "A renewable $20,000 University of Saskatchewan entrance scholarship chosen on academic achievement.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Saskatchewan"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2216,
+    "title": "USask Wally and Mavis Pieczonka Bursary",
+    "amount": "$40,000 ($10,000 a year for four years)",
+    "deadline": "2027-03-01",
+    "audience": "First Nations, Metis and Inuit Grade 12 students with a 70% average and financial need entering the University of Saskatchewan",
+    "url": "https://admissions.usask.ca/money/search-awards.php?award=300550EB01",
+    "category": "Indigenous",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply for admission by February 15, then fill in the Competitive Entrance Awards application in the PAWS Scholarships and Bursaries channel by March 1. Offers go out between April 1 and July 1. Bursaries use the PAWS Financial Need Calculator, with parents' tax information if you are a dependent student. You also verify Indigenous membership or citizenship through the PAWS verification channel. Include a statement on your plans to improve the economic wellbeing of Indigenous communities. It renews with a 65% average.",
+    "active": true,
+    "description": "A renewable $40,000 USask entrance bursary for an Indigenous student with financial need.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Saskatchewan"
+      ],
+      "fields": [],
+      "minAverage": 70,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2217,
+    "title": "USask Rob Jaspar Aboriginal Award",
+    "amount": "$20,000 ($5,000 a year for four years)",
+    "deadline": "2027-03-01",
+    "audience": "Indigenous Grade 12 students with a 75% average and financial need entering Commerce at USask's Edwards School of Business",
+    "url": "https://admissions.usask.ca/money/search-awards.php?award=301291EB01",
+    "category": "Indigenous",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply for admission by February 15, then fill in the Competitive Entrance Awards application in the PAWS Scholarships and Bursaries channel by March 1. Offers go out between April 1 and July 1. Bursaries use the PAWS Financial Need Calculator, with parents' tax information if you are a dependent student. You also verify Indigenous membership or citizenship through the PAWS verification channel. You need at least 21 credit units a year.",
+    "active": true,
+    "description": "A renewable $20,000 bursary for an Indigenous student starting the Bachelor of Commerce at the Edwards School of Business.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Saskatchewan"
+      ],
+      "fields": [
+        "Business",
+        "Commerce"
+      ],
+      "minAverage": 75,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2218,
+    "title": "USask Lloyd Carr-Harris Foundation Scholarship",
+    "amount": "Tuition, renewable for three more years",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students entering the Edwards School of Business at the University of Saskatchewan",
+    "url": "https://admissions.usask.ca/money/search-awards.php?award=301016ES01",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply for admission by February 15, then fill in the Competitive Entrance Awards application in the PAWS Scholarships and Bursaries channel by March 1. Offers go out between April 1 and July 1. It renews with a 75% average.",
+    "active": true,
+    "description": "Four renewable USask scholarships covering tuition for students starting at the Edwards School of Business, chosen on academic achievement.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Saskatchewan"
+      ],
+      "fields": [
+        "Business",
+        "Commerce"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2219,
+    "title": "USask Peter Lewochko Bursary",
+    "amount": "About $8,000 to $11,000 a year for up to four years",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students with financial need entering Agriculture and Bioresources, Engineering or Education at the University of Saskatchewan",
+    "url": "https://admissions.usask.ca/money/search-awards.php?award=301792EB01",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply for admission by February 15, then fill in the Competitive Entrance Awards application in the PAWS Scholarships and Bursaries channel by March 1. Offers go out between April 1 and July 1. Bursaries use the PAWS Financial Need Calculator, with parents' tax information if you are a dependent student. It renews while you keep a 75% average and still have need.",
+    "active": true,
+    "description": "A large renewable USask bursary for students with financial need starting in agriculture, engineering or education.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Saskatchewan"
+      ],
+      "fields": [
+        "Agriculture",
+        "Engineering",
+        "Education"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2220,
+    "title": "USask Norman MacLeod Reid Entrance Scholarship",
+    "amount": "$6,000",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students at a Canadian high school entering the University of Saskatchewan",
+    "url": "https://admissions.usask.ca/money/search-awards.php?award=300568ES01",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply for admission by February 15, then fill in the Competitive Entrance Awards application in the PAWS Scholarships and Bursaries channel by March 1. Offers go out between April 1 and July 1. More than one may be given.",
+    "active": true,
+    "description": "A $6,000 University of Saskatchewan entrance scholarship chosen on academic achievement.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Saskatchewan"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2221,
+    "title": "USask William A. Willison Scholarship in honour of Forbes William Cavanagh",
+    "amount": "$6,000",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students with financial need entering any direct-entry college at the University of Saskatchewan",
+    "url": "https://admissions.usask.ca/money/search-awards.php?award=301794EB01",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply for admission by February 15, then fill in the Competitive Entrance Awards application in the PAWS Scholarships and Bursaries channel by March 1. Offers go out between April 1 and July 1. Bursaries use the PAWS Financial Need Calculator, with parents' tax information if you are a dependent student.",
+    "active": true,
+    "description": "A $6,000 USask entrance scholarship for a student with strong marks and financial need.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Saskatchewan"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2222,
+    "title": "USask Harold Ross Saddington Memorial Award in Math",
+    "amount": "About $6,000",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students planning to major in mathematics, statistics or applied mathematics at the University of Saskatchewan",
+    "url": "https://admissions.usask.ca/money/search-awards.php?award=301822CS01",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply for admission by February 15, then fill in the Competitive Entrance Awards application in the PAWS Scholarships and Bursaries channel by March 1. Offers go out between April 1 and July 1. Include a one-page letter on your interest in the mathematical sciences and your degree plans, plus one reference letter.",
+    "active": true,
+    "description": "A USask entrance award of about $6,000 for students who plan to major in math, statistics, math physics or applied math.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Saskatchewan"
+      ],
+      "fields": [
+        "Mathematics"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2223,
+    "title": "USask Canada Wide Science Fair (2002) Scholarship",
+    "amount": "$5,000",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students entering engineering, agriculture or natural science at the University of Saskatchewan, with preference for science fair participants",
+    "url": "https://admissions.usask.ca/money/search-awards.php?award=300092ES01",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply for admission by February 15, then fill in the Competitive Entrance Awards application in the PAWS Scholarships and Bursaries channel by March 1. Offers go out between April 1 and July 1. Preference goes to students who took part in the Canada-Wide Science Fair or a regional fair in their last four years of school.",
+    "active": true,
+    "description": "A $5,000 USask entrance scholarship for students heading into engineering, agriculture or a natural science major.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Saskatchewan"
+      ],
+      "fields": [
+        "Science",
+        "Engineering",
+        "Agriculture"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "science fair"
+      ]
+    }
+  },
+  {
+    "id": 2224,
+    "title": "USask Douglas Christie Ferguson Fund Scholarship",
+    "amount": "$5,000",
+    "deadline": "2027-03-01",
+    "audience": "Canadian citizens and permanent residents in Grade 12 entering a degree in USask's College of Agriculture and Bioresources",
+    "url": "https://admissions.usask.ca/money/search-awards.php?award=300178ES01",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply for admission by February 15, then fill in the Competitive Entrance Awards application in the PAWS Scholarships and Bursaries channel by March 1. Offers go out between April 1 and July 1. More than one may be given.",
+    "active": true,
+    "description": "A $5,000 USask entrance scholarship for students starting an agriculture or bioresources degree, chosen on academic achievement.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Saskatchewan"
+      ],
+      "fields": [
+        "Agriculture"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2225,
+    "title": "USask Daniel and Nicole Halyk Edwards School of Business Entrance Bursary",
+    "amount": "At least $4,000",
+    "deadline": "2027-03-01",
+    "audience": "Canadian Grade 12 students with financial need entering Commerce at USask's Edwards School of Business",
+    "url": "https://admissions.usask.ca/money/search-awards.php?award=302085EB01",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply for admission by February 15, then fill in the Competitive Entrance Awards application in the PAWS Scholarships and Bursaries channel by March 1. Offers go out between April 1 and July 1. Bursaries use the PAWS Financial Need Calculator, with parents' tax information if you are a dependent student. Include a statement of up to 500 words on your community outreach or volunteering.",
+    "active": true,
+    "description": "A USask Commerce entrance bursary of at least $4,000, judged 60% on financial need and 40% on a statement about community involvement.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Saskatchewan"
+      ],
+      "fields": [
+        "Business",
+        "Commerce"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2226,
+    "title": "USask Poelzer Family Foundation Bursary",
+    "amount": "$4,000",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students with financial need entering the Bachelor of Commerce at USask's Edwards School of Business",
+    "url": "https://admissions.usask.ca/money/search-awards.php?award=301479EB01",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply for admission by February 15, then fill in the Competitive Entrance Awards application in the PAWS Scholarships and Bursaries channel by March 1. Offers go out between April 1 and July 1. Bursaries use the PAWS Financial Need Calculator, with parents' tax information if you are a dependent student.",
+    "active": true,
+    "description": "A $4,000 entrance bursary for a student with financial need starting Commerce at the Edwards School of Business.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Saskatchewan"
+      ],
+      "fields": [
+        "Business",
+        "Commerce"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2227,
+    "title": "USask Joseph H. Thompson Scholarship",
+    "amount": "$3,500",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students entering USask's Edwards School of Business",
+    "url": "https://admissions.usask.ca/money/search-awards.php?award=300687ES01",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply for admission by February 15, then fill in the Competitive Entrance Awards application in the PAWS Scholarships and Bursaries channel by March 1. Offers go out between April 1 and July 1. Four are given each year.",
+    "active": true,
+    "description": "Four $3,500 entrance scholarships for students starting at the Edwards School of Business, chosen on academic achievement.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Saskatchewan"
+      ],
+      "fields": [
+        "Business",
+        "Commerce"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2228,
+    "title": "USask Community Leadership Award in Business",
+    "amount": "$3,000",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students with financial need and community involvement entering Commerce at the University of Saskatchewan",
+    "url": "https://admissions.usask.ca/money/search-awards.php?award=302169EB01",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply for admission by February 15, then fill in the Competitive Entrance Awards application in the PAWS Scholarships and Bursaries channel by March 1. Offers go out between April 1 and July 1. Bursaries use the PAWS Financial Need Calculator, with parents' tax information if you are a dependent student. Include a statement of up to 500 words on your volunteering, leadership or mentoring.",
+    "active": true,
+    "description": "Two $3,000 USask Commerce entrance awards judged 70% on a community statement and 30% on financial need.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Saskatchewan"
+      ],
+      "fields": [
+        "Business",
+        "Commerce"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer",
+        "Leadership"
+      ]
+    }
+  },
+  {
+    "id": 2229,
+    "title": "USask Chase Memorial Scholarship",
+    "amount": "$3,000",
+    "deadline": "2027-03-01",
+    "audience": "First Nations Grade 12 students with excellent marks entering the University of Saskatchewan",
+    "url": "https://admissions.usask.ca/money/search-awards.php?award=300100ES02",
+    "category": "Indigenous",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply for admission by February 15, then fill in the Competitive Entrance Awards application in the PAWS Scholarships and Bursaries channel by March 1. Offers go out between April 1 and July 1. Two are given each year.",
+    "active": true,
+    "description": "Two $3,000 University of Saskatchewan entrance scholarships for First Nations students with strong grades.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Saskatchewan"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2230,
+    "title": "USask Louis Riel Scholarship",
+    "amount": "$2,500",
+    "deadline": "2027-03-01",
+    "audience": "Metis Grade 12 students entering the University of Saskatchewan",
+    "url": "https://admissions.usask.ca/money/search-awards.php?award=300577ES02",
+    "category": "Indigenous",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply for admission by February 15, then fill in the Competitive Entrance Awards application in the PAWS Scholarships and Bursaries channel by March 1. Offers go out between April 1 and July 1.",
+    "active": true,
+    "description": "A $2,500 University of Saskatchewan entrance scholarship for a Metis student, chosen on academic achievement.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Saskatchewan"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2231,
+    "title": "USask Matthew Baraniuk Memorial Award",
+    "amount": "$2,000",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students living with mental health challenges entering a degree at the University of Saskatchewan",
+    "url": "https://admissions.usask.ca/money/search-awards.php?award=302819ES01",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply for admission by February 15, then fill in the Competitive Entrance Awards application in the PAWS Scholarships and Bursaries channel by March 1. Offers go out between April 1 and July 1. Include a one-page statement on the obstacles you have worked through as a student living with mental health challenges.",
+    "active": true,
+    "description": "A $2,000 USask entrance award, named for a Huskies football player, for a student who has navigated school while living with mental health challenges.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Saskatchewan"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2232,
+    "title": "USask Conrad Neufeldt Entrance Award for Homeschooled Students",
+    "amount": "Varies",
+    "deadline": "2027-03-01",
+    "audience": "Homeschooled students with financial need entering a degree at the University of Saskatchewan",
+    "url": "https://admissions.usask.ca/money/search-awards.php?award=302070EB01",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply for admission by February 15, then fill in the Competitive Entrance Awards application in the PAWS Scholarships and Bursaries channel by March 1. Offers go out between April 1 and July 1. Bursaries use the PAWS Financial Need Calculator, with parents' tax information if you are a dependent student. Include a statement of up to 500 words on your volunteering or community impact. Edwards School of Business applicants get preference.",
+    "active": true,
+    "description": "A USask entrance award for a homeschooled student, judged half on financial need and half on a community statement.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Saskatchewan"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2233,
+    "title": "USask Dr. and Mrs. Edmund H. Oliver Memorial Scholarship",
+    "amount": "$2,000",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students entering an undergraduate degree at the University of Saskatchewan",
+    "url": "https://admissions.usask.ca/money/search-awards.php?award=300525EB02",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply for admission by February 15, then fill in the Competitive Entrance Awards application in the PAWS Scholarships and Bursaries channel by March 1. Offers go out between April 1 and July 1. Twelve are given each year.",
+    "active": true,
+    "description": "Twelve $2,000 University of Saskatchewan entrance scholarships chosen on academic achievement.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Saskatchewan"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2234,
+    "title": "USask Centennial Fund Award",
+    "amount": "$2,000",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students with financial need entering first year at the University of Saskatchewan",
+    "url": "https://admissions.usask.ca/money/search-awards.php?award=301510EB04",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply for admission by February 15, then fill in the Competitive Entrance Awards application in the PAWS Scholarships and Bursaries channel by March 1. Offers go out between April 1 and July 1. Bursaries use the PAWS Financial Need Calculator, with parents' tax information if you are a dependent student.",
+    "active": true,
+    "description": "$2,000 USask entrance awards for first-year students with financial need, funded by alumni donations.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Saskatchewan"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2235,
+    "title": "USask College of Agriculture and Bioresources Entrance Scholarship",
+    "amount": "$2,000",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students entering a degree in USask's College of Agriculture and Bioresources",
+    "url": "https://admissions.usask.ca/money/search-awards.php?award=301434ES04",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply for admission by February 15, then fill in the Competitive Entrance Awards application in the PAWS Scholarships and Bursaries channel by March 1. Offers go out between April 1 and July 1. Twenty are given each year.",
+    "active": true,
+    "description": "Twenty $2,000 entrance scholarships for students starting an agriculture or bioresources degree at USask.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Saskatchewan"
+      ],
+      "fields": [
+        "Agriculture"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2236,
+    "title": "USask Edwards Dean's Circle Undergraduate Scholarship",
+    "amount": "$2,000",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students entering the Bachelor of Commerce at USask's Edwards School of Business",
+    "url": "https://admissions.usask.ca/money/search-awards.php?award=302304ES01",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply for admission by February 15, then fill in the Competitive Entrance Awards application in the PAWS Scholarships and Bursaries channel by March 1. Offers go out between April 1 and July 1. You cannot hold another USask award worth $6,000 or more.",
+    "active": true,
+    "description": "Ten $2,000 entrance scholarships for students starting Commerce at the Edwards School of Business.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Saskatchewan"
+      ],
+      "fields": [
+        "Business",
+        "Commerce"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2237,
+    "title": "USask Nasser Scholarship Fund",
+    "amount": "$1,000",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students with financial need entering Arts and Science, Kinesiology, Commerce or Agriculture at the University of Saskatchewan",
+    "url": "https://admissions.usask.ca/money/search-awards.php?award=300500EB02",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply for admission by February 15, then fill in the Competitive Entrance Awards application in the PAWS Scholarships and Bursaries channel by March 1. Offers go out between April 1 and July 1. Bursaries use the PAWS Financial Need Calculator, with parents' tax information if you are a dependent student. Ten go to each of the four colleges.",
+    "active": true,
+    "description": "Forty $1,000 USask entrance awards for students with good marks and financial need.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Saskatchewan"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2238,
+    "title": "USask Orvald A. Gratias Scholarship",
+    "amount": "$2,000",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students at a Canadian high school entering the University of Saskatchewan",
+    "url": "https://admissions.usask.ca/money/search-awards.php?award=300214ES01",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply for admission by February 15, then fill in the Competitive Entrance Awards application in the PAWS Scholarships and Bursaries channel by March 1. Offers go out between April 1 and July 1.",
+    "active": true,
+    "description": "A $2,000 University of Saskatchewan entrance scholarship chosen on academic achievement, named for a Huskie athlete and Rhodes Scholar.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Saskatchewan"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2239,
+    "title": "USask Garth Thomas Scholarship in Arts and Science",
+    "amount": "$2,000",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students entering a degree in USask's College of Arts and Science",
+    "url": "https://admissions.usask.ca/money/search-awards.php?award=302235ES01",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply for admission by February 15, then fill in the Competitive Entrance Awards application in the PAWS Scholarships and Bursaries channel by March 1. Offers go out between April 1 and July 1.",
+    "active": true,
+    "description": "A $2,000 entrance scholarship for a student starting any Arts and Science degree at USask, chosen on academic merit.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Saskatchewan"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2240,
+    "title": "USask Beatrice Murray Agriculture and Bioresources Entrance Scholarship",
+    "amount": "$2,900",
+    "deadline": "2027-03-01",
+    "audience": "Women in Grade 12 entering a degree in USask's College of Agriculture and Bioresources",
+    "url": "https://admissions.usask.ca/money/search-awards.php?award=300494ES01",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply for admission by February 15, then fill in the Competitive Entrance Awards application in the PAWS Scholarships and Bursaries channel by March 1. Offers go out between April 1 and July 1.",
+    "active": true,
+    "description": "A $2,900 USask entrance scholarship for a woman starting an agriculture or bioresources degree, chosen on academic achievement.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Saskatchewan"
+      ],
+      "fields": [
+        "Agriculture"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": "female",
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2241,
+    "title": "USask Selby Porter Indigenous Award",
+    "amount": "$1,500",
+    "deadline": "2027-03-01",
+    "audience": "Indigenous Grade 12 students with financial need entering a degree at the University of Saskatchewan",
+    "url": "https://admissions.usask.ca/money/search-awards.php?award=301413EB01",
+    "category": "Indigenous",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply for admission by February 15, then fill in the Competitive Entrance Awards application in the PAWS Scholarships and Bursaries channel by March 1. Offers go out between April 1 and July 1. Bursaries use the PAWS Financial Need Calculator, with parents' tax information if you are a dependent student. You also verify Indigenous membership or citizenship through the PAWS verification channel.",
+    "active": true,
+    "description": "Two $1,500 USask entrance awards for Indigenous students with financial need.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Saskatchewan"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2242,
+    "title": "USask Sikh Society of Saskatchewan Bursary",
+    "amount": "$2,000",
+    "deadline": "2027-03-01",
+    "audience": "Sikh Grade 12 students with financial need entering the University of Saskatchewan",
+    "url": "https://admissions.usask.ca/money/search-awards.php?award=300639EB02",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply for admission by February 15, then fill in the Competitive Entrance Awards application in the PAWS Scholarships and Bursaries channel by March 1. Offers go out between April 1 and July 1. Bursaries use the PAWS Financial Need Calculator, with parents' tax information if you are a dependent student.",
+    "active": true,
+    "description": "A $2,000 USask entrance bursary for a Sikh student, chosen on marks and financial need.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Saskatchewan"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2243,
+    "title": "USask India-Canada Cultural Association Bursary",
+    "amount": "$1,250",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students of Indian or Indo-Canadian ancestry entering the University of Saskatchewan",
+    "url": "https://admissions.usask.ca/money/search-awards.php?award=300325ES01",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply for admission by February 15, then fill in the Competitive Entrance Awards application in the PAWS Scholarships and Bursaries channel by March 1. Offers go out between April 1 and July 1.",
+    "active": true,
+    "description": "A $1,250 USask entrance award for a student of Indian ancestry, chosen on marks and school and community involvement.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Saskatchewan"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2244,
+    "title": "USask APEGS Entrance Bursary",
+    "amount": "$3,000 to $4,000",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students with financial need entering Engineering, or Arts and Science to major in geology, at the University of Saskatchewan",
+    "url": "https://admissions.usask.ca/money/search-awards.php?award=302029EB01",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply for admission by February 15, then fill in the Competitive Entrance Awards application in the PAWS Scholarships and Bursaries channel by March 1. Offers go out between April 1 and July 1. Bursaries use the PAWS Financial Need Calculator, with parents' tax information if you are a dependent student. If you are entering Arts and Science, add a short statement that you intend to major in the geological sciences. Two of the three awards prefer self-declared Indigenous students.",
+    "active": true,
+    "description": "Three entrance bursaries from the Association of Professional Engineers and Geoscientists of Saskatchewan for students with financial need.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Saskatchewan"
+      ],
+      "fields": [
+        "Engineering",
+        "Geosciences"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
   }
 ]
