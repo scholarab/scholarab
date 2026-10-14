@@ -69277,5 +69277,45 @@
       "apprenticeship": false,
       "extracurriculars": []
     }
+  },
+  {
+    "id": 1882,
+    "title": "Energy Job Shop Skilled Trades Scholarship",
+    "amount": "$1,000",
+    "deadline": "2027-04-30",
+    "openDate": null,
+    "audience": "Canadians 18 or older entering a trade, apprenticeship, technical program or industry certification",
+    "url": "https://www.energyjobshop.com/scholarship/",
+    "category": "Trades",
+    "region": "National",
+    "lastVerified": "2026-10",
+    "active": true,
+    "description": "An Alberta trades job board pays one $1,000 award a year to someone heading into a skilled trade, apprenticeship, technical program or industry certification. The first winner, in 2026, was training as a heavy equipment operator.",
+    "notes": "Write up to 500 words on the trade you are pursuing and how you are getting ready for work. You must be 18 when you apply, so a Grade 12 student who is still 17 has to wait for their birthday. The money can go to tuition, tools, safety tickets or certifications. The cutoff is 7 p.m. Mountain time, and the winner is named about 30 days later.",
+    "metaDetail": "One $1,000 award, open at 18.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "trades"
+      ],
+      "minAverage": null,
+      "minAge": 18,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
   }
 ]
