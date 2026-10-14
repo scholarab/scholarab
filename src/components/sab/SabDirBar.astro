@@ -67,8 +67,10 @@ const LENS = '<svg viewBox="0 0 16 16" width="16" height="16" fill="none" aria-h
 </div>
 
 <script>
-  // Arrows at either edge while more tabs sit past them. The line is never
-  // scrolled for the reader, so it reads the same on every page.
+  // Arrows at either edge while more tabs sit past them. The lit tab glides
+  // to the middle of the line (Ilia, 2026-10-13): the line starts where the
+  // last page left it, then scrolls, so a click on Medicine Hat visibly
+  // brings Medicine Hat to the centre.
   let sync = () => {};
   addEventListener('resize', () => sync(), { passive: true });
   document.addEventListener('astro:page-load', () => {
@@ -85,6 +87,19 @@ const LENS = '<svg viewBox="0 0 16 16" width="16" height="16" fill="none" aria-h
     more.addEventListener('click', () => step(1));
     back.addEventListener('click', () => step(-1));
     track.addEventListener('scroll', () => sync(), { passive: true });
+    track.addEventListener('click', () => {
+      try { sessionStorage.setItem('sa_tabs_x', String(track.scrollLeft)); } catch { /* storage blocked */ }
+    });
+    const lit = track.querySelector<HTMLElement>('[aria-current="page"]');
+    if (lit) {
+      let from = 0;
+      try { from = Number(sessionStorage.getItem('sa_tabs_x')) || 0; sessionStorage.removeItem('sa_tabs_x'); } catch { /* storage blocked */ }
+      track.scrollLeft = from;
+      const box = lit.getBoundingClientRect(), line = track.getBoundingClientRect();
+      const to = track.scrollLeft + box.left - line.left - (track.clientWidth - box.width) / 2;
+      const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      track.scrollTo({ left: to, behavior: still || Math.abs(to - from) < 2 ? 'instant' : 'smooth' });
+    }
     sync();
   });
 </script>
