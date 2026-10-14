@@ -2,6 +2,7 @@
 // beyond the event name and which item it concerns. Must never break the page.
 import { getSaved, getSavedPrograms } from './tracker.ts'
 import { STARTER_PACK_IDS } from './starter-pack.ts'
+import { showToast } from './utils.ts'
 
 export type AppEvent =
   | 'detail_view' | 'apply_click' | 'save' | 'quiz_start' | 'quiz_complete' | 'search_empty'
@@ -18,6 +19,10 @@ export type AppEvent =
   /** A status set on /saved. Meta is the status (working, submitted, won):
    *  the first count of whether a saved award gets applied for or won. */
   | 'app_status'
+  /** A directory opened (meta: scholarship or program), a filter used (meta:
+   *  which one, never its value) and Show more or Show all pressed (meta:
+   *  more or all). All three since 2026-10-14, each once per tab session. */
+  | 'list_view' | 'filter_use' | 'list_more'
 
 const OPT_OUT_KEY = 'sa_no_track'
 /** `?nt=1` opts this browser out, `?nt=0` opts back in. */
@@ -96,12 +101,17 @@ export function syncTrackingOptOut(): void {
     if (v === null) return
     // warn, not info: "this browser is no longer being counted" is exactly the
     // sort of thing that should be hard to miss if it was set by accident.
+    // The toast is the proof on a phone, where nobody reads the console. Only
+    // on a change, since every event re-reads the URL.
+    const was = localStorage.getItem(OPT_OUT_KEY) !== null
     if (v === '0') {
       localStorage.removeItem(OPT_OUT_KEY)
       console.warn('[scholarab] analytics re-enabled on this browser')
+      if (was) showToast('This browser is counted again')
     } else {
       localStorage.setItem(OPT_OUT_KEY, '1')
       console.warn('[scholarab] analytics disabled on this browser, so nothing you do here will be counted')
+      if (!was) showToast('This browser is no longer counted')
     }
   } catch { /* storage or URL unavailable; nothing to sync */ }
 }
@@ -174,6 +184,9 @@ export function sendEventAfterDwell(
   } catch { /* never break the page for analytics */ }
   return cancel
 }
+
+/** What filter_use may name. A filter's key only, never what was picked. */
+export const FILTER_USES = ['sort', 'category', 'region', 'status', 'school', 'town', 'format', 'search', 'reset'] as const
 
 /** Where an Apply click was made. `mine` is My combo (/saved). */
 export type ApplyPlace = 'page' | 'row' | 'quiz' | 'combo' | 'mine'

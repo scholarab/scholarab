@@ -255,6 +255,9 @@ or column is added, and the 180-day events retention is unchanged.
 - Every event row carries `device`, one of phone, tablet or computer, worked
   out by the server from the user agent (`src/lib/device-class.ts`). The user
   agent is not stored. Migration 0016 adds the column.
+- Directories send `list_view`, `filter_use` and `list_more`, each with a
+  required word from a fixed list: which directory, which filter by name
+  (never the value picked, never the search text) and more or all.
 
 The server rejects anything outside each list (`src/pages/api/event.ts`). The
 privacy policy's counts row and its local storage line say all three.

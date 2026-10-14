@@ -1,7 +1,7 @@
 // Vanilla controller for the public directory pages (/scholarships, /programs).
 // The page ships fully server-rendered cards; this module only shows/hides and
 // reorders existing DOM nodes, replicating what the old React islands did.
-import { sendEvent } from './events.ts';
+import { FILTER_USES, sendEvent } from './events.ts';
 import { normalizeSearchQuery, tokenIndexMayMatch, correctQuery, searchTokens, searchRows } from './search-text.ts';
 import { writeListContext } from './list-context.ts';
 import { DIRECTORY_PAGE_SIZE, showingLine } from './list-core.ts';
@@ -572,6 +572,7 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
 
     const step = t.closest<HTMLElement>('[data-dir-more-btn], [data-dir-all]');
     if (step) {
+      sendEvent('list_more', undefined, undefined, step.matches('[data-dir-all]') ? 'all' : 'more');
       const before = Math.min(shown, visible.length);
       // Show all needs the match count, which a split page only has once its
       // rest is in; the load applies a press made before then.
@@ -594,6 +595,7 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     // The filter row's Clear: every filter back to its default, keeping the
     // sort and the words in the search box, which are not filters.
     if (t.closest('[data-dir-reset]')) {
+      sendEvent('filter_use', undefined, undefined, 'reset');
       state = { ...config.defaultState, sort: state.sort };
       shown = pageSize;
       render();
@@ -602,6 +604,7 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     }
 
     if (t.closest('[data-dir-clear]')) {
+      sendEvent('filter_use', undefined, undefined, 'reset');
       state = { ...config.defaultState };
       query = '';
       shown = pageSize;
@@ -624,6 +627,8 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
       ? (picks.length && picks.length < every ? picks.join('|') : 'all')
       : sel.value;
     state = { ...state, [sel.dataset.fselect as keyof S & string]: value };
+    // Which filter, never what was picked in it.
+    if ((FILTER_USES as readonly string[]).includes(sel.dataset.fselect!)) sendEvent('filter_use', undefined, undefined, sel.dataset.fselect);
     shown = pageSize;
     render();
   });
@@ -659,6 +664,8 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     const input = e.target as HTMLInputElement | null;
     if (!root || !input?.matches?.('[data-dir-search]') || !root.contains(input)) return;
     query = input.value;
+    // That search was used at all. What was typed is not sent here.
+    if (query.trim().length >= 3) sendEvent('filter_use', undefined, undefined, 'search');
     shown = pageSize;
     render();
     paintFind();
@@ -694,6 +701,8 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     pending = false;
     showAllOnLoad = false;
     if (!root) return;
+    // The base the filter and Show more counts are read against.
+    sendEvent('list_view', undefined, undefined, config.itemType);
     pageSize = Number(root.querySelector<HTMLElement>('[data-dir-step]')?.dataset.dirStep) || config.pageSize || DIRECTORY_PAGE_SIZE;
     // The layout sets this in <head>; repeated here so a page built on another
     // layout still gets its "Show more" block (global.css hides it without).

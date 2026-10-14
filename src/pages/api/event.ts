@@ -9,7 +9,7 @@ import { deviceClass } from '../../lib/device-class'
 
 // Client-sendable events only. alert_subscribe is recorded server-side in /api/alert.
 // app_step left with the application-step ticker (deleted with /app, Aug 2026).
-const ALLOWED_EVENTS = new Set(['detail_view', 'apply_click', 'save', 'quiz_start', 'quiz_complete', 'search_empty', 'source_visit', 'tour_open', 'tour_step', 'tour_finish', 'tour_close', 'tour_cta', 'combo_open', 'app_status'])
+const ALLOWED_EVENTS = new Set(['detail_view', 'apply_click', 'save', 'quiz_start', 'quiz_complete', 'search_empty', 'source_visit', 'tour_open', 'tour_step', 'tour_finish', 'tour_close', 'tour_cta', 'combo_open', 'app_status', 'list_view', 'filter_use', 'list_more'])
 // Campaign sources, mirroring SOURCES in src/lib/events.ts. Anyone can type
 // `?s=` into the address bar, so the server keeps its own copy of the list
 // rather than trusting whatever the client sends.
@@ -23,6 +23,14 @@ const SAVE_FROM = new Set(['page', 'row', 'quiz', 'combo'])
 // by the starter pack, or not). Mirrors sendApply in src/lib/events.ts.
 const APPLY_PLACES = new Set(['page', 'row', 'quiz', 'combo', 'mine'])
 const APPLY_STATES = new Set(['saved', 'starter', 'new'])
+// Directory use since 2026-10-14, each with a required word from a fixed list:
+// which directory opened, which filter was used (never its value), and which
+// of Show more or Show all. Mirrors FILTER_USES in src/lib/events.ts.
+const REQUIRED_META: Record<string, Set<string>> = {
+  list_view: new Set(['scholarship', 'program']),
+  filter_use: new Set(['sort', 'category', 'region', 'status', 'school', 'town', 'format', 'search', 'reset']),
+  list_more: new Set(['more', 'all']),
+}
 // detail_view: whether this device first opened the site on an earlier day.
 const VISIT_KINDS = new Set(['new', 'back'])
 // How the walkthrough was opened: by itself on a first visit ('auto', until
@@ -108,12 +116,15 @@ export const POST: APIRoute = async ({ request }) => {
   // new or back for detail_view, how tour_open was opened, the step for
   // tour_step and tour_close, and the status for app_status; nothing else
   // takes a meta at all
-  const META_EVENTS = new Set(['search_empty', 'source_visit', 'save', 'apply_click', 'detail_view', 'tour_open', 'tour_step', 'tour_close', 'app_status'])
+  const META_EVENTS = new Set(['search_empty', 'source_visit', 'save', 'apply_click', 'detail_view', 'tour_open', 'tour_step', 'tour_close', 'app_status', ...Object.keys(REQUIRED_META)])
   if (meta !== undefined && (!META_EVENTS.has(event) || typeof meta !== 'string'))
     return jsonError('meta not allowed for this event', 400)
 
   let cleanMeta: string | null = null
-  if (event === 'source_visit') {
+  if (REQUIRED_META[event]) {
+    if (!REQUIRED_META[event]!.has(meta as string)) return jsonError('unknown directory word', 400)
+    cleanMeta = meta as string
+  } else if (event === 'source_visit') {
     // A source row with no source is just an untagged visit, which the page
     // views already count. Reject rather than store a null.
     if (typeof meta !== 'string' || !ALLOWED_SOURCES.has(meta))

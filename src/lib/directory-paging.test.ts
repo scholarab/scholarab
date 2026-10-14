@@ -2,7 +2,7 @@ import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { initDirectory } from './directory-client'
 import type { DirectoryItem } from './directory-client'
 
-vi.mock('./events.ts', () => ({ sendEvent: vi.fn() }))
+vi.mock('./events.ts', async importOriginal => ({ ...(await importOriginal<typeof import('./events.ts')>()), sendEvent: vi.fn() }))
 
 // The "Show more" step, at a page size of 2 so five cards cover every case:
 // a first step, a partial last step, a filter that fits in one step.

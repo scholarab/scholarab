@@ -361,6 +361,19 @@ describe('POST /api/event', () => {
     expect((await call({ event: 'save', itemType: 'scholarship', itemId: 5, meta: 'combo' })).status).toBe(204)
   })
 
+  it('records directory use with a word from each fixed list, and requires it', async () => {
+    for (const [event, meta] of [['list_view', 'program'], ['filter_use', 'town'], ['filter_use', 'search'], ['list_more', 'all']]) {
+      expect((await call({ event, meta })).status).toBe(204)
+      expect(mockValues).toHaveBeenLastCalledWith({ event, itemType: null, itemId: null, meta, device: 'phone' })
+    }
+    mockValues.mockClear()
+    expect((await call({ event: 'filter_use', meta: 'Calgary' })).status).toBe(400)
+    expect((await call({ event: 'filter_use' })).status).toBe(400)
+    expect((await call({ event: 'list_more', meta: 'some' })).status).toBe(400)
+    expect((await call({ event: 'list_view' })).status).toBe(400)
+    expect(mockValues).not.toHaveBeenCalled()
+  })
+
   it('accepts the How it works walkthrough events', async () => {
     for (const event of ['tour_open', 'tour_finish']) {
       const res = await call({ event })

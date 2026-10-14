@@ -2,7 +2,7 @@ import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { initDirectory } from './directory-client'
 import type { DirectoryItem } from './directory-client'
 
-vi.mock('./events.ts', () => ({ sendEvent: vi.fn() }))
+vi.mock('./events.ts', async importOriginal => ({ ...(await importOriginal<typeof import('./events.ts')>()), sendEvent: vi.fn() }))
 
 import { readListContext } from './list-context.ts'
 import { sendEvent } from './events.ts'
@@ -292,7 +292,7 @@ describe('initDirectory', () => {
     expect(btn.textContent).toBe('☆')
     expect(btn.getAttribute('aria-label')).toBe('Save Alpha Camp')
     // Un-saving is not an event: the metric counts people who shortlisted it
-    expect(sendEvent).toHaveBeenCalledTimes(1)
+    expect(vi.mocked(sendEvent).mock.calls.filter(c => c[0] === 'save')).toHaveLength(1)
   })
 
   it('paints previously saved ids on load', () => {
@@ -326,7 +326,7 @@ describe('initDirectory', () => {
     vi.useFakeTimers()
     await type('gamma')
     vi.advanceTimersByTime(1500)
-    expect(sendEvent).not.toHaveBeenCalled()
+    expect(sendEvent).not.toHaveBeenCalledWith('search_empty', undefined, undefined, expect.anything())
     vi.useRealTimers()
 
     // Typing again before the debounce fires cancels the pending event
@@ -335,7 +335,7 @@ describe('initDirectory', () => {
     vi.advanceTimersByTime(500)
     await type('')
     vi.advanceTimersByTime(2000)
-    expect(sendEvent).not.toHaveBeenCalled()
+    expect(sendEvent).not.toHaveBeenCalledWith('search_empty', undefined, undefined, expect.anything())
     vi.useRealTimers()
     history.replaceState(null, '', '/')
   })
@@ -555,3 +555,35 @@ describe('grouped grids', () => {
     expect(grid()).toEqual(['H:open', 'One', 'Two', 'H:closed', 'H:after'])
   })
 })
+
+describe('directory use counts', () => {
+  beforeEach(() => vi.mocked(sendEvent).mockClear())
+
+  it('counts the directory opening, the filter by name only, search, and Show more', () => {
+    setup()
+    expect(sendEvent).toHaveBeenCalledWith('list_view', undefined, undefined, 'scholarship')
+    selectFilter('category', 'Arts')
+    expect(sendEvent).toHaveBeenCalledWith('filter_use', undefined, undefined, 'category')
+    // What was picked never travels
+    expect(JSON.stringify(vi.mocked(sendEvent).mock.calls)).not.toContain('Arts')
+    const input = $('[data-dir-search]') as HTMLInputElement
+    input.value = 'ga'
+    input.dispatchEvent(new Event('input', { bubbles: true }))
+    expect(sendEvent).not.toHaveBeenCalledWith('filter_use', undefined, undefined, 'search')
+    input.value = 'gamma'
+    input.dispatchEvent(new Event('input', { bubbles: true }))
+    expect(sendEvent).toHaveBeenCalledWith('filter_use', undefined, undefined, 'search')
+    expect(JSON.stringify(vi.mocked(sendEvent).mock.calls.filter(c => c[0] === 'filter_use'))).not.toContain('gamma')
+  })
+
+  it('counts Show more and Show all apart', () => {
+    setup()
+    const root = $('#dir-root')
+    root.insertAdjacentHTML('beforeend', '<button type="button" data-dir-more-btn>Show more</button><button type="button" data-dir-all>Show all</button>')
+    click($('[data-dir-more-btn]'))
+    click($('[data-dir-all]'))
+    expect(sendEvent).toHaveBeenCalledWith('list_more', undefined, undefined, 'more')
+    expect(sendEvent).toHaveBeenCalledWith('list_more', undefined, undefined, 'all')
+  })
+})
+

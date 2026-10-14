@@ -78,6 +78,20 @@ describe('sendEvent', () => {
     expect(beaconCalls).toHaveLength(0)
   })
 
+  it('says so on screen when ?nt=1 changes the browser, and only then', () => {
+    document.getElementById('sa-toast')?.remove()
+    setSearch('?nt=1')
+    syncTrackingOptOut()
+    expect(document.getElementById('sa-toast')?.textContent).toBe('This browser is no longer counted')
+    document.getElementById('sa-toast')?.remove()
+    syncTrackingOptOut()
+    expect(document.getElementById('sa-toast')).toBeNull()
+    setSearch('?nt=0')
+    syncTrackingOptOut()
+    expect(document.getElementById('sa-toast')?.textContent).toBe('This browser is counted again')
+    document.getElementById('sa-toast')?.remove()
+  })
+
   it('opts back in from ?nt=0', () => {
     optOutOfEvents()
     setSearch('?nt=0')

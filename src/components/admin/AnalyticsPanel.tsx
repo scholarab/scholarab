@@ -68,6 +68,22 @@ const DEVICES: [string, string][] = [
   ['none', 'Not recorded (before Oct 14 2026)'],
 ]
 
+/** filter_use and list_more words, in the order the Directories table reads.
+    `always` rows show at 0; the rest only once someone has used them. */
+const DIRECTORY_USES: { event: string; key: string; label: string; always?: boolean }[] = [
+  { event: 'list_more', key: 'more', label: 'Pressed Show more', always: true },
+  { event: 'list_more', key: 'all', label: 'Pressed Show all', always: true },
+  { event: 'filter_use', key: 'search', label: 'Searched', always: true },
+  { event: 'filter_use', key: 'sort', label: 'Changed the sort', always: true },
+  { event: 'filter_use', key: 'category', label: 'Type or field', always: true },
+  { event: 'filter_use', key: 'town', label: 'Town' },
+  { event: 'filter_use', key: 'school', label: 'School' },
+  { event: 'filter_use', key: 'format', label: 'Format' },
+  { event: 'filter_use', key: 'region', label: 'Region' },
+  { event: 'filter_use', key: 'status', label: 'Status' },
+  { event: 'filter_use', key: 'reset', label: 'Cleared the filters' },
+]
+
 interface MetaRow { key: string; label: string; n: number }
 
 /** Rows for one labelled table, with each row's share. A "none" row shows only when it has rows. */
@@ -402,6 +418,16 @@ export default function AnalyticsPanel({ data }: Props) {
   }, [metaBy])
 
   const visits = useMemo(() => shareRows(metaBy.detail_view ?? {}, VISIT_KINDS), [metaBy])
+
+  // Directory use, each row a share of the people who opened a directory in
+  // the period. Every count is once per tab session.
+  const directories = useMemo(() => {
+    const opened = Object.values(metaBy.list_view ?? {}).reduce((a, b) => a + b, 0)
+    const rows = DIRECTORY_USES
+      .map(u => ({ key: `${u.event}:${u.key}`, label: u.label, n: metaBy[u.event]?.[u.key] ?? 0, always: u.always }))
+      .filter(r => r.always || r.n > 0)
+    return { opened, rows }
+  }, [metaBy])
 
   // Views, applies and saves per device class, and how often a view on each
   // one ends in Apply. Views carry no device before 2026-10-14, so the rate
@@ -755,6 +781,12 @@ export default function AnalyticsPanel({ data }: Props) {
           </div>
 
           <ShareTable title="Visits from our links" sub={periodLabel} rows={sources.rows} total={sources.total} attr="data-source-table" />
+
+          <ShareTable
+            title="Directories"
+            sub={`${periodLabel}, share of the ${n(directories.opened)} who opened one`}
+            rows={directories.rows} total={directories.opened} attr="data-directory-table"
+          />
 
           {/* How it works */}
           <div className="adm-block">

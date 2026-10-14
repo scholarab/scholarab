@@ -282,4 +282,26 @@ describe('AnalyticsPanel', () => {
       ['Tablet', '0', '0%', '0', '·', '0'],
     ])
   })
+
+  it('reads directory use as a share of the people who opened one', () => {
+    const withLists = { ...data, byMeta: [
+      { month: '2026-10', event: 'list_view', meta: 'scholarship', n: 80 },
+      { month: '2026-10', event: 'list_view', meta: 'program', n: 20 },
+      { month: '2026-10', event: 'list_more', meta: 'more', n: 25 },
+      { month: '2026-10', event: 'filter_use', meta: 'search', n: 40 },
+      { month: '2026-10', event: 'filter_use', meta: 'town', n: 5 },
+    ] }
+    render(<AnalyticsPanel data={withLists} />)
+    expect(screen.getByText(/share of the 100 who opened one/)).toBeTruthy()
+    const rows = [...document.querySelector('[data-directory-table]')!.querySelectorAll('tr')]
+      .map(r => [...r.querySelectorAll('td')].map(c => c.textContent))
+    expect(rows).toEqual([
+      ['Pressed Show more', '25', '25%'],
+      ['Pressed Show all', '0', '0%'],
+      ['Searched', '40', '40%'],
+      ['Changed the sort', '0', '0%'],
+      ['Type or field', '0', '0%'],
+      ['Town', '5', '5%'],
+    ])
+  })
 })
