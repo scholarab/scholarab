@@ -71914,7 +71914,7 @@
     "lastVerified": "2026-10",
     "region": "Alberta",
     "notes": "You need a physical disability that requires a mobility aid such as a wheelchair, walker or power scooter, and you must be accepted to or enrolled in an Alberta post-secondary diploma or degree program taking at least two courses a term. Fill in the online form, then email a character reference, an academic reference from a teacher, a one-page personal letter about your school experience and goals, a certified transcript and a note from your healthcare provider confirming the diagnosis to Scholarships@easterseals.ab.ca. Applications open March 1 and close June 30 at midnight. To keep the money for all four years you send a new letter, a current transcript and proof of enrolment each year.",
-    "active": null,
+    "active": true,
     "description": "Easter Seals Alberta pays $5,000 a year for up to four years to an Alberta student with a physical disability who uses a mobility aid and is heading to college or university in Alberta.",
     "metaDetail": "Renewable for up to four years.",
     "eligibility": {
@@ -71938,7 +71938,8 @@
       "citizenship": "any",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "openDate": "2027-03-01"
   },
   {
     "id": 1947,
@@ -71952,7 +71953,7 @@
     "lastVerified": "2026-10",
     "region": "Alberta",
     "notes": "You must live with a disability and be a current student or applicant at an Alberta post-secondary school, taking at least two courses a term toward a diploma or degree. The committee looks for a real record of volunteering or disability advocacy, so describe it in your one-page personal letter. Complete the online form and email a character reference, an academic reference, the personal letter, a certified transcript and confirmation of your diagnosis from a healthcare provider to Scholarships@easterseals.ab.ca by June 30 at midnight. The money can only go to tuition, books, technology and other school costs.",
-    "active": null,
+    "active": true,
     "description": "Two $5,000 scholarships a year from Easter Seals Alberta for students living with a disability who have made a mark through volunteering or advocacy and are heading to post-secondary in Alberta.",
     "metaDetail": "Two awards a year.",
     "eligibility": {
@@ -71978,7 +71979,8 @@
       "extracurriculars": [
         "Volunteering"
       ]
-    }
+    },
+    "openDate": "2027-03-01"
   },
   {
     "id": 1948,
@@ -71992,7 +71994,7 @@
     "lastVerified": "2026-10",
     "region": "Alberta",
     "notes": "Open to Alberta residents with a documented disability starting or continuing an undergraduate or graduate degree at an accredited school. Priority goes to students from rural or underserved parts of Alberta and to first-year students, and the committee also weighs community work supporting people with disabilities. The money can cover school costs plus disability expenses such as equipment, transportation or personal support. Send the online form, two references, a one-page personal letter, a certified transcript and proof of disability to Scholarships@easterseals.ab.ca by June 30 at midnight.",
-    "active": null,
+    "active": true,
     "description": "Easter Seals Alberta gives $5,000 a year to Alberta students with a disability, as two $2,500 awards or one $5,000 award, with priority for rural students in their first year.",
     "metaDetail": "First-year rural students come first.",
     "eligibility": {
@@ -72016,7 +72018,8 @@
       "citizenship": "any",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "openDate": "2027-03-01"
   },
   {
     "id": 1949,
@@ -72030,7 +72033,7 @@
     "lastVerified": "2026-10",
     "region": "Alberta",
     "notes": "You must live in Alberta, live with a disability and be enrolled or planning to enroll in an Alberta college, university, vocational or trades program. Fill in the Easter Seals online form and email a one-page letter about your goals, effort, activities, challenges and financial need, a recent photo, confirmation of your diagnosis from a healthcare provider and proof of fall enrolment to Scholarships@easterseals.ab.ca. Applications open March 1 and close June 30 at midnight. The winner is also matched with a volunteer mentor to help prepare for work.",
-    "active": null,
+    "active": true,
     "description": "Easter Seals Alberta and Sun Life give one $2,000 scholarship a year to an Alberta student with a disability who is moving into post-secondary or trades training.",
     "metaDetail": "Comes with a volunteer mentor.",
     "eligibility": {
@@ -72054,7 +72057,8 @@
       "citizenship": "any",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "openDate": "2027-03-01"
   },
   {
     "id": 1950,
