@@ -19,6 +19,8 @@ export interface ScholarshipWithMeta extends Scholarship {
   _deadline_formatted?: string | null;
   /** The school a school award is for; the client reads it off the row. */
   _school?: string | null;
+  /** Area hubs: every town the award reaches, read from the row (data-towns). */
+  _towns?: string[];
 }
 
 export type { ScholarshipStatus };
@@ -86,6 +88,8 @@ export interface ScholarshipFilterState {
   selectedRegion: RegionKey | null;
   /** University & college awards page only: one school, or 'all'. */
   selectedSchool?: string;
+  /** Area hubs (several towns on one page): one or more towns, or 'all'. */
+  selectedTown?: string;
   searchQuery: string;
   sortBy: ScholarshipSort;
 }
@@ -123,7 +127,7 @@ export const DEFAULT_SCHOLARSHIP_STATE: ScholarshipFilterState = {
  */
 export function selectScholarships(
   initialScholarships: ScholarshipWithMeta[],
-  { statusFilter, selectedCategory, selectedRegion, selectedSchool = 'all', searchQuery }: ScholarshipFilterState,
+  { statusFilter, selectedCategory, selectedRegion, selectedSchool = 'all', selectedTown = 'all', searchQuery }: ScholarshipFilterState,
   statusCache: Map<number, ScholarshipStatus> = buildScholarshipStatusCache(initialScholarships),
 ): ScholarshipWithMeta[] {
   const pool = statusFilter === 'closed'
@@ -138,10 +142,14 @@ export function selectScholarships(
   const afterSchool = schools === null
     ? pool
     : pool.filter(s => schools.includes(s._school ?? schoolOf(s) ?? ''));
+  const towns = picksOf(selectedTown);
+  const afterTown = towns === null
+    ? afterSchool
+    : afterSchool.filter(s => (s._towns ?? [s.region, ...(s.alsoOpenTo ?? [])]).some(t => towns.includes(t ?? '')));
   const categories = picksOf(selectedCategory);
   const afterCategory = categories === null
-    ? afterSchool
-    : afterSchool.filter(s => categories.includes(s.category ?? ''));
+    ? afterTown
+    : afterTown.filter(s => categories.includes(s.category ?? ''));
   const afterRegion = selectedRegion === null
     ? afterCategory
     : afterCategory.filter(s => regionMatches(selectedRegion, s));

@@ -255,6 +255,19 @@ describe('filterSortScholarships', () => {
     expect(ids(filterSortScholarships(items, state({ statusFilter: 'closed' })))).toEqual([1])
   })
 
+  it('town filter keeps awards that reach any picked town, from the row or the data', () => {
+    const items = [
+      makeScholarship({ id: 1, region: 'Lacombe', _deadline_ms: FUTURE_MS }),
+      makeScholarship({ id: 2, region: 'Camrose', alsoOpenTo: ['Lacombe'], _deadline_ms: FUTURE_MS }),
+      makeScholarship({ id: 3, region: 'Wetaskiwin', _deadline_ms: FUTURE_MS }),
+      makeScholarship({ id: 4, region: 'Red Deer', _towns: ['Red Deer', 'Wetaskiwin'], _deadline_ms: FUTURE_MS }),
+    ]
+    expect(ids(filterSortScholarships(items, state({ selectedTown: 'Lacombe' }))).sort()).toEqual([1, 2])
+    expect(ids(filterSortScholarships(items, state({ selectedTown: 'Wetaskiwin' }))).sort()).toEqual([3, 4])
+    expect(ids(filterSortScholarships(items, state({ selectedTown: 'Lacombe|Wetaskiwin' }))).sort()).toEqual([1, 2, 3, 4])
+    expect(ids(filterSortScholarships(items, state({ selectedTown: 'all' })))).toHaveLength(4)
+  })
+
   it('region filters: Medicine Hat exact, Alberta-wide includes provincial cities, National includes International', () => {
     const items = [
       makeScholarship({ id: 1, region: 'Medicine Hat', _deadline_ms: FUTURE_MS }),

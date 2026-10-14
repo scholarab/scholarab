@@ -176,6 +176,16 @@ const schoolCounts = new Map<string, number>();
 if (schoolFilter) for (const s of items) { const k = schoolOf(s); if (k) schoolCounts.set(k, (schoolCounts.get(k) ?? 0) + 1); }
 const schools = [...schoolCounts.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
 
+// Area hubs roll several towns into one page, so a Town picker narrows it to
+// one (Ilia, 2026-10-13). Only towns with awards here, and only when there are
+// two or more of them: Southern Alberta is Brooks alone.
+const reachOf = (s: ScholarshipWithMeta) => [s.region, ...(s.alsoOpenTo ?? [])].filter((t): t is string => !!t);
+const townCounts = (towns ?? [])
+  .map(t => ({ t, n: items.filter(s => reachOf(s).includes(t)).length }))
+  .filter(x => x.n > 0)
+  .sort((a, b) => b.n - a.n || a.t.localeCompare(b.t));
+const townFilter = townCounts.length >= 2;
+
 const counts = new Map<string, number>();
 for (const s of items) if (s.category) counts.set(s.category, (counts.get(s.category) ?? 0) + 1);
 const categories = [...counts.entries()].sort((a, b) => b[1] - a[1]).map(([name]) => name);
@@ -240,6 +250,10 @@ const openNow = openNowCount(initial);
     {schoolFilter && <SabFilterSelect label="School" filterKey="school" options={[
       { value: 'all', label: 'All schools', count: items.length },
       ...schools.map(([name, count]) => ({ value: name, label: name, count })),
+    ]} />}
+    {townFilter && <SabFilterSelect label="Town" filterKey="town" options={[
+      { value: 'all', label: 'All towns', count: items.length },
+      ...townCounts.map(({ t, n }) => ({ value: t, label: t, count: n })),
     ]} />}
     {!hideCategories && <SabFilterSelect label="Type" filterKey="category" options={[
       { value: 'all', label: 'All types', count: items.length },
@@ -336,6 +350,7 @@ const openNow = openNowCount(initial);
           data-category={s.category ?? undefined}
           data-region={s.region ?? undefined}
           data-school={schoolFilter ? schoolOf(s) ?? undefined : undefined}
+          data-towns={townFilter ? reachOf(s).join('|') : undefined}
           data-amount={String(s._amount ?? 0)}
           data-deadline={s.deadline ?? undefined}
           data-open-date={s.openDate ?? undefined}
@@ -428,7 +443,7 @@ const openNow = openNowCount(initial);
 
   // `name` mirrors the card title for the DirectoryItem contract (save labels)
   type Item = ScholarshipWithMeta & { el: HTMLElement; search: string; name: string; scopes: string[] };
-  type State = { sort: string; category: string; region: string; status: string; school: string };
+  type State = { sort: string; category: string; region: string; status: string; school: string; town: string };
 
   type Cache = Map<number, ScholarshipStatus>;
 
@@ -438,13 +453,14 @@ const openNow = openNowCount(initial);
     selectedCategory: state.category,
     selectedRegion: (state.region || null) as RegionKey | null,
     selectedSchool: state.school,
+    selectedTown: state.town,
     searchQuery: '',
     sortBy: state.sort as ScholarshipSort,
   });
 
   initDirectory<Item, State, Cache>('#sab-scholarships', {
     itemType: 'scholarship',
-    defaultState: { sort: DEFAULT_SCHOLARSHIP_STATE.sortBy, category: 'all', region: '', status: 'all', school: 'all' },
+    defaultState: { sort: DEFAULT_SCHOLARSHIP_STATE.sortBy, category: 'all', region: '', status: 'all', school: 'all', town: 'all' },
     parseCard(el) {
       const d = el.dataset;
       return {
@@ -456,6 +472,7 @@ const openNow = openNowCount(initial);
         category: d.category ?? null,
         region: d.region ?? null,
         _school: d.school ?? null,
+        _towns: d.towns ? d.towns.split('|') : undefined,
         deadline: d.deadline ?? null,
         openDate: d.openDate ?? null,
         _amount: Number(d.amount ?? 0),
