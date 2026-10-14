@@ -47,7 +47,7 @@ function shownRuns(visible: typeof items, shown: number) {
   return runs.filter(r => {
     if (SHUT.has(r.key)) return true;
     const start = at; at += r.count; return start < shown;
-  }).map(r => `${r.label} ${r.count}`);
+  }).map(r => `${r.label} ${r.count.toLocaleString('en-CA')}`);
 }
 const unique = items.find(s => items.filter(x => scholarshipSearchBlob(x).includes(normalizeSearchQuery(s.title))).length === 1)!;
 const query = unique.title;
