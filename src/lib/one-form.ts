@@ -68,6 +68,10 @@ export const ONE_FORMS = {
     form: 'Spruce Grove Composite awards form',
     text: "Spruce Grove Composite uses one Awards Application Form for all of its grade 12 awards, plus a Teacher Endorsement Form, both filed with Student Services. The 2026 cycle closed April 17 at 4pm, and the school sets a new mid-April date each year, so ask Student Services for this year's.",
   },
+  ualberta: {
+    form: 'University of Alberta entrance award application',
+    text: "Apply for admission to the University of Alberta first. Then sign in to the Awards Hub with your CCID and complete two forms, the General Application and the Entrance Scholarship Application. They open each year on October 1 and close in mid-January, January 10 for fall 2027 entry, and they put you in the running for every entrance award you qualify for. Applications cannot be changed or reopened after the deadline.",
+  },
   brooks: {
     form: 'Brooks Composite awards form',
     text: 'Brooks Composite High School collects these applications, not the sponsors, on a Google Doc only Grasslands students can open. The handbook publishes no closing dates, so ask the BCHS office in the fall.',

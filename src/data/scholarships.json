@@ -76026,5 +76026,2935 @@
       "apprenticeship": false,
       "extracurriculars": []
     }
+  },
+  {
+    "id": 2050,
+    "title": "City of Edmonton Entrance Scholarship (University of Alberta)",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01",
+    "audience": "Edmonton residents entering first year at the University of Alberta with top marks",
+    "url": "https://alberta.academicworks.ca/opportunities/26888",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "Edmonton",
+    "notes": "Your permanent home must be in the City of Edmonton. Selection rests on superior academic achievement.",
+    "active": true,
+    "description": "The City of Edmonton endowed this University of Alberta entrance scholarship for top students who live in Edmonton.",
+    "metaDetail": "For Edmonton residents.",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2051,
+    "title": "Peace River Pioneer Memorial Scholarships",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01",
+    "audience": "Peace Country students entering first year at the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/26895",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "Alberta",
+    "localArea": "Peace Country, north of township 68 and west of the 5th meridian",
+    "notes": "Your home must lie north of township 68 and west of the 5th meridian, which takes in the Peace Country. Admission average decides it, and students with financial need get preference.",
+    "active": true,
+    "description": "Endowed by Charles Plavin of North Star, these University of Alberta entrance scholarships go to students from northwestern Alberta.",
+    "metaDetail": "For Peace Country homes.",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2052,
+    "title": "Rosa H Wolters Entrance Scholarship",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01",
+    "audience": "M.D. of Vermilion River high school graduates entering the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/26900",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "Alberta",
+    "localArea": "M.D. of Vermilion River high school graduates",
+    "notes": "You must graduate from a high school in the Municipal District of Vermilion River No. 24. The winner is the applicant with the highest admission average.",
+    "active": true,
+    "description": "A University of Alberta entrance scholarship endowed by Rosa Wolters for a graduate of a Vermilion River high school.",
+    "metaDetail": "For Vermilion River graduates.",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2053,
+    "title": "Robert Tegler Entrance Scholarships",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01",
+    "audience": "Canadian citizens or permanent residents who did Grades 10 to 12 in Alberta, with financial need, entering the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/26902",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must have completed Grades 10, 11 and 12 in Alberta. Selection weighs your admission average together with financial need you show in the application.",
+    "active": true,
+    "description": "The Robert Tegler Trust funds University of Alberta entrance scholarships for Alberta-schooled students who need the money.",
+    "metaDetail": "Marks plus need.",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2054,
+    "title": "Bill Swift Memorial Scholarship",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01",
+    "audience": "Alberta high school graduates entering first-year Education at the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/26916",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Only students admitted to the Bachelor of Education from an Alberta high school qualify. The highest admission average wins.",
+    "active": true,
+    "description": "The Education Society of Edmonton funds this University of Alberta entrance scholarship for a future teacher.",
+    "metaDetail": "For future teachers.",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Education"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2055,
+    "title": "Dr Eric Newell Entrance Scholarship in Engineering",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01",
+    "audience": "Grade 12 students entering first-year Engineering at the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/26956",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Selection weighs your admission average and the financial need you report.",
+    "active": true,
+    "description": "Former Syncrude chief Eric Newell endowed this University of Alberta entrance scholarship for first-year engineering students.",
+    "metaDetail": "Marks plus need.",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Engineering"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2056,
+    "title": "Bev Snyder Engineering Scholarship",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01",
+    "audience": "Alberta high school graduates entering first-year Engineering at the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/26958",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must be an Alberta high school graduate admitted to first-year Engineering. The award follows your admission average.",
+    "active": true,
+    "description": "Jean Snyder endowed this University of Alberta engineering entrance scholarship in honour of her husband, a 1931 civil engineering graduate.",
+    "metaDetail": "For Alberta engineering entrants.",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Engineering"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2057,
+    "title": "Edmonton 2001 Sport Performance Entrance Scholarship",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01",
+    "audience": "Grade 12 students entering first-year Kinesiology or Physical Education at the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/26993",
+    "category": "Sports",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Selection weighs your admission average and your involvement in improving sport performance. Applicants interested in sport nutrition and ergogenic aids get preference.",
+    "active": true,
+    "description": "Left by the organizers of a sport nutrition conference held alongside the 2001 World Championships in Athletics, this award helps a first-year kinesiology student.",
+    "metaDetail": "Sport nutrition interest helps.",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Kinesiology"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2058,
+    "title": "Mary H Corns and Sons Memorial Scholarship in Nursing",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01",
+    "audience": "Grade 12 students entering first-year Nursing at the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/26995",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "The winner is chosen on admission average, and financial need gets preference.",
+    "active": true,
+    "description": "Dr. William Corns endowed this University of Alberta nursing entrance scholarship in memory of his family.",
+    "metaDetail": "Need gets preference.",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Nursing"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2059,
+    "title": "Kay Kirby Pullen Entrance Scholarship in Nursing",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01",
+    "audience": "Rural Alberta high school graduates entering first-year Nursing at the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/26999",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "Alberta",
+    "localArea": "Rural Alberta high school graduates",
+    "notes": "You must graduate from a rural, non-metropolitan Alberta high school. Your work, volunteer and leadership experience count alongside your admission average.",
+    "active": true,
+    "description": "Registered nurse Kay Kirby Pullen endowed this University of Alberta entrance scholarship for nursing students from rural Alberta.",
+    "metaDetail": "For rural nursing entrants.",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Nursing"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteering"
+      ]
+    }
+  },
+  {
+    "id": 2060,
+    "title": "Mama Lu Rising Star Science Entrance Scholarship",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01",
+    "audience": "Alberta residents entering Science at the University of Alberta within a year of finishing high school",
+    "url": "https://alberta.academicworks.ca/opportunities/27011",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must start within one year of finishing high school and live in Alberta. Your admission average decides it.",
+    "active": true,
+    "description": "Dr. Benjamin Lu endowed this University of Alberta science entrance scholarship in memory of his mother.",
+    "metaDetail": "Start within a year of graduating.",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Science"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2061,
+    "title": "Donald Scobie Memorial Entrance Scholarship",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01",
+    "audience": "Grade 12 students entering Chemistry or Biological Sciences honours or specialization at the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27012",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must enter a specialization or honours program in Chemistry or Biological Sciences. Students involved in music or other arts get preference.",
+    "active": true,
+    "description": "Friends and family of Donald Scobie fund this University of Alberta entrance scholarship for science students who also love the arts.",
+    "metaDetail": "Music or art involvement helps.",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Chemistry",
+        "Biology"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2062,
+    "title": "APEGA Education Foundation Award in Engineering",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01",
+    "audience": "Grade 12 students entering first-year Engineering at the University of Alberta with financial need",
+    "url": "https://alberta.academicworks.ca/opportunities/27022",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Satisfactory marks are enough to qualify. Selection then weighs your admission average and your financial need.",
+    "active": true,
+    "description": "The APEGA Education Foundation, set up by Alberta's engineering regulator, funds this University of Alberta entrance award.",
+    "metaDetail": "Need weighs in.",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Engineering"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2063,
+    "title": "Cheryl and Norma Harbottle Scholarship",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01",
+    "audience": "Grade 12 students entering Education or Agricultural, Life and Environmental Sciences at the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27036",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must enter the Faculty of Education or the Faculty of Agricultural, Life and Environmental Sciences. Students from rural areas get preference.",
+    "active": true,
+    "description": "Cheryl and Norma Harbottle endowed this University of Alberta entrance scholarship for future teachers and agriculture or environment students.",
+    "metaDetail": "Rural students get preference.",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Education",
+        "Agriculture"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2064,
+    "title": "Spirit of Ukraine Award",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01",
+    "audience": "Students with financial need entering the University of Alberta, refugees and protected persons first",
+    "url": "https://alberta.academicworks.ca/opportunities/27052",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Satisfactory marks qualify you. Selection weighs financial need, and refugees and protected persons in Canada get preference.",
+    "active": true,
+    "description": "Named in honour of the people of Ukraine, this University of Alberta entrance award supports students who need the money, especially those who came to Canada as refugees.",
+    "metaDetail": "Refugees get preference.",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2065,
+    "title": "Frederick KF Wong Memorial Entrance Scholarship in Science",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01",
+    "audience": "Grade 12 students entering first-year Science at the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27060",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Selection weighs your admission average and your leadership, volunteering and activities. Students with a real passion for the outdoors get preference.",
+    "active": true,
+    "description": "James and Maria Wong endowed this University of Alberta science entrance scholarship in memory of their son Frederick.",
+    "metaDetail": "Outdoor lovers get preference.",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Science"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteering"
+      ]
+    }
+  },
+  {
+    "id": 2066,
+    "title": "Wayne A Davis Memorial Scholarship",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01",
+    "audience": "Fort Macleod high school graduates entering Science or Engineering at the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27066",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "Alberta",
+    "localArea": "Fort Macleod high school graduates",
+    "notes": "You must graduate from a high school in Fort Macleod. Selection weighs your admission average and your leadership and community involvement.",
+    "active": true,
+    "description": "A bequest from Professor Emeritus Wayne Davis funds this University of Alberta entrance scholarship for Fort Macleod students.",
+    "metaDetail": "For Fort Macleod graduates.",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Science",
+        "Engineering"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2067,
+    "title": "Harry Buhler Entrance Scholarship in Business",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01",
+    "audience": "Grade 12 students entering the Alberta School of Business",
+    "url": "https://alberta.academicworks.ca/opportunities/27067",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Selection weighs your admission average and your leadership and involvement. Students with a record of entrepreneurial projects get preference.",
+    "active": true,
+    "description": "All Weather Windows funds this Alberta School of Business entrance scholarship in memory of its founder, Harry Buhler.",
+    "metaDetail": "Young entrepreneurs get preference.",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Business",
+        "Entrepreneurship"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2068,
+    "title": "Kathryn O'Donoghue Ward Memorial Scholarship",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01",
+    "audience": "Grade 12 students entering Computing Science at the University of Alberta, women first",
+    "url": "https://alberta.academicworks.ca/opportunities/27068",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Academic achievement decides the winner, and women get preference.",
+    "active": true,
+    "description": "Friends and family of Kathryn O'Donoghue Ward fund this University of Alberta computing science entrance scholarship.",
+    "metaDetail": "Women get preference.",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Computer Science"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2069,
+    "title": "Charlotte A and J Garner Caddel Memorial Leadership Scholarship",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01",
+    "audience": "Strathcona County high school graduates entering first year at the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27069",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "Sherwood Park",
+    "notes": "You must graduate from a high school in Strathcona County. Selection weighs your admission average and the leadership you show in activities and community service.",
+    "active": true,
+    "description": "The Caddel family endowed this University of Alberta entrance scholarship for a Strathcona County graduate who leads.",
+    "metaDetail": "For Strathcona County graduates.",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteering"
+      ]
+    }
+  },
+  {
+    "id": 2070,
+    "title": "Jason Wong and Yim Ning Yeung Entrance Award in Business",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01",
+    "audience": "Grade 12 students with financial need entering the Alberta School of Business",
+    "url": "https://alberta.academicworks.ca/opportunities/27074",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Satisfactory marks qualify you, and selection weighs financial need. First-generation Canadian citizens, permanent residents and refugees get preference.",
+    "active": true,
+    "description": "Jason Wong and Yim Ning Yeung endowed this Alberta School of Business entrance award for students who need support.",
+    "metaDetail": "Newcomer families get preference.",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Business"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2071,
+    "title": "Jake and Ruth Superstein Leadership Scholarship",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01",
+    "audience": "Alberta high school graduates with a record of community service entering the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27075",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Selection weighs leadership and social conscience shown through community service or charity work, plus your admission average. Students with financial need get preference.",
+    "active": true,
+    "description": "The Alexander family endowed this University of Alberta entrance scholarship to honour Jake Superstein, a former member of the university's Board of Governors, and his wife Ruth.",
+    "metaDetail": "Community service counts most.",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteering"
+      ]
+    }
+  },
+  {
+    "id": 2072,
+    "title": "Adele MacInnis Memorial Leadership Scholarships",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01",
+    "audience": "Rural Alberta residents entering the University of Alberta from a rural high school",
+    "url": "https://alberta.academicworks.ca/opportunities/27085",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "Alberta",
+    "localArea": "Rural Alberta high school graduates",
+    "notes": "You must live in rural Alberta and come from a rural Alberta high school. Selection weighs your admission average and leadership, and financial need gets preference.",
+    "active": true,
+    "description": "The MacInnis family endowed these University of Alberta entrance scholarships for rural students who lead.",
+    "metaDetail": "For rural Albertans.",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteering"
+      ]
+    }
+  },
+  {
+    "id": 2073,
+    "title": "Hu Harries Memorial Entrance Leadership Awards",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01",
+    "audience": "YMCA or YWCA volunteers entering the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27086",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must be or have been a volunteer with the YMCA, YWCA or a similar organization. Selection looks at academic promise, leadership and social conscience, and need may count.",
+    "active": true,
+    "description": "Friends of Hu Harries, the first Dean of Commerce, endowed these University of Alberta awards for students who volunteer.",
+    "metaDetail": "For Y volunteers.",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteering"
+      ]
+    }
+  },
+  {
+    "id": 2074,
+    "title": "Gwen J and NK Found Scholarship",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01",
+    "audience": "Grade 12 students entering first-year Engineering at the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27089",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must come straight from high school. Selection weighs leadership in activities and community along with your admission average.",
+    "active": true,
+    "description": "Gwen and N.K. Found endowed this University of Alberta engineering entrance scholarship for students who lead.",
+    "metaDetail": "Leadership plus marks.",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Engineering"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteering"
+      ]
+    }
+  },
+  {
+    "id": 2075,
+    "title": "Dana Morimoto Memorial Entrance Leadership Scholarship",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01",
+    "audience": "Grade 12 students entering the University of Alberta, northern Alberta and Métis students first",
+    "url": "https://alberta.academicworks.ca/opportunities/27095",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Selection weighs your admission average and your activities and community leadership. Graduates of Alberta high schools north of metro Edmonton and Métis students get preference.",
+    "active": true,
+    "description": "Kim and Tom Morimoto endowed this University of Alberta entrance scholarship in memory of their son Dana.",
+    "metaDetail": "Northern grads get preference.",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2076,
+    "title": "Edmonton Musical Club Scholarship in Music",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01",
+    "audience": "Alberta high school graduates entering the Bachelor of Music at the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27096",
+    "category": "Arts",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must come from an Alberta high school and enter the Bachelor of Music. Academic achievement decides it.",
+    "active": true,
+    "description": "The Edmonton Musical Club left this University of Alberta music entrance scholarship when it dissolved in 1973.",
+    "metaDetail": "For Bachelor of Music entrants.",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Music"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2077,
+    "title": "Jean Patoine Scholarship",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01",
+    "audience": "Albertans whose first language is French entering Campus Saint-Jean",
+    "url": "https://alberta.academicworks.ca/opportunities/27101",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must be an Albertan whose first language is French. Selection weighs academics and extracurricular involvement, and the value can differ by recipient.",
+    "active": true,
+    "description": "The Fonds Jean Patoine and Club Richelieu set up this Campus Saint-Jean entrance scholarship for francophone students.",
+    "metaDetail": "For French first-language students.",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "French"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2078,
+    "title": "Virgin Radio 104.9 Award",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01",
+    "audience": "Grade 12 musicians entering the Bachelor of Music at the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27109",
+    "category": "Arts",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Your Bachelor of Music audition is what counts, so it goes to the most promising performer.",
+    "active": true,
+    "description": "Virgin Radio 104.9 in Edmonton endowed this University of Alberta award for incoming music students.",
+    "metaDetail": "Decided by your audition.",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Music"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2079,
+    "title": "Vera Richards Macdonald Entrance Leadership Scholarship",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01",
+    "audience": "Alberta residents entering Human Ecology or Nutrition and Food Science at the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27123",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must plan to study clothing and textiles or human nutrition. Selection weighs interpersonal skills, leadership and grades, and a willingness to work in rural Alberta helps.",
+    "active": true,
+    "description": "This University of Alberta entrance scholarship backs future dietitians and textile specialists who may serve rural Alberta.",
+    "metaDetail": "Rural work interest helps.",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Human Ecology",
+        "Nutrition"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2080,
+    "title": "Bar None Entrance Leadership Awards (University of Alberta)",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01",
+    "audience": "Grade 12 students entering Agriculture, Animal Health or Nutrition and Food Science at the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27125",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Several Bar None awards and scholarships come from the same pool, and you can hold only one in a year. Selection weighs leadership in activities and community along with academics, and financial need or a rural home gets preference for some of them.",
+    "active": true,
+    "description": "Agriculture and nutrition alumni fund a family of Bar None entrance awards for first-year students in the University of Alberta's agriculture faculty.",
+    "metaDetail": "One Bar None award per student.",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Agriculture",
+        "Animal Health",
+        "Nutrition"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "4-H",
+        "volunteering"
+      ]
+    }
+  },
+  {
+    "id": 2081,
+    "title": "Serecon Scholarship in Memory of Don Hoover and Bruce Simpson",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01",
+    "audience": "Grade 12 students entering Agriculture or Animal Health at the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27129",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Selection weighs your admission average and your leadership and involvement. Students heading for Agricultural and Food Business Management get preference.",
+    "active": true,
+    "description": "Ag consulting firm Serecon funds this University of Alberta entrance scholarship in memory of two colleagues.",
+    "metaDetail": "Ag business students get preference.",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Agriculture",
+        "Agricultural Business"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2082,
+    "title": "Robert Spence Foundation Award",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01",
+    "audience": "Alberta residents with a 70% average entering the University of Alberta from high school",
+    "url": "https://alberta.academicworks.ca/opportunities/27133",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You need at least 70%, and financial need gets preference. The award is run through Campus Saint-Jean, which also opens it to its continuing students.",
+    "active": true,
+    "description": "The Robert Spence Foundation endowed this Campus Saint-Jean award for Albertans entering from high school or continuing there.",
+    "metaDetail": "70% plus need.",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [],
+      "minAverage": 70,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2083,
+    "title": "Francis Charles Lynch-Staunton Memorial Entrance Leadership Scholarship",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01",
+    "audience": "Grade 12 students entering Agriculture or Animal Health at the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27134",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Selection weighs leadership in activities and community along with academics. You can keep it for second year with a 3.5 GPA.",
+    "active": true,
+    "description": "This renewable University of Alberta entrance scholarship honours former Lieutenant Governor Francis Lynch-Staunton.",
+    "metaDetail": "Renewable for second year.",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Agriculture",
+        "Animal Health"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteering"
+      ]
+    }
+  },
+  {
+    "id": 2084,
+    "title": "David Butchart Pope Entrance Leadership Scholarship",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01",
+    "audience": "Alberta residents entering Agricultural, Life and Environmental Sciences at the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27139",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must plan to take agriculture or human ecology courses after first year. Leadership counts, students from rural farm families get preference, and it renews for second year with strong marks.",
+    "active": true,
+    "description": "A renewable University of Alberta entrance scholarship for Albertans heading into agriculture or human ecology.",
+    "metaDetail": "Farm families get preference.",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Agriculture",
+        "Human Ecology"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "4-H"
+      ]
+    }
+  },
+  {
+    "id": 2085,
+    "title": "University Hospital Nursing Class of January 1959 Scholarship",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01",
+    "audience": "Grade 12 students entering first-year Nursing at the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27143",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Commitment to nursing and financial need get preference. It renews for up to three more years if your marks stay high and the need remains.",
+    "active": true,
+    "description": "Nurses who graduated from the University Hospital in January 1959 fund this renewable University of Alberta nursing scholarship.",
+    "metaDetail": "Renewable for four years.",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Nursing"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2086,
+    "title": "Ruth Renner Scholarship in Human Nutrition",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01",
+    "audience": "Grade 12 students entering Nutrition and Food Science at the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27147",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Financial need gets preference. It renews up to three times with a 3.5 GPA.",
+    "active": true,
+    "description": "Former nutrition professor Ruth Renner endowed this renewable University of Alberta entrance scholarship.",
+    "metaDetail": "Renewable with a 3.5 GPA.",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Nutrition"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2087,
+    "title": "Chelsy Shillington Memorial Leadership Entrance Award",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01",
+    "audience": "Grade 12 students entering Environmental and Conservation Sciences at the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27158",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Selection rests on your leadership in activities and community. Students with past or planned international volunteer or work experience get preference.",
+    "active": true,
+    "description": "Family and friends of Chelsy Shillington fund this University of Alberta award in her memory.",
+    "metaDetail": "International volunteering helps.",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Environmental Science"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteering"
+      ]
+    }
+  },
+  {
+    "id": 2088,
+    "title": "CNFS Bilingual Nursing Entrance Award",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01",
+    "audience": "Grade 12 students entering the Bilingual Nursing degree at Campus Saint-Jean",
+    "url": "https://alberta.academicworks.ca/opportunities/27159",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "First-year entrants get preference over transfer students.",
+    "active": true,
+    "description": "The Consortium national de formation en santé funds this Campus Saint-Jean award for bilingual nursing students.",
+    "metaDetail": "For bilingual nursing entrants.",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Nursing",
+        "French"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2089,
+    "title": "Dr. Marguerite Lambert Leng WISEST Rising Star Scholarship",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01",
+    "audience": "WISEST Summer Research Program alumni entering Biochemistry or Chemistry at the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27161",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must have taken part in the WISEST Summer Research Program and plan an honours or specialization in Biochemistry, or Chemistry if no biochemistry candidate qualifies.",
+    "active": true,
+    "description": "Dr. Marguerite Lambert Leng endowed this University of Alberta entrance scholarship for WISEST summer researchers.",
+    "metaDetail": "For WISEST alumni.",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Chemistry",
+        "Biochemistry"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2090,
+    "title": "Professor Bayard Reesor Political Studies Entrance Scholarship",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01",
+    "audience": "Grade 12 students entering Ethics and Global Studies or Law, Crime and Justice Studies at Augustana",
+    "url": "https://alberta.academicworks.ca/opportunities/27163",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "Camrose",
+    "notes": "You must major in Ethics and Global Studies or in Law, Crime and Justice Studies. Academic standing decides it.",
+    "active": true,
+    "description": "An Augustana Campus entrance scholarship named for political studies professor Bayard Reesor.",
+    "metaDetail": "For two Augustana majors.",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Politics",
+        "Law"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2091,
+    "title": "Dr Art Quinney Scholarship",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01",
+    "audience": "Grade 12 students entering the Bachelor of Science in Kinesiology at the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27164",
+    "category": "Sports",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Selection weighs your admission average and leadership in physical activity and sport. Strong communicators and critical thinkers get preference.",
+    "active": true,
+    "description": "Former dean Art Quinney endowed this University of Alberta kinesiology entrance scholarship.",
+    "metaDetail": "Sport leadership counts.",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Kinesiology"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "sports"
+      ]
+    }
+  },
+  {
+    "id": 2092,
+    "title": "Syncrude Award in Environmental and Conservation Sciences",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01",
+    "audience": "Grade 12 students entering Environmental and Conservation Sciences at the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27169",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Your Grade 11 and 12 final marks decide it. First Nations, Inuit and Métis students get preference.",
+    "active": true,
+    "description": "Syncrude endowed this University of Alberta entrance award for first-year environmental science students.",
+    "metaDetail": "Indigenous students get preference.",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Environmental Science"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2093,
+    "title": "La Bruyère Scholarship",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01",
+    "audience": "Grade 12 students entering Campus Saint-Jean who write strong French",
+    "url": "https://alberta.academicworks.ca/opportunities/27170",
+    "category": "Arts",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You submit an original 4 to 6 page essay in French, judged on clarity, logic, originality and style.",
+    "active": true,
+    "description": "Marc de La Bruyère endowed this Campus Saint-Jean entrance prize for the best French writer in the incoming class.",
+    "metaDetail": "Judged on a French essay.",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "French",
+        "Creative Writing"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2094,
+    "title": "Lynn Morgan Music Scholarships",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01",
+    "audience": "Grade 12 singers and orchestral players entering the Bachelor of Music at the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27172",
+    "category": "Arts",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "There are two, one for an orchestral instrument and one for voice. Your admission audition and academic standing decide them.",
+    "active": true,
+    "description": "Family and friends of former Registrar Lynn Morgan fund two University of Alberta music entrance scholarships.",
+    "metaDetail": "One for voice, one for orchestra.",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Music"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2095,
+    "title": "AFPA Arden Rytz Memorial Leadership Award in Forestry",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01",
+    "audience": "Grade 12 students entering Forestry or Forest Business Management at the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27176",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Leadership in your community and activities decides it.",
+    "active": true,
+    "description": "The Alberta Forest Products Association funds this University of Alberta entrance award for future foresters.",
+    "metaDetail": "Leadership decides it.",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Forestry"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteering"
+      ]
+    }
+  },
+  {
+    "id": 2096,
+    "title": "Harvard Broadcasting Entrance Award in Music",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01",
+    "audience": "Grade 12 students entering the Bachelor of Music at the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27178",
+    "category": "Arts",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Performance potential and academic standing count. First Nations, Inuit and Métis students get preference.",
+    "active": true,
+    "description": "Harvard Broadcasting endowed this University of Alberta music entrance award.",
+    "metaDetail": "Indigenous students get preference.",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Music"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2097,
+    "title": "Alberta Wheat Commission Award in Crop Science",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01",
+    "audience": "Students entering Agriculture with a Crop Science major at the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27187",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Selection weighs academics and leadership in school or community groups. Transfer students can apply too.",
+    "active": true,
+    "description": "Alberta Wheat, the province's wheat growers' commission, endowed this University of Alberta award for crop science students.",
+    "metaDetail": "For Crop Science majors.",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Agriculture"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "4-H"
+      ]
+    }
+  },
+  {
+    "id": 2098,
+    "title": "Français pour l'avenir Awards (Campus Saint-Jean)",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01",
+    "audience": "French immersion and francophone high school graduates entering Campus Saint-Jean",
+    "url": "https://alberta.academicworks.ca/opportunities/27192",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "There is one award for French immersion graduates and one for francophone school graduates. You must also complete the Français pour l'avenir writing contest, and the award renews with a 3.0 GPA and at least 9 French credits a term.",
+    "active": true,
+    "description": "Campus Saint-Jean gives renewable entrance awards to students arriving from French immersion and francophone high schools.",
+    "metaDetail": "Renewable with a 3.0 GPA.",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "French"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2099,
+    "title": "Diversity Entrance Scholarship in Computing Science",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01",
+    "audience": "Women entering Honors Computing Science at the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27200",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Your admission average decides it.",
+    "active": true,
+    "description": "A University of Alberta entrance scholarship for women starting an honours degree in computing science.",
+    "metaDetail": "For Honors Computing Science.",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Computer Science"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": "female",
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2100,
+    "title": "West Fraser FRIAA and Forestry Class of 1974 Award",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01",
+    "audience": "Grade 12 students with financial need entering Forestry at the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27208",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Selection weighs academic standing and financial need.",
+    "active": true,
+    "description": "The Forestry Class of 1974, West Fraser and the Forest Resource Improvement Association fund this University of Alberta forestry award.",
+    "metaDetail": "Need weighs in.",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Forestry"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2101,
+    "title": "Dr Piotr Rudnicki Memorial Award in Computing Science",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01",
+    "audience": "Grade 12 students entering Computing Science at the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27221",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Students who competed in the University of Alberta Programming Contest get preference.",
+    "active": true,
+    "description": "Michael Williams funds this University of Alberta computing science award in memory of Dr. Piotr Rudnicki.",
+    "metaDetail": "Programming contest entrants first.",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Computer Science"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2102,
+    "title": "Eric Newell Dean's Entrance Citation in Native Studies",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01",
+    "audience": "Grade 12 students entering Native Studies at the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27231",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must enter straight from high school. It renews each year you keep satisfactory standing in Native Studies.",
+    "active": true,
+    "description": "A renewable University of Alberta entrance citation for students starting a Native Studies degree.",
+    "metaDetail": "Renewable for four years.",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Indigenous Knowledge"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2103,
+    "title": "Elizabeth Donald Dean's Entrance Citation in Human Nutrition",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01",
+    "audience": "Grade 12 students with an 80% average entering Nutrition and Food Science at the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27233",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You need an admission average of 80% or more. It renews with a 3.5 GPA.",
+    "active": true,
+    "description": "Elizabeth Donald endowed this renewable University of Alberta nutrition entrance citation.",
+    "metaDetail": "Renewable with a 3.5 GPA.",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Nutrition"
+      ],
+      "minAverage": 80,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2104,
+    "title": "Westmoreland Coal Company Dean's Entrance Citation in Engineering",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01",
+    "audience": "Grade 12 students entering first-year Engineering at the University of Alberta, Civil and Mining first",
+    "url": "https://alberta.academicworks.ca/opportunities/27242",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You need an admission average around 95%. Students headed for Civil or Mining Engineering get preference, and payment starts in second year with a 3.5 GPA.",
+    "active": true,
+    "description": "Westmoreland Coal endowed this renewable University of Alberta engineering citation.",
+    "metaDetail": "Paid from second year.",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Engineering"
+      ],
+      "minAverage": 95,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2105,
+    "title": "Robert Stollery Award in Social Entrepreneurship",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01",
+    "audience": "Grade 12 students entering the Alberta School of Business",
+    "url": "https://alberta.academicworks.ca/opportunities/27327",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Leadership in social entrepreneurship and community development decides it.",
+    "active": true,
+    "description": "This Alberta School of Business entrance award honours builder and philanthropist Robert Stollery.",
+    "metaDetail": "For social entrepreneurs.",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Business",
+        "Entrepreneurship"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteering"
+      ]
+    }
+  },
+  {
+    "id": 2106,
+    "title": "Canada-Wide Science Fair Scholarship (University of Alberta)",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01",
+    "audience": "Canada-Wide Science Fair finalists and medalists entering the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27342",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must have been a finalist or medalist at the Canada-Wide Science Fair. Academic standing counts too.",
+    "active": true,
+    "description": "The University of Alberta gives this entrance scholarship to Canada-Wide Science Fair finalists.",
+    "metaDetail": "For CWSF finalists.",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Science"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "science fair"
+      ]
+    }
+  },
+  {
+    "id": 2107,
+    "title": "University of Alberta Rural Scholars Entrance Award",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01",
+    "audience": "Canadian citizens or permanent residents from rural communities entering the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27345",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "Alberta",
+    "localArea": "Rural communities",
+    "notes": "Satisfactory marks qualify you. Leadership, volunteering and activities get preference.",
+    "active": true,
+    "description": "A University of Alberta entrance award for students who grew up in rural communities.",
+    "metaDetail": "For rural students.",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteering"
+      ]
+    }
+  },
+  {
+    "id": 2108,
+    "title": "Saddle Lake Steinhauer Entrance Scholarship",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01",
+    "audience": "Grade 12 students with community service among Indigenous peoples entering the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27346",
+    "category": "Indigenous",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Selection rests on community service with or among Indigenous peoples. First Nations, Inuit and Métis students get preference.",
+    "active": true,
+    "description": "An anonymous donor endowed this University of Alberta entrance scholarship honouring the Steinhauer family of Saddle Lake.",
+    "metaDetail": "Indigenous community service counts.",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteering"
+      ]
+    }
+  },
+  {
+    "id": 2109,
+    "title": "Pathways to Dentistry Award",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01",
+    "audience": "Grade 12 students with financial need who plan to become dentists, entering the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27347",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must want to enter the Doctor of Dental Surgery after your first degree. Selection weighs academics and need, and it renews for three more years.",
+    "active": true,
+    "description": "Supporters of the School of Dentistry fund this renewable award for first-year students aiming at dentistry.",
+    "metaDetail": "Renewable for four years.",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Health"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2110,
+    "title": "Kay Anderson Entrance Bursary for Indigenous Students",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01",
+    "audience": "First Nations, Inuit and Métis students with a 70% average entering the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27351",
+    "category": "Indigenous",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You need 70% or better, and financial need decides it.",
+    "active": true,
+    "description": "Kay Anderson funds this University of Alberta entrance bursary for First Nations, Inuit and Métis students.",
+    "metaDetail": "70% plus need.",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [],
+      "minAverage": 70,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2111,
+    "title": "Poelzer Family Foundation Award in Business",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01",
+    "audience": "Grade 12 students with financial need entering the Alberta School of Business",
+    "url": "https://alberta.academicworks.ca/opportunities/27356",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Selection weighs your admission average and financial need.",
+    "active": true,
+    "description": "The Poelzer Family Foundation endowed this Alberta School of Business entrance award.",
+    "metaDetail": "Marks plus need.",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Business"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2112,
+    "title": "Elaine A (Ross) Nye Scholarship in Education and Science",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01",
+    "audience": "Alberta residents entering the combined Education and Science degree at Augustana",
+    "url": "https://alberta.academicworks.ca/opportunities/27359",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "Camrose",
+    "notes": "You must enter the Bachelor of Education and Bachelor of Science (Secondary) combined degree. Academic standing decides it.",
+    "active": true,
+    "description": "An Augustana Campus entrance scholarship for future secondary science teachers.",
+    "metaDetail": "For future science teachers.",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Education",
+        "Science"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2113,
+    "title": "Carol Mallett Scholarship",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01",
+    "audience": "Voice majors entering the Bachelor of Music at the University of Alberta, Red Deer students first",
+    "url": "https://alberta.academicworks.ca/opportunities/27364",
+    "category": "Arts",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must major in voice. Students from Red Deer get preference.",
+    "active": true,
+    "description": "The late Carol Mallett endowed this University of Alberta scholarship for singers.",
+    "metaDetail": "Red Deer singers get preference.",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Music"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2114,
+    "title": "Augustana Faculty Education Award",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01",
+    "audience": "Grade 12 students entering an Education degree at Augustana",
+    "url": "https://alberta.academicworks.ca/opportunities/27368",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "Camrose",
+    "notes": "You must enter the elementary Education degree or a combined secondary Education degree with Arts or Science. Academic standing decides it.",
+    "active": true,
+    "description": "An Augustana Campus entrance award for students starting teacher education in Camrose.",
+    "metaDetail": "For Augustana Education.",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Education"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2115,
+    "title": "Centre collégial de l'Alberta Entrance Scholarship",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01",
+    "audience": "Grade 12 students entering a college program at Centre collégial de l'Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27371",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Your admission average decides it.",
+    "active": true,
+    "description": "The University of Alberta's French-language college gives entrance scholarships in any of its programs.",
+    "metaDetail": "For French college programs.",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "French"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2116,
+    "title": "Centre collégial de l'Alberta Health Care Aide Entrance Scholarship",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01",
+    "audience": "Students entering the Health Care Aide program at Centre collégial de l'Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27373",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Admission to the program is the basis for selection.",
+    "active": true,
+    "description": "Centre collégial de l'Alberta funds entrance scholarships for its French-language Health Care Aide program.",
+    "metaDetail": "For Health Care Aide entrants.",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Health Care",
+        "French"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2117,
+    "title": "Jenny Guittard Memorial Entrance Award in Nursing",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01",
+    "audience": "Grade 12 students with financial need entering Nursing at the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27387",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Selection weighs academic standing and financial need. Students interested in oncology or palliative care nursing get preference.",
+    "active": true,
+    "description": "This University of Alberta nursing entrance award remembers Jenny Guittard.",
+    "metaDetail": "Oncology interest helps.",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Nursing"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2118,
+    "title": "Leo and Diana Wong Indigenous Entrance Award in Business",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "openDate": "2026-10-01",
+    "audience": "First Nations, Inuit and Métis students entering the Alberta School of Business",
+    "url": "https://alberta.academicworks.ca/opportunities/27388",
+    "category": "Indigenous",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Selection weighs your admission average and financial need.",
+    "active": true,
+    "description": "Dr. Leo Wong and Diana Wong fund this Alberta School of Business entrance award for Indigenous students.",
+    "metaDetail": "Marks plus need.",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Business"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
   }
 ]
