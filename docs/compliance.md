@@ -239,3 +239,19 @@ provider posts. An estimated date is still a date: the 60-days-after-deadline
 rule covers it, as it does a confirmed one.
 This fills the previously unbounded undated case; dated and unconfirmed-email
 retention windows are unchanged. The privacy policy states the fallback.
+
+## Three labels on existing counts, October 14, 2026
+
+Three counts gained a closed-list word, and nothing else. No identifier, table
+or column is added, and the 180-day events retention is unchanged.
+
+- `apply_click` carries where it was clicked and whether the listing was in
+  My combo first ("row:saved"). Saved first is read from the device's own
+  saved list at click time. Only the word leaves the device.
+- `detail_view` carries `new` or `back`. The device keeps the calendar day it
+  first opened the site in local storage (`sa_first_seen`). The day is never
+  sent, and a count cannot be tied to a person or to another count.
+- Reminder emails link with `?s=rm`, counted like the other tagged links.
+
+The server rejects anything outside each list (`src/pages/api/event.ts`). The
+privacy policy's counts row and its local storage line say all three.

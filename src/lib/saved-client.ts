@@ -5,7 +5,7 @@ import { showToast, getToday, prefersReducedMotion } from './utils.ts';
 import { amountCell, getScholarshipStatus, paintRowAction, rowAction, scholarshipWhen, programWhen } from './list-core.ts';
 import { canApplyNow } from './status.ts';
 import type { ScholarshipWithMeta, ProgramWithMeta } from './list-core.ts';
-import { sendEvent } from './events.ts';
+import { sendApply, sendEvent } from './events.ts';
 import { downloadICS } from './ics.ts';
 import { BOOKMARK, ARROW, EXT } from './icons.ts';
 import type { ICSScholarship, ICSProgram } from './ics.ts';
@@ -523,7 +523,7 @@ export function initSaved() {
     const apply = t.closest<HTMLElement>('[data-sv-apply]');
     if (apply) {
       const wrap = apply.closest<HTMLElement>('[data-sv-wrap]');
-      if (wrap?.dataset.type === 'scholarship' && apply.dataset.track === 'apply') sendEvent('apply_click', 'scholarship', Number(wrap.dataset.id));
+      if (wrap?.dataset.type === 'scholarship' && apply.dataset.track === 'apply') sendApply('scholarship', Number(wrap.dataset.id), 'mine');
       return;
     }
 

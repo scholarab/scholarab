@@ -439,7 +439,7 @@ const openNow = openNowCount(initial);
   import { ARROW_REF, EXT_REF } from '../../lib/icons.ts';
   import type { ScholarshipWithMeta, ScholarshipSort, ScholarshipStatus, StatusFilter, RegionKey } from '../../lib/list-core.ts';
   import { getSaved, toggleSaved } from '../../lib/tracker.ts';
-  import { sendEvent } from '../../lib/events.ts';
+  import { sendApply } from '../../lib/events.ts';
 
   // `name` mirrors the card title for the DirectoryItem contract (save labels)
   type Item = ScholarshipWithMeta & { el: HTMLElement; search: string; name: string; scopes: string[] };
@@ -567,7 +567,7 @@ const openNow = openNowCount(initial);
   document.addEventListener('click', e => {
     const link = (e.target as Element | null)?.closest?.('[data-track="apply"]');
     if (link && link.closest('#sab-scholarships')) {
-      sendEvent('apply_click', 'scholarship', Number(link.closest<HTMLElement>('[data-dir-card]')?.dataset.id));
+      sendApply('scholarship', Number(link.closest<HTMLElement>('[data-dir-card]')?.dataset.id), 'row');
     }
   });
 </script>

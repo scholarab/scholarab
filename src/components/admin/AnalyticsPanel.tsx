@@ -8,8 +8,9 @@ export interface AnalyticsData {
   perItem: { month: string; event: string; itemType: string | null; itemId: number | null; n: number }[]
   daily: { day: string; n: number }[]
   emptySearches: { month: string; q: string | null; n: number }[]
-  /** Saves by the button used: page, row or quiz. null = before 2026-09-26. */
-  saveFrom?: { month: string; from: string | null; n: number }[]
+  /** The word on save, apply_click, detail_view and source_visit rows.
+      null = recorded before that event carried one. */
+  byMeta?: { month: string; event: string; meta: string | null; n: number }[]
   /** Live email list: people = distinct addresses, reminders = rows. */
   subscribers: { people: number; reminders: number; pending?: number }
   monthlySubs: { month: string; people: number; reminders: number }[]
@@ -31,8 +32,41 @@ const SAVE_PLACES: [string, string][] = [
   ['page', 'Listing page'],
   ['row', 'Directory row'],
   ['quiz', 'Quiz results'],
+  ['combo', 'Combo page'],
   ['none', 'Not recorded (before Sep 26 2026)'],
 ]
+
+/** apply_click meta is "place:state"; this table reads the state. */
+const APPLY_STATES: [string, string][] = [
+  ['saved', 'Saved first'],
+  ['starter', 'Starter pack only'],
+  ['new', 'Not saved'],
+  ['none', 'Not recorded (before Oct 14 2026)'],
+]
+
+const VISIT_KINDS: [string, string][] = [
+  ['back', 'Returning device'],
+  ['new', 'First day here'],
+  ['none', 'Not recorded'],
+]
+
+/** source_visit meta, from ?s= on our own links (events.ts SOURCES). */
+const SOURCE_LABELS: [string, string][] = [
+  ['em', 'Counsellor email'],
+  ['rm', 'Reminder email'],
+  ['ig', 'Instagram'],
+  ['tt', 'TikTok'],
+  ['yt', 'YouTube'],
+  ['qr', 'Print or QR'],
+]
+
+interface MetaRow { key: string; label: string; n: number }
+
+/** Rows for one labelled table, with each row's share. A "none" row shows only when it has rows. */
+function shareRows(by: Record<string, number>, labels: [string, string][]): { total: number; rows: MetaRow[] } {
+  const rows = labels.map(([key, label]) => ({ key, label, n: by[key] ?? 0 })).filter(r => r.n > 0 || r.key !== 'none')
+  return { total: rows.reduce((a, r) => a + r.n, 0), rows }
+}
 
 interface Props {
   data: AnalyticsData
@@ -327,24 +361,40 @@ export default function AnalyticsPanel({ data }: Props) {
       }))
   }, [data.emptySearches, month])
 
-  const saves = useMemo(() => {
-    const by: Record<string, number> = {}
-    for (const s of data.saveFrom ?? []) {
-      if (month !== ALL && s.month !== month) continue
-      const key = s.from ?? 'none'
-      by[key] = (by[key] ?? 0) + s.n
+  // Each event's rows in the period, keyed by the word it carries ("none"
+  // when it carries none). apply_click is keyed by its state alone.
+  const metaBy = useMemo(() => {
+    const by: Record<string, Record<string, number>> = {}
+    for (const r of data.byMeta ?? []) {
+      if (month !== ALL && r.month !== month) continue
+      const key = r.meta === null ? 'none' : r.event === 'apply_click' ? r.meta.split(':')[1] ?? 'none' : r.meta
+      const e = (by[r.event] ??= {})
+      e[key] = (e[key] ?? 0) + r.n
     }
+    return by
+  }, [data.byMeta, month])
+
+  const saves = useMemo(() => {
     let views = 0
     for (const m of data.monthly) {
       if (m.event === 'detail_view' && (month === ALL || m.month === month)) views += m.n
     }
-    const total = Object.values(by).reduce((a, b) => a + b, 0)
-    return {
-      total,
-      per100: views > 0 ? (total / views) * 100 : null,
-      rows: SAVE_PLACES.map(([key, label]) => ({ key, label, n: by[key] ?? 0 })).filter(r => r.n > 0 || r.key !== 'none'),
-    }
-  }, [data.saveFrom, data.monthly, month])
+    const { total, rows } = shareRows(metaBy.save ?? {}, SAVE_PLACES)
+    return { total, rows, per100: views > 0 ? (total / views) * 100 : null }
+  }, [metaBy, data.monthly, month])
+
+  // Does a save turn into an application: was the award in My combo when
+  // Apply was clicked. The share of Saved first is read over the labelled
+  // clicks only, so the old unlabelled ones cannot dilute it.
+  const applies = useMemo(() => {
+    const { total, rows } = shareRows(metaBy.apply_click ?? {}, APPLY_STATES)
+    const labelled = total - (metaBy.apply_click?.none ?? 0)
+    const saved = metaBy.apply_click?.saved ?? 0
+    return { total, rows, savedPct: labelled > 0 ? Math.round((saved / labelled) * 100) : null }
+  }, [metaBy])
+
+  const visits = useMemo(() => shareRows(metaBy.detail_view ?? {}, VISIT_KINDS), [metaBy])
+  const sources = useMemo(() => shareRows(metaBy.source_visit ?? {}, SOURCE_LABELS), [metaBy])
 
   // How it works: how many opened it and how many went on to the quiz from
   // it. Every count is people per tab session, as sendEvent dedupes.
@@ -619,25 +669,17 @@ export default function AnalyticsPanel({ data }: Props) {
               </tbody>
             </table>
           </div>
-          {/* Which save button gets used */}
-          <div className="adm-block">
-            <h2 className="adm-h2">
-              Where saves happen <small>{periodLabel}{saves.per100 !== null && `, ${saves.per100.toFixed(1)} per 100 views`}</small>
-            </h2>
-            <div className="adm-table-wrap">
-              <table className="adm-table">
-                <tbody>
-                  {saves.rows.map(r => (
-                    <tr key={r.key}>
-                      <td>{r.label}</td>
-                      <td data-num>{n(r.n)}</td>
-                      <td data-num data-dim style={{ width: 64 }}>{saves.total > 0 ? `${Math.round((r.n / saves.total) * 100)}%` : ''}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
+          <ShareTable
+            title="Where saves happen"
+            sub={`${periodLabel}${saves.per100 !== null ? `, ${saves.per100.toFixed(1)} per 100 views` : ''}`}
+            rows={saves.rows} total={saves.total} attr="data-save-table"
+          />
+          <ShareTable
+            title="Apply clicks"
+            sub={`${periodLabel}${applies.savedPct !== null ? `, ${applies.savedPct}% saved first` : ''}`}
+            rows={applies.rows} total={applies.total} attr="data-apply-table"
+          />
+          <ShareTable title="Listing views" sub={periodLabel} rows={visits.rows} total={visits.total} attr="data-visit-table" />
 
         </section>
 
@@ -657,6 +699,8 @@ export default function AnalyticsPanel({ data }: Props) {
               ))}
             </div>
           </div>
+
+          <ShareTable title="Visits from our links" sub={periodLabel} rows={sources.rows} total={sources.total} attr="data-source-table" />
 
           {/* How it works */}
           <div className="adm-block">
@@ -679,6 +723,28 @@ export default function AnalyticsPanel({ data }: Props) {
             </div>
           </div>
         </section>
+      </div>
+    </div>
+  )
+}
+
+/** A block of label, count and share rows, the shape of Where saves happen. */
+function ShareTable({ title, sub, rows, total, attr }: { title: string; sub: string; rows: MetaRow[]; total: number; attr: string }) {
+  return (
+    <div className="adm-block">
+      <h2 className="adm-h2">{title} <small>{sub}</small></h2>
+      <div className="adm-table-wrap">
+        <table className="adm-table" {...{ [attr]: '' }}>
+          <tbody>
+            {rows.map(r => (
+              <tr key={r.key}>
+                <td>{r.label}</td>
+                <td data-num>{r.n.toLocaleString('en-CA')}</td>
+                <td data-num data-dim style={{ width: 64 }}>{total > 0 ? `${Math.round((r.n / total) * 100)}%` : ''}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   )

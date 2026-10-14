@@ -12,10 +12,18 @@ const ALLOWED_EVENTS = new Set(['detail_view', 'apply_click', 'save', 'quiz_star
 // Campaign sources, mirroring SOURCES in src/lib/events.ts. Anyone can type
 // `?s=` into the address bar, so the server keeps its own copy of the list
 // rather than trusting whatever the client sends.
-const ALLOWED_SOURCES = new Set(['ig', 'tt', 'yt', 'em', 'qr'])
+const ALLOWED_SOURCES = new Set(['ig', 'tt', 'yt', 'em', 'qr', 'rm'])
 // Where a save was made: the listing page, a directory row, or quiz results.
 // Added 2026-09-26 to learn which save button students actually use.
-const SAVE_FROM = new Set(['page', 'row', 'quiz'])
+// 'combo' (a combo page) since 2026-10-14; those saves were unlabelled before.
+const SAVE_FROM = new Set(['page', 'row', 'quiz', 'combo'])
+// apply_click: "place:state" since 2026-10-14. Where Apply was clicked, and
+// whether the award was in My combo first (saved by the student, put there
+// by the starter pack, or not). Mirrors sendApply in src/lib/events.ts.
+const APPLY_PLACES = new Set(['page', 'row', 'quiz', 'combo', 'mine'])
+const APPLY_STATES = new Set(['saved', 'starter', 'new'])
+// detail_view: whether this device first opened the site on an earlier day.
+const VISIT_KINDS = new Set(['new', 'back'])
 // How the walkthrough was opened: by itself on a first visit ('auto', until
 // 2026-09-27), from the first-visit strip that replaced that, or a button.
 // 'button' is every hand opening before 2026-09-26, when the three buttons
@@ -95,10 +103,11 @@ export const POST: APIRoute = async ({ request }) => {
   if ((itemType === undefined) !== (itemId === undefined))
     return jsonError('itemType and itemId must be sent together', 400)
   // meta carries the query text for search_empty, the source code for
-  // source_visit, the place for save, how tour_open was opened, the step
-  // for tour_step and tour_close, and the status for app_status; nothing else
+  // source_visit, the place for save, place and saved state for apply_click,
+  // new or back for detail_view, how tour_open was opened, the step for
+  // tour_step and tour_close, and the status for app_status; nothing else
   // takes a meta at all
-  const META_EVENTS = new Set(['search_empty', 'source_visit', 'save', 'tour_open', 'tour_step', 'tour_close', 'app_status'])
+  const META_EVENTS = new Set(['search_empty', 'source_visit', 'save', 'apply_click', 'detail_view', 'tour_open', 'tour_step', 'tour_close', 'app_status'])
   if (meta !== undefined && (!META_EVENTS.has(event) || typeof meta !== 'string'))
     return jsonError('meta not allowed for this event', 400)
 
@@ -123,6 +132,19 @@ export const POST: APIRoute = async ({ request }) => {
     // Required, and only for an item: a status without its award says nothing
     if (!APP_STATUSES.has(meta as string) || itemId === undefined) return jsonError('unknown status', 400)
     cleanMeta = meta as string
+  } else if (event === 'apply_click') {
+    // Optional, since pages cached before the field existed send none
+    if (meta !== undefined) {
+      const [place, state, extra] = (meta as string).split(':')
+      if (extra !== undefined || !APPLY_PLACES.has(place!) || !APPLY_STATES.has(state!)) return jsonError('unknown apply place', 400)
+      cleanMeta = meta as string
+    }
+  } else if (event === 'detail_view') {
+    // Optional: blocked storage sends none
+    if (meta !== undefined) {
+      if (!VISIT_KINDS.has(meta as string)) return jsonError('unknown visit kind', 400)
+      cleanMeta = meta as string
+    }
   } else if (event === 'save') {
     // Optional, since pages cached before the field existed send none
     if (meta !== undefined) {

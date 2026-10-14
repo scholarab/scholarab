@@ -844,7 +844,7 @@ const chip: { text: string; tone: Tone } =
 
 <script>
   import { todayDate } from '../../lib/calendar';
-  import { sendEvent, sendEventAfterDwell } from '../../lib/events.ts';
+  import { sendApply, sendEvent, sendEventAfterDwell, visitKind } from '../../lib/events.ts';
   import { getSaved, toggleSaved, getSavedPrograms, toggleSavedProgram } from '../../lib/tracker';
   import { showToast, prefersReducedMotion, emailProblem } from '../../lib/utils';
   import { URGENT_DAYS, SOON_DAYS } from '../../lib/list-core';
@@ -925,7 +925,7 @@ const chip: { text: string; tone: Tone } =
     const apply = target.closest?.('[data-track="apply"]');
     if (apply?.closest('.sabd-card, .sabd-bar')) {
       const [applyType, applyId] = itemAttrs(apply);
-      if (applyType && applyId) sendEvent('apply_click', applyType, applyId);
+      if (applyType && applyId) sendApply(applyType, applyId, 'page');
     }
 
     const save = target.closest?.('[data-sabd-save]') as HTMLElement | null;
@@ -1094,7 +1094,7 @@ const chip: { text: string; tone: Tone } =
     setupBar();
     const view = document.querySelector('[data-detail-view]');
     // Dwell-gated: an instant back/misclick shouldn't count as a view
-    if (view) sendEventAfterDwell('detail_view', ...itemAttrs(view));
+    if (view) sendEventAfterDwell('detail_view', ...itemAttrs(view), 2500, visitKind);
 
     document.querySelectorAll<HTMLElement>('[data-sabd-save]').forEach(btn => {
       const id = parseInt(btn.dataset.bookmarkId!);

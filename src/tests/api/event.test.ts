@@ -320,6 +320,37 @@ describe('POST /api/event', () => {
     expect(mockInsert).not.toHaveBeenCalled()
   })
 
+  it('records where Apply was clicked and whether the award was saved first', async () => {
+    expect((await call({ event: 'apply_click', itemType: 'scholarship', itemId: 14, meta: 'mine:saved' })).status).toBe(204)
+    expect(mockValues).toHaveBeenCalledWith({ event: 'apply_click', itemType: 'scholarship', itemId: 14, meta: 'mine:saved' })
+    for (const meta of ['page:new', 'row:starter', 'quiz:saved', 'combo:new']) {
+      expect((await call({ event: 'apply_click', itemType: 'program', itemId: 3, meta })).status).toBe(204)
+    }
+    // Pages cached before the field send none
+    expect((await call({ event: 'apply_click', itemType: 'program', itemId: 3 })).status).toBe(204)
+    expect(mockValues).toHaveBeenLastCalledWith({ event: 'apply_click', itemType: 'program', itemId: 3, meta: null })
+  })
+
+  it('rejects an apply place or state outside the fixed lists', async () => {
+    mockValues.mockClear()
+    for (const meta of ['row', 'row:maybe', 'home:saved', 'row:saved:x', 'row:saved ']) {
+      expect((await call({ event: 'apply_click', itemType: 'scholarship', itemId: 5, meta })).status).toBe(400)
+    }
+    expect(mockValues).not.toHaveBeenCalled()
+  })
+
+  it('records a listing view as new or back, and nothing else', async () => {
+    expect((await call({ event: 'detail_view', itemType: 'scholarship', itemId: 5, meta: 'back' })).status).toBe(204)
+    expect(mockValues).toHaveBeenCalledWith({ event: 'detail_view', itemType: 'scholarship', itemId: 5, meta: 'back' })
+    expect((await call({ event: 'detail_view', itemType: 'scholarship', itemId: 5, meta: '2026-10-01' })).status).toBe(400)
+  })
+
+  it('accepts the reminder email as a source and a save from a combo page', async () => {
+    expect((await call({ event: 'source_visit', meta: 'rm' })).status).toBe(204)
+    expect(mockValues).toHaveBeenCalledWith({ event: 'source_visit', itemType: null, itemId: null, meta: 'rm' })
+    expect((await call({ event: 'save', itemType: 'scholarship', itemId: 5, meta: 'combo' })).status).toBe(204)
+  })
+
   it('accepts the How it works walkthrough events', async () => {
     for (const event of ['tour_open', 'tour_finish']) {
       const res = await call({ event })

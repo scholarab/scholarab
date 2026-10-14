@@ -211,10 +211,10 @@ describe('AnalyticsPanel', () => {
   })
 
   it('splits saves by the button used, with the rate per 100 views', () => {
-    const withSaves = { ...data, saveFrom: [
-      { month: '2026-09', from: 'page', n: 3 },
-      { month: '2026-09', from: 'row', n: 1 },
-      { month: '2026-07', from: null, n: 4 },
+    const withSaves = { ...data, byMeta: [
+      { month: '2026-09', event: 'save', meta: 'page', n: 3 },
+      { month: '2026-09', event: 'save', meta: 'row', n: 1 },
+      { month: '2026-07', event: 'save', meta: null, n: 4 },
     ] }
     render(<AnalyticsPanel data={withSaves} />)
     fireEvent.click(screen.getByRole('button', { name: 'Sep 2026' }))
@@ -223,9 +223,43 @@ describe('AnalyticsPanel', () => {
     expect(cells('Listing page')).toEqual(['Listing page', '3', '75%'])
     expect(cells('Directory row')).toEqual(['Directory row', '1', '25%'])
     expect(cells('Quiz results')).toEqual(['Quiz results', '0', '0%'])
+    expect(cells('Combo page')).toEqual(['Combo page', '0', '0%'])
     // July's unplaced saves stay out of September, and so does their row
     expect(screen.queryByText(/Not recorded/)).toBeNull()
     // 4 saves over 25 September views
     expect(screen.getByText(/16\.0 per 100 views/)).toBeTruthy()
+  })
+
+  it('splits Apply clicks by saved state, views by new or back, and visits by our links', () => {
+    const withMeta = { ...data, byMeta: [
+      { month: '2026-10', event: 'apply_click', meta: 'mine:saved', n: 2 },
+      { month: '2026-10', event: 'apply_click', meta: 'page:saved', n: 1 },
+      { month: '2026-10', event: 'apply_click', meta: 'row:starter', n: 1 },
+      { month: '2026-10', event: 'apply_click', meta: 'row:new', n: 6 },
+      { month: '2026-10', event: 'apply_click', meta: null, n: 30 },
+      { month: '2026-10', event: 'detail_view', meta: 'back', n: 4 },
+      { month: '2026-10', event: 'detail_view', meta: 'new', n: 12 },
+      { month: '2026-10', event: 'source_visit', meta: 'em', n: 5 },
+      { month: '2026-10', event: 'source_visit', meta: 'rm', n: 2 },
+    ] }
+    render(<AnalyticsPanel data={withMeta} />)
+    const table = (attr: string) => [...document.querySelector(`[${attr}]`)!.querySelectorAll('tr')]
+      .map(r => [...r.querySelectorAll('td')].map(c => c.textContent))
+    // 3 of the 10 labelled clicks were saved first; the 30 unlabelled ones do not dilute it
+    expect(screen.getByText(/30% saved first/)).toBeTruthy()
+    expect(table('data-apply-table')).toEqual([
+      ['Saved first', '3', '8%'],
+      ['Starter pack only', '1', '3%'],
+      ['Not saved', '6', '15%'],
+      ['Not recorded (before Oct 14 2026)', '30', '75%'],
+    ])
+    expect(table('data-visit-table')).toEqual([
+      ['Returning device', '4', '25%'],
+      ['First day here', '12', '75%'],
+    ])
+    expect(table('data-source-table').slice(0, 2)).toEqual([
+      ['Counsellor email', '5', '71%'],
+      ['Reminder email', '2', '29%'],
+    ])
   })
 })

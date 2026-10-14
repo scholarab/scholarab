@@ -7,7 +7,7 @@ import type { StudentProfile, ConfidenceTier } from '../lib/eligibility-types'
 import { isRestrictedCheck, matchAll, matchPrograms } from '../lib/eligibility-matcher'
 import { getSaved, toggleSaved, getSavedPrograms, toggleSavedProgram } from '../lib/tracker.ts'
 import { generateSlug, parseAmount } from '../lib/utils.ts'
-import { sendEvent } from '../lib/events.ts'
+import { sendApply, sendEvent } from '../lib/events.ts'
 import { NO_DEADLINE, STATUS_WORDS, canApplyNow, openLaterNote, programOpensLater, programStatusOf, programUndatedLabel, rowAction, scholarshipStatusOf, waitingLabel } from '../lib/status.ts'
 import { amountCell, whenTier } from '../lib/list-core.ts'
 import { BOOKMARK } from '../lib/icons.ts'
@@ -686,7 +686,7 @@ export default function EligibilityQuiz({ scholarships, programs, combos = [] }:
               const act = rowAction(canApplyNow(status), s.url, `/scholarships/${generateSlug(s.title)}/`, s.title)
               return act.external
                 ? <a href={act.href} target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer" className="sabl-apply"
-                    onClick={() => sendEvent('apply_click', 'scholarship', s.id)} aria-label={act.aria}
+                    onClick={() => sendApply('scholarship', s.id, 'quiz')} aria-label={act.aria}
                   >{act.label}<span className="sabl-ext" aria-hidden="true">↗</span></a>
                 : <a href={act.href} className="sabl-apply" aria-label={act.aria}>{act.label}<span className="sabl-ext" aria-hidden="true">→</span></a>
             })()}
@@ -857,7 +857,7 @@ export default function EligibilityQuiz({ scholarships, programs, combos = [] }:
                     const act = rowAction(canApplyNow(programStatusOf(p, today)), p.url, `/programs/${generateSlug(p.name)}/`, p.name)
                     return act.external
                       ? <a href={act.href} target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer" className="sabl-apply"
-                          onClick={() => sendEvent('apply_click', 'program', p.id)} aria-label={act.aria}
+                          onClick={() => sendApply('program', p.id, 'quiz')} aria-label={act.aria}
                         >{act.label}<span className="sabl-ext" aria-hidden="true">↗</span></a>
                       : <a href={act.href} className="sabl-apply" aria-label={act.aria}>{act.label}<span className="sabl-ext" aria-hidden="true">→</span></a>
                   })()}

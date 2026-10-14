@@ -193,7 +193,7 @@ const breadcrumbJson = {
   import type { ScholarshipWithMeta } from '../../../lib/list-core.ts';
   import { canApplyNow } from '../../../lib/status.ts';
   import { getSaved, toggleSaved } from '../../../lib/tracker.ts';
-  import { sendEvent } from '../../../lib/events.ts';
+  import { sendApply, sendEvent } from '../../../lib/events.ts';
 
   const root = document.getElementById('sab-combos');
   const cards = [...(root?.querySelectorAll<HTMLElement>('[data-combo-card]') ?? [])];
@@ -245,7 +245,7 @@ const breadcrumbJson = {
 
   const save = (id: number) => {
     toggleSaved(id);
-    sendEvent('save', 'scholarship', id);
+    sendEvent('save', 'scholarship', id, 'combo');
   };
 
   root?.addEventListener('click', e => {
@@ -264,7 +264,7 @@ const breadcrumbJson = {
       return;
     }
     const apply = target.closest<HTMLElement>('[data-track="apply"]');
-    if (apply) sendEvent('apply_click', 'scholarship', idOf(apply.closest<HTMLElement>('[data-combo-card]')!));
+    if (apply) sendApply('scholarship', idOf(apply.closest<HTMLElement>('[data-combo-card]')!), 'combo');
   });
 
   // Another tab can change the saved list.

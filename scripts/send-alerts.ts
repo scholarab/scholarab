@@ -200,8 +200,11 @@ async function sendPendingConfirmations(): Promise<void> {
 if (TEST_SUBSCRIPTION_ID === null) await sendPendingConfirmations()
 
 const allItems = [
-  ...scholarships.map(s => ({ ...s, itemType: 'scholarship' as const, label: s.title!, detailUrl: `${BASE_URL}/scholarships/${generateSlug(s.title!)}` })),
-  ...programs.map(p => ({ ...p, itemType: 'program' as const, label: p.name!, detailUrl: `${BASE_URL}/programs/${generateSlug(p.name!)}` })),
+  // `?s=rm` counts the visit as one a reminder brought back (events.ts
+  // SOURCES). The slash form is the page itself, so the tag survives instead
+  // of riding a redirect.
+  ...scholarships.map(s => ({ ...s, itemType: 'scholarship' as const, label: s.title!, detailUrl: `${BASE_URL}/scholarships/${generateSlug(s.title!)}/?s=rm` })),
+  ...programs.map(p => ({ ...p, itemType: 'program' as const, label: p.name!, detailUrl: `${BASE_URL}/programs/${generateSlug(p.name!)}/?s=rm` })),
 ]
 const targets = allItems.map(item => ({ item, due: remindersDue(item, item.itemType, item.label, NOW, {
   milestones: MILESTONES, catchUp: CATCH_UP, test: TEST_SUBSCRIPTION_ID !== null,

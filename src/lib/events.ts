@@ -1,5 +1,8 @@
 // Anonymous event counting; fire-and-forget, no cookies, no ids, no payload
 // beyond the event name and which item it concerns. Must never break the page.
+import { getSaved, getSavedPrograms } from './tracker.ts'
+import { STARTER_PACK_IDS } from './starter-pack.ts'
+
 export type AppEvent =
   | 'detail_view' | 'apply_click' | 'save' | 'quiz_start' | 'quiz_complete' | 'search_empty'
   /** The How it works walkthrough: opened (meta: where from), each step
@@ -26,9 +29,11 @@ const SOURCE_PARAM = 's'
  * The only source codes that get recorded. A closed set, not free text: the
  * value arrives from a URL anyone can edit, and an open field would be an
  * open invitation to write something identifying into the events table.
- * ig = Instagram, tt = TikTok, yt = YouTube, em = counsellor email, qr = print/QR.
+ * ig = Instagram, tt = TikTok, yt = YouTube, em = counsellor email, qr = print/QR,
+ * rm = a deadline reminder email (2026-10-14), kept apart from em so the
+ * reminders' own pull back to the site can be read.
  */
-export const SOURCES = ['ig', 'tt', 'yt', 'em', 'qr'] as const
+export const SOURCES = ['ig', 'tt', 'yt', 'em', 'qr', 'rm'] as const
 export type Source = (typeof SOURCES)[number]
 
 export function parseSource(search: string): Source | null {
@@ -133,9 +138,11 @@ export function sendEvent(
   itemType?: 'scholarship' | 'program',
   itemId?: number,
   meta?: string,
+  /** What the once-per-session dedupe keys on, when that is not the meta. */
+  dedupeMeta: string | undefined = meta,
 ): void {
   try {
-    if (shouldSkip(`sa_sent:${event}:${itemType ?? ''}:${itemId ?? ''}:${meta ?? ''}`)) return
+    if (shouldSkip(`sa_sent:${event}:${itemType ?? ''}:${itemId ?? ''}:${dedupeMeta ?? ''}`)) return
     const payload = JSON.stringify({ event, itemType, itemId, meta })
     if (navigator.sendBeacon?.('/api/event', payload)) return
     fetch('/api/event', { method: 'POST', body: payload, keepalive: true }).catch(() => {})
@@ -152,6 +159,7 @@ export function sendEventAfterDwell(
   itemType?: 'scholarship' | 'program',
   itemId?: number,
   dwellMs = 2500,
+  meta?: () => string | undefined,
 ): () => void {
   let timer: ReturnType<typeof setTimeout> | null = null
   const cancel = () => {
@@ -160,11 +168,68 @@ export function sendEventAfterDwell(
     window.removeEventListener('pagehide', cancel)
   }
   try {
-    timer = setTimeout(() => { cancel(); sendEvent(event, itemType, itemId) }, dwellMs)
+    timer = setTimeout(() => { cancel(); sendEvent(event, itemType, itemId, meta?.(), '') }, dwellMs)
     document.addEventListener('astro:before-preparation', cancel)
     window.addEventListener('pagehide', cancel)
   } catch { /* never break the page for analytics */ }
   return cancel
+}
+
+/** Where an Apply click was made. `mine` is My combo (/saved). */
+export type ApplyPlace = 'page' | 'row' | 'quiz' | 'combo' | 'mine'
+
+/**
+ * Was this award in the device's My combo when Apply was clicked: `saved` by
+ * the student, `starter` only because the starter pack put it there (nobody
+ * chose it), or `new`. The question it answers is whether saves turn into
+ * applications, which a bare apply_click could not say (2026-10-14).
+ */
+export function savedState(itemType: 'scholarship' | 'program', itemId: number): 'saved' | 'starter' | 'new' {
+  try {
+    const ids = itemType === 'program' ? getSavedPrograms() : getSaved()
+    if (!ids.includes(itemId)) return 'new'
+    return itemType === 'scholarship' && (STARTER_PACK_IDS as readonly number[]).includes(itemId) ? 'starter' : 'saved'
+  } catch {
+    return 'new'
+  }
+}
+
+/**
+ * apply_click with "place:state" as its meta, say "row:saved". The dedupe
+ * still keys on the item alone, so one student clicking Apply on a row and
+ * then on its page counts once, as before the meta existed.
+ */
+export function sendApply(itemType: 'scholarship' | 'program', itemId: number, place: ApplyPlace): void {
+  if (!Number.isInteger(itemId) || itemId < 1) return
+  sendEvent('apply_click', itemType, itemId, `${place}:${savedState(itemType, itemId)}`, '')
+}
+
+/** The device's own calendar day it first opened the site. Never sent. */
+const FIRST_SEEN_KEY = 'sa_first_seen'
+
+function localDay(): string {
+  const d = new Date()
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
+}
+
+/**
+ * `back` when this device first opened the site on an earlier day, else
+ * `new`. Only the word leaves the device, on a listing view. The day stays in
+ * local storage. Called on every page load so the first page sets it.
+ * Storage blocked: undefined, and the view goes unlabelled.
+ */
+export function visitKind(): 'new' | 'back' | undefined {
+  try {
+    const today = localDay()
+    const first = localStorage.getItem(FIRST_SEEN_KEY)
+    if (!first || !/^\d{4}-\d{2}-\d{2}$/.test(first) || first > today) {
+      localStorage.setItem(FIRST_SEEN_KEY, today)
+      return 'new'
+    }
+    return first < today ? 'back' : 'new'
+  } catch {
+    return undefined
+  }
 }
 
 /** Called from the admin panel so the owner's own browsing stops counting. */

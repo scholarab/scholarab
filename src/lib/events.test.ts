@@ -1,5 +1,5 @@
-import { describe, it, expect, beforeEach, vi } from 'vitest'
-import { sendEvent, sendEventAfterDwell, optOutOfEvents, syncTrackingOptOut, isLocalPreview, parseSource, recordSourceVisit } from './events'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
+import { sendEvent, sendEventAfterDwell, optOutOfEvents, syncTrackingOptOut, isLocalPreview, parseSource, recordSourceVisit, sendApply, savedState, visitKind } from './events'
 
 /** happy-dom allows navigation via history, which is enough to set a query. */
 const setSearch = (search: string) => history.replaceState(null, '', '/' + search)
@@ -233,3 +233,75 @@ describe('isLocalPreview', () => {
       expect(isLocalPreview(h)).toBe(false)
   })
 })
+
+describe('sendApply', () => {
+  const metaOf = (i: number) => JSON.parse(beaconCalls[i]!.body).meta
+  // tracker.ts caches each list in memory and drops it on a storage event
+  const setList = (key: string, ids: number[]) => {
+    localStorage.setItem(key, JSON.stringify(ids))
+    window.dispatchEvent(new StorageEvent('storage', { key }))
+  }
+  beforeEach(() => { setList('scholarab_saved', []); setList('scholarab_saved_programs', []) })
+
+  it('says where Apply was clicked and whether the student saved the award first', () => {
+    setList('scholarab_saved', [42])
+    sendApply('scholarship', 42, 'mine')
+    sendApply('scholarship', 43, 'row')
+    expect(metaOf(0)).toBe('mine:saved')
+    expect(metaOf(1)).toBe('row:new')
+  })
+
+  it('tells a starter-pack award apart from one the student chose', () => {
+    setList('scholarab_saved', [14])
+    expect(savedState('scholarship', 14)).toBe('starter')
+    expect(savedState('scholarship', 15)).toBe('new')
+  })
+
+  it('reads the program list for a program', () => {
+    setList('scholarab_saved_programs', [7])
+    expect(savedState('program', 7)).toBe('saved')
+    expect(savedState('scholarship', 7)).toBe('new')
+  })
+
+  it('still counts one student once per item, whichever button they clicked', () => {
+    sendApply('scholarship', 42, 'row')
+    sendApply('scholarship', 42, 'page')
+    expect(beaconCalls).toHaveLength(1)
+  })
+
+  it('sends nothing for an item with no id', () => {
+    sendApply('scholarship', Number.NaN, 'row')
+    expect(beaconCalls).toHaveLength(0)
+  })
+})
+
+describe('visitKind', () => {
+  afterEach(() => vi.useRealTimers())
+
+  it('is new on the first day and back on a later one, and keeps the first day', () => {
+    vi.useFakeTimers()
+    vi.setSystemTime(new Date(2026, 9, 14, 9, 0))
+    expect(visitKind()).toBe('new')
+    vi.setSystemTime(new Date(2026, 9, 14, 23, 0))
+    expect(visitKind()).toBe('new')
+    vi.setSystemTime(new Date(2026, 9, 15, 7, 0))
+    expect(visitKind()).toBe('back')
+    expect(localStorage.getItem('sa_first_seen')).toBe('2026-10-14')
+  })
+
+  it('starts over from a value it did not write', () => {
+    localStorage.setItem('sa_first_seen', 'hello')
+    expect(visitKind()).toBe('new')
+    expect(localStorage.getItem('sa_first_seen')).toMatch(/^\d{4}-\d{2}-\d{2}$/)
+  })
+
+  it('labels a listing view sent after the dwell', () => {
+    vi.useFakeTimers()
+    vi.setSystemTime(new Date(2026, 9, 15, 7, 0))
+    localStorage.setItem('sa_first_seen', '2026-10-01')
+    sendEventAfterDwell('detail_view', 'scholarship', 5, 2500, visitKind)
+    vi.advanceTimersByTime(2500)
+    expect(JSON.parse(beaconCalls[0]!.body)).toEqual({ event: 'detail_view', itemType: 'scholarship', itemId: 5, meta: 'back' })
+  })
+})
+
