@@ -10,11 +10,6 @@ export interface AnalyticsData {
   emptySearches: { month: string; q: string | null; n: number }[]
   /** Saves by the button used: page, row or quiz. null = before 2026-09-26. */
   saveFrom?: { month: string; from: string | null; n: number }[]
-  /** How it works by detail: tour_open by where from, tour_step by step
-      reached, tour_close by the step it was closed on. From 2026-09-26. */
-  /** tracked is false for opens before steps and closes were recorded
-      (Sep 26 2026, about 10 pm); absent means tracked. */
-  tourMeta?: { month: string; event: string; meta: string | null; n: number; tracked?: boolean }[]
   /** Live email list: people = distinct addresses, reminders = rows. */
   subscribers: { people: number; reminders: number; pending?: number }
   monthlySubs: { month: string; people: number; reminders: number }[]
@@ -38,17 +33,6 @@ const SAVE_PLACES: [string, string][] = [
   ['quiz', 'Quiz results'],
   ['none', 'Not recorded (before Sep 26 2026)'],
 ]
-
-const TOUR_FROM_LABELS: [string, string][] = [
-  ['bar', 'Bar button'],
-  ['sheet', 'Phone menu'],
-  ['strip', 'First-visit strip (to Sep 29 2026)'],
-  ['auto', 'Opened on its own (before Sep 27 2026)'],
-  ['menu', 'Explore menu (to Sep 29 2026)'],
-  ['button', 'A button (before Sep 26 2026)'],
-  ['none', 'Not recorded'],
-]
-const TOUR_STEP_NAMES = ['Find', 'Shortlist', 'Save', 'Deadlines', 'Guides']
 
 interface Props {
   data: AnalyticsData
@@ -362,44 +346,17 @@ export default function AnalyticsPanel({ data }: Props) {
     }
   }, [data.saveFrom, data.monthly, month])
 
-  // The walkthrough as a funnel: opened (by where), each step reached, how
-  // it ended. Every count is people per tab session, as sendEvent dedupes.
-  // Opens from before steps and closes were recorded can never show up past
-  // step 1, so the funnel's percentages are taken over the tracked opens only.
+  // How it works: how many opened it and how many went on to the quiz from
+  // it. Every count is people per tab session, as sendEvent dedupes.
   const tour = useMemo(() => {
-    const inScope = (m: string) => month === ALL || m === month
-    const from: Record<string, number> = {}
-    const step: Record<string, number> = {}
-    let untracked = 0
-    for (const t of data.tourMeta ?? []) {
-      if (!inScope(t.month)) continue
-      if (t.event === 'tour_open' && t.tracked === false) untracked += t.n
-      const key = t.meta ?? 'none'
-      const into = t.event === 'tour_open' ? from : t.event === 'tour_step' ? step : null
-      if (into) into[key] = (into[key] ?? 0) + t.n
-    }
     let opens = 0, cta = 0
     for (const m of data.monthly) {
-      if (!inScope(m.month)) continue
+      if (month !== ALL && m.month !== month) continue
       if (m.event === 'tour_open') opens += m.n
       else if (m.event === 'tour_cta') cta += m.n
     }
-    const pct = (n: number) => (opens > 0 ? `${Math.round((n / opens) * 100)}%` : '')
-    const base = opens - untracked
-    const funnelPct = (n: number) => (base > 0 ? `${Math.round((n / base) * 100)}%` : '')
-    return {
-      opens,
-      untracked,
-      from: TOUR_FROM_LABELS.map(([k, label]) => ({ k, label, n: from[k] ?? 0 }))
-        .filter(r => r.n > 0 || ['bar', 'sheet'].includes(r.k)),
-      steps: TOUR_STEP_NAMES.map((name, i) => {
-        const n = i === 0 ? base : step[String(i + 1)] ?? 0
-        return { label: `Step ${i + 1}: ${name}`, n, pct: funnelPct(n) }
-      }),
-      cta: { n: cta, pct: funnelPct(cta) },
-      pct,
-    }
-  }, [data.tourMeta, data.monthly, month])
+    return { opens, cta, pct: opens > 0 ? `${Math.round((cta / opens) * 100)}%` : '' }
+  }, [data.monthly, month])
 
   // Every calendar day in the period, newest first, quiet days at 0: the
   // rows only exist for days with events, so a dead day used to vanish
@@ -701,39 +658,21 @@ export default function AnalyticsPanel({ data }: Props) {
             </div>
           </div>
 
-          {/* How it works, as a funnel */}
+          {/* How it works */}
           <div className="adm-block">
-            <h2 className="adm-h2">How it works <small>{periodLabel}, {tour.opens} opened</small></h2>
+            <h2 className="adm-h2">How it works <small>{periodLabel}</small></h2>
             <div className="adm-table-wrap">
               <table className="adm-table" data-tour-table>
                 <tbody>
-                  <tr className="adm-sub-head"><td colSpan={3}>Where it was opened</td></tr>
-                  {tour.from.map(r => (
-                    <tr key={r.k}>
-                      <td>{r.label}</td>
-                      <td data-num>{r.n}</td>
-                      <td data-num data-dim style={{ width: 64 }}>{tour.pct(r.n)}</td>
-                    </tr>
-                  ))}
-                  <tr className="adm-sub-head"><td colSpan={3}>How far people got</td></tr>
-                  {tour.untracked > 0 && (
-                    <tr>
-                      <td data-dim>Not tracked (opened before Sep 26 2026, 10 pm)</td>
-                      <td data-num data-dim>{tour.untracked}</td>
-                      <td style={{ width: 64 }}></td>
-                    </tr>
-                  )}
-                  {tour.steps.map(r => (
-                    <tr key={r.label}>
-                      <td>{r.label}</td>
-                      <td data-num>{r.n}</td>
-                      <td data-num data-dim style={{ width: 64 }}>{r.pct}</td>
-                    </tr>
-                  ))}
+                  <tr>
+                    <td>Opened</td>
+                    <td data-num>{tour.opens}</td>
+                    <td style={{ width: 64 }}></td>
+                  </tr>
                   <tr>
                     <td>Went on to the quiz</td>
-                    <td data-num>{tour.cta.n}</td>
-                    <td data-num data-dim style={{ width: 64 }}>{tour.cta.pct}</td>
+                    <td data-num>{tour.cta}</td>
+                    <td data-num data-dim style={{ width: 64 }}>{tour.pct}</td>
                   </tr>
                 </tbody>
               </table>

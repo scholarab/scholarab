@@ -191,56 +191,23 @@ describe('AnalyticsPanel', () => {
     render(<AnalyticsPanel data={{ ...data, monthly: [], perItem: [], monthlySubs: [], perItemSubs: [], daily: [], emptySearches: [], search: [] }} />)
     expect(screen.getByText(/No events yet/)).toBeTruthy()
   })
-  it('shows How it works as a funnel: where it opened and how far people got', () => {
+  it('shows How it works as two numbers: opened and went on to the quiz', () => {
     const withTour = { ...data,
       monthly: [...data.monthly,
         { month: '2026-09', event: 'tour_open', n: 10 },
-        { month: '2026-09', event: 'tour_cta', n: 3 }],
-      tourMeta: [
-        { month: '2026-09', event: 'tour_open', meta: 'auto', n: 6 },
-        { month: '2026-09', event: 'tour_open', meta: 'bar', n: 4 },
-        { month: '2026-09', event: 'tour_step', meta: '2', n: 8 },
-        { month: '2026-09', event: 'tour_step', meta: '5', n: 4 },
-        { month: '2026-09', event: 'tour_close', meta: '1', n: 2 },
-      ] }
+        { month: '2026-09', event: 'tour_cta', n: 3 },
+        { month: '2026-08', event: 'tour_open', n: 5 }] }
     render(<AnalyticsPanel data={withTour} />)
     fireEvent.click(screen.getByRole('button', { name: 'Sep 2026' }))
     const cells = (label: string) =>
       [...screen.getByText(label).closest('tr')!.querySelectorAll('td')].map(c => c.textContent)
-    expect(cells('Opened on its own (before Sep 27 2026)')).toEqual(['Opened on its own (before Sep 27 2026)', '6', '60%'])
-    expect(cells('Phone menu')).toEqual(['Phone menu', '0', '0%'])
-    expect(screen.queryByText(/Explore menu/)).toBeNull()
-    expect(cells('Step 1: Find')).toEqual(['Step 1: Find', '10', '100%'])
-    expect(cells('Step 2: Shortlist')).toEqual(['Step 2: Shortlist', '8', '80%'])
-    expect(cells('Step 5: Guides')).toEqual(['Step 5: Guides', '4', '40%'])
+    expect(cells('Opened')).toEqual(['Opened', '10', ''])
     expect(cells('Went on to the quiz')).toEqual(['Went on to the quiz', '3', '30%'])
-    expect(screen.queryByText(/Closed on step/)).toBeNull()
-    // The pre-split 'button' row only appears when there is something in it
-    expect(screen.queryByText(/before Sep 26/)).toBeNull()
-  })
-
-  it('keeps opens from before steps were tracked out of the funnel percentages', () => {
-    const withTour = { ...data,
-      monthly: [...data.monthly,
-        { month: '2026-09', event: 'tour_open', n: 60 },
-        { month: '2026-09', event: 'tour_cta', n: 5 }],
-      tourMeta: [
-        { month: '2026-09', event: 'tour_open', meta: 'auto', n: 31, tracked: false },
-        { month: '2026-09', event: 'tour_open', meta: 'auto', n: 28, tracked: true },
-        { month: '2026-09', event: 'tour_open', meta: 'sheet', n: 1, tracked: true },
-        { month: '2026-09', event: 'tour_step', meta: '2', n: 5, tracked: true },
-        { month: '2026-09', event: 'tour_close', meta: '1', n: 5, tracked: true },
-      ] }
-    render(<AnalyticsPanel data={withTour} />)
-    fireEvent.click(screen.getByRole('button', { name: 'Sep 2026' }))
-    const cells = (label: string) =>
-      [...screen.getByText(label).closest('tr')!.querySelectorAll('td')].map(c => c.textContent)
-    // Where it was opened still counts every opening
-    expect(cells('Opened on its own (before Sep 27 2026)')).toEqual(['Opened on its own (before Sep 27 2026)', '59', '98%'])
-    expect(cells('Not tracked (opened before Sep 26 2026, 10 pm)')).toEqual(['Not tracked (opened before Sep 26 2026, 10 pm)', '31', ''])
-    expect(cells('Step 1: Find')).toEqual(['Step 1: Find', '29', '100%'])
-    expect(cells('Step 2: Shortlist')).toEqual(['Step 2: Shortlist', '5', '17%'])
-    expect(cells('Went on to the quiz')).toEqual(['Went on to the quiz', '5', '17%'])
+    expect(screen.queryByText(/Step 1/)).toBeNull()
+    expect(screen.queryByText(/Where it was opened/)).toBeNull()
+    fireEvent.click(screen.getByRole('button', { name: 'All time' }))
+    expect(cells('Opened')).toEqual(['Opened', '15', ''])
+    expect(cells('Went on to the quiz')).toEqual(['Went on to the quiz', '3', '20%'])
   })
 
   it('splits saves by the button used, with the rate per 100 views', () => {
