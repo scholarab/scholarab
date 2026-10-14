@@ -73839,5 +73839,757 @@
       "apprenticeship": false,
       "extracurriculars": []
     }
+  },
+  {
+    "id": 1996,
+    "title": "Animikii Technology and Entrepreneurship Awards for Indigenous Youth",
+    "amount": "$1,000",
+    "deadline": "2026-10-31",
+    "audience": "Indigenous youth aged 17 to 30 in a post-secondary technology or entrepreneurship program",
+    "url": "https://animikii.com/impact/scholarship",
+    "category": "Indigenous",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Any academic level counts, so a first-year student can apply. The technology award favours computer studies but stays open to other kinds of technology, and the entrepreneurship award asks how your program is helping you build a business. Young people with a business idea or a business under two years old can also apply without being in school.",
+    "active": true,
+    "description": "Animikii, an Indigenous-owned technology company, gives two $1,000 awards each year to Indigenous youth studying technology or entrepreneurship.",
+    "metaDetail": "Any academic level counts.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "STEM",
+        "Business"
+      ],
+      "minAverage": null,
+      "minAge": 17,
+      "maxAge": 30,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1997,
+    "title": "Jays Care Scholarships presented by Rogers",
+    "amount": "$2,000",
+    "deadline": "2027-06-04",
+    "deadlineEstimated": true,
+    "audience": "Canadian students aged 25 or under starting a first degree, diploma or trades program with a 70% average",
+    "url": "https://www.mlb.com/bluejays/community/jays-care/scholarships",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "You need a cumulative average of 70% over your last three terms of marks and must be a citizen or permanent resident starting full-time studies at a Canadian university, college or trade school. The application closes early once 800 applications arrive, so apply as soon as it opens.",
+    "active": true,
+    "description": "Jays Care Foundation, the Toronto Blue Jays charity, gives 500 entrance scholarships of $2,000 each year to students starting post-secondary studies.",
+    "metaDetail": "Closes early at 800 applications.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": 25,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1998,
+    "title": "Junior Gelbvieh Scholarship",
+    "amount": "$500",
+    "deadline": "2027-07-15",
+    "audience": "Junior members of the Canadian Gelbvieh Association under age 21",
+    "url": "https://gelbvieh.ca/juniors.php",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Junior membership in the Canadian Gelbvieh Association is open to young people under 21. Fill in the scholarship form and add a one-page essay about your work with Gelbvieh cattle. The deadline is July 15 every year.",
+    "active": true,
+    "description": "The Canadian Gelbvieh Association gives an annual $500 scholarship to junior members involved with the breed.",
+    "metaDetail": "A one-page essay about your cattle.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Agriculture"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": 20,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "4-H"
+      ]
+    }
+  },
+  {
+    "id": 1999,
+    "title": "Katrina Sriranpong Bursary",
+    "amount": "$1,000",
+    "deadline": "2027-07-01",
+    "deadlineEstimated": true,
+    "audience": "Students at Canadian colleges and universities with financial need and a record of standing up for human rights",
+    "url": "https://www.katrinasriranpong-bursary.com/",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Any major qualifies. Write a 500 to 1,000 word essay on your financial need and a time you advocated for human rights, then attach proof of need and your admission letter once you have one, so Grade 12 students heading to post-secondary can apply.",
+    "active": true,
+    "description": "Refugee lawyer Katrina Sriranpong gives a $1,000 bursary each year to a Canadian student in financial need who advocates for human rights.",
+    "metaDetail": "An admission letter is enough.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2000,
+    "title": "Sarah Gaulin Memorial Scholarship",
+    "amount": "$1,000",
+    "deadline": null,
+    "audience": "Full-time Canadian college and university students living with a diagnosed mental health condition",
+    "url": "https://gaulin.foundation/en/scholarship_criteria.php",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "You need a mental health condition diagnosed at least two years ago and an ongoing treatment plan with a health professional or campus counselling service. You must be studying full-time and returning full-time in the fall, so a Grade 12 graduate applies during first year. Developmental and learning disabilities, ADHD and autism are covered by other programs, not this one. Citizens and permanent residents can apply, and the next intake opens in the fall.",
+    "active": true,
+    "description": "The Gaulin Foundation gives $1,000 scholarships to post-secondary students who keep studying while managing a serious mental health condition.",
+    "metaDetail": "Apply during first year.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2001,
+    "title": "MAE Indigenous Education Fund",
+    "amount": "$1,000",
+    "deadline": "2027-05-31",
+    "audience": "Indigenous students in full-time science, technology, engineering or math studies anywhere in Canada",
+    "url": "https://www.mccuaig.net/scholarship.html",
+    "category": "Indigenous",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "One $1,000 award is given each year, or two of $500 if two students are chosen. Email the application with proof of enrolment between January 1 and May 31, so a Grade 12 graduate applies during first year. The winner hears by June 30.",
+    "active": true,
+    "description": "McCuaig and Associates Engineering gives $1,000 each year to an Indigenous student in a STEM program.",
+    "metaDetail": "Two winners would split it.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "STEM",
+        "Engineering"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2002,
+    "title": "Bethany Care Foundation Scholarships",
+    "amount": "$2,000",
+    "deadline": "2027-06-30",
+    "deadlineEstimated": true,
+    "audience": "Students in health care aide, nursing, health leadership or allied health programs",
+    "url": "https://bethanyseniors.com/scholarships-awards/scholarships-awards/",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "Alberta",
+    "notes": "You must be enrolled in a health care aide, nursing, health leadership or allied health program for the coming school year. Apply online between April 1 and June 30, which works for Grade 12 students already accepted into a fall program. Selection weighs your marks, clear career goals and your contribution to continuing care.",
+    "active": true,
+    "description": "Bethany Care Foundation, which runs seniors care in Calgary and central Alberta, gives $2,000 scholarships to students training for health careers.",
+    "metaDetail": "Applications open April 1.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Health",
+        "Nursing"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2003,
+    "title": "Anne Falk Memorial Education Endowment Fund",
+    "amount": "$1,000",
+    "deadline": "2026-10-30",
+    "audience": "First and second generation immigrants living and studying in Edmonton in a health-related program",
+    "url": "https://newcomercentre.com/program/anne-falk-endowment-fund/",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "Edmonton",
+    "notes": "You must be an immigrant or the child of immigrants, live and study in Edmonton, and be in the first or second year of a health-related diploma or degree. Part-time study counts if the program lasts at least four months. In 2025 two students received $1,000 each.",
+    "active": true,
+    "description": "The Edmonton Newcomer Centre gives an annual award to young immigrants starting health careers, in memory of founding nurse Anne Falk.",
+    "metaDetail": "First-year students can apply.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Health"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2004,
+    "title": "Canadian Junior Limousin Association Scholarship",
+    "amount": "$1,000",
+    "deadline": "2026-10-31",
+    "audience": "Members of the Canadian Junior Limousin Association attending or enrolled in college or university",
+    "url": "https://www.limousin.com/juniors/scholarships/",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "You must be a junior member in good standing for the calendar year and attending, or enrolled at, a college or university, so Grade 12 students with an acceptance can apply. Selection looks at your involvement in the junior or provincial association, leadership and interest in the cattle industry. You can win it only once. The deadline is October 31 every year.",
+    "active": true,
+    "description": "The Canadian Junior Limousin Association gives a $1,000 scholarship each year to a junior member heading into post-secondary studies.",
+    "metaDetail": "The deadline is October 31 every year.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Agriculture"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "4-H"
+      ]
+    }
+  },
+  {
+    "id": 2005,
+    "title": "Canadian Charolais Association Scholarships",
+    "amount": "$1,000 to $1,500",
+    "deadline": "2026-10-31",
+    "deadlineEstimated": true,
+    "audience": "Post-secondary students in an agriculture-related program whose family uses Charolais bulls",
+    "url": "https://charolais.com/wp-content/uploads/2025/09/CCA-Scholarship-Form.pdf",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "You must be involved in agriculture and registered at a college or university in a field that supports agriculture. You or your family must have bought or be using a Charolais bull. Send the form with a list of your activities, a description of your involvement with the breed, your reasons for applying, two reference letters and a transcript. Recent years offered two $1,000 awards plus the $1,500 Dale Norheim Memorial Scholarship.",
+    "active": true,
+    "description": "The Canadian Charolais Association gives three scholarships each year to students in agriculture programs with ties to the Charolais breed.",
+    "metaDetail": "Your family must use a Charolais bull.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Agriculture"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2006,
+    "title": "Canadian Junior Shorthorn Association Scholarship",
+    "amount": "$1,000",
+    "deadline": "2026-11-01",
+    "audience": "Young Shorthorn cattle enthusiasts heading into or attending post-secondary studies",
+    "url": "https://www.canadianshorthorn.com/cjsascholarship",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "The application form is on the Canadian Shorthorn Association site, and the deadline is November 1 every year.",
+    "active": true,
+    "description": "The Canadian Junior Shorthorn Association gives two $1,000 scholarships each year to young people involved with Shorthorn cattle.",
+    "metaDetail": "Two winners every year.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Agriculture"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "4-H"
+      ]
+    }
+  },
+  {
+    "id": 2007,
+    "title": "CUPE Alberta Rick Malcolm Education Scholarship",
+    "amount": "Varies",
+    "deadline": "2027-09-01",
+    "audience": "Members of CUPE locals in Alberta and their spouses and children going to post-secondary",
+    "url": "https://787.cupe.ca/resources/scholarships/",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "Alberta",
+    "notes": "The member must belong to a CUPE local affiliated with the Alberta Division, and the application goes through that local with a letter of endorsement. Write an essay of up to 1,000 words on a topic such as why unions matter or youth involvement in unions. Winners show proof of registration at a post-secondary school. The deadline is September 1 every year and past winners cannot apply again.",
+    "active": true,
+    "description": "CUPE Alberta gives an annual education scholarship to a union member or a member's spouse or child going to post-secondary.",
+    "metaDetail": "Apply through your parent's local.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2008,
+    "title": "CUPE Local 787 Scholarship",
+    "amount": "Varies",
+    "deadline": "2026-11-01",
+    "audience": "Members of CUPE Local 787 in Grande Prairie and their spouses and children going to post-secondary",
+    "url": "https://787.cupe.ca/resources/scholarships/",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "Grande Prairie",
+    "notes": "Use the Local 787 application form and send it to the local's Membership Officer by November 1. Include an essay of up to 1,000 words on a topic such as why unions matter. Winners show proof of registration at a post-secondary school, and past winners cannot apply again.",
+    "active": true,
+    "description": "CUPE Local 787 in Grande Prairie gives a yearly scholarship to a member or a member's spouse or child going to post-secondary.",
+    "metaDetail": "Past winners cannot reapply.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2009,
+    "title": "CJHA Keith Gilmore Foundation Future of the Breed Scholarship",
+    "amount": "$1,000",
+    "deadline": "2027-05-15",
+    "audience": "Active Canadian Junior Hereford Association members in their last year of high school or entering post-secondary",
+    "url": "http://keithgilmorefoundation.com/futureofthebreedscholarship",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "This is an entry scholarship for students in Grade 12 or entering their first year of a full-time program of any kind. You need an active junior Hereford membership. Send a cover sheet, a resume, four short essays on your plans, interests, junior Hereford involvement and other activities, an unofficial transcript and one reference letter. Up to four are given each year and you can win only once.",
+    "active": true,
+    "description": "The Keith Gilmore Foundation and the Canadian Junior Hereford Association give up to four $1,000 scholarships each year to junior members starting post-secondary.",
+    "metaDetail": "Built for Grade 12 students.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Agriculture"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "4-H"
+      ]
+    }
+  },
+  {
+    "id": 2010,
+    "title": "Keith Gilmore Foundation Trade Worker Bursary",
+    "amount": "$2,500",
+    "deadline": "2027-06-01",
+    "audience": "Canadian Hereford Association members and their families entering a skilled trade or technical program that benefits agriculture",
+    "url": "https://keithgilmorefoundation.com/new-bursary-for-2024",
+    "category": "Trades",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Anyone tied to a Canadian Hereford Association membership can apply at any age. The program must be a skilled worker course that helps agriculture, such as welding, mechanics, ultrasound, health care or artificial insemination. Send an essay with proof of registration and the program cost. One bursary is given each year and you can win only once.",
+    "active": true,
+    "description": "The Keith Gilmore Foundation gives a $2,500 bursary each year to a Hereford family member training for a trade that serves agriculture.",
+    "metaDetail": "Open to members of any age.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "trades",
+        "Agriculture"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2011,
+    "title": "EQUS Member Scholarship",
+    "amount": "$1,500",
+    "deadline": "2027-08-01",
+    "audience": "EQUS members and their children going into a post-secondary or apprenticeship program of at least two years",
+    "url": "https://equs.ca/community/",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "Alberta",
+    "localArea": "Families of EQUS rural power co-op members across Alberta",
+    "notes": "You or a parent or guardian must be an EQUS member in good standing, and you must be an Alberta resident who is a citizen or permanent resident. Send the form, an essay of up to 1,000 words on yourself and your plans, Alberta transcripts, two reference letters and your acceptance letter. Applications open June 1 and must be postmarked by August 1. Past winners cannot apply again.",
+    "active": true,
+    "description": "EQUS, the rural Alberta power co-op, gives four $1,500 scholarships each year to members and their children starting a program of two years or more.",
+    "metaDetail": "Four $1,500 awards for member families.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "trades"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2012,
+    "title": "Lakeland Power Co-op Scholarship",
+    "amount": "$500",
+    "deadline": "2027-08-01",
+    "audience": "Children and grandchildren of Lakeland Power Co-op members finishing high school",
+    "url": "https://www.lakelandrea.com/member-community",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "Alberta",
+    "localArea": "Lakeland Power Co-op service area around Vegreville, Lavoy and Derwent",
+    "notes": "A parent, grandparent or guardian must be a member in good standing. You must have graduated this year or last year and be starting a full-time program of at least two years or a first year apprenticeship. Mail the form, an essay of up to 1,000 words, your acceptance letter, Alberta transcripts and two reference letters to the Vegreville office by August 1.",
+    "active": true,
+    "description": "Lakeland Power Co-op gives two $500 scholarships each year to recent high school graduates from member families around Vegreville.",
+    "metaDetail": "Two $500 awards for member families.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "trades"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2013,
+    "title": "Brian Good Memorial Scholarship",
+    "amount": "$2,000 to $3,000",
+    "deadline": "2026-10-15",
+    "audience": "Students in their last year of high school or already in post-secondary who are committed to the livestock industry, up to age 30",
+    "url": "https://www.cdnangus.ca/foundation/scholarships-bursaries-and-awards/",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Email a typed application to the Canadian Angus Foundation by October 15 with a cover sheet, a resume of your industry, community and school involvement, a 500 to 750 word essay on your livestock operation, how you market your cattle and your career plans, and three references. Winners show proof of enrolment in a second semester before the money is paid, and past winners cannot apply again.",
+    "active": true,
+    "description": "The Canadian Angus Foundation gives two awards worth $5,000 in total each year to a young person committed to the livestock industry, presented at Canadian Western Agribition.",
+    "metaDetail": "Grade 12 students can apply.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Agriculture"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": 30,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "4-H"
+      ]
+    }
+  },
+  {
+    "id": 2014,
+    "title": "Tolko Woodlands Indigenous Student Scholarship",
+    "amount": "$1,000",
+    "deadline": "2027-06-30",
+    "deadlineEstimated": true,
+    "audience": "Indigenous students accepted to post-secondary who live where Tolko operates, including the Slave Lake, High Level and High Prairie areas",
+    "url": "https://tolko.com/responsibility/scholarship-program/woodlands-scholarship-program/",
+    "category": "Indigenous",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply with the online form on the Tolko site, sharing your program, school, community, career goals and activities, and a statement on why you should be chosen. Send proof of acceptance now and proof of enrolment later. Forestry and related programs get priority but any field can apply. Questions go to WoodlandsScholarships@tolko.com.",
+    "active": true,
+    "description": "Tolko Industries gives twenty five $1,000 scholarships each year to Indigenous students from the communities around its forestry operations.",
+    "metaDetail": "Twenty five awards a year.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Forestry"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
   }
 ]
