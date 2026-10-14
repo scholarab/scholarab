@@ -78956,5 +78956,3080 @@
       "apprenticeship": false,
       "extracurriculars": []
     }
+  },
+  {
+    "id": 2119,
+    "title": "Mary Anderson Memorial Bursary",
+    "amount": "$2,250",
+    "deadline": "2027-03-01",
+    "openDate": "2026-11-01",
+    "audience": "Grade 12 students entering first-year Education at Mount Royal with financial need",
+    "url": "https://mtroyal.academicworks.ca/opportunities/16518",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Only full-time students starting the Bachelor of Education in the fall qualify. Financial need decides it.",
+    "active": true,
+    "description": "A Mount Royal bursary in memory of Mary Anderson for a first-year student training to teach.",
+    "metaDetail": "For future teachers.",
+    "oneForm": "mru",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Mount Royal University"
+      ],
+      "fields": [
+        "Education"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2120,
+    "title": "Irene Robbins Memorial Entrance Bursary",
+    "amount": "$1,000",
+    "deadline": "2027-03-01",
+    "openDate": "2026-11-01",
+    "audience": "Grade 12 students entering first-year Science or Computer Information Systems at Mount Royal with financial need",
+    "url": "https://mtroyal.academicworks.ca/opportunities/16679",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must start the Bachelor of Science or the Bachelor of Computer Information Systems full time in the fall. Need decides it.",
+    "active": true,
+    "description": "Named for Irene Robbins, this Mount Royal entrance bursary helps a first-year science or computing student who needs the money.",
+    "metaDetail": "Science or computing, need.",
+    "oneForm": "mru",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Mount Royal University"
+      ],
+      "fields": [
+        "Science",
+        "Computer Science"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2121,
+    "title": "City of Calgary Bursary (Mount Royal)",
+    "amount": "$1,250",
+    "deadline": "2027-03-01",
+    "openDate": "2026-11-01",
+    "audience": "Calgary Grade 12 students entering first year at Mount Royal with financial need",
+    "url": "https://mtroyal.academicworks.ca/opportunities/16690",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "Calgary",
+    "notes": "You must graduate from a Calgary high school this year and start any degree, diploma or University Entrance program full time in the fall. Need and marks both count.",
+    "active": true,
+    "description": "The City of Calgary funds this Mount Royal entrance bursary for a graduating Calgary student.",
+    "metaDetail": "For Calgary graduates.",
+    "oneForm": "mru",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Mount Royal University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2122,
+    "title": "MRSA Open Studies Entrance Bursary",
+    "amount": "$3,000",
+    "deadline": "2027-03-01",
+    "openDate": "2026-11-01",
+    "audience": "Grade 12 students entering Open Studies at Mount Royal with financial need",
+    "url": "https://mtroyal.academicworks.ca/opportunities/16846",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Open only to students starting Open Studies in the fall. Need decides it.",
+    "active": true,
+    "description": "The Students' Association of Mount Royal funds this bursary for a new Open Studies student still choosing a program.",
+    "metaDetail": "For Open Studies.",
+    "oneForm": "mru",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Mount Royal University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2123,
+    "title": "Kay Kirby Pullen Entrance Scholarship in Nursing (Mount Royal)",
+    "amount": "$2,750",
+    "deadline": "2027-03-01",
+    "openDate": "2026-11-01",
+    "audience": "Rural Grade 12 students entering first-year Nursing at Mount Royal",
+    "url": "https://mtroyal.academicworks.ca/opportunities/16868",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must come from a rural area and start the Bachelor of Nursing full time. Marks count, and high school volunteer work or student council leadership earns preference.",
+    "active": true,
+    "description": "A Mount Royal nursing entrance scholarship in memory of Kay Kirby Pullen for a student from a rural community.",
+    "metaDetail": "Rural nursing entrants.",
+    "oneForm": "mru",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Mount Royal University"
+      ],
+      "fields": [
+        "Nursing"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer",
+        "Student Council"
+      ]
+    }
+  },
+  {
+    "id": 2124,
+    "title": "Carol Pullen Dacyk Memorial Scholarship",
+    "amount": "$1,500",
+    "deadline": "2027-03-01",
+    "openDate": "2026-11-01",
+    "audience": "Grade 12 students entering first-year Aviation at Mount Royal",
+    "url": "https://mtroyal.academicworks.ca/opportunities/17045",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must start the Aviation program full time in the fall. Marks decide it, and a graduate of a rural Alberta high school gets preference.",
+    "active": true,
+    "description": "Remembering Carol Pullen Dacyk, this Mount Royal entrance scholarship goes to a new aviation student.",
+    "metaDetail": "For aviation entrants.",
+    "oneForm": "mru",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Mount Royal University"
+      ],
+      "fields": [
+        "Aviation"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2125,
+    "title": "David and Leslie Bissett Bursary",
+    "amount": "$5,000",
+    "deadline": "2027-03-01",
+    "openDate": "2026-11-01",
+    "audience": "Calgary Grade 12 students entering first-year Business at Mount Royal with financial need",
+    "url": "https://mtroyal.academicworks.ca/opportunities/17059",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "Calgary",
+    "notes": "You must graduate from a Calgary high school this year and start a Bachelor of Business Administration full time. The winner is considered for renewal for up to three more years while full time at Mount Royal.",
+    "active": true,
+    "description": "David and Leslie Bissett fund this renewable Mount Royal business bursary for a Calgary graduate in need.",
+    "metaDetail": "Renewable, for Calgary grads.",
+    "oneForm": "mru",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Mount Royal University"
+      ],
+      "fields": [
+        "Business"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2126,
+    "title": "WorldSkills Calgary 2009 Scholarship",
+    "amount": "$1,250",
+    "deadline": "2027-03-01",
+    "openDate": "2026-11-01",
+    "audience": "Grade 12 students entering first-year Environmental Science at Mount Royal",
+    "url": "https://mtroyal.academicworks.ca/opportunities/17075",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must start the Environmental Science major of the Bachelor of Science full time. Marks count alongside campus or community involvement.",
+    "active": true,
+    "description": "Left by the 2009 WorldSkills competition in Calgary, this Mount Royal entrance scholarship backs a new environmental science student.",
+    "metaDetail": "Environmental science entrants.",
+    "oneForm": "mru",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Mount Royal University"
+      ],
+      "fields": [
+        "Environmental Science"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2127,
+    "title": "Everest Family Bursary",
+    "amount": "$6,250",
+    "deadline": "2027-03-01",
+    "openDate": "2026-11-01",
+    "audience": "Alberta Grade 12 students entering first-year Arts at Mount Royal with financial need",
+    "url": "https://mtroyal.academicworks.ca/opportunities/17114",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must graduate from an Alberta high school and start the Bachelor of Arts full time. Need decides it, and a graduate of a Jasper high school gets preference.",
+    "active": true,
+    "description": "The Everest family funds this Mount Royal arts bursary, one of the larger first-year bursaries on the campus.",
+    "metaDetail": "Arts entrants in need.",
+    "oneForm": "mru",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Mount Royal University"
+      ],
+      "fields": [
+        "Arts"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2128,
+    "title": "Chief Jack Beaton Bursary in Criminal Justice Studies",
+    "amount": "$4,250",
+    "deadline": "2027-03-01",
+    "openDate": "2026-11-01",
+    "audience": "Grade 12 students entering first-year Criminal Justice at Mount Royal with financial need",
+    "url": "https://mtroyal.academicworks.ca/opportunities/17115",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must start the Criminal Justice program of the Bachelor of Arts full time. Need decides it.",
+    "active": true,
+    "description": "Named for Jack Beaton, this Mount Royal bursary helps a first-year criminal justice student.",
+    "metaDetail": "Criminal justice, need.",
+    "oneForm": "mru",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Mount Royal University"
+      ],
+      "fields": [
+        "Social Sciences"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2129,
+    "title": "MacNeill/Enbridge Entrance Scholarship in Business",
+    "amount": "$1,250",
+    "deadline": "2027-03-01",
+    "openDate": "2026-11-01",
+    "audience": "Grade 12 students entering first-year Business at Mount Royal with no prior post-secondary",
+    "url": "https://mtroyal.academicworks.ca/opportunities/17141",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must start the Bachelor of Business Administration full time with no earlier post-secondary study. Academic excellence decides it.",
+    "active": true,
+    "description": "MacNeill and Enbridge fund this Mount Royal business entrance scholarship for a top student coming straight from high school.",
+    "metaDetail": "Business, straight from school.",
+    "oneForm": "mru",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Mount Royal University"
+      ],
+      "fields": [
+        "Business"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2130,
+    "title": "Thomas L. Wood Scholarship in Mathematics",
+    "amount": "$1,250",
+    "deadline": "2027-03-01",
+    "openDate": "2026-11-01",
+    "audience": "Grade 12 students entering the Faculty of Science and Technology at Mount Royal with a focus on math",
+    "url": "https://mtroyal.academicworks.ca/opportunities/17168",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Any first-year program in Science and Technology qualifies if your focus is mathematics. Shown ability and interest in math count with financial need.",
+    "active": true,
+    "description": "A Mount Royal entrance scholarship named for Thomas L. Wood for a new student drawn to mathematics.",
+    "metaDetail": "For math students.",
+    "oneForm": "mru",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Mount Royal University"
+      ],
+      "fields": [
+        "Mathematics"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2131,
+    "title": "Fred C and Margaret Mannix Scholarship in Nonprofit Studies for Excellence in High School",
+    "amount": "$1,000",
+    "deadline": "2027-03-01",
+    "openDate": "2026-11-01",
+    "audience": "Grade 12 students entering first-year Business at Mount Royal with no prior post-secondary",
+    "url": "https://mtroyal.academicworks.ca/opportunities/17308",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must start the Bachelor of Business Administration full time straight from high school, with no earlier post-secondary study. Marks decide it.",
+    "active": true,
+    "description": "The Mannix family funds this Mount Royal entrance scholarship honouring high school achievement, tied to the nonprofit studies program.",
+    "metaDetail": "Business, high school marks.",
+    "oneForm": "mru",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Mount Royal University"
+      ],
+      "fields": [
+        "Business"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2132,
+    "title": "School of Communication Studies Scholarship",
+    "amount": "$2,000",
+    "deadline": "2027-03-01",
+    "openDate": "2026-11-01",
+    "audience": "Grade 12 students entering first-year Communication at Mount Royal",
+    "url": "https://mtroyal.academicworks.ca/opportunities/17325",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must start the Bachelor of Communication full time. Academic excellence decides it.",
+    "active": true,
+    "description": "Mount Royal's School of Communication Studies gives this entrance scholarship to a top first-year student.",
+    "metaDetail": "Communication entrants.",
+    "oneForm": "mru",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Mount Royal University"
+      ],
+      "fields": [
+        "Communications"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2133,
+    "title": "MRU Scholarship in Social Work",
+    "amount": "$3,250",
+    "deadline": "2027-03-01",
+    "openDate": "2026-11-01",
+    "audience": "Grade 12 students entering first-year Social Work at Mount Royal",
+    "url": "https://mtroyal.academicworks.ca/opportunities/17346",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "The Bachelor of Social Work and the Social Work diploma both qualify, full time in first year. Marks decide it.",
+    "active": true,
+    "description": "Mount Royal's own entrance scholarship for a new social work student.",
+    "metaDetail": "Social work entrants.",
+    "oneForm": "mru",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Mount Royal University"
+      ],
+      "fields": [
+        "Social Work"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2134,
+    "title": "Rory and Drewe Hewson Salahor Bursary",
+    "amount": "$1,250",
+    "deadline": "2027-03-01",
+    "openDate": "2026-11-01",
+    "audience": "Grade 12 students entering the Faculty of Arts at Mount Royal with financial need",
+    "url": "https://mtroyal.academicworks.ca/opportunities/17364",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Any first-year Arts program qualifies. Need and campus or community involvement count, and a student with a disability gets preference.",
+    "active": true,
+    "description": "The Hewson Salahor family funds this Mount Royal arts bursary, with a preference for students with disabilities.",
+    "metaDetail": "Arts, need, disability preferred.",
+    "oneForm": "mru",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Mount Royal University"
+      ],
+      "fields": [
+        "Arts"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2135,
+    "title": "Environmental Science Entrance Award (Mount Royal)",
+    "amount": "$7,250",
+    "deadline": "2027-03-01",
+    "openDate": "2026-11-01",
+    "audience": "Grade 12 students entering first-year Environmental Science at Mount Royal",
+    "url": "https://mtroyal.academicworks.ca/opportunities/17448",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must start the Environmental Science major of the Bachelor of Science full time. Marks, community service and financial need are all weighed.",
+    "active": true,
+    "description": "At $7,250 this is one of the largest first-year awards in Mount Royal's science faculty.",
+    "metaDetail": "Marks, service and need.",
+    "oneForm": "mru",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Mount Royal University"
+      ],
+      "fields": [
+        "Environmental Science"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2136,
+    "title": "Ecotourism and Outdoor Leadership Scholarship for Entrance Students",
+    "amount": "$1,500",
+    "deadline": "2027-03-01",
+    "openDate": "2026-11-01",
+    "audience": "Grade 12 students entering Ecotourism and Outdoor Leadership at Mount Royal",
+    "url": "https://mtroyal.academicworks.ca/opportunities/17463",
+    "category": "Sports",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must start the Ecotourism and Outdoor Leadership major of the Bachelor of Health and Physical Education full time. Marks and financial need count.",
+    "active": true,
+    "description": "A Mount Royal entrance scholarship for a new student in the outdoor leadership major.",
+    "metaDetail": "Outdoor leadership entrants.",
+    "oneForm": "mru",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Mount Royal University"
+      ],
+      "fields": [
+        "Recreation"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2137,
+    "title": "Sport and Recreation Scholarship for Entrance Students",
+    "amount": "$1,500",
+    "deadline": "2027-03-01",
+    "openDate": "2026-11-01",
+    "audience": "Grade 12 students entering Sport and Recreation Management at Mount Royal",
+    "url": "https://mtroyal.academicworks.ca/opportunities/17611",
+    "category": "Sports",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must start the Sport and Recreation Management major of the Bachelor of Health and Physical Education full time. Marks and financial need count.",
+    "active": true,
+    "description": "A Mount Royal entrance scholarship for a new student in the sport management major.",
+    "metaDetail": "Sport management entrants.",
+    "oneForm": "mru",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Mount Royal University"
+      ],
+      "fields": [
+        "Recreation"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2138,
+    "title": "Merv Anderson Memorial Bursary",
+    "amount": "$3,250",
+    "deadline": "2027-03-01",
+    "openDate": "2026-11-01",
+    "audience": "Grade 12 students entering first-year Journalism and Digital Media at Mount Royal with financial need",
+    "url": "https://mtroyal.academicworks.ca/opportunities/17614",
+    "category": "Arts",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must start the Journalism and Digital Media major of the Bachelor of Communication full time. Need decides it.",
+    "active": true,
+    "description": "Named for Merv Anderson, this Mount Royal bursary helps a new journalism student.",
+    "metaDetail": "Journalism, need.",
+    "oneForm": "mru",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Mount Royal University"
+      ],
+      "fields": [
+        "Journalism"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2139,
+    "title": "Gordon Lingenfelter Memorial Scholarship",
+    "amount": "$2,500",
+    "deadline": "2027-03-01",
+    "openDate": "2026-11-01",
+    "audience": "Rural Grade 12 students entering Science and Technology at Mount Royal and living in residence",
+    "url": "https://mtroyal.academicworks.ca/opportunities/17697",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must come from a rural area and live in Mount Royal Residence in the fall. Marks and need count, and a Saskatchewan high school graduate gets preference.",
+    "active": true,
+    "description": "Remembering Gordon Lingenfelter, this Mount Royal scholarship helps a rural science student move to campus.",
+    "metaDetail": "Rural, living in residence.",
+    "oneForm": "mru",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Mount Royal University"
+      ],
+      "fields": [
+        "Science"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2140,
+    "title": "Joyce Wontner Memorial Entrance Bursary",
+    "amount": "$3,000",
+    "deadline": "2027-03-01",
+    "openDate": "2026-11-01",
+    "audience": "Grade 12 students entering first-year Child Studies at Mount Royal with financial need",
+    "url": "https://mtroyal.academicworks.ca/opportunities/17730",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must start the Bachelor of Child Studies full time. Need decides it, and a single parent gets preference.",
+    "active": true,
+    "description": "A Mount Royal bursary in memory of Joyce Wontner for a first-year child studies student.",
+    "metaDetail": "Child studies, need.",
+    "oneForm": "mru",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Mount Royal University"
+      ],
+      "fields": [
+        "Education"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2141,
+    "title": "Ike Kolias Centennial Entrance Scholarship",
+    "amount": "$2,000",
+    "deadline": "2027-03-01",
+    "openDate": "2026-11-01",
+    "audience": "Grade 12 students entering first-year Arts at Mount Royal",
+    "url": "https://mtroyal.academicworks.ca/opportunities/17777",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must start the Bachelor of Arts full time. Marks decide it.",
+    "active": true,
+    "description": "Created for Mount Royal's centennial, this entrance scholarship is named for Ike Kolias.",
+    "metaDetail": "Arts entrants.",
+    "oneForm": "mru",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Mount Royal University"
+      ],
+      "fields": [
+        "Arts"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2142,
+    "title": "Catalyst Bursary (Mount Royal)",
+    "amount": "$2,500",
+    "deadline": "2027-03-01",
+    "openDate": "2026-11-01",
+    "audience": "Grade 12 students entering first year at Mount Royal with financial need",
+    "url": "https://mtroyal.academicworks.ca/opportunities/17919",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Any first-year program qualifies, full time. Need decides it, and a single parent gets preference.",
+    "active": true,
+    "description": "A Mount Royal entrance bursary open to every program for a student who needs the money.",
+    "metaDetail": "Any program, need.",
+    "oneForm": "mru",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Mount Royal University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2143,
+    "title": "Helen Hartman Smith Centennial Entrance Scholarship",
+    "amount": "$3,000",
+    "deadline": "2027-03-01",
+    "openDate": "2026-11-01",
+    "audience": "Grade 12 students entering first-year English at Mount Royal",
+    "url": "https://mtroyal.academicworks.ca/opportunities/17924",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must start the English major of the Bachelor of Arts full time. Academic excellence decides it.",
+    "active": true,
+    "description": "Created for Mount Royal's centennial in honour of Helen Hartman Smith, this scholarship rewards a top new English student.",
+    "metaDetail": "English entrants.",
+    "oneForm": "mru",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Mount Royal University"
+      ],
+      "fields": [
+        "Arts"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2144,
+    "title": "Calgary Police Half Marathon Social Work Bursary",
+    "amount": "$1,500",
+    "deadline": "2027-03-01",
+    "openDate": "2026-11-01",
+    "audience": "Grade 12 students entering first-year Social Work at Mount Royal with financial need",
+    "url": "https://mtroyal.academicworks.ca/opportunities/17973",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "The Bachelor of Social Work and the Social Work diploma both qualify, full time. Need decides it.",
+    "active": true,
+    "description": "Money raised by the Calgary Police Half Marathon funds this Mount Royal bursary for a new social work student.",
+    "metaDetail": "Social work, need.",
+    "oneForm": "mru",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Mount Royal University"
+      ],
+      "fields": [
+        "Social Work"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2145,
+    "title": "BMO Financial Group Entrance Scholarship (Mount Royal)",
+    "amount": "$1,250",
+    "deadline": "2027-03-01",
+    "openDate": "2026-11-01",
+    "audience": "Grade 12 students entering first-year Business at Mount Royal",
+    "url": "https://mtroyal.academicworks.ca/opportunities/18011",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must start the Bachelor of Business Administration full time. Marks decide it.",
+    "active": true,
+    "description": "BMO Financial Group funds this Mount Royal business entrance scholarship.",
+    "metaDetail": "Business entrants.",
+    "oneForm": "mru",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Mount Royal University"
+      ],
+      "fields": [
+        "Business"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2146,
+    "title": "Alberta Blue Cross Entrance Bursary (Mount Royal)",
+    "amount": "$1,250",
+    "deadline": "2027-03-01",
+    "openDate": "2026-11-01",
+    "audience": "Alberta Grade 12 students entering first year at Mount Royal with financial need",
+    "url": "https://mtroyal.academicworks.ca/opportunities/18021",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must be an Alberta resident with no earlier post-secondary study, starting any program full time. You cannot hold more than $5,000 in other scholarships and bursaries that year.",
+    "active": true,
+    "description": "Alberta Blue Cross funds this Mount Royal entrance bursary for Albertans heading to university for the first time.",
+    "metaDetail": "Need, under $5,000 in awards.",
+    "oneForm": "mru",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Mount Royal University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2147,
+    "title": "Alberta Blue Cross Away From Home Bursary (Mount Royal)",
+    "amount": "$1,250",
+    "deadline": "2027-03-01",
+    "openDate": "2026-11-01",
+    "audience": "Alberta Grade 12 students moving 100 km or more to attend Mount Royal",
+    "url": "https://mtroyal.academicworks.ca/opportunities/18112",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must be an Alberta resident relocating more than 100 kilometres one way, with no earlier post-secondary study. Need decides it, and you cannot hold more than $5,000 in other awards that year.",
+    "active": true,
+    "description": "Alberta Blue Cross funds this Mount Royal bursary for students who have to leave home to study in Calgary.",
+    "metaDetail": "For students moving 100 km.",
+    "oneForm": "mru",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Mount Royal University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2148,
+    "title": "Harman Boparai Memorial Bursary",
+    "amount": "$1,250",
+    "deadline": "2027-03-01",
+    "openDate": "2026-11-01",
+    "audience": "Grade 12 students entering a first-year degree at Mount Royal with financial need",
+    "url": "https://mtroyal.academicworks.ca/opportunities/18192",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Any degree program qualifies, full time. Need decides it.",
+    "active": true,
+    "description": "A Mount Royal entrance bursary in memory of Harman Boparai.",
+    "metaDetail": "Any degree, need.",
+    "oneForm": "mru",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Mount Royal University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2149,
+    "title": "Joe-Anne D'Avignon Interior Design Scholarship",
+    "amount": "$1,250",
+    "deadline": "2027-03-01",
+    "openDate": "2026-11-01",
+    "audience": "Grade 12 students entering first-year Interior Design at Mount Royal",
+    "url": "https://mtroyal.academicworks.ca/opportunities/18248",
+    "category": "Arts",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must start the Bachelor of Interior Design full time. Academic excellence decides it, and a student from outside Alberta gets preference.",
+    "active": true,
+    "description": "Named for Joe-Anne D'Avignon, this Mount Royal scholarship backs a new interior design student.",
+    "metaDetail": "Interior design entrants.",
+    "oneForm": "mru",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Mount Royal University"
+      ],
+      "fields": [
+        "Design"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2150,
+    "title": "Nolana Baillargeon Award",
+    "amount": "$1,500",
+    "deadline": "2027-03-01",
+    "openDate": "2026-11-01",
+    "audience": "Grade 12 string players entering Music Performance at Mount Royal",
+    "url": "https://mtroyal.academicworks.ca/opportunities/18306",
+    "category": "Arts",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must start the Music Performance program on a string instrument, full time. Need and artistic performance count, and alumni of the Conservatory's Academy program get preference.",
+    "active": true,
+    "description": "A Mount Royal Conservatory award named for Nolana Baillargeon for a new string performer.",
+    "metaDetail": "String players.",
+    "oneForm": "mru",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Mount Royal University"
+      ],
+      "fields": [
+        "Music"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "music"
+      ]
+    }
+  },
+  {
+    "id": 2151,
+    "title": "Ingram Family Foundation Nursing Entrance Scholarship",
+    "amount": "$3,000",
+    "deadline": "2027-03-01",
+    "openDate": "2026-11-01",
+    "audience": "Grade 12 students entering first-year Nursing at Mount Royal",
+    "url": "https://mtroyal.academicworks.ca/opportunities/18328",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must start the Bachelor of Nursing full time. Academic achievement decides it.",
+    "active": true,
+    "description": "The Ingram Family Foundation funds this Mount Royal nursing entrance scholarship.",
+    "metaDetail": "Nursing entrants.",
+    "oneForm": "mru",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Mount Royal University"
+      ],
+      "fields": [
+        "Nursing"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2152,
+    "title": "Ingram Family Foundation Business Entrance Scholarship",
+    "amount": "$3,000",
+    "deadline": "2027-03-01",
+    "openDate": "2026-11-01",
+    "audience": "Grade 12 students entering a first-year degree in the Bissett School of Business",
+    "url": "https://mtroyal.academicworks.ca/opportunities/18330",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Any degree in the Bissett School of Business qualifies, full time. Academic achievement decides it.",
+    "active": true,
+    "description": "The Ingram Family Foundation funds this Mount Royal business entrance scholarship.",
+    "metaDetail": "Business entrants.",
+    "oneForm": "mru",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Mount Royal University"
+      ],
+      "fields": [
+        "Business"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2153,
+    "title": "AimCo Business Entrance Scholarship",
+    "amount": "$2,500",
+    "deadline": "2027-03-01",
+    "openDate": "2026-11-01",
+    "audience": "Grade 12 students entering first-year Business at Mount Royal",
+    "url": "https://mtroyal.academicworks.ca/opportunities/18529",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must start the Bachelor of Business Administration full time. Marks decide it, and students majoring in Accounting or Finance get preference.",
+    "active": true,
+    "description": "Alberta Investment Management Corporation funds this Mount Royal business entrance scholarship.",
+    "metaDetail": "Accounting or finance preferred.",
+    "oneForm": "mru",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Mount Royal University"
+      ],
+      "fields": [
+        "Business",
+        "Accounting"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2154,
+    "title": "Clara Helen Moore Cormier Memorial Bursary in Nursing",
+    "amount": "$1,600",
+    "deadline": "2027-03-01",
+    "openDate": "2026-11-01",
+    "audience": "Canadian Grade 12 students entering first-year Nursing at Mount Royal with financial need",
+    "url": "https://mtroyal.academicworks.ca/opportunities/18565",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must be a Canadian citizen or permanent resident starting the Bachelor of Nursing full time. It renews for up to three more years while you stay full time in nursing.",
+    "active": true,
+    "description": "A renewable Mount Royal nursing bursary in memory of Clara Helen Moore Cormier.",
+    "metaDetail": "Renewable nursing bursary.",
+    "oneForm": "mru",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Mount Royal University"
+      ],
+      "fields": [
+        "Nursing"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2155,
+    "title": "Gloria Visser-Niven Memorial Entrance Bursary in Journalism and Digital Media",
+    "amount": "$1,000",
+    "deadline": "2027-03-01",
+    "openDate": "2026-11-01",
+    "audience": "Canadian Grade 12 students entering Journalism and Digital Media at Mount Royal with financial need",
+    "url": "https://mtroyal.academicworks.ca/opportunities/18572",
+    "category": "Arts",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must be a Canadian citizen or permanent resident starting the Journalism and Digital Media major full time. Need decides it.",
+    "active": true,
+    "description": "Remembering Gloria Visser-Niven, this Mount Royal bursary helps a new journalism student.",
+    "metaDetail": "Journalism, need.",
+    "oneForm": "mru",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Mount Royal University"
+      ],
+      "fields": [
+        "Journalism"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2156,
+    "title": "Alumni Legacy Entrance Scholarship (Mount Royal)",
+    "amount": "$3,500",
+    "deadline": "2027-03-01",
+    "openDate": "2026-11-01",
+    "audience": "Children of Mount Royal alumni entering a first-year degree at Mount Royal",
+    "url": "https://mtroyal.academicworks.ca/opportunities/18651",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "A parent must be an alumna or alumnus of Mount Royal College or Mount Royal University. Marks and community involvement count.",
+    "active": true,
+    "description": "Mount Royal's alumni fund this entrance scholarship for the next generation of the family.",
+    "metaDetail": "For alumni children.",
+    "oneForm": "mru",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Mount Royal University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2157,
+    "title": "Mount Royal Board of Governors' Entrance Scholarship",
+    "amount": "$4,750",
+    "deadline": "2027-03-01",
+    "openDate": "2026-11-01",
+    "audience": "Alberta Grade 12 students entering first year at Mount Royal with top marks",
+    "url": "https://mtroyal.academicworks.ca/opportunities/16688",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must graduate from an Alberta high school and start any degree, diploma or University Entrance program full time. Academic excellence decides it.",
+    "active": true,
+    "description": "The Mount Royal Board of Governors funds this entrance scholarship for top Alberta graduates.",
+    "metaDetail": "For top Alberta grads.",
+    "oneForm": "mru",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Mount Royal University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2158,
+    "title": "AFF Access to the Future Entrance Scholarship (Mount Royal)",
+    "amount": "$1,000",
+    "deadline": "2027-03-01",
+    "openDate": "2026-11-01",
+    "audience": "Grade 12 students entering first year at Mount Royal",
+    "url": "https://mtroyal.academicworks.ca/opportunities/16686",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Any degree, diploma or University Entrance program qualifies, full time. Marks decide it.",
+    "active": true,
+    "description": "Matched through Alberta's Access to the Future Fund, this Mount Royal entrance scholarship is open to every program.",
+    "metaDetail": "Any program, marks.",
+    "oneForm": "mru",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Mount Royal University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2159,
+    "title": "AFF Access to the Future Entrance Bursary (Mount Royal)",
+    "amount": "$1,000",
+    "deadline": "2027-03-01",
+    "openDate": "2026-11-01",
+    "audience": "Grade 12 students entering first year at Mount Royal with financial need",
+    "url": "https://mtroyal.academicworks.ca/opportunities/18118",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Any first-year program qualifies, full time. Need decides it.",
+    "active": true,
+    "description": "Matched through Alberta's Access to the Future Fund, this Mount Royal entrance bursary is open to every program.",
+    "metaDetail": "Any program, need.",
+    "oneForm": "mru",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Mount Royal University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2160,
+    "title": "MRU Foundation Entrance Bursary",
+    "amount": "$3,000",
+    "deadline": "2027-03-01",
+    "openDate": "2026-11-01",
+    "audience": "Grade 12 students entering first year at Mount Royal with financial need",
+    "url": "https://mtroyal.academicworks.ca/opportunities/18720",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Any degree, diploma or University Entrance program qualifies, full time. Need decides it.",
+    "active": true,
+    "description": "The Mount Royal University Foundation funds this entrance bursary across every program.",
+    "metaDetail": "Any program, need.",
+    "oneForm": "mru",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Mount Royal University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2161,
+    "title": "MRU Foundation Entrance Scholarship",
+    "amount": "$3,000",
+    "deadline": "2027-03-01",
+    "openDate": "2026-11-01",
+    "audience": "Grade 12 students entering first year at Mount Royal",
+    "url": "https://mtroyal.academicworks.ca/opportunities/18723",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Any degree, diploma or University Entrance program qualifies, full time. Academic achievement decides it.",
+    "active": true,
+    "description": "The Mount Royal University Foundation funds this entrance scholarship across every program.",
+    "metaDetail": "Any program, marks.",
+    "oneForm": "mru",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Mount Royal University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2162,
+    "title": "James M. Stanford Bursary",
+    "amount": "$4,250",
+    "deadline": "2027-03-01",
+    "openDate": "2026-11-01",
+    "audience": "Grade 12 students entering first year at Mount Royal with financial need",
+    "url": "https://mtroyal.academicworks.ca/opportunities/17557",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Any first-year program qualifies, full time. Need decides it.",
+    "active": true,
+    "description": "Named for former Petro-Canada chief executive James M. Stanford, this Mount Royal bursary is open to every program.",
+    "metaDetail": "Any program, need.",
+    "oneForm": "mru",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Mount Royal University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2163,
+    "title": "Hire A Student/Calgary Chamber of Commerce Bursary",
+    "amount": "$1,250",
+    "deadline": "2027-03-01",
+    "openDate": "2026-11-01",
+    "audience": "Grade 12 students entering first year at Mount Royal with financial need",
+    "url": "https://mtroyal.academicworks.ca/opportunities/17347",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Any first-year program qualifies, full time. Need decides it.",
+    "active": true,
+    "description": "The Calgary Chamber of Commerce and the Hire A Student program fund this Mount Royal entrance bursary.",
+    "metaDetail": "Any program, need.",
+    "oneForm": "mru",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Mount Royal University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2164,
+    "title": "PCL Family Entrance Scholarship in Environmental Science",
+    "amount": "$1,250",
+    "deadline": "2027-03-01",
+    "openDate": "2026-11-01",
+    "audience": "Grade 12 students entering first-year Environmental Science at Mount Royal",
+    "url": "https://mtroyal.academicworks.ca/opportunities/18039",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must have finished Grade 12 within the preceding calendar year. Marks and community leadership count, work in industrial ecology or the environment earns preference, and President's Scholarship winners cannot also hold it.",
+    "active": true,
+    "description": "The PCL family of companies funds this Mount Royal entrance scholarship for a new environmental science student.",
+    "metaDetail": "Leadership plus marks.",
+    "oneForm": "mru",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Mount Royal University"
+      ],
+      "fields": [
+        "Environmental Science"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership"
+      ]
+    }
+  },
+  {
+    "id": 2165,
+    "title": "R. Michael Mears Scholarship",
+    "amount": "$1,500",
+    "deadline": "2027-03-01",
+    "openDate": "2026-11-01",
+    "audience": "Canadian Grade 12 students entering first-year Business at Mount Royal",
+    "url": "https://mtroyal.academicworks.ca/opportunities/17836",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must be a Canadian citizen or permanent resident starting the Bachelor of Business Administration full time. It renews up to three times if you stay full time, finish 24 credits and keep a 2.7 GPA.",
+    "active": true,
+    "description": "A renewable Mount Royal business scholarship named for R. Michael Mears, weighing marks, need and volunteering.",
+    "metaDetail": "Renewable, business.",
+    "oneForm": "mru",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Mount Royal University"
+      ],
+      "fields": [
+        "Business"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2166,
+    "title": "Mount Royal Bright Future Scholarships",
+    "amount": "$3,500",
+    "deadline": "2027-03-01",
+    "openDate": "2026-11-01",
+    "audience": "Grade 12 students entering a first-year degree at Mount Royal",
+    "url": "https://mtroyal.academicworks.ca/opportunities/16730",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Any degree program qualifies, full time. Need, marks and involvement all count, and it renews for up to three more years with full-time study and a 3.0 GPA.",
+    "active": true,
+    "description": "Mount Royal's renewable Bright Future Scholarships are worth $3,500 a year for up to four years.",
+    "metaDetail": "Renewable for 4 years.",
+    "oneForm": "mru",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Mount Royal University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2167,
+    "title": "Mark Bellamy Engineering Scholarship",
+    "amount": "$1,000",
+    "deadline": "2027-03-15",
+    "audience": "Grade 12 students entering the Engineering Transfer Program at the University of Lethbridge",
+    "url": "https://uleth.academicworks.ca/opportunities/12596",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You need an 80% admission average plus leadership or community service.",
+    "active": true,
+    "description": "Mark Bellamy funds this University of Lethbridge entrance scholarship for a future engineer starting in the transfer program.",
+    "metaDetail": "80% plus leadership.",
+    "oneForm": "uleth",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Lethbridge"
+      ],
+      "fields": [
+        "Engineering"
+      ],
+      "minAverage": 80,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership",
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2168,
+    "title": "William Asbury Buchanan Award",
+    "amount": "$200 minimum",
+    "deadline": "2027-03-15",
+    "audience": "Grade 12 students from the Lethbridge Public, Holy Spirit Catholic or Palliser divisions entering the University of Lethbridge",
+    "url": "https://uleth.academicworks.ca/opportunities/12606",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "Alberta",
+    "localArea": "Lethbridge Public, Holy Spirit Catholic and Palliser school divisions",
+    "notes": "Your home must be in the Lethbridge Public School District, Holy Spirit Catholic Separate Regional Division or Palliser Regional Division. You need a 70% admission average and financial need.",
+    "active": true,
+    "description": "Named for Lethbridge Herald founder W. A. Buchanan, this award helps students from the three southern school divisions.",
+    "metaDetail": "Three divisions, need.",
+    "oneForm": "uleth",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Lethbridge"
+      ],
+      "fields": [],
+      "minAverage": 70,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2169,
+    "title": "SMP Engineering Innovator Award",
+    "amount": "$1,500",
+    "deadline": "2027-03-15",
+    "audience": "Grade 12 students entering the Engineering Transfer Program at the University of Lethbridge",
+    "url": "https://uleth.academicworks.ca/opportunities/12613",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You need a 70% admission average and leadership, entrepreneurship or community service, with entrepreneurship preferred.",
+    "active": true,
+    "description": "SMP Engineering funds this University of Lethbridge award for an engineering entrant with an inventive streak.",
+    "metaDetail": "Entrepreneurs preferred.",
+    "oneForm": "uleth",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Lethbridge"
+      ],
+      "fields": [
+        "Engineering"
+      ],
+      "minAverage": 70,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership"
+      ]
+    }
+  },
+  {
+    "id": 2170,
+    "title": "Lethbridge Chamber of Commerce University of Lethbridge Scholarship",
+    "amount": "$1,000",
+    "deadline": "2027-03-15",
+    "audience": "Southern Alberta Grade 12 students entering Business at the University of Lethbridge",
+    "url": "https://uleth.academicworks.ca/opportunities/12646",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "Alberta",
+    "localArea": "South of Calgary",
+    "notes": "You must be an Alberta resident from south of Calgary entering the Bachelor of Business Administration, with an 80% admission average and community involvement. The winner is invited to the Business of the Year Awards in October.",
+    "active": true,
+    "description": "The Lethbridge Chamber of Commerce funds this entrance scholarship for a southern Alberta business student.",
+    "metaDetail": "South of Calgary, business.",
+    "oneForm": "uleth",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Lethbridge"
+      ],
+      "fields": [
+        "Business"
+      ],
+      "minAverage": 80,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2171,
+    "title": "Dr. Dennis Connolly Entrance Scholarship",
+    "amount": "$1,000",
+    "deadline": "2027-03-15",
+    "audience": "Grade 12 students entering Arts and Science at the University of Lethbridge",
+    "url": "https://uleth.academicworks.ca/opportunities/12747",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must enter a full-time Arts and Science program with at least an 80% admission average. It can be won only once.",
+    "active": true,
+    "description": "Named for Dr. Dennis Connolly, this University of Lethbridge entrance scholarship rewards strong marks in Arts and Science.",
+    "metaDetail": "80% in Arts and Science.",
+    "oneForm": "uleth",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Lethbridge"
+      ],
+      "fields": [],
+      "minAverage": 80,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2172,
+    "title": "Alberta Blue Cross Computer Science Award (University of Lethbridge)",
+    "amount": "$1,500",
+    "deadline": "2027-03-15",
+    "audience": "Alberta Grade 12 students entering Computer Science at the University of Lethbridge with financial need",
+    "url": "https://uleth.academicworks.ca/opportunities/12807",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must be an Alberta resident majoring in Computer Science in the Bachelor of Science, with a 70% admission average and financial need.",
+    "active": true,
+    "description": "Alberta Blue Cross funds this University of Lethbridge entrance award for new computer science students.",
+    "metaDetail": "Computer science, need.",
+    "oneForm": "uleth",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Lethbridge"
+      ],
+      "fields": [
+        "Computer Science"
+      ],
+      "minAverage": 70,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2173,
+    "title": "Neil and Beverly Holmes Memorial Award",
+    "amount": "$1,000 minimum",
+    "deadline": "2027-03-15",
+    "audience": "Grade 12 students entering Biology at the University of Lethbridge with financial need",
+    "url": "https://uleth.academicworks.ca/opportunities/12816",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must major in Biology, with a 70% admission average and financial need.",
+    "active": true,
+    "description": "Remembering Neil and Beverly Holmes, this University of Lethbridge entrance award supports a new biology student.",
+    "metaDetail": "Biology, need.",
+    "oneForm": "uleth",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Lethbridge"
+      ],
+      "fields": [
+        "Biology"
+      ],
+      "minAverage": 70,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2174,
+    "title": "Alberta Blue Cross Entrance Award (University of Lethbridge)",
+    "amount": "$1,500",
+    "deadline": "2027-03-15",
+    "audience": "Alberta Grade 12 students entering any degree at the University of Lethbridge with financial need",
+    "url": "https://uleth.academicworks.ca/opportunities/12939",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must be an Alberta resident with a 70% admission average and financial need. Any degree program qualifies.",
+    "active": true,
+    "description": "Alberta Blue Cross funds this University of Lethbridge entrance award for Albertans who need help with the first year.",
+    "metaDetail": "Any degree, need.",
+    "oneForm": "uleth",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Lethbridge"
+      ],
+      "fields": [],
+      "minAverage": 70,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2175,
+    "title": "Robert H. Parsons Scholarship",
+    "amount": "$700 minimum",
+    "deadline": "2027-03-15",
+    "audience": "Grade 12 students entering the University of Lethbridge who show leadership",
+    "url": "https://uleth.academicworks.ca/opportunities/12975",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You need an 80% admission average and potential for group leadership.",
+    "active": true,
+    "description": "Named for Robert H. Parsons, this University of Lethbridge entrance scholarship looks for future leaders.",
+    "metaDetail": "80% plus leadership.",
+    "oneForm": "uleth",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Lethbridge"
+      ],
+      "fields": [],
+      "minAverage": 80,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership"
+      ]
+    }
+  },
+  {
+    "id": 2176,
+    "title": "Mary Agnes Crow Scholarship",
+    "amount": "$1,000 minimum",
+    "deadline": "2027-03-15",
+    "audience": "Palliser Regional Division graduates entering the University of Lethbridge",
+    "url": "https://uleth.academicworks.ca/opportunities/13080",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "Alberta",
+    "localArea": "Palliser Regional School Division",
+    "notes": "You must graduate from a high school in Palliser Regional School Division, with an 80% admission average.",
+    "active": true,
+    "description": "Mary Agnes Crow funds this University of Lethbridge entrance scholarship for a Palliser graduate.",
+    "metaDetail": "For Palliser graduates.",
+    "oneForm": "uleth",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Lethbridge"
+      ],
+      "fields": [],
+      "minAverage": 80,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2177,
+    "title": "Archdeacon Cecil Swanson Award",
+    "amount": "$1,000",
+    "deadline": "2027-03-15",
+    "audience": "Grade 12 students entering the University of Lethbridge with financial need",
+    "url": "https://uleth.academicworks.ca/opportunities/13114",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You need a 70% admission average and financial need. Students majoring in English or History get preference.",
+    "active": true,
+    "description": "Named for Archdeacon Cecil Swanson, this University of Lethbridge entrance award favours future English and history students.",
+    "metaDetail": "English or history preferred.",
+    "oneForm": "uleth",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Lethbridge"
+      ],
+      "fields": [
+        "Arts"
+      ],
+      "minAverage": 70,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2178,
+    "title": "Alberta Blue Cross Away from Home Award (University of Lethbridge)",
+    "amount": "$1,500",
+    "deadline": "2027-03-15",
+    "audience": "Alberta Grade 12 students living 100 km or more from Lethbridge entering the University of Lethbridge",
+    "url": "https://uleth.academicworks.ca/opportunities/13229",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Your permanent home must be in Alberta and at least 100 kilometres from Lethbridge. You need a 70% admission average and financial need.",
+    "active": true,
+    "description": "Alberta Blue Cross funds this University of Lethbridge award for students who move to Lethbridge to study.",
+    "metaDetail": "For students from 100 km away.",
+    "oneForm": "uleth",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Lethbridge"
+      ],
+      "fields": [],
+      "minAverage": 70,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2179,
+    "title": "Stantec Engineering Academic Scholarship",
+    "amount": "$1,500",
+    "deadline": "2027-03-15",
+    "audience": "Grade 12 students entering the Engineering Transfer Program at the University of Lethbridge",
+    "url": "https://uleth.academicworks.ca/opportunities/13296",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You need an 80% admission average plus leadership or community service.",
+    "active": true,
+    "description": "Stantec funds this University of Lethbridge entrance scholarship for a new engineering transfer student.",
+    "metaDetail": "80% plus service.",
+    "oneForm": "uleth",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Lethbridge"
+      ],
+      "fields": [
+        "Engineering"
+      ],
+      "minAverage": 80,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership",
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2180,
+    "title": "French Language Entrance Award (University of Lethbridge)",
+    "amount": "$1,000",
+    "deadline": "2027-03-15",
+    "audience": "Alberta Grade 12 students entering French at the University of Lethbridge",
+    "url": "https://uleth.academicworks.ca/opportunities/13412",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must declare a major in French or French and Spanish. Candidates are ranked by French marks, with ties broken by admission average.",
+    "active": true,
+    "description": "A University of Lethbridge entrance award for Alberta students who will keep studying French.",
+    "metaDetail": "Ranked by French marks.",
+    "oneForm": "uleth",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Lethbridge"
+      ],
+      "fields": [
+        "French"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2181,
+    "title": "Frank M. and Lila Linn Thompson Scholarship",
+    "amount": "$2,500 minimum",
+    "deadline": "2027-03-15",
+    "audience": "Lethbridge Grade 12 students entering the University of Lethbridge the same year",
+    "url": "https://uleth.academicworks.ca/opportunities/13413",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "Lethbridge",
+    "notes": "You must graduate from a high school in the City of Lethbridge and start at the university in the same calendar year, with an 80% admission average.",
+    "active": true,
+    "description": "Frank and Lila Linn Thompson fund this University of Lethbridge scholarship for graduates of city high schools.",
+    "metaDetail": "For Lethbridge graduates.",
+    "oneForm": "uleth",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Lethbridge"
+      ],
+      "fields": [],
+      "minAverage": 80,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2182,
+    "title": "Bigelow Fowler Clinic Scholarship",
+    "amount": "$500",
+    "deadline": "2027-03-15",
+    "audience": "Grade 12 students headed for a medical career entering the University of Lethbridge",
+    "url": "https://uleth.academicworks.ca/opportunities/13416",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must intend to pursue a medical career and have an 80% admission average.",
+    "active": true,
+    "description": "Lethbridge's Bigelow Fowler Clinic funds this entrance scholarship for a student aiming at medicine.",
+    "metaDetail": "For future doctors.",
+    "oneForm": "uleth",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Lethbridge"
+      ],
+      "fields": [
+        "Medicine"
+      ],
+      "minAverage": 80,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2183,
+    "title": "RMH Award",
+    "amount": "$2,500",
+    "deadline": "2027-03-15",
+    "audience": "Grade 12 students entering Business at the University of Lethbridge with financial need",
+    "url": "https://uleth.academicworks.ca/opportunities/13463",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must intend to earn a Bachelor of Business Administration, with a 70% admission average and financial need.",
+    "active": true,
+    "description": "Given in memory of Richard Martin Howell, this University of Lethbridge entrance award supports a future business graduate.",
+    "metaDetail": "Business, need.",
+    "oneForm": "uleth",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Lethbridge"
+      ],
+      "fields": [
+        "Business"
+      ],
+      "minAverage": 70,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2184,
+    "title": "Vivien Kossuth Women in Engineering Leadership Award",
+    "amount": "$500",
+    "deadline": "2027-03-15",
+    "audience": "Grade 12 students entering the Engineering Transfer Program at the University of Lethbridge",
+    "url": "https://uleth.academicworks.ca/opportunities/13521",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You need a record of leadership or community service. Applicants who advocate for women in science, technology, engineering and math get preference.",
+    "active": true,
+    "description": "Vivien Kossuth funds this University of Lethbridge award for engineering entrants who champion women in STEM.",
+    "metaDetail": "Leadership in engineering.",
+    "oneForm": "uleth",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Lethbridge"
+      ],
+      "fields": [
+        "Engineering"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership"
+      ]
+    }
+  },
+  {
+    "id": 2185,
+    "title": "Lethbridge Jaycees Entrance Award",
+    "amount": "$800 minimum",
+    "deadline": "2027-03-15",
+    "audience": "Lethbridge Grade 12 students with financial need entering the University of Lethbridge the same year",
+    "url": "https://uleth.academicworks.ca/opportunities/13679",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "Lethbridge",
+    "notes": "You must graduate from a high school in the City of Lethbridge and start at the university in the same calendar year, with a 70% admission average and financial need.",
+    "active": true,
+    "description": "The Lethbridge Jaycees fund this entrance award for city graduates who need help with costs.",
+    "metaDetail": "Lethbridge grads in need.",
+    "oneForm": "uleth",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Lethbridge"
+      ],
+      "fields": [],
+      "minAverage": 70,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2186,
+    "title": "TECTERRA Geomatics Entrance Scholarship",
+    "amount": "$1,000 minimum",
+    "deadline": "2027-03-15",
+    "audience": "Grade 12 students entering geomatics majors at the University of Lethbridge",
+    "url": "https://uleth.academicworks.ca/opportunities/13755",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Remote Sensing, Computer Science and GIS, Geography and Environmental Science majors qualify. You need an 80% admission average.",
+    "active": true,
+    "description": "TECTERRA funds this University of Lethbridge entrance scholarship for students heading into mapping and spatial data.",
+    "metaDetail": "Geography and GIS majors.",
+    "oneForm": "uleth",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Lethbridge"
+      ],
+      "fields": [
+        "Environmental Science",
+        "Computer Science"
+      ],
+      "minAverage": 80,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2187,
+    "title": "Nancy and Paul Walker Music Scholarship",
+    "amount": "$1,000 minimum",
+    "deadline": "2027-03-15",
+    "audience": "Grade 12 students entering Music or Digital Audio Arts at the University of Lethbridge",
+    "url": "https://uleth.academicworks.ca/opportunities/13852",
+    "category": "Arts",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must declare a major in Music or Digital Audio Arts, in the Bachelor of Music or Bachelor of Arts. Academic achievement decides it.",
+    "active": true,
+    "description": "Nancy and Paul Walker fund this University of Lethbridge entrance scholarship for new music students.",
+    "metaDetail": "Music entrants.",
+    "oneForm": "uleth",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Lethbridge"
+      ],
+      "fields": [
+        "Music"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "music"
+      ]
+    }
+  },
+  {
+    "id": 2188,
+    "title": "Forrest Family Entrance Scholarship",
+    "amount": "$1,000",
+    "deadline": "2027-03-15",
+    "audience": "Grade 12 students entering a degree at the University of Lethbridge with an 80% average",
+    "url": "https://uleth.academicworks.ca/opportunities/13860",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You need at least an 80% admission average, and candidates are ranked on marks. Students not receiving another University of Lethbridge award get preference.",
+    "active": true,
+    "description": "Patrick and Jennifer Forrest fund this entrance scholarship, aimed at strong students the other awards missed.",
+    "metaDetail": "For students without other awards.",
+    "oneForm": "uleth",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Lethbridge"
+      ],
+      "fields": [],
+      "minAverage": 80,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2189,
+    "title": "Arlene Bedster Memorial Award",
+    "amount": "$1,000 minimum",
+    "deadline": "2027-03-15",
+    "audience": "Grade 12 students entering Dramatic Arts at the University of Lethbridge",
+    "url": "https://uleth.academicworks.ca/opportunities/14013",
+    "category": "Arts",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Dramatic Arts in the BA or BFA and the multidisciplinary BFA qualify. Candidates are ranked on commitment to performing arts, and financial need earns preference.",
+    "active": true,
+    "description": "Remembering Arlene Bedster, this University of Lethbridge entrance award backs a new drama student.",
+    "metaDetail": "Drama entrants.",
+    "oneForm": "uleth",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Lethbridge"
+      ],
+      "fields": [
+        "Fine Arts"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "drama"
+      ]
+    }
+  },
+  {
+    "id": 2190,
+    "title": "Ian and Dorothy McKenna Bursary",
+    "amount": "$2,000 minimum",
+    "deadline": "2027-03-15",
+    "audience": "First-generation Grade 12 students entering the University of Lethbridge with financial need",
+    "url": "https://uleth.academicworks.ca/opportunities/14081",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must be the first in your immediate family to attend university. Financial need decides it.",
+    "active": true,
+    "description": "Ian and Dorothy McKenna fund this University of Lethbridge bursary for students who are the first in their family at university.",
+    "metaDetail": "First in the family.",
+    "oneForm": "uleth",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Lethbridge"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2191,
+    "title": "Dr. Bhagwan Dua Memorial Entrance Scholarship",
+    "amount": "Up to $2,500",
+    "deadline": "2027-03-15",
+    "audience": "Grade 12 students entering Arts and Science at the University of Lethbridge with an 80% average",
+    "url": "https://uleth.academicworks.ca/opportunities/13649",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You need an 80% admission average, a 500-word write-up on student citizenship or community involvement, and a reference.",
+    "active": true,
+    "description": "Remembering Dr. Bhagwan Dua, this University of Lethbridge entrance scholarship weighs community involvement alongside marks.",
+    "metaDetail": "Essay and reference.",
+    "oneForm": "uleth",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Lethbridge"
+      ],
+      "fields": [],
+      "minAverage": 80,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2192,
+    "title": "From VK to C in 50 Award",
+    "amount": "$2,000 per year",
+    "deadline": "2027-03-15",
+    "audience": "Canadian Grade 12 students entering any degree at the University of Lethbridge",
+    "url": "https://uleth.academicworks.ca/opportunities/13430",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must be a Canadian citizen or permanent resident with academic achievement, financial need and community or extracurricular involvement. It renews if you keep a 3.00 GPA over at least 30 credit hours.",
+    "active": true,
+    "description": "A renewable University of Lethbridge entrance award worth $2,000 a year for students who need it.",
+    "metaDetail": "Renewable, $2,000 a year.",
+    "oneForm": "uleth",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Lethbridge"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
   }
 ]

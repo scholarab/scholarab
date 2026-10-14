@@ -72,6 +72,14 @@ export const ONE_FORMS = {
     form: 'University of Alberta entrance award application',
     text: "Apply for admission to the University of Alberta first. Then sign in to the Awards Hub with your CCID and complete two forms, the General Application and the Entrance Scholarship Application. They open each year on October 1 and close in mid-January, January 10 for fall 2027 entry, and they put you in the running for every entrance award you qualify for. Applications cannot be changed or reopened after the deadline.",
   },
+  mru: {
+    form: 'Mount Royal awards application',
+    text: "Mount Royal takes award applications once a year, through the awards application in MyMRU, open November 1 to March 1. Apply for admission first, because you need an admission record and student ID before you can open it. To be considered for an award tied to a major, declare that major with the Registrar's Office before you fill it in.",
+  },
+  uleth: {
+    form: 'University of Lethbridge awards application',
+    text: "Log in to the Bridge with your uLethbridge student ID and choose Apply for uLethbridge Scholarships, Awards and Bursaries. Complete the General Application, the Undergraduate Scholarship and Awards Application and any extra award questions that appear, then submit each one by March 15. Some awards ask for a reference letter or an essay inside the same application.",
+  },
   brooks: {
     form: 'Brooks Composite awards form',
     text: 'Brooks Composite High School collects these applications, not the sponsors, on a Google Doc only Grasslands students can open. The handbook publishes no closing dates, so ask the BCHS office in the fall.',
