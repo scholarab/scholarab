@@ -74591,5 +74591,369 @@
       "apprenticeship": false,
       "extracurriculars": []
     }
+  },
+  {
+    "id": 2015,
+    "title": "Rocky Gas Co-op Scholarships",
+    "amount": "$1,000",
+    "deadline": "2027-08-15",
+    "deadlineEstimated": true,
+    "audience": "Grade 12 graduates from Rocky Gas Co-op member families starting their first year of post-secondary",
+    "url": "https://www.rockygas.ca/about/scholarships/",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "Alberta",
+    "localArea": "Rocky Gas Co-op service area around Rocky Mountain House",
+    "notes": "There are three categories, a member academic scholarship, a community minded scholarship and an apprenticeship or agricultural scholarship, and each has its own requirements in the information package. You must have graduated Grade 12 this year or last year and start post-secondary in the fall. Winners send proof of enrolment before the money is paid.",
+    "active": true,
+    "description": "Rocky Gas Co-op gives up to three $1,000 scholarships each year to Grade 12 graduates from member families around Rocky Mountain House.",
+    "metaDetail": "Three $1,000 awards for member families.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "trades",
+        "Agriculture"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2016,
+    "title": "Natural Gas Co-op 52 Natural Gas Industry Award",
+    "amount": "$500",
+    "deadline": "2027-06-30",
+    "audience": "Children of Natural Gas Co-op 52 members entering a diploma or apprenticeship program in Alberta",
+    "url": "https://naturalgas52.ca/careers-scholarships/",
+    "category": "Trades",
+    "lastVerified": "2026-10",
+    "region": "Alberta",
+    "localArea": "Natural Gas Co-op 52 service area around Provost",
+    "notes": "Your family's membership must have been in place for at least a full year. You must be admitted full-time to a diploma, certificate or apprenticeship program at an accredited Alberta school. Mail the form, an essay about yourself and your interest in a field that helps the natural gas industry, two references from people who are not relatives and proof of admission to the Provost office by June 30. You can win only once.",
+    "active": true,
+    "description": "Natural Gas Co-op 52 in Provost gives a $500 award each year to a member's child heading into a diploma or trade program.",
+    "metaDetail": "One $500 award a year.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "trades"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": true,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2017,
+    "title": "East Smoky Gas Co-op Scholarship",
+    "amount": "$500",
+    "deadline": "2027-08-31",
+    "audience": "East Smoky Gas customers and their children enrolled in post-secondary or trade school",
+    "url": "https://www.esgas.ca/scholarships",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "Alberta",
+    "localArea": "East Smoky Gas Co-op service area around Crooked Creek",
+    "notes": "Fill in the application from the downloads page and include proof of enrolment, an official transcript and a list of your volunteer and extracurricular activities. You or your parent must be a current East Smoky Gas customer. The deadline is August 31 every year and you can win only once.",
+    "active": true,
+    "description": "East Smoky Gas Co-op gives a $500 scholarship to its gas customers and their children going to post-secondary or trade school.",
+    "metaDetail": "Open to customers and their children.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "trades"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2018,
+    "title": "Wild Rose REA Scholarship",
+    "amount": "Varies",
+    "deadline": "2027-03-31",
+    "audience": "Wild Rose REA members and their children going to post-secondary or an Alberta apprenticeship",
+    "url": "https://www.wildroserea.com/scholarship",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "Alberta",
+    "localArea": "Wild Rose REA service area around Westlock",
+    "notes": "You or a parent or guardian must be a Wild Rose member in good standing. Mail the form with an essay on why you should win, an official Alberta transcript and two reference letters from teachers, 4-H leaders, employers, ministers or coaches to the Westlock office by March 31. Winners are picked on their top five Grade 12 marks, the essay and the references, and must accept the award at the next annual meeting.",
+    "active": true,
+    "description": "Wild Rose REA, the member-owned power co-op around Westlock, gives scholarships each year to members and their children going on to further education.",
+    "metaDetail": "Judged on Grade 12 marks.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "trades"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "4-H"
+      ]
+    }
+  },
+  {
+    "id": 2019,
+    "title": "Clear Hills County Continuing Education Scholarship",
+    "amount": "Up to $3,000",
+    "deadline": "2027-02-01",
+    "audience": "Clear Hills County and Village of Hines Creek residents entering a trade, apprenticeship, degree or certification program",
+    "url": "https://www.clearhillscounty.ab.ca/forms/grants/clear-hills-county-continuing-education-scholarship",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "Alberta",
+    "localArea": "Clear Hills County and Village of Hines Creek residents",
+    "notes": "You must have lived in the county or Hines Creek for at least a year and be enrolled or have applied to your program. First-year applicants attach a high school transcript, a cover letter on your goals and how you will use the money, and a reference from a teacher or employer. There are two intakes a year, October 1 and February 1. The program must lead to work that exists in the county, the money is paid against your tuition receipt, and you repay it if you do not finish.",
+    "active": true,
+    "description": "Clear Hills County pays up to $3,000 toward tuition or training fees for residents of the county and Hines Creek starting further education.",
+    "metaDetail": "Up to $3,000 toward fees.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "trades"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2020,
+    "title": "Northern Sunrise County Trades Bursary",
+    "amount": "$1,000",
+    "deadline": "2026-12-15",
+    "openDate": "2026-11-15",
+    "audience": "Northern Sunrise County and Village of Nampa residents registered in an apprenticeship program",
+    "url": "https://northernsunrise.net/index.asp?SEC=F52D7C76-FBE9-469A-8822-88EAFDB0C5D5",
+    "category": "Trades",
+    "lastVerified": "2026-10",
+    "region": "Alberta",
+    "localArea": "Northern Sunrise County and Village of Nampa residents",
+    "notes": "Send the county intake form, a cover letter and two reference letters by email. Your technical training must run at least six weeks. Apply in the window before your classes start, March 15 to April 15 for May to August training, July 15 to August 15 for September to December, and November 15 to December 15 for January to April.",
+    "active": true,
+    "description": "Northern Sunrise County gives three $1,000 bursaries a year to residents of the county and Nampa who are training as apprentices.",
+    "metaDetail": "Three $1,000 bursaries a year.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "trades"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": true,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2021,
+    "title": "Christian Credit Union Stewardship Scholarship",
+    "amount": "$1,000",
+    "deadline": "2027-04-15",
+    "openDate": "2027-03-01",
+    "audience": "Grade 12 Christian Credit Union members at participating Christian high schools in Edmonton, Calgary and Lethbridge areas",
+    "url": "https://christiancu.ca/en/personal/youth/christian-cu-scholarship",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "Alberta",
+    "localArea": "Covenant Canadian Reformed, Edmonton Christian, Parkland Immanuel, Calgary Christian, Tyndale Christian, Calvin Christian, Coaldale Christian, Immanuel Christian and Providence Christian students",
+    "notes": "You must be a member by March 31 of the year you apply, so open an account before then. Applications run from March 1 to April 15. Submit an unsigned essay of about 300 words on what biblical stewardship means in your life, plus a cover letter and an outline of your accomplishments, volunteering and goals. One winner is picked per school, and the money is paid once you show enrolment and tuition payment within three years.",
+    "active": true,
+    "description": "Christian Credit Union gives a $1,000 Stewardship Scholarship to one graduating member at each participating Christian school in Alberta.",
+    "metaDetail": "One $1,000 award per school.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteering"
+      ]
+    }
+  },
+  {
+    "id": 2022,
+    "title": "Red Deer City ATA Local 60 Scholarships",
+    "amount": "Up to $2,000",
+    "deadline": "2027-05-01",
+    "deadlineEstimated": true,
+    "audience": "Graduating children of Red Deer City ATA Local 60 teachers going on to post-secondary",
+    "url": "https://huntinghills.rdpsd.ab.ca/students/career-suite/red-deer-city-local-60-ata",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "Alberta",
+    "localArea": "Children of Red Deer Public Schools teachers",
+    "notes": "A parent must be a current, retired, substitute or long-term disability member of Local 60. One $2,000 award is for students entering a Faculty of Education and another $2,000 award is for any other program, with two more $1,500 awards at the committee's discretion. Send a two-page typed application with your marks, activities, community involvement and career plans to the scholarship chair at Hunting Hills High School. Short-listed applicants are interviewed, and winners show proof of enrolment before payment.",
+    "active": true,
+    "description": "The Red Deer City local of the Alberta Teachers' Association gives four scholarships of $1,500 to $2,000 to its members' children finishing Grade 12.",
+    "metaDetail": "For children of Local 60 teachers.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteering"
+      ]
+    }
+  },
+  {
+    "id": 2023,
+    "title": "Slave Lake ATA Local 62 Scholarship",
+    "amount": "$1,000",
+    "deadline": "2027-06-01",
+    "audience": "Grade 12 graduates of Roland Michener Secondary or Lakeside Outreach School in Slave Lake",
+    "url": "https://www.hpsd.ca/documents/5fabd56c-ab07-49e2-85ad-515587619957/ATA%20Local%20%2362%20Scholarship.pdf",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "Alberta",
+    "localArea": "Slave Lake high school graduates",
+    "notes": "You need an overall average of at least 65 percent and a recent transcript. Write a 1,000-word essay on one of the two prompts in the form, about how your schooling shaped you or what drives you toward further study. Hand it in to the Career Coach office by June 1. The cheque is paid once you confirm registration at a recognized post-secondary school.",
+    "active": true,
+    "description": "The Slave Lake local of the Alberta Teachers' Association gives a $1,000 scholarship each year to a Grade 12 graduate from a Slave Lake high school.",
+    "metaDetail": "One $1,000 award, essay based.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
   }
 ]
