@@ -69317,5 +69317,77 @@
       "apprenticeship": false,
       "extracurriculars": []
     }
+  },
+  {
+    "id": 1883,
+    "title": "Co-op Excellence in Ag Program",
+    "amount": "Up to $16,000",
+    "deadline": "2026-11-15",
+    "audience": "Students entering or in an agriculture diploma or degree",
+    "url": "https://jobs.aghires.com/job/excellence-ag-students-95958",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "Alberta",
+    "openDate": "2026-09-02",
+    "notes": "Run by Federated Co-operatives and the Co-op Retailing System across Alberta, Saskatchewan and Manitoba. The scholarship pays $2,000 to $4,000 a year toward your degree or diploma, up to $16,000, and comes with paid summer internships for up to three years on the Agro team at a local Co-op. Graduates may be offered a full-time job with a signing bonus. A conditional letter of acceptance counts, so Grade 12 students heading into agriculture can apply, and first-year entrants can send their transcript later. Interviews start in mid to late November. Finalists may face a background check and a substance test.",
+    "active": true,
+    "description": "Federated Co-operatives pays $2,000 to $4,000 a year, up to $16,000, to agriculture students, plus paid summer internships at a prairie Co-op.",
+    "metaDetail": "Paid internships included.",
+    "toApply": {
+      "checked": "2026-10-13",
+      "complete": true,
+      "items": [
+        {
+          "kind": "acceptance",
+          "text": "Proof of enrolment or a conditional letter of acceptance"
+        },
+        {
+          "kind": "other",
+          "text": "A resume"
+        },
+        {
+          "kind": "transcript",
+          "text": "A transcript, which first-year entrants can send later"
+        },
+        {
+          "kind": "reference",
+          "text": "Two reference letters, at least one from a work supervisor",
+          "count": 2
+        },
+        {
+          "kind": "essay",
+          "text": "A 500-word essay or a video on co-ops in their community, the future of farming in Western Canada, or your best coach or teacher"
+        },
+        {
+          "kind": "interview",
+          "text": "An interview for finalists, from mid November"
+        }
+      ]
+    },
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Agriculture",
+        "Agribusiness"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
   }
 ]
