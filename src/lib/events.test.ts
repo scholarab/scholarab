@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
-import { sendEvent, sendEventAfterDwell, optOutOfEvents, syncTrackingOptOut, isLocalPreview, parseSource, recordSourceVisit, sendApply, savedState, visitKind } from './events'
+import { sendEvent, sendEventAfterDwell, optOutOfEvents, syncTrackingOptOut, isLocalPreview, parseSource, recordSourceVisit, sendApply, savedState, visitKind, notFoundFrom } from './events'
 
 /** happy-dom allows navigation via history, which is enough to set a query. */
 const setSearch = (search: string) => history.replaceState(null, '', '/' + search)
@@ -319,3 +319,14 @@ describe('visitKind', () => {
   })
 })
 
+
+describe('notFoundFrom', () => {
+  it('names where the link to a missing page was, never the URL', () => {
+    expect(notFoundFrom('', 'www.scholarab.ca')).toBe('none')
+    expect(notFoundFrom('https://www.scholarab.ca/scholarships/', 'www.scholarab.ca')).toBe('site')
+    expect(notFoundFrom('https://www.google.com/', 'www.scholarab.ca')).toBe('search')
+    expect(notFoundFrom('https://duckduckgo.com/', 'www.scholarab.ca')).toBe('search')
+    expect(notFoundFrom('https://www.reddit.com/r/alberta', 'www.scholarab.ca')).toBe('other')
+    expect(notFoundFrom('not a url', 'www.scholarab.ca')).toBe('none')
+  })
+})

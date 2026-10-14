@@ -38,7 +38,7 @@ const currentMonth = currentDay.slice(0, 7)
 const search = (searchMonths as { generated: string; months: AnalyticsData['search'] })
 
 let data: AnalyticsData = {
-  monthly: [], perItem: [], daily: [], emptySearches: [], byMeta: [],
+  monthly: [], perItem: [], daily: [], emptySearches: [], missingPages: [], byMeta: [],
   search: search.months, searchGenerated: search.generated,
   subscribers: { people: 0, reminders: 0 },
   monthlySubs: [], perItemSubs: [],
@@ -81,15 +81,25 @@ try {
     .groupBy(sql`1`, events.meta)
     .orderBy(desc(count()))
 
+  // Missing pages students landed on, "path | where the link was", since
+  // 2026-10-14. The list of redirects worth adding.
+  const missingPagesQuery = db
+    .select({ month: EVENT_MONTH, q: events.meta, n: count() })
+    .from(events)
+    .where(and(eq(events.event, 'not_found'), sql`${events.meta} is not null`))
+    .groupBy(sql`1`, events.meta)
+    .orderBy(desc(count()))
+
   // The word each counted event carries: the save button used (from
   // 2026-09-26), the Apply place and saved state, new or back on a listing
   // view, and the campaign source (all three from 2026-10-14), and the
-  // device class, and directory use (from 2026-10-14). Earlier rows carry
+  // device class, directory use and how people unsubscribe (from
+  // 2026-10-14). Earlier rows carry
   // none and come back as null.
   const byMetaQuery = db
     .select({ month: EVENT_MONTH, event: events.event, meta: events.meta, device: events.device, n: count() })
     .from(events)
-    .where(sql`${events.event} in ('save', 'apply_click', 'detail_view', 'source_visit', 'list_view', 'filter_use', 'list_more')`)
+    .where(sql`${events.event} in ('save', 'apply_click', 'detail_view', 'source_visit', 'list_view', 'filter_use', 'list_more', 'unsubscribe')`)
     .groupBy(sql`1`, events.event, events.meta, events.device)
 
   // The email list itself, not the signup events: unsubscribing deletes the
@@ -121,8 +131,8 @@ try {
     .where(isNotNull(subscribers.confirmedAt))
     .groupBy(sql`1`, subscribers.itemType, subscribers.itemId)
 
-  const [monthly,perItem,daily,emptySearches,totals,monthlySubs,perItemSubs,byMeta] = await db.batch([
-    monthlyQuery,perItemQuery,dailyQuery,emptySearchesQuery,subTotalsQuery,monthlySubsQuery,perItemSubsQuery,byMetaQuery,
+  const [monthly,perItem,daily,emptySearches,totals,monthlySubs,perItemSubs,byMeta,missingPages] = await db.batch([
+    monthlyQuery,perItemQuery,dailyQuery,emptySearchesQuery,subTotalsQuery,monthlySubsQuery,perItemSubsQuery,byMetaQuery,missingPagesQuery,
   ])
   const subTotals = totals[0]
   // Event IDs name published JSON; internal historical IDs are never joined.
@@ -138,6 +148,7 @@ try {
     // yesterday and read as stuck (Ilia, 2026-09-26).
     daily: daily.at(-1)?.day === currentDay ? daily : [...daily, { day: currentDay, n: 0 }],
     emptySearches,
+    missingPages,
     byMeta,
     subscribers: subTotals ?? { people: 0, reminders: 0 },
     monthlySubs,

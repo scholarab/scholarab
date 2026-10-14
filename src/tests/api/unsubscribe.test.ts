@@ -1,12 +1,15 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { recipientKey } from '../../lib/mail-delivery'
 
-const { mockDeleteWhere, mockDelete, mockSelectWhere, mockHitRateLimit, selectRows } = vi.hoisted(() => {
+const { mockDeleteWhere, mockDelete, mockSelectWhere, mockHitRateLimit, mockInsertValues, selectRows, deletedRows } = vi.hoisted(() => {
   const selectRows: { email: string }[] = []
-  const mockDeleteWhere = vi.fn((_cond: unknown) => Promise.resolve())
+  const deletedRows: { itemType: string; itemId: number }[] = []
+  const mockDeleteWhere = vi.fn((_cond: unknown) => Object.assign(Promise.resolve(), { returning: () => Promise.resolve(deletedRows) }))
   const mockSelectWhere = vi.fn((_cond: unknown) => ({ limit: () => Promise.resolve(selectRows) }))
   return {
     selectRows,
+    deletedRows,
+    mockInsertValues: vi.fn((_v: unknown) => Promise.resolve()),
     mockDeleteWhere,
     mockSelectWhere,
     mockDelete: vi.fn((_table: unknown) => ({ where: mockDeleteWhere })),
@@ -17,12 +20,14 @@ const { mockDeleteWhere, mockDelete, mockSelectWhere, mockHitRateLimit, selectRo
 vi.mock('../../lib/db/client', () => ({
   db: {
     delete: (t: unknown) => mockDelete(t),
+    insert: () => ({ values: mockInsertValues }),
     select: () => ({ from: () => ({ where: mockSelectWhere }) }),
   },
 }))
 vi.mock('../../lib/db/schema', () => ({
   subscribers: { __table: 'subscribers', token: 'token', email: 'email' },
   confirmationRecipients: { __table: 'confirmation_recipients', key: 'key' },
+  events: { __table: 'events' },
 }))
 vi.mock('../../lib/rate-limit', () => ({
   getClientIp: () => '1.2.3.4',
@@ -47,6 +52,7 @@ function post(fields: Record<string, string>) {
 beforeEach(() => {
   vi.clearAllMocks()
   selectRows.length = 0
+  deletedRows.length = 0
 })
 
 describe('GET /api/unsubscribe', () => {
@@ -198,5 +204,48 @@ describe('POST /api/unsubscribe, one-click', () => {
     } as Parameters<typeof POST>[0])
     expect(res.status).toBe(200)
     expect(mockDelete).toHaveBeenCalled()
+  })
+})
+
+describe('the unsubscribe count', () => {
+  // The deleted row leaves nothing behind, so the count is written as it goes:
+  // how they left and which listing, never the address or the token.
+  it('counts a button unsubscribe with its listing', async () => {
+    deletedRows.push({ itemType: 'scholarship', itemId: 14 })
+    await post({ token: 'abc' })
+    expect(mockInsertValues).toHaveBeenCalledWith({ event: 'unsubscribe', meta: 'button', itemType: 'scholarship', itemId: 14 })
+  })
+
+  it('tells a mail app one-click apart', async () => {
+    deletedRows.push({ itemType: 'program', itemId: 3 })
+    await POST({
+      request: new Request('http://localhost/api/unsubscribe?token=abc', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: 'List-Unsubscribe=One-Click',
+      }),
+    } as Parameters<typeof POST>[0])
+    expect(mockInsertValues).toHaveBeenCalledWith({ event: 'unsubscribe', meta: 'oneclick', itemType: 'program', itemId: 3 })
+  })
+
+  it('counts Delete all my data with no listing', async () => {
+    selectRows.push({ email: 'student@example.com' })
+    await post({ token: 'abc', scope: 'all' })
+    expect(mockInsertValues).toHaveBeenCalledWith({ event: 'unsubscribe', meta: 'all', itemType: null, itemId: null })
+    expect(JSON.stringify(mockInsertValues.mock.calls)).not.toContain('student@example.com')
+  })
+
+  it('counts nothing when the token matched no row', async () => {
+    await post({ token: 'nope' })
+    await post({ token: 'nope', scope: 'all' })
+    expect(mockInsertValues).not.toHaveBeenCalled()
+  })
+
+  it('still unsubscribes when the count fails', async () => {
+    deletedRows.push({ itemType: 'scholarship', itemId: 14 })
+    mockInsertValues.mockRejectedValueOnce(new Error('db down'))
+    const res = await post({ token: 'abc' })
+    expect(res.status).toBe(200)
+    expect(await res.text()).toContain('Unsubscribed')
   })
 })

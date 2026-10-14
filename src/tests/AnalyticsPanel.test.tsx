@@ -304,4 +304,34 @@ describe('AnalyticsPanel', () => {
       ['Town', '5', '5%'],
     ])
   })
+
+  it('counts unsubscribes by how people left', () => {
+    const withUnsubs = { ...data, byMeta: [
+      { month: '2026-10', event: 'unsubscribe', meta: 'button', n: 3 },
+      { month: '2026-10', event: 'unsubscribe', meta: 'oneclick', n: 1 },
+    ] }
+    render(<AnalyticsPanel data={withUnsubs} />)
+    const rows = [...document.querySelector('[data-unsub-table]')!.querySelectorAll('tr')]
+      .map(r => [...r.querySelectorAll('td')].map(c => c.textContent))
+    expect(rows).toEqual([
+      ['Unsubscribe button', '3', '75%'],
+      ['Gmail or Yahoo one-click', '1', '25%'],
+      ['Deleted all their data', '0', '0%'],
+    ])
+  })
+
+  it('lists missing pages once per path, with where the links were', () => {
+    const withMissing = { ...data, missingPages: [
+      { month: '2026-10', q: '/scholarships/old/ | search', n: 4 },
+      { month: '2026-10', q: '/scholarships/old/ | site', n: 2 },
+      { month: '2026-10', q: '/progams/ | none', n: 1 },
+    ] }
+    render(<AnalyticsPanel data={withMissing} />)
+    const rows = [...document.querySelector('[data-missing-table]')!.querySelectorAll('tr')]
+      .map(r => [...r.querySelectorAll('td')].map(c => c.textContent))
+    expect(rows).toEqual([
+      ['/scholarships/old/search 4   our site 2', '6\u00d7'],
+      ['/progams/typed, email or app 1', '1\u00d7'],
+    ])
+  })
 })

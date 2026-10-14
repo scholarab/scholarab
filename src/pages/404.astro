@@ -54,6 +54,10 @@ const scopeMap = scopeSearchMap(SCHOLARSHIP_FACETS.filter(f => facetItems(f, enr
 
 <script>
   import { wireScopeSearch } from '../lib/scope-search';
+  import { sendNotFound } from '../lib/events';
+  // page-load, not module run: the client router runs this module once, so a
+  // second missing page in the same tab would otherwise go uncounted.
+  document.addEventListener('astro:page-load', () => { if (document.getElementById('sab-404')) sendNotFound(); });
   document.querySelectorAll<HTMLFormElement>('form[data-scope-search]').forEach(wireScopeSearch);
 </script>
 

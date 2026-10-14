@@ -311,6 +311,26 @@ describe('POST /api/event', () => {
     expect(mockValues).toHaveBeenCalledWith({ event: 'save', itemType: 'program', itemId: 3, meta: null, device: 'phone' })
   })
 
+  it('records a missing path and where its link was', async () => {
+    const res = await call({ event: 'not_found', meta: '/scholarships/old-award/ | search' })
+    expect(res.status).toBe(204)
+    expect(mockValues).toHaveBeenCalledWith({ event: 'not_found', itemType: null, itemId: null, meta: '/scholarships/old-award/ | search', device: 'phone' })
+  })
+
+  it('rejects a not_found link place outside the fixed list', async () => {
+    expect((await call({ event: 'not_found', meta: '/x/ | https://evil.example' })).status).toBe(400)
+    expect((await call({ event: 'not_found', meta: '/x/' })).status).toBe(400)
+    expect((await call({ event: 'not_found' })).status).toBe(400)
+    expect(mockValues).not.toHaveBeenCalled()
+  })
+
+  it('drops a missing path that could carry an identifier', async () => {
+    for (const path of ['/reset/a1b2c3d4e5f6a7b8c9d0', '/order/1234567', '/me@example.com/', 'no-slash', '/Has Space/']) {
+      expect((await call({ event: 'not_found', meta: `${path} | none` })).status).toBe(204)
+    }
+    expect(mockValues).not.toHaveBeenCalled()
+  })
+
   it('records a status set on /saved, with the status as meta', async () => {
     const res = await call({ event: 'app_status', itemType: 'scholarship', itemId: 57, meta: 'submitted' })
     expect(res.status).toBe(204)

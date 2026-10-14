@@ -8,6 +8,8 @@ export interface AnalyticsData {
   perItem: { month: string; event: string; itemType: string | null; itemId: number | null; n: number }[]
   daily: { day: string; n: number }[]
   emptySearches: { month: string; q: string | null; n: number }[]
+  /** Missing pages shown, "path | from", since 2026-10-14. */
+  missingPages?: { month: string; q: string | null; n: number }[]
   /** The word on save, apply_click, detail_view and source_visit rows.
       null = recorded before that event carried one. */
   byMeta?: { month: string; event: string; meta: string | null; device?: string | null; n: number }[]
@@ -61,6 +63,20 @@ const SOURCE_LABELS: [string, string][] = [
 ]
 
 /** device on every event since 2026-10-14 (src/lib/device-class.ts). */
+const UNSUBSCRIBE_HOW: [string, string][] = [
+  ['button', 'Unsubscribe button'],
+  ['oneclick', 'Gmail or Yahoo one-click'],
+  ['all', 'Deleted all their data'],
+]
+
+/** Where the link to a missing page was. */
+const NOT_FOUND_FROM: Record<string, string> = {
+  site: 'our site',
+  search: 'search',
+  other: 'another site',
+  none: 'typed, email or app',
+}
+
 const DEVICES: [string, string][] = [
   ['phone', 'Phone'],
   ['computer', 'Computer'],
@@ -452,6 +468,29 @@ export default function AnalyticsPanel({ data }: Props) {
       }))
   }, [data.byMeta, month])
   const sources = useMemo(() => shareRows(metaBy.source_visit ?? {}, SOURCE_LABELS), [metaBy])
+  const unsubscribes = useMemo(() => shareRows(metaBy.unsubscribe ?? {}, UNSUBSCRIBE_HOW), [metaBy])
+
+  // Missing pages, one row per path, with where its links were as a second
+  // line. A path seen from "our site" is a broken link of our own.
+  const missing = useMemo(() => {
+    const merged = new Map<string, { n: number; from: Map<string, number> }>()
+    for (const r of data.missingPages ?? []) {
+      if (!r.q || (month !== ALL && r.month !== month)) continue
+      const [path, from] = r.q.split(' | ')
+      if (!path) continue
+      const row = merged.get(path) ?? { n: 0, from: new Map<string, number>() }
+      row.n += r.n
+      if (from) row.from.set(from, (row.from.get(from) ?? 0) + r.n)
+      merged.set(path, row)
+    }
+    return [...merged.entries()]
+      .sort((a, b) => b[1].n - a[1].n || a[0].localeCompare(b[0]))
+      .map(([path, row]) => ({
+        path,
+        n: row.n,
+        from: [...row.from.entries()].sort((a, b) => b[1] - a[1]).map(([f, c]) => `${NOT_FOUND_FROM[f] ?? f} ${c}`),
+      }))
+  }, [data.missingPages, month])
 
   // How it works: how many opened it and how many went on to the quiz from
   // it. Every count is people per tab session, as sendEvent dedupes.
@@ -737,6 +776,26 @@ export default function AnalyticsPanel({ data }: Props) {
             rows={applies.rows} total={applies.total} attr="data-apply-table"
           />
           <ShareTable title="Listing views" sub={periodLabel} rows={visits.rows} total={visits.total} attr="data-visit-table" />
+          <ShareTable title="Unsubscribes" sub={`${periodLabel}, counted from Oct 14 2026`} rows={unsubscribes.rows} total={unsubscribes.total} attr="data-unsub-table" />
+
+          <div className="adm-block">
+            <h2 className="adm-h2">Pages not found <small>{periodLabel}{missing.length > 0 && `, ${n(missing.length)} different`}</small></h2>
+            <div className="adm-table-wrap adm-scroll">
+              <table className="adm-table" data-missing-table>
+                <tbody>
+                  {missing.length === 0 && (
+                    <tr><td data-dim>Nothing yet. These are addresses students followed to a page that does not exist.</td></tr>
+                  )}
+                  {missing.map(({ path, n: count, from }) => (
+                    <tr key={path}>
+                      <td>{path}{from.length > 0 && <small>{from.join('   ')}</small>}</td>
+                      <td data-num data-dim style={{ verticalAlign: 'top' }}>{count}&times;</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
 
         </section>
 

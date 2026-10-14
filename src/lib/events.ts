@@ -23,6 +23,9 @@ export type AppEvent =
    *  which one, never its value) and Show more or Show all pressed (meta:
    *  more or all). All three since 2026-10-14, each once per tab session. */
   | 'list_view' | 'filter_use' | 'list_more'
+  /** The not-found page was shown. Meta is "path | from": the missing path
+   *  and where the link was, from NOT_FOUND_FROM. Since 2026-10-14. */
+  | 'not_found'
 
 const OPT_OUT_KEY = 'sa_no_track'
 /** `?nt=1` opts this browser out, `?nt=0` opts back in. */
@@ -183,6 +186,34 @@ export function sendEventAfterDwell(
     window.addEventListener('pagehide', cancel)
   } catch { /* never break the page for analytics */ }
   return cancel
+}
+
+/**
+ * Where a link to a missing page was: on this site (our own broken link), a
+ * search engine, another site, or nowhere (typed, a bookmark, or an email or
+ * chat app, which send no referrer). A closed set, never the referring URL.
+ */
+export const NOT_FOUND_FROM = ['site', 'search', 'other', 'none'] as const
+
+const SEARCH_HOSTS = /(^|\.)(google|bing|duckduckgo|yahoo|ecosia|qwant|brave|startpage|yandex|baidu)\./
+
+export function notFoundFrom(referrer: string, host: string): (typeof NOT_FOUND_FROM)[number] {
+  if (!referrer) return 'none'
+  try {
+    const h = new URL(referrer).hostname.toLowerCase()
+    if (h === host.toLowerCase()) return 'site'
+    return SEARCH_HOSTS.test(h) ? 'search' : 'other'
+  } catch {
+    return 'none'
+  }
+}
+
+/** Record the missing path the not-found page was served for, once per path per tab. */
+export function sendNotFound(): void {
+  try {
+    const path = decodeURIComponent(location.pathname).toLowerCase().slice(0, 100)
+    sendEvent('not_found', undefined, undefined, `${path} | ${notFoundFrom(document.referrer, location.hostname)}`, path)
+  } catch { /* never break the page for analytics */ }
 }
 
 /** What filter_use may name. A filter's key only, never what was picked. */

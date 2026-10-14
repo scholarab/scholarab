@@ -261,3 +261,16 @@ or column is added, and the 180-day events retention is unchanged.
 
 The server rejects anything outside each list (`src/pages/api/event.ts`). The
 privacy policy's counts row and its local storage line say all three.
+
+Two more counts the same day, again with no identifier and the same 180 days.
+
+- `not_found`, sent by the not-found page: the missing path and where the
+  link was (site, search, other or none, from the referrer's host, which is
+  never sent). The server keeps a path only if it is plain lowercase
+  characters, at most 100 long, with no email shape and no long digit or hex
+  run that could be a token. Anything else is dropped.
+- `unsubscribe`, written by the server in `src/pages/api/unsubscribe.ts`
+  after a row is actually deleted, since the deleted row leaves nothing to
+  count. It records how (button, one-click or all) and, for one deadline, its
+  listing. Never the address or the token. Clients cannot send it, because
+  `/api/event` does not accept it. A failed count never blocks the delete.

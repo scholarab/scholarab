@@ -2,7 +2,7 @@ export const prerender = false
 
 import type { APIRoute } from 'astro'
 import { db } from '../../lib/db/client'
-import { confirmationRecipients, subscribers } from '../../lib/db/schema'
+import { confirmationRecipients, events, subscribers } from '../../lib/db/schema'
 import { eq } from 'drizzle-orm'
 import { recipientKey } from '../../lib/mail-delivery'
 import { getClientIp, hitRateLimit } from '../../lib/rate-limit'
@@ -26,6 +26,18 @@ async function limited(request: Request): Promise<boolean> {
     console.error('[rate-limit] unsubscribe check failed, allowing request:', e)
   }
   return false
+}
+
+// An anonymous count of who leaves, written here because the deleted row
+// leaves nothing behind to count. No address, token or id: only how they left
+// (the button, Gmail's or Yahoo's one-click, or Delete all my data) and, for a
+// single deadline, which listing it was. Failure never blocks the unsubscribe.
+async function countUnsubscribe(how: 'button' | 'oneclick' | 'all', item?: { itemType: string; itemId: number }) {
+  try {
+    await db.insert(events).values({ event: 'unsubscribe', meta: how, itemType: item?.itemType ?? null, itemId: item?.itemId ?? null })
+  } catch (e) {
+    console.error('[unsubscribe] count failed:', e instanceof Error ? e.message : 'unknown')
+  }
 }
 
 export const GET: APIRoute = async ({ request }) => {
@@ -87,6 +99,7 @@ export const POST: APIRoute = async ({ request }) => {
     if (row?.email) {
       await db.delete(confirmationRecipients).where(eq(confirmationRecipients.key, await recipientKey(row.email)))
       await db.delete(subscribers).where(eq(subscribers.email, row.email))
+      await countUnsubscribe('all')
     }
     // Same page whether or not the token matched; see below.
     return page(
@@ -98,7 +111,9 @@ export const POST: APIRoute = async ({ request }) => {
     )
   }
 
-  await db.delete(subscribers).where(eq(subscribers.token, token))
+  const [gone] = await db.delete(subscribers).where(eq(subscribers.token, token))
+    .returning({ itemType: subscribers.itemType, itemId: subscribers.itemId })
+  if (gone) await countUnsubscribe(form.get('List-Unsubscribe') === 'One-Click' ? 'oneclick' : 'button', gone)
 
   // Same response whether or not the token matched, so this can't be used to
   // probe which tokens are live.

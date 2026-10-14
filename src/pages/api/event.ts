@@ -9,7 +9,7 @@ import { deviceClass } from '../../lib/device-class'
 
 // Client-sendable events only. alert_subscribe is recorded server-side in /api/alert.
 // app_step left with the application-step ticker (deleted with /app, Aug 2026).
-const ALLOWED_EVENTS = new Set(['detail_view', 'apply_click', 'save', 'quiz_start', 'quiz_complete', 'search_empty', 'source_visit', 'tour_open', 'tour_step', 'tour_finish', 'tour_close', 'tour_cta', 'combo_open', 'app_status', 'list_view', 'filter_use', 'list_more'])
+const ALLOWED_EVENTS = new Set(['detail_view', 'apply_click', 'save', 'quiz_start', 'quiz_complete', 'search_empty', 'source_visit', 'tour_open', 'tour_step', 'tour_finish', 'tour_close', 'tour_cta', 'combo_open', 'app_status', 'list_view', 'filter_use', 'list_more', 'not_found'])
 // Campaign sources, mirroring SOURCES in src/lib/events.ts. Anyone can type
 // `?s=` into the address bar, so the server keeps its own copy of the list
 // rather than trusting whatever the client sends.
@@ -31,6 +31,12 @@ const REQUIRED_META: Record<string, Set<string>> = {
   filter_use: new Set(['sort', 'category', 'region', 'status', 'school', 'town', 'format', 'search', 'reset']),
   list_more: new Set(['more', 'all']),
 }
+// not_found: where the link to the missing page was. Mirrors NOT_FOUND_FROM.
+const NOT_FOUND_FROM = new Set(['site', 'search', 'other', 'none'])
+// The missing path itself: site-relative, plain characters only, and nothing
+// that could be a token or an identifier (no long digit or hex runs).
+const MISSING_PATH = /^\/[a-z0-9/._~+-]{0,100}$/
+const ID_LIKE = /\d{6,}|[0-9a-f]{16,}/
 // detail_view: whether this device first opened the site on an earlier day.
 const VISIT_KINDS = new Set(['new', 'back'])
 // How the walkthrough was opened: by itself on a first visit ('auto', until
@@ -113,10 +119,10 @@ export const POST: APIRoute = async ({ request }) => {
     return jsonError('itemType and itemId must be sent together', 400)
   // meta carries the query text for search_empty, the source code for
   // source_visit, the place for save, place and saved state for apply_click,
-  // new or back for detail_view, how tour_open was opened, the step for
-  // tour_step and tour_close, and the status for app_status; nothing else
-  // takes a meta at all
-  const META_EVENTS = new Set(['search_empty', 'source_visit', 'save', 'apply_click', 'detail_view', 'tour_open', 'tour_step', 'tour_close', 'app_status', ...Object.keys(REQUIRED_META)])
+  // new or back for detail_view, the missing path and link place for
+  // not_found, how tour_open was opened, the step for tour_step and
+  // tour_close, and the status for app_status; nothing else takes a meta
+  const META_EVENTS = new Set(['search_empty', 'source_visit', 'save', 'apply_click', 'detail_view', 'tour_open', 'tour_step', 'tour_close', 'app_status', 'not_found', ...Object.keys(REQUIRED_META)])
   if (meta !== undefined && (!META_EVENTS.has(event) || typeof meta !== 'string'))
     return jsonError('meta not allowed for this event', 400)
 
@@ -151,6 +157,13 @@ export const POST: APIRoute = async ({ request }) => {
       if (extra !== undefined || !APPLY_PLACES.has(place!) || !APPLY_STATES.has(state!)) return jsonError('unknown apply place', 400)
       cleanMeta = meta as string
     }
+  } else if (event === 'not_found') {
+    // Required, "path | from". A path that fails the shape is dropped, not
+    // stored blank: a count with no path cannot point at a redirect to add.
+    const [path, from, extra] = typeof meta === 'string' ? meta.split(' | ') : []
+    if (extra !== undefined || !NOT_FOUND_FROM.has(from!)) return jsonError('unknown not-found source', 400)
+    if (!MISSING_PATH.test(path!) || ID_LIKE.test(path!) || EMAIL_LIKE.test(path!)) return accepted()
+    cleanMeta = `${path} | ${from}`
   } else if (event === 'detail_view') {
     // Optional: blocked storage sends none
     if (meta !== undefined) {
