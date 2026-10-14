@@ -83,13 +83,13 @@ try {
 
   // The word each counted event carries: the save button used (from
   // 2026-09-26), the Apply place and saved state, new or back on a listing
-  // view, and the campaign source (all three from 2026-10-14). Earlier rows
-  // carry none and come back as null.
+  // view, and the campaign source (all three from 2026-10-14), and the
+  // device class. Earlier rows carry none and come back as null.
   const byMetaQuery = db
-    .select({ month: EVENT_MONTH, event: events.event, meta: events.meta, n: count() })
+    .select({ month: EVENT_MONTH, event: events.event, meta: events.meta, device: events.device, n: count() })
     .from(events)
     .where(sql`${events.event} in ('save', 'apply_click', 'detail_view', 'source_visit')`)
-    .groupBy(sql`1`, events.event, events.meta)
+    .groupBy(sql`1`, events.event, events.meta, events.device)
 
   // The email list itself, not the signup events: unsubscribing deletes the
   // row, so these are live reminders. One person can track several deadlines,

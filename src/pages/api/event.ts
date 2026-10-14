@@ -5,6 +5,7 @@ import { db } from '../../lib/db/client'
 import { events } from '../../lib/db/schema'
 import { jsonError } from '../../lib/api-response'
 import { getClientIp, hitRateLimit } from '../../lib/rate-limit'
+import { deviceClass } from '../../lib/device-class'
 
 // Client-sendable events only. alert_subscribe is recorded server-side in /api/alert.
 // app_step left with the application-step ticker (deleted with /app, Aug 2026).
@@ -176,6 +177,7 @@ export const POST: APIRoute = async ({ request }) => {
       itemType: (itemType as string) ?? null,
       itemId: (itemId as number) ?? null,
       meta: cleanMeta,
+      device: deviceClass(ua, request.headers.get('sec-ch-ua-mobile')),
     })
   } catch { /* analytics must never surface errors to the page */ }
 

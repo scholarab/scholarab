@@ -252,6 +252,9 @@ or column is added, and the 180-day events retention is unchanged.
   first opened the site in local storage (`sa_first_seen`). The day is never
   sent, and a count cannot be tied to a person or to another count.
 - Reminder emails link with `?s=rm`, counted like the other tagged links.
+- Every event row carries `device`, one of phone, tablet or computer, worked
+  out by the server from the user agent (`src/lib/device-class.ts`). The user
+  agent is not stored. Migration 0016 adds the column.
 
 The server rejects anything outside each list (`src/pages/api/event.ts`). The
 privacy policy's counts row and its local storage line say all three.

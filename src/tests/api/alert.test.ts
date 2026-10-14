@@ -2,7 +2,7 @@
 import { beforeAll, beforeEach, afterAll, afterEach, it, expect, vi } from 'vitest';
 import { PGlite } from '@electric-sql/pglite';
 import { drizzle } from 'drizzle-orm/pglite';
-import { readFileSync } from 'node:fs';
+import { readFileSync, readdirSync } from 'node:fs';
 import { POST } from '../../pages/api/alert';
 const state = vi.hoisted(() => ({
   db: null as any,
@@ -40,7 +40,10 @@ let pg: PGlite;
 beforeAll(async () => {
   pg = new PGlite();
   await pg.exec(readFileSync('drizzle/bootstrap.sql', 'utf8'));
-  await pg.exec(readFileSync('drizzle/migrations/0013_catalogue_and_delivery.sql', 'utf8'));
+  // Every maintained migration, as migrate-db applies them, so a column the
+  // schema gains (events.device in 0016) exists here too.
+  for (const f of readdirSync('drizzle/migrations').filter(f => /^\d{4}.*\.sql$/.test(f) && Number(f.slice(0, 4)) >= 13).sort())
+    await pg.exec(readFileSync(`drizzle/migrations/${f}`, 'utf8'));
   state.db = drizzle(pg);
 }, 30000);
 beforeEach(async () => {

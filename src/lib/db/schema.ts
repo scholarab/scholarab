@@ -107,6 +107,8 @@ export const events = pgTable('events', {
   itemType: text('item_type'),
   itemId: integer('item_id'),
   meta: text('meta'),
+  /** phone, tablet or computer (src/lib/device-class.ts). Null before 2026-10-14. */
+  device: text('device'),
 }, t => [index('events_event_ts_idx').on(t.event, t.ts)])
 
 export const catalogueEntries = pgTable('catalogue_entries', {

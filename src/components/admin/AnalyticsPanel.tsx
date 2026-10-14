@@ -10,7 +10,7 @@ export interface AnalyticsData {
   emptySearches: { month: string; q: string | null; n: number }[]
   /** The word on save, apply_click, detail_view and source_visit rows.
       null = recorded before that event carried one. */
-  byMeta?: { month: string; event: string; meta: string | null; n: number }[]
+  byMeta?: { month: string; event: string; meta: string | null; device?: string | null; n: number }[]
   /** Live email list: people = distinct addresses, reminders = rows. */
   subscribers: { people: number; reminders: number; pending?: number }
   monthlySubs: { month: string; people: number; reminders: number }[]
@@ -58,6 +58,14 @@ const SOURCE_LABELS: [string, string][] = [
   ['tt', 'TikTok'],
   ['yt', 'YouTube'],
   ['qr', 'Print or QR'],
+]
+
+/** device on every event since 2026-10-14 (src/lib/device-class.ts). */
+const DEVICES: [string, string][] = [
+  ['phone', 'Phone'],
+  ['computer', 'Computer'],
+  ['tablet', 'Tablet'],
+  ['none', 'Not recorded (before Oct 14 2026)'],
 ]
 
 interface MetaRow { key: string; label: string; n: number }
@@ -394,6 +402,29 @@ export default function AnalyticsPanel({ data }: Props) {
   }, [metaBy])
 
   const visits = useMemo(() => shareRows(metaBy.detail_view ?? {}, VISIT_KINDS), [metaBy])
+
+  // Views, applies and saves per device class, and how often a view on each
+  // one ends in Apply. Views carry no device before 2026-10-14, so the rate
+  // is only shown where both counts were recorded.
+  const devices = useMemo(() => {
+    const by: Record<string, { views: number; applies: number; saves: number }> = {}
+    for (const r of data.byMeta ?? []) {
+      if (month !== ALL && r.month !== month) continue
+      const col = r.event === 'detail_view' ? 'views' : r.event === 'apply_click' ? 'applies' : r.event === 'save' ? 'saves' : null
+      if (!col) continue
+      const row = (by[r.device ?? 'none'] ??= { views: 0, applies: 0, saves: 0 })
+      row[col] += r.n
+    }
+    const views = Object.values(by).reduce((a, r) => a + r.views, 0)
+    return DEVICES
+      .map(([key, label]) => ({ key, label, ...(by[key] ?? { views: 0, applies: 0, saves: 0 }) }))
+      .filter(r => r.key !== 'none' || r.views + r.applies + r.saves > 0)
+      .map(r => ({
+        ...r,
+        share: views > 0 ? `${Math.round((r.views / views) * 100)}%` : '',
+        rate: r.key !== 'none' && r.views > 0 ? `${Math.round((r.applies / r.views) * 100)}` : '·',
+      }))
+  }, [data.byMeta, month])
   const sources = useMemo(() => shareRows(metaBy.source_visit ?? {}, SOURCE_LABELS), [metaBy])
 
   // How it works: how many opened it and how many went on to the quiz from
@@ -697,6 +728,29 @@ export default function AnalyticsPanel({ data }: Props) {
                   <span>{n(d.n)}</span>
                 </div>
               ))}
+            </div>
+          </div>
+
+          <div className="adm-block">
+            <h2 className="adm-h2">Phone or computer <small>{periodLabel}</small></h2>
+            <div className="adm-table-wrap">
+              <table className="adm-table" data-device-table>
+                <thead>
+                  <tr><th></th><th data-num>Views</th><th data-num>Share</th><th data-num>Applies</th><th data-num>Per 100 views</th><th data-num>Saves</th></tr>
+                </thead>
+                <tbody>
+                  {devices.map(r => (
+                    <tr key={r.key}>
+                      <td>{r.label}</td>
+                      <td data-num>{n(r.views)}</td>
+                      <td data-num data-dim>{r.share}</td>
+                      <td data-num>{n(r.applies)}</td>
+                      <td data-num data-dim>{r.rate}</td>
+                      <td data-num>{n(r.saves)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </div>
 

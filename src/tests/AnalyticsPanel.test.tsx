@@ -225,7 +225,7 @@ describe('AnalyticsPanel', () => {
     expect(cells('Quiz results')).toEqual(['Quiz results', '0', '0%'])
     expect(cells('Combo page')).toEqual(['Combo page', '0', '0%'])
     // July's unplaced saves stay out of September, and so does their row
-    expect(screen.queryByText(/Not recorded/)).toBeNull()
+    expect(document.querySelector('[data-save-table]')!.textContent).not.toMatch(/Not recorded/)
     // 4 saves over 25 September views
     expect(screen.getByText(/16\.0 per 100 views/)).toBeTruthy()
   })
@@ -260,6 +260,26 @@ describe('AnalyticsPanel', () => {
     expect(table('data-source-table').slice(0, 2)).toEqual([
       ['Counsellor email', '5', '71%'],
       ['Reminder email', '2', '29%'],
+    ])
+  })
+
+  it('splits views, applies and saves by phone, computer and tablet', () => {
+    const withDevices = { ...data, byMeta: [
+      { month: '2026-10', event: 'detail_view', meta: 'new', device: 'phone', n: 30 },
+      { month: '2026-10', event: 'detail_view', meta: 'back', device: 'phone', n: 10 },
+      { month: '2026-10', event: 'detail_view', meta: 'new', device: 'computer', n: 10 },
+      { month: '2026-10', event: 'apply_click', meta: 'row:new', device: 'phone', n: 8 },
+      { month: '2026-10', event: 'apply_click', meta: 'page:saved', device: 'computer', n: 5 },
+      { month: '2026-10', event: 'save', meta: 'row', device: 'phone', n: 3 },
+      { month: '2026-10', event: 'source_visit', meta: 'em', device: 'computer', n: 9 },
+    ] }
+    render(<AnalyticsPanel data={withDevices} />)
+    const rows = [...document.querySelector('[data-device-table] tbody')!.querySelectorAll('tr')]
+      .map(r => [...r.querySelectorAll('td')].map(c => c.textContent))
+    expect(rows).toEqual([
+      ['Phone', '40', '80%', '8', '20', '3'],
+      ['Computer', '10', '20%', '5', '50', '0'],
+      ['Tablet', '0', '0%', '0', '·', '0'],
     ])
   })
 })

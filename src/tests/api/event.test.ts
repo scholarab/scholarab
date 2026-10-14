@@ -58,6 +58,7 @@ describe('POST /api/event', () => {
       itemType: 'scholarship',
       itemId: 42,
       meta: null,
+      device: 'phone',
     })
   })
 
@@ -69,7 +70,15 @@ describe('POST /api/event', () => {
       itemType: null,
       itemId: null,
       meta: null,
+      device: 'phone',
     })
+  })
+
+  it('stores phone, tablet or computer, never the user agent', async () => {
+    await call({ event: 'quiz_start' }, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/129.0 Safari/537.36')
+    expect(mockValues).toHaveBeenLastCalledWith({ event: 'quiz_start', itemType: null, itemId: null, meta: null, device: 'computer' })
+    await call({ event: 'quiz_start' }, 'Mozilla/5.0 (Linux; Android 14; SM-X710) AppleWebKit/537.36 Chrome/129.0 Safari/537.36')
+    expect(mockValues).toHaveBeenLastCalledWith({ event: 'quiz_start', itemType: null, itemId: null, meta: null, device: 'tablet' })
   })
 
   it('silently drops bot user agents without inserting', async () => {
@@ -163,7 +172,7 @@ describe('POST /api/event', () => {
   it('accepts quiz_start', async () => {
     const res = await call({ event: 'quiz_start' })
     expect(res.status).toBe(204)
-    expect(mockValues).toHaveBeenCalledWith({ event: 'quiz_start', itemType: null, itemId: null, meta: null })
+    expect(mockValues).toHaveBeenCalledWith({ event: 'quiz_start', itemType: null, itemId: null, meta: null, device: 'phone' })
   })
 
   it('rejects out-of-range itemId', async () => {
@@ -225,6 +234,7 @@ describe('POST /api/event', () => {
       itemType: 'program',
       itemId: 7,
       meta: null,
+      device: 'phone',
     })
   })
 
@@ -292,19 +302,19 @@ describe('POST /api/event', () => {
   it('records where a save was made', async () => {
     const res = await call({ event: 'save', itemType: 'scholarship', itemId: 5, meta: 'row' })
     expect(res.status).toBe(204)
-    expect(mockValues).toHaveBeenCalledWith({ event: 'save', itemType: 'scholarship', itemId: 5, meta: 'row' })
+    expect(mockValues).toHaveBeenCalledWith({ event: 'save', itemType: 'scholarship', itemId: 5, meta: 'row', device: 'phone' })
   })
 
   it('still accepts a save with no place, from pages cached before the field', async () => {
     const res = await call({ event: 'save', itemType: 'program', itemId: 3 })
     expect(res.status).toBe(204)
-    expect(mockValues).toHaveBeenCalledWith({ event: 'save', itemType: 'program', itemId: 3, meta: null })
+    expect(mockValues).toHaveBeenCalledWith({ event: 'save', itemType: 'program', itemId: 3, meta: null, device: 'phone' })
   })
 
   it('records a status set on /saved, with the status as meta', async () => {
     const res = await call({ event: 'app_status', itemType: 'scholarship', itemId: 57, meta: 'submitted' })
     expect(res.status).toBe(204)
-    expect(mockValues).toHaveBeenCalledWith({ event: 'app_status', itemType: 'scholarship', itemId: 57, meta: 'submitted' })
+    expect(mockValues).toHaveBeenCalledWith({ event: 'app_status', itemType: 'scholarship', itemId: 57, meta: 'submitted', device: 'phone' })
   })
 
   it('rejects an app_status without a known status or without its award', async () => {
@@ -322,13 +332,13 @@ describe('POST /api/event', () => {
 
   it('records where Apply was clicked and whether the award was saved first', async () => {
     expect((await call({ event: 'apply_click', itemType: 'scholarship', itemId: 14, meta: 'mine:saved' })).status).toBe(204)
-    expect(mockValues).toHaveBeenCalledWith({ event: 'apply_click', itemType: 'scholarship', itemId: 14, meta: 'mine:saved' })
+    expect(mockValues).toHaveBeenCalledWith({ event: 'apply_click', itemType: 'scholarship', itemId: 14, meta: 'mine:saved', device: 'phone' })
     for (const meta of ['page:new', 'row:starter', 'quiz:saved', 'combo:new']) {
       expect((await call({ event: 'apply_click', itemType: 'program', itemId: 3, meta })).status).toBe(204)
     }
     // Pages cached before the field send none
     expect((await call({ event: 'apply_click', itemType: 'program', itemId: 3 })).status).toBe(204)
-    expect(mockValues).toHaveBeenLastCalledWith({ event: 'apply_click', itemType: 'program', itemId: 3, meta: null })
+    expect(mockValues).toHaveBeenLastCalledWith({ event: 'apply_click', itemType: 'program', itemId: 3, meta: null, device: 'phone' })
   })
 
   it('rejects an apply place or state outside the fixed lists', async () => {
@@ -341,13 +351,13 @@ describe('POST /api/event', () => {
 
   it('records a listing view as new or back, and nothing else', async () => {
     expect((await call({ event: 'detail_view', itemType: 'scholarship', itemId: 5, meta: 'back' })).status).toBe(204)
-    expect(mockValues).toHaveBeenCalledWith({ event: 'detail_view', itemType: 'scholarship', itemId: 5, meta: 'back' })
+    expect(mockValues).toHaveBeenCalledWith({ event: 'detail_view', itemType: 'scholarship', itemId: 5, meta: 'back', device: 'phone' })
     expect((await call({ event: 'detail_view', itemType: 'scholarship', itemId: 5, meta: '2026-10-01' })).status).toBe(400)
   })
 
   it('accepts the reminder email as a source and a save from a combo page', async () => {
     expect((await call({ event: 'source_visit', meta: 'rm' })).status).toBe(204)
-    expect(mockValues).toHaveBeenCalledWith({ event: 'source_visit', itemType: null, itemId: null, meta: 'rm' })
+    expect(mockValues).toHaveBeenCalledWith({ event: 'source_visit', itemType: null, itemId: null, meta: 'rm', device: 'phone' })
     expect((await call({ event: 'save', itemType: 'scholarship', itemId: 5, meta: 'combo' })).status).toBe(204)
   })
 
@@ -356,12 +366,12 @@ describe('POST /api/event', () => {
       const res = await call({ event })
       expect(res.status).toBe(204)
     }
-    expect(mockValues).toHaveBeenCalledWith({ event: 'tour_finish', itemType: null, itemId: null, meta: null })
+    expect(mockValues).toHaveBeenCalledWith({ event: 'tour_finish', itemType: null, itemId: null, meta: null, device: 'phone' })
   })
 
   it('records how the walkthrough was opened, from a fixed list', async () => {
     expect((await call({ event: 'tour_open', meta: 'auto' })).status).toBe(204)
-    expect(mockValues).toHaveBeenCalledWith({ event: 'tour_open', itemType: null, itemId: null, meta: 'auto' })
+    expect(mockValues).toHaveBeenCalledWith({ event: 'tour_open', itemType: null, itemId: null, meta: 'auto', device: 'phone' })
     expect((await call({ event: 'tour_open', meta: 'hello' })).status).toBe(400)
     expect((await call({ event: 'tour_finish', meta: 'auto' })).status).toBe(400)
     // The three buttons told apart since 2026-09-26; 'button' from older cached pages
@@ -370,9 +380,9 @@ describe('POST /api/event', () => {
 
   it('records the step reached and the step closed on, and nothing else', async () => {
     expect((await call({ event: 'tour_step', meta: '3' })).status).toBe(204)
-    expect(mockValues).toHaveBeenCalledWith({ event: 'tour_step', itemType: null, itemId: null, meta: '3' })
+    expect(mockValues).toHaveBeenCalledWith({ event: 'tour_step', itemType: null, itemId: null, meta: '3', device: 'phone' })
     expect((await call({ event: 'tour_close', meta: '1' })).status).toBe(204)
-    expect(mockValues).toHaveBeenCalledWith({ event: 'tour_close', itemType: null, itemId: null, meta: '1' })
+    expect(mockValues).toHaveBeenCalledWith({ event: 'tour_close', itemType: null, itemId: null, meta: '1', device: 'phone' })
     // Step 1 is the opening, not a step reached; no step 6; a step is required
     expect((await call({ event: 'tour_step', meta: '1' })).status).toBe(400)
     expect((await call({ event: 'tour_close', meta: '6' })).status).toBe(400)
