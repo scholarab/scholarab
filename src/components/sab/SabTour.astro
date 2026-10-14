@@ -1,6 +1,7 @@
 ---
-// "How it works": a five-step walkthrough of what the site does. Opt in only:
-// opened from the header's button (desktop) or the phone menu's row, never by
+// "How it works": a three-step walkthrough of what the site does (find, save,
+// Build my combo last so it leads into its button; cut from five 2026-10-14).
+// Opt in only: opened from the header's button (desktop) or the phone menu's row, never by
 // itself and never as a banner (Ilia, 2026-10-02, bringing it back after the
 // 2026-09-29 removal). One native <dialog>, closed until asked for, so it
 // costs no layout until the button is used.
@@ -32,7 +33,7 @@ const findCopy = scholarships !== null && programs !== null
   ? `${fmt(scholarships)} scholarships and ${fmt(programs)} programs for Alberta high school students.`
   : 'Scholarships and programs for Alberta high school students.';
 
-const STEPS = 5;
+const STEPS = 3;
 ---
 
 <dialog class="sabt" data-tour aria-labelledby="sabt-title-1">
@@ -62,22 +63,7 @@ const STEPS = 5;
 
   <section class="sabt-step" data-tour-step="2" data-off inert>
     <div class="sabt-art" aria-hidden="true">
-      <div class="sabt-card sabt-quiz sabt-tilt-r">
-        <div class="sabt-bar"><span class="on"></span><span class="on"></span><span></span><span></span><span></span></div>
-        <div class="sabt-q">What grade are you in?</div>
-        <div class="sabt-chips"><span>Grade 10</span><span>Grade 11</span><span class="on">Grade 12</span></div>
-      </div>
-    </div>
-    <div class="sabt-body">
-      <p class="sabt-count">2 of {STEPS}</p>
-      <h2 class="sabt-title" id="sabt-title-2">Build my combo</h2>
-      <p class="sabt-text">Not sure where to start? Answer a few questions about your grade, where you live, what you want to study and your average, and get the awards you fit, closing soonest first. Your answers stay in your browser.</p>
-    </div>
-  </section>
-
-  <section class="sabt-step" data-tour-step="3" data-off inert>
-    <div class="sabt-art" aria-hidden="true">
-      <div class="sabt-card sabt-cal sabt-tilt-l">
+      <div class="sabt-card sabt-cal sabt-tilt-r">
         <div class="sabt-cal-head"><span>October</span><span class="sabt-quiet">Saved · 3</span></div>
         <div class="sabt-cal-grid">
           {Array.from({ length: 35 }, (_, i) => {
@@ -89,39 +75,24 @@ const STEPS = 5;
       </div>
     </div>
     <div class="sabt-body">
+      <p class="sabt-count">2 of {STEPS}</p>
+      <h2 class="sabt-title" id="sabt-title-2">Save the ones you want</h2>
+      <p class="sabt-text">Tap Save on any listing. Your shortlist lives on My combo, as a list or a calendar of deadlines, so you can come back to it. No account: it stays on this device. On a listing with a posted closing date, you can also get email reminders before it closes.</p>
+    </div>
+  </section>
+
+  <section class="sabt-step" data-tour-step="3" data-off inert>
+    <div class="sabt-art" aria-hidden="true">
+      <div class="sabt-card sabt-quiz sabt-tilt-l">
+        <div class="sabt-bar"><span class="on"></span><span class="on"></span><span></span><span></span><span></span></div>
+        <div class="sabt-q">What grade are you in?</div>
+        <div class="sabt-chips"><span>Grade 10</span><span>Grade 11</span><span class="on">Grade 12</span></div>
+      </div>
+    </div>
+    <div class="sabt-body">
       <p class="sabt-count">3 of {STEPS}</p>
-      <h2 class="sabt-title" id="sabt-title-3">Save the ones you want</h2>
-      <p class="sabt-text">Tap Save on any listing. Your shortlist lives on My combo, as a list or a calendar of deadlines, so you can come back to it. No account: it stays on this device.</p>
-    </div>
-  </section>
-
-  <section class="sabt-step" data-tour-step="4" data-off inert>
-    <div class="sabt-art" aria-hidden="true">
-      <div class="sabt-card sabt-mail sabt-tilt-r">
-        <div class="sabt-mail-from"><span class="sabt-dot"></span>ScholarAB reminder</div>
-        <div class="sabt-mail-subj">{row?.title ?? 'Loran Scholarship'} closes in 3 days</div>
-        <div class="sabt-chips sabt-chips-sm"><span>30 days</span><span>14 days</span><span class="on">3 days</span></div>
-      </div>
-    </div>
-    <div class="sabt-body">
-      <p class="sabt-count">4 of {STEPS}</p>
-      <h2 class="sabt-title" id="sabt-title-4">Get reminders</h2>
-      <p class="sabt-text">The Deadlines page lays out every closing date, month by month. On a listing with a posted closing date, leave your email and get reminders before it closes. We keep the address only to send those reminders, and one click deletes it.</p>
-    </div>
-  </section>
-
-  <section class="sabt-step" data-tour-step="5" data-off inert>
-    <div class="sabt-art" aria-hidden="true">
-      <div class="sabt-guides">
-        <div class="sabt-card sabt-guide sabt-tilt-l">How to write a scholarship essay</div>
-        <div class="sabt-card sabt-guide">How to ask for a scholarship reference letter</div>
-        <div class="sabt-card sabt-guide sabt-tilt-r">Local scholarships in Alberta and where to find them</div>
-      </div>
-    </div>
-    <div class="sabt-body">
-      <p class="sabt-count">5 of {STEPS}</p>
-      <h2 class="sabt-title" id="sabt-title-5">Read the guides</h2>
-      <p class="sabt-text">Guides cover the essay, reference letters, the Rutherford and Loran, and the scholarships near you. Written by a high school student in Medicine Hat.</p>
+      <h2 class="sabt-title" id="sabt-title-3">Build my combo</h2>
+      <p class="sabt-text">Not sure where to start? Answer a few questions about your grade, where you live, what you want to study and your average, and get the awards you fit, closing soonest first. Your answers stay in your browser.</p>
     </div>
   </section>
 
@@ -210,7 +181,6 @@ const STEPS = 5;
     border: 1.5px solid rgba(var(--fg-rgb), 0.18);
   }
   .sabt-chips span.on { background: var(--cta); border-color: var(--cta); color: var(--text-on-cta); }
-  .sabt-chips-sm span { padding: 5px 10px; font-size: 12px; }
 
   .sabt-cal { width: 250px; padding: 14px 16px; }
   .sabt-cal-head { display: flex; justify-content: space-between; font-size: 13px; font-weight: 700; margin-bottom: 8px; }
@@ -219,15 +189,6 @@ const STEPS = 5;
   .sabt-cal-grid span.is-off { visibility: hidden; }
   .sabt-cal-grid span.is-mark { background: var(--cta); color: var(--text-on-cta); font-weight: 700; }
 
-  .sabt-mail { width: 280px; }
-  .sabt-mail-from { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--ink-faint); font-weight: 600; }
-  .sabt-dot { width: 8px; height: 8px; border-radius: 0; background: var(--cta); }
-  .sabt-mail-subj { font-weight: 700; font-size: 16px; line-height: 1.3; margin: 8px 0 12px; }
-
-  .sabt-guides { display: flex; flex-direction: column; gap: 8px; width: 280px; }
-  .sabt-guide { padding: 11px 14px; font-size: 13px; font-weight: 700; line-height: 1.3; }
-  .sabt-guide.sabt-tilt-l { transform: rotate(-2deg) translateX(-10px); }
-  .sabt-guide.sabt-tilt-r { transform: rotate(2deg) translateX(10px); }
 
   /* ── Words ── */
   .sabt-body { padding: 22px 26px 4px; }
@@ -259,7 +220,7 @@ const STEPS = 5;
 
   @media (prefers-reduced-motion: no-preference) {
     .sabt[open] { animation: sabt-in 0.22s cubic-bezier(0.2, 0.8, 0.3, 1); }
-    .sabt-step:not([data-off]) .sabt-card, .sabt-step:not([data-off]) .sabt-guides { animation: sabt-card 0.35s cubic-bezier(0.2, 0.8, 0.3, 1); }
+    .sabt-step:not([data-off]) .sabt-card { animation: sabt-card 0.35s cubic-bezier(0.2, 0.8, 0.3, 1); }
   }
   @keyframes sabt-in { from { opacity: 0; transform: translateY(10px) scale(0.98); } }
   @keyframes sabt-card { from { opacity: 0; translate: 0 14px; } }
@@ -302,7 +263,7 @@ const STEPS = 5;
     dialog.dataset.step = String(n);
     // Each step reached counts once per tab session (sendEvent dedupes on the
     // meta), so the admin panel reads as a funnel: of those who opened it,
-    // how many saw step 2, 3, 4 and 5.
+    // how many saw step 2 and 3.
     if (n > 1) sendEvent('tour_step', undefined, undefined, String(n));
     if (n === last) sendEvent('tour_finish');
   }
