@@ -44,7 +44,6 @@ interface Props {
   /** University & college awards: a School picker, biggest school first. */
   schoolFilter?: boolean;
   /** City hubs: the broad lists the reader can also apply from. */
-  alsoOpen?: { place: string; lists: Array<{ slug: string; label: string; count: number }> };
   /** Rows before "Show more". City hubs take 12: a phone page ran 8 screens and
       4-7% of readers reached its end (private/flow-plan, 2026-10-01). */
   step?: number;
@@ -52,8 +51,6 @@ interface Props {
       names the ones it is open to, so a Calgary-only award never reads as an
       Airdrie student's. */
   towns?: string[];
-  /** City hubs: the board's specials, from lib/city-specials.ts. */
-  specials?: Array<{ label: string; href: string; title: string; meta: string }>;
   /** The place tabs (Ilia, 2026-10-12, after polymarket.com): every hub in
       one line under the heading, this page's slug lit, '' for All. Replaces
       the left rail and the Where you live picker. */
@@ -83,9 +80,7 @@ const {
   hideCategories = false,
   hideScopes = false,
   schoolFilter = false,
-  alsoOpen,
   step = DIRECTORY_PAGE_SIZE,
-  specials = [],
   towns,
   tabs,
 } = Astro.props;
@@ -290,31 +285,6 @@ const openNow = openNowCount(initial);
     {directoryCountLine(initial.length, items.length, 'LISTINGS', openNow)}
   </div>
 
-  {/* Under the toolbar, not in the board: every hub's toolbar sits at one
-      height (smoke.spec), and this line is about the list below it. */}
-  {alsoOpen && (
-    <p class="sabl-also">
-      These are only the {alsoOpen.place} awards. Many of the{' '}
-      {alsoOpen.lists.map((l, i) => (
-        <>{i > 0 && ' and '}<a href={`/scholarships/${l.slug}/`}>{l.count.toLocaleString('en-CA')} {l.label}</a></>
-      ))}{' '}awards are open to you too.
-    </p>
-  )}
-  {/* A city's specials (lib/city-specials.ts): the biggest award still to go
-      for and the next to open, from the data. Under the toolbar for the same
-      reason as the line above; in the board they moved every city's toolbar
-      down by 170 to 260px. */}
-  {specials.length > 0 && (
-    <ul class="sabl-specials">
-      {specials.map(sp => (
-        <li class="sabl-special">
-          <span class="sabl-special-k">{sp.label}</span>
-          <a href={sp.href} class="sabl-special-name">{sp.title}</a>
-          <span class="sabl-special-v tnum">{sp.meta}</span>
-        </li>
-      ))}
-    </ul>
-  )}
   <p class="sabl-corrected" data-dir-corrected hidden></p>
 
   <div class="sabl-grid" data-dir-grid hidden={initial.length === 0}>
