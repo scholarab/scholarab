@@ -152,9 +152,39 @@
   /* Secondary text is the ink at one of three strengths, not fourteen
      (critique 2026-10-02 counted 0.55 to 0.85 in 14 steps). Faint is the
      floor: 0.62 is 4.84:1 on a shaded row, where 0.6 was 4.54:1. */
-  --ink-soft:     rgba(20, 25, 21, 0.8);   /* facts, provider lines */
-  --ink-muted:    rgba(20, 25, 21, 0.72);  /* standfirsts, blurbs, notes */
-  --ink-faint:    rgba(20, 25, 21, 0.62);  /* countdowns, captions, "Amount varies" */
+  --ink-soft:     rgba(var(--fg-rgb), 0.8);   /* facts, provider lines */
+  --ink-muted:    rgba(var(--fg-rgb), 0.72);  /* standfirsts, blurbs, notes */
+  --ink-faint:    rgba(var(--fg-rgb), 0.62);  /* countdowns, captions, "Amount varies" */
+  --ink-fixed-muted: rgba(20, 25, 21, 0.72);  /* on always-white pills over photos, same in both themes */
+
+  /* The two colours every tint is built from: the text colour (hairlines,
+     hover washes, the three strengths above) and the green (selected
+     washes). Dark mode swaps these and the solids, and every tint follows. */
+  --fg-rgb:       20, 25, 21;
+  --bg-rgb:       255, 255, 255;
+  --green-rgb:    10, 86, 50;
+  /* Solid ink as a fill: numbered badges, the selected segment, the
+     consent band. In dark mode it lifts above the page instead of
+     inverting to white, so the yellow and white set on it still read. */
+  --fill-ink:     #141915;
+  /* Menus and popovers that float over the page. */
+  --bg-raised:    #FFFFFF;
+  /* Page-specific greys, one token each so light keeps its exact values. */
+  --text-body: #3A403B;
+  --text-body-2: #454945;
+  --text-label: #5C5F5B;
+  --text-placeholder: #626862;
+  --text-placeholder-2: #526252;
+  --line-warm: #E4E0D5;
+  --line-warm-2: #E5E0D5;
+  --line-soft: #E6E9E3;
+  --bg-hover-strong: #EBEEEA;
+  --bg-hover: #F5F6F4;
+  --bg-selected: #EDF5EF;
+  --bg-done: #E1F0E5;
+  --fill-ink-hover: #2B332D;
+  --bg-code: #F2F3F5;
+  --bg-subtle: #FAFBF9;
 
   /* The text sizes under the display face. Whole pixels only: the half
      sizes (12.5, 13.5, 14.5, 15.5, 16.5) each sat a hair from a neighbour
@@ -174,6 +204,90 @@
 
   /* The pickers' arrow: they draw their own (see .sabl-sort-select). */
   --select-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23141915' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+/* ── Dark mode ───────────────────────────────────────────────
+   The head script in Layout.astro sets data-theme on <html> before first
+   paint: the visitor's choice from the header gear (localStorage sa_theme),
+   else the device setting. Light is the tokens above; dark swaps only the
+   tokens, so a rule that names a token never needs a dark twin. The page is
+   the logo's green-black rather than pure black, the text a step under the
+   ink bands' paper so long reading does not glare, and the greens are the
+   light logo green that already carries the ink surfaces. */
+@media screen {
+html[data-theme='dark'] {
+  color-scheme: dark;
+  --bg-page:      #0D1410;
+  --bg-panel:     #18211B;
+  --text-primary: #E6EAE4;
+  --fg-rgb:       230, 234, 228;
+  --bg-rgb:       13, 20, 16;
+  --green:        #66C08D;
+  --green-rgb:    102, 192, 141;
+  --cta:          #4AA873;
+  --cta-hover:    #5DB884;
+  --text-on-cta:  #08120E;
+  --fill-ink:     #2A362E;
+  --bg-raised:    #1B251E;
+  --text-body: #C9CFC8;
+  --text-body-2: #BEC4BD;
+  --text-label: #A3AAA2;
+  --text-placeholder: #8E968D;
+  --text-placeholder-2: #93A093;
+  --line-warm: #263029;
+  --line-warm-2: #263029;
+  --line-soft: #263029;
+  --bg-hover-strong: #222C25;
+  --bg-hover: #1C251F;
+  --bg-selected: #17291F;
+  --bg-done: #17291F;
+  --fill-ink-hover: #364339;
+  --bg-code: #1C251F;
+  --bg-subtle: #121A15;
+  --rust:         #EE945F;
+  --focus-ring:   #5DB884;
+  --select-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23E6EAE4' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+}
+
+/* The footer and the ink bands are the light page's dark ground; on the dark
+   page a hairline keeps the footer from running into the content. */
+html[data-theme='dark'] .sabf-footer { box-shadow: inset 0 1px 0 rgba(238, 241, 236, 0.08); }
+
+@media screen {
+  /* Shadows barely read on a dark page, so anything that floats is lifted by
+     a lighter surface and a faint top edge instead. */
+  html[data-theme='dark'] :is(.sabl-suggest, .sabl-menu-list) {
+    background: var(--bg-raised);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 18px 40px -12px rgba(0, 0, 0, 0.7);
+  }
+  html[data-theme='dark'][data-sab-stuck] body > .sabp-header { box-shadow: 0 1px 0 rgba(var(--fg-rgb), 0.08), 0 8px 24px -16px rgba(0, 0, 0, 0.8); }
+  @media (hover: hover) {
+    html[data-theme='dark'] :is(#sab-scholarships, #sab-programs) [data-dir-grid] > .sabl-card:hover {
+      box-shadow: inset 0 0 0 1px rgba(var(--fg-rgb), 0.1);
+    }
+  }
+  /* Field edges at 3:1 against the dark page (WCAG 1.4.11); hover and focus
+     rules on the fields themselves still win. */
+  html[data-theme='dark'] :is(input:not([type=checkbox], [type=radio], [type=range]), select, textarea) { border-color: rgba(var(--fg-rgb), 0.44); }
+  html[data-theme='dark'] .sabl-search { border-color: rgba(var(--fg-rgb), 0.44); }
+  /* The bright accent carries ink text in dark, so its ring cannot be ink. */
+  html[data-theme='dark'] :is(.sab-btn-accent, .sabm-btn-accent, .sab404-btn-accent, .sabd-cta, .sabe-btn-solid) { --focus-ring: var(--green); }
+  html[data-theme='dark'] .sabh[data-tone='light']:not([data-open]) { --focus-ring: var(--green); }
+  /* Card actions read in the text green, a step brighter than the fill green. */
+  html[data-theme='dark'] :is(#sab-scholarships, #sab-programs) .sabl-card .sabl-apply:not(:hover) { color: var(--green); }
+  /* School crests are mostly white squares; take the glare off them. */
+  html[data-theme='dark'] .sabl-logo { filter: brightness(0.86); }
+  /* The cookie band sits on the raised surface like the other floating panels. */
+  html[data-theme='dark'] .sab-consent { background: var(--bg-raised); }
+  /* The combo tray is printed: mint or mustard paper with ink on it, in
+     either theme. It takes the light ink tokens back for everything inside. */
+  html[data-theme='dark'] .sabm-combo {
+    --text-primary: #141915; --fg-rgb: 20, 25, 21; --fill-ink: #141915; --fill-ink-hover: #2B332D;
+    --focus-ring: #141915;
+    color: #141915; border-color: rgba(238, 241, 236, 0.16);
+  }
+  html[data-theme='dark'] .sabm-combo .sabm-btn-accent { --focus-ring: #141915; }
 }
 
 /* ── Base ──────────────────────────────────────────────────── */
@@ -307,36 +421,41 @@ body > .sabp-header { background: transparent; color: inherit; border-bottom: 0;
 .sabh { position: relative; }
 .sabh[data-open] { background: #0A1310; }
 .sabh[data-tone='light']:not([data-open]) {
-  background: #FFFFFF; box-shadow: inset 0 -1px 0 rgba(20, 25, 21, 0.1);
+  background: var(--bg-page); box-shadow: inset 0 -1px 0 rgba(var(--fg-rgb), 0.1);
   --focus-ring: #0A5632;
 }
 .sabh-logo-light { display: none; }
 .sabh[data-tone='light']:not([data-open]) .sabh-logo-light { display: block; }
 .sabh[data-tone='light']:not([data-open]) .sabh-logo-dark { display: none; }
-.sabh[data-tone='light']:not([data-open]) :is(.sabh-link, .sabh-how, .sabh-social a) {
+/* Dark mode: the light header sits on the dark page, so it wears the on-dark logo. */
+@media screen {
+  html[data-theme='dark'] .sabh[data-tone='light'] .sabh-logo-light { display: none; }
+  html[data-theme='dark'] .sabh[data-tone='light'] .sabh-logo-dark { display: block; }
+}
+.sabh[data-tone='light']:not([data-open]) :is(.sabh-link, .sabh-how, .sabh-gear-btn) {
   color: var(--ink-muted);
 }
-.sabh[data-tone='light']:not([data-open]) :is(.sabh-link-active, .sabh-link:hover, .sabh-has-menu:hover .sabh-link, .sabh-has-menu[data-menu-open] .sabh-link, .sabh-how:hover, .sabh-social a:hover) {
-  color: #141915;
+.sabh[data-tone='light']:not([data-open]) :is(.sabh-link-active, .sabh-link:hover, .sabh-has-menu:hover .sabh-link, .sabh-has-menu[data-menu-open] .sabh-link, .sabh-how:hover, .sabh-gear-btn:hover, .sabh-gear[data-open] .sabh-gear-btn) {
+  color: var(--text-primary);
 }
-.sabh[data-tone='light']:not([data-open]) :is(.sabh-how:hover, .sabh-social a:hover) { background: rgba(20, 25, 21, 0.06); }
-.sabh[data-tone='light']:not([data-open]) .sabh-how-i { background: rgba(20, 25, 21, 0.08); }
-.sabh[data-tone='light']:not([data-open]) .sabh-burger span { background: #141915; }
+.sabh[data-tone='light']:not([data-open]) :is(.sabh-how:hover, .sabh-gear-btn:hover, .sabh-gear[data-open] .sabh-gear-btn) { background: rgba(var(--fg-rgb), 0.06); }
+.sabh[data-tone='light']:not([data-open]) .sabh-how-i { background: rgba(var(--fg-rgb), 0.08); }
+.sabh[data-tone='light']:not([data-open]) .sabh-burger span { background: var(--text-primary); }
 /* An open menu works as on the home page (Ilia, 2026-10-12): no panel, the
    list is words over the page, with a soft white fall-off under the bar in
    place of home's black smoke. The bar's hairline goes while a menu is open
    so nothing runs between a label and its list. data-sab-menu comes from the
    header script (see syncMenuFlag). */
 /* Without the script there is no fade, so the list keeps a white panel. */
-.sabh[data-tone='light']:not([data-open]):not([data-drop]) .sabh-menu { background: #FFFFFF; }
+.sabh[data-tone='light']:not([data-open]):not([data-drop]) .sabh-menu { background: var(--bg-page); }
 html[data-sab-menu] .sabh[data-tone='light']:not([data-open]) { box-shadow: none; }
 .sabh[data-tone='light']:not([data-open]) .sabh-menu-desk a { color: var(--ink-soft); }
-.sabh[data-tone='light']:not([data-open]) .sabh-menu-desk a:hover { color: #0A5632; }
+.sabh[data-tone='light']:not([data-open]) .sabh-menu-desk a:hover { color: var(--green); }
 @media (min-width: 901px) {
   .sabh[data-tone='light']::after {
     content: ''; position: absolute; left: 0; right: 0; top: 100%; z-index: 4;
     height: 260px; pointer-events: none; opacity: 0; transition: opacity 0.25s ease;
-    background: linear-gradient(180deg, #FFFFFF 0, rgba(255, 255, 255, 0.94) 50%, rgba(255, 255, 255, 0) 100%);
+    background: linear-gradient(180deg, var(--bg-page) 0, rgba(var(--bg-rgb), 0.94) 50%, rgba(var(--bg-rgb), 0) 100%);
   }
   html[data-sab-menu] .sabh[data-tone='light']:not([data-open])::after { opacity: 1; }
 }
@@ -433,9 +552,9 @@ body.quiz-past-first .sabm-progress-wrap { margin-top: 10px; padding-top: 16px; 
 .sabm-find {
   display: block; width: 100%; max-width: 420px; box-sizing: border-box; min-height: 44px; margin: 0 0 16px;
   padding: 0 16px; font: 500 16px var(--font-body); color: var(--text-primary);
-  background: #FFFFFF; border: 1.5px solid rgba(20,25,21,0.3); border-radius: var(--radius);
+  background: var(--bg-page); border: 1.5px solid rgba(var(--fg-rgb), 0.3); border-radius: var(--radius);
 }
-.sabm-find::placeholder { color: #626862; opacity: 1; }
+.sabm-find::placeholder { color: var(--text-placeholder); opacity: 1; }
 .sabm-find:hover { border-color: var(--text-primary); }
 /* The results' answer summary: each answer a quiet chip that reopens its
    question. */
@@ -446,7 +565,7 @@ body.quiz-past-first .sabm-progress-wrap { margin-top: 10px; padding-top: 16px; 
 .sabm-answers button {
   min-height: 32px; padding: 0 12px; cursor: pointer;
   font: 500 14px var(--font-body); color: var(--text-primary);
-  background: #FFFFFF; border: 1px solid rgba(20,25,21,0.22); border-radius: var(--radius);
+  background: var(--bg-page); border: 1px solid rgba(var(--fg-rgb), 0.22); border-radius: var(--radius);
 }
 .sabm-answers button:hover { border-color: var(--text-primary); }
 /* Thumb-sized on touch: at 32px these were the smallest buttons on the
@@ -519,8 +638,8 @@ body.quiz-past-first .sabm-progress-wrap { margin-top: 10px; padding-top: 16px; 
 .sabl-find { position: relative; display: flex; align-items: center; }
 .sabl-search {
   display: flex; align-items: center; gap: 8px; width: 280px; height: 44px; box-sizing: border-box;
-  padding: 0 4px 0 12px; border: 1px solid rgba(20,25,21,0.14); border-radius: 8px;
-  background: rgba(20,25,21,0.04);
+  padding: 0 4px 0 12px; border: 1px solid rgba(var(--fg-rgb), 0.14); border-radius: 8px;
+  background: rgba(var(--fg-rgb), 0.04);
 }
 /* This was the ⌕ character, which is a text glyph: it inherits the font's own
    weight and baseline, so it sat light and low next to 15px Archivo and looked
@@ -548,9 +667,9 @@ body.quiz-past-first .sabm-progress-wrap { margin-top: 10px; padding-top: 16px; 
    typing"). html[data-pointer] says the focus came from a pointer, set by the
    inline script in Layout.astro, so the rule is left to keyboard focus, where
    an input with no visible indicator fails 2.4.7 outright. */
-.sabl-search:focus-within { border-color: rgba(20,25,21,0.5); background: #FFFFFF; }
+.sabl-search:focus-within { border-color: rgba(var(--fg-rgb), 0.5); background: var(--bg-page); }
 html:not([data-pointer]) .sabl-search:has(input:focus-visible) {
-  box-shadow: inset 0 -2px 0 rgba(20,25,21,0.75);
+  box-shadow: inset 0 -2px 0 rgba(var(--fg-rgb), 0.75);
 }
 /* The field carries no visible label, so the placeholder is the only thing
    saying what to type; 0.4 alpha put it at 2.6:1. 0.62 clears AA. */
@@ -563,12 +682,12 @@ html:not([data-pointer]) .sabl-search:has(input:focus-visible) {
   width: 34px; height: 34px; border: 0; border-radius: 6px; background: none; cursor: pointer;
   color: var(--ink-muted);
 }
-.sabl-search-clear:hover { color: var(--text-primary); background: rgba(20,25,21,0.06); }
+.sabl-search-clear:hover { color: var(--text-primary); background: rgba(var(--fg-rgb), 0.06); }
 .sabl-search-clear[hidden] { display: none; }
 /* Words to try, under the empty box while it is in use. */
 .sabl-suggest {
   position: absolute; top: calc(100% + 6px); right: 0; z-index: 30; width: 280px; box-sizing: border-box;
-  padding: 6px; background: #FFFFFF; border: 1px solid rgba(20,25,21,0.12); border-radius: 10px;
+  padding: 6px; background: var(--bg-page); border: 1px solid rgba(var(--fg-rgb), 0.12); border-radius: 10px;
   box-shadow: 0 16px 36px -14px rgba(20,25,21,0.35);
 }
 .sabl-suggest[hidden] { display: none; }
@@ -579,7 +698,7 @@ html:not([data-pointer]) .sabl-search:has(input:focus-visible) {
   font: 500 15px var(--font-body); color: var(--text-primary);
 }
 .sabl-suggest-q svg { flex: none; color: var(--ink-muted); }
-.sabl-suggest-q:hover { background: rgba(20,25,21,0.05); }
+.sabl-suggest-q:hover { background: rgba(var(--fg-rgb), 0.05); }
 .sabl-sort { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
 /* The chips inside had no rule of their own on a desktop, so the only thing
    between three 36px pills was the whitespace between the buttons, about 4px
@@ -600,7 +719,7 @@ html:not([data-pointer]) .sabl-search:has(input:focus-visible) {
   color: var(--ink-muted); cursor: pointer;
   box-shadow: inset 0 -2px 0 transparent;
 }
-.sabl-chip:hover { color: var(--text-primary); box-shadow: inset 0 -2px 0 rgba(20, 25, 21, 0.2); }
+.sabl-chip:hover { color: var(--text-primary); box-shadow: inset 0 -2px 0 rgba(var(--fg-rgb), 0.2); }
 
 /* City chips are links to that city's hub, so they need the padding and
    baseline an inline anchor does not get on its own, and no underline. */
@@ -632,8 +751,8 @@ html.js .sabl-scope-chips { display: none; }
 html.js .sabl-scope-select {
   display: block; width: auto; min-width: 260px; max-width: 100%; min-height: 40px; padding: 0 36px 0 14px;
   font: 600 14px var(--font-body); color: var(--text-primary); cursor: pointer;
-  background: #FFFFFF var(--select-arrow) right 14px center / 10px 6px no-repeat;
-  border: 1.5px solid rgba(20,25,21,0.3); border-radius: var(--radius);
+  background: var(--bg-page) var(--select-arrow) right 14px center / 10px 6px no-repeat;
+  border: 1.5px solid rgba(var(--fg-rgb), 0.3); border-radius: var(--radius);
   -webkit-appearance: none; appearance: none;
 }
 html.js .sabl-scope-select:hover { border-color: var(--text-primary); }
@@ -645,8 +764,8 @@ html.js .sabl-scope-select:hover { border-color: var(--text-primary); }
 .sabl-sort-select {
   min-height: 40px; padding: 0 36px 0 14px; cursor: pointer;
   font: 600 14px var(--font-body); color: var(--text-primary);
-  background: #FFFFFF var(--select-arrow) right 14px center / 10px 6px no-repeat;
-  border: 1.5px solid rgba(20,25,21,0.3); border-radius: var(--radius);
+  background: var(--bg-page) var(--select-arrow) right 14px center / 10px 6px no-repeat;
+  border: 1.5px solid rgba(var(--fg-rgb), 0.3); border-radius: var(--radius);
   -webkit-appearance: none; appearance: none;
 }
 .sabl-sort-select:hover { border-color: var(--text-primary); }
@@ -675,7 +794,7 @@ html.js .sabl-scope-select:hover { border-color: var(--text-primary); }
   /* Thin and quiet rather than hidden: on a row that does overflow (FIELD on
      /programs) this bar is the only thing telling a mouse user the row keeps
      going. macOS shows it only while scrolling anyway. */
-  scrollbar-width: thin; scrollbar-color: rgba(20, 25, 21, 0.25) transparent;
+  scrollbar-width: thin; scrollbar-color: rgba(var(--fg-rgb), 0.25) transparent;
 }
 .sabl-chips > * { flex: none; }
 
@@ -724,9 +843,9 @@ html.js .sabl-scope-select:hover { border-color: var(--text-primary); }
 /* Native fields combine without navigating away or exposing every choice. */
 .sabl-filter-select {
   font: inherit; font-size: 14px; color: var(--text-primary);
-  background: #FFFFFF var(--select-arrow) right 14px center / 10px 6px no-repeat;
+  background: var(--bg-page) var(--select-arrow) right 14px center / 10px 6px no-repeat;
   -webkit-appearance: none; appearance: none;
-  border: 1px solid rgba(20,25,21,0.28); border-radius: var(--radius);
+  border: 1px solid rgba(var(--fg-rgb), 0.28); border-radius: var(--radius);
   min-height: 44px; min-width: 0; width: 100%; max-width: 320px; padding: 8px 36px 8px 10px;
 }
 html:not(.js) .sabl-interactive-filter { display: none; }
@@ -782,7 +901,7 @@ html[data-later-ok] .sabm-later-note { display: none; }
   position: relative;
 }
 .sab-later-ok::after { content: ''; position: absolute; inset: -12px -8px; }
-.sab-later-ok:hover { color: #141915; }
+.sab-later-ok:hover { color: var(--text-primary); }
 .sabl-group {
   grid-column: 1 / -1; width: 100%;
   display: flex; align-items: flex-end; gap: 14px;
@@ -837,7 +956,7 @@ html.js .sabl-group-toggle { display: inline-flex; }
   align-items: center;
   background: transparent;
   border: 0;
-  border-top: 1px solid rgba(20,25,21,0.14);
+  border-top: 1px solid rgba(var(--fg-rgb), 0.14);
   border-radius: 0;
   padding: 16px 12px 15px;
   background-color: var(--row-bg, transparent);
@@ -858,17 +977,17 @@ html.js .sabl-group-toggle { display: inline-flex; }
   .sabl-grid > [data-sv-wrap] > .sabl-card { border-top-color: transparent; border-bottom-color: transparent; }
   [data-dir-grid] > .sabl-card:nth-child(even of .sabl-card:not([hidden], [data-dir-later], [data-dir-shut])),
   [data-sv-wrap]:nth-child(even) > .sabl-card {
-    --row-bg: rgba(20,25,21,0.04);
+    --row-bg: rgba(var(--fg-rgb), 0.04);
   }
 }
 /* Pointers only, like the quiz tiles: on a phone the tint lit whichever row
    the finger landed on to scroll, and jumped from row to row (Ilia,
    2026-10-03). */
-@media (hover: hover) { .sabl-card:hover { background-color: rgba(20,25,21,0.07); } }
+@media (hover: hover) { .sabl-card:hover { background-color: rgba(var(--fg-rgb), 0.07); } }
 /* The 01/02 row numbers (2026-09-22) were removed on 2026-09-23 (Ilia, after
    the critique): section numbers carry no information a sort does not. */
 [data-dir-grid] .sabl-card { position: relative; }
-.sabl-card:last-of-type { border-bottom: 1px solid rgba(20,25,21,0.14); }
+.sabl-card:last-of-type { border-bottom: 1px solid rgba(var(--fg-rgb), 0.14); }
 
 /* Four cells, each with its own stack. The deadline's two lines used to be
    separate grid items, which forced a matching empty row into the title column
@@ -888,7 +1007,7 @@ html.js .sabl-group-toggle { display: inline-flex; }
    beside it was an eyebrow over the listing's own heading and is gone. */
 .sabl-tag {
   font-family: var(--font-label); font-size: 12px; letter-spacing: 0.05em;
-  padding: 6px 12px; border-radius: var(--radius); border: 1px solid rgba(20,25,21,0.25); color: var(--ink-faint);
+  padding: 6px 12px; border-radius: var(--radius); border: 1px solid rgba(var(--fg-rgb), 0.25); color: var(--ink-faint);
   white-space: nowrap;
 }
 .sabl-name { font-weight: 700; font-size: 17px; letter-spacing: -0.01em; line-height: 1.3; color: var(--text-primary); text-decoration: none; display: block; }
@@ -928,7 +1047,7 @@ html.js .sabl-group-toggle { display: inline-flex; }
 .sabl-facts li { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 600; color: var(--ink-soft); }
 .sabl-facts li::before { content: ''; width: 6px; height: 6px; border-radius: 0; background: var(--green); flex: none; }
 /* Not a requirement, so not the green dot: an open ink ring for who takes the application (lib/apply-method.ts). */
-.sabl-facts li.is-route::before { background: none; box-shadow: inset 0 0 0 1.5px rgba(20, 25, 21, 0.7); width: 7px; height: 7px; }
+.sabl-facts li.is-route::before { background: none; box-shadow: inset 0 0 0 1.5px rgba(var(--fg-rgb), 0.7); width: 7px; height: 7px; }
 /* The deadline cell: the date, then the countdown in a lighter weight. The
    tier colours the text; only the last two weeks get the dot. */
 .sabl-when { font-size: 14px; font-weight: 700; color: var(--text-primary); white-space: nowrap; display: inline-flex; align-items: center; }
@@ -1033,7 +1152,7 @@ html.js .sabl-group-toggle { display: inline-flex; }
   display: inline-grid; place-items: center;
   display: inline-flex; align-items: center; justify-content: center;
 }
-.sabl-save:hover { background: rgba(20,25,21,0.06); color: var(--text-primary); }
+.sabl-save:hover { background: rgba(var(--fg-rgb), 0.06); color: var(--text-primary); }
 /* Worded since 2026-09-26: the bare bookmark read as decoration (about 5
    saves per 100 views). Same size and weight as the Apply link beside it. */
 /* "No listing says voley. Showing results for volleyball." Above the grid,
@@ -1081,12 +1200,12 @@ html.js .sabl-group-toggle { display: inline-flex; }
 .sabl-tool .sabl-ico { fill: none; stroke-width: 1.4; }
 /* The page's first line under the bar keeps clear of it. */
 .sabl-tabbed .sabl-col > :first-child:not(.sr-only), .sabl-tabbed .sabl-col > .sr-only + * { margin-top: 22px; }
-.sabl-tool:hover { background: rgba(20,25,21,0.06); }
-.sabl-tool[aria-expanded='true'] { color: var(--cta); background: rgba(10,86,50,0.1); }
+.sabl-tool:hover { background: rgba(var(--fg-rgb), 0.06); }
+.sabl-tool[aria-expanded='true'] { color: var(--cta); background: rgba(var(--green-rgb), 0.1); }
 .sabl-tool-n {
   position: absolute; top: 4px; right: 3px; display: inline-flex; align-items: center; justify-content: center;
   min-width: 16px; height: 16px; padding: 0 4px; box-sizing: border-box; border-radius: 8px;
-  background: var(--cta); color: #FFFFFF; font-size: 10px; line-height: 1;
+  background: var(--cta); color: var(--text-on-cta); font-size: 10px; line-height: 1;
 }
 .sabl-tool-n[hidden] { display: none; }
 /* Search and filters do nothing without script, so their icons go too. */
@@ -1102,8 +1221,8 @@ html:not(.js) .sabl-tool[data-dir-search-btn], html:not(.js) .sabl-tool[data-dir
   border-radius: 8px; white-space: nowrap; text-decoration: none;
   font: 600 15px var(--font-body); color: var(--ink-muted);
 }
-.sabl-tab:hover { color: var(--text-primary); background: rgba(20,25,21,0.05); }
-.sabl-tab[aria-current='page'] { color: var(--cta); background: rgba(10,86,50,0.1); }
+.sabl-tab:hover { color: var(--text-primary); background: rgba(var(--fg-rgb), 0.05); }
+.sabl-tab[aria-current='page'] { color: var(--cta); background: rgba(var(--green-rgb), 0.1); }
 /* A tab whose page has a photo wears it (Ilia, 2026-10-12): a small crop
    of the hub's own backdrop (<slug>-tab.webp, 288x104), lazy so the tabs
    past the edge cost nothing until scrolled to, under a dark wash so the
@@ -1111,7 +1230,7 @@ html:not(.js) .sabl-tool[data-dir-search-btn], html:not(.js) .sabl-tool[data-dir
    its edge, since the scrolling line clips anything outside it. */
 .sabl-tab-photo {
   position: relative; isolation: isolate; overflow: hidden; min-height: 44px; padding: 0 16px;
-  color: #FFFFFF; background: var(--text-primary);
+  color: #FFFFFF; background: var(--fill-ink);
 }
 .sabl-tab-img { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; }
 .sabl-tab-photo::after {
@@ -1119,21 +1238,21 @@ html:not(.js) .sabl-tool[data-dir-search-btn], html:not(.js) .sabl-tool[data-dir
   background: linear-gradient(rgba(12,16,13,0.38), rgba(12,16,13,0.62));
 }
 .sabl-tab-photo .sabl-tab-label { text-shadow: 0 1px 2px rgba(0,0,0,0.45); }
-.sabl-tab-photo:hover { color: #FFFFFF; background: var(--text-primary); }
+.sabl-tab-photo:hover { color: #FFFFFF; background: var(--fill-ink); }
 .sabl-tab-photo:hover::after { background: linear-gradient(rgba(12,16,13,0.2), rgba(12,16,13,0.5)); }
-.sabl-tab-photo[aria-current='page'] { color: #FFFFFF; background: var(--text-primary); }
+.sabl-tab-photo[aria-current='page'] { color: #FFFFFF; background: var(--fill-ink); }
 /* On the wash, not the box: the photo would cover a ring drawn on the box. */
 .sabl-tab-photo[aria-current='page']::after { border-radius: inherit; box-shadow: inset 0 0 0 3px #4AA873; }
 .sabl-tabs-more {
   position: absolute; right: 0; top: 0; bottom: 0; width: 64px;
   display: flex; align-items: center; justify-content: flex-end; padding: 0 8px 0 0;
   border: 0; cursor: pointer; color: var(--ink-muted);
-  background: linear-gradient(to right, rgba(255,255,255,0), var(--bg-page) 55%);
+  background: linear-gradient(to right, rgba(var(--bg-rgb), 0), var(--bg-page) 55%);
 }
 .sabl-tabs-more:hover { color: var(--text-primary); }
 .sabl-tabs-back {
   right: auto; left: 0; justify-content: flex-start; padding: 0 0 0 8px; z-index: 1;
-  background: linear-gradient(to left, rgba(255,255,255,0), var(--bg-page) 55%);
+  background: linear-gradient(to left, rgba(var(--bg-rgb), 0), var(--bg-page) 55%);
 }
 .sabl-tabs-more[hidden] { display: none; }
 /* The filters as one line of pickers under the bar, no panel and no labels:
@@ -1166,18 +1285,18 @@ html:not(.js) .sabl-tool[data-dir-search-btn], html:not(.js) .sabl-tool[data-dir
 .sabl-menu { position: relative; }
 .sabl-menu-btn {
   display: none; align-items: center; gap: 8px; min-height: 40px; padding: 0 12px 0 14px;
-  border: 1px solid rgba(20,25,21,0.16); border-radius: 10px; background: #FFFFFF; cursor: pointer;
+  border: 1px solid rgba(var(--fg-rgb), 0.16); border-radius: 10px; background: var(--bg-page); cursor: pointer;
   font: 600 15px var(--font-body); color: var(--text-primary); white-space: nowrap;
 }
-.sabl-menu-btn:hover { border-color: rgba(20,25,21,0.4); }
-.sabl-menu-btn[aria-expanded='true'] { background: rgba(20,25,21,0.05); border-color: rgba(20,25,21,0.4); }
-.sabl-menu.is-set .sabl-menu-btn { color: var(--cta); background: rgba(10,86,50,0.08); border-color: rgba(10,86,50,0.35); }
+.sabl-menu-btn:hover { border-color: rgba(var(--fg-rgb), 0.4); }
+.sabl-menu-btn[aria-expanded='true'] { background: rgba(var(--fg-rgb), 0.05); border-color: rgba(var(--fg-rgb), 0.4); }
+.sabl-menu.is-set .sabl-menu-btn { color: var(--cta); background: rgba(var(--green-rgb), 0.08); border-color: rgba(var(--green-rgb), 0.35); }
 .sabl-menu-chev { color: var(--ink-muted); transition: transform 0.15s; }
 .sabl-menu-btn[aria-expanded='true'] .sabl-menu-chev { transform: rotate(180deg); }
 .sabl-menu-list {
   position: absolute; top: calc(100% + 8px); left: 0; z-index: 40; min-width: 240px; max-height: 420px;
   overflow-y: auto; overscroll-behavior: contain; box-sizing: border-box; padding: 8px;
-  background: #FFFFFF; border: 1px solid rgba(20,25,21,0.12); border-radius: 14px;
+  background: var(--bg-page); border: 1px solid rgba(var(--fg-rgb), 0.12); border-radius: 14px;
   box-shadow: 0 18px 40px -16px rgba(20,25,21,0.35);
 }
 .sabl-menu-list[hidden] { display: none; }
@@ -1185,7 +1304,7 @@ html:not(.js) .sabl-tool[data-dir-search-btn], html:not(.js) .sabl-tool[data-dir
   display: flex; align-items: center; gap: 12px; min-height: 46px; padding: 0 14px; border-radius: 8px;
   cursor: pointer; font: 600 16px var(--font-body); color: var(--text-primary); white-space: nowrap;
 }
-.sabl-menu-opt:hover, .sabl-menu-opt:focus { background: rgba(20,25,21,0.05); }
+.sabl-menu-opt:hover, .sabl-menu-opt:focus { background: rgba(var(--fg-rgb), 0.05); }
 .sabl-menu-opt:focus-visible { outline-offset: -2px; }
 .sabl-menu-n { margin-left: auto; font: 500 14px var(--font-body); color: var(--ink-muted); font-variant-numeric: tabular-nums; }
 .sabl-menu-check { display: inline-flex; width: 16px; margin-left: auto; color: var(--cta); visibility: hidden; }
@@ -1227,12 +1346,12 @@ html:not(.js) .sabl-tool[data-dir-search-btn], html:not(.js) .sabl-tool[data-dir
   grid-template-areas: "title title" "blurb blurb" "facts facts" "gap gap" "amount when" "actions actions";
   align-items: start; gap: 0 12px;
   margin: 0; padding: 16px 16px 14px; border: 0; border-radius: 14px;
-  --row-bg: #F3F5F2;
+  --row-bg: var(--bg-panel);
   transition: background-color 0.14s ease, box-shadow 0.14s ease;
 }
 @media (hover: hover) {
   :is(#sab-scholarships, #sab-programs) [data-dir-grid] > .sabl-card:hover {
-    background-color: #EBEEEA; box-shadow: 0 10px 24px -18px rgba(20, 25, 21, 0.5);
+    background-color: var(--bg-hover-strong); box-shadow: 0 10px 24px -18px rgba(20, 25, 21, 0.5);
   }
 }
 :is(#sab-scholarships, #sab-programs) .sabl-card > .sabl-row-main { display: contents; }
@@ -1245,8 +1364,8 @@ html:not(.js) .sabl-tool[data-dir-search-btn], html:not(.js) .sabl-tool[data-dir
 .sabl-logo { display: none; }
 #sab-scholarships .sabl-card .sabl-logo {
   display: block; grid-area: logo; align-self: center; width: 44px; height: 44px;
-  border-radius: 10px; object-fit: cover; background: #FFFFFF;
-  box-shadow: 0 0 0 1px rgba(20, 25, 21, 0.08);
+  border-radius: 10px; object-fit: cover; background: var(--bg-page);
+  box-shadow: 0 0 0 1px rgba(var(--fg-rgb), 0.08);
 }
 #sab-scholarships .sabl-card .sabl-name-h { align-self: center; }
 #sab-scholarships .sabl-card :is(.sabl-blurb, .sabl-org) { margin-top: 10px; }
@@ -1286,11 +1405,11 @@ html:not(.js) .sabl-tool[data-dir-search-btn], html:not(.js) .sabl-tool[data-dir
   height: 40px; border-radius: 8px; justify-content: center; font-size: 14px;
   transition: background-color 0.14s ease, color 0.14s ease;
 }
-:is(#sab-scholarships, #sab-programs) .sabl-card .sabl-save { background: rgba(20, 25, 21, 0.07); width: 100%; padding: 0 16px; }
-:is(#sab-scholarships, #sab-programs) .sabl-card .sabl-save:hover { background: rgba(20, 25, 21, 0.13); }
+:is(#sab-scholarships, #sab-programs) .sabl-card .sabl-save { background: rgba(var(--fg-rgb), 0.07); width: 100%; padding: 0 16px; }
+:is(#sab-scholarships, #sab-programs) .sabl-card .sabl-save:hover { background: rgba(var(--fg-rgb), 0.13); }
 :is(#sab-scholarships, #sab-programs) .sabl-card .sabl-save.on { background: rgba(74, 168, 115, 0.18); }
-:is(#sab-scholarships, #sab-programs) .sabl-card .sabl-apply { background: rgba(10, 86, 50, 0.12); color: var(--cta); }
-:is(#sab-scholarships, #sab-programs) .sabl-card .sabl-apply:hover { background: var(--cta); color: #FFFFFF; }
+:is(#sab-scholarships, #sab-programs) .sabl-card .sabl-apply { background: rgba(var(--green-rgb), 0.12); color: var(--cta); }
+:is(#sab-scholarships, #sab-programs) .sabl-card .sabl-apply:hover { background: var(--cta); color: var(--text-on-cta); }
 :is(#sab-scholarships, #sab-programs) .sabl-card .sabl-apply::before { content: none; }
 :is(#sab-scholarships, #sab-programs) .sabl-card :is(.sabl-save, .sabl-apply)::after { inset: 0; }
 /* Paper keeps the printed list a list. */
@@ -1325,10 +1444,10 @@ html:not(.js) .sabl-more { display: none; }
   min-height: 48px; padding: 0 30px; border-radius: var(--radius); cursor: pointer;
   /* Secondary, so an outline: the next 24 rows are not the page's action
      (critique 2026-10-02, one primary fill sitewide). */
-  background: transparent; color: var(--text-primary); border: 1.5px solid rgba(20,25,21,0.3);
+  background: transparent; color: var(--text-primary); border: 1.5px solid rgba(var(--fg-rgb), 0.3);
   transition: background-color 0.15s ease, border-color 0.15s ease;
 }
-.sabl-more-btn:hover { border-color: var(--text-primary); background: rgba(20,25,21,0.04); }
+.sabl-more-btn:hover { border-color: var(--text-primary); background: rgba(var(--fg-rgb), 0.04); }
 .sabl-more-all {
   font-family: var(--font-body); font-weight: 600; font-size: 15px;
   min-height: 44px; padding: 0 6px; background: none; border: none; cursor: pointer;
@@ -1341,7 +1460,7 @@ html:not(.js) .sabl-more { display: none; }
   .sabl-more-btn { width: 100%; }
 }
 
-.sabl-empty { text-align: center; padding: 80px 24px; border: 2px dashed rgba(20,25,21,0.2); border-radius: var(--radius); margin-top: 16px; }
+.sabl-empty { text-align: center; padding: 80px 24px; border: 2px dashed rgba(var(--fg-rgb), 0.2); border-radius: var(--radius); margin-top: 16px; }
 /* /saved's empty page: no dashed box, left-aligned like the rest of the page
    (flow plan, 2026-10-02). */
 .sabs-empty { text-align: left; border: 0; border-radius: 0; padding: 0; margin-top: 48px; max-width: 640px; }
@@ -1358,7 +1477,7 @@ html:not(.js) .sabl-more { display: none; }
   color: var(--green); text-decoration: underline; text-underline-offset: 3px;
   text-decoration-thickness: 1.5px;
 }
-.sabl-empty-link:hover, .sabl-empty-link:focus-visible { color: #08452A; }
+.sabl-empty-link:hover, .sabl-empty-link:focus-visible { color: var(--cta-hover); }
 
 .sabl-empty-btn {
   font-family: var(--font-body); background: var(--cta); color: var(--text-on-cta);
@@ -1467,7 +1586,7 @@ html:not(.js) .sabl-more { display: none; }
 }
 /* A dot per item rather than a separator between them, so an item that wraps
    onto its own line does not start with a stray "·". */
-.sabl-meta::before { content: ''; position: absolute; left: 0; top: calc(0.7em - 2.5px); width: 5px; height: 5px; border-radius: 0; background: rgba(20, 25, 21, 0.35); }
+.sabl-meta::before { content: ''; position: absolute; left: 0; top: calc(0.7em - 2.5px); width: 5px; height: 5px; border-radius: 0; background: rgba(var(--fg-rgb), 0.35); }
 /* On a phone the three facts run as one sentence capped at two lines, and the
    provider line goes (the detail page has it): each fact wrapping on its own
    made program rows 286px on average against 180px for a scholarship row
@@ -1524,7 +1643,7 @@ html:not(.js) .sabl-more { display: none; }
    links whenever the lists were collapsed (Ilia, 2026-09-23). */
 .sabp-body:has(.sabl-hubfoot) { padding-bottom: 0; }
 .sabl-hubfoot {
-  border-top: 1px solid #E5E0D5;
+  border-top: 1px solid var(--line-warm-2);
   margin-top: 48px; padding: 28px 0;
   display: flex; flex-direction: column; gap: 12px;
   font-size: 15px; color: var(--ink-muted);
@@ -1535,7 +1654,7 @@ html:not(.js) .sabl-more { display: none; }
    links inside a sentence, so the inline exception does not apply. */
 .sabl-hublinks { display: flex; flex-wrap: wrap; gap: 2px 18px; }
 .sabl-hublinks a {
-  color: #141915; display: inline-flex; align-items: center; min-height: 24px;
+  color: var(--text-primary); display: inline-flex; align-items: center; min-height: 24px;
 }
 @media (pointer: coarse) {
   .sabl-hublinks { row-gap: 0; }
@@ -1553,11 +1672,11 @@ html:not(.js) .sabl-more { display: none; }
 
 .sabm-progress-wrap { margin-top: 34px; padding-top: 24px; border-top: 2px solid var(--text-primary); }
 .sabm-progress { display: flex; gap: 8px; max-width: 420px; }
-.sabm-seg { flex: 1; height: 5px; border-radius: 0; background: rgba(20,25,21,0.12); }
+.sabm-seg { flex: 1; height: 5px; border-radius: 0; background: rgba(var(--fg-rgb), 0.12); }
 .sabm-seg.done { background: var(--green-shadow); }
 .sabm-seg.current { background: var(--cta); }
 /* A question only some cities get: outlined until the city answer decides. */
-.sabm-seg.maybe { background: transparent; box-shadow: inset 0 0 0 1px rgba(20,25,21,0.22); }
+.sabm-seg.maybe { background: transparent; box-shadow: inset 0 0 0 1px rgba(var(--fg-rgb), 0.22); }
 .sabm-step-label, .sabm-ph-step-label { font-family: var(--font-body); font-size: 14px; color: var(--ink-muted); margin-top: 14px; }
 
 .sabm-question-panel { display: flex; flex-direction: column; max-width: 840px; }
@@ -1577,7 +1696,7 @@ html:not(.js) .sabl-more { display: none; }
 .sabm-opt, .sabm-ph-opt {
   display: flex; justify-content: space-between; align-items: center; gap: 16px;
   width: 100%; text-align: left; font-family: var(--font-body);
-  background: #FFFFFF; border: 1px solid rgba(20,25,21,0.3); border-radius: var(--radius);
+  background: var(--bg-page); border: 1px solid rgba(var(--fg-rgb), 0.3); border-radius: var(--radius);
   padding: 18px 20px; min-height: 80px; height: 100%; cursor: pointer;
   transition: border-color 0.15s ease, background 0.15s ease;
 }
@@ -1586,8 +1705,8 @@ html:not(.js) .sabl-more { display: none; }
    shift, and pointing at an option never looks like having picked it). */
 /* Pointers only: on a touch screen the tint stuck to whatever option
    landed under the finger on the next question (critique 2026-10-01). */
-@media (hover: hover) { .sabm-opt:hover { background: #F5F6F4; } }
-.sabm-opt-selected { border-color: var(--green); background: #EDF5EF; box-shadow: inset 0 0 0 1.5px var(--green); }
+@media (hover: hover) { .sabm-opt:hover { background: var(--bg-hover); } }
+.sabm-opt-selected { border-color: var(--green); background: var(--bg-selected); box-shadow: inset 0 0 0 1.5px var(--green); }
 .sabm-opt-dim { opacity: 0.45; }
 .sabm-opt-text { display: flex; flex-direction: column; gap: 5px; }
 .sabm-opt-label, .sabm-ph-opt-label { font-weight: 700; font-size: 18px; letter-spacing: -0.01em; color: var(--text-primary); }
@@ -1619,7 +1738,7 @@ html:not(.js) .sabm-ph { display: none; }
 .sabm-pick-bar {
   position: sticky; bottom: 0; z-index: 2; margin: 16px -20px 0;
   padding: 12px 20px calc(12px + env(safe-area-inset-bottom, 0px));
-  background: var(--bg-page); box-shadow: 0 -1px 0 rgba(20,25,21,0.12);
+  background: var(--bg-page); box-shadow: 0 -1px 0 rgba(var(--fg-rgb), 0.12);
 }
 button.sabm-pick-go { min-height: 48px; }
 .sabm-escape {
@@ -1645,7 +1764,7 @@ button.sabm-pick-go { min-height: 48px; }
 .sabm-show-all { display: block; margin: 32px auto 0; }
 .sabm-btn-outline {
   font-family: var(--font-body); font-size: var(--fs-small); font-weight: 600;
-  padding: 12px 22px; border-radius: var(--radius); border: 1.5px solid rgba(20,25,21,0.3);
+  padding: 12px 22px; border-radius: var(--radius); border: 1.5px solid rgba(var(--fg-rgb), 0.3);
   background: transparent; color: var(--text-primary); cursor: pointer;
   transition: border-color 0.18s ease, transform 0.07s ease;
 }
@@ -1682,7 +1801,7 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
   letter-spacing: 0.01em; margin: 8px 0 14px;
 }
 .sabm-combo-tag {
-  display: inline-block; background: var(--text-primary); color: #FFC700;
+  display: inline-block; background: var(--fill-ink); color: #FFC700;
   font: 800 13px/1 var(--font-display); letter-spacing: 0.14em; text-transform: uppercase;
   padding: 7px 12px 6px; border-radius: var(--radius); transform: rotate(-4deg);
 }
@@ -1692,14 +1811,14 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
 }
 .sabm-combo-who { font-size: var(--fs-body); line-height: 1.5; margin: 0; max-width: 60ch; }
 .sabm-combo-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 18px; margin-top: 14px; }
-.sabm-combo .sabm-btn-accent { background: var(--text-primary); color: #fff; }
-.sabm-combo .sabm-btn-accent:hover, .sabm-combo .sabm-btn-accent:focus-visible { background: #2B332D; color: #fff; }
+.sabm-combo .sabm-btn-accent { background: var(--fill-ink); color: #fff; }
+.sabm-combo .sabm-btn-accent:hover, .sabm-combo .sabm-btn-accent:focus-visible { background: var(--fill-ink-hover); color: #fff; }
 .sabm-combo .sabm-saved-all { color: var(--text-primary); }
-.sabm-combo .sabm-text-link { text-decoration-color: rgba(20, 25, 21, 0.6); }
+.sabm-combo .sabm-text-link { text-decoration-color: rgba(var(--fg-rgb), 0.6); }
 /* Leaving the results is the quiet choice (critique 2026-09-23). */
 .sabm-text-link {
   align-self: center; font-size: var(--fs-small); font-weight: 600; color: var(--text-primary);
-  text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(20, 25, 21, 0.35);
+  text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(var(--fg-rgb), 0.35);
   padding: 12px 4px;
 }
 .sabm-text-link:hover, .sabm-text-link:focus-visible { text-decoration-color: currentColor; }
@@ -1711,7 +1830,7 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
   }
 }
 
-.sabm-later-note { font-size: 15px; line-height: 1.55; color: #454945; max-width: 62ch; margin: 10px 0 0; }
+.sabm-later-note { font-size: 15px; line-height: 1.55; color: var(--text-body-2); max-width: 62ch; margin: 10px 0 0; }
 .sabm-table { border-top: 2px solid var(--text-primary); margin-top: 40px; }
 .sabm-table-label { font-size: 14px; font-weight: 600; color: var(--ink-soft); padding: 14px 0 0; margin: 0; }
 /* The second group's label, below the first group's last row */
@@ -1721,9 +1840,9 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
    here: the fit tags and the reasons under the title. */
 @supports selector(:nth-child(1 of .a)) {
   .sabm-table > .sabl-card { border-top-color: transparent; }
-  .sabm-table > .sabl-card:nth-child(even of .sabl-card) { --row-bg: rgba(20,25,21,0.04); }
+  .sabm-table > .sabl-card:nth-child(even of .sabl-card) { --row-bg: rgba(var(--fg-rgb), 0.04); }
 }
-.sabm-table > .sabl-card:last-child { border-bottom: 1px solid rgba(20,25,21,0.14); }
+.sabm-table > .sabl-card:last-child { border-bottom: 1px solid rgba(var(--fg-rgb), 0.14); }
 @media (max-width: 899px) {
   .sabm-table > .sabl-card { margin-left: -20px; margin-right: -20px; padding-left: 20px; padding-right: 20px; }
 }
@@ -1747,11 +1866,11 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
   padding: 3px 10px; border-radius: var(--radius); white-space: normal; max-width: 100%;
 }
 .sabm-tier-strong { background: rgba(74,168,115,0.18); color: var(--green); }
-.sabm-tier-good { background: rgba(20,25,21,0.07); color: var(--ink-muted); }
+.sabm-tier-good { background: rgba(var(--fg-rgb), 0.07); color: var(--ink-muted); }
 /* An eligibility rule the quiz never asked about. Rust, like every other
    "act on this" mark, at #A0491A, the directory day-chip rust, which clears AA on white. */
 .sabm-check { border: 1px solid rgba(160,73,26,0.45); color: var(--rust); white-space: normal; }
-.sabm-tier-possible, .sabm-cat { border: 1px solid rgba(20,25,21,0.2); color: var(--ink-muted); }
+.sabm-tier-possible, .sabm-cat { border: 1px solid rgba(var(--fg-rgb), 0.2); color: var(--ink-muted); }
 .sabm-amount-muted { font-family: var(--font-body); font-size: 13px; color: var(--ink-muted); }
 .sabm-amount-cell { display: flex; flex-direction: column; align-items: flex-end; gap: 7px; }
 .sabm-paid-chip {
@@ -1805,7 +1924,7 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
 
 /* ══ "ScholarAB Saved" design (claude.ai/design); shortlist + calendar ══ */
 .sabs-toggle {
-  display: flex; border: 1.5px solid rgba(20,25,21,0.85); border-radius: var(--radius);
+  display: flex; border: 1.5px solid rgba(var(--fg-rgb), 0.85); border-radius: var(--radius);
   overflow: hidden; flex: none; margin-bottom: 6px;
 }
 .sabs-toggle[hidden] { display: none; }
@@ -1813,9 +1932,9 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
   font-family: var(--font-body); font-size: 14px; font-weight: 700;
   padding: 11px 24px; min-height: 44px; border: none; cursor: pointer; background: transparent; color: var(--text-primary);
 }
-.sabs-toggle-btn + .sabs-toggle-btn { border-left: 1.5px solid rgba(20,25,21,0.85); }
+.sabs-toggle-btn + .sabs-toggle-btn { border-left: 1.5px solid rgba(var(--fg-rgb), 0.85); }
 .sabs-toggle-btn:hover { opacity: 0.85; }
-.sabs-toggle-btn.on { background: var(--text-primary); color: var(--paper); }
+.sabs-toggle-btn.on { background: var(--fill-ink); color: var(--paper); }
 
 /* /saved as a plan (2026-10-01): a status on each row, the first three to
    start numbered with the combo trays' sticker, and what the list asks for. */
@@ -1832,7 +1951,7 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
 .sabs-start {
   display: inline-grid; place-items: center; flex: none;
   width: 30px; height: 30px; margin-right: 10px; border-radius: var(--radius);
-  background: var(--text-primary); color: #FFC700;
+  background: var(--fill-ink); color: #FFC700;
   font: 800 17px/1 var(--font-display); transform: rotate(-6deg); vertical-align: 2px;
 }
 .sabs-start[hidden] { display: none; }
@@ -1842,14 +1961,14 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
   appearance: none; -webkit-appearance: none; cursor: pointer;
   font: 700 13px/1 var(--font-body); color: var(--text-primary);
   min-height: 34px; padding: 8px 30px 8px 13px;
-  border: 1.5px solid rgba(20, 25, 21, 0.3); border-radius: var(--radius);
-  background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23141915' stroke-width='1.6'/%3E%3C/svg%3E") no-repeat right 12px center;
+  border: 1.5px solid rgba(var(--fg-rgb), 0.3); border-radius: var(--radius);
+  background: var(--bg-page) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23141915' stroke-width='1.6'/%3E%3C/svg%3E") no-repeat right 12px center;
 }
 .sabs-status select:hover { border-color: var(--text-primary); }
 [data-status="working"] .sabs-status select { border-color: var(--text-primary); }
-[data-status="submitted"] .sabs-status select { background-color: #E1F0E5; border-color: #0A5632; color: #0A5632; }
+[data-status="submitted"] .sabs-status select { background-color: var(--bg-done); border-color: var(--cta); color: var(--green); }
 [data-status="won"] .sabs-status select {
-  background-color: var(--text-primary); border-color: var(--text-primary); color: #FFC700;
+  background-color: var(--fill-ink); border-color: var(--fill-ink); color: #FFC700;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23FFC700' stroke-width='1.6'/%3E%3C/svg%3E");
 }
 @media (max-width: 900px) {
@@ -1890,25 +2009,25 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
 }
 .sabs-cal-add {
   font-family: var(--font-body); font-size: var(--fs-ui); font-weight: 600;
-  padding: 9px 18px; border-radius: var(--radius); border: 1.5px solid rgba(20,25,21,0.3);
+  padding: 9px 18px; border-radius: var(--radius); border: 1.5px solid rgba(var(--fg-rgb), 0.3);
   background: transparent; color: var(--text-primary); cursor: pointer;
 }
 .sabs-cal-add:hover { border-color: var(--text-primary); }
 
 .sabs-cal-card {
-  background: #FFFFFF; border: 1.5px solid rgba(20,25,21,0.85); border-radius: var(--radius);
+  background: var(--bg-page); border: 1.5px solid rgba(var(--fg-rgb), 0.85); border-radius: var(--radius);
   padding: 32px 36px 28px; margin-top: 10px;
 }
 .sabs-cal-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 26px; }
 .sabs-cal-month { font-family: var(--font-display); font-size: clamp(24px, 3vw, 34px); letter-spacing: -0.01em; }
 .sabs-cal-nav {
   font-family: var(--font-body); font-size: 16px; background: none;
-  border: 1.5px solid rgba(20,25,21,0.25); border-radius: var(--radius);
+  border: 1.5px solid rgba(var(--fg-rgb), 0.25); border-radius: var(--radius);
   min-width: 38px; height: 38px; padding: 0 12px; cursor: pointer; color: var(--text-primary);
   display: inline-flex; align-items: center; justify-content: center; gap: 7px;
 }
 /* An arrow with something behind it looks different from one without. */
-.sabs-cal-nav.has-due { border-color: rgba(20, 25, 21, 0.68); }
+.sabs-cal-nav.has-due { border-color: rgba(var(--fg-rgb), 0.68); }
 .sabs-cal-nav-count {
   font-size: 11px; font-weight: 500; line-height: 1;
   background: var(--cta); color: var(--text-on-cta); border-radius: var(--radius); padding: 3px 6px;
@@ -1918,7 +2037,7 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
 .sabs-cal-wd { text-align: center; font-size: var(--fs-caption); letter-spacing: 0.05em; color: var(--ink-muted); padding: 6px 0; }
 .sabs-cal-cell {
   min-height: 58px; border-radius: var(--radius); padding: 8px 10px; box-sizing: border-box;
-  background: transparent; border: 1.5px solid rgba(20,25,21,0.08);
+  background: transparent; border: 1.5px solid rgba(var(--fg-rgb), 0.08);
 }
 .sabs-cal-cell.blank { border-color: transparent; }
 .sabs-cal-cell.has-due { background: rgba(74,168,115,0.16); border-color: rgba(46,122,80,0.4); }
@@ -1926,10 +2045,10 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
 .sabs-cal-day { font-size: var(--fs-ui); color: var(--text-primary); }
 .sabs-cal-cell.has-due .sabs-cal-day, .sabs-cal-cell.today .sabs-cal-day { font-weight: 700; }
 .sabs-cal-due { font-size: 10px; letter-spacing: 0.03em; color: var(--green); margin-top: 4px; line-height: 1.3; }
-.sabs-cal-list { border-top: 1px solid rgba(20,25,21,0.12); margin-top: 24px; }
+.sabs-cal-list { border-top: 1px solid rgba(var(--fg-rgb), 0.12); margin-top: 24px; }
 .sabs-cal-row {
   display: grid; grid-template-columns: 110px 1fr auto; gap: 24px; align-items: center;
-  padding: 18px 4px; border-bottom: 1px solid rgba(20,25,21,0.1);
+  padding: 18px 4px; border-bottom: 1px solid rgba(var(--fg-rgb), 0.1);
 }
 .sabs-cal-date { font-size: var(--fs-meta); letter-spacing: 0.04em; color: var(--rust); }
 .sabs-cal-name { font-weight: 700; font-size: 16px; }
@@ -1951,7 +2070,7 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
    the page to demand one would misrepresent what is being asked. */
 .sab-consent {
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 9998;
-  background: var(--text-primary); color: var(--bg-page);
+  background: var(--fill-ink); color: #FFFFFF;
   border-top: 1.5px solid rgba(255, 255, 255, 0.14);
   /* Mint on near-black is the readable pairing; the ink surfaces hand the
      focus ring back to mint for exactly this reason. */
@@ -2022,7 +2141,7 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
   .sabh, .sabf-footer, #sab-consent, .sabt-strip, .sabl-tools, .sabl-search, .sabl-rail, .sabl-card-actions,
   .sabl-more, .sabl-group-toggle,
   .sabcal-jump, .sabcal-where, .sabl-crumbs, .sabd-remind { display: none !important; }
-  body { background: #fff; }
+  body { background: var(--bg-page); }
   .sabl-card {
     break-inside: avoid; background: none !important;
     border-top: 0.5pt solid #b5b5b5 !important; margin: 0 !important; padding: 7pt 0 !important;
@@ -2059,13 +2178,13 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
   display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px;
   padding: 7px 0; font-size: 15px; line-height: 1.45;
 }
-.sabl-special + .sabl-special { border-top: 1px solid rgba(20, 25, 21, 0.1); }
+.sabl-special + .sabl-special { border-top: 1px solid rgba(var(--fg-rgb), 0.1); }
 .sabl-special-k {
   flex: none; padding: 4px 10px 3px; border-radius: var(--radius);
-  background: var(--text-primary); color: #FFC700;
+  background: var(--fill-ink); color: #FFC700;
   font: 800 13px/1.1 var(--font-display); letter-spacing: 0.04em; text-transform: uppercase;
 }
-.sabl-special-name { color: #0A5632; font-weight: 700; text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
+.sabl-special-name { color: var(--green); font-weight: 700; text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
 .sabl-special-name:hover { color: var(--text-primary); }
 .sabl-special-v { color: var(--ink-muted); }
 /* One special on a phone: two cost the first row 190px of a 812px screen. */
@@ -2075,7 +2194,7 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
 }
 /* City hubs: where the rest of the reader's awards are (critique 2026-10-01). */
 .sabl-also { margin: 0 0 18px; max-width: 75ch; font-size: 15px; line-height: 1.5; color: var(--ink-soft); }
-.sabl-also a { color: #0A5632; font-weight: 700; text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
+.sabl-also a { color: var(--green); font-weight: 700; text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
 .sabl-also a:hover { color: var(--text-primary); }
 /* The run heading's count, as the sticker the combo trays wear. */
 .sabl-group { border-bottom-width: 3px; }
@@ -2086,7 +2205,7 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
   /* flex: none: beside a heading that wraps ("OPENS LATER, DATE NOT
      POSTED") the row squeezed "261" out of its pill (critique 2026-10-01). */
   flex: none;
-  background: var(--text-primary); color: #FFC700;
+  background: var(--fill-ink); color: #FFC700;
   font: 800 21px/1 var(--font-display); transform: rotate(-6deg);
 }
 .sabl-more-btn {
@@ -2110,7 +2229,7 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
   .sabl-card .sabl-name-h { display: flex; align-items: flex-end; }
   .sabl-card .sabl-name-h::after {
     content: ''; flex: 1 1 24px; min-width: 24px; margin: 0 -14px 6px 12px;
-    border-bottom: 3px dotted rgba(20, 25, 21, 0.28);
+    border-bottom: 3px dotted rgba(var(--fg-rgb), 0.28);
   }
   .sabl-card > :is(.sabl-amount, .sabl-card-top-left) { justify-self: start; text-align: left; }
 }
@@ -2130,7 +2249,7 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
 .sabh-saved-n {
   display: inline-grid; place-items: center; box-sizing: border-box;
   min-width: 20px; height: 20px; padding: 0 6px; margin-left: 6px; border-radius: var(--radius);
-  background: #FFC700; color: var(--text-primary); font: 800 13px/1 var(--font-display);
+  background: #FFC700; color: #141915; font: 800 13px/1 var(--font-display);
   vertical-align: 1px;
 }
 .sabh-saved-n[hidden] { display: none; }

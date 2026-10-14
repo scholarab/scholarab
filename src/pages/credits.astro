@@ -77,19 +77,19 @@ const rows = [
   .sabcr-h1 {
     font-family: var(--font-display); font-weight: 400;
     font-size: clamp(40px, 6vw, 76px); line-height: 1.02; letter-spacing: -0.02em;
-    color: #141915; margin: 12px 0 24px;
+    color: var(--text-primary); margin: 12px 0 24px;
   }
-  .sabcr-lede { font-size: 17px; line-height: 1.65; color: #3A403B; max-width: 68ch; margin: 0 0 40px; }
+  .sabcr-lede { font-size: 17px; line-height: 1.65; color: var(--text-body); max-width: 68ch; margin: 0 0 40px; }
   .sabcr-table-wrap { overflow-x: auto; }
-  .sabcr-table { width: 100%; border-collapse: collapse; font-size: 15px; line-height: 1.5; color: #3A403B; }
-  .sabcr-table th, .sabcr-table td { text-align: left; vertical-align: top; padding: 12px 16px 12px 0; border-bottom: 1px solid #E4E0D5; }
+  .sabcr-table { width: 100%; border-collapse: collapse; font-size: 15px; line-height: 1.5; color: var(--text-body); }
+  .sabcr-table th, .sabcr-table td { text-align: left; vertical-align: top; padding: 12px 16px 12px 0; border-bottom: 1px solid var(--line-warm); }
   .sabcr-table thead th {
     font-family: var(--font-label); font-weight: 500; font-size: 12px; letter-spacing: 0.05em;
-    text-transform: uppercase; color: #5C5F5B; border-bottom: 2px solid #141915;
+    text-transform: uppercase; color: var(--text-label); border-bottom: 2px solid var(--text-primary);
   }
-  .sabcr-table tbody th { font-weight: 600; color: #141915; white-space: nowrap; }
-  .sabcr-table a { color: #0A5632; text-decoration: underline; text-underline-offset: 3px; }
-  .sabcr-src { color: #5C5F5B; }
+  .sabcr-table tbody th { font-weight: 600; color: var(--text-primary); white-space: nowrap; }
+  .sabcr-table a { color: var(--green); text-decoration: underline; text-underline-offset: 3px; }
+  .sabcr-src { color: var(--text-label); }
   @media (max-width: 760px) {
     .sabcr-body { padding: 48px 20px 80px; }
     .sabcr-table { font-size: 14px; }

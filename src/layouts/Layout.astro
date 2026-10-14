@@ -33,7 +33,29 @@ const {
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="color-scheme" content="light" />
+    <meta name="color-scheme" content="light dark" />
+    {/* Before anything paints: the gear's choice (sa_theme), else the device
+        setting. Inline and first in <head> so a dark page never flashes white.
+        The ClientRouter swaps in a fresh <html> on every navigation, so the
+        attribute is copied onto the incoming document before the swap. */}
+    <script is:inline>
+      (function () {
+        const mq = matchMedia('(prefers-color-scheme: dark)');
+        function pick() {
+          let t = null;
+          try { t = localStorage.getItem('sa_theme'); } catch { /* storage blocked */ }
+          return t === 'dark' || t === 'light' ? t : (mq.matches ? 'dark' : 'light');
+        }
+        document.documentElement.dataset.theme = pick();
+        if (window.__saTheme) return;
+        window.__saTheme = function (t) {
+          try { if (t) localStorage.setItem('sa_theme', t); else localStorage.removeItem('sa_theme'); } catch { /* storage blocked */ }
+          document.documentElement.dataset.theme = pick();
+        };
+        mq.addEventListener('change', function () { document.documentElement.dataset.theme = pick(); });
+        document.addEventListener('astro:before-swap', function (e) { e.newDocument.documentElement.dataset.theme = pick(); });
+      })();
+    </script>
     <meta name="google-site-verification" content="nhpc-sXNyJgfEMBonhftRYTiJpQMP0NDTVRDsIy2Yk4" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />

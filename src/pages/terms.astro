@@ -156,27 +156,27 @@ const ldJson = webPageJson({ name: 'Terms of Use', description, path: '/terms/' 
   .sabtm-h1 {
     font-family: var(--font-display); font-weight: 400;
     font-size: clamp(40px, 6vw, 76px); line-height: 1.02; letter-spacing: -0.02em;
-    color: #141915; margin: 12px 0 24px;
+    color: var(--text-primary); margin: 12px 0 24px;
   }
   .sabtm-h1-accent { color: inherit; }
 
-  .sabtm-lede { font-size: 19px; line-height: 1.65; color: #3A403B; max-width: 62ch; margin: 0 0 12px; }
+  .sabtm-lede { font-size: 19px; line-height: 1.65; color: var(--text-body); max-width: 62ch; margin: 0 0 12px; }
   .sabtm-updated {
     font-family: var(--font-label); font-size: 12px; letter-spacing: 0.06em;
-    text-transform: uppercase; color: #5C5F5B; margin: 0 0 56px;
+    text-transform: uppercase; color: var(--text-label); margin: 0 0 56px;
   }
 
   .sabtm-h2 {
     font-family: var(--font-display); font-weight: 400;
-    font-size: clamp(26px, 3vw, 34px); letter-spacing: -0.01em; color: #141915;
-    margin: 56px 0 20px; padding-top: 24px; border-top: 1px solid #E4E0D5;
+    font-size: clamp(26px, 3vw, 34px); letter-spacing: -0.01em; color: var(--text-primary);
+    margin: 56px 0 20px; padding-top: 24px; border-top: 1px solid var(--line-warm);
   }
 
-  .sabtm-p { font-size: 16px; line-height: 1.7; color: #3A403B; max-width: 68ch; margin: 0 0 18px; }
-  .sabtm-p a, .sabtm-list a { color: #0A5632; text-decoration: underline; text-underline-offset: 3px; }
+  .sabtm-p { font-size: 16px; line-height: 1.7; color: var(--text-body); max-width: 68ch; margin: 0 0 18px; }
+  .sabtm-p a, .sabtm-list a { color: var(--green); text-decoration: underline; text-underline-offset: 3px; }
 
   .sabtm-list { margin: 0; padding-left: 20px; max-width: 68ch; }
-  .sabtm-list li { font-size: 16px; line-height: 1.7; color: #3A403B; margin-bottom: 12px; }
+  .sabtm-list li { font-size: 16px; line-height: 1.7; color: var(--text-body); margin-bottom: 12px; }
 
   @media (max-width: 760px) {
     .sabtm-body { padding: 48px 20px 80px; }

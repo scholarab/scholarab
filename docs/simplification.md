@@ -2420,3 +2420,15 @@ Outcome: the directory cards keep the look Ilia likes, without the one part that
 - Changed: Save fits its word and Apply takes the rest of the row. Same tints, same height. One grid column value and one padding.
 - Test: the card e2e test checked the halves were equal; it now checks Apply is the wider. test:e2e 177 passed, npm run ci 1,283 passed with only the baseline counsellor-drafts errors.
 - Add-back fraction: 0 of 1.
+
+## 2026-10-13: dark mode and the gear menu (Ilia: "a proper very high quality dark mode", "all social media inside the gear")
+
+Outcome: a student can read the site in dark at night, by system setting or by choice, and nothing they already rely on in light moves.
+
+- Removed before adding: the separate envelope and social icons in the header bar. Email, Instagram, TikTok and YouTube now sit in one gear panel with the guides, help, educators, update log, the dark switch and the small print. Phones get one Dark mode row in the menu sheet.
+- One implementation: the hard-coded greys became tokens on `:root` whose light values are the old literals, so light renders pixel-identical (compared on 21 pages at 1440 and 390). Dark is one token block under `html[data-theme='dark']`, set before first paint by an inline script, kept across ClientRouter swaps, and left out of print.
+- Fixed surfaces stay fixed: anything printed on a photo, the mint and mustard combo trays and the yellow count badge keep their ink in both themes. A cross-theme scan of every element found the badge, the tray and a map pin borrowing theme colours.
+- Measured: axe colour contrast 0 in both themes on 22 pages at two widths, and 0 with 22 menus, panels, dialogs and quiz states open. Every link and button on 18 pages hovered and measured, 0 below AA in either theme. Dark field edges and focus rings at 3:1 or better. The update log tags (250 dark violations) were the largest single source.
+- Tests: e2e/theme.spec.ts (system setting, gear switch persisting over reload and navigation, phone row, print stays light), also run once in Firefox, WebKit and an iPhone profile. design-tokens tests updated for the token form. npm run ci 1,283 passed with only the baseline counsellor-drafts errors, test:e2e 183 passed.
+- Not done on purpose: no filter on photos (scroll cost in Firefox), emails stay light.
+- Add-back fraction: 0 of 2.

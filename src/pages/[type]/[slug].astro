@@ -794,11 +794,11 @@ const breadcrumbJson = {
     padding-top: 20px; margin-bottom: 10px;
   }
   .sabd-related-title { font-family: var(--font-display); font-weight: 400; font-size: 30px; letter-spacing: -0.01em; line-height: 1.1; margin: 0; }
-  .sabd-related-all { font-size: 15px; font-weight: 600; color: #0A5632; text-decoration: none; display: inline-block; padding: 12px 0; margin: -12px 0; white-space: nowrap; }
-  .sabd-related-all:hover { color: #141915; }
+  .sabd-related-all { font-size: 15px; font-weight: 600; color: var(--green); text-decoration: none; display: inline-block; padding: 12px 0; margin: -12px 0; white-space: nowrap; }
+  .sabd-related-all:hover { color: var(--text-primary); }
   /* Rows in the directory's own grammar: name and where on the left, then the
      figure and the deadline in fixed columns so both read down the list. */
-  .sabd-related-grid { border-top: 2px solid #141915; }
+  .sabd-related-grid { border-top: 2px solid var(--text-primary); }
   /* The two related blocks are one pair, so the full 96px section rhythm
      between them would read as two unrelated sections. Applied from the first
      block only when a second actually follows it. */
@@ -808,8 +808,8 @@ const breadcrumbJson = {
      2026" in a third column, a layout found nowhere else. */
   .sabd-related-row {
     display: grid; grid-template-columns: 88px minmax(0, 1fr) 180px; gap: 24px; align-items: baseline;
-    padding: 16px 8px; border-bottom: 1px solid rgba(20,25,21,0.14);
-    text-decoration: none; color: #141915; transition: background 0.15s ease;
+    padding: 16px 8px; border-bottom: 1px solid rgba(var(--fg-rgb), 0.14);
+    text-decoration: none; color: var(--text-primary); transition: background 0.15s ease;
   }
   .sabd-related-row:hover { background: rgba(74,168,115,0.14); }
   .sabd-related-row:hover .sabd-related-name { color: var(--green); }

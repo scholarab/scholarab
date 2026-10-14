@@ -278,27 +278,54 @@ const isActive = (href: string, also: string[] = []) =>
         <div class="sabh-item sabh-how-row">
           <button type="button" class="sabh-link" data-tour-open="sheet"><span class="sabh-link-label">How it works</span></button>
         </div>
+        <div class="sabh-item sabh-how-row">
+          <button type="button" class="sabh-link sabh-theme-row" role="switch" aria-checked="false" data-sabh-theme><span class="sabh-link-label">Dark mode</span><span class="sabh-theme-ind" aria-hidden="true"><span></span></span></button>
+        </div>
       </nav>
-      {/* Same destinations and link treatment as the footer's CONTACT column:
-          outside links open a new tab, and the mailto sits inside email_off so
-          Cloudflare's email obfuscation does not rewrite the anchor. */}
+      {/* The gear holds the footer's CONTACT destinations, social links
+          included: outside links open a new tab, and the mailto sits inside
+          email_off so Cloudflare's email obfuscation does not rewrite it. */}
       <div class="sabh-right">
       {/* Opt-in: a quiet button, never opened for anyone (SabTour). Text from
           1101px, where the bar has room; the "i" alone from 901 to 1100. */}
       <button type="button" class="sabh-how" data-tour-open="bar" aria-label="How it works">
         <span class="sabh-how-i" aria-hidden="true">i</span><span class="sabh-how-text">How it works</span>
       </button>
-      <div class="sabh-social">
-        <a href="https://www.instagram.com/scholarab.ca" target="_blank" rel="noopener noreferrer" aria-label="ScholarAB on Instagram">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none" /></svg>
-        </a>
-        <a href="https://www.tiktok.com/@scholarab" target="_blank" rel="noopener noreferrer" aria-label="ScholarAB on TikTok">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 1 1-2.59-2.59c.27 0 .53.04.77.11V9.77a5.7 5.7 0 0 0-.77-.05 5.68 5.68 0 1 0 5.68 5.68V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3a4.28 4.28 0 0 1-3.24-1.48z" /></svg>
-        </a>
-        <a href="https://www.youtube.com/@scholaralberta" target="_blank" rel="noopener noreferrer" aria-label="ScholarAB on YouTube">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.58 7.19a2.5 2.5 0 0 0-1.76-1.77C18.25 5 12 5 12 5s-6.25 0-7.82.42a2.5 2.5 0 0 0-1.76 1.77C2 8.76 2 12 2 12s0 3.24.42 4.81a2.5 2.5 0 0 0 1.76 1.77C5.75 19 12 19 12 19s6.25 0 7.82-.42a2.5 2.5 0 0 0 1.76-1.77C22 15.24 22 12 22 12s0-3.24-.42-4.81zM10 15V9l5.2 3L10 15z" /></svg>
-        </a>
-        <Fragment set:html={`<!--email_off--><a href="mailto:contact.scholarab@gmail.com" aria-label="Email ScholarAB"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 6.5 8.5 6.5 8.5-6.5"/></svg></a><!--/email_off-->`} />
+      {/* The gear: the site's small print and contact in one place, the way
+          polymarket.com folds its links behind one button. */}
+      <div class="sabh-gear" data-sabh-gear>
+        <button type="button" class="sabh-gear-btn" aria-label="More" aria-expanded="false" aria-controls="sabh-gear-panel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        </button>
+        <div class="sabh-gear-panel" id="sabh-gear-panel">
+          <ul class="sabh-gear-list">
+            <li><Fragment set:html={`<!--email_off--><a href="mailto:contact.scholarab@gmail.com">Email us</a><!--/email_off-->`} /></li>
+            <li><a href="/guides/">Guides</a></li>
+            <li><a href="/about/">Help center</a></li>
+            <li><a href="/educators/">For educators</a></li>
+            <li><a href="/updates/">What's new</a></li>
+          </ul>
+          <div class="sabh-gear-dark">
+            <span>Dark mode</span>
+            <button type="button" class="sabh-gear-switch" role="switch" aria-checked="false" aria-label="Dark mode" data-sabh-theme><span></span></button>
+          </div>
+          <ul class="sabh-gear-small">
+            <li><a href="/terms/">Terms of use</a></li>
+            <li><a href="/privacy/">Privacy</a></li>
+            <li><a href="/credits/">Credits</a></li>
+          </ul>
+          <div class="sabh-gear-social">
+          <a href="https://www.instagram.com/scholarab.ca" target="_blank" rel="noopener noreferrer" aria-label="ScholarAB on Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none" /></svg>
+          </a>
+          <a href="https://www.tiktok.com/@scholarab" target="_blank" rel="noopener noreferrer" aria-label="ScholarAB on TikTok">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 1 1-2.59-2.59c.27 0 .53.04.77.11V9.77a5.7 5.7 0 0 0-.77-.05 5.68 5.68 0 1 0 5.68 5.68V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3a4.28 4.28 0 0 1-3.24-1.48z" /></svg>
+          </a>
+          <a href="https://www.youtube.com/@scholaralberta" target="_blank" rel="noopener noreferrer" aria-label="ScholarAB on YouTube">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.58 7.19a2.5 2.5 0 0 0-1.76-1.77C18.25 5 12 5 12 5s-6.25 0-7.82.42a2.5 2.5 0 0 0-1.76 1.77C2 8.76 2 12 2 12s0 3.24.42 4.81a2.5 2.5 0 0 0 1.76 1.77C5.75 19 12 19 12 19s6.25 0 7.82-.42a2.5 2.5 0 0 0 1.76-1.77C22 15.24 22 12 22 12s0-3.24-.42-4.81zM10 15V9l5.2 3L10 15z" /></svg>
+          </a>
+          </div>
+        </div>
       </div>
       </div>
       <button
@@ -484,7 +511,6 @@ const isActive = (href: string, also: string[] = []) =>
      the email_off comments), so it never receives this component's scope
      attribute and a scoped `a` selector would miss it. */
   .sabh-right { justify-self: end; display: flex; align-items: center; gap: 6px; }
-  .sabh-social { display: flex; align-items: center; gap: 2px; }
   .sabh-how {
     display: inline-flex; align-items: center; gap: 8px; height: 36px; padding: 0 10px 0 6px;
     border: 0; border-radius: var(--radius); background: transparent; cursor: pointer; white-space: nowrap;
@@ -498,20 +524,53 @@ const isActive = (href: string, also: string[] = []) =>
   /* The sheet row only exists on phones; desktop has the button above. */
   .sabh-how-row { display: none; }
   .sabh-how-row .sabh-link { font: inherit; border: 0; width: 100%; }
+  .sabh-theme-row { display: flex; align-items: center; justify-content: space-between; background: transparent; cursor: pointer; text-align: left; }
+  .sabh-theme-ind { width: 36px; height: 20px; padding: 2px; border-radius: var(--radius); background: rgba(238, 241, 236, 0.2); flex: none; }
+  .sabh-theme-ind span { display: block; width: 16px; height: 16px; border-radius: 2px; background: #FFFFFF; }
+  .sabh-theme-row[aria-checked="true"] .sabh-theme-ind { background: #4AA873; }
+  .sabh-theme-row[aria-checked="true"] .sabh-theme-ind span { transform: translateX(16px); }
   @media (min-width: 901px) and (max-width: 1100px) {
     .sabh-right .sabh-how { padding: 0; width: 36px; justify-content: center; }
     .sabh-right .sabh-how-text { display: none; }
   }
-  /* The footer carries the social links when the header has less room. */
-  @media (min-width: 901px) and (max-width: 1359px) {
-    .sabh-right .sabh-social { display: none; }
+  .sabh-gear { position: relative; }
+  .sabh-gear-btn {
+    display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px;
+    padding: 0; border: 0; border-radius: var(--radius); background: transparent; cursor: pointer; color: rgba(238, 241, 236, 0.7);
   }
-  .sabh-social :global(a) {
+  .sabh-gear-btn:hover, .sabh-gear[data-open] .sabh-gear-btn { color: #EEF1EC; background: rgba(238, 241, 236, 0.08); }
+  .sabh-gear-btn svg { width: 19px; height: 19px; display: block; }
+  .sabh-gear-panel {
+    position: absolute; top: calc(100% + 10px); right: 0; width: 240px; padding: 8px; z-index: 60;
+    background: var(--bg-raised); color: var(--text-primary); border-radius: var(--radius); box-shadow: 0 12px 32px rgba(10, 14, 11, 0.22), 0 0 0 1px rgba(var(--fg-rgb), 0.08);
+    display: none;
+  }
+  .sabh-gear[data-open] .sabh-gear-panel { display: block; }
+  .sabh-gear-panel ul { list-style: none; margin: 0; padding: 0; }
+  .sabh-gear-list :global(a) {
+    display: block; padding: 9px 10px; border-radius: var(--radius); font-family: var(--font-body); font-size: 15px; font-weight: 600;
+    color: var(--text-primary); text-decoration: none;
+  }
+  .sabh-gear-list :global(a:hover) { background: rgba(var(--fg-rgb), 0.06); }
+  .sabh-gear-dark {
+    display: flex; align-items: center; justify-content: space-between; margin: 6px 0; padding: 10px 10px;
+    border-top: 1px solid rgba(var(--fg-rgb), 0.08); border-bottom: 1px solid rgba(var(--fg-rgb), 0.08);
+    font-family: var(--font-body); font-size: 15px; font-weight: 600;
+  }
+  .sabh-gear-switch { width: 36px; height: 20px; padding: 2px; border: 0; border-radius: var(--radius); background: rgba(var(--fg-rgb), 0.5); cursor: pointer; }
+  .sabh-gear-switch span { display: block; width: 16px; height: 16px; border-radius: 2px; background: #FFFFFF; }
+  .sabh-gear-switch[aria-checked="true"] { background: var(--cta); }
+  .sabh-gear-switch[aria-checked="true"] span { transform: translateX(16px); }
+  .sabh-gear-small { display: flex; flex-wrap: wrap; gap: 2px 12px; padding: 4px 10px 2px !important; }
+  .sabh-gear-small a { font-family: var(--font-body); font-size: 13px; color: rgba(var(--fg-rgb), 0.62); text-decoration: none; }
+  .sabh-gear-small a:hover { color: var(--text-primary); text-decoration: underline; }
+  .sabh-gear-social { display: flex; gap: 2px; margin-top: 6px; padding: 6px 4px 0; border-top: 1px solid rgba(var(--fg-rgb), 0.08); }
+  .sabh-gear-social a {
     display: inline-flex; align-items: center; justify-content: center;
-    width: 36px; height: 36px; border-radius: var(--radius); color: rgba(238, 241, 236, 0.7);
+    width: 36px; height: 36px; border-radius: var(--radius); color: rgba(var(--fg-rgb), 0.72);
   }
-  .sabh-social :global(a:hover) { color: #EEF1EC; background: rgba(238, 241, 236,0.08); }
-  .sabh-social :global(svg) { width: 18px; height: 18px; display: block; }
+  .sabh-gear-social a:hover { color: var(--text-primary); background: rgba(var(--fg-rgb), 0.06); }
+  .sabh-gear-social svg { width: 18px; height: 18px; display: block; }
 
   /* ── Menu button: three bars that fold into an ✕ while the sheet is open ── */
   .sabh-burger {
@@ -764,6 +823,28 @@ const isActive = (href: string, also: string[] = []) =>
     burger.addEventListener('click', () => (isOpen() ? closeMenu({ restoreFocus: true }) : openMenu()));
 
     initHoverMenus(sheet);
+
+    const gear = header.querySelector<HTMLElement>('[data-sabh-gear]');
+    if (gear) {
+      const btn = gear.querySelector<HTMLElement>('.sabh-gear-btn')!;
+      const setGear = (open: boolean) => { gear.toggleAttribute('data-open', open); btn.setAttribute('aria-expanded', String(open)); };
+      btn.addEventListener('click', () => setGear(!gear.hasAttribute('data-open')));
+      gear.addEventListener('focusout', e => { if (!gear.contains(e.relatedTarget as Node | null)) setGear(false); });
+      gear.addEventListener('keydown', e => { if (e.key === 'Escape') { setGear(false); btn.focus(); } });
+      document.addEventListener('pointerdown', e => { if (!gear.contains(e.target as Node)) setGear(false); });
+    }
+
+    // Dark mode: the gear's switch on desktop, a row in the sheet on phones.
+    // Each shows the theme in force, whether chosen here or taken from the
+    // device, and a flip stores the choice (Layout's head script).
+    const html = document.documentElement;
+    const switches = header.querySelectorAll<HTMLElement>('[data-sabh-theme]');
+    const syncSwitches = () => switches.forEach(sw => sw.setAttribute('aria-checked', String(html.dataset.theme === 'dark')));
+    syncSwitches();
+    switches.forEach(sw => sw.addEventListener('click', () => {
+      (window as unknown as { __saTheme?: (t: string) => void }).__saTheme?.(html.dataset.theme === 'dark' ? 'light' : 'dark');
+      syncSwitches();
+    }));
 
     // Desktop dropdown toggles. A mouse click only opens, since hover has
     // usually opened the list already and a toggle would shut it under the

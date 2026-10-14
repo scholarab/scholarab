@@ -219,8 +219,8 @@ I really appreciate you taking the time.
 
   .sabt-body { max-width: calc(var(--sab-read) + 2 * var(--sab-gutter)); padding: 56px var(--sab-gutter) 96px; width: 100%; box-sizing: border-box; }
   .sabt-intro { font-size: 17px; line-height: 1.7; color: var(--ink-soft); margin: 0 0 8px; }
-  .sabt-intro a, .sabt-list a { color: #0A5632; text-decoration: underline; text-underline-offset: 3px; }
-  .sabt-intro a:hover { color: #141915; }
+  .sabt-intro a, .sabt-list a { color: var(--green); text-decoration: underline; text-underline-offset: 3px; }
+  .sabt-intro a:hover { color: var(--text-primary); }
 
   .sabt-block { margin-top: 48px; }
   .sabt-block-head { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
@@ -228,24 +228,24 @@ I really appreciate you taking the time.
   .sabt-h2 {
     font-family: var(--font-display); font-weight: 400;
     font-size: clamp(26px, 3.2vw, 34px); line-height: 1.15; letter-spacing: -0.01em;
-    margin: 0; color: #141915;
+    margin: 0; color: var(--text-primary);
   }
   .sabt-note { font-size: 16px; line-height: 1.65; color: var(--ink-muted); margin: 12px 0 18px; }
   .sabt-list { margin: 14px 0 0; padding-left: 22px; font-size: 16px; line-height: 1.65; color: var(--ink-soft); }
   .sabt-list li { margin-bottom: 12px; }
-  .sabt-list strong, .sabt-note strong { color: #141915; }
+  .sabt-list strong, .sabt-note strong { color: var(--text-primary); }
 
   /* The template itself. Monospaced and boxed because it is a thing to be
      lifted whole, not read as prose -- the fixed pitch is what makes the
      [brackets] scan as blanks rather than as punctuation. */
   .sabt-card {
-    position: relative; background: #FFFFFF;
-    border: 1.5px solid rgba(20,25,21,0.85); border-radius: var(--radius);
+    position: relative; background: var(--bg-page);
+    border: 1.5px solid rgba(var(--fg-rgb), 0.85); border-radius: var(--radius);
     padding: 22px 22px 20px;
   }
   .sabt-pre {
     margin: 0; font-family: var(--font-label);
-    font-size: var(--fs-ui); line-height: 1.75; color: #141915;
+    font-size: var(--fs-ui); line-height: 1.75; color: var(--text-primary);
     white-space: pre-wrap; overflow-wrap: anywhere;
   }
   .sabt-copy {
@@ -255,7 +255,8 @@ I really appreciate you taking the time.
     background: #141915; color: #EEF1EC; border: none;
     min-width: 84px;
   }
-  .sabt-copy:hover { background: #0A5632; }
+  .sabt-copy:hover { background: var(--cta); }
+  @media screen { :global(html[data-theme='dark']) .sabt-copy:hover { color: var(--text-on-cta); } }
   .sabt-copy:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
 
   @media (max-width: 720px) {

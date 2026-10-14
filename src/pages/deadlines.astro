@@ -467,7 +467,7 @@ const breadcrumbJson = {
   }
   /* 24px tap target at 12px type; the negative margin keeps the line in place. */
   .sabl-crumbs a { color: var(--ink-muted); text-decoration: none; display: inline-flex; align-items: center; min-height: 24px; padding: 0 4px; margin: -6px -4px; }
-  .sabl-crumbs a:hover { color: #141915; text-decoration: underline; }
+  .sabl-crumbs a:hover { color: var(--text-primary); text-decoration: underline; }
 
   .sabd-cal { padding-bottom: 72px; }
   .sabcal-head { padding: 28px 0 8px; }
@@ -475,22 +475,22 @@ const breadcrumbJson = {
     /* The directories' display face, not the body face at 800: this was the
        one page whose H1 read as a different site. */
     font-family: var(--font-display); font-weight: 400; letter-spacing: -0.015em;
-    font-size: clamp(40px, 6vw, 68px); line-height: 1.02; color: #141915;
+    font-size: clamp(40px, 6vw, 68px); line-height: 1.02; color: var(--text-primary);
     margin: 0 0 16px; text-wrap: balance; max-width: 24ch;
   }
-  .sabcal-intro { font-size: 17px; line-height: 1.65; color: #454945; max-width: 62ch; margin: 0; }
+  .sabcal-intro { font-size: 17px; line-height: 1.65; color: var(--text-body-2); max-width: 62ch; margin: 0; }
   .sabcal-stats { font-size: 15px; color: var(--ink-muted); margin: 14px 0 0; max-width: 72ch; }
-  .sabcal-where { display: inline-flex; align-items: center; gap: 12px; margin-top: 18px; font-size: 15px; font-weight: 600; color: #141915; }
+  .sabcal-where { display: inline-flex; align-items: center; gap: 12px; margin-top: 18px; font-size: 15px; font-weight: 600; color: var(--text-primary); }
   html:not(.js) .sabcal-where { display: none; }
   /* Draws its own box and arrow like the directory pickers (.sabl-sort-select
      in global.css): natively, iPhone Safari drew this 44px picker 29px tall. */
   .sabcal-where select {
-    min-height: 44px; padding: 0 36px 0 16px; font: 500 16px var(--font-body); color: #141915;
-    background: #FFFFFF var(--select-arrow) right 16px center / 10px 6px no-repeat;
-    border: 1.5px solid rgba(20,25,21,0.3); border-radius: var(--radius);
+    min-height: 44px; padding: 0 36px 0 16px; font: 500 16px var(--font-body); color: var(--text-primary);
+    background: var(--bg-page) var(--select-arrow) right 16px center / 10px 6px no-repeat;
+    border: 1.5px solid rgba(var(--fg-rgb), 0.3); border-radius: var(--radius);
     -webkit-appearance: none; appearance: none;
   }
-  .sabcal-where select:hover { border-color: #141915; }
+  .sabcal-where select:hover { border-color: var(--text-primary); }
   .sabcal-row.is-elsewhere, .sabcal-month[hidden], .sabcal-chip[hidden], .sabcal-above[hidden] { display: none; }
 
   /* The jump nav is the page's table of contents and its main internal link
@@ -499,24 +499,24 @@ const breadcrumbJson = {
     position: sticky; top: var(--sab-nav-shown); z-index: 2; transition: top 0.3s ease;
     display: flex; flex-wrap: wrap; gap: 8px;
     margin: 28px 0 8px; padding: 12px 0;
-    background: var(--bg-page); border-bottom: 1px solid rgba(20,25,21,0.12);
+    background: var(--bg-page); border-bottom: 1px solid rgba(var(--fg-rgb), 0.12);
   }
   .sabcal-chip {
     display: inline-flex; align-items: baseline; gap: 6px;
-    padding: 6px 4px; text-decoration: none; color: #141915;
+    padding: 6px 4px; text-decoration: none; color: var(--text-primary);
   }
   .sabcal-chip:hover .sabcal-chip-m { text-decoration: underline; text-underline-offset: 3px; }
   /* Set apart from the months: "This week 24" beside "SEP 15" read as two
      counts of one thing, though the week runs into October (critique
      2026-10-01). */
-  .sabcal-chip-week { padding-right: 16px; margin-right: 10px; border-right: 2px solid rgba(20, 25, 21, 0.18); }
+  .sabcal-chip-week { padding-right: 16px; margin-right: 10px; border-right: 2px solid rgba(var(--fg-rgb), 0.18); }
   .sabcal-chip-m { font-size: 15px; font-weight: 700; }
   .sabcal-chip-n { font-size: var(--fs-ui); color: var(--ink-muted); }
 
   .sabcal-month { padding-top: 40px; scroll-margin-top: 72px; }
   .sabcal-month-head {
     display: flex; align-items: baseline; justify-content: space-between; gap: 16px;
-    flex-wrap: wrap; border-bottom: 2px solid #141915; padding-bottom: 8px;
+    flex-wrap: wrap; border-bottom: 2px solid var(--text-primary); padding-bottom: 8px;
     cursor: pointer; list-style: none;
   }
   .sabcal-month-head::-webkit-details-marker { display: none; }
@@ -532,7 +532,7 @@ const breadcrumbJson = {
      month headings were the one set in bold body type (critique 2026-10-02). */
   .sabcal-h2 {
     font-family: var(--font-display); font-weight: 400; letter-spacing: -0.01em;
-    font-size: 30px; line-height: 1.1; color: #141915; margin: 0;
+    font-size: 30px; line-height: 1.1; color: var(--text-primary); margin: 0;
   }
   .sabcal-month-count { font-size: 14px; color: var(--ink-muted); }
 
@@ -546,13 +546,13 @@ const breadcrumbJson = {
      were replaced for the same reason (reader feedback, 2026-09-29).
      Counted over the rows on screen: a Where-you-live filter and a
      deadline passing since the build both take rows out. */
-  .sabcal-row:nth-child(even of :not(.is-elsewhere, [hidden])) { background: rgba(20,25,21,0.04); }
+  .sabcal-row:nth-child(even of :not(.is-elsewhere, [hidden])) { background: rgba(var(--fg-rgb), 0.04); }
   /* A layout-free wrapper above 720px (meta and status stay grid columns);
      phones turn it into one wrapping line. */
   .sabcal-sub { display: contents; }
   /* The date is a figure in ink, as on every other listing row (critique
      2026-09-29); it was 15px grey beside a 16px name. */
-  .sabcal-day { font-size: 20px; line-height: 1; color: #141915; text-align: right; }
+  .sabcal-day { font-size: 20px; line-height: 1; color: var(--text-primary); text-align: right; }
   /* Each award name is the row's only action and sits in a list, not a
      sentence, so WCAG 2.2 2.5.8's inline exception does not cover it. The
      inline box measured 17px; the padding takes the tap target past 24px and
@@ -562,7 +562,7 @@ const breadcrumbJson = {
      name's second line and, in Safari, lifted the first line over the rule
      above (479 of 1,030 rows on a 375px phone, critique 2026-09-27). */
   .sabcal-name a {
-    color: #141915; text-decoration: none; font-size: 16px; line-height: 1.4;
+    color: var(--text-primary); text-decoration: none; font-size: 16px; line-height: 1.4;
     display: inline-flex; padding-block: 4px; margin-block: -4px;
   }
   .sabcal-name a:hover { text-decoration: underline; }
@@ -575,13 +575,13 @@ const breadcrumbJson = {
      month heading already counts the open ones (critique 2026-10-02). */
   .sabcal-state { font-size: var(--fs-ui); font-weight: 600; color: var(--ink-muted); white-space: nowrap; }
 
-  .sabcal-tail { padding-top: 56px; font-size: 16px; line-height: 1.65; color: #454945; }
+  .sabcal-tail { padding-top: 56px; font-size: 16px; line-height: 1.65; color: var(--text-body-2); }
   .sabcal-tail p { max-width: 62ch; }
-  .sabcal-tail .sabcal-h2 { border-bottom: 2px solid #141915; padding-bottom: 8px; margin-bottom: 16px; }
+  .sabcal-tail .sabcal-h2 { border-bottom: 2px solid var(--text-primary); padding-bottom: 8px; margin-bottom: 16px; }
   .sabcal-undated { list-style: none; margin: 20px 0; padding: 0; }
-  .sabcal-undated li { padding: 9px 0; border-bottom: 1px solid rgba(20,25,21,0.12); display: flex; justify-content: space-between; gap: 18px; }
+  .sabcal-undated li { padding: 9px 0; border-bottom: 1px solid rgba(var(--fg-rgb), 0.12); display: flex; justify-content: space-between; gap: 18px; }
   .sabcal-undated a {
-    color: #141915; display: inline-block; padding-block: 3px; margin-block: -3px;
+    color: var(--text-primary); display: inline-block; padding-block: 3px; margin-block: -3px;
   }
 
   .sabcal-above { font-size: 14px; color: var(--ink-muted); margin: 12px 0 0; }
@@ -589,10 +589,10 @@ const breadcrumbJson = {
   .sabcal-week .sabcal-row { grid-template-columns: 64px 1fr auto auto; }
   .sabcal-undated-fold summary {
     display: inline-flex; align-items: center; min-height: 44px; cursor: pointer;
-    font-weight: 600; color: #141915; text-decoration: underline; text-underline-offset: 3px;
+    font-weight: 600; color: var(--text-primary); text-decoration: underline; text-underline-offset: 3px;
   }
 
-  .sabcal-empty { padding: 64px 0; color: #454945; }
+  .sabcal-empty { padding: 64px 0; color: var(--text-body-2); }
 
   @media (max-width: 720px) {
     /* Wrapped, the eleven month chips stack three deep and a sticky nav then
@@ -606,7 +606,7 @@ const breadcrumbJson = {
     .sabcal-jump::after {
       content: ''; position: sticky; right: 0; flex: 0 0 28px; align-self: stretch;
       margin: -12px 0; pointer-events: none;
-      background: linear-gradient(to right, rgba(255, 255, 255, 0), var(--bg-page) 85%);
+      background: linear-gradient(to right, rgba(var(--bg-rgb), 0), var(--bg-page) 85%);
     }
     .sabcal-chip { flex: 0 0 auto; min-height: 44px; align-items: center; }
 

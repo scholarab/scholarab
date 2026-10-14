@@ -22,9 +22,10 @@ describe('theme tokens', () => {
     expect(globalCss).not.toMatch(/html\.theme-(light|dark)/)
   })
 
-  it('declares light color-scheme exactly once, on :root', () => {
+  it('declares light color-scheme on :root and dark only for the dark theme', () => {
     const schemes = [...globalCss.matchAll(/color-scheme: *(\w+)/g)].map(m => m[1])
-    expect(schemes).toEqual(['light'])
+    expect(schemes).toEqual(['light', 'dark'])
+    expect(globalCss).toMatch(/html\[data-theme='dark'\] \{\s*color-scheme: dark;/)
   })
 
   it('keeps /admin declaring its own dark canvas, on selectors that win', () => {
@@ -134,12 +135,12 @@ describe('focus indicators', () => {
     // deliberately chromeless -- no border, no fill, no hover -- so a ring or a
     // pill would be the only box on the page and was asked for twice to be
     // removed. What replaces it is a 2px rule under the field, ink on cream,
-    // drawn on :focus-visible alone. Mouse users see the caret and nothing
+    // drawn on :focus-visible alone, in the theme ink so it shows in dark too. Mouse users see the caret and nothing
     // else; a keyboard user still gets an indicator, which is the line 2.4.7
     // draws. Deleting this without putting something else there is the
     // regression this whole file exists to catch.
     const search = globalCss.slice(globalCss.indexOf('.sabl-search input'))
-    expect(search).toMatch(/\.sabl-search:has\(input:focus-visible\)[\s\S]{0,120}box-shadow: inset 0 -2px 0 rgba\(20,25,21,0\.75\)/)
+    expect(search).toMatch(/\.sabl-search:has\(input:focus-visible\)[\s\S]{0,120}box-shadow: inset 0 -2px 0 rgba\(var\(--fg-rgb\), 0\.75\)/)
 
     const detail = read('src/components/sab/SabDetail.astro')
     expect(detail).toMatch(/\.sabd-remind-input:focus-visible[\s\S]{0,120}outline: 2px solid var\(--focus-ring\)/)
@@ -202,7 +203,8 @@ describe('quiz option states', () => {
   it('does not draw selected exactly like hover', () => {
     // One shared rule meant an option you were pointing at looked identical to
     // one you had chosen.
-    expect(globalCss).toMatch(/\.sabm-opt:hover \{ background: #F5F6F4; \}/)
+    expect(globalCss).toMatch(/\.sabm-opt:hover \{ background: var\(--bg-hover\); \}/)
+    expect(globalCss).toMatch(/--bg-hover: *#F5F6F4;/)
     expect(globalCss).toMatch(/\.sabm-opt-selected \{ border-color: var\(--green\);/)
   })
 })
@@ -244,7 +246,8 @@ describe('type scale and ink tokens', () => {
 
   it('keeps the faint ink at or above 0.62', () => {
     // 0.62 is 4.84:1 on a shaded row; 0.6 was 4.54:1, a pass with no margin.
-    const faint = globalCss.match(/--ink-faint: *rgba\(20, 25, 21, ([0-9.]+)\)/)
+    expect(globalCss).toMatch(/--fg-rgb: *20, 25, 21;/)
+    const faint = globalCss.match(/--ink-faint: *rgba\(var\(--fg-rgb\), ([0-9.]+)\)/)
     expect(faint).not.toBeNull()
     expect(Number(faint![1])).toBeGreaterThanOrEqual(0.62)
   })

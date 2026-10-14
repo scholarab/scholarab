@@ -277,13 +277,13 @@ const breadcrumbJson = {
      2026-09-30: "like a promotion for fast food chain, more fun"). Ink
      outlines and flat colour trays, no shadows; the mint, pink and yellow
      trays tell the combos apart, and mustard is kept for the stickers. */
-  #sab-combos { --sabc-line: 3px solid var(--sabc-ink); }
+  #sab-combos { --sabc-line: 3px solid var(--text-primary); }
   body:has(#sab-combos) { background: var(--bg-page); }
   #sab-combos .sabp-body { max-width: 1080px; margin: 0 auto; }
   /* ── A combo: one tray ── */
   .sabc-combo {
     margin-top: 44px; border: var(--sabc-line); border-radius: var(--radius); overflow: hidden;
-    scroll-margin-top: 80px; background: #fff;
+    scroll-margin-top: 80px; background: var(--bg-page);
   }
   .sabc-top {
     display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 28px; align-items: center;
@@ -314,17 +314,17 @@ const breadcrumbJson = {
   /* ── The items, as menu lines ── */
   .sabc-items { list-style: none; margin: 0; padding: 6px 30px; }
   .sabc-item { padding: 20px 0; }
-  .sabc-item + .sabc-item { border-top: 2px dashed rgba(20, 25, 21, 0.18); }
+  .sabc-item + .sabc-item { border-top: 2px dashed rgba(var(--fg-rgb), 0.18); }
   .sabc-line { display: flex; align-items: flex-end; gap: 10px; }
   .sabc-name-h { margin: 0; font: inherit; flex: 0 1 auto; min-width: 0; }
-  .sabc-name { font-weight: 800; font-size: 19px; line-height: 1.25; color: var(--sabc-ink); text-decoration: none; }
+  .sabc-name { font-weight: 800; font-size: 19px; line-height: 1.25; color: var(--text-primary); text-decoration: none; }
   .sabc-name:hover { color: var(--green); text-decoration: underline; text-underline-offset: 3px; }
   /* The leader dots that run from the name to the price on a menu board. */
   .sabc-dots {
     flex: 1 1 24px; min-width: 24px; margin-bottom: 6px;
-    border-bottom: 3px dotted rgba(20, 25, 21, 0.4);
+    border-bottom: 3px dotted rgba(var(--fg-rgb), 0.4);
   }
-  .sabc-price { flex: none; font: 800 32px/0.95 var(--font-display); color: var(--sabc-ink); white-space: nowrap; }
+  .sabc-price { flex: none; font: 800 32px/0.95 var(--font-display); color: var(--text-primary); white-space: nowrap; }
   .sabc-price.is-varies { font: 600 14px/1.3 var(--font-body); color: var(--ink-faint); padding-bottom: 2px; }
   .sabc-aud { margin: 6px 0 0; font-size: var(--fs-small); line-height: 1.45; color: var(--ink-muted); max-width: 70ch; }
   .sabc-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; margin-top: 12px; }
@@ -332,16 +332,16 @@ const breadcrumbJson = {
 
   .sabc-rest > summary {
     display: flex; align-items: center; gap: 10px; min-height: 48px; margin: 0 30px 14px;
-    padding: 0 18px; width: fit-content; border: 2px solid var(--sabc-ink); border-radius: var(--radius);
+    padding: 0 18px; width: fit-content; border: 2px solid var(--text-primary); border-radius: var(--radius);
     font: 800 17px/1 var(--font-display); letter-spacing: 0.06em; text-transform: uppercase;
     cursor: pointer; list-style: none;
   }
-  .sabc-rest > .sabc-items > .sabc-item:first-child { border-top: 2px dashed rgba(20, 25, 21, 0.18); }
+  .sabc-rest > .sabc-items > .sabc-item:first-child { border-top: 2px dashed rgba(var(--fg-rgb), 0.18); }
   .sabc-rest > summary::-webkit-details-marker { display: none; }
   .sabc-rest > summary::after { content: '+'; font-size: 22px; }
   .sabc-rest[open] > summary { display: none; }
-  .sabc-rest > summary:hover { background: var(--brand); }
-  .sabc-sides { border-top: 3px dashed var(--sabc-ink); background: #FAFBF9; }
+  .sabc-rest > summary:hover { background: var(--brand); color: #141915; border-color: #141915; }
+  .sabc-sides { border-top: 3px dashed var(--text-primary); background: var(--bg-subtle); }
   .sabc-sides-h { margin: 0; padding: 20px 30px 0; font-size: var(--fs-small); color: var(--ink-muted); }
   .sabc-sides-h strong {
     display: inline-block; margin-right: 8px; padding: 5px 12px; border-radius: var(--radius);
@@ -356,13 +356,13 @@ const breadcrumbJson = {
   }
   .sabc-save-all {
     min-height: 52px; padding: 0 30px; border: 0; border-radius: var(--radius); cursor: pointer;
-    background: var(--sabc-ink); color: #fff;
+    background: var(--fill-ink); color: #fff;
     font: 800 22px/1 var(--font-display); letter-spacing: 0.04em; text-transform: uppercase;
     transition: background-color 0.15s ease, color 0.15s ease;
   }
   .sabc-save-all:hover { background: var(--brand); color: var(--sabc-ink); }
   .sabc-save-all:disabled { cursor: default; background: var(--brand); color: var(--sabc-ink); }
-  .sabc-saved-link { font-size: 15px; font-weight: 700; color: var(--sabc-ink); }
+  .sabc-saved-link { font-size: 15px; font-weight: 700; color: var(--text-primary); }
   .sabc-saved-link[hidden] { display: none; }
 
   @media (prefers-reduced-motion: reduce) {

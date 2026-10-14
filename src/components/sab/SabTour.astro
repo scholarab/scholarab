@@ -148,7 +148,7 @@ const STEPS = 5;
     /* The global reset zeroes every margin, which pins a modal dialog to the
        top-left corner; auto is what centres it. */
     margin: auto; padding: 0; border: 0; border-radius: var(--radius); overflow: hidden;
-    background: #FFFFFF; color: #141915; font-family: var(--font-body);
+    background: var(--bg-page); color: var(--text-primary); font-family: var(--font-body);
     box-shadow: 0 30px 80px -20px rgba(5, 10, 8, 0.55);
   }
   .sabt[open] { display: flex; flex-direction: column; }
@@ -176,13 +176,13 @@ const STEPS = 5;
     display: flex; align-items: center; justify-content: center;
   }
   .sabt-card {
-    background: #FFFFFF; color: #141915; border-radius: var(--radius); padding: 16px 18px;
+    background: var(--bg-page); color: var(--text-primary); border-radius: var(--radius); padding: 16px 18px;
     box-shadow: 0 18px 40px -12px rgba(0, 0, 0, 0.55);
   }
   .sabt-tilt-l { transform: rotate(-3deg); }
   .sabt-tilt-r { transform: rotate(3deg); }
   .sabt-quiet { color: var(--ink-faint); font-weight: 500; }
-  .sabt-rust { color: #A0491A; font-weight: 700; }
+  .sabt-rust { color: var(--rust); font-weight: 700; }
 
   .sabt-search {
     position: absolute; top: 22px; left: 50%; transform: translateX(-50%);
@@ -201,13 +201,13 @@ const STEPS = 5;
 
   .sabt-quiz { width: 270px; }
   .sabt-bar { display: flex; gap: 4px; margin-bottom: 14px; }
-  .sabt-bar span { flex: 1; height: 4px; border-radius: 4px; background: rgba(20, 25, 21, 0.1); }
+  .sabt-bar span { flex: 1; height: 4px; border-radius: 4px; background: rgba(var(--fg-rgb), 0.1); }
   .sabt-bar span.on { background: #2E7A50; }
   .sabt-q { font-family: var(--font-display); font-weight: 700; font-size: 24px; line-height: 1.1; margin-bottom: 14px; }
   .sabt-chips { display: flex; gap: 6px; flex-wrap: wrap; }
   .sabt-chips span {
     padding: 7px 12px; border-radius: var(--radius); font-size: 13px; font-weight: 600;
-    border: 1.5px solid rgba(20, 25, 21, 0.18);
+    border: 1.5px solid rgba(var(--fg-rgb), 0.18);
   }
   .sabt-chips span.on { background: var(--cta); border-color: var(--cta); color: var(--text-on-cta); }
   .sabt-chips-sm span { padding: 5px 10px; font-size: 12px; }
@@ -233,21 +233,21 @@ const STEPS = 5;
   .sabt-body { padding: 22px 26px 4px; }
   .sabt-count {
     margin: 0 0 6px; font-family: var(--font-label); font-size: 12px; letter-spacing: 0.08em;
-    text-transform: uppercase; color: #0A5632;
+    text-transform: uppercase; color: var(--green);
   }
   .sabt-title { margin: 0 0 10px; font-family: var(--font-display); font-weight: 800; font-size: 32px; line-height: 1.02; letter-spacing: -0.005em; }
   .sabt-text { margin: 0; font-size: 15px; line-height: 1.55; color: var(--ink-soft); }
 
   .sabt-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 20px 26px 24px; flex: none; }
   .sabt-dots { display: flex; gap: 6px; }
-  .sabt-dots span { width: 6px; height: 6px; border-radius: 0; background: rgba(20, 25, 21, 0.18); transition: background-color 0.2s ease; }
+  .sabt-dots span { width: 6px; height: 6px; border-radius: 0; background: rgba(var(--fg-rgb), 0.18); transition: background-color 0.2s ease; }
   .sabt-dots span.on { width: 20px; background: #2E7A50; }
   .sabt-btns { display: flex; align-items: center; gap: 6px; }
   .sabt-back {
     min-height: 44px; padding: 0 14px; border: 0; background: none; cursor: pointer;
     font: inherit; font-size: 15px; font-weight: 600; color: var(--ink-muted);
   }
-  .sabt-back:hover { color: #141915; }
+  .sabt-back:hover { color: var(--text-primary); }
   .sabt-next {
     display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 26px;
     border: 0; border-radius: var(--radius); background: var(--cta); color: var(--text-on-cta); cursor: pointer;

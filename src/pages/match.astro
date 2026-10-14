@@ -117,7 +117,7 @@ const breadcrumbJson = {
 <style is:global>
   /* The match design is fixed light regardless of site theme */
   #sab-match .sabm-trust {
-    color: #526252;
+    color: var(--text-placeholder-2);
   }
   body:has(#sab-match) {
     background: var(--bg-page);
@@ -131,7 +131,7 @@ const breadcrumbJson = {
     max-width: 62ch;
     margin: 48px 0 8px;
     padding-top: 32px;
-    border-top: 1px solid rgba(20, 25, 21, 0.12);
+    border-top: 1px solid rgba(var(--fg-rgb), 0.12);
     font-family: var(--font-body);
   }
   .sabm-about summary {
@@ -141,7 +141,7 @@ const breadcrumbJson = {
   .sabm-about summary::-webkit-details-marker { display: none; }
   .sabm-about summary::after {
     content: ''; width: 8px; height: 8px; flex: none; margin-top: -4px;
-    border-right: 2px solid #141915; border-bottom: 2px solid #141915;
+    border-right: 2px solid var(--text-primary); border-bottom: 2px solid var(--text-primary);
     transform: rotate(45deg); transition: transform 0.18s ease;
   }
   .sabm-about[open] summary::after { transform: rotate(-135deg); margin-top: 4px; }
@@ -150,7 +150,7 @@ const breadcrumbJson = {
     font-size: 22px;
     font-weight: 700;
     letter-spacing: -0.01em;
-    color: #141915;
+    color: var(--text-primary);
     margin: 0;
   }
   .sabm-about[open] summary { margin-bottom: 14px; }
@@ -164,12 +164,12 @@ const breadcrumbJson = {
     margin-bottom: 0;
   }
   .sabm-about a {
-    color: #141915;
+    color: var(--text-primary);
     text-decoration: underline;
     text-underline-offset: 2px;
   }
   .sabm-about strong {
-    color: #141915;
+    color: var(--text-primary);
     font-weight: 600;
   }
   @media (max-width: 720px) {
