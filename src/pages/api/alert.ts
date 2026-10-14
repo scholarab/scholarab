@@ -9,6 +9,7 @@ import catalogue from '../../data/runtime-catalogue.json'
 import { jsonOk, jsonError } from '../../lib/api-response'
 import { getClientIp, hitRateLimit } from '../../lib/rate-limit'
 import { defer } from '../../lib/defer'
+import { deviceClass } from '../../lib/device-class'
 import { ALERT_MILESTONES, cadenceFromInput, formatCadence, milestonesAhead, reminderState, type AlertKind } from '../../lib/alerts'
 import { sendConfirmEmail } from '../../lib/confirm-email'
 import { canonicalUrl } from '../../lib/site-origin'
@@ -95,7 +96,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
       .onConflictDoNothing({target:[subscribers.email,subscribers.itemType,subscribers.itemId]})
       .returning({id:subscribers.id,token:subscribers.token})
     if (inserted) {
-      await defer(locals,db.insert(events).values({event:'alert_subscribe',itemType,itemId}))
+      await defer(locals,db.insert(events).values({event:'alert_subscribe',itemType,itemId,device:deviceClass(request.headers.get('user-agent')??'',request.headers.get('sec-ch-ua-mobile'))}))
       const confirmUrl=canonicalUrl(`/api/confirm?token=${inserted.token}`,request)
       if(await sendConfirmEmail(email,itemLabel,confirmUrl,cadenceValue,inserted.id))
         await defer(locals,db.update(subscribers).set({confirmSentAt:new Date()}).where(eq(subscribers.id,inserted.id)))

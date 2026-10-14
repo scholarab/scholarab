@@ -5,11 +5,10 @@
 //   1. Retention: events older than 180 days (dashboard reads 30)
 //   2. Junk search_empty rows that predate the server-side hygiene rules
 //      (added 2026-07-16): null/short metas, no letters, email-shaped
-//   3. Orphans: events pointing at item ids no longer in the data files
-//   4. rate_limit_counter windows older than 2 days (window is 15 minutes)
-//   5. Subscriptions whose deadline is far enough past that no reminder can
+//   3. rate_limit_counter windows older than 2 days (window is 15 minutes)
+//   4. Subscriptions whose deadline is far enough past that no reminder can
 //      ever be sent to them again
-//   6. Sign-ups that were never confirmed and are now more than 30 days old
+//   5. Sign-ups that were never confirmed and are now more than 30 days old
 import { readFileSync } from 'fs'
 import { dirname, join } from 'path'
 import { fileURLToPath } from 'url'
@@ -63,19 +62,10 @@ const [junk] = await pruneSql`
 `
 console.log(`junk search_empty: ${junk!.n} deleted`)
 
-const [orphans] = await pruneSql`
-  with del as (
-    delete from events
-    where item_id is not null
-      and (
-        (item_type = 'scholarship' and item_id <> all(${scholarshipIds}))
-        or (item_type = 'program' and item_id <> all(${programIds}))
-      )
-    returning 1
-  )
-  select count(*)::int as n from del
-`
-console.log(`orphaned item ids: ${orphans!.n} deleted`)
+// Events for a listing that left the data files are kept. Deleting them
+// rewrote past months: the Oct 1 2026 sweep took 711 rows for listings cut
+// on Sep 30 and restored on Oct 4. The rows hold no personal data, the 180
+// days above still bound them, and the admin panel names them by id.
 
 // rate_limit was dropped in 0012 along with the better-auth leftovers;
 // rate_limit_counter replaced it in 0011. hitRateLimit sweeps this on a 5%

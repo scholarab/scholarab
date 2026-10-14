@@ -243,9 +243,11 @@ const breadcrumbJson = {
     }
   }
 
+  // The single button toggles, so only a save that leaves the award saved
+  // is counted; removing one is not a save.
   const save = (id: number) => {
     toggleSaved(id);
-    sendEvent('save', 'scholarship', id, 'combo');
+    if (getSaved().includes(id)) sendEvent('save', 'scholarship', id, 'combo');
   };
 
   root?.addEventListener('click', e => {

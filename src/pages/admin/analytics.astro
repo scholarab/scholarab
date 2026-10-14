@@ -68,9 +68,12 @@ try {
 
   // Every day the site has ever recorded, Alberta time. One row per active day
   // is small enough to ship whole, and the panel slices it to the chosen month.
+  // The counters added on 2026-10-14 are left out, or the day they started
+  // would read as a jump in use. list_view alone fires on most visits.
   const dailyQuery = db
     .select({ day: sql<string>`to_char(${events.ts} AT TIME ZONE 'UTC' AT TIME ZONE 'America/Edmonton', 'YYYY-MM-DD')`, n: count() })
     .from(events)
+    .where(sql`${events.event} not in ('list_view', 'filter_use', 'list_more', 'not_found', 'unsubscribe')`)
     .groupBy(sql`1`)
     .orderBy(sql`1`)
 

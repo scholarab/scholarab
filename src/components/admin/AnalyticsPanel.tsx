@@ -221,7 +221,7 @@ function buildItemRows(data: AnalyticsData, month: string): ItemRow[] {
     if (!row) {
       row = {
         key,
-        title: (itemType === 'program' ? data.titles.program : data.titles.scholarship)[itemId] ?? `#${itemId}`,
+        title: (itemType === 'program' ? data.titles.program : data.titles.scholarship)[itemId] ?? `Removed listing #${itemId}`,
         itemType,
         views: 0, applies: 0, rate: null, saves: 0, alerts: 0, onList: 0,
       }

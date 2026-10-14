@@ -177,5 +177,6 @@ it.each([[8, 'posted,14,3'], [9, 'open,14,3'], [10, 'posted,14,3']])('stores the
   expect((await call({ ...valid, itemId })).status).toBe(200);
   expect((await pg.query('SELECT cadence,confirmed_at FROM subscribers')).rows).toEqual([{ cadence, confirmed_at: null }]);
   expect(state.send.mock.calls[0]![3]).toBe(cadence);
-  expect((await pg.query("SELECT event FROM events WHERE event='alert_subscribe'")).rows).toHaveLength(1);
+  // The device class is recorded like every client event; no user agent reads as a computer
+  expect((await pg.query("SELECT device FROM events WHERE event='alert_subscribe'")).rows).toEqual([{ device: 'computer' }]);
 });
