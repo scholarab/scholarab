@@ -287,6 +287,16 @@ export function openNowCount(items: ScholarshipWithMeta[]): number {
   return items.filter(s => !isAfterHighSchool(s) && canApplyNow(getScholarshipStatus(s))).length;
 }
 
+/** The dollars beside OPEN NOW, and no other run (Ilia, 2026-10-14): every listing's own
+ *  figure added up, the first one where it names two ("$2,000 to $7,000"
+ *  counts 2,000) and nothing for "Amount varies". Empty when nothing names a
+ *  figure, so the heading never prints $0. */
+export function runMoney(key: string, run: Array<{ _amount?: number }>): string {
+  if (key !== 'active') return '';
+  const n = run.reduce((t, s) => t + (s._amount ?? 0), 0);
+  return n ? `$${n.toLocaleString('en-CA')}` : '';
+}
+
 /** The program twin of openNowCount: the OPEN NOW run, dated or not. */
 export function programOpenNowCount(items: ProgramWithMeta[]): number {
   return items.filter(p => canApplyNow(getProgramStatus(p))).length;

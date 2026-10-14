@@ -3,7 +3,7 @@
 // Every card is in the HTML; lib/directory-client.ts shows/hides/reorders
 // them and recomputes the clock-dependent bits on load, so no React ships.
 import { canApplyNow } from '../../lib/status.ts';
-import { showingLine, DEFAULT_SCHOLARSHIP_STATE, DIRECTORY_PAGE_SIZE, SCHOLARSHIP_GROUP_LABELS, SCHOLARSHIP_SHUT_GROUPS, directoryCountLine, openNowCount, filterSortScholarships, getScholarshipStatus, amountCell, groupRuns, isAfterHighSchool, rowAction, scholarshipGroupKey, scholarshipWhen } from '../../lib/list-core.ts';
+import { showingLine, DEFAULT_SCHOLARSHIP_STATE, DIRECTORY_PAGE_SIZE, SCHOLARSHIP_GROUP_LABELS, SCHOLARSHIP_SHUT_GROUPS, directoryCountLine, openNowCount, runMoney, filterSortScholarships, getScholarshipStatus, amountCell, groupRuns, isAfterHighSchool, rowAction, scholarshipGroupKey, scholarshipWhen } from '../../lib/list-core.ts';
 import type { ScholarshipWithMeta } from '../../lib/list-core.ts';
 import { generateSlug, formatVerifiedMonth, isCheckStale } from '../../lib/utils.ts';
 import { scholarshipSearchBlob, searchSuggestions } from '../../lib/search-text.ts';
@@ -208,10 +208,10 @@ const initial = filterSortScholarships(items, DEFAULT_SCHOLARSHIP_STATE);
 const runs = groupRuns(initial, scholarshipGroupKey, SCHOLARSHIP_GROUP_LABELS);
 const showGroups = runs.length > 1;
 const SHUT_GROUPS = new Set(SCHOLARSHIP_SHUT_GROUPS);
-const headerAt = new Map<number, { label: string; count: number; key: string }>();
+const headerAt = new Map<number, { label: string; count: number; key: string; sum: string }>();
 if (showGroups) {
   let at = 0;
-  for (const r of runs) { headerAt.set(at, r); at += r.count; }
+  for (const r of runs) { headerAt.set(at, { ...r, sum: runMoney(r.key, initial.slice(at, at + r.count)) }); at += r.count; }
 }
 const openNow = openNowCount(initial);
 ---
@@ -328,6 +328,7 @@ const openNow = openNowCount(initial);
             <span class="sabl-group-name">
               <span class="sabl-group-label">{head.label}</span>
               <span class="sabl-group-count">{head.count.toLocaleString('en-CA')}</span>
+              <span class="sabl-group-sum" hidden={!head.sum}>{head.sum}</span>
             </span>
             {/* aria-hidden so the button's name stays "OPEN NOW 15"; the state
                 itself is carried by aria-expanded, which is what a screen
@@ -435,7 +436,7 @@ const openNow = openNowCount(initial);
 <script>
   import { canApplyNow } from '../../lib/status.ts';
   import { initDirectory } from '../../lib/directory-client.ts';
-  import { DEFAULT_SCHOLARSHIP_STATE, SCHOLARSHIP_GROUP_LABELS, SCHOLARSHIP_SHUT_GROUPS, isAfterHighSchool, buildScholarshipStatusCache, directoryCountLine, openNowCount, filterSortScholarships, getScholarshipStatus, paintRowAction, rowAction, scholarshipGroupKey, scholarshipWhen, selectScholarships } from '../../lib/list-core.ts';
+  import { DEFAULT_SCHOLARSHIP_STATE, SCHOLARSHIP_GROUP_LABELS, SCHOLARSHIP_SHUT_GROUPS, isAfterHighSchool, buildScholarshipStatusCache, directoryCountLine, openNowCount, runMoney, filterSortScholarships, getScholarshipStatus, paintRowAction, rowAction, scholarshipGroupKey, scholarshipWhen, selectScholarships } from '../../lib/list-core.ts';
   import { ARROW_REF, EXT_REF } from '../../lib/icons.ts';
   import type { ScholarshipWithMeta, ScholarshipSort, ScholarshipStatus, StatusFilter, RegionKey } from '../../lib/list-core.ts';
   import { getSaved, toggleSaved } from '../../lib/tracker.ts';
@@ -528,7 +529,7 @@ const openNow = openNowCount(initial);
         a.classList.toggle('is-empty', n === 0);
       });
     },
-    groups: { key: scholarshipGroupKey, label: key => SCHOLARSHIP_GROUP_LABELS[key] ?? key, shut: SCHOLARSHIP_SHUT_GROUPS },
+    groups: { key: scholarshipGroupKey, label: key => SCHOLARSHIP_GROUP_LABELS[key] ?? key, shut: SCHOLARSHIP_SHUT_GROUPS, sum: runMoney },
     summary(visible, total) {
       return { count: directoryCountLine(visible.length, total, 'LISTINGS', openNowCount(visible)) };
     },

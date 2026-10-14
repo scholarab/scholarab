@@ -2,7 +2,7 @@ import { describe, it, expect, vi } from 'vitest'
 import {
   getScholarshipStatus, getProgramStatus, programMatchesGrade,
   filterSortScholarships, filterSortPrograms, scholarshipWhen, programWhen,
-  whenTier, URGENT_DAYS, SOON_DAYS, groupRuns, directoryCountLine,
+  whenTier, URGENT_DAYS, SOON_DAYS, groupRuns, directoryCountLine, runMoney,
   scholarshipGroupKey, programGroupKey, SCHOLARSHIP_GROUP_LABELS, PROGRAM_GROUP_LABELS, isAfterHighSchool, showingLine,
 } from './list-core'
 import type { ScholarshipWithMeta, ProgramWithMeta, ScholarshipFilterState, ProgramFilterState } from './list-core'
@@ -678,3 +678,13 @@ describe('one open run', () => {
     expect(Object.keys(PROGRAM_GROUP_LABELS)).not.toContain('soon')
   })
 })
+
+describe('runMoney', () => {
+  it('adds the open run and leaves every other run empty', () => {
+    expect(runMoney('active', [{ _amount: 1500 }, { _amount: 0 }, {}, { _amount: 1_000_000 }])).toBe('$1,001,500');
+    expect(runMoney('future', [{ _amount: 1500 }])).toBe('');
+  });
+  it('never prints $0', () => {
+    expect(runMoney('active', [{ _amount: 0 }, {}])).toBe('');
+  });
+});

@@ -2231,3 +2231,13 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
 /* Wraps the header and footer so Google leaves them out of snippets and AI
    summaries (see SabHeader). Contributes no box of its own. */
 .sab-nosnippet { display: contents; }
+/* The dollars open now, beside the OPEN NOW sticker (Ilia, 2026-10-14), in
+   the face and ink the row amounts use. */
+.sabl-group-sum {
+  font: 800 30px/1 var(--font-display); color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+}
+.sabl-group-sum[hidden] { display: none; }
+@media (max-width: 900px) {
+  .sabl-group-sum { font-size: 22px; }
+}

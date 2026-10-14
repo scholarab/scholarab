@@ -56,6 +56,9 @@ export interface DirectoryConfig<T extends DirectoryItem, S extends Record<strin
      *  2026-09-25: the scholarship list opened on closed and unconfirmed
      *  awards). The server marks their cards data-dir-shut to match. */
     shut?: string[];
+    /** A second figure beside a run's count (the dollars under OPEN NOW),
+     *  from every match in the run; '' leaves it empty. */
+    sum?(key: string, items: T[]): string;
   };
   getSavedIds(): number[];
   toggleSave(id: number): number[];
@@ -230,7 +233,7 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
 
   const CARET = '<svg class="sabl-group-caret" viewBox="0 0 12 8" width="12" height="8" fill="none"><path d="M1 1.5 6 6.5 11 1.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
-  function headerFor(key: string, count: number): HTMLElement {
+  function headerFor(key: string, count: number, items: T[]): HTMLElement {
     let el = headers.get(key);
     if (!el) {
       el = root?.querySelector<HTMLElement>(`[data-dir-group="${key}"]`) ?? undefined;
@@ -240,7 +243,7 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
         el = document.createElement('h2');
         el.className = 'sabl-group-h';
         el.dataset.dirGroup = key;
-        el.innerHTML = '<button type="button" class="sabl-group"><span class="sabl-group-name"><span class="sabl-group-label"></span><span class="sabl-group-count"></span></span>'
+        el.innerHTML = '<button type="button" class="sabl-group"><span class="sabl-group-name"><span class="sabl-group-label"></span><span class="sabl-group-count"></span><span class="sabl-group-sum"></span></span>'
           + `<span class="sabl-group-toggle" aria-hidden="true"><span data-dir-group-word></span>${CARET}</span></button>`;
       }
       headers.set(key, el);
@@ -252,6 +255,11 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     if (word) word.textContent = open ? 'Hide' : 'Show';
     el.querySelector('.sabl-group-label')!.textContent = config.groups!.label(key);
     el.querySelector('.sabl-group-count')!.textContent = count.toLocaleString('en-CA');
+    const sum = el.querySelector<HTMLElement>('.sabl-group-sum');
+    if (sum) {
+      sum.textContent = config.groups!.sum?.(key, items) ?? '';
+      sum.hidden = !sum.textContent;
+    }
     return el;
   }
 
@@ -277,19 +285,18 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     const g = config.groups;
     if (!g || !isGrouped(all)) return page.map(v => v.el);
 
-    const counts = new Map<string, number>();
-    const order: string[] = [];
+    const runs = new Map<string, T[]>();
     for (const v of all) {
       const k = g.key(v);
-      if (!counts.has(k)) order.push(k);
-      counts.set(k, (counts.get(k) ?? 0) + 1);
+      const run = runs.get(k);
+      if (run) run.push(v); else runs.set(k, [v]);
     }
 
     const out: HTMLElement[] = [];
-    for (const key of order) {
+    for (const [key, run] of runs) {
       const cards = page.filter(v => g.key(v) === key);
       if (!cards.length && !collapsed.has(key)) continue;
-      out.push(headerFor(key, counts.get(key) ?? 0));
+      out.push(headerFor(key, run.length, run));
       for (const v of cards) out.push(v.el);
     }
     return out;
