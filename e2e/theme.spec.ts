@@ -52,3 +52,24 @@ test('the phone menu row switches the theme and reports its state', async ({ pag
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
   expect(await page.evaluate(() => localStorage.getItem('sa_theme'))).toBe('light');
 });
+
+test('the gear opens on hover, stays open on the way to the panel, and closes when the mouse leaves', async ({ page, isMobile }) => {
+  test.skip(!!isMobile, 'hover is the desktop gear');
+  await page.goto('/about/');
+  const gear = page.locator('[data-sabh-gear]');
+  const panel = page.locator('#sabh-gear-panel');
+  await page.locator('.sabh-gear-btn').hover();
+  await expect(panel).toBeVisible();
+  await expect(page.locator('.sabh-gear-btn')).toHaveAttribute('aria-expanded', 'true');
+  const btn = (await page.locator('.sabh-gear-btn').boundingBox())!;
+  const box = (await panel.boundingBox())!;
+  // Straight down from the gear, across the gap, into the panel's first row.
+  await page.mouse.move(btn.x + btn.width / 2, btn.y + btn.height + 5, { steps: 3 });
+  await page.mouse.move(btn.x + btn.width / 2, box.y + 20, { steps: 3 });
+  await page.waitForTimeout(250);
+  await expect(panel).toBeVisible();
+  await page.locator('.sabh-gear-btn').click();
+  await expect(panel).toBeVisible();
+  await page.mouse.move(10, 600);
+  await expect(gear).not.toHaveAttribute('data-open');
+});

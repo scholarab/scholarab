@@ -2432,3 +2432,4 @@ Outcome: a student can read the site in dark at night, by system setting or by c
 - Tests: e2e/theme.spec.ts (system setting, gear switch persisting over reload and navigation, phone row, print stays light), also run once in Firefox, WebKit and an iPhone profile. design-tokens tests updated for the token form. npm run ci 1,283 passed with only the baseline counsellor-drafts errors, test:e2e 183 passed.
 - Not done on purpose: no filter on photos (scroll cost in Firefox), emails stay light.
 - Add-back fraction: 0 of 2.
+- Follow-up the same evening (Ilia: "when you just put your cursor onto the gear, it opens it right away"): a mouse opens the gear on hover with the nav menus' 70ms open and 140ms close timings, a 10px invisible bridge keeps it open on the way down to the panel, and a click after a hover keeps it open. Touch and keyboard still use the click. e2e covers it in Chromium, Firefox and WebKit.

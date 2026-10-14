@@ -546,6 +546,8 @@ const isActive = (href: string, also: string[] = []) =>
     display: none;
   }
   .sabh-gear[data-open] .sabh-gear-panel { display: block; }
+  /* Bridges the 10px gap so a mouse moving down to the panel keeps it open. */
+  .sabh-gear-panel::before { content: ''; position: absolute; left: 0; right: 0; top: -10px; height: 10px; }
   .sabh-gear-panel ul { list-style: none; margin: 0; padding: 0; }
   .sabh-gear-list :global(a) {
     display: block; padding: 9px 10px; border-radius: var(--radius); font-family: var(--font-body); font-size: 15px; font-weight: 600;
@@ -828,7 +830,25 @@ const isActive = (href: string, also: string[] = []) =>
     if (gear) {
       const btn = gear.querySelector<HTMLElement>('.sabh-gear-btn')!;
       const setGear = (open: boolean) => { gear.toggleAttribute('data-open', open); btn.setAttribute('aria-expanded', String(open)); };
-      btn.addEventListener('click', () => setGear(!gear.hasAttribute('data-open')));
+      // A mouse opens it on hover, like the nav menus (polymarket.com does the
+      // same); a click then keeps it open rather than toggling it shut.
+      let gearTimer = 0, hoverOpened = false;
+      btn.addEventListener('click', () => {
+        if (hoverOpened && gear.hasAttribute('data-open')) { hoverOpened = false; return; }
+        setGear(!gear.hasAttribute('data-open'));
+      });
+      if (matchMedia('(hover: hover)').matches) {
+        gear.addEventListener('pointerenter', e => {
+          if (e.pointerType !== 'mouse') return;
+          clearTimeout(gearTimer);
+          gearTimer = window.setTimeout(() => { if (!gear.hasAttribute('data-open')) { hoverOpened = true; setGear(true); } }, 70);
+        });
+        gear.addEventListener('pointerleave', e => {
+          if (e.pointerType !== 'mouse') return;
+          clearTimeout(gearTimer);
+          gearTimer = window.setTimeout(() => { hoverOpened = false; if (!gear.querySelector(':focus-visible')) setGear(false); }, 140);
+        });
+      }
       gear.addEventListener('focusout', e => { if (!gear.contains(e.relatedTarget as Node | null)) setGear(false); });
       gear.addEventListener('keydown', e => { if (e.key === 'Escape') { setGear(false); btn.focus(); } });
       document.addEventListener('pointerdown', e => { if (!gear.contains(e.target as Node)) setGear(false); });
