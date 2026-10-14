@@ -1213,8 +1213,8 @@ html:not(.js) .sabl-tool[data-dir-search-btn], html:not(.js) .sabl-tool[data-dir
 /* ── Market cards (Ilia, 2026-10-12, after polymarket.com) ──
    The two directories show a grid of tiles instead of rows: the name, who
    it is for and the requirements on top, then the money and the date as the
-   two figures, then Save and Apply as two filled halves, like a market's Yes
-   and No. Same markup as the rows, so search, filters, paging and Save are
+   two figures, then Save and Apply as filled buttons, Apply the wider.
+   Same markup as the rows, so search, filters, paging and Save are
    untouched; /saved and the other lists keep the row. The ID scope is what
    lets one block beat every row rule at every width. */
 :is(#sab-scholarships, #sab-programs) [data-dir-grid] {
@@ -1274,16 +1274,19 @@ html:not(.js) .sabl-tool[data-dir-search-btn], html:not(.js) .sabl-tool[data-dir
 :is(#sab-scholarships, #sab-programs) .sabl-card .sabl-when { align-items: flex-end; }
 :is(#sab-scholarships, #sab-programs) .sabl-card .sabl-when:not(.is-quiet) [data-when-main] { font-size: 20px; }
 :is(#sab-scholarships, #sab-programs) .sabl-card .sabl-when.is-quiet [data-when-main] { font-size: 13px; }
-/* Save and Apply, two halves of one bar along the foot. */
+/* Save and Apply along the foot: Save as wide as its word, Apply the rest.
+   They were two equal halves, a market's Yes and No, and that pair was the
+   part of the card that read as copied from polymarket.com. Same tints,
+   so the card keeps its palette (Ilia, 2026-10-13). */
 :is(#sab-scholarships, #sab-programs) .sabl-card > .sabl-card-actions {
   grid-area: actions; justify-self: stretch; margin-top: 14px;
-  display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+  display: grid; grid-template-columns: auto 1fr; gap: 8px;
 }
 :is(#sab-scholarships, #sab-programs) .sabl-card :is(.sabl-save, .sabl-apply) {
   height: 40px; border-radius: 8px; justify-content: center; font-size: 14px;
   transition: background-color 0.14s ease, color 0.14s ease;
 }
-:is(#sab-scholarships, #sab-programs) .sabl-card .sabl-save { background: rgba(20, 25, 21, 0.07); width: 100%; }
+:is(#sab-scholarships, #sab-programs) .sabl-card .sabl-save { background: rgba(20, 25, 21, 0.07); width: 100%; padding: 0 16px; }
 :is(#sab-scholarships, #sab-programs) .sabl-card .sabl-save:hover { background: rgba(20, 25, 21, 0.13); }
 :is(#sab-scholarships, #sab-programs) .sabl-card .sabl-save.on { background: rgba(74, 168, 115, 0.18); }
 :is(#sab-scholarships, #sab-programs) .sabl-card .sabl-apply { background: rgba(10, 86, 50, 0.12); color: var(--cta); }

@@ -2411,3 +2411,12 @@ Outcome: the scholarship and program cards read as this site's own, with the dat
 - Option B (a ticket stub with the date) was mocked and not chosen.
 - Add-back fraction: 1 of 5 (the picture, at Ilia's call).
 - Reverted the same day (Ilia: "bring back the way polymarket was"). The market cards are back exactly as before. Kept from this pass: the pointer-only `.sabl-name:hover`, a real touch bug, and the impeccable ignore it needed is removed. Add-back fraction for the pass: 5 of 5.
+
+## 2026-10-13: card buttons stop reading as Yes and No (Ilia: "quite similar to Polymarket")
+
+Outcome: the directory cards keep the look Ilia likes, without the one part that read as copied.
+
+- Tried and dropped the same day: ledger cards (shipped be31660, reverted 9e39f24), photo cards (mocked, too busy, and only 2 photos covered the first 24 listings), a solid green Apply (too loud across 24 cards, off the card palette), Save beside the title (cut long names).
+- Changed: Save fits its word and Apply takes the rest of the row. Same tints, same height. One grid column value and one padding.
+- Test: the card e2e test checked the halves were equal; it now checks Apply is the wider. test:e2e 177 passed, npm run ci 1,283 passed with only the baseline counsellor-drafts errors.
+- Add-back fraction: 0 of 1.

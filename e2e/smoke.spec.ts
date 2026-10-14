@@ -393,16 +393,17 @@ test('on a phone, no field makes Safari zoom and every picker draws its own box'
 });
 
 // The directories are a grid of cards (Ilia, 2026-10-12, after
-// polymarket.com): Save and Apply are two filled halves along each card's
-// foot, the same height on one line, before and after a search, and no card
-// is striped the way the rows were.
-test('cards: Save and Apply split the foot of every card, no stripes', async ({ page }) => {
+// polymarket.com): Save and Apply are filled buttons along each card's foot,
+// the same height on one line, before and after a search, and no card is
+// striped the way the rows were. Apply is the wider: two equal halves read
+// as a market's Yes and No (Ilia, 2026-10-13).
+test('cards: Save and Apply fill the foot of every card, Apply wider, no stripes', async ({ page }) => {
   for (const [path, term] of [['/scholarships/', 'engineering'], ['/programs/', 'math']] as const) {
     await page.goto(path);
     const measure = () => page.locator('[data-dir-card]:visible').evaluateAll(cards => cards.slice(0, 10).map(c => {
       const save = c.querySelector('.sabl-save')!.getBoundingClientRect();
       const apply = c.querySelector('.sabl-apply')!.getBoundingClientRect();
-      return { top: Math.abs(save.top - apply.top), h: [save.height, apply.height], w: Math.abs(save.width - apply.width), order: apply.left > save.right, bg: getComputedStyle(c).backgroundColor };
+      return { top: Math.abs(save.top - apply.top), h: [save.height, apply.height], w: apply.width - save.width, order: apply.left > save.right, bg: getComputedStyle(c).backgroundColor };
     }));
     for (const cards of [await measure(), await (async () => {
       await page.locator('[data-dir-search-btn]').click();
@@ -414,7 +415,7 @@ test('cards: Save and Apply split the foot of every card, no stripes', async ({ 
       for (const c of cards) {
         expect(c.top).toBeLessThanOrEqual(1);
         for (const h of c.h) expect(h).toBeGreaterThanOrEqual(40);
-        expect(c.w).toBeLessThanOrEqual(1);
+        expect(c.w).toBeGreaterThan(40);
         expect(c.order).toBe(true);
       }
       expect(new Set(cards.map(c => c.bg)).size).toBe(1);
