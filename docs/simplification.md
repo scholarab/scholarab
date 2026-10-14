@@ -2433,3 +2433,4 @@ Outcome: a student can read the site in dark at night, by system setting or by c
 - Not done on purpose: no filter on photos (scroll cost in Firefox), emails stay light.
 - Add-back fraction: 0 of 2.
 - Follow-up the same evening (Ilia: "when you just put your cursor onto the gear, it opens it right away"): a mouse opens the gear on hover with the nav menus' 70ms open and 140ms close timings, a 10px invisible bridge keeps it open on the way down to the panel, and a click after a hover keeps it open. Touch and keyboard still use the click. e2e covers it in Chromium, Firefox and WebKit.
+- 2026-10-13 follow-up: the gear copies polymarket.com. Hover opens it with no delay, it grows in over .2s and fades out over .15s, and a mouse click never closes it (only leaving does). Removed the hoverOpened flag and the 70ms open delay; touch and keyboard still toggle. Verified in Chromium, Firefox and WebKit on the static build.

@@ -53,7 +53,7 @@ test('the phone menu row switches the theme and reports its state', async ({ pag
   expect(await page.evaluate(() => localStorage.getItem('sa_theme'))).toBe('light');
 });
 
-test('the gear opens on hover, stays open on the way to the panel, and closes when the mouse leaves', async ({ page, isMobile }) => {
+test('the gear opens on hover, clicks never shut it, and only leaving closes it', async ({ page, isMobile }) => {
   test.skip(!!isMobile, 'hover is the desktop gear');
   await page.goto('/about/');
   const gear = page.locator('[data-sabh-gear]');
@@ -69,7 +69,10 @@ test('the gear opens on hover, stays open on the way to the panel, and closes wh
   await page.waitForTimeout(250);
   await expect(panel).toBeVisible();
   await page.locator('.sabh-gear-btn').click();
+  await page.locator('.sabh-gear-btn').click();
+  await page.waitForTimeout(250);
   await expect(panel).toBeVisible();
   await page.mouse.move(10, 600);
   await expect(gear).not.toHaveAttribute('data-open');
+  await expect(panel).toBeHidden();
 });

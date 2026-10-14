@@ -543,9 +543,19 @@ const isActive = (href: string, also: string[] = []) =>
   .sabh-gear-panel {
     position: absolute; top: calc(100% + 10px); right: 0; width: 240px; padding: 8px; z-index: 60;
     background: var(--bg-raised); color: var(--text-primary); border-radius: var(--radius); box-shadow: 0 12px 32px rgba(10, 14, 11, 0.22), 0 0 0 1px rgba(var(--fg-rgb), 0.08);
-    display: none;
+    /* Polymarket's timing: it springs open in .2s and fades shut in .15s,
+       growing from the gear's corner. Visibility waits out the fade. */
+    visibility: hidden; opacity: 0; transform: translateY(-5px) scale(0.95); transform-origin: 100% 0;
+    transition: opacity 0.15s ease, transform 0.15s ease, visibility 0s linear 0.15s;
   }
-  .sabh-gear[data-open] .sabh-gear-panel { display: block; }
+  .sabh-gear[data-open] .sabh-gear-panel {
+    visibility: visible; opacity: 1; transform: none;
+    transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), visibility 0s;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .sabh-gear-panel { transform: none; transition: opacity 0.15s ease, visibility 0s linear 0.15s; }
+    .sabh-gear[data-open] .sabh-gear-panel { transition: opacity 0.15s ease, visibility 0s; }
+  }
   /* Bridges the 10px gap so a mouse moving down to the panel keeps it open. */
   .sabh-gear-panel::before { content: ''; position: absolute; left: 0; right: 0; top: -10px; height: 10px; }
   .sabh-gear-panel ul { list-style: none; margin: 0; padding: 0; }
@@ -830,23 +840,23 @@ const isActive = (href: string, also: string[] = []) =>
     if (gear) {
       const btn = gear.querySelector<HTMLElement>('.sabh-gear-btn')!;
       const setGear = (open: boolean) => { gear.toggleAttribute('data-open', open); btn.setAttribute('aria-expanded', String(open)); };
-      // A mouse opens it on hover, like the nav menus (polymarket.com does the
-      // same); a click then keeps it open rather than toggling it shut.
-      let gearTimer = 0, hoverOpened = false;
-      btn.addEventListener('click', () => {
-        if (hoverOpened && gear.hasAttribute('data-open')) { hoverOpened = false; return; }
-        setGear(!gear.hasAttribute('data-open'));
+      // A mouse opens it on hover and only leaving closes it, the way
+      // polymarket.com does it, so clicking the gear never shuts it. Touch and
+      // the keyboard still toggle it with a tap or Enter.
+      let gearTimer = 0;
+      btn.addEventListener('click', e => {
+        setGear((e as PointerEvent).pointerType === 'mouse' || !gear.hasAttribute('data-open'));
       });
       if (matchMedia('(hover: hover)').matches) {
         gear.addEventListener('pointerenter', e => {
           if (e.pointerType !== 'mouse') return;
           clearTimeout(gearTimer);
-          gearTimer = window.setTimeout(() => { if (!gear.hasAttribute('data-open')) { hoverOpened = true; setGear(true); } }, 70);
+          setGear(true);
         });
         gear.addEventListener('pointerleave', e => {
           if (e.pointerType !== 'mouse') return;
           clearTimeout(gearTimer);
-          gearTimer = window.setTimeout(() => { hoverOpened = false; if (!gear.querySelector(':focus-visible')) setGear(false); }, 140);
+          gearTimer = window.setTimeout(() => { if (!gear.querySelector(':focus-visible')) setGear(false); }, 100);
         });
       }
       gear.addEventListener('focusout', e => { if (!gear.contains(e.relatedTarget as Node | null)) setGear(false); });
