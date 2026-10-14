@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
-import { checkedSince, formatVerifiedMonth, isCheckStale, generateSlug, getToday, formatDeadline, parseAmount, showToast, emailProblem, EMAIL_RE, amountSpan } from './utils'
+import { formatVerifiedMonth, isCheckStale, generateSlug, getToday, formatDeadline, parseAmount, showToast, emailProblem, EMAIL_RE, amountSpan } from './utils'
 
 // ── generateSlug ─────────────────────────────────────────────────────────────
 
@@ -313,14 +313,5 @@ describe('amountSpan', () => {
     expect(amountSpan('$1,000', 'A one-time award.')).toBeNull()
     expect(amountSpan('$4,000 a year', 'over four years')).toBeNull()
     expect(amountSpan('Varies', 'over three years')).toBeNull()
-  })
-})
-
-describe('checkedSince', () => {
-  it('counts checks from the start of last month and names that month', () => {
-    expect(checkedSince(['2026-08', '2026-09', '2026-10', null, 'junk'], '2026-10-05')).toEqual({ count: 2, month: 'September' })
-  })
-  it('crosses the year in January', () => {
-    expect(checkedSince(['2026-11', '2026-12', '2027-01'], '2027-01-03')).toEqual({ count: 2, month: 'December' })
   })
 })

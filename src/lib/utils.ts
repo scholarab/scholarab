@@ -57,28 +57,6 @@ export function isCheckStale(str: string | null | undefined, today: string = alb
   return months >= STALE_CHECK_MONTHS;
 }
 
-const FULL_MONTHS = ['January', 'February', 'March', 'April', 'May', 'June',
-                     'July', 'August', 'September', 'October', 'November', 'December'];
-
-/**
- * How many listings were checked against the provider's page since the start
- * of last month, and that month's name: "since September" on October 5. The
- * directory says it once in its standfirst, because a checked line on every
- * row was noise beside the deadline (reader feedback, 2026-09-29).
- */
-export function checkedSince(
-  checks: Array<string | null | undefined>,
-  today: string = albertaDate(),
-): { count: number; month: string } {
-  const t = /^(\d{4})-(\d{2})/.exec(today)!;
-  const from = Number(t[1]) * 12 + Number(t[2]) - 2;
-  const count = checks.filter(c => {
-    const v = /^(\d{4})-(\d{2})/.exec(c ?? '');
-    return !!v && Number(v[1]) * 12 + Number(v[2]) - 1 >= from;
-  }).length;
-  return { count, month: FULL_MONTHS[((from % 12) + 12) % 12]! };
-}
-
 // First dollar figure in the string: "$2,500" → 2500, "up to $8,000" → 8000,
 // "$4,000–$5,000" → 4000, "Varies" → 0
 export function parseAmount(amount: string | null | undefined): number {

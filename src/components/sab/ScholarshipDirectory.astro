@@ -5,7 +5,7 @@
 import { canApplyNow } from '../../lib/status.ts';
 import { showingLine, DEFAULT_SCHOLARSHIP_STATE, DIRECTORY_PAGE_SIZE, SCHOLARSHIP_GROUP_LABELS, SCHOLARSHIP_SHUT_GROUPS, directoryCountLine, openNowCount, filterSortScholarships, getScholarshipStatus, amountCell, groupRuns, isAfterHighSchool, rowAction, scholarshipGroupKey, scholarshipWhen } from '../../lib/list-core.ts';
 import type { ScholarshipWithMeta } from '../../lib/list-core.ts';
-import { generateSlug, formatVerifiedMonth, isCheckStale, checkedSince } from '../../lib/utils.ts';
+import { generateSlug, formatVerifiedMonth, isCheckStale } from '../../lib/utils.ts';
 import { scholarshipSearchBlob, searchSuggestions } from '../../lib/search-text.ts';
 import { SCHOLARSHIP_FACETS, MIN_FACET_ITEMS, facetItems, facetMatches } from '../../lib/facets.ts';
 import { saysNoApplication, rowRoute, routeTag } from '../../lib/apply-method.ts';
@@ -69,13 +69,10 @@ const iconOf = (s: ScholarshipWithMeta): { src: string; name: string } => {
   return { src: `/logos/place-${place}.webp`, name: '' };
 };
 
-// The default standfirst says what a reader cannot see on any row: that the
-// listings are checked, and how recently.
-const checked = checkedSince(Astro.props.items.map(s => s.lastVerified));
 const {
   items,
   h1 = 'All scholarships',
-  intro = `Every listing links to its provider; ${checked.count.toLocaleString('en-CA')} of ${Astro.props.items.length.toLocaleString('en-CA')} checked since ${checked.month}.`,
+  intro = 'Every scholarship open to Alberta students, from town funds to national.',
   allItems = items,
   hideCategories = false,
   hideScopes = false,

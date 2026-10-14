@@ -617,15 +617,12 @@ body.quiz-past-first .sabm-progress-wrap { margin-top: 10px; padding-top: 16px; 
   font-family: var(--font-display); font-weight: 400;
   font-size: clamp(40px, 4vw, 56px); line-height: 1.05; letter-spacing: -0.015em; margin: 0;
 }
-/* The standfirst is the only part of the header whose height varies, and the
-   toolbar and the three chip rows sit directly under it. Left to size itself,
-   every hop between scopes moved the chips up or down by a line, so the reader
-   aims at a button that is no longer there. Three lines is reserved for it on
-   every page: it is what all but the shortest intro already needs, and
-   facets.test.ts caps intro length so none of them runs past it. */
+/* Every standfirst is the same 72 characters (facets.test.ts), so hopping
+   between tabs moves nothing: one line here, two on a phone, each reserved
+   so a short word wrap cannot change the height either (2026-10-13). */
 .sabl-desc {
   font-size: 17px; line-height: 1.55; color: var(--ink-faint);
-  margin: 12px 0 0; max-width: 70ch; min-height: calc(1.55em * 3);
+  margin: 12px 0 0; max-width: 70ch; min-height: 1.55em;
 }
 /* A hub named by a jargon word defines it here (lib/glossary.ts). */
 .sabl-define {
@@ -1514,12 +1511,7 @@ html:not(.js) .sabl-more { display: none; }
   /* 48px is the desktop floor of the clamp, which on a phone spent a third of
      the viewport on one word. */
   .sabl-h1 { font-size: 40px; }
-  /* The three reserved lines keep the chip rows from moving as a reader hops
-     between hubs -- a desktop problem, where the intro runs two lines and the
-     rows sit beside the fold. On a phone every intro already fills three lines
-     or more, so the reservation buys nothing and the chips are below the fold
-     regardless. */
-  .sabl-desc { min-height: 0; margin-top: 14px; font-size: 16px; }
+  .sabl-desc { min-height: 3em; margin-top: 14px; font-size: 16px; }
   .sabl-row-label { width: 100%; }
   /* The label takes the full width here, which a nowrap row cannot give it:
      the row becomes a column, and the chips keep their own line underneath. */
@@ -2123,10 +2115,13 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
    weeks, which answers "is there anything for me" better than a paragraph,
    and the OPENS LATER run says the rest. */
 @media (max-width: 640px) {
-  .sabl-title-row > div > .sabl-h1 { margin-bottom: 10px; }
+  /* Most hub headings take two lines here and a few take one, so every page
+     keeps two and a short one sits on the lower line: the tabs and the list
+     land at one height whichever tab is open (2026-10-13). */
+  .sabl-title-row > div > .sabl-h1 { margin-bottom: 10px; min-height: 1.8em; display: flex; align-items: flex-end; }
   /* No line clamp since 2026-10-01: two lines cut Calgary's off before the
      "$100,000" that sells the page (critique). */
-  .sabl-title-row .sabl-desc { margin: 0; font-size: 16px; line-height: 1.5; }
+  .sabl-title-row .sabl-desc { margin: 0; font-size: 16px; line-height: 1.5; min-height: 3em; }
   .sabl-group-h:first-child > .sabl-group { margin-top: 4px; }
 }
 

@@ -16,6 +16,9 @@ import {
 import { generateSlug } from './utils.ts';
 import scholarships from '../data/scholarships.json';
 import programs from '../data/research-programs.json';
+import { readFileSync } from 'node:fs';
+
+const INTRO_LENGTH = 72;
 
 type Listing = { title?: string; name?: string; region?: string | null; category?: string | null; format?: string | null; alsoOpenTo?: string[]; active?: boolean };
 
@@ -178,14 +181,21 @@ describe('facet copy', () => {
     }
   });
 
-  it('gives every facet real intro prose rather than a templated label', () => {
+  it('gives the two directories a default intro of the same length', () => {
+    for (const file of ['ScholarshipDirectory', 'ProgramDirectory']) {
+      const src = readFileSync(`src/components/sab/${file}.astro`, 'utf8');
+      const intro = /\n {2}intro = '([^']+)',/.exec(src)?.[1] ?? '';
+      expect(intro.length, file).toBe(INTRO_LENGTH);
+    }
+  });
+
+  it('gives every facet an intro of exactly the same length', () => {
     for (const f of [...SCHOLARSHIP_FACETS, ...ALL_PROGRAM_FACETS]) {
-      expect(f.intro.length, `${f.slug} intro`).toBeGreaterThan(120);
-      // And the ceiling, which is a layout rule rather than a taste one:
-      // .sabl-desc reserves three lines so the chip rows land at the same
-      // height on every scope, and at 560px wide a fourth line starts
-      // somewhere past 215 characters. 205 leaves room for a long word.
-      expect(f.intro.length, `${f.slug} intro`).toBeLessThanOrEqual(205);
+      // A layout rule (Ilia, 2026-10-13): hopping between tabs must not move
+      // anything, so every standfirst is the same 72 characters, one line on
+      // a desktop and two on a phone. The directories' default lines match.
+      expect(f.intro.length, `${f.slug} intro`).toBe(INTRO_LENGTH);
+      expect(f.intro, `${f.slug} intro`).not.toMatch(/[:;\u2014]/);
       // The h1 has to hold one line. At the top of its clamp it is 76px, and a
       // second line moves the toolbar and all three chip rows down by exactly
       // that much, which is the shift a reader sees when they hop between
