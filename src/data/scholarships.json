@@ -74955,5 +74955,1076 @@
       "apprenticeship": false,
       "extracurriculars": []
     }
+  },
+  {
+    "id": 2024,
+    "title": "Salers Association of Canada Scholarship",
+    "amount": "$2,500",
+    "deadline": "2026-12-31",
+    "audience": "Young people from agricultural backgrounds heading to or already in post-secondary, with preference for those involved with Salers cattle",
+    "url": "https://www.salerscanada.com/juniors",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Email the applicant form, your latest transcripts and a 300 to 500 word essay to the association by December 31. The essay covers your involvement in agriculture, your volunteer work, your career goals and how you would use the money. Post-secondary students and applicants with Salers involvement get preference.",
+    "active": true,
+    "description": "The Salers Association of Canada gives a $2,500 scholarship to a young person from an agricultural background who is continuing their education.",
+    "metaDetail": "Salers involvement gets preference.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Agriculture"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "4-H",
+        "volunteering"
+      ]
+    }
+  },
+  {
+    "id": 2025,
+    "title": "Canadian Pony Club Award of Excellence",
+    "amount": "$500 to $1,200",
+    "deadline": "2026-12-31",
+    "audience": "Active Canadian Pony Club members enrolled at a college or university",
+    "url": "https://canadianponyclub.org/about-us/cpc-award-of-excellence",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Pick one level when you apply. The $1,200 award needs HB2 or higher, the $800 award needs C2 SM or higher and the $500 award needs C SM or higher, and the two lower levels also need three years of membership. Send typed answers about your club, regional and community activities, a short essay of 200 words or less, three signed reference letters and proof of college or university enrolment to the national office by December 31. You must still be enrolled when winners are presented in April, so first-year students apply in their first fall term.",
+    "active": true,
+    "description": "The Canadian Pony Club gives four Awards of Excellence each year to members in post-secondary school who show the club's aims of loyalty, character and sportsmanship.",
+    "metaDetail": "First-year students can apply.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Equestrian",
+        "volunteering"
+      ]
+    }
+  },
+  {
+    "id": 2026,
+    "title": "Canadian Sheep Breeders' Association Scholarship",
+    "amount": "$500",
+    "deadline": "2027-10-01",
+    "deadlineEstimated": true,
+    "audience": "Post-secondary students who are CSBA members, or whose parents or grandparents are members, with preference for agriculture programs",
+    "url": "https://sheepbreeders.ca/scholarships",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "The member must have registered or transferred sheep in the current year. Apply through the online form and questionnaire on the association's page by October 1. Programs with a sheep focus get preference. Past winners and children of current board members cannot apply. The money is paid once you show enrolment in a second semester.",
+    "active": true,
+    "description": "The Canadian Sheep Breeders' Association gives one $500 scholarship each year to a student from a member family who wants to help grow the Canadian sheep industry.",
+    "metaDetail": "Member families only.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Agriculture"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "4-H"
+      ]
+    }
+  },
+  {
+    "id": 2027,
+    "title": "Equestrian Canada Jumping Youth Bursary",
+    "amount": "Varies",
+    "deadline": "2026-10-30",
+    "audience": "Canadian riders aged 14 to 21 who hold a Gold Equestrian Canada sport licence and compete in hunter, jumper or equitation",
+    "url": "https://equestrian.ca/resource/jumping-youth-bursary-program/",
+    "category": "Sports",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "A coach, show organizer, provincial federation or fellow sport licence holder nominates you by email by October 30. Include the nomination form, your academic transcript and a letter of support from your coach, the nominator and an independent sport licence holder. The committee looks at your grades, education plans, competition results, goals and financial need. You can win it twice at most.",
+    "active": true,
+    "description": "Equestrian Canada gives bursaries to young show jumping, hunter and equitation riders who are keeping up with school while competing.",
+    "metaDetail": "For riders aged 14 to 21.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": 14,
+      "maxAge": 21,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Equestrian"
+      ]
+    }
+  },
+  {
+    "id": 2028,
+    "title": "Soroptimist Live Your Dream Award",
+    "amount": "$1,000 to $16,000",
+    "deadline": "2026-11-15",
+    "openDate": null,
+    "audience": "Women who are the main financial support for themselves and their dependents, starting or in a vocational or undergraduate program",
+    "url": "https://www.soroptimist.org/our-work/live-your-dream-awards/apply-for-the-live-your-dream-awards.html",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply online at apply.soroptimist.org between August 1 and November 15. Your local club judges first, and club winners usually hear between January and April before moving on to the region and then the international round. You cannot apply if you already hold a graduate degree, have won before, or are a Soroptimist member, employee or relative of one.",
+    "active": true,
+    "description": "Soroptimist International gives cash awards to women who head their households and need money for vocational training or a first undergraduate degree. Club awards are usually about $1,000, region awards $3,000 or $5,000, and international awards $10,000.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": "female",
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2029,
+    "title": "Kiwanis Oil Capital Laurie Billings Community Leadership Scholarship",
+    "amount": "Up to $1,000",
+    "deadline": "2027-06-26",
+    "deadlineEstimated": true,
+    "openDate": null,
+    "audience": "Edmonton Grade 12 graduates with three years of school and community leadership and a 70% average",
+    "url": "https://oilcapitalkiwanis.ca/",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "Edmonton",
+    "notes": "Mail the package to PO Box 22727 RPO Southbrook, Edmonton T6W 5G8 or email it to kiwanis@oilcapitalkiwanis.ca. Send a cover letter on how three years of school and community involvement built your leadership, one community reference, one teacher reference and proof of conditional acceptance. Interim marks are fine. Winners give a SIN before payment.",
+    "active": false,
+    "description": "The Kiwanis Club of Edmonton Oil Capital gives up to $1,000, matched by the Kiwanis Foundation of Canada, to a graduating student who has led in school and community. You need a 70% average across English 30, Social 30, one 30-level math or science and two other 30-level courses.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": 70,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer",
+        "Leadership"
+      ]
+    }
+  },
+  {
+    "id": 2030,
+    "title": "Stampede City Kinsmen Scholarship (Mount Royal)",
+    "amount": "$2,250",
+    "deadline": "2027-03-01",
+    "deadlineEstimated": true,
+    "openDate": "2026-11-01",
+    "audience": "Grade 12 students entering first year of any degree, diploma or University Entrance program at Mount Royal University",
+    "url": "https://mtroyal.academicworks.ca/opportunities/16698",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through the Mount Royal awards application in MyMRU, which runs November 1 to March 1. You need an admission record and student ID before you can open it.",
+    "active": true,
+    "description": "A Stampede City Kinsmen Club scholarship for a full-time first-year Mount Royal student, chosen on marks plus community or school involvement.",
+    "metaDetail": "Marks plus involvement.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Mount Royal University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2031,
+    "title": "Royal Canadian Legion Alberta-NWT Command Bursary (Mount Royal)",
+    "amount": "$1,000",
+    "deadline": "2027-03-01",
+    "deadlineEstimated": true,
+    "openDate": "2026-11-01",
+    "audience": "Mount Royal students who serve or served, or whose parent, grandparent or great-grandparent did",
+    "url": "https://mtroyal.academicworks.ca/opportunities/17044",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through the Mount Royal awards application in MyMRU, which runs November 1 to March 1. Students entering first year can apply, and so can returning students in any program.",
+    "active": true,
+    "description": "The Alberta-NWT Command of the Royal Canadian Legion funds a $1,000 bursary at Mount Royal for full-time students with financial need who have served or are descended from someone who served.",
+    "metaDetail": "Descendants qualify.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Mount Royal University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2032,
+    "title": "Royal Canadian Legion Branch #52 TVS Bursary in Nursing",
+    "amount": "$1,500",
+    "deadline": "2027-03-01",
+    "deadlineEstimated": true,
+    "openDate": "2026-11-01",
+    "audience": "Bachelor of Nursing students in any year at Mount Royal University with financial need",
+    "url": "https://mtroyal.academicworks.ca/opportunities/17535",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through the Mount Royal awards application in MyMRU, which runs November 1 to March 1. Preference goes to students who served in the regular or reserve forces, including CIC officers and cadets.",
+    "active": true,
+    "description": "Royal Canadian Legion Branch #52 funds a $1,500 bursary for full-time Mount Royal nursing students in years one to four who need the money.",
+    "metaDetail": "Military and cadet service gets preference.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Mount Royal University"
+      ],
+      "fields": [
+        "Nursing"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2033,
+    "title": "Rotary Club of Calgary at Stampede Park Nursing Entrance Bursary",
+    "amount": "$2,500",
+    "deadline": "2027-03-01",
+    "deadlineEstimated": true,
+    "openDate": "2026-11-01",
+    "audience": "Grade 12 students entering first-year Bachelor of Nursing at Mount Royal University with financial need",
+    "url": "https://mtroyal.academicworks.ca/opportunities/18344",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through the Mount Royal awards application in MyMRU, which runs November 1 to March 1. Volunteering and community leadership weigh alongside need.",
+    "active": true,
+    "description": "A $2,500 bursary from the Rotary Club of Calgary at Stampede Park for a full-time student starting the Mount Royal nursing degree.",
+    "metaDetail": "Need plus volunteer leadership.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Mount Royal University"
+      ],
+      "fields": [
+        "Nursing"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer",
+        "Leadership"
+      ]
+    }
+  },
+  {
+    "id": 2034,
+    "title": "Edmonton Rotary Club Foundation Bursary (NAIT)",
+    "amount": "$1,000",
+    "deadline": "2027-02-12",
+    "openDate": null,
+    "audience": "First-year NAIT students in any program with financial need and volunteer work",
+    "url": "https://nait.academicworks.ca/opportunities/12075",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply in the NAIT awards portal once you are enrolled. Selection uses your first-semester marks, so this is a winter application in your first year.",
+    "active": true,
+    "description": "The Edmonton Rotary Club Foundation gives $1,000 to a first-year NAIT student who needs the money and volunteers at NAIT or in the community.",
+    "metaDetail": "Uses first-term marks.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Northern Alberta Institute of Technology"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2035,
+    "title": "Royal Canadian Legion Alberta-NWT Command Bursary (NAIT)",
+    "amount": "$1,000",
+    "deadline": "2027-02-12",
+    "openDate": null,
+    "audience": "Full-time NAIT students in two-year programs with financial need, veterans' families first",
+    "url": "https://nait.academicworks.ca/opportunities/12526",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply in the NAIT awards portal and answer the ex-service question. Priority runs from children of deceased or disabled war veterans, through veterans and their children and grandchildren, to any Canadian living in Alberta or the NWT.",
+    "active": true,
+    "description": "The Alberta-NWT Command of the Royal Canadian Legion gives $1,000 to a NAIT student in a two-year program with satisfactory marks and financial need.",
+    "metaDetail": "Veterans first.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Northern Alberta Institute of Technology"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2036,
+    "title": "Royal Canadian Legion Alberta-NWT Command Bursary (University of Lethbridge)",
+    "amount": "$1,000",
+    "deadline": "2027-06-15",
+    "deadlineEstimated": true,
+    "openDate": null,
+    "audience": "Grade 12 students accepted to the University of Lethbridge who served or descend from someone who did",
+    "url": "https://uleth.academicworks.ca/opportunities/12631",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply on the University of Lethbridge awards portal. New high school applicants must be accepted first. Payment follows full-time enrolment in the fall and winter terms.",
+    "active": true,
+    "description": "A $1,000 Legion bursary at the University of Lethbridge for students with financial need who served in the Canadian Forces or are their children, grandchildren or great-grandchildren.",
+    "metaDetail": "Entering students apply once accepted.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Lethbridge"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2037,
+    "title": "IODE Award in Music (University of Lethbridge)",
+    "amount": "$400 minimum",
+    "deadline": "2027-03-15",
+    "deadlineEstimated": true,
+    "openDate": null,
+    "audience": "Grade 12 musicians entering the University of Lethbridge who audition for studio courses",
+    "url": "https://uleth.academicworks.ca/opportunities/13515",
+    "category": "Arts",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "The Faculty of Fine Arts nominates the winner from the studio audition, so the audition is your application. Payment follows full-time enrolment in the fall and winter terms.",
+    "active": true,
+    "applyViaGuidance": true,
+    "applyRoute": "nominated",
+    "description": "An IODE award for a new high school applicant who shows outstanding promise as a performer in the University of Lethbridge studio audition.",
+    "metaDetail": "Decided by your studio audition.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Lethbridge"
+      ],
+      "fields": [
+        "Music"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "music"
+      ]
+    }
+  },
+  {
+    "id": 2038,
+    "title": "Edmonton Elks Award (Golden Bears Football)",
+    "amount": "Varies",
+    "deadline": "2027-09-01",
+    "deadlineEstimated": true,
+    "openDate": null,
+    "audience": "University of Alberta students in any year who play for the Golden Bears football team",
+    "url": "https://alberta.academicworks.ca/opportunities/21679",
+    "category": "Sports",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply on the University of Alberta awards portal once you are on the roster. Graduate students on the team can apply too.",
+    "active": true,
+    "description": "The Edmonton Elks fund an award for Golden Bears football players with satisfactory marks, chosen on academic standing and excellence in football.",
+    "metaDetail": "For Golden Bears football players.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "sports"
+      ]
+    }
+  },
+  {
+    "id": 2039,
+    "title": "Spruce Grove Legion Poppy Fund Bursary",
+    "amount": "Varies",
+    "deadline": null,
+    "openDate": null,
+    "audience": "Students in financial need who are children, grandchildren or great-grandchildren of veterans",
+    "url": "https://www.sprucegrovelegion.com/bursary-information/",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "Spruce Grove",
+    "notes": "Send proof that you are registered, not just conditionally accepted, plus your program and the veteran's name, rank, service number and relationship to you. Drop off, mail or email those details, but bring or mail the Poppy Fund means test rather than emailing it. The branch is at 100-215 McLeod Avenue, Spruce Grove. Requests go to general meetings on the fourth Wednesday of January, March, May, June, September and November, then to Alberta-NWT Command.",
+    "active": true,
+    "applyViaGuidance": true,
+    "applyRoute": "sponsor",
+    "description": "The Royal Canadian Legion branch in Spruce Grove pays educational bursaries from its Poppy Fund to descendants of veterans who need help with school costs. You can apply again each year you are studying.",
+    "metaDetail": "Apply again each year you study.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2040,
+    "title": "Peter Denney Rotary Award (Olds College)",
+    "amount": "$1,000",
+    "deadline": "2027-01-31",
+    "openDate": null,
+    "audience": "Full-time Olds College students in any program with financial need and community leadership",
+    "url": "https://oldscollege.academicworks.ca/opportunities/7812",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply in the Olds College awards portal once enrolled. Preference goes to students who went to high school in Chinook's Edge School Division.",
+    "active": true,
+    "description": "A Rotary award of $1,000 for an Olds College student who needs the money and has led through community involvement.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Olds College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer",
+        "Leadership"
+      ]
+    }
+  },
+  {
+    "id": 2041,
+    "title": "Royal Canadian Legion Alberta-NWT Command Award (Olds College)",
+    "amount": "$1,000",
+    "deadline": "2026-10-31",
+    "openDate": null,
+    "audience": "Olds College students in any year who served, or whose family member served, in the forces, RCMP, police or Coast Guard",
+    "url": "https://oldscollege.academicworks.ca/opportunities/7883",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply in the Olds College awards portal and attach proof of service with the rank, unit and your relationship to the person who served.",
+    "active": true,
+    "description": "The Alberta-NWT Command of the Royal Canadian Legion gives up to two $1,000 awards to full-time Olds College students with financial need who served or are dependents of someone who did.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Olds College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2042,
+    "title": "Baron Tweedsmuir Chapter IODE Award (Olds College)",
+    "amount": "$500",
+    "deadline": "2027-01-31",
+    "openDate": null,
+    "audience": "First-year full-time Olds College students in any program with financial need",
+    "url": "https://oldscollege.academicworks.ca/opportunities/7878",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply in the Olds College awards portal during your first year. Need is the only stated test.",
+    "active": true,
+    "description": "The Baron Tweedsmuir Chapter of the IODE gives $500 to a first-year Olds College student who needs help with costs.",
+    "metaDetail": "Need is the only test.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Olds College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2043,
+    "title": "Kinsmen Club of Lloydminster Bursary (Lakeland College)",
+    "amount": "$500 minimum",
+    "deadline": "2026-11-15",
+    "openDate": null,
+    "audience": "Lloydminster-area residents in first or second year at Lakeland College's Lloydminster campus with financial need",
+    "url": "https://lakelandcollege.academicworks.ca/opportunities/3708",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply in the Lakeland College awards portal. You need satisfactory marks and non-academic involvement that helps the community or the college. Mature students get preference.",
+    "active": true,
+    "description": "The Kinsmen Club of Lloydminster gives at least $500 to a full-time Lakeland College student from Lloydminster or nearby who needs the money.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Lakeland College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2044,
+    "title": "Royal Canadian Legion Lloydminster Branch #39 Leadership Award",
+    "amount": "$500",
+    "deadline": "2027-01-25",
+    "openDate": null,
+    "audience": "Full-time Lakeland College students at the Lloydminster campus in any program",
+    "url": "https://lakelandcollege.academicworks.ca/opportunities/3635",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply in the Lakeland College awards portal during the year. First-year students can apply in January.",
+    "active": true,
+    "description": "Royal Canadian Legion Branch #39 gives $500 to a Lakeland College student in Lloydminster for strong marks and leadership.",
+    "metaDetail": "Rewards marks and leadership.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Lakeland College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership"
+      ]
+    }
+  },
+  {
+    "id": 2045,
+    "title": "Order of the Eastern Star Edmonton Chapter #19 Bursary (NAIT)",
+    "amount": "$1,000",
+    "deadline": "2027-06-07",
+    "openDate": null,
+    "audience": "Power Systems Electrician and Powerline Technician apprentices at NAIT with financial need",
+    "url": "https://nait.academicworks.ca/opportunities/12123",
+    "category": "Trades",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply in the NAIT awards portal for the intake you attend. You are only considered for that intake.",
+    "active": true,
+    "description": "Edmonton Chapter #19 of the Order of the Eastern Star gives $1,000 to a NAIT apprentice in the power systems or powerline trades with satisfactory marks and financial need.",
+    "metaDetail": "Your intake only.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Northern Alberta Institute of Technology"
+      ],
+      "fields": [
+        "Power Systems Electrician",
+        "Powerline Technician"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": true,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2046,
+    "title": "Rotary Club of Edmonton Medical Device Reprocessing Bursary (NorQuest)",
+    "amount": "$1,000",
+    "deadline": "2026-11-01",
+    "openDate": null,
+    "audience": "Full-time NorQuest Medical Device Reprocessing Technician students with a 75% average and financial need",
+    "url": "https://norquest.academicworks.ca/opportunities/5525",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply in the NorQuest awards portal with a personal letter on your education and career goals. Winners are invited to a Rotary Club of Edmonton luncheon.",
+    "active": true,
+    "description": "The Edmonton Rotary Club Foundation gives $1,000 to a NorQuest student in the Medical Device Reprocessing Technician program who needs the money.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "NorQuest College"
+      ],
+      "fields": [
+        "Medical Device Reprocessing"
+      ],
+      "minAverage": 75,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2047,
+    "title": "Rotary Club of Edmonton Settlement Studies Bursary (NorQuest)",
+    "amount": "$1,000",
+    "deadline": "2027-03-01",
+    "openDate": null,
+    "audience": "Full-time NorQuest Settlement Studies students with a 75% average and financial need",
+    "url": "https://norquest.academicworks.ca/opportunities/5532",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply in the NorQuest awards portal with a personal letter on your education and career goals. Winners are invited to a Rotary Club of Edmonton luncheon.",
+    "active": true,
+    "description": "The Edmonton Rotary Club Foundation gives $1,000 to a NorQuest Settlement Studies student who needs the money.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "NorQuest College"
+      ],
+      "fields": [
+        "Settlement Studies"
+      ],
+      "minAverage": 75,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2048,
+    "title": "Edmonton Chinese Lions Club Legacy Award (NorQuest)",
+    "amount": "$1,200",
+    "deadline": "2027-03-01",
+    "openDate": null,
+    "audience": "First-year full-time NorQuest Social Work students with a 75% average",
+    "url": "https://norquest.academicworks.ca/opportunities/5746",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply in the NorQuest awards portal with a personal letter on your education and career goals. Single-parent households get preference.",
+    "active": true,
+    "description": "The Edmonton Chinese Lions Club gives $1,200 to a first-year student in the NorQuest Social Work program.",
+    "metaDetail": "Single parents first.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "NorQuest College"
+      ],
+      "fields": [
+        "Social Work"
+      ],
+      "minAverage": 75,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2049,
+    "title": "Donna and Fred Vanouck Nursing Education Fund",
+    "amount": "Up to $2,100",
+    "deadline": "2027-06-15",
+    "deadlineEstimated": true,
+    "openDate": null,
+    "audience": "Nursing students in any year who graduated from a high school in Camrose, Flagstaff or Beaver County",
+    "url": "https://brcf.ca/grants-scholarships/donna-and-fred-vanouck-nursing-education-fund/",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "Camrose",
+    "notes": "Apply to the Battle River Community Foundation once you are enrolled full-time. LPN, RN, BScN, psychiatric nursing and advanced nursing programs anywhere in Canada all count.",
+    "active": false,
+    "description": "The Battle River Community Foundation gives up to $2,100 a year to a nursing student who graduated from a public or Catholic high school in Camrose, Flagstaff or Beaver County.",
+    "metaDetail": "Any Canadian nursing program.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Nursing"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
   }
 ]
