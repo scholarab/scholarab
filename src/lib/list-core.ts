@@ -334,10 +334,13 @@ export function directoryCountLine(shown: number, total: number, noun: string, o
 
 // A row's amount cell. "Varies" is a missing number, not a figure: set in the
 // big green display face it was the loudest thing on a third of the rows. A
-// range ("$2,000 to $7,000") steps down a size so it holds one line.
+// range ("$2,000 to $7,000") steps down a size so it holds one line. An award
+// paid in kind ("Full tuition", "Toolbox") has no figure but does say what you
+// get, so it shows its words instead of reading as a missing amount.
 export function amountCell(amount: string | null | undefined): { text: string; cls: string } {
   const a = (amount ?? '').trim();
-  if (!/\$\s?\d/.test(a)) return { text: 'Amount varies', cls: 'sabl-amount is-varies' };
+  if (!a || /^(amount )?varies\b/i.test(a)) return { text: 'Amount varies', cls: 'sabl-amount is-varies' };
+  if (!/\$\s?\d/.test(a)) return { text: a, cls: 'sabl-amount is-words' };
   return { text: a, cls: a.length > 10 ? 'sabl-amount is-long' : 'sabl-amount' };
 }
 

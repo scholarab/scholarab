@@ -3,7 +3,7 @@ import {
   getScholarshipStatus, getProgramStatus, programMatchesGrade,
   filterSortScholarships, filterSortPrograms, scholarshipWhen, programWhen,
   whenTier, URGENT_DAYS, SOON_DAYS, groupRuns, directoryCountLine, runMoney,
-  scholarshipGroupKey, programGroupKey, SCHOLARSHIP_GROUP_LABELS, PROGRAM_GROUP_LABELS, isAfterHighSchool, showingLine,
+  scholarshipGroupKey, programGroupKey, SCHOLARSHIP_GROUP_LABELS, PROGRAM_GROUP_LABELS, isAfterHighSchool, showingLine, amountCell,
 } from './list-core'
 import type { ScholarshipWithMeta, ProgramWithMeta, ScholarshipFilterState, ProgramFilterState } from './list-core'
 import { SCHOLARSHIP_FACETS } from './facets'
@@ -688,3 +688,19 @@ describe('runMoney', () => {
     expect(runMoney('active', [{ _amount: 0 }, {}])).toBe('');
   });
 });
+
+describe('amountCell', () => {
+  it('shows a dollar figure in the display face', () => {
+    expect(amountCell('$2,500')).toEqual({ text: '$2,500', cls: 'sabl-amount' })
+    expect(amountCell('$1,000 per year, up to $4,000').cls).toBe('sabl-amount is-long')
+  })
+  it('treats Varies and a blank as a missing figure', () => {
+    for (const a of ['Varies', 'Amount varies', 'Varies, many awards', '', null, undefined]) {
+      expect(amountCell(a)).toEqual({ text: 'Amount varies', cls: 'sabl-amount is-varies' })
+    }
+  })
+  it('shows an award paid in kind in its own words', () => {
+    expect(amountCell('Full tuition')).toEqual({ text: 'Full tuition', cls: 'sabl-amount is-words' })
+    expect(amountCell(' Toolbox ').text).toBe('Toolbox')
+  })
+})

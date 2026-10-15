@@ -1035,6 +1035,9 @@ html.js .sabl-group-toggle { display: inline-flex; }
 /* "Amount varies" is the absence of a figure, so it is set as a note, not in
    the display face the real amounts use. */
 .sabl-amount.is-varies { font: 500 14px/1.3 var(--font-body); color: var(--ink-faint); }
+/* An award paid in kind ("Full tuition") is a value, so it keeps the ink of a
+   figure, but its words run to a sentence, so they take the note's size. */
+.sabl-amount.is-words { font: 600 14px/1.3 var(--font-body); white-space: normal; text-wrap: balance; }
 /* Wraps inside its 150px column: nowrap ran four amounts ("$1,000 per year,
    up to $4,000") over Save at 1280 (critique 2026-10-02). */
 .sabl-amount.is-long { font-size: 20px; line-height: 1.2; white-space: normal; text-wrap: balance; }
@@ -1382,7 +1385,7 @@ html:not(.js) .sabl-tool[data-dir-search-btn], html:not(.js) .sabl-tool[data-dir
 }
 :is(#sab-scholarships, #sab-programs) .sabl-card > .sabl-amount { font-size: 28px; line-height: 1; }
 :is(#sab-scholarships, #sab-programs) .sabl-card > .sabl-amount.is-long { font-size: 18px; line-height: 1.15; }
-:is(#sab-scholarships, #sab-programs) .sabl-card > .sabl-amount.is-varies { font-size: 14px; }
+:is(#sab-scholarships, #sab-programs) .sabl-card > .sabl-amount:is(.is-varies, .is-words) { font-size: 14px; line-height: 1.3; }
 :is(#sab-scholarships, #sab-programs) .sabl-card > .sabl-row-when {
   grid-area: when; align-self: end; justify-self: end; align-items: flex-end; text-align: right;
   margin-top: 16px; padding: 0;
