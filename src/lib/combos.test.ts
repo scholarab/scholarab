@@ -163,6 +163,17 @@ describe('combos on /match, against the published catalogue', () => {
   const index = comboIndex(items, today);
   const open = items.filter(s => !(s as { concluded?: boolean }).concluded && (!s.deadline || new Date(s.deadline + 'T00:00:00') >= today));
 
+  // A hand-written school combo and the generated one for the same school
+  // used to share an anchor, so a page showed the school twice (2026-10-14).
+  it('shows each combo once per page and once per quiz town', () => {
+    for (const { city } of CITY_COMBOS) {
+      const slugs = combosForCity(city, items, today).map(b => b.combo.slug);
+      expect(slugs.filter((s, i) => slugs.indexOf(s) !== i), city).toEqual([]);
+    }
+    const keys = index.map(e => `${e.quizCity}|${e.page}|${e.slug}`);
+    expect(keys.filter((k, i) => keys.indexOf(k) !== i)).toEqual([]);
+  });
+
   it('names only quiz answers a student can actually give', () => {
     const cities = new Set(QUIZ_QUESTIONS.find(q => q.key === 'city')!.opts.map(o => o.value));
     const institutions = new Set(QUIZ_QUESTIONS.find(q => q.key === 'institution')!.opts.map(o => o.value));

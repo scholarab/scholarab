@@ -50,7 +50,7 @@ export const AUDIENCE_SCHOOLS: { page: string; quizCity: string; name: string; p
   { page: 'edmonton', quizCity: 'Spruce Grove', name: 'Memorial Composite High School', pattern: /\bMemorial Composite\b/ },
   { page: 'edmonton', quizCity: 'Spruce Grove', name: 'Spruce Grove Composite High School', pattern: /\bSpruce Grove Composite\b/ },
   { page: 'edmonton', quizCity: 'Fort Saskatchewan', name: 'Fort Saskatchewan High School', pattern: /\bFort High\b|\bFort Saskatchewan High School\b/ },
-  { page: 'northern-alberta', quizCity: 'Lloydminster', name: 'Lloydminster Comprehensive (LCHS)', pattern: /\bLCHS\b/ },
+  { page: 'northern-alberta', quizCity: 'Lloydminster', name: 'Lloydminster Comprehensive High School', pattern: /\bLCHS\b/ },
   { page: 'northern-alberta', quizCity: 'Cold Lake', name: 'Cold Lake High School', pattern: /\bCold Lake High\b/ },
   { page: 'calgary', quizCity: 'Chestermere', name: 'Chestermere High School', pattern: /\bChestermere High\b/ },
 ];

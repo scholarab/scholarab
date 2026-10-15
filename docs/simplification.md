@@ -2496,3 +2496,14 @@ Outcome: a student at Forestburg, Bawlf or Daysland School who answers "Other Al
 - Measured with the matcher on the JSON (local): a Forestburg School student on "Other Alberta" went from 0 to 9 of the 11 sampled awards, a Daysland School student 0 to 9, and a Camrose Composite student 8 to 6 (the two Rosalind-area awards left). The Central Alberta combos for Forestburg, Bawlf and Daysland School are unchanged in membership.
 - Removed: nothing. No new field or rule, only data.
 - Add-back fraction: 0 of 0.
+
+## 2026-10-15: one combo per school, and combo page copy without colons or semicolons
+
+Outcome: a student sees their school once on a combo page and once in /match results, with every award either copy held. A Lloydminster or St. Albert student who picks their school in the quiz no longer loses that school's awards to a second spelling of its name.
+
+- Cause: the hand-written combos for schools named in audience lines (AUDIENCE_SCHOOLS) and the generated school combos shared anchors. The page dedupe only caught identical award sets, and the generated copy always held fewer awards, so Paul Kane, Bellerose and Memorial Composite showed twice on the Edmonton area page and Cold Lake High twice on Northern Alberta, each also twice in the /match combo index. LCHS was a third case under a second anchor, because the hand combo used the name "Lloydminster Comprehensive (LCHS)" while the data says "Lloydminster Comprehensive High School".
+- Removed: the generated combo for any school a hand combo already covers on that page. Every award it held is in the hand combo, checked award by award. Renamed the LCHS entry to the data's name, which also drops a duplicate quiz option (picking the old one hid 25 awards). Seven listings used a second spelling of a school (418 to 422 "Bellerose High School", 355 and 897 "Foothills Composite High School") and now use the name every other listing uses, which merges two more duplicate quiz options.
+- Copy: the Medicine Hat, Edmonton area, Calgary area, Red Deer, Lethbridge, Grande Prairie and Fort McMurray combo descriptions and intros lost their colons and semicolons, rewritten as sentences, descriptions still 130 to 155 characters.
+- Guard: a test fails if any combo page or any quiz town in the combo index lists the same anchor twice. It failed on the old code.
+- Measured on the JSON (local): duplicate school combos 5 to 0 (four shared anchors plus LCHS), duplicate combo index keys 4 to 0.
+- Add-back fraction: 0 of 1.

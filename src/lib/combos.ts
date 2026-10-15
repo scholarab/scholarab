@@ -111,7 +111,7 @@ export const CITY_COMBOS: CityCombos[] = [
     h1: 'Medicine Hat scholarship combos',
     title: 'Medicine Hat Scholarship Combos',
     description:
-      "Medicine Hat scholarships grouped by who can apply: Medicine Hat Catholic school graduates and Redcliff students. Apply to the whole set at once.",
+      "Medicine Hat scholarships grouped by who can apply, so Medicine Hat Catholic school graduates and Redcliff students can apply to a whole set at once.",
     intro:
       'Each combo is a set of local awards open to the same students, so if its first line describes you, you can apply to every award in it. The conditions on each award still apply.',
   },
@@ -120,54 +120,54 @@ export const CITY_COMBOS: CityCombos[] = [
     h1: 'Edmonton area scholarship combos',
     title: 'Edmonton Area Scholarship Combos',
     description:
-      'Edmonton area scholarships grouped by who can apply: Edmonton Public and Catholic students, and the award lists of Paul Kane, Fort High and more.',
+      'Edmonton area scholarships grouped by who can apply, for Edmonton Public and Catholic students and the award lists of Paul Kane, Fort High and more.',
     intro:
-      "Edmonton's awards split by school board, and the suburbs' by high school. If the first line of a combo describes you, every award in it is open to you; the conditions on each award still apply.",
+      "Edmonton's awards split by school board, and the suburbs' by high school. If the first line of a combo describes you, every award in it is open to you. The conditions on each award still apply.",
   },
   {
     city: 'calgary',
     h1: 'Calgary area scholarship combos',
     title: 'Calgary Area Scholarship Combos',
     description:
-      'Calgary area scholarships grouped by who can apply: CBE and Calgary Catholic students, and the award lists of Foothills Composite, Cochrane High and more.',
+      'Calgary area scholarships grouped by who can apply, for CBE and Calgary Catholic students and award lists of Foothills Composite, Cochrane High and more.',
     intro:
-      'Most awards here are open to one school board or one high school, so the combo you are in says more than the whole area list does. If the first line of a combo describes you, every award in it is open to you; the conditions on each award still apply.',
+      'Most awards here are open to one school board or one high school, so the combo you are in says more than the whole area list does. If the first line of a combo describes you, every award in it is open to you. The conditions on each award still apply.',
   },
   {
     city: 'red-deer',
     h1: 'Red Deer scholarship combos',
     title: 'Red Deer Scholarship Combos',
     description:
-      "Red Deer scholarships grouped by who can apply: graduates of Red Deer Catholic Regional Schools, whose division runs a set of its own awards.",
+      "Red Deer scholarships grouped by who can apply. Graduates of Red Deer Catholic Regional Schools get a set of awards that their own division runs.",
     intro:
-      "The Catholic division runs its own set of awards for its graduates. If the first line of a combo describes you, every award in it is open to you; the conditions on each award still apply.",
+      "The Catholic division runs its own set of awards for its graduates. If the first line of a combo describes you, every award in it is open to you. The conditions on each award still apply.",
   },
   {
     city: 'lethbridge',
     h1: 'Lethbridge scholarship combos',
     title: 'Lethbridge Scholarship Combos',
     description:
-      "Lethbridge scholarships grouped by who can apply: the University of Lethbridge's awards for students starting there right after Grade 12.",
+      "Lethbridge scholarships grouped by who can apply, with the University of Lethbridge awards for students who start there right after Grade 12.",
     intro:
-      'The University of Lethbridge ties several of its awards to students arriving straight from high school. If the first line of a combo describes you, every award in it is open to you; the conditions on each award still apply.',
+      'The University of Lethbridge ties several of its awards to students arriving straight from high school. If the first line of a combo describes you, every award in it is open to you. The conditions on each award still apply.',
   },
   {
     city: 'grande-prairie',
     h1: 'Grande Prairie scholarship combos',
     title: 'Grande Prairie Scholarship Combos',
     description:
-      "Grande Prairie scholarships grouped by who can apply: one Northwestern Alberta Foundation form for the Peace Country, and Grande Prairie Public grads.",
+      "Grande Prairie scholarships grouped by who can apply, from one Northwestern Alberta Foundation form for the Peace Country to Grande Prairie Public grads.",
     intro:
-      "One Northwestern Alberta Foundation form reaches dozens of Peace Country funds, and the public division runs its own set. If the first line of a combo describes you, every award in it is open to you; the conditions on each award still apply.",
+      "One Northwestern Alberta Foundation form reaches dozens of Peace Country funds, and the public division runs its own set. If the first line of a combo describes you, every award in it is open to you. The conditions on each award still apply.",
   },
   {
     city: 'fort-mcmurray',
     h1: 'Fort McMurray scholarship combos',
     title: 'Fort McMurray Scholarship Combos',
     description:
-      "Fort McMurray scholarships grouped by who can apply: Keyano College's awards for local students starting there right after Grade 12, in one set.",
+      "Fort McMurray scholarships grouped by who can apply, with the Keyano College awards for local students who start there right after Grade 12.",
     intro:
-      'Keyano College ties several of its awards to local students arriving straight from high school. If the first line of a combo describes you, every award in it is open to you; the conditions on each award still apply.',
+      'Keyano College ties several of its awards to local students arriving straight from high school. If the first line of a combo describes you, every award in it is open to you. The conditions on each award still apply.',
   },
   {
     city: 'northern-alberta',
@@ -314,7 +314,10 @@ function generatedCombos(city: string, pool: ComboTarget[]): Combo[] {
   // the set is awards several schools share, and naming it after whichever
   // school sorted first told the others' students it was not for them.
   const ownAward = (school: string) => pool.some(s => s.eligibility?.specificSchools?.length === 1 && s.eligibility.specificSchools[0] === school);
-  const schools: Combo[] = count(s => s.eligibility?.specificSchools ?? []).filter(ownAward).map(school => ({
+  // A school in AUDIENCE_SCHOOLS already has its hand-written combo, which
+  // also catches the awards whose audience line names the school.
+  const handled = new Set(AUDIENCE_SCHOOLS.filter(a => a.page === city).map(a => a.name));
+  const schools: Combo[] = count(s => s.eligibility?.specificSchools ?? []).filter(s => ownAward(s) && !handled.has(s)).map(school => ({
     slug: `school-${slugify(school)}`, city, name: school, who: `you go to ${school}`,
     includes: s => has(s.eligibility?.specificSchools, school),
     addOn: s => narrower(s) || college(s),
