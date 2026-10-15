@@ -19,6 +19,16 @@ export type AlertKind = AlertMilestone | 'open' | 'posted'
 export type ReminderState = 'deadline' | 'open' | 'posted' | 'too-soon' | null
 export type ItemType = 'scholarship' | 'program'
 
+/** The most listings one sign-up can carry (My combo, the quiz results). The
+ * confirm page lists this many by name, so a whole set is always shown before
+ * one click switches it on. */
+export const MAX_REMINDER_SET = 50
+
+/** Whether a listing in this state takes a sign-up at all. */
+export function canRemind(state: ReminderState): state is 'deadline' | 'open' | 'posted' {
+  return state === 'deadline' || state === 'open' || state === 'posted'
+}
+
 /** Page, browser and API use the existing status rules with an explicit date. */
 export function reminderState(item: StatusInput, type: ItemType, today: Date): ReminderState {
   if (item.concluded || (type === 'program' && item.active === false)) return null

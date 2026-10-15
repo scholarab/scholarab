@@ -8,8 +8,8 @@ import { dirname, join } from 'path'
 import { fileURLToPath } from 'url'
 import { neon } from '@neondatabase/serverless'
 import { generateSlug } from '../src/lib/utils.ts'
-import { ALERT_MILESTONES, parseCadence, remindersDue, inReminderWindow, hasConfirmedDeadline, type ReminderCopy } from '../src/lib/alerts.ts'
-import { CONFIRM_SUBJECT, confirmEmailHtml } from '../src/lib/confirm-email.ts'
+import { ALERT_MILESTONES, MAX_REMINDER_SET, parseCadence, remindersDue, inReminderWindow, hasConfirmedDeadline, type DueReminder, type ReminderCopy } from '../src/lib/alerts.ts'
+import { confirmEmailHtml, confirmSubject } from '../src/lib/confirm-email.ts'
 import { listUnsubscribeHeaders, senderIdentityHtml } from '../src/lib/email-identity.ts'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
@@ -55,14 +55,15 @@ if (TEST_SUBSCRIPTION_ID !== null && !Number.isSafeInteger(TEST_SUBSCRIPTION_ID)
 // subscriber's chosen milestones would make them send nothing at all.
 const IGNORE_CADENCE = CATCH_UP || !!process.env.TEST_DAYS || TEST_SUBSCRIPTION_ID !== null
 
-interface SubscriberRow { id:number; email:string; token:string; cadence:string; item_type:string; item_id:number; sent_reminders: { key:string; created_at:string }[] }
+interface SubscriberRow { id:number; email:string; token:string; cadence:string; item_type:string; item_id:number; sent_reminders: { key:string; created_at:string }[]; unsettled: string[] }
 const query = (text:string,params?:unknown[]) => sql.query(text,params)
 
 function escapeHtml(s: string): string {
   return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
 }
 
-function emailHtml(rawLabel: string, rawAmount: string | undefined, copy: ReminderCopy, rawApplyUrl: string, unsubscribeUrl: string): string {
+/** One reminder: what it says, the date, and the button to the listing. */
+function reminderBlock(rawLabel: string, rawAmount: string | undefined, copy: ReminderCopy, rawApplyUrl: string, heading: 'h1' | 'h2'): string {
   const label = escapeHtml(rawLabel)
   const amount = rawAmount ? escapeHtml(rawAmount) : undefined
   // Escaped like the two above it, which it was not. validate-data.ts checks
@@ -70,6 +71,15 @@ function emailHtml(rawLabel: string, rawAmount: string | undefined, copy: Remind
   // quite happily, so an unescaped one here would end the href attribute and
   // let the rest of the value become markup of its own.
   const applyUrl = escapeHtml(rawApplyUrl)
+  return `<p style="margin:0 0 4px;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:#888">${escapeHtml(copy.kicker)}</p>
+    <${heading} style="margin:0 0 8px;font-size:${heading === 'h1' ? 22 : 18}px;font-weight:700;color:#0a0a0f;line-height:1.3">${label}</${heading}>
+    ${amount ? `<p style="margin:0 0 4px;font-size:18px;font-weight:600;color:#0a5632">${amount}</p>` : ''}
+    <p style="margin:0 0 ${copy.caution ? '8' : '24'}px;font-size:14px;color:#666">${escapeHtml(copy.dateLine)}</p>
+    ${copy.caution ? `<p style="margin:0 0 24px;font-size:14px;line-height:1.5;color:#0a0a0f">${escapeHtml(copy.caution)}</p>` : ''}
+    <a href="${applyUrl}" style="display:inline-block;background:#0a5632;color:#fff;padding:12px 28px;border-radius:10px;text-decoration:none;font-weight:600;font-size:15px">${escapeHtml(copy.button)} →</a>`
+}
+
+function emailShell(body: string, unsubscribeUrl: string, preamble: string): string {
   return `<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1"></head>
 <body style="margin:0;padding:0;background:#f4f4f5;font-family:system-ui,-apple-system,sans-serif">
@@ -78,16 +88,11 @@ function emailHtml(rawLabel: string, rawAmount: string | undefined, copy: Remind
     <span style="font-size:20px;font-weight:700;color:#fff">Scholar<span style="color:#4aa873">AB</span></span>
   </div>
   <div style="padding:32px">
-    <p style="margin:0 0 4px;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:#888">${escapeHtml(copy.kicker)}</p>
-    <h1 style="margin:0 0 8px;font-size:22px;font-weight:700;color:#0a0a0f;line-height:1.3">${label}</h1>
-    ${amount ? `<p style="margin:0 0 4px;font-size:18px;font-weight:600;color:#0a5632">${amount}</p>` : ''}
-    <p style="margin:0 0 ${copy.caution ? '8' : '24'}px;font-size:14px;color:#666">${escapeHtml(copy.dateLine)}</p>
-    ${copy.caution ? `<p style="margin:0 0 24px;font-size:14px;line-height:1.5;color:#0a0a0f">${escapeHtml(copy.caution)}</p>` : ''}
-    <a href="${applyUrl}" style="display:inline-block;background:#0a5632;color:#fff;padding:12px 28px;border-radius:10px;text-decoration:none;font-weight:600;font-size:15px">${escapeHtml(copy.button)} →</a>
+    ${body}
   </div>
   <div style="padding:16px 32px 24px;border-top:1px solid #f0f0f0">
     ${senderIdentityHtml({
-      preamble: 'You asked ScholarAB for deadline reminders and confirmed the request by email.',
+      preamble,
       mailingAddress: MAILING_ADDRESS,
       unsubscribeUrl,
       siteUrl: BASE_URL,
@@ -95,6 +100,22 @@ function emailHtml(rawLabel: string, rawAmount: string | undefined, copy: Remind
   </div>
 </div>
 </body></html>`
+}
+
+const PREAMBLE = 'You asked ScholarAB for deadline reminders and confirmed the request by email.'
+
+function emailHtml(rawLabel: string, rawAmount: string | undefined, copy: ReminderCopy, rawApplyUrl: string, unsubscribeUrl: string): string {
+  return emailShell(reminderBlock(rawLabel, rawAmount, copy, rawApplyUrl, 'h1'), unsubscribeUrl, PREAMBLE)
+}
+
+/** Several reminders due the same day for one address, soonest deadline first. */
+function bundleHtml(due: Due[], unsubscribeUrl: string): string {
+  const blocks = due.map(d => `<div style="margin:24px 0 0;padding:24px 0 0;border-top:1px solid #f0f0f0">
+    ${reminderBlock(d.item.label, d.item.amount, d.reminder.copy, d.item.detailUrl, 'h2')}
+    </div>`).join('\n    ')
+  return emailShell(`<p style="margin:0 0 4px;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:#888">${due.length} reminders</p>
+    <h1 style="margin:0;font-size:22px;font-weight:700;color:#0a0a0f;line-height:1.3">Dates you asked us to watch</h1>
+    ${blocks}`, unsubscribeUrl, `${PREAMBLE} Reminders due on the same day come in one email, and Unsubscribe stops all of them.`)
 }
 
 /**
@@ -133,9 +154,12 @@ let errors = 0
  * from the real alerts@ address. Roughly 1,900 messages a day to one inbox,
  * signed by our own domain.
  *
- *   DISTINCT ON (email)  one confirmation per address per run, so the
- *                        amplification factor is 1, which is the number
- *                        double opt-in is supposed to guarantee.
+ *   one per address      one confirmation per address per run, naming every
+ *                        sign-up it is waiting on (up to MAX_REMINDER_SET),
+ *                        so the amplification factor is 1, which is the
+ *                        number double opt-in is supposed to guarantee. A set
+ *                        signed up at once (My combo, the quiz results) is
+ *                        many rows and still one email.
  *   NOT EXISTS           and not even that one if the address already had a
  *                        confirmation in the last day, whoever sent it.
  *   created_at window    a row nobody has confirmed in a week is not waiting
@@ -147,11 +171,13 @@ let errors = 0
 const CONFIRM_SWEEP_COOLDOWN = '24 hours'
 const CONFIRM_SWEEP_MAX_AGE = `${PENDING_CONFIRM_DAYS} days`
 
+const listing = (type: string, id: number) => (type === 'program' ? programs : scholarships).find(i => i.id === id)
+
 async function sendPendingConfirmations(): Promise<void> {
   let pending: { id: number; email: string; token: string; item_type: string; item_id: number; cadence:string }[]
   try {
     pending = await sql`
-      SELECT DISTINCT ON (s.email) s.id, s.email, s.token, s.item_type, s.item_id, s.cadence
+      SELECT s.id, s.email, s.token, s.item_type, s.item_id, s.cadence
       FROM subscribers s
       WHERE s.confirmed_at IS NULL
         AND s.confirm_sent_at IS NULL
@@ -167,32 +193,39 @@ async function sendPendingConfirmations(): Promise<void> {
     console.error('[confirm] cannot read pending confirmations. Is 0010 applied?', e)
     return
   }
-  if (pending.length === 0) return
-  console.log(`Confirmations pending: ${pending.length}`)
-
+  const byEmail = new Map<string, { row: typeof pending[number]; label: string }[]>()
   for (const row of pending) {
-    const list = row.item_type === 'program' ? programs : scholarships
-    const item = list.find(i => i.id === row.item_id)
+    const item = listing(row.item_type, row.item_id)
     // A sign-up for a listing that has since been removed has nothing to
     // confirm. Left alone rather than deleted; that is a curator's call.
     if (!item) continue
-    const label = item.title ?? item.name ?? 'your saved listing'
-    if (/@example\.(com|org|net)$/i.test(row.email)) continue
+    const named = byEmail.get(row.email) ?? []
+    if (named.length < MAX_REMINDER_SET) named.push({ row, label: item.title ?? item.name ?? 'your saved listing' })
+    byEmail.set(row.email, named)
+  }
+  if (byEmail.size === 0) return
+  console.log(`Confirmations pending: ${byEmail.size}`)
+
+  for (const [email, named] of byEmail) {
+    if (/@example\.(com|org|net)$/i.test(email)) continue
+    const first = named[0]!.row
+    const what = named.length === 1 ? `${first.item_type} ${first.item_id}` : `${named.length} listings`
     if (DRY_RUN) {
-      console.log(`  would ask ${row.id} to confirm (${row.item_type} ${row.item_id})`)
+      console.log(`  would ask ${first.id} to confirm (${what})`)
       continue
     }
     try {
-      if (!(await claimRecipient(query,row.email))) continue
-      const confirmUrl = `${BASE_URL}/api/confirm?token=${row.token}`
-      if (!(await sendEmail(row,'confirm',`confirm/${confirmUrl}`,CONFIRM_SUBJECT,
-        confirmEmailHtml(label,confirmUrl,MAILING_ADDRESS,row.cadence),
-        `${BASE_URL}/api/unsubscribe?token=${row.token}`))) continue
-      await sql`UPDATE subscribers SET confirm_sent_at = now() WHERE id = ${row.id}`
-      console.log(`  asked ${row.id} to confirm (${row.item_type} ${row.item_id})`)
+      if (!(await claimRecipient(query,email))) continue
+      const confirmUrl = `${BASE_URL}/api/confirm?token=${first.token}`
+      const labels = named.map(n => n.label)
+      if (!(await sendEmail(first,'confirm',`confirm/${confirmUrl}`,confirmSubject(labels.length),
+        confirmEmailHtml(labels.length === 1 ? labels[0]! : labels,confirmUrl,MAILING_ADDRESS,first.cadence),
+        `${BASE_URL}/api/unsubscribe?token=${first.token}`))) continue
+      await sql`UPDATE subscribers SET confirm_sent_at = now() WHERE id = ANY(${named.map(n => n.row.id)}::int[])`
+      console.log(`  asked ${first.id} to confirm (${what})`)
     } catch (e) {
       errors++
-      console.error(`  confirm failed ${row.id}:`, e)
+      console.error(`  confirm failed ${first.id}:`, e)
     }
   }
 }
@@ -215,7 +248,9 @@ const targetKeys = targets.map(({item})=>`${item.itemType}:${item.id}`)
 const recipients = targetKeys.length ? await sql`
   SELECT s.id,s.email,s.token,s.cadence,s.item_type,s.item_id,
     COALESCE((SELECT json_agg(json_build_object('key',d.key,'created_at',d.created_at))
-      FROM mail_deliveries d WHERE d.subscription_id=s.id AND d.kind='reminder' AND d.state='sent'), '[]') AS sent_reminders
+      FROM mail_deliveries d WHERE d.subscription_id=s.id AND d.kind='reminder' AND d.state='sent'), '[]') AS sent_reminders,
+    COALESCE((SELECT json_agg(d.key)
+      FROM mail_deliveries d WHERE d.subscription_id=s.id AND d.kind='reminder' AND d.state<>'sent'), '[]') AS unsettled
   FROM subscribers s
   WHERE s.confirmed_at IS NOT NULL AND (${TEST_SUBSCRIPTION_ID}::int IS NULL OR s.id = ${TEST_SUBSCRIPTION_ID}) AND (s.item_type || ':' || s.item_id::text) = ANY(${targetKeys}::text[])` as SubscriberRow[] : []
 const byItem = new Map<string,SubscriberRow[]>()
@@ -224,6 +259,11 @@ for (const row of recipients) {
   const key=`${row.item_type}:${row.item_id}`
   const bucket=byItem.get(key) ?? [];bucket.push(row);byItem.set(key,bucket)
 }
+// Everything due for one address in this run, so the reminders of a set that
+// fall on the same day (17 awards in one school's combo share a deadline)
+// arrive as one email instead of one per award.
+interface Due { row: SubscriberRow; item: (typeof allItems)[number]; reminder: DueReminder; identity: string; key: string }
+const dueByEmail = new Map<string, Due[]>()
 for (const {item,due} of targets) {
   for (const row of byItem.get(`${item.itemType}:${item.id}`) ?? []) {
     if (/@example\.(com|org|net)$/i.test(row.email)) continue
@@ -236,22 +276,73 @@ for (const {item,due} of targets) {
       const identity = `reminder/${row.token}/${reminder.identity}`
       const key = await mailKey(identity)
       const previous = row.sent_reminders.find(d => d.key === key)
-      const copy = reminder.copy
-      const subject = `${TEST_SUBSCRIPTION_ID !== null ? '[TEST] ' : ''}${copy.subject}`
-      const unsubscribeUrl = `${BASE_URL}/api/unsubscribe?token=${row.token}`
-      const html = emailHtml(item.label,item.amount,copy,item.detailUrl,unsubscribeUrl)
       // The one-time notice replaces a coinciding milestone on that day.
       if (previous) {
         if (special && albertaDate(new Date(previous.created_at)) === albertaDate(NOW)) break
         continue
       }
-      if (DRY_RUN) {sent++;console.log(`would send ${reminder.kind} to subscription ${row.id}`);if(special) break;continue}
-      try {
-        if(await sendEmail(row,'reminder',identity,subject,html,unsubscribeUrl)) sent++
-      } catch(e) {errors++;console.error(`delivery failed for subscription ${row.id}`,e instanceof Error?e.message:'unknown')}
+      const list = dueByEmail.get(row.email) ?? []
+      list.push({ row, item, reminder, identity, key })
+      dueByEmail.set(row.email, list)
       if (special) break
     }
   }
+}
+
+async function sendOne({ row, item, reminder, identity }: Due) {
+  const copy = reminder.copy
+  const subject = `${TEST_SUBSCRIPTION_ID !== null ? '[TEST] ' : ''}${copy.subject}`
+  const unsubscribeUrl = `${BASE_URL}/api/unsubscribe?token=${row.token}`
+  const html = emailHtml(item.label,item.amount,copy,item.detailUrl,unsubscribeUrl)
+  if (DRY_RUN) {sent++;console.log(`would send ${reminder.kind} to subscription ${row.id}`);return}
+  try {
+    if(await sendEmail(row,'reminder',identity,subject,html,unsubscribeUrl)) sent++
+  } catch(e) {errors++;console.error(`delivery failed for subscription ${row.id}`,e instanceof Error?e.message:'unknown')}
+}
+
+const deadlineOrder = (item: { deadline?: string }) => /^\d{4}-\d{2}-\d{2}$/.test(item.deadline ?? '') ? item.deadline! : '9999-12-31'
+
+/**
+ * Two or more reminders for one address, as one email.
+ *
+ * The bundle has its own delivery key, made from its reminders' keys, and is
+ * filed under the reminder with the latest deadline, the subscription that
+ * stays longest. Once that delivery row exists, each reminder in it is marked
+ * sent on its own subscription, so no later run sends it again, alone or in
+ * another bundle; only the retry sweep resends the bundle, byte for byte.
+ *
+ * Unsubscribe at the foot of a list reads as "stop these emails", so the
+ * footer link and the one-click header stop every reminder for the address.
+ * The link carries the tokens of the three latest deadlines, so it still
+ * works after one of them is stopped on its own.
+ */
+async function sendBundle(due: Due[]) {
+  due.sort((a, b) => deadlineOrder(a.item).localeCompare(deadlineOrder(b.item)) || a.item.label.localeCompare(b.item.label))
+  const ids = due.map(d => d.row.id)
+  if (DRY_RUN) {sent++;console.log(`would send ${due.length} reminders in one email to subscriptions ${ids.join(',')}`);return}
+  const anchors = due.slice(-3).reverse().map(d => d.row)
+  const unsubscribeUrl = `${BASE_URL}/api/unsubscribe?scope=all${anchors.map(r => `&token=${r.token}`).join('')}`
+  const subject = `${due[0]!.reminder.copy.subject}, plus ${due.length - 1} more`
+  const identity = `bundle/${due.map(d => d.key).sort().join(',')}`
+  try {
+    if(await sendEmail(anchors[0]!,'reminder',identity,subject,bundleHtml(due,unsubscribeUrl),unsubscribeUrl)) sent++
+  } catch(e) {errors++;console.error(`delivery failed for subscriptions ${ids.join(',')}`,e instanceof Error?e.message:'unknown')}
+  try {
+    await sql`INSERT INTO mail_deliveries (key,subscription_id,kind,state)
+      SELECT t.key, t.id, 'reminder', 'sent' FROM unnest(${due.map(d => d.key)}::text[], ${ids}::int[]) AS t(key, id)
+      WHERE EXISTS (SELECT 1 FROM mail_deliveries WHERE key = ${await mailKey(identity)})
+        AND EXISTS (SELECT 1 FROM subscribers WHERE id = t.id)
+      ON CONFLICT (key) DO NOTHING`
+  } catch(e) {errors++;console.error(`could not mark the reminders bundled for subscriptions ${ids.join(',')}`,e instanceof Error?e.message:'unknown')}
+}
+
+for (const due of dueByEmail.values()) {
+  // A reminder an earlier run could not settle is retried alone, with the
+  // bytes it was first sent with; only fresh ones are bundled.
+  const fresh = due.filter(d => !d.row.unsettled.includes(d.key))
+  if (fresh.length < 2) { for (const d of due) await sendOne(d); continue }
+  for (const d of due) if (!fresh.includes(d)) await sendOne(d)
+  await sendBundle(fresh)
 }
 // Retry unsettled payloads within the provider's deduplication window, even if
 // the calendar milestone has passed. Unsubscribe cascades delete the payload.

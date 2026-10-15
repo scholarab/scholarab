@@ -7,6 +7,7 @@ import { eq, and, or, gt, inArray, isNull, sql } from 'drizzle-orm'
 import { alias } from 'drizzle-orm/pg-core'
 import catalogue from '../../data/runtime-catalogue.json'
 import { PENDING_CONFIRM_DAYS } from '../../lib/mail-delivery'
+import { MAX_REMINDER_SET } from '../../lib/alerts'
 import { reminderPage as page, reminderBackLink as backLink, reminderError, escapeAttr } from '../../lib/reminder-page'
 
 // The confirm half of double opt-in. Two steps, for the same reason
@@ -30,7 +31,12 @@ import { reminderPage as page, reminderBackLink as backLink, reminderError, esca
 // address and one click turns on exactly the ones it listed. Listing them is
 // what keeps it consent: a sign-up someone else typed this address into is
 // shown by name before anything is switched on.
-const MAX_LISTED = 25
+//
+// A set signed up at once (My combo, the quiz results) is one confirmation
+// for up to MAX_REMINDER_SET rows, so the page lists that many, and the rows
+// that email named come straight after the emailed one: they share its
+// created_at, being one insert. Older waiting sign-ups fill what is left.
+const MAX_LISTED = MAX_REMINDER_SET
 const recent = () => gt(subscribers.createdAt, sql`now() - make_interval(days => ${PENDING_CONFIRM_DAYS})`)
 
 function listingName(itemType: string, itemId: number): string | null {
@@ -51,7 +57,7 @@ async function waiting(token: string): Promise<{ id: number; name: string; own: 
     .from(subscribers)
     .innerJoin(mine, eq(mine.email, subscribers.email))
     .where(and(eq(mine.token, token), isNull(subscribers.confirmedAt), or(own, recent())))
-    .orderBy(sql`${own} desc`, subscribers.createdAt, subscribers.id)
+    .orderBy(sql`${own} desc`, sql`${subscribers.createdAt} = ${mine.createdAt} desc`, subscribers.createdAt, subscribers.id)
     .limit(MAX_LISTED + 1)
   return rows.flatMap(r => {
     const name = listingName(r.itemType, r.itemId)

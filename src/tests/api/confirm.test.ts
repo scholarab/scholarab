@@ -11,6 +11,8 @@ vi.mock('../../data/runtime-catalogue.json', () => ({ default: {
     { id: 1, title: 'Example award' },
     { id: 2, title: 'Second award' },
     { id: 3, title: 'Third <award>' },
+    // A combo's worth, for a set signed up at once.
+    ...Array.from({ length: 50 }, (_, n) => ({ id: 100 + n, title: `Set award ${n}` })),
   ],
   programs: [{ id: 1, name: 'Example program' }],
 } }))
@@ -218,5 +220,46 @@ describe('POST /api/confirm', () => {
     expect(res.headers.get('Content-Type')).toContain('text/html')
     expect(await res.text()).toContain('Open the full link in your ScholarAB email')
     expect(await confirmedTokens()).toEqual([])
+  })
+})
+
+describe('a set signed up at once', () => {
+  // /api/alert writes a set as one insert, so its rows share one created_at.
+  const addSet = (size: number) => pg.query(
+    `insert into subscribers (email, item_type, item_id, token, created_at)
+     select 'student@example.org', 'scholarship', 100 + n, 'set' || n, now() - interval '1 minute'
+     from generate_series(0, $1::int - 1) n`, [size])
+
+  it('lists every row its email named straight after the emailed one, ahead of older sign-ups', async () => {
+    await add({ itemId: 2, token: 'old1', age: '2 days' }, { itemId: 3, token: 'old2', age: '3 days' })
+    await addSet(50)
+    const html = await (await get('http://localhost/api/confirm?token=set0')).text()
+    const listed = [...html.matchAll(/<li>([^<]*)<\/li>/g)].map(m => m[1])
+    expect(listed.slice(0, 50)).toEqual(Array.from({ length: 50 }, (_, n) => `Set award ${n}`))
+    // The emailed row plus 50 more, so the oldest waiting one fills the last place.
+    expect(listed).toHaveLength(51)
+    expect(listed[50]).toBe('Third &lt;award&gt;')
+    expect(html).toContain('Yes, remind me about all 51')
+  })
+
+  it('turns the whole set on with one click', async () => {
+    await add({ itemId: 2, token: 'old1', age: '2 days' }, { itemId: 3, token: 'old2', age: '3 days' })
+    await addSet(50)
+    await submitPage('set0')
+    const on = await confirmedTokens()
+    expect(on).toHaveLength(51)
+    expect(on).toEqual(expect.arrayContaining(Array.from({ length: 50 }, (_, n) => `set${n}`)))
+    expect(on).not.toContain('old1')
+  })
+
+  it('never takes more than a set from a forged form', async () => {
+    await addSet(50)
+    await add({ itemId: 1, token: 'own' }, { itemId: 2, token: 'x' }, { itemId: 3, token: 'y' })
+    const others = (await pg.query<{ id: number }>("select id from subscribers where token <> 'own' order by id")).rows.map(r => r.id)
+    expect(others).toHaveLength(52)
+    await post('own', others)
+    // The emailed row and the first 50 ids sent, never all 52.
+    expect(await confirmedTokens()).toHaveLength(51)
+    expect(await confirmedTokens()).not.toContain('y')
   })
 })

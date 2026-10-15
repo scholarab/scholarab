@@ -167,3 +167,78 @@ it('confirmation describes each waiting request and the following deadlines', ()
     expect(html).toContain('Confirm my reminder');
   }
 });
+async function subscribeAs(email: string, token: string, type: string, id: number, confirmed = true) {
+  await state.query(`INSERT INTO subscribers(email,item_type,item_id,token,cadence,confirmed_at,created_at)
+    VALUES ($1,$2,$3,$4,'30,14,3',${confirmed ? 'now()' : 'NULL'},now())`, [email, type, id, token]);
+}
+const mails = () => send.mock.calls.map(c => JSON.parse(c[1].body) as { to: string[]; subject: string; html: string; headers: Record<string, string> });
+it('sends the reminders one address has due on the same day as one email, once', async () => {
+  // A combo signed up at once shares deadlines: one email, not one per award.
+  state.scholarships[0]!.deadline = '2026-10-12';
+  state.scholarships.push({ id: 3, title: 'Second award', deadline: '2026-11-08', url: 'https://provider.invalid' });
+  state.programs[0]!.deadline = '2026-10-23';
+  await subscribeAs('student@local.invalid', 'tok-a', 'scholarship', 1);
+  await subscribeAs('student@local.invalid', 'tok-b', 'scholarship', 3);
+  await subscribeAs('student@local.invalid', 'tok-c', 'program', 2);
+  await subscribeAs('friend@local.invalid', 'tok-d', 'scholarship', 1);
+  await run();
+  expect(send).toHaveBeenCalledTimes(2);
+  const [bundle] = mails().filter(m => m.to[0] === 'student@local.invalid');
+  const [single] = mails().filter(m => m.to[0] === 'friend@local.invalid');
+  expect(bundle!.subject).toMatch(/^3 days left.*, plus 2 more$/);
+  // Soonest deadline first.
+  const at = (label: string) => bundle!.html.indexOf(label);
+  expect(at('Local award')).toBeGreaterThan(-1);
+  expect(at('Local award')).toBeLessThan(at('Local program'));
+  expect(at('Local program')).toBeLessThan(at('Second award'));
+  // Unsubscribe under a list stops all of it, by the latest deadlines' tokens.
+  expect(bundle!.headers['List-Unsubscribe']).toContain('/api/unsubscribe?scope=all&token=tok-b&token=tok-c&token=tok-a>');
+  expect(bundle!.headers['List-Unsubscribe-Post']).toBe('List-Unsubscribe=One-Click');
+  expect(bundle!.html).toContain('Unsubscribe stops all of them');
+  expect(single!.subject).not.toContain('more');
+  expect(single!.headers['List-Unsubscribe']).toContain('/api/unsubscribe?token=tok-d>');
+  // Each reminder in the bundle counts as sent on its own subscription.
+  const settled = await state.query(`SELECT s.token FROM mail_deliveries d JOIN subscribers s ON s.id=d.subscription_id
+    WHERE d.state='sent' ORDER BY s.token`);
+  expect(settled.map(r => r.token)).toEqual(['tok-a', 'tok-b', 'tok-b', 'tok-c', 'tok-d']);
+  await run();
+  expect(send).toHaveBeenCalledTimes(2);
+});
+it('retries an unsettled reminder alone with its first bytes and bundles only the fresh ones', async () => {
+  state.scholarships[0]!.deadline = '2026-10-12';
+  state.scholarships.push({ id: 3, title: 'Second award', deadline: '2026-10-12', url: 'https://provider.invalid' });
+  state.programs[0]!.deadline = '2026-10-12';
+  await subscribeAs('student@local.invalid', 'tok-a', 'scholarship', 1);
+  send.mockRejectedValueOnce(new Error('local simulated timeout'));
+  await expect(run()).rejects.toThrow('exit:1');
+  const first = send.mock.calls[0]![1].body;
+  await subscribeAs('student@local.invalid', 'tok-b', 'scholarship', 3);
+  await subscribeAs('student@local.invalid', 'tok-c', 'program', 2);
+  setTime('2026-10-09T18:05:00Z');
+  await run();
+  expect(send).toHaveBeenCalledTimes(3);
+  expect(send.mock.calls[1]![1].body).toBe(first);
+  expect(mails()[2]!.subject).toMatch(/, plus 1 more$/);
+  expect(mails()[2]!.html).not.toContain('Local award');
+  await run();
+  expect(send).toHaveBeenCalledTimes(3);
+});
+it('asks each address to confirm once, naming every sign-up it is waiting on', async () => {
+  state.scholarships.push({ id: 3, title: 'Second award', deadline: '2026-11-08', url: 'https://provider.invalid' });
+  await subscribeAs('student@local.invalid', 'tok-a', 'scholarship', 1, false);
+  await subscribeAs('student@local.invalid', 'tok-b', 'scholarship', 3, false);
+  await subscribeAs('student@local.invalid', 'tok-c', 'program', 2, false);
+  await subscribeAs('friend@local.invalid', 'tok-d', 'scholarship', 1, false);
+  await run();
+  expect(send).toHaveBeenCalledTimes(2);
+  const [set] = mails().filter(m => m.to[0] === 'student@local.invalid');
+  expect(set!.subject).toBe('Confirm your ScholarAB deadline reminders');
+  for (const label of ['Local award', 'Second award', 'Local program']) expect(set!.html).toContain(label);
+  expect(set!.html).toContain('/api/confirm?token=tok-a');
+  expect(mails().find(m => m.to[0] === 'friend@local.invalid')!.subject).toBe('Confirm your ScholarAB deadline reminder');
+  const asked = await state.query('SELECT token FROM subscribers WHERE confirm_sent_at IS NOT NULL ORDER BY token');
+  expect(asked.map(r => r.token)).toEqual(['tok-a', 'tok-b', 'tok-c', 'tok-d']);
+  setTime('2026-10-11T18:00:00Z');
+  await run();
+  expect(send).toHaveBeenCalledTimes(2);
+});

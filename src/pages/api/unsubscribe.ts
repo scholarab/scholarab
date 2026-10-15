@@ -3,7 +3,7 @@ export const prerender = false
 import type { APIRoute } from 'astro'
 import { db } from '../../lib/db/client'
 import { confirmationRecipients, events, subscribers } from '../../lib/db/schema'
-import { eq } from 'drizzle-orm'
+import { eq, inArray } from 'drizzle-orm'
 import { recipientKey } from '../../lib/mail-delivery'
 import { reminderPage as page, reminderBackLink as backLink, reminderError, escapeAttr } from '../../lib/reminder-page'
 
@@ -31,11 +31,34 @@ async function countUnsubscribe(how: 'button' | 'oneclick' | 'all', item?: { ite
   }
 }
 
+// A bundled reminder (several due the same day for one address) links here
+// with scope=all and up to three tokens, so the link still works after one of
+// those reminders is stopped on its own. More than three are ignored.
+function tokensFrom(values: readonly (string | File)[]): string[] {
+  return values.filter((t): t is string => typeof t === 'string' && t !== '').slice(0, 3)
+}
+
 export const GET: APIRoute = async ({ request }) => {
-  const token = new URL(request.url).searchParams.get('token')
+  const url = new URL(request.url)
+  const tokens = tokensFrom(url.searchParams.getAll('token'))
+  const token = tokens[0]
   if (!token) return reminderError('missing-token')
 
   // Nothing is deleted here, so an automated prefetch of this URL is harmless.
+  if (url.searchParams.get('scope') === 'all') return page(
+    'Unsubscribe',
+    `<h1>Stop all your reminders?</h1>
+     <p>You'll stop receiving every ScholarAB reminder sent to this address.</p>
+     <form method="post">
+       ${tokens.map(t => `<input type="hidden" name="token" value="${escapeAttr(t)}">`).join('')}
+       <input type="hidden" name="scope" value="all">
+       <button type="submit">Yes, stop them all</button>
+     </form>
+     <p class="fine">This removes every reminder set up with this email address, the
+     address itself, and its confirmation-email fingerprint. See the
+     <a href="/privacy/">privacy policy</a> for other collection and retention details.</p>
+     ${backLink}`
+  )
   return page(
     'Unsubscribe',
     `<h1>Unsubscribe?</h1>
@@ -65,7 +88,8 @@ export const POST: APIRoute = async ({ request }) => {
   // without any further interaction.
   let form: FormData
   try { form = await request.formData() } catch { form = new FormData() }
-  const token = form.get('token') ?? new URL(request.url).searchParams.get('token')
+  const query = new URL(request.url).searchParams
+  const token = form.get('token') ?? query.get('token')
   if (typeof token !== 'string' || !token) return reminderError('missing-token')
 
   // "Delete all my data"; the PIPEDA erasure path. The token is what proves
@@ -80,9 +104,14 @@ export const POST: APIRoute = async ({ request }) => {
   // between the two is a concurrent second click, which deletes nothing more.
   // The confirmation throttle's hash of the address goes first: if the second
   // delete then fails, the token still works and a retry finishes the job.
-  if (form.get('scope') === 'all') {
+  //
+  // A bundled reminder asks for this in its query string, because a one-click
+  // post carries no fields of its own.
+  if ((form.get('scope') ?? query.get('scope')) === 'all') {
+    const posted = form.getAll('token')
+    const tokens = tokensFrom(posted.length ? posted : query.getAll('token'))
     const [row] = await db.select({ email: subscribers.email })
-      .from(subscribers).where(eq(subscribers.token, token)).limit(1)
+      .from(subscribers).where(inArray(subscribers.token, tokens)).limit(1)
     if (row?.email) {
       await db.delete(confirmationRecipients).where(eq(confirmationRecipients.key, await recipientKey(row.email)))
       await db.delete(subscribers).where(eq(subscribers.email, row.email))

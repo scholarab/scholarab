@@ -454,7 +454,7 @@ const chip: { text: string; tone: Tone } =
           sends (critique 2026-09-29). The late line replaces it instead. */}
       <div data-remind-late hidden={!remindLate}>
         <h2 class="sabd-remind-label">Closes <span data-remind-late-when>{lateWhen}</span></h2>
-        <p class="sabd-remind-sub sabd-remind-late">Too soon for an email reminder.{lateApply && ' Apply today.'}</p>
+        <p class="sabd-remind-sub">Too soon for an email reminder.{lateApply && ' Apply today.'}</p>
       </div>
       <div data-remind-open hidden={remindLate}>
         <h2 class="sabd-remind-label" data-remind-heading>{remindCopy.heading}</h2>
@@ -501,28 +501,8 @@ const chip: { text: string; tone: Tone } =
   }
   .sabd-guide:hover { border-color: #2E7A50; }
 
-  /* Collection notice, sits under the sign-up form. Deliberately quiet but
-     always present: the address is the only personal data the site takes, and
-     the moment to say what happens to it is the moment it is asked for. */
-  /* On the var(--text-primary) block, #6B716C measured 3.56:1. Paper at 0.55 is 5.48:1
-     and still sits below the sub above it, which is paper at 0.65. */
-  .sabd-remind-fine { margin-top: 10px; font-size: var(--fs-meta); line-height: 1.55; color: var(--ink-muted); }
-  /* The disclosure under it. The summary keeps the colour and underline the
-     old "How this works" link had (in the sentence's own colour it was
-     invisible), so it still reads as the thing to press, and is 24px tall
-     (the link was 14). */
-  .sabd-remind-how { margin-top: 4px; font-size: var(--fs-meta); line-height: 1.55; color: var(--ink-muted); }
-  .sabd-remind-how summary {
-    display: inline-flex; align-items: center; gap: 6px; min-height: 24px; cursor: pointer;
-    list-style: none; color: var(--green); text-decoration: underline; text-underline-offset: 2px;
-  }
-  .sabd-remind-how summary::-webkit-details-marker { display: none; }
-  .sabd-remind-caret { flex: none; transition: transform 0.18s ease; }
-  .sabd-remind-how[open] .sabd-remind-caret { transform: rotate(180deg); }
-  .sabd-remind-how p { margin: 4px 0 0; }
-  .sabd-remind-late { margin-bottom: 0; }
-  .sabd-remind-how a { color: var(--green); text-decoration: underline; text-underline-offset: 2px; }
-  @media (prefers-reduced-motion: reduce) { .sabd-remind-caret { transition: none; } }
+  /* The reminder form's styles are in global.css ("Reminder sign-up"), shared
+     with the one sign-up for a set on My combo and the quiz results. */
   .sabd-guide-label { display: block; font-size: var(--fs-ui); font-weight: 600; color: var(--ink-muted); }
   .sabd-guide-title {
     display: block; margin-top: 6px; font-family: var(--font-display);
@@ -753,39 +733,6 @@ const chip: { text: string; tone: Tone } =
   }
   .sabd-visit:hover { border-color: #2E7A50; color: var(--green); }
 
-  /* A light inline form under the card, not a dark newsletter box
-     (critique 2026-09-23). */
-  .sabd-remind { border-top: 1px solid rgba(var(--fg-rgb), 0.14); padding: 18px 2px 0; color: var(--text-primary); }
-  .sabd-remind-label { font-family: var(--font-body); font-size: 16px; font-weight: 700; margin: 0 0 4px; }
-  .sabd-remind-sub { font-size: 14px; line-height: 1.5; color: var(--ink-soft); margin-bottom: 12px; }
-  .sabd-remind-form { display: flex; gap: 8px; }
-  .sabd-remind-input {
-    font-family: var(--font-body); font-size: 14px; flex: 1; min-width: 0;
-    background: var(--bg-page); border: 1.5px solid rgba(var(--fg-rgb), 0.3);
-    border-radius: var(--radius); padding: 11px 16px; color: var(--text-primary);
-  }
-  /* Bare `outline: none` here outranked the global :focus-visible rule, so the
-     reminder field had no focus indicator on any of the detail pages. Keeping
-     the outline off for mouse focus, where the border is enough, and putting
-     the ring back for keyboard focus. */
-  .sabd-remind-input:focus { outline: none; }
-  .sabd-remind-input:focus-visible {
-    outline: 2px solid var(--focus-ring);
-    outline-offset: 2px;
-  }
-  .sabd-remind-input::placeholder { color: var(--ink-faint); }
-  .sabd-remind-btn {
-    font-family: var(--font-body); font-size: var(--fs-ui); font-weight: 700;
-    background: var(--cta); color: var(--text-on-cta); border: none; border-radius: var(--radius);
-    padding: 11px 18px; cursor: pointer; flex: none;
-  }
-  .sabd-remind-btn:hover { background: var(--cta-hover); }
-  .sabd-remind-btn:disabled { opacity: 0.6; cursor: default; }
-  .sabd-remind-msg { margin-top: 8px; font-size: var(--fs-small); font-weight: 600; color: var(--green); }
-  /* It was near-white on the white card, so a bad address showed nothing. */
-  .sabd-remind-msg.is-error { color: #B42318; }
-  .sabd-remind-input[aria-invalid="true"] { border-color: #B42318; }
-
   @media (max-width: 900px) {
     .sabd-crumb-row { padding: 28px 20px 0; }
     .sabd-title-block { padding: 28px 20px 0; }
@@ -811,10 +758,6 @@ const chip: { text: string; tone: Tone } =
     .sabd-fact { display: grid; grid-template-columns: 82px 1fr; gap: 12px; align-items: baseline; padding: 12px 0; }
     .sabd-fact .sabd-card-label { margin-bottom: 0; }
     .sabd-fact-value { font-size: var(--fs-body); line-height: 1.4; }
-    /* Safari zooms the page into any field under 16px when it takes focus,
-       and leaves it zoomed (critique 2026-09-27). */
-    .sabd-remind-input { font-size: 16px; }
-    .sabd-remind-how summary { min-height: 44px; }
   }
   /* Wide screens: the title shares its row with a photo, and the prose under
      it runs in two columns, so the page fills the width the rail leaves. */

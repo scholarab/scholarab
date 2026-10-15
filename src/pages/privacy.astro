@@ -21,7 +21,7 @@ const collected = [
   },
   {
     what: 'Which scholarship or program the reminder is for, and when you asked to be reminded',
-    when: 'Stored alongside the email address above.',
+    when: 'Stored alongside the email address above. Asking from My combo or Build my combo stores one for each listing there that can take a reminder.',
     why: 'A reminder has to know what it is reminding you about.',
     kept: 'Same as the email address.',
   },
@@ -57,7 +57,7 @@ const collected = [
   },
   {
     what: 'Anonymous counts of what gets used',
-    when: 'When you open a listing, click through to apply, save something, mark a saved scholarship as started, submitted or won (which records the listing and that one word), run Build my combo, and once per visit if you arrived from one of our own tagged links, such as the one in an Instagram or TikTok bio or in a reminder email, which records only which of those it was. Opening a listing also records whether this browser first came here on an earlier day. Clicking through to apply also records where on the site you clicked and whether that listing was already in My combo. On a scholarship or program list, it records that you opened one, which filter you used but not what you picked in it, that you searched but not what you typed (that is only kept for searches that find nothing, as above), and whether you pressed Show more. If you land on a page that does not exist, it records that page’s address and whether the link to it was on this site, a search engine, another site or none of those, so the broken link can be fixed. When you unsubscribe, it records that someone did, which listing the reminder was for and whether you used the button, your mail app’s own unsubscribe or Delete all my data, with no email address attached. Every count also records whether it came from a phone, a tablet or a computer, worked out from what your browser says about itself. That one word is kept and the rest is not.',
+    when: 'When you open a listing, click through to apply, save something, mark a saved scholarship as started, submitted or won (which records the listing and that one word), run Build my combo, and once per visit if you arrived from one of our own tagged links, such as the one in an Instagram or TikTok bio or in a reminder email, which records only which of those it was. Opening a listing also records whether this browser first came here on an earlier day. Clicking through to apply also records where on the site you clicked and whether that listing was already in My combo. On a scholarship or program list, it records that you opened one, which filter you used but not what you picked in it, that you searched but not what you typed (that is only kept for searches that find nothing, as above), and whether you pressed Show more. If you land on a page that does not exist, it records that page’s address and whether the link to it was on this site, a search engine, another site or none of those, so the broken link can be fixed. When you ask for reminders, it records which listings they are for and, if you asked from My combo or Build my combo, which of the two, with no email address attached. When you unsubscribe, it records that someone did, which listing the reminder was for and whether you used the button, your mail app’s own unsubscribe or Delete all my data, with no email address attached. Every count also records whether it came from a phone, a tablet or a computer, worked out from what your browser says about itself. That one word is kept and the rest is not.',
     why: 'To know which listings matter and which way of telling people about the site works, so the directory gets better. What was searched for is the row above; this row is counts.',
     kept: '180 days, including previously recorded walkthrough counts. These rows carry no IP address, no cookie, no account and no session. There is nothing in them that points back to a person, which also means they cannot be traced to you in order to delete them.',
   },
@@ -160,9 +160,17 @@ const ldJson = webPageJson({ name: 'Privacy Policy', description, path: '/privac
         makes sure only the person who can read the inbox can turn reminders on.
       </p>
       <p class="sabpv-p">
+        Asking from My combo or Build my combo works the same way for every listing there that can take a
+        reminder. It creates a pending row for each and sends one confirmation email that names them all,
+        and its button turns on exactly those. When several of your reminders fall on the same day, they
+        come together in one email.
+      </p>
+      <p class="sabpv-p">
         Every email we send carries an unsubscribe link, including the confirmation email, and also the
         header your mail app reads to put its own unsubscribe button at the top of the message. Either
-        one deletes the row outright. We don't keep a suppression list of people who left.
+        one deletes the row outright. In an email that carries several reminders, either one stops all of
+        them and deletes every reminder set up with your address, the address itself and its fingerprint.
+        We don't keep a suppression list of people who left.
       </p>
 
       <h2 class="sabpv-h2">Deleting your data</h2>

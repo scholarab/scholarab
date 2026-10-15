@@ -495,6 +495,74 @@ html[data-sab-hidden] .sab-hero-band {
   .sab-btn, .sab-btn:active { transform: none; transition: none; }
 }
 
+/* ── Reminder sign-up ─────────────────────────────────────── */
+/* One look for every reminder form: a listing's own (SabDetail.astro) and the
+   one sign-up for a whole set on My combo and the quiz results
+   (lib/set-reminder.ts). These were the listing's scoped styles; each rule is
+   anchored on .sabd-remind so it keeps the weight it had there, above .sab-btn
+   and the pages' own rules. A light inline form, not a dark newsletter box
+   (critique 2026-09-23). */
+.sabd-remind { border-top: 1px solid rgba(var(--fg-rgb), 0.14); padding: 18px 2px 0; color: var(--text-primary); }
+.sabd-remind .sabd-remind-label { font-family: var(--font-body); font-size: 16px; font-weight: 700; margin: 0 0 4px; }
+.sabd-remind .sabd-remind-sub { font-size: 14px; line-height: 1.5; color: var(--ink-soft); margin-bottom: 12px; }
+.sabd-remind .sabd-remind-form { display: flex; gap: 8px; }
+.sabd-remind .sabd-remind-input {
+  font-family: var(--font-body); font-size: 14px; flex: 1; min-width: 0;
+  background: var(--bg-page); border: 1.5px solid rgba(var(--fg-rgb), 0.3);
+  border-radius: var(--radius); padding: 11px 16px; color: var(--text-primary);
+}
+/* A bare outline reset here outranked the global :focus-visible rule, so the
+   reminder field had no focus indicator on any of the detail pages. Keeping
+   the outline off for mouse focus, where the border is enough, and putting
+   the ring back for keyboard focus. */
+.sabd-remind .sabd-remind-input:focus { outline: none; }
+.sabd-remind .sabd-remind-input:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+.sabd-remind .sabd-remind-input::placeholder { color: var(--ink-faint); }
+.sabd-remind .sabd-remind-btn {
+  font-family: var(--font-body); font-size: var(--fs-ui); font-weight: 700;
+  background: var(--cta); color: var(--text-on-cta); border: none; border-radius: var(--radius);
+  padding: 11px 18px; cursor: pointer; flex: none;
+}
+.sabd-remind .sabd-remind-btn:hover { background: var(--cta-hover); }
+.sabd-remind .sabd-remind-btn:disabled { opacity: 0.6; cursor: default; }
+.sabd-remind .sabd-remind-msg { margin-top: 8px; font-size: var(--fs-small); font-weight: 600; color: var(--green); }
+/* It was near-white on the white card, so a bad address showed nothing. */
+.sabd-remind .sabd-remind-msg.is-error { color: #B42318; }
+.sabd-remind .sabd-remind-input[aria-invalid="true"] { border-color: #B42318; }
+/* Collection notice, sits under the sign-up form. Deliberately quiet but
+   always present: the address is the only personal data the site takes, and
+   the moment to say what happens to it is the moment it is asked for. */
+/* On the var(--text-primary) block, #6B716C measured 3.56:1. Paper at 0.55 is 5.48:1
+   and still sits below the sub above it, which is paper at 0.65. */
+.sabd-remind .sabd-remind-fine { margin-top: 10px; font-size: var(--fs-meta); line-height: 1.55; color: var(--ink-muted); }
+/* The disclosure under it. The summary keeps the colour and underline the
+   old "How this works" link had (in the sentence's own colour it was
+   invisible), so it still reads as the thing to press, and is 24px tall
+   (the link was 14). */
+.sabd-remind .sabd-remind-how { margin-top: 4px; font-size: var(--fs-meta); line-height: 1.55; color: var(--ink-muted); }
+.sabd-remind .sabd-remind-how summary {
+  display: inline-flex; align-items: center; gap: 6px; min-height: 24px; cursor: pointer;
+  list-style: none; color: var(--green); text-decoration: underline; text-underline-offset: 2px;
+}
+.sabd-remind .sabd-remind-how summary::-webkit-details-marker { display: none; }
+.sabd-remind .sabd-remind-caret { flex: none; transition: transform 0.18s ease; }
+.sabd-remind .sabd-remind-how[open] .sabd-remind-caret { transform: rotate(180deg); }
+.sabd-remind .sabd-remind-how p { margin: 4px 0 0; }
+.sabd-remind .sabd-remind-how a { color: var(--green); text-decoration: underline; text-underline-offset: 2px; }
+/* A set's form opens under its button, in a page column, not a listing's rail. */
+.sabd-remind.sabd-remind-set { max-width: 560px; margin-top: 28px; }
+.sabs-remind { margin-bottom: 44px; }
+@media (prefers-reduced-motion: reduce) { .sabd-remind .sabd-remind-caret { transition: none; } }
+@media (max-width: 900px) {
+  /* Safari zooms the page into any field under 16px when it takes focus,
+     and leaves it zoomed (critique 2026-09-27). */
+  .sabd-remind .sabd-remind-input { font-size: 16px; }
+  .sabd-remind .sabd-remind-how summary { min-height: 44px; }
+}
+
 h1, h2 {
   letter-spacing: -0.02em;
 }

@@ -255,6 +255,8 @@ export function initSaved() {
   function paintPlan() {
     if (!root) return;
     const live = liveItems();
+    // The one reminder sign-up for the whole list paints from these rows (set-reminder.ts).
+    root.dispatchEvent(new CustomEvent('saved:plan', { bubbles: true, detail: live.map(s => ({ ...s, status: statusOf(s) })) }));
     const first = startWith(live, statusOf);
     const rank = new Map(first.map((s, n) => [s.id, n + 1]));
     for (const w of wraps()) {

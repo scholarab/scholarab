@@ -12,6 +12,8 @@ import { NO_DEADLINE, STATUS_WORDS, canApplyNow, openLaterNote, programOpensLate
 import { amountCell, whenTier } from '../lib/list-core.ts'
 import { BOOKMARK } from '../lib/icons.ts'
 import { comboHref, pickCombos, type ComboEntry } from '../lib/combo-pick.ts'
+import { planSetReminder, setCandidate } from '../lib/set-reminder.ts'
+import SetReminderForm from './SetReminderForm'
 import {
   QUIZ_QUESTIONS, QUIZ_STORAGE_KEY, QUIZ_TTL_MS, QUIZ_MAX_QUESTION_COUNT,
   SCHOOL_QUESTION_KEY, schoolQuestion, schoolsForCity,
@@ -516,6 +518,8 @@ export default function EligibilityQuiz({ scholarships, programs, combos = [] }:
   const restResults = useMemo(() => allScholarshipResults?.filter(r => !inCombo.has(r.scholarship.id)) ?? null, [allScholarshipResults, inCombo])
 
   const [showAll, setShowAll] = useState(false)
+  // The one reminder sign-up for the rows on screen opens from the results bar.
+  const [remindOpen, setRemindOpen] = useState(false)
   // The first screen keeps both groups in view: at least half the rows from
   // each when both have that many, so the best fits that open in spring are
   // not all pushed behind "Show all" by the ones open tonight.
@@ -644,6 +648,13 @@ export default function EligibilityQuiz({ scholarships, programs, combos = [] }:
     // A combo's first rows lead the page; Show all opens the rest of each.
     const comboShown = comboSections.map(c => showAll ? c.rows : c.rows.slice(0, COMBO_SHOWN))
 
+    // One sign-up for every row on screen that can take a reminder, in page
+    // order (lib/set-reminder.ts); null when none can, and then no button.
+    const remindPlan = planSetReminder([
+      ...(showScholarships ? [...comboShown.flat(), ...(scholarshipResults ?? [])].map(r => setCandidate('scholarship', r.scholarship)) : []),
+      ...(showPrograms ? (programResults ?? []).map(p => setCandidate('program', p)) : []),
+    ], today)
+
     // One row, the same in a combo and in the rest of the list.
     const scholarshipRow = ({ scholarship: s, tier, signals, checks }: NonNullable<typeof allScholarshipResults>[number]) => {
       const style = TIER_STYLES[tier]
@@ -743,6 +754,15 @@ export default function EligibilityQuiz({ scholarships, programs, combos = [] }:
                     ? `Save the ${strong.length > 0 ? 'strong' : 'good'} match`
                     : `Save the ${saveable.length} ${strong.length > 0 ? 'strong' : 'good'} matches`}</button>
             )}
+            {remindPlan && (
+              <button
+                type="button"
+                className="sabm-btn-outline"
+                aria-expanded={remindOpen}
+                aria-controls="sabm-remind"
+                onClick={() => setRemindOpen(o => !o)}
+              >Email me before these close</button>
+            )}
           </div>
           {/* Its own group so a phone can move it under the list (global.css,
               "Phones: first result"); beside Save everywhere else. */}
@@ -760,6 +780,8 @@ export default function EligibilityQuiz({ scholarships, programs, combos = [] }:
             )}
           </div>
         </div>
+
+        {remindPlan && <SetReminderForm id="sabm-remind" plan={remindPlan} open={remindOpen} />}
 
         {/* The combos this student is in, first: a set of awards open to
             the same students, which they can keep in one tap. */}

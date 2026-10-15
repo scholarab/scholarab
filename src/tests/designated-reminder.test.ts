@@ -3,11 +3,11 @@ import { afterEach, beforeEach, expect, it, vi } from 'vitest';
 const state = vi.hoisted(() => ({ send: vi.fn(async () => 'sent'), queries: [] as string[] }));
 vi.mock('@neondatabase/serverless', () => ({ neon: () => Object.assign(async (strings: TemplateStringsArray) => {
   const query = strings.join('?'); state.queries.push(query);
-  if (query.includes('SELECT DISTINCT ON')) throw new Error('Test must never run confirmation sweep');
+  if (query.includes('s.confirm_sent_at IS NULL')) throw new Error('Test must never run confirmation sweep');
   if (query.includes('SELECT s.id,s.email,s.token')) return [
-    { id: 50, email: 'designated@example.test', token: 'a'.repeat(48), cadence: '3', item_type: 'program', item_id: 44, sent_reminders: [] },
+    { id: 50, email: 'designated@example.test', token: 'a'.repeat(48), cadence: '3', item_type: 'program', item_id: 44, sent_reminders: [], unsettled: [] },
     // Defence in depth: even an unexpectedly broad DB result cannot mail this row.
-    { id: 51, email: 'unrelated@example.test', token: 'b'.repeat(48), cadence: '3', item_type: 'program', item_id: 44, sent_reminders: [] },
+    { id: 51, email: 'unrelated@example.test', token: 'b'.repeat(48), cadence: '3', item_type: 'program', item_id: 44, sent_reminders: [], unsettled: [] },
   ];
   if (query.includes('SELECT d.key')) return [{ key: 'unrelated-retry', subscription_id: 51, kind: 'reminder', payload: {}, email: 'unrelated@example.test' }];
   if (query.includes('count(*)')) return [{ n: 0 }];
@@ -49,7 +49,7 @@ it('sends only to the designated confirmed subscription, never a sweep or unrela
   expect(call[3]).toBe('reminder');
   expect(call[4]).toMatchObject({ to: ['designated@example.test'], subject: expect.stringContaining('[TEST]') });
   expect(String(call[1])).toContain('designated-test');
-  expect(state.queries.some(q => q.includes('SELECT DISTINCT ON'))).toBe(false);
+  expect(state.queries.some(q => q.includes('s.confirm_sent_at IS NULL'))).toBe(false);
   expect(state.queries.some(q => q.includes('SELECT d.key'))).toBe(false);
   expect(state.queries.find(q => q.includes('SELECT s.id,s.email,s.token'))).toContain('id =');
 });

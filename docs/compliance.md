@@ -274,3 +274,41 @@ Two more counts the same day, again with no identifier and the same 180 days.
   count. It records how (button, one-click or all) and, for one deadline, its
   listing. Never the address or the token. Clients cannot send it, because
   `/api/event` does not accept it. A failed count never blocks the delete.
+
+## One sign-up for a set, October 14, 2026
+
+My combo (`/saved/`) and the Build my combo results (`/match/`) ask once for
+every listing on screen that can take a reminder. No new personal information
+category, table or column is added.
+
+- A set is one request to `/api/alert` with up to 50 listings
+  (`MAX_REMINDER_SET`). Each covered listing gets the row its own page's form
+  would write with the default schedule, trimmed to the milestones still ahead.
+  Listings that take no reminder are skipped. The answer is a count worked out
+  from the catalogue alone, so it is the same for a new, waiting or confirmed
+  address.
+- Consent stays double opt-in and per listing. One confirmation email names
+  every new row, the confirm page names them again, and its button turns on
+  exactly that list. The page now lists up to 50 others (was 25), the set's
+  rows first, since they share the emailed row's `created_at`.
+- The IP limit counts a set once, and the recipient throttle
+  (`claimRecipient`, 15 minutes apart, five a day) is unchanged, so a set
+  cannot multiply confirmation mail. The daily sweep now names every waiting
+  row for an address in its one confirmation instead of picking one.
+- `alert_subscribe` is still written by the server for new rows only. Set
+  rows carry `meta` of `saved` or `match` and nothing else. The server drops
+  any other value.
+- Reminders due the same day for one address go out as one email. Its footer
+  link and one-click header carry `scope=all` and the tokens of up to three of
+  its rows, and stop every reminder for the address, the same erasure as Delete
+  all my data, the throttle's hash included. The GET still only renders a page
+  with a button. The bundle's delivery row sits under the subscription with
+  the latest deadline, and each reminder in it gets a `sent` tombstone on its
+  own subscription, so none is mailed twice. A reminder an earlier run could
+  not settle is retried alone with its first bytes.
+- Unsubscribe in a set's confirmation email removes the emailed row. The rest
+  stay unconfirmed, are never mailed (the sweep only asks rows whose
+  `confirm_sent_at` is null) and are pruned with every unconfirmed row within
+  30 days.
+
+The privacy policy's reminder section and its counts row say this.

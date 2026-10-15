@@ -100,8 +100,8 @@ const OUTLINE_NONE_ALLOWED: Record<string, string> = {
   '.sabm-question':
     'focused programmatically on step change (EligibilityQuiz questionHeadingRef), '
     + 'so :focus-visible never matches and a ring would appear unprompted',
-  '.sabd-remind-input:focus':
-    'ring restored on .sabd-remind-input:focus-visible',
+  '.sabd-remind .sabd-remind-input:focus':
+    'ring restored on .sabd-remind .sabd-remind-input:focus-visible',
 }
 
 /** The selector a declaration sits under; the text between the previous
@@ -142,8 +142,8 @@ describe('focus indicators', () => {
     const search = globalCss.slice(globalCss.indexOf('.sabl-search input'))
     expect(search).toMatch(/\.sabl-search:has\(input:focus-visible\)[\s\S]{0,120}box-shadow: inset 0 -2px 0 rgba\(var\(--fg-rgb\), 0\.75\)/)
 
-    const detail = read('src/components/sab/SabDetail.astro')
-    expect(detail).toMatch(/\.sabd-remind-input:focus-visible[\s\S]{0,120}outline: 2px solid var\(--focus-ring\)/)
+    // Every reminder form (a listing's, My combo's, the quiz results') takes it.
+    expect(globalCss).toMatch(/\.sabd-remind \.sabd-remind-input:focus-visible[\s\S]{0,120}outline: 2px solid var\(--focus-ring\)/)
   })
 })
 
@@ -180,6 +180,7 @@ describe('button press language', () => {
       ['src/pages/404.astro', ['sab404-btn-accent']],
       ['src/pages/educators.astro', ['sabe-btn-solid', 'sabe-btn-outline']],
       ['src/components/sab/SabDetail.astro', ['sabd-cta', 'sabd-remind-btn']],
+      ['src/components/sab/SavedDirectory.astro', ['sabd-remind-btn']],
     ]
     for (const [file, classes] of wearers) {
       const src = read(file)

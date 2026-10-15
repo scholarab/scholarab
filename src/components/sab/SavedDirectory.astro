@@ -66,6 +66,38 @@ const openNow = initialScholarships.filter(s => {
   </div>
 
   <div style="margin-top:48px" data-sv-list hidden>
+    {/* One sign-up for every saved listing that can take a reminder, behind
+        one button as on the quiz results, in the listing form's look.
+        lib/set-reminder.ts paints it from the rows below and sends it; until
+        then it stays hidden. */}
+    <div class="sabs-remind" data-set-remind hidden>
+      <button type="button" class="sabm-btn-outline" aria-expanded="false" aria-controls="sabs-remind" data-set-remind-open>Email me before these close</button>
+      <section id="sabs-remind" class="sabd-remind sabd-remind-set" aria-labelledby="sabs-remind-h" data-set-remind-box hidden>
+        <h2 id="sabs-remind-h" class="sabd-remind-label" data-set-remind-heading>Email me before these close</h2>
+        <div class="sabd-remind-sub" data-set-remind-sub></div>
+        <form class="sabd-remind-form" data-set-remind-form data-place="saved" novalidate>
+          <label for="sabs-remind-email" class="sr-only">Your email for deadline reminders</label>
+          <input id="sabs-remind-email" type="email" name="email" required autocomplete="email" placeholder="your@email.com" class="sabd-remind-input" aria-describedby="sabs-remind-msg" />
+          <button type="submit" class="sab-btn sabd-remind-btn">Remind me</button>
+        </form>
+        <div id="sabs-remind-msg" class="sabd-remind-msg" role="status" aria-live="polite" data-set-remind-msg hidden></div>
+        <div class="sabd-remind-fine">
+          We store your address only to send these reminders, and delete it the
+          moment you unsubscribe.
+        </div>
+        <details class="sabd-remind-how">
+          <summary>What we keep<svg class="sabd-remind-caret" viewBox="0 0 12 8" width="10" height="7" fill="none" aria-hidden="true"><path d="M1 1.5 6 6.5 11 1.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <p>
+            Nothing else is sent until you press the button in the confirmation
+            email. If you never do, the address is deleted within 30 days.
+            Otherwise each reminder, address included, goes 60 days after its
+            deadline or the moment you unsubscribe, whichever comes first. We
+            never sell or trade it.
+            <a href="/privacy/">The full privacy policy</a>.
+          </p>
+        </details>
+      </section>
+    </div>
     <section class="sabs-plan" aria-labelledby="sabs-plan-h" data-sv-plan hidden>
       <h2 id="sabs-plan-h" class="sabs-section-head">
         <span class="sabl-group-label">YOUR PLAN</span>
@@ -98,6 +130,9 @@ const openNow = initialScholarships.filter(s => {
 
 <script>
   import { initSaved } from '../../lib/saved-client.ts';
+  import { bindSetReminder } from '../../lib/set-reminder.ts';
+  // Listening before the first paint, so the first `saved:plan` is not missed.
+  bindSetReminder();
   initSaved();
 </script>
 

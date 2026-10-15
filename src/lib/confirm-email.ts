@@ -10,6 +10,12 @@ import { listUnsubscribeHeaders, senderIdentityHtml } from './email-identity'
 
 export const CONFIRM_SUBJECT = 'Confirm your ScholarAB deadline reminder'
 
+/** The subject for one listing or several (a set signed up at once, or the
+ * sweep naming every sign-up still waiting on an address). */
+export function confirmSubject(count: number): string {
+  return count > 1 ? `${CONFIRM_SUBJECT}s` : CONFIRM_SUBJECT
+}
+
 /**
  * `astro/env/runtime` is imported lazily rather than at the top of the file:
  * scripts/send-alerts.ts pulls confirmEmailHtml() in from plain Node, where
@@ -52,10 +58,17 @@ function unsubscribeUrlFor(confirmUrl: string): string | undefined {
   }
 }
 
-export function confirmEmailHtml(itemLabel: string, confirmUrl: string, mailingAddress?: string, cadence = '30,14,3'): string {
+/**
+ * One listing reads as before. Several (a set signed up at once) are named in
+ * a list, since the person is consenting to each of them, and share one
+ * schedule sentence: each row keeps its own cadence, which the confirm page
+ * says again.
+ */
+export function confirmEmailHtml(itemLabel: string | readonly string[], confirmUrl: string, mailingAddress?: string, cadence = '30,14,3'): string {
   const origin = (() => {
     try { return new URL(confirmUrl).origin } catch { return 'https://www.scholarab.ca' }
   })()
+  const labels = typeof itemLabel === 'string' ? [itemLabel] : [...itemLabel]
   const kinds = parseCadence(cadence)
   const days = kinds.filter(isMilestone).join(', ')
   const promise = kinds.includes('open')
@@ -63,12 +76,17 @@ export function confirmEmailHtml(itemLabel: string, confirmUrl: string, mailingA
     : kinds.includes('posted')
       ? `when a confirmed deadline is posted, then ${days} days before it closes`
       : `${days} days before it closes`
+  const asked = labels.length > 1
+    ? `<p>Someone (hopefully you) asked ScholarAB to send deadline reminders for these ${labels.length}.</p>
+  <ul style="margin:0 0 16px;padding-left:20px">${labels.map(l => `<li><strong>${escapeHtml(l)}</strong></li>`).join('')}</ul>
+  <p>Confirm and we'll email you 30, 14 and 3 days before each one closes, where there is still time, and when a date is posted or applications open. Reminders due on the same day come in one email.</p>`
+    : `<p>Someone (hopefully you) asked ScholarAB to send deadline reminders for <strong>${escapeHtml(labels[0] ?? '')}</strong>.</p>
+  <p>Confirm and we'll email you ${promise}.</p>`
   return `<!doctype html><html><body style="font-family:system-ui,-apple-system,sans-serif;color:#141915;line-height:1.55">
-  <p>Someone (hopefully you) asked ScholarAB to send deadline reminders for <strong>${escapeHtml(itemLabel)}</strong>.</p>
-  <p>Confirm and we'll email you ${promise}.</p>
+  ${asked}
   <p><a href="${escapeHtml(confirmUrl)}"
         style="display:inline-block;background:#0A5632;color:#FFFFFF;font-weight:600;
-               text-decoration:none;padding:12px 28px;border-radius:100px">Confirm my reminder</a></p>
+               text-decoration:none;padding:12px 28px;border-radius:100px">${labels.length > 1 ? 'Confirm my reminders' : 'Confirm my reminder'}</a></p>
   <p style="color:#5A605B;font-size:14px">If this wasn't you, ignore this email.
   We store your address only to send these reminders, and
   <a href="${escapeHtml(origin)}/privacy/" style="color:#0a5632">explain exactly what we keep</a>.</p>
@@ -90,7 +108,7 @@ export function escapeHtml(s: string): string {
  * missing key must not turn a sign-up into a 500. The caller records whether
  * the mail went out so the daily sweep can try again.
  */
-export async function sendConfirmEmail(to: string, itemLabel: string, confirmUrl: string, cadence: string, subscriptionId: number): Promise<boolean> {
+export async function sendConfirmEmail(to: string, itemLabel: string | readonly string[], confirmUrl: string, cadence: string, subscriptionId: number): Promise<boolean> {
   const key = await env('RESEND_API_KEY')
   if (!key) return false
   const { getSql } = await import('./db/client')
@@ -101,7 +119,7 @@ export async function sendConfirmEmail(to: string, itemLabel: string, confirmUrl
     const result = await deliverMail(query, await mailKey(`confirm/${confirmUrl}`), subscriptionId, 'confirm', {
       from:(await env('ALERT_FROM_EMAIL')) || 'ScholarAB <alerts@scholarab.ca>',
       to:[to],reply_to:(await env('ALERT_REPLY_TO')) || 'contact.scholarab@gmail.com',
-      subject:CONFIRM_SUBJECT,
+      subject:confirmSubject(typeof itemLabel === 'string' ? 1 : itemLabel.length),
       html:confirmEmailHtml(itemLabel,confirmUrl,await env('ALERT_MAILING_ADDRESS'),cadence),
       headers:listUnsubscribeHeaders(unsubscribeUrlFor(confirmUrl)),
     },key)

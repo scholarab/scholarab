@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { senderIdentityHtml, listUnsubscribeHeaders, DEFAULT_MAILING_ADDRESS, SENDER_NAME, SENDER_CONTACT_EMAIL } from './email-identity'
-import { confirmEmailHtml } from './confirm-email'
+import { confirmEmailHtml, confirmSubject } from './confirm-email'
 
 const SITE = 'https://www.scholarab.ca'
 
@@ -60,6 +60,23 @@ describe('confirmEmailHtml', () => {
 
   it('escapes the listing name', () => {
     expect(confirmEmailHtml('<script>x</script>', `${SITE}/api/confirm?token=t`)).not.toContain('<script>x')
+  })
+
+  it('names every listing of a set signed up at once, escaped, under one button', () => {
+    // The person is consenting to each of them, so each is named.
+    const set = confirmEmailHtml(['Rutherford Scholarship', 'Loran <Award>', 'Schulich Leader'], `${SITE}/api/confirm?token=abc123`)
+    expect(set).toContain('for these 3.')
+    expect(set).toContain('<li><strong>Rutherford Scholarship</strong></li><li><strong>Loran &lt;Award&gt;</strong></li>')
+    expect(set).not.toContain('<Award>')
+    expect(set).toContain('Reminders due on the same day come in one email.')
+    expect(set).toContain('Confirm my reminders</a>')
+    expect(set).toContain(`${SITE}/api/unsubscribe?token=abc123`)
+  })
+
+  it('reads as the single-listing email when a set has only one new listing', () => {
+    expect(confirmEmailHtml(['Rutherford Scholarship'], `${SITE}/api/confirm?token=t`)).toBe(confirmEmailHtml('Rutherford Scholarship', `${SITE}/api/confirm?token=t`))
+    expect(confirmSubject(1)).toBe('Confirm your ScholarAB deadline reminder')
+    expect(confirmSubject(3)).toBe('Confirm your ScholarAB deadline reminders')
   })
 })
 

@@ -30,6 +30,7 @@ vi.mock('../../lib/db/schema', () => ({
 }))
 vi.mock('drizzle-orm', () => ({
   eq: (a: unknown, b: unknown) => ({ eq: [a, b] }),
+  inArray: (a: unknown, b: unknown) => ({ inArray: [a, b] }),
 }))
 
 const { GET, POST } = await import('../../pages/api/unsubscribe')
@@ -234,5 +235,60 @@ describe('the unsubscribe count', () => {
     const res = await post({ token: 'abc' })
     expect(res.status).toBe(200)
     expect(await res.text()).toContain('Unsubscribed')
+  })
+})
+
+describe('the stop-all link at the foot of a bundled reminder', () => {
+  // Several reminders due the same day come in one email. Its Unsubscribe
+  // reads as "stop these emails", so it carries scope=all and the tokens of up
+  // to three of them, any one of which still proves the address.
+  const bundled = 'http://localhost/api/unsubscribe?scope=all&token=t1&token=t2&token=t3'
+
+  it('asks first on GET and deletes nothing', async () => {
+    const res = await get(bundled)
+    expect(res.status).toBe(200)
+    const html = await res.text()
+    expect(html).toContain('Stop all your reminders?')
+    for (const t of ['t1', 't2', 't3']) expect(html).toContain(`name="token" value="${t}"`)
+    expect(html).toContain('name="scope" value="all"')
+    expect(mockDelete).not.toHaveBeenCalled()
+    expect(mockSelectWhere).not.toHaveBeenCalled()
+  })
+
+  it('escapes every token it echoes back', async () => {
+    const html = await (await get('http://localhost/api/unsubscribe?scope=all&token=a&token=b"><script>x</script>')).text()
+    expect(html).not.toContain('<script>x</script>')
+  })
+
+  it('finds the address by any of its tokens when the page button posts them', async () => {
+    selectRows.push({ email: 'student@example.com' })
+    const body = new FormData()
+    for (const t of ['t1', 't2']) body.append('token', t)
+    body.set('scope', 'all')
+    await POST({ request: new Request('http://localhost/api/unsubscribe', { method: 'POST', body }) } as Parameters<typeof POST>[0])
+    expect(mockSelectWhere).toHaveBeenCalledWith({ inArray: ['token', ['t1', 't2']] })
+    expect(mockDeleteWhere).toHaveBeenCalledWith({ eq: ['email', 'student@example.com'] })
+  })
+
+  it('stops them all on a mail app one-click, which posts no fields of ours', async () => {
+    selectRows.push({ email: 'student@example.com' })
+    const res = await POST({
+      request: new Request(bundled, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: 'List-Unsubscribe=One-Click',
+      }),
+    } as Parameters<typeof POST>[0])
+    expect(res.status).toBe(200)
+    expect(mockSelectWhere).toHaveBeenCalledWith({ inArray: ['token', ['t1', 't2', 't3']] })
+    expect(mockDeleteWhere).toHaveBeenCalledWith({ eq: ['email', 'student@example.com'] })
+  })
+
+  it('reads at most three tokens', async () => {
+    await POST({
+      request: new Request(`${bundled}&token=t4&token=t5`, { method: 'POST', body: 'List-Unsubscribe=One-Click',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }),
+    } as Parameters<typeof POST>[0])
+    expect(mockSelectWhere).toHaveBeenCalledWith({ inArray: ['token', ['t1', 't2', 't3']] })
   })
 })
