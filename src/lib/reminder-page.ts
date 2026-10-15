@@ -23,6 +23,7 @@ export function reminderPage(title: string, body: string, status = 200): Respons
       button.secondary{background:transparent;color:#5A605B;border:1px solid #d8d4c8;font-weight:500;
         padding:10px 22px;margin-top:.75rem}
       button.secondary:hover{background:#F2F3F5;color:#141915}
+      .picks{text-align:left;margin:1rem auto;padding-left:1.25rem;color:#141915;font-size:.95rem;line-height:1.5}
       .fine{font-size:.8rem;color:#5C5F5B;margin-top:1rem}
       .fine a{color:#5C5F5B}
       .back{display:inline-block;margin-top:1.5rem;font-size:.9rem}

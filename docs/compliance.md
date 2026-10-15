@@ -50,7 +50,7 @@ because it is cheap and it is the honest handling:
 
 | CASL requirement | How it is met |
 |---|---|
-| Express consent | Double opt-in. `send-alerts.ts` filters `confirmed_at IS NOT NULL`; an unconfirmed row is never mailed a reminder. |
+| Express consent | Double opt-in. `send-alerts.ts` filters `confirmed_at IS NOT NULL`; an unconfirmed row is never mailed a reminder. The confirm page lists, by name, every other sign-up waiting on the same address from the last 7 days, and its button switches on exactly that list (since 2026-10-14). The token is the proof of the inbox, as it is for Delete all my data. |
 | Consent request is itself a CEM | The confirmation email carries the full footer and an unsubscribe link, because the address is attacker-supplied and unproven at that point. |
 | Sender identification | Name, locality, website and contact address in every message footer, valid well past 60 days. |
 | Mailing address | **Locality only.** This is the gap the position above covers. |

@@ -13,6 +13,10 @@ export async function mailKey(value: string): Promise<string> {
   const bytes = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(value));
   return Array.from(new Uint8Array(bytes), (b) => b.toString(16).padStart(2, '0')).join('');
 }
+/** How long an unconfirmed sign-up still counts as waiting on its person. The
+ * send-alerts sweep stops re-asking after this, and one confirm click switches
+ * on every waiting sign-up for the address within it. */
+export const PENDING_CONFIRM_DAYS = 7;
 /** The confirmation throttle's key for an address. Unsubscribe's "Delete all
  * my data" derives the same key to erase the row, so both go through here. */
 export function recipientKey(email: string): Promise<string> {

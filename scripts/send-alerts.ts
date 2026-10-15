@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Sends deadline reminder emails via Resend.
 // Run every six hours via GitHub Actions. Requires DATABASE_URL and RESEND_API_KEY.
-import { claimRecipient, deliverMail, mailKey, type MailPayload } from '../src/lib/mail-delivery.ts'
+import { claimRecipient, deliverMail, mailKey, PENDING_CONFIRM_DAYS, type MailPayload } from '../src/lib/mail-delivery.ts'
 import { albertaDate } from '../src/lib/calendar.ts'
 import { readFileSync } from 'fs'
 import { dirname, join } from 'path'
@@ -145,7 +145,7 @@ let errors = 0
  * row, swept on the next run.
  */
 const CONFIRM_SWEEP_COOLDOWN = '24 hours'
-const CONFIRM_SWEEP_MAX_AGE = '7 days'
+const CONFIRM_SWEEP_MAX_AGE = `${PENDING_CONFIRM_DAYS} days`
 
 async function sendPendingConfirmations(): Promise<void> {
   let pending: { id: number; email: string; token: string; item_type: string; item_id: number; cadence:string }[]
