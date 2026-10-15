@@ -1323,6 +1323,10 @@
     "hash": "4b8283aa1cf3ab53",
     "date": "2026-10-14"
   },
+  "/scholarships/alberta-blue-cross-away-from-home-bursary-macewan/": {
+    "hash": "d97b14eaa124ad19",
+    "date": "2026-10-14"
+  },
   "/scholarships/alberta-blue-cross-away-from-home-bursary-mount-royal/": {
     "hash": "046b4f100c21338f",
     "date": "2026-10-14"
@@ -1339,12 +1343,20 @@
     "hash": "c626e92fce046952",
     "date": "2026-10-08"
   },
+  "/scholarships/alberta-blue-cross-barrier-free-bursary-macewan/": {
+    "hash": "8a25ccca4879dd67",
+    "date": "2026-10-14"
+  },
   "/scholarships/alberta-blue-cross-barrier-free-learning-bursary/": {
     "hash": "14d678e2173f0c0f",
     "date": "2026-10-08"
   },
   "/scholarships/alberta-blue-cross-bursary-in-nursing/": {
     "hash": "cc8467bd3a7e5cc0",
+    "date": "2026-10-14"
+  },
+  "/scholarships/alberta-blue-cross-bursary-macewan/": {
+    "hash": "f5caa2c275f9bcb3",
     "date": "2026-10-14"
   },
   "/scholarships/alberta-blue-cross-computer-science-award-university-of-lethbridge/": {
@@ -1378,6 +1390,14 @@
   "/scholarships/alberta-blue-cross-indigenous-scholarship/": {
     "hash": "757bee006154e487",
     "date": "2026-10-08"
+  },
+  "/scholarships/alberta-blue-cross-media-and-it-entrance-bursary-nait/": {
+    "hash": "d23d828519edcd2c",
+    "date": "2026-10-14"
+  },
+  "/scholarships/alberta-blue-cross-nursing-bursary-macewan/": {
+    "hash": "a17c749dde6760f2",
+    "date": "2026-10-14"
   },
   "/scholarships/alberta-centennial-award/": {
     "hash": "9b87c52b2c63b034",
@@ -2979,6 +2999,10 @@
     "hash": "a7fb43af2f9c3328",
     "date": "2026-10-05"
   },
+  "/scholarships/carson-integrated-conservation-biology-entrance-bursary/": {
+    "hash": "dfdc458257b2b861",
+    "date": "2026-10-14"
+  },
   "/scholarships/carstairs-elks-business-and-entrepreneurship-scholarship/": {
     "hash": "a3caf7051702c722",
     "date": "2026-10-08"
@@ -3483,6 +3507,10 @@
     "hash": "0437c471c5e167d0",
     "date": "2026-09-27"
   },
+  "/scholarships/costco-wholesale-bursary-macewan/": {
+    "hash": "ddc72e2d516c69b6",
+    "date": "2026-10-14"
+  },
   "/scholarships/cotter-macgillivray-memorial-scholarship/": {
     "hash": "e1e0cfff7f9babfc",
     "date": "2026-10-08"
@@ -3829,6 +3857,10 @@
   },
   "/scholarships/dorothy-banks-memorial-scholarship/": {
     "hash": "7213a542f29bf173",
+    "date": "2026-10-14"
+  },
+  "/scholarships/dorothy-oneill-skills-canada-alberta-entrance-award-nait/": {
+    "hash": "73f6cba5095be5c2",
     "date": "2026-10-14"
   },
   "/scholarships/double-a-solutions-annual-scholarship/": {
@@ -4195,6 +4227,10 @@
     "hash": "32c34c0536196052",
     "date": "2026-10-14"
   },
+  "/scholarships/epcor-essential-elements-of-excellence-award/": {
+    "hash": "d23fe8f64ac310fd",
+    "date": "2026-10-14"
+  },
   "/scholarships/equestrian-canada-jumping-youth-bursary/": {
     "hash": "5e2c6df997a7a3ae",
     "date": "2026-10-14"
@@ -4210,6 +4246,10 @@
   "/scholarships/eric-and-nancy-bansgrove-bursary/": {
     "hash": "f4feab28c8fb65c7",
     "date": "2026-10-08"
+  },
+  "/scholarships/eric-mccorkell-memorial-entrance-bursary/": {
+    "hash": "7499ca77373fda96",
+    "date": "2026-10-14"
   },
   "/scholarships/eric-newell-deans-entrance-citation-in-native-studies/": {
     "hash": "98f1f01ba2049dd0",
@@ -4763,6 +4803,10 @@
     "hash": "8f1fa2ba8f44b22d",
     "date": "2026-10-14"
   },
+  "/scholarships/global-television-network-bursary/": {
+    "hash": "b7a6120377bd2bc6",
+    "date": "2026-10-14"
+  },
   "/scholarships/gloria-barron-prize-for-young-heroes/": {
     "hash": "453543598ac62954",
     "date": "2026-10-08"
@@ -5065,6 +5109,10 @@
   },
   "/scholarships/helen-hartman-smith-centennial-entrance-scholarship/": {
     "hash": "cabfcd58dfffea99",
+    "date": "2026-10-14"
+  },
+  "/scholarships/helen-seguin-memorial-award/": {
+    "hash": "e08777a69885b62b",
     "date": "2026-10-14"
   },
   "/scholarships/hendrickson-black-llp-post-secondary-scholarship/": {
@@ -6443,13 +6491,73 @@
     "hash": "05beb427b3945ca0",
     "date": "2026-10-08"
   },
+  "/scholarships/macewan-acupuncture-entrance-scholarship/": {
+    "hash": "fb1d833066deafd1",
+    "date": "2026-10-14"
+  },
   "/scholarships/macewan-all-in-for-youth-bursary/": {
     "hash": "ac7ea4dbb7188b10",
     "date": "2026-10-04"
   },
+  "/scholarships/macewan-correctional-services-entrance-scholarship/": {
+    "hash": "263d47fc110887e3",
+    "date": "2026-10-14"
+  },
+  "/scholarships/macewan-educational-assistant-entrance-scholarship/": {
+    "hash": "8345dd7ce8e330df",
+    "date": "2026-10-14"
+  },
+  "/scholarships/macewan-emergency-communications-scholarship/": {
+    "hash": "20d58a74bcb73a4f",
+    "date": "2026-10-14"
+  },
+  "/scholarships/macewan-massage-therapy-entrance-scholarship/": {
+    "hash": "e22ec1871f4107b6",
+    "date": "2026-10-14"
+  },
+  "/scholarships/macewan-police-and-investigations-scholarship/": {
+    "hash": "d2dab0db3fb19d02",
+    "date": "2026-10-14"
+  },
+  "/scholarships/macewan-psychiatric-nursing-entrance-scholarship/": {
+    "hash": "2616769df27e05aa",
+    "date": "2026-10-14"
+  },
   "/scholarships/macewan-residence-award/": {
     "hash": "513d8f894df43d6c",
     "date": "2026-10-09"
+  },
+  "/scholarships/macewan-social-work-entrance-scholarship/": {
+    "hash": "7ce720b60906bc6f",
+    "date": "2026-10-14"
+  },
+  "/scholarships/macewan-student-success-bursary-for-arts-and-science/": {
+    "hash": "c9d1ad97480520d0",
+    "date": "2026-10-14"
+  },
+  "/scholarships/macewan-student-success-bursary-for-business/": {
+    "hash": "ea15795f3f5fcff8",
+    "date": "2026-10-14"
+  },
+  "/scholarships/macewan-student-success-bursary-for-fine-arts-and-communications/": {
+    "hash": "56d1b933f1f2c304",
+    "date": "2026-10-14"
+  },
+  "/scholarships/macewan-student-success-bursary-for-health-and-community-studies/": {
+    "hash": "e9d9af457f86a5d0",
+    "date": "2026-10-14"
+  },
+  "/scholarships/macewan-students-association-bursary/": {
+    "hash": "d627d734e2e59fb3",
+    "date": "2026-10-14"
+  },
+  "/scholarships/macewan-therapist-assistant-scholarship-ptaota/": {
+    "hash": "c9de394c98641f2d",
+    "date": "2026-10-14"
+  },
+  "/scholarships/macewan-therapist-assistant-scholarship-slpa/": {
+    "hash": "451912dedabe90b3",
+    "date": "2026-10-14"
   },
   "/scholarships/macewan-university-chancellors-scholarship/": {
     "hash": "5e5ac0feed8ea913",
@@ -6481,6 +6589,10 @@
   },
   "/scholarships/mactavish-memorial-science-entrance-bursary/": {
     "hash": "61ea8edd4cb3a3fc",
+    "date": "2026-10-14"
+  },
+  "/scholarships/mad-hatters-gala-scholarship/": {
+    "hash": "a148c8be909149fb",
     "date": "2026-10-14"
   },
   "/scholarships/madd-canada-youth-bursary-fund/": {
@@ -9051,6 +9163,10 @@
     "hash": "93fd98c7d0dadcec",
     "date": "2026-10-13"
   },
+  "/scholarships/terry-patrick-memorial-award/": {
+    "hash": "0067af5aa1d6b8c1",
+    "date": "2026-10-14"
+  },
   "/scholarships/the-excellence-award/": {
     "hash": "aea1e1138c359b8c",
     "date": "2026-10-08"
@@ -9741,6 +9857,10 @@
   },
   "/scholarships/vera-richards-macdonald-entrance-leadership-scholarship/": {
     "hash": "5e032fb15a4e62ec",
+    "date": "2026-10-14"
+  },
+  "/scholarships/veres-indigenous-nursing-bursary-macewan/": {
+    "hash": "3c9510c54316591e",
     "date": "2026-10-14"
   },
   "/scholarships/verna-jean-maisie-hawkins-scholarship/": {

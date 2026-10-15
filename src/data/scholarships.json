@@ -94447,5 +94447,1167 @@
       "apprenticeship": false,
       "extracurriculars": []
     }
+  },
+  {
+    "id": 2509,
+    "title": "Mad Hatter's Gala Scholarship",
+    "amount": "$1,000",
+    "deadline": null,
+    "audience": "Grade 12 students entering Communication Studies or Design at MacEwan University",
+    "url": "https://www.macewan.ca/apply-enrol/fees-finances/scholarships-awards-bursaries/search/details/?sabid=SAB_922000000770",
+    "category": "Arts",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "There is no separate application. The program picks the full-time first-year students with the highest admission averages in the regular admission category. You must take at least 12 credits a term.",
+    "active": true,
+    "description": "Fifty-two $1,000 scholarships for first-year communication and design students with the strongest entrance grades.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "MacEwan University"
+      ],
+      "fields": [
+        "Communications",
+        "Design"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2510,
+    "title": "MacEwan Acupuncture Entrance Scholarship",
+    "amount": "$1,500",
+    "deadline": null,
+    "audience": "Grade 12 students entering the Acupuncture diploma at MacEwan University",
+    "url": "https://www.macewan.ca/apply-enrol/fees-finances/scholarships-awards-bursaries/search/details/?sabid=SAB_922000000536",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "There is no separate application. The program picks the full-time first-year students with the highest admission averages in the regular admission category.",
+    "active": true,
+    "description": "Two $1,500 scholarships for the top new students in the Acupuncture diploma.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "MacEwan University"
+      ],
+      "fields": [
+        "Health"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2511,
+    "title": "MacEwan Correctional Services Entrance Scholarship",
+    "amount": "$600",
+    "deadline": null,
+    "audience": "Grade 12 students entering Correctional Services at MacEwan University",
+    "url": "https://www.macewan.ca/apply-enrol/fees-finances/scholarships-awards-bursaries/search/details/?sabid=SAB_922000000545",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "There is no separate application. The program picks the full-time first-year students with the highest admission averages in the regular admission category.",
+    "active": true,
+    "description": "A $600 scholarship for the top new student in the Correctional Services program.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "MacEwan University"
+      ],
+      "fields": [
+        "Justice"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2512,
+    "title": "MacEwan Emergency Communications Scholarship",
+    "amount": "$1,500",
+    "deadline": null,
+    "audience": "Grade 12 students entering the Emergency Communications and Response certificate at MacEwan University",
+    "url": "https://www.macewan.ca/apply-enrol/fees-finances/scholarships-awards-bursaries/search/details/?sabid=SAB_922000000562",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "There is no separate application. The program picks the full-time first-year students with the highest admission averages in the regular admission category.",
+    "active": true,
+    "description": "A $1,500 scholarship for the top new student in Emergency Communications and Response.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "MacEwan University"
+      ],
+      "fields": [
+        "Public Safety"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2513,
+    "title": "MacEwan Massage Therapy Entrance Scholarship",
+    "amount": "$1,500",
+    "deadline": null,
+    "audience": "Grade 12 students entering the Massage Therapy diploma at MacEwan University",
+    "url": "https://www.macewan.ca/apply-enrol/fees-finances/scholarships-awards-bursaries/search/details/?sabid=SAB_922000000602",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "There is no separate application. The program picks the full-time first-year students with the highest admission averages in the regular admission category.",
+    "active": true,
+    "description": "A $1,500 scholarship for the top new student in the Massage Therapy diploma.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "MacEwan University"
+      ],
+      "fields": [
+        "Health"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2514,
+    "title": "MacEwan Police and Investigations Scholarship",
+    "amount": "$1,500",
+    "deadline": null,
+    "audience": "Grade 12 students entering Police and Investigations at MacEwan University",
+    "url": "https://www.macewan.ca/apply-enrol/fees-finances/scholarships-awards-bursaries/search/details/?sabid=SAB_922000000607",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "There is no separate application. The program picks the full-time first-year students with the highest admission averages in the regular admission category.",
+    "active": true,
+    "description": "A $1,500 scholarship for the top new student in the Police and Investigations diploma.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "MacEwan University"
+      ],
+      "fields": [
+        "Justice"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2515,
+    "title": "MacEwan Psychiatric Nursing Entrance Scholarship",
+    "amount": "$1,500",
+    "deadline": null,
+    "audience": "Canadian Grade 12 students entering the Psychiatric Nursing diploma at MacEwan University",
+    "url": "https://www.macewan.ca/apply-enrol/fees-finances/scholarships-awards-bursaries/search/details/?sabid=SAB_922000000620",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "There is no separate application. The program picks the full-time first-year students with the highest admission averages in the regular admission category. Post-secondary course substitutions do not count toward the average.",
+    "active": true,
+    "description": "Seven $1,500 scholarships for the top domestic students entering the Psychiatric Nursing diploma.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "MacEwan University"
+      ],
+      "fields": [
+        "Nursing"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2516,
+    "title": "MacEwan Social Work Entrance Scholarship",
+    "amount": "$1,000",
+    "deadline": null,
+    "audience": "Grade 12 students entering the Social Work diploma at MacEwan University",
+    "url": "https://www.macewan.ca/apply-enrol/fees-finances/scholarships-awards-bursaries/search/details/?sabid=SAB_922000000621",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "There is no separate application. The program picks the full-time first-year students with the highest admission averages in the regular admission category.",
+    "active": true,
+    "description": "Two $1,000 scholarships for the top new students in the Social Work diploma.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "MacEwan University"
+      ],
+      "fields": [
+        "Social Work"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2517,
+    "title": "MacEwan Educational Assistant Entrance Scholarship",
+    "amount": "$1,500",
+    "deadline": null,
+    "audience": "Grade 12 students entering the Special Needs Educational Assistant certificate at MacEwan University",
+    "url": "https://www.macewan.ca/apply-enrol/fees-finances/scholarships-awards-bursaries/search/details/?sabid=SAB_922000000603",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "There is no separate application. The program picks the full-time first-year students with the highest admission averages in the regular admission category.",
+    "active": true,
+    "description": "A $1,500 scholarship for the top new student in the Special Needs Educational Assistant program.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "MacEwan University"
+      ],
+      "fields": [
+        "Education"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2518,
+    "title": "MacEwan Therapist Assistant Scholarship (PTA/OTA)",
+    "amount": "$1,500",
+    "deadline": null,
+    "audience": "Grade 12 students entering the Physical or Occupational Therapist Assistant major at MacEwan University",
+    "url": "https://www.macewan.ca/apply-enrol/fees-finances/scholarships-awards-bursaries/search/details/?sabid=SAB_922000000915",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "There is no separate application. The program picks the full-time first-year students with the highest admission averages in the regular admission category.",
+    "active": true,
+    "description": "A $1,500 scholarship for the top new student in the physical and occupational therapist assistant major.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "MacEwan University"
+      ],
+      "fields": [
+        "Health"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2519,
+    "title": "MacEwan Therapist Assistant Scholarship (SLPA)",
+    "amount": "$1,500",
+    "deadline": null,
+    "audience": "Grade 12 students entering the Speech Language Pathologist Assistant major at MacEwan University",
+    "url": "https://www.macewan.ca/apply-enrol/fees-finances/scholarships-awards-bursaries/search/details/?sabid=SAB_922000000947",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "There is no separate application. The program picks the full-time first-year students with the highest admission averages in the regular admission category.",
+    "active": true,
+    "description": "A $1,500 scholarship for the top new student in the speech language pathologist assistant major.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "MacEwan University"
+      ],
+      "fields": [
+        "Health"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2520,
+    "title": "Alberta Blue Cross Away from Home Bursary (MacEwan)",
+    "amount": "$1,250",
+    "deadline": null,
+    "audience": "Grade 12 students with financial need moving from outside the Edmonton region to study at MacEwan University",
+    "url": "https://www.macewan.ca/apply-enrol/fees-finances/scholarships-awards-bursaries/search/details/?sabid=SAB_922000001222",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply in myStudentSystem under Financial Aid once you are enrolled. Applications open in the first week of the fall term and each award shows its closing date there. Write up to 250 words on what the bursary would mean for you. The recipient meets someone from Alberta Blue Cross for coffee.",
+    "active": true,
+    "description": "A $1,250 bursary for a new full-time MacEwan student who moved from outside the Edmonton Metropolitan region.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "MacEwan University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2521,
+    "title": "Alberta Blue Cross Barrier-Free Bursary (MacEwan)",
+    "amount": "$1,250",
+    "deadline": null,
+    "audience": "Grade 12 students with a disability and financial need entering a degree or diploma at MacEwan University",
+    "url": "https://www.macewan.ca/apply-enrol/fees-finances/scholarships-awards-bursaries/search/details/?sabid=SAB_922000001224",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply in myStudentSystem under Financial Aid once you are enrolled. Applications open in the first week of the fall term and each award shows its closing date there. Write up to 250 words on what the bursary would mean for you. The recipient meets someone from Alberta Blue Cross for coffee.",
+    "active": true,
+    "description": "A $1,250 bursary for a new full-time MacEwan student with a disability.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "MacEwan University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2522,
+    "title": "Alberta Blue Cross Bursary (MacEwan)",
+    "amount": "$1,250",
+    "deadline": null,
+    "audience": "Grade 12 students with financial need entering a degree or diploma at MacEwan University",
+    "url": "https://www.macewan.ca/apply-enrol/fees-finances/scholarships-awards-bursaries/search/details/?sabid=SAB_922000001217",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply in myStudentSystem under Financial Aid once you are enrolled. Applications open in the first week of the fall term and each award shows its closing date there. Write up to 250 words on what the bursary would mean for you. The recipient meets someone from Alberta Blue Cross for coffee.",
+    "active": true,
+    "description": "A $1,250 bursary for a new full-time MacEwan degree or diploma student with financial need.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "MacEwan University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2523,
+    "title": "Alberta Blue Cross Nursing Bursary (MacEwan)",
+    "amount": "$1,250",
+    "deadline": null,
+    "audience": "Grade 12 students with financial need entering the Bachelor of Science in Nursing at MacEwan University",
+    "url": "https://www.macewan.ca/apply-enrol/fees-finances/scholarships-awards-bursaries/search/details/?sabid=SAB_922000001223",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply in myStudentSystem under Financial Aid once you are enrolled. Applications open in the first week of the fall term and each award shows its closing date there. Write up to 250 words on what the bursary would mean for you. The recipient meets someone from Alberta Blue Cross for coffee.",
+    "active": true,
+    "description": "A $1,250 bursary for a new full-time MacEwan nursing student with financial need.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "MacEwan University"
+      ],
+      "fields": [
+        "Nursing"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2524,
+    "title": "Costco Wholesale Bursary (MacEwan)",
+    "amount": "$4,000",
+    "deadline": null,
+    "audience": "Canadian Grade 12 graduates with a 70% average and financial need entering business at MacEwan University",
+    "url": "https://www.macewan.ca/apply-enrol/fees-finances/scholarships-awards-bursaries/search/details/?sabid=SAB_922000000996",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply in myStudentSystem under Financial Aid once you are enrolled. Applications open in the first week of the fall term and each award shows its closing date there. You need a 70% high school average and Canadian citizenship. Greater Edmonton residents get preference.",
+    "active": true,
+    "description": "A $4,000 bursary for a first-year MacEwan business student with financial need.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "MacEwan University"
+      ],
+      "fields": [
+        "Business"
+      ],
+      "minAverage": 70,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2525,
+    "title": "EPCOR Essential Elements of Excellence Award",
+    "amount": "$1,000",
+    "deadline": null,
+    "audience": "Grade 12 students from outside Edmonton and Calgary who work on conservation or community projects, entering MacEwan University",
+    "url": "https://www.macewan.ca/apply-enrol/fees-finances/scholarships-awards-bursaries/search/details/?sabid=SAB_922000000519",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply in myStudentSystem under Financial Aid once you are enrolled. Applications open in the first week of the fall term and each award shows its closing date there. Students from outside the Edmonton and Calgary metro areas qualify, with rural applicants first. Send two reference letters.",
+    "active": true,
+    "description": "Eight $1,000 awards for new MacEwan students from rural and small-town Alberta who protect the environment or improve their community.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "MacEwan University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer",
+        "environment"
+      ]
+    }
+  },
+  {
+    "id": 2526,
+    "title": "Eric McCorkell Memorial Entrance Bursary",
+    "amount": "$500",
+    "deadline": null,
+    "audience": "Grade 12 graduates with financial need entering a two-year or longer program at MacEwan University",
+    "url": "https://www.macewan.ca/apply-enrol/fees-finances/scholarships-awards-bursaries/search/details/?sabid=SAB_922000000559",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply in myStudentSystem under Financial Aid once you are enrolled. Applications open in the first week of the fall term and each award shows its closing date there.",
+    "active": true,
+    "description": "Two $500 bursaries for first-year MacEwan students with financial need in a program of two years or more.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "MacEwan University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2527,
+    "title": "Global Television Network Bursary",
+    "amount": "$1,000",
+    "deadline": null,
+    "audience": "Grade 12 students entering theatre, design or music programs at MacEwan University",
+    "url": "https://www.macewan.ca/apply-enrol/fees-finances/scholarships-awards-bursaries/search/details/?sabid=SAB_922000000492",
+    "category": "Arts",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply in myStudentSystem under Financial Aid once you are enrolled. Applications open in the first week of the fall term and each award shows its closing date there.",
+    "active": true,
+    "description": "Sixteen $1,000 bursaries for new MacEwan students in theatre, theatre production, design or music.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "MacEwan University"
+      ],
+      "fields": [
+        "Performing Arts",
+        "Music",
+        "Design"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2528,
+    "title": "Helen Seguin Memorial Award",
+    "amount": "$1,000",
+    "deadline": null,
+    "audience": "Grade 12 students who have pushed through hardship, entering the Library and Information Technology diploma at MacEwan University",
+    "url": "https://www.macewan.ca/apply-enrol/fees-finances/scholarships-awards-bursaries/search/details/?sabid=SAB_922000001275",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply in myStudentSystem under Financial Aid once you are enrolled. Applications open in the first week of the fall term and each award shows its closing date there. Write up to 250 words about the adversity you overcame to stay in school. Part-time students qualify too.",
+    "active": true,
+    "description": "A $1,000 award for a new Library and Information Technology student who kept going with school through adversity.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "MacEwan University"
+      ],
+      "fields": [
+        "Library"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2529,
+    "title": "Veres Indigenous Nursing Bursary (MacEwan)",
+    "amount": "Up to $5,000 a term, renewable",
+    "deadline": null,
+    "audience": "Indigenous Alberta Grade 12 students with financial need entering the Bachelor of Science in Nursing at MacEwan University",
+    "url": "https://www.macewan.ca/apply-enrol/fees-finances/scholarships-awards-bursaries/search/details/?sabid=SAB_922000001136",
+    "category": "Indigenous",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply in myStudentSystem under Financial Aid once you are enrolled. Applications open in the first week of the fall term and each award shows its closing date there. Students in their first term get preference. It renews each term with a 2.0 GPA for up to 12 terms, paying up to $2,500 in spring and summer.",
+    "active": true,
+    "description": "A renewable bursary paying up to $5,000 a term through a MacEwan nursing degree for an Indigenous student with financial need.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "MacEwan University"
+      ],
+      "fields": [
+        "Nursing"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2530,
+    "title": "MacEwan Student Success Bursary for Arts and Science",
+    "amount": "Varies",
+    "deadline": null,
+    "audience": "Grade 12 students with financial need accepted to Arts or Science at MacEwan University",
+    "url": "https://www.macewan.ca/apply-enrol/fees-finances/scholarships-awards-bursaries/search/details/?sabid=SAB_922000000638",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply in myStudentSystem under Financial Aid once you are enrolled. Applications open in the first week of the fall term and each award shows its closing date there. Conditional acceptance is enough to qualify.",
+    "active": true,
+    "description": "A bursary for new Bachelor of Arts and Bachelor of Science students with financial need.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "MacEwan University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2531,
+    "title": "MacEwan Student Success Bursary for Fine Arts and Communications",
+    "amount": "Varies",
+    "deadline": null,
+    "audience": "Grade 12 students with financial need accepted to Fine Arts and Communications at MacEwan University",
+    "url": "https://www.macewan.ca/apply-enrol/fees-finances/scholarships-awards-bursaries/search/details/?sabid=SAB_922000000639",
+    "category": "Arts",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply in myStudentSystem under Financial Aid once you are enrolled. Applications open in the first week of the fall term and each award shows its closing date there. Conditional acceptance is enough to qualify.",
+    "active": true,
+    "description": "A bursary for new students in the Faculty of Fine Arts and Communications with financial need.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "MacEwan University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2532,
+    "title": "MacEwan Student Success Bursary for Health and Community Studies",
+    "amount": "Varies",
+    "deadline": null,
+    "audience": "Grade 12 students with financial need accepted to Health and Community Studies at MacEwan University",
+    "url": "https://www.macewan.ca/apply-enrol/fees-finances/scholarships-awards-bursaries/search/details/?sabid=SAB_922000000640",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply in myStudentSystem under Financial Aid once you are enrolled. Applications open in the first week of the fall term and each award shows its closing date there. Conditional acceptance is enough to qualify.",
+    "active": true,
+    "description": "A bursary for new students in the Faculty of Health and Community Studies with financial need.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "MacEwan University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2533,
+    "title": "MacEwan Student Success Bursary for Business",
+    "amount": "Varies",
+    "deadline": null,
+    "audience": "Grade 12 students with financial need accepted to the School of Business at MacEwan University",
+    "url": "https://www.macewan.ca/apply-enrol/fees-finances/scholarships-awards-bursaries/search/details/?sabid=SAB_922000000641",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply in myStudentSystem under Financial Aid once you are enrolled. Applications open in the first week of the fall term and each award shows its closing date there. Conditional acceptance is enough to qualify.",
+    "active": true,
+    "description": "A bursary for new School of Business students with financial need.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "MacEwan University"
+      ],
+      "fields": [
+        "Business"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2534,
+    "title": "MacEwan Students' Association Bursary",
+    "amount": "Up to $3,000",
+    "deadline": null,
+    "audience": "Grade 12 students with financial need accepted to any program at MacEwan University",
+    "url": "https://www.macewan.ca/apply-enrol/fees-finances/scholarships-awards-bursaries/search/details/?sabid=SAB_922000000642",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply in myStudentSystem under Financial Aid once you are enrolled. Applications open in the first week of the fall term and each award shows its closing date there. You need final acceptance to a certificate, diploma or degree program.",
+    "active": true,
+    "description": "A bursary for new MacEwan students with financial need, up to $3,000 in a degree or $2,000 in a diploma or certificate.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "MacEwan University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2535,
+    "title": "Terry Patrick Memorial Award",
+    "amount": "$1,500",
+    "deadline": null,
+    "audience": "Grade 12 students active in their community entering Correctional Services at MacEwan University",
+    "url": "https://www.macewan.ca/apply-enrol/fees-finances/scholarships-awards-bursaries/search/details/?sabid=SAB_922000000523",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply in myStudentSystem under Financial Aid once you are enrolled. Applications open in the first week of the fall term and each award shows its closing date there.",
+    "active": true,
+    "description": "Two $1,500 awards for new Correctional Services students who show optimism, generosity and community involvement.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "MacEwan University"
+      ],
+      "fields": [
+        "Justice"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2536,
+    "title": "Alberta Blue Cross Media and IT Entrance Bursary (NAIT)",
+    "amount": "$1,500",
+    "deadline": "2027-03-31",
+    "audience": "Grade 12 students with financial need entering a School of Media and Information Technology program at NAIT",
+    "url": "https://nait.academicworks.ca/opportunities/13756",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply for admission, then fill in the application in MyAwards Central by March 31, 2027. Satisfactory marks are also required.",
+    "active": true,
+    "description": "A $1,500 entrance bursary for new NAIT media and information technology diploma or degree students with financial need.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Northern Alberta Institute of Technology"
+      ],
+      "fields": [
+        "Computer Science",
+        "Media"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2537,
+    "title": "Carson Integrated Conservation Biology Entrance Bursary",
+    "amount": "$1,000",
+    "deadline": "2027-03-31",
+    "audience": "Grade 12 students with financial need entering Conservation Biology at NAIT",
+    "url": "https://nait.academicworks.ca/opportunities/13765",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply for admission, then fill in the application in MyAwards Central by March 31, 2027.",
+    "active": true,
+    "description": "A $1,000 entrance bursary for new NAIT Conservation Biology students with financial need.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Northern Alberta Institute of Technology"
+      ],
+      "fields": [
+        "Environmental Science",
+        "Biology"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2538,
+    "title": "Dorothy O'Neill Skills Canada Alberta Entrance Award (NAIT)",
+    "amount": "Varies",
+    "deadline": null,
+    "audience": "Gold, silver and bronze medal winners at the Skills Canada Alberta provincial competition who go on to NAIT",
+    "url": "https://nait.academicworks.ca/opportunities/13183",
+    "category": "Trades",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Medal winners get an offer letter at the provincial competition. Register at NAIT in the same field within five years and attach the letter in MyAwards Central to collect it.",
+    "active": true,
+    "description": "An entrance award for Skills Canada Alberta medal winners who study at NAIT in the area where they won.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Northern Alberta Institute of Technology"
+      ],
+      "fields": [
+        "trades"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
   }
 ]
