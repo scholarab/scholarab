@@ -2076,7 +2076,7 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
 .sab-consent-copy { min-width: 0; }
 .sab-consent-title { font-weight: 700; font-size: 15px; margin: 0; }
 .sab-consent-body { font-size: var(--fs-ui); line-height: 1.5; margin: 4px 0 0; color: rgba(255, 255, 255, 0.72); }
-.sab-consent-body a { color: var(--brand); text-underline-offset: 3px; }
+.sab-consent-body a { color: var(--brand); text-decoration: underline; text-underline-offset: 3px; }
 .sab-consent-actions { display: flex; gap: 10px; flex-shrink: 0; }
 .sab-consent-btn {
   font: inherit; font-size: var(--fs-ui); font-weight: 700; cursor: pointer;

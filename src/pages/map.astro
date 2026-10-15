@@ -492,25 +492,28 @@ const canonical = 'https://www.scholarab.ca/map/';
   }
 
   /* Pins: a mint dot sized by the number of schools, the count inside it,
-     the name beside it. Each is a 44px target, wider than it looks. */
+     the name beside it. The link's own box is the dot's spot, at least 24px
+     square, centred on the place; the 44px pseudo-element is what fingers
+     get. The name is positioned off that box rather than laid out in it: on
+     a phone the names of neighbouring towns overlap, and when they were part
+     of the link box PageSpeed's target-size check read six pins as obscured
+     by the next one (2026-10-14). Nothing moves: the dot's centre is the
+     same point and the name keeps its 8px (5px above or below) from it. */
   .am-pins { position: absolute; inset: 0; }
   .am-pin {
-    position: absolute; z-index: 1; display: flex; align-items: center; gap: 8px;
-    transform: translate(calc(var(--s) / -2), -50%);
+    position: absolute; z-index: 1; display: grid; place-items: center;
+    width: max(24px, var(--s)); height: max(24px, var(--s));
+    transform: translate(-50%, -50%);
     color: var(--am-soft); text-decoration: none; white-space: nowrap;
   }
-  .am-pin::before { content: ''; position: absolute; left: calc(var(--s) / 2 - 22px); top: 50%; width: 44px; height: 44px; margin-top: -22px; }
-  .am-pin-left { flex-direction: row-reverse; transform: translate(calc(-100% + var(--s) / 2), -50%); }
-  .am-pin-left::before { left: auto; right: calc(var(--s) / 2 - 22px); }
-  .am-pin-above, .am-pin-below { gap: 5px; }
-  .am-pin-above { flex-direction: column-reverse; transform: translate(-50%, calc(-100% + var(--s) / 2)); }
-  .am-pin-below { flex-direction: column; transform: translate(-50%, calc(var(--s) / -2)); }
+  .am-pin::before { content: ''; position: absolute; left: 50%; top: 50%; width: 44px; height: 44px; margin: -22px 0 0 -22px; }
+  .am-pin-label { position: absolute; left: calc(50% + var(--s) / 2 + 8px); top: 50%; transform: translateY(-50%); }
+  .am-pin-left .am-pin-label { left: auto; right: calc(50% + var(--s) / 2 + 8px); }
+  .am-pin-above .am-pin-label, .am-pin-below .am-pin-label { left: 50%; top: auto; transform: translateX(-50%); }
+  .am-pin-above .am-pin-label { bottom: calc(50% + var(--s) / 2 + 5px); }
+  .am-pin-below .am-pin-label { top: calc(50% + var(--s) / 2 + 5px); }
   /* Under the dot, ending at it: Cochrane, with Calgary's dot to its right. */
-  .am-pin-below-left { flex-direction: column; align-items: flex-end; gap: 5px; transform: translate(calc(-100% + var(--s) / 2), calc(var(--s) / -2)); }
-  .am-pin-below-left::before { left: auto; right: calc(var(--s) / 2 - 22px); top: calc(var(--s) / 2 - 22px); margin: 0; }
-  .am-pin-above::before, .am-pin-below::before { left: 50%; margin: 0 0 0 -22px; }
-  .am-pin-above::before { top: auto; bottom: calc(var(--s) / 2 - 22px); }
-  .am-pin-below::before { top: calc(var(--s) / 2 - 22px); }
+  .am-pin-below-left .am-pin-label { left: auto; right: calc(50% - var(--s) / 2); top: calc(50% + var(--s) / 2 + 5px); transform: none; }
 
   /* The key, in the dark beside the province on a wide screen. */
   .am-legend {

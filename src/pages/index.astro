@@ -1240,16 +1240,18 @@ const carousels = [
   .sab-scopes-prev { left: 16px; }
   .sab-scopes-next { right: 16px; }
   /* Each dot is drawn 8px but taps as 24px: the bare 8px buttons 10px apart
-     missed the 24px target floor (critique 2026-09-23). Same 18px pitch.
+     missed the 24px target floor (critique 2026-09-23). The pitch is 24px,
+     the buttons' own width, because at 18px the tap areas overlapped and
+     PageSpeed's target-size check failed on every dot (2026-10-14).
      They sit on the photo now, over its bottom shade, so they are white. */
   .sab-scopes-dots {
     position: absolute; z-index: 2; left: 50%; bottom: 10px; transform: translateX(-50%);
     display: flex; justify-content: center; gap: 0;
   }
   .sab-scopes-dot {
-    /* 44px tall, the 24px pitch kept: ten 44px-wide dots would not fit a
-       phone. The dot itself sits where it did (bottom moved 20px to 10px). */
-    display: grid; place-items: center; width: 24px; height: 44px; margin: 0 -3px;
+    /* 44px tall, 24px wide: ten 44px-wide dots would not fit a phone. The
+       dot itself sits where it did (bottom moved 20px to 10px). */
+    display: grid; place-items: center; width: 24px; height: 44px; margin: 0;
     padding: 0; border: 0; background: none; cursor: pointer;
   }
   .sab-scopes-dot::before {
