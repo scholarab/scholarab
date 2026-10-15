@@ -86348,5 +86348,4053 @@
         "work"
       ]
     }
+  },
+  {
+    "id": 2302,
+    "title": "Algoma University Alumni Award IV",
+    "amount": "$2,000",
+    "deadline": "2027-06-30",
+    "audience": "Grade 12 students applying to Algoma University who can write a strong essay",
+    "url": "https://algomau.ca/students/tuition-scholarships-financial-aid/awards-scholarships/entrance-scholarships/",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Send the application form with a 500-word essay in English by June 30. Write about what sets Algoma apart, the history behind its Thunderbird logo, and why you chose Algoma and your field of study. It is paid once.",
+    "active": true,
+    "description": "A $2,000 Algoma University entrance award that goes to the best essay from an incoming student.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Algoma University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "writing"
+      ]
+    }
+  },
+  {
+    "id": 2303,
+    "title": "Brock University OneApp Awards",
+    "amount": "Up to $20,000",
+    "deadline": "2027-04-15",
+    "audience": "Grade 12 students applying to Brock University, with awards for marks, activities and financial need",
+    "url": "https://discover.brocku.ca/awards/",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Fill in OneApp as early as you can once it opens in the fall. You do not need to be accepted to Brock before you apply. Merit awards go up to $20,000 and bursaries for financial need go up to $3,000.",
+    "active": true,
+    "description": "Brock University's single application for more than $1 million in entrance scholarships and bursaries.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Brock University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2304,
+    "title": "Brock Leaders Citizenship Society Award",
+    "amount": "$2,000 a year, $8,000 in all",
+    "deadline": "2027-04-15",
+    "audience": "Grade 12 students with an 85% average, strong leadership and community involvement entering Brock University",
+    "url": "https://discover.brocku.ca/awards/",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Fill in the Brock Leaders Citizenship Award application by April 15. Winners hear in the spring and join the Brock Leaders Citizenship Society on arrival. The $2,000 renews each year you stay an active member.",
+    "active": true,
+    "description": "A renewable Brock University award for top students who lead in their school and community, with a place in a campus leadership society.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Brock University"
+      ],
+      "fields": [],
+      "minAverage": 85,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership",
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2305,
+    "title": "Brock Goodman School of Business Scholarship",
+    "amount": "Up to $8,000",
+    "deadline": "2027-04-15",
+    "audience": "Grade 12 students with an 80% average entering the Goodman School of Business at Brock University",
+    "url": "https://discover.brocku.ca/awards/",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply through OneApp by April 15. You need at least two of these, leadership in school and community or entrepreneurial talent, excellent grades, and financial need. It may renew with a 75% average at Brock.",
+    "active": true,
+    "description": "Brock University business scholarships worth up to $8,000 for students who combine two of leadership, high marks and financial need.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Brock University"
+      ],
+      "fields": [
+        "Business"
+      ],
+      "minAverage": 80,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2306,
+    "title": "Brock Scholars Award",
+    "amount": "$3,000 to $7,000 over four years",
+    "deadline": null,
+    "audience": "Grade 12 students with an 85% average entering a first degree at Brock University straight from high school",
+    "url": "https://discover.brocku.ca/awards/",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "No application. Offers come with admission and are rechecked against final grades. An 85 to 89.9% average earns $3,000, 90 to 94.9% earns $5,000 and 95% or higher earns $7,000, most of it in first year with $500 renewals. Renewals need an 80% average on 4.0 credits.",
+    "active": true,
+    "description": "Automatic Brock University entrance scholarships for students who pay domestic tuition, sized by admission average.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Brock University"
+      ],
+      "fields": [],
+      "minAverage": 85,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2307,
+    "title": "Brock International Baccalaureate Scholars Award",
+    "amount": "$1,000",
+    "deadline": null,
+    "audience": "Grade 12 students finishing the IB diploma and starting full-time study at Brock University",
+    "url": "https://discover.brocku.ca/awards/",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "No application. You need the full IB diploma and a full-time course load at Brock. Students from every province can receive it.",
+    "active": true,
+    "description": "A $1,000 Brock University award for incoming students who complete the International Baccalaureate diploma.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Brock University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2308,
+    "title": "Carleton Calgary Alumni Award",
+    "amount": "$5,000",
+    "deadline": "2027-05-31",
+    "audience": "Calgary-area Grade 12 students with an 85% average applying to Carleton University",
+    "url": "https://carleton.ca/awards/awards/bursaries/entrance-bursaries/",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "Calgary",
+    "notes": "Apply by May 31, then receive and accept an offer of admission and enrol at Carleton full time that fall. The committee looks at your marks, your interests and activities in high school, and your financial need.",
+    "active": true,
+    "description": "A $5,000 first-year award from Carleton alumni in Calgary for one student heading to Carleton from a Calgary-area high school.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Carleton University"
+      ],
+      "fields": [],
+      "minAverage": 85,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2309,
+    "title": "Carleton Leadership Entrance Bursaries",
+    "amount": "Up to full tuition for four years",
+    "deadline": "2027-05-01",
+    "audience": "Canadian Grade 12 students with financial need and strong activities, offered admission to Carleton University",
+    "url": "https://carleton.ca/awards/awards/bursaries/entrance-bursaries/",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "One application in Carleton Central by May 1 covers every bursary in the group. They include the Donald R. Yeomans and three Shaver bursaries at full tuition for four years, the Dunsmore Family and CIBC bursaries at $5,000 a year, the Linda Dunsmore Brown bursary at $3,000 a year, the Alumni Association Leadership Bursary and the Nicholson science bursary. You must be applying for government student aid.",
+    "active": true,
+    "description": "Carleton University entrance bursaries for students in need who lead in school activities, community service or volunteer work.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Carleton University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership",
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2310,
+    "title": "Carleton David Muir Aerospace Scholarship",
+    "amount": "$7,500 first year, up to $19,500 in all",
+    "deadline": "2027-04-03",
+    "audience": "Grade 12 students with a 90% average entering Mechanical and Aerospace Engineering programs at Carleton University",
+    "url": "https://carleton.ca/awards/awards/scholarships/entrance-scholarships/",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply by April 3. It covers Aerospace, Mechanical, Biomedical and Mechanical, and Sustainable and Renewable Energy Engineering. The committee weighs your school and community activities, and it renews at $3,000 or $4,000 a year. It replaces any renewable entrance scholarship you were offered.",
+    "active": true,
+    "description": "One Carleton University scholarship for a top student starting a mechanical or aerospace engineering degree.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Carleton University"
+      ],
+      "fields": [
+        "Engineering"
+      ],
+      "minAverage": 90,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2311,
+    "title": "Carleton Ronald and Deanna Biggs Scholarship",
+    "amount": "Amount varies",
+    "deadline": "2027-04-03",
+    "audience": "Grade 12 students with strong marks and activities entering a Bachelor of Engineering at Carleton University",
+    "url": "https://carleton.ca/awards/awards/scholarships/entrance-scholarships/",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply by April 3 and show participation in school activities or community service. It can continue for three more years with a 10.0 GPA.",
+    "active": true,
+    "description": "A renewable Carleton University engineering entrance scholarship endowed by Ronald and Deanna Biggs.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Carleton University"
+      ],
+      "fields": [
+        "Engineering"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2312,
+    "title": "Carleton Buss Family Scholarship for Alumni Children",
+    "amount": "Amount varies",
+    "deadline": "2027-04-03",
+    "audience": "Grade 12 students entering Carleton University whose parent is a Carleton graduate",
+    "url": "https://carleton.ca/awards/awards/scholarships/entrance-scholarships/",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply by April 3. You need a parent who graduated from Carleton and a record of civic, community or school involvement.",
+    "active": true,
+    "description": "A renewable Carleton University scholarship for the son or daughter of a Carleton alumnus.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Carleton University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2313,
+    "title": "Carleton Arthur Kroeger National Scholarship",
+    "amount": "$2,000",
+    "deadline": null,
+    "audience": "Grade 12 students with a 90% average entering Public Affairs and Policy Management at Carleton University",
+    "url": "https://carleton.ca/awards/",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "No application. Two winners come from each of five regions, and Alberta students compete in the Prairies group. You can hold it on top of other Carleton entrance scholarships.",
+    "active": true,
+    "description": "Up to ten $2,000 Carleton University scholarships for students starting the Bachelor of Public Affairs and Policy Management.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Carleton University"
+      ],
+      "fields": [
+        "Politics",
+        "Public Administration"
+      ],
+      "minAverage": 90,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2314,
+    "title": "Carleton Collins Earth Sciences Scholarship",
+    "amount": "Up to $4,000",
+    "deadline": null,
+    "audience": "Grade 12 students entering a Bachelor of Science in Earth Sciences at Carleton University",
+    "url": "https://carleton.ca/awards/awards/scholarships/entrance-scholarships/",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "No application. The top students entering Earth Sciences are picked automatically. It renews for a second year with a 10.0 GPA and can be held with other Carleton scholarships.",
+    "active": true,
+    "description": "Carleton University entrance scholarships for the strongest students starting an Earth Sciences degree.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Carleton University"
+      ],
+      "fields": [
+        "Geosciences"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2315,
+    "title": "Guelph-Humber Founders' Merit Scholarship",
+    "amount": "$9,000 a year, $36,000 in all",
+    "deadline": "2027-01-25",
+    "audience": "Canadian Grade 12 students with a 90% average and strong leadership entering the University of Guelph-Humber",
+    "url": "https://www.guelphhumber.ca/current-students/student-financial-services/founders-academic-merit-scholarship",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply by January 25. You must be starting post-secondary for the first time. It cannot be combined with the Vice-Provost or Renewable Entrance scholarships.",
+    "active": true,
+    "description": "The University of Guelph-Humber's top entrance scholarship, for ten students with high marks and proven leadership.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Guelph-Humber"
+      ],
+      "fields": [],
+      "minAverage": 90,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership"
+      ]
+    }
+  },
+  {
+    "id": 2316,
+    "title": "Guelph-Humber Diversity Entrance Bursary",
+    "amount": "$2,000",
+    "deadline": "2027-04-15",
+    "audience": "Black, Indigenous and racialized Grade 12 students with financial need entering the University of Guelph-Humber",
+    "url": "https://www.guelphhumber.ca/current-students/student-financial-services/diversity-entrance-bursary",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply online by April 15. You must be a Canadian citizen, permanent resident or protected person. You cannot also receive the Registrar's Need-Based Entrance Bursary.",
+    "active": true,
+    "description": "A $2,000 University of Guelph-Humber bursary for Black, Indigenous and racialized students who need the money.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Guelph-Humber"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": true,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2317,
+    "title": "Guelph-Humber Registrar's Entrance Bursary",
+    "amount": "$2,000",
+    "deadline": "2027-04-15",
+    "audience": "Grade 12 students with financial need starting post-secondary for the first time at the University of Guelph-Humber",
+    "url": "https://www.guelphhumber.ca/sfs/need-based-bursary",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply online by April 15. You must never have attended post-secondary and must be a Canadian citizen, permanent resident or protected person.",
+    "active": true,
+    "description": "The University of Guelph-Humber's need-based $2,000 entrance bursary.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Guelph-Humber"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2318,
+    "title": "Guelph-Humber Vice-Provost Scholarship",
+    "amount": "$5,000 a year, $20,000 in all",
+    "deadline": null,
+    "audience": "Grade 12 students with the highest admission average in their honours program at the University of Guelph-Humber",
+    "url": "https://www.guelphhumber.ca/current-students/student-financial-services/vice-provost-entrance-scholarship",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "No application. One goes to the top entering student in each honours degree program. Keep an 80% average and a full course load to renew it.",
+    "active": true,
+    "description": "Eight renewable University of Guelph-Humber scholarships, one for the top new student in each honours program.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Guelph-Humber"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2319,
+    "title": "Guelph Clara E. Elliott Education Scholarship",
+    "amount": "$10,000 over four years",
+    "deadline": "2027-04-15",
+    "audience": "Grade 12 students with an 80% average entering the BASc at the University of Guelph who plan to teach",
+    "url": "https://www.uoguelph.ca/regweb/studentfinance/apps/awards?id=E0210",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply by April 15. Winners are chosen on marks and leadership. You need a 77% average to keep it in second year and 80% after that. It cannot be held with the Clara E. Elliott Entrance Scholarship.",
+    "active": true,
+    "description": "Two University of Guelph scholarships for Bachelor of Applied Science students heading for a career in teaching.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Guelph"
+      ],
+      "fields": [
+        "Education"
+      ],
+      "minAverage": 80,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership"
+      ]
+    }
+  },
+  {
+    "id": 2320,
+    "title": "Guelph Clara E. Elliott Entrance Scholarship",
+    "amount": "$10,000 over four years",
+    "deadline": "2027-04-15",
+    "audience": "Grade 12 students with an 80% average and leadership experience entering the BASc at the University of Guelph",
+    "url": "https://www.uoguelph.ca/regweb/studentfinance/apps/awards?id=E0095",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply by April 15. Positions you have held and your school and community activities count. You need 77% to keep it in second year and 80% after that.",
+    "active": true,
+    "description": "Two University of Guelph scholarships for incoming Bachelor of Applied Science students with leadership potential.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Guelph"
+      ],
+      "fields": [],
+      "minAverage": 80,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership"
+      ]
+    }
+  },
+  {
+    "id": 2321,
+    "title": "Guelph Golding Family Bursary for Black Students",
+    "amount": "$10,000",
+    "deadline": "2027-04-15",
+    "audience": "Black Grade 12 students with financial need entering any degree at the University of Guelph",
+    "url": "https://www.uoguelph.ca/regweb/studentfinance/apps/awards?id=E3133",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Submit the Financial Need Assessment Form for Entrance Awards and the bursary application by April 15. Ontario students get preference, but students from other provinces can apply.",
+    "active": true,
+    "description": "A $10,000 University of Guelph bursary from Kevin and Leigh Golding for a Black student starting university.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Guelph"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": true,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2322,
+    "title": "Guelph Honours Physics Scholarships",
+    "amount": "$2,000",
+    "deadline": null,
+    "audience": "Grade 12 students with a 90 to 94.99% average entering a physics major at the University of Guelph",
+    "url": "https://www.uoguelph.ca/regweb/studentfinance/apps/awards?id=E0132",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "No application. Several go to the highest averages among students entering Physics, Biological and Medical Physics, Chemical Physics or Theoretical Physics, including co-op.",
+    "active": true,
+    "description": "University of Guelph entrance scholarships for strong students starting a physics degree.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Guelph"
+      ],
+      "fields": [
+        "Physics"
+      ],
+      "minAverage": 90,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2323,
+    "title": "University of Guelph Entrance Scholarship",
+    "amount": "$1,000 to $2,000",
+    "deadline": null,
+    "audience": "Grade 12 students with a 90% average starting full-time study at the University of Guelph",
+    "url": "https://www.uoguelph.ca/regweb/studentfinance/apps/awards?id=E0291",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "No application. It is paid in two parts over fall and winter and needs at least 2.0 credits a term. You cannot hold it with the President's, Lincoln Alexander or Board of Governors' scholarships.",
+    "active": true,
+    "description": "Automatic University of Guelph entrance scholarships for every first-year student with a 90% average.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Guelph"
+      ],
+      "fields": [],
+      "minAverage": 90,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2324,
+    "title": "Guelph Maxwell OAC Entrance Scholarship",
+    "amount": "$10,000 over four years",
+    "deadline": "2027-04-15",
+    "audience": "Grade 12 students with financial need entering an Ontario Agricultural College degree at the University of Guelph",
+    "url": "https://www.uoguelph.ca/regweb/studentfinance/apps/awards?id=E1275",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Submit the Financial Need Assessment Form for Entrance Awards and the application by April 15. Among students in need, the highest admission averages win. It renews with a 70% average.",
+    "active": true,
+    "description": "Up to three Joe and Barbara Maxwell scholarships for students in need starting agriculture and food degrees at Guelph.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Guelph"
+      ],
+      "fields": [
+        "Agriculture"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2325,
+    "title": "Guelph Board of Governors' Scholarship",
+    "amount": "$20,000 over four years",
+    "deadline": null,
+    "audience": "Grade 12 students with among the highest admission averages entering the University of Guelph",
+    "url": "https://www.uoguelph.ca/regweb/studentfinance/apps/awards?id=E0317",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "No application. It renews each year with an 80% average in full-time study. It cannot be held with the President's or Lincoln Alexander Chancellor's scholarships.",
+    "active": true,
+    "description": "Ten automatic University of Guelph scholarships for the strongest admission averages in the entering class.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Guelph"
+      ],
+      "fields": [],
+      "minAverage": 80,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2326,
+    "title": "Robert Orr Lawson Microbiology Scholarship",
+    "amount": "$4,000 over four years",
+    "deadline": null,
+    "audience": "Grade 12 students with an 80% average entering the Microbiology major at the University of Guelph",
+    "url": "https://www.uoguelph.ca/regweb/studentfinance/apps/awards?id=E0489",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "No application. The highest admission average wins. It pays $1,000 a year, and later payments need a 77% average in the major.",
+    "active": true,
+    "description": "A University of Guelph entrance scholarship for the top student starting the microbiology major.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Guelph"
+      ],
+      "fields": [
+        "Biology"
+      ],
+      "minAverage": 80,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2327,
+    "title": "Lakehead University Presidential Scholarship",
+    "amount": "$10,000 a year, $40,000 in all",
+    "deadline": "2027-04-25",
+    "audience": "Grade 12 students with a 90% average, leadership and community involvement entering Lakehead University",
+    "url": "https://www.lakeheadu.ca/studentcentral/financing-budgeting",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply by April 25. Up to two are given each year, and they renew with an 85% average.",
+    "active": true,
+    "description": "Lakehead University's top entrance scholarship for students who stand out in school and their community.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Lakehead University"
+      ],
+      "fields": [],
+      "minAverage": 90,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership",
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2328,
+    "title": "Lakehead Academic Excellence Scholarship",
+    "amount": "Free tuition for four years",
+    "deadline": null,
+    "audience": "Canadian Grade 12 students who hold a 95% average through final grades and enter Lakehead University",
+    "url": "https://www.lakeheadu.ca/future-students/scholarships/entrance-scholarships/entrance-scholarships-awards",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "No application. Students first offered $4,000 who keep a 95% average on their best six final grades are moved up to free tuition. Out-of-province students must send midterm grades by the end of April and final grades by the end of July.",
+    "active": true,
+    "description": "Automatic free tuition at Lakehead University for Canadian students who finish high school with a 95% average.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Lakehead University"
+      ],
+      "fields": [],
+      "minAverage": 95,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2329,
+    "title": "Destination Lakehead Bursary",
+    "amount": "Up to $3,000",
+    "deadline": "2027-06-30",
+    "audience": "Canadian Grade 12 students with financial need coming straight from high school to Lakehead University",
+    "url": "https://www.lakeheadu.ca/studentcentral/financing-budgeting",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply by June 30. The general bursary is up to $2,000, and students travelling at least 250 km to campus can add a travel top-up of up to $1,000. Offers go out by email in July.",
+    "active": true,
+    "description": "Lakehead University entrance bursaries for students in need, with extra travel money for those coming from far away.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Lakehead University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2330,
+    "title": "Lakehead University Alumni Award",
+    "amount": "$2,500 a year, $10,000 in all",
+    "deadline": "2027-04-30",
+    "deadlineEstimated": true,
+    "audience": "Grade 12 students entering Lakehead University whose parent or other immediate family member is a Lakehead graduate",
+    "url": "https://www.lakeheadu.ca/studentcentral/financing-budgeting",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply by the end of April. You need sound marks, leadership and community involvement, and it renews with an 80% average. The 2027 date is not posted yet, so this is last year's date moved forward.",
+    "active": true,
+    "description": "A renewable Lakehead University award for incoming students from Lakehead alumni families.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Lakehead University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership",
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2331,
+    "title": "Lakehead Entrance Athletic Scholarship",
+    "amount": "Up to $5,000",
+    "deadline": null,
+    "audience": "Grade 12 athletes with an 80% average joining a Lakehead University varsity team",
+    "url": "https://www.lakeheadu.ca/studentcentral/financing-budgeting",
+    "category": "Sports",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Contact Lakehead Athletics about a place on next year's varsity roster. You must meet U SPORTS and Ontario University Athletics eligibility rules.",
+    "active": true,
+    "description": "Renewable Lakehead University scholarships for incoming varsity athletes.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Lakehead University"
+      ],
+      "fields": [],
+      "minAverage": 80,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "sports"
+      ]
+    }
+  },
+  {
+    "id": 2332,
+    "title": "Laurier Western Canada Scholarship",
+    "amount": "Up to $4,000",
+    "deadline": "2027-09-24",
+    "audience": "Grade 12 students finishing high school in Alberta or another province west of Ontario and entering Wilfrid Laurier University",
+    "url": "https://students.wlu.ca/registration-and-finances/scholarships-and-bursaries/scholarships-and-awards/index.html#competitive",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Laurier fills its competitive awards from up to three student profiles you complete once you are an incoming student, due September 24. Your permanent home must be in the western province where you finish high school. Students entering the Lazaridis School of Business and Economics come first, and the committee looks for initiative, volunteer work and activities.",
+    "active": true,
+    "description": "Two Wilfrid Laurier University scholarships set aside for students coming from Western Canada.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Wilfrid Laurier University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2333,
+    "title": "Laurier Hachborn Centennial Scholarship",
+    "amount": "Up to $4,000",
+    "deadline": "2027-09-24",
+    "audience": "Grade 12 students graduating from a Canadian high school with an average under 95% and entering Wilfrid Laurier University",
+    "url": "https://students.wlu.ca/registration-and-finances/scholarships-and-bursaries/scholarships-and-awards/index.html#competitive",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Laurier fills its competitive awards from up to three student profiles you complete once you are an incoming student, due September 24. It is meant for students who just miss the President's Gold level, so your final average must be under 95%.",
+    "active": true,
+    "description": "The Walter and Jean Hachborn Centennial Scholarship for a new Laurier student coming straight from high school.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Wilfrid Laurier University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2334,
+    "title": "Laurier BBA Alumni Centennial Scholarship",
+    "amount": "Up to $2,000",
+    "deadline": "2027-09-24",
+    "audience": "Grade 12 students with a 90% average entering the Laurier BBA who worked part-time jobs in high school",
+    "url": "https://students.wlu.ca/registration-and-finances/scholarships-and-bursaries/scholarships-and-awards/index.html#competitive",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Laurier fills its competitive awards from up to three student profiles you complete once you are an incoming student, due September 24. Include a resume of the paid part-time work you did in high school to help your family. The fund also encourages an international exchange later in the degree.",
+    "active": true,
+    "description": "A Laurier business scholarship for top BBA entrants who worked their way through high school.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Wilfrid Laurier University"
+      ],
+      "fields": [
+        "Business"
+      ],
+      "minAverage": 90,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "work"
+      ]
+    }
+  },
+  {
+    "id": 2335,
+    "title": "Laurier Chancellor's Scholarship Fund",
+    "amount": "Up to $3,000",
+    "deadline": "2027-09-24",
+    "audience": "Grade 12 students with an 85% average and significant activities or volunteering entering Wilfrid Laurier University",
+    "url": "https://students.wlu.ca/registration-and-finances/scholarships-and-bursaries/scholarships-and-awards/index.html#competitive",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Laurier fills its competitive awards from up to three student profiles you complete once you are an incoming student, due September 24. Two are given each year. Your best six Grade 12 university courses need an 85% average.",
+    "active": true,
+    "description": "Two Laurier Chancellor's scholarships for students with top marks and a record outside the classroom.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Wilfrid Laurier University"
+      ],
+      "fields": [],
+      "minAverage": 85,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2336,
+    "title": "Laurier Elsaesser Indigenous Scholarship",
+    "amount": "Up to $2,000",
+    "deadline": "2027-09-01",
+    "audience": "Indigenous Grade 12 students entering Wilfrid Laurier University straight from high school",
+    "url": "https://www.wlu.ca/future-students/undergraduate/applicants/indigenous-students/scholarships-and-bursaries.html",
+    "category": "Indigenous",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "No separate application. A Faculty of Music student recommended by the dean comes first, judged on marks and audition. Without one, it goes to the Indigenous student with the highest admission average in any faculty.",
+    "active": true,
+    "description": "A Laurier entrance scholarship for a high-achieving Indigenous student.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Wilfrid Laurier University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2337,
+    "title": "Laurier Schultz Memorial Music Scholarship",
+    "amount": "$6,000",
+    "deadline": "2027-09-24",
+    "audience": "Grade 12 keyboard and string players entering the Faculty of Music at Wilfrid Laurier University",
+    "url": "https://students.wlu.ca/registration-and-finances/scholarships-and-bursaries/scholarships-and-awards/index.html#competitive",
+    "category": "Arts",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "The audition committee nominates winners to the dean. Organists come first, then cellists, then other keyboard and string players. It renews for three years in the same program, so it is not given every year.",
+    "active": true,
+    "description": "The Rev. Erich R. W. Schultz music scholarship for Laurier students who play keyboard or stringed instruments.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Wilfrid Laurier University"
+      ],
+      "fields": [
+        "Music"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "music"
+      ]
+    }
+  },
+  {
+    "id": 2338,
+    "title": "Laurier Ken Murray Music Entrance Scholarship",
+    "amount": "Up to $3,000",
+    "deadline": "2027-09-24",
+    "audience": "Grade 12 students with strong auditions entering the Faculty of Music at Wilfrid Laurier University",
+    "url": "https://students.wlu.ca/registration-and-finances/scholarships-and-bursaries/scholarships-and-awards/index.html#competitive",
+    "category": "Arts",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Winners are chosen on talent and performance potential shown at the Faculty of Music audition.",
+    "active": true,
+    "description": "A Laurier entrance scholarship for an outstanding high school musician.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Wilfrid Laurier University"
+      ],
+      "fields": [
+        "Music"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "music"
+      ]
+    }
+  },
+  {
+    "id": 2339,
+    "title": "Laurier Arthur Stephen Memorial Scholarship",
+    "amount": "Up to $1,000",
+    "deadline": "2027-09-24",
+    "audience": "Grade 12 students with an 85% average and a strong commitment to sport entering Wilfrid Laurier University",
+    "url": "https://students.wlu.ca/registration-and-finances/scholarships-and-bursaries/scholarships-and-awards/index.html#competitive",
+    "category": "Sports",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Laurier fills its competitive awards from up to three student profiles you complete once you are an incoming student, due September 24. Athletics in school or in the wider community both count.",
+    "active": true,
+    "description": "A renewable Laurier scholarship in memory of Arthur Stephen for students who combine marks and sport.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Wilfrid Laurier University"
+      ],
+      "fields": [],
+      "minAverage": 85,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "sports"
+      ]
+    }
+  },
+  {
+    "id": 2340,
+    "title": "Laurier One Dish, One Spoon Bursary",
+    "amount": "Up to $1,000",
+    "deadline": "2027-09-24",
+    "audience": "Indigenous Grade 12 students with financial need and a 70% average entering Wilfrid Laurier University",
+    "url": "https://students.wlu.ca/registration-and-finances/scholarships-and-bursaries/scholarships-and-awards/index.html#competitive",
+    "category": "Indigenous",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Laurier fills its competitive awards from up to three student profiles you complete once you are an incoming student, due September 24. Students with averages from 70 to 79% come first. It renews for up to five years with full-time study.",
+    "active": true,
+    "description": "A renewable Laurier bursary for Indigenous students who need the money.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Wilfrid Laurier University"
+      ],
+      "fields": [],
+      "minAverage": 70,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2341,
+    "title": "Laurier Oille Family Music Scholarship",
+    "amount": "$6,600",
+    "deadline": "2027-09-24",
+    "audience": "Grade 12 students with community involvement entering the Community Music program at Wilfrid Laurier University",
+    "url": "https://students.wlu.ca/registration-and-finances/scholarships-and-bursaries/scholarships-and-awards/index.html#competitive",
+    "category": "Arts",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "The value is approximate. Winners combine strong marks with community involvement beyond what school credit required. It renews for three years with a 9.0 GPA and continued community work.",
+    "active": true,
+    "description": "A renewable Laurier scholarship for students starting the Honours Bachelor of Music in Community Music.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Wilfrid Laurier University"
+      ],
+      "fields": [
+        "Music"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "music",
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2342,
+    "title": "Laurier Reitberger Family Award",
+    "amount": "$1,000",
+    "deadline": "2027-09-24",
+    "audience": "Grade 12 students entering the Honours BBA at Wilfrid Laurier University straight from high school",
+    "url": "https://students.wlu.ca/registration-and-finances/scholarships-and-bursaries/scholarships-and-awards/index.html#competitive",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Laurier fills its competitive awards from up to three student profiles you complete once you are an incoming student, due September 24. Double-degree students must declare Laurier as their home school.",
+    "active": true,
+    "description": "A renewable Laurier business award created by Eddy Reitberger for new BBA students.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Wilfrid Laurier University"
+      ],
+      "fields": [
+        "Business"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2343,
+    "title": "Laurier Jonah Lowy Health Sciences Scholarship",
+    "amount": "Up to $1,000",
+    "deadline": "2027-09-24",
+    "audience": "Grade 12 students with an 85% average and volunteer work entering Health Sciences at Wilfrid Laurier University",
+    "url": "https://students.wlu.ca/registration-and-finances/scholarships-and-bursaries/scholarships-and-awards/index.html#competitive",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Laurier fills its competitive awards from up to three student profiles you complete once you are an incoming student, due September 24. Volunteering in hospitals, care homes, lifeguarding or emergency response gets preference.",
+    "active": true,
+    "description": "A renewable Laurier scholarship for incoming Health Sciences students who volunteer in health care.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Wilfrid Laurier University"
+      ],
+      "fields": [
+        "Health Sciences"
+      ],
+      "minAverage": 85,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2344,
+    "title": "Laurier John William Dumer Memorial Bursary",
+    "amount": "Up to $2,000",
+    "deadline": "2027-09-24",
+    "audience": "Grade 12 students with financial need entering the BBA at Wilfrid Laurier University",
+    "url": "https://students.wlu.ca/registration-and-finances/scholarships-and-bursaries/scholarships-and-awards/index.html#competitive",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Laurier fills its competitive awards from up to three student profiles you complete once you are an incoming student, due September 24. Two are given each year.",
+    "active": true,
+    "description": "A Laurier bursary for first-year business students who need help paying for school.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Wilfrid Laurier University"
+      ],
+      "fields": [
+        "Business"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2345,
+    "title": "Laurier Alumni Association Award of Merit",
+    "amount": "Up to $1,000",
+    "deadline": "2027-09-24",
+    "audience": "Grade 12 students entering Wilfrid Laurier University whose parent, brother or sister is a Laurier graduate",
+    "url": "https://students.wlu.ca/finances/scholarships-and-bursaries/scholarships-and-awards/index.html",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Laurier fills its competitive awards from up to three student profiles you complete once you are an incoming student, due September 24. You need good marks, leadership and school and community involvement.",
+    "active": true,
+    "description": "Three renewable Laurier awards for students from Laurier alumni families.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Wilfrid Laurier University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership",
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2346,
+    "title": "Laurier Crawford and Company Bursary",
+    "amount": "$2,500",
+    "deadline": "2027-09-24",
+    "audience": "Grade 12 students with financial need entering the Lazaridis School of Business and Economics at Laurier",
+    "url": "https://students.wlu.ca/registration-and-finances/scholarships-and-bursaries/scholarships-and-awards/index.html#competitive",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Laurier fills its competitive awards from up to three student profiles you complete once you are an incoming student, due September 24.",
+    "active": true,
+    "description": "A $2,500 Laurier bursary from Crawford and Company for a first-year business or economics student.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Wilfrid Laurier University"
+      ],
+      "fields": [
+        "Business"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2347,
+    "title": "Laurier Entrance Scholarships",
+    "amount": "$2,500 to $16,000 over four years",
+    "deadline": null,
+    "audience": "Grade 12 students with an 85% average entering Wilfrid Laurier University",
+    "url": "https://www.wlu.ca/future-students/undergraduate/tuition-finances/entrance-scholarships.html",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "No application. An 85 to 89.9% average earns $2,500 and 90 to 94.9% earns $3,000. At 95% you get the President's Gold Scholarship, $4,000 a year for four years. BBA students need 90% to qualify.",
+    "active": true,
+    "description": "Automatic Laurier entrance scholarships based on your admission average in July.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Wilfrid Laurier University"
+      ],
+      "fields": [],
+      "minAverage": 85,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2348,
+    "title": "McMaster Brighter World Entrance Award",
+    "amount": "$5,000",
+    "deadline": "2027-02-19",
+    "audience": "Black Grade 12 students applying to a Level 1 program at McMaster University",
+    "url": "https://registrar.mcmaster.ca/entrance-awards/",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply in AwardSpring by February 19 with a short essay on the accomplishments you are proudest of and one reference letter. School, jobs, community service, family care and activities all count.",
+    "active": true,
+    "description": "Renewable McMaster University entrance awards created in 2020 to celebrate the achievements of Black students.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "McMaster University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": true,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2349,
+    "title": "McMaster Joseph Ip Engineering Scholarship",
+    "amount": "$10,000",
+    "deadline": null,
+    "audience": "Grade 12 students with a 95% average, leadership and activities entering Engineering at McMaster University",
+    "url": "https://www.eng.mcmaster.ca/future-students/future-undergraduate-students/undergraduate-entrance-scholarships/",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "The Faculty of Engineering runs the selection, so watch its entrance scholarship page for the application. Four are given each year.",
+    "active": true,
+    "description": "Four $10,000 McMaster engineering entrance scholarships for students with top marks and leadership.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "McMaster University"
+      ],
+      "fields": [
+        "Engineering"
+      ],
+      "minAverage": 95,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership"
+      ]
+    }
+  },
+  {
+    "id": 2350,
+    "title": "Nipissing FIRST Robotics Scholarship",
+    "amount": "Full first-year tuition, renewable",
+    "deadline": "2027-05-01",
+    "audience": "Grade 12 students with an 85% average who were on a FIRST Robotics Competition team, entering Nipissing University",
+    "url": "https://future.nipissingu.ca/finances/#support",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply by May 1. You must have been on a high school FIRST Robotics Competition team in the last two years. After first year it renews at $3,000 a year for three years with an 85% average on 24 credits.",
+    "active": true,
+    "description": "Up to two Nipissing University scholarships, run with FIRST, for students from high school robotics teams.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Nipissing University"
+      ],
+      "fields": [],
+      "minAverage": 85,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "FIRST Robotics"
+      ]
+    }
+  },
+  {
+    "id": 2351,
+    "title": "OCAD University Scotiabank Entrance Scholarship",
+    "amount": "$10,000",
+    "deadline": null,
+    "audience": "Grade 12 students starting a first undergraduate degree at OCAD University",
+    "url": "https://admissions.ocadu.ca/afford/funding-options",
+    "category": "Arts",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "No application. OCAD U picks entrance award winners from your high school average, your admission portfolio and supporting documents.",
+    "active": true,
+    "description": "A $10,000 OCAD University entrance scholarship for a top new art and design student.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "OCAD University"
+      ],
+      "fields": [
+        "Fine Arts",
+        "Design"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2352,
+    "title": "Ontario Tech Chancellor's Scholarship",
+    "amount": "$9,000 a year, $36,000 in all",
+    "deadline": "2027-02-19",
+    "audience": "Canadian Grade 12 students with an 85% average and strong leadership applying to Ontario Tech University",
+    "url": "https://safa.ontariotechu.ca/awards-bursaries-and-scholarships/",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply by February 19 with reference letters, after your Ontario Tech application is on file. You need exceptional leadership and community involvement, and it renews with a 3.7 GPA.",
+    "active": true,
+    "description": "Ontario Tech University's largest entrance scholarship, for one student who leads in school and community.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Ontario Tech University"
+      ],
+      "fields": [],
+      "minAverage": 85,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership",
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2353,
+    "title": "Ontario Tech President's Scholarship",
+    "amount": "$7,500 a year, $30,000 in all",
+    "deadline": "2027-02-19",
+    "audience": "Canadian Grade 12 students with an 85% average and strong leadership applying to Ontario Tech University",
+    "url": "https://safa.ontariotechu.ca/awards-bursaries-and-scholarships/",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply by February 19 with reference letters once your admission application is on file. Two are given each year, and they renew with a 3.7 GPA.",
+    "active": true,
+    "description": "Two renewable Ontario Tech University President's scholarships for leaders with high marks.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Ontario Tech University"
+      ],
+      "fields": [],
+      "minAverage": 85,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership",
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2354,
+    "title": "Ontario Tech Founder's Scholarship",
+    "amount": "$6,000 a year, $24,000 in all",
+    "deadline": "2027-02-19",
+    "audience": "Canadian Grade 12 students with an 85% average and community involvement applying to Ontario Tech University",
+    "url": "https://safa.ontariotechu.ca/awards-bursaries-and-scholarships/",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply by February 19 with reference letters. Two are given each year, and they renew with a 3.7 GPA.",
+    "active": true,
+    "description": "Two renewable Ontario Tech University Founder's scholarships for active community leaders.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Ontario Tech University"
+      ],
+      "fields": [],
+      "minAverage": 85,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership",
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2355,
+    "title": "Ontario Tech FIRST Robotics Scholarship",
+    "amount": "$3,000 a year, $12,000 in all",
+    "deadline": "2027-02-19",
+    "audience": "Canadian Grade 12 FIRST Robotics team members with an 85% average entering Engineering at Ontario Tech University",
+    "url": "https://safa.ontariotechu.ca/awards-bursaries-and-scholarships/",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply by February 19. You must be on your high school FIRST Robotics Competition team and entering Engineering and Applied Science. It renews with a 3.7 GPA.",
+    "active": true,
+    "description": "One renewable Ontario Tech engineering scholarship for a student from a FIRST Robotics team.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Ontario Tech University"
+      ],
+      "fields": [
+        "Engineering"
+      ],
+      "minAverage": 85,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "FIRST Robotics"
+      ]
+    }
+  },
+  {
+    "id": 2356,
+    "title": "Ontario Tech Women for STEM Scholarship",
+    "amount": "$5,000",
+    "deadline": null,
+    "audience": "Women with high averages entering STEM programs at Ontario Tech University",
+    "url": "https://safa.ontariotechu.ca/awards-bursaries-and-scholarships/index.php",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "No application. Twenty are awarded automatically on admission average. The program adds mentoring, events and a chance at a renewable $2,000.",
+    "active": true,
+    "description": "Twenty $5,000 Ontario Tech University scholarships for women starting science, technology, engineering and math degrees.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Ontario Tech University"
+      ],
+      "fields": [
+        "STEM"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": "female",
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2357,
+    "title": "uOttawa Arnold Amber Admission Scholarship",
+    "amount": "$1,500 or more",
+    "deadline": "2027-03-31",
+    "audience": "Canadian Grade 12 students with financial need admitted to the School of Political Studies at the University of Ottawa",
+    "url": "https://uottawa.syntosolution.com/docrepo/721200105071_1_ENG.pdf",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply in Online Scholarships and Bursaries through uoZone by March 31. Include the Financial Questionnaire.",
+    "active": true,
+    "description": "University of Ottawa admission scholarships for political studies students who need financial help.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Ottawa"
+      ],
+      "fields": [
+        "Political Science"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2358,
+    "title": "uOttawa Faculty of Engineering Memorial Scholarship",
+    "amount": "$2,000",
+    "deadline": "2027-03-31",
+    "audience": "Female Grade 12 students with an 80% average entering engineering at the University of Ottawa",
+    "url": "https://uottawa.syntosolution.com/docrepo/721200300181_1_ENG.pdf",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply in Online Scholarships and Bursaries through uoZone by March 31. Include a letter on why you want to study engineering and a resume of your academic and extracurricular achievements. Computer science does not count.",
+    "active": true,
+    "description": "Seven University of Ottawa scholarships, one per engineering program, for women starting engineering.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Ottawa"
+      ],
+      "fields": [
+        "Engineering"
+      ],
+      "minAverage": 80,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": "female",
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2359,
+    "title": "uOttawa All My Relations Assistance Fund",
+    "amount": "$9,000 a year, $36,000 in all",
+    "deadline": "2027-03-31",
+    "audience": "First Nations, Inuit and Metis Grade 12 students with financial need living in the Nidjinawendaganag community at the University of Ottawa",
+    "url": "https://uottawa.syntosolution.com/docrepo/721100107241_1_ENG.pdf",
+    "category": "Indigenous",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply in Online Scholarships and Bursaries through uoZone by March 31. You must be a Canadian citizen, have accepted a place in the Nidjinawendaganag (All My Relations) Living Learning Community, and send a letter on your financial need with proof of Indigenous identity.",
+    "active": true,
+    "description": "University of Ottawa support for Indigenous students in need who live in its All My Relations residence community.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Ottawa"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2360,
+    "title": "Telfer Diversity and Equity Scholarship",
+    "amount": "$5,000 a year, $20,000 in all",
+    "deadline": "2027-03-31",
+    "audience": "Racialized and Indigenous Grade 12 students with community involvement entering the Telfer School of Management at the University of Ottawa",
+    "url": "https://uottawa.syntosolution.com/docrepo/721100107117_1_ENG.pdf",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply in Online Scholarships and Bursaries through uoZone by March 31. You must be a Canadian citizen or permanent resident, meet the admission average and be involved in your community. Indigenous applicants send documented proof of identity.",
+    "active": true,
+    "description": "Four renewable University of Ottawa admission scholarships for racialized and Indigenous business students.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Ottawa"
+      ],
+      "fields": [
+        "Business"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": true,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2361,
+    "title": "uOttawa Undergraduate Research Scholarships",
+    "amount": "$11,500 to $18,000",
+    "deadline": "2027-03-15",
+    "audience": "Canadian Grade 12 students with a 92% average and a passion for science entering the Faculty of Science at the University of Ottawa",
+    "url": "https://uottawa.syntosolution.com/docrepo/721130101000_1_ENG.html",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply by March 15 with transcripts, a resume, a science teacher recommendation and 250 words on how you explore and share science. Short-listed students interview in the spring. The money comes as paid research work terms.",
+    "active": true,
+    "description": "Sixteen University of Ottawa scholarships that pay first-year science students to work in research labs.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Ottawa"
+      ],
+      "fields": [
+        "Science"
+      ],
+      "minAverage": 92,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "science fair"
+      ]
+    }
+  },
+  {
+    "id": 2362,
+    "title": "uOttawa Arcade Guindon Scholarship",
+    "amount": "$5,000 or more",
+    "deadline": "2027-03-31",
+    "audience": "Bilingual Canadian Grade 12 students with a 75% average who promote francophone life, entering the University of Ottawa",
+    "url": "https://uottawa.syntosolution.com/docrepo/721200103909_1_ENG.html",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply in Online Scholarships and Bursaries through uoZone by March 31. Send your resume, an unofficial transcript and two letters, one from school and one from the community. You must be fluent in English and French.",
+    "active": true,
+    "description": "A University of Ottawa admission scholarship for a bilingual student active in francophone and community life.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Ottawa"
+      ],
+      "fields": [],
+      "minAverage": 75,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2363,
+    "title": "uOttawa E.N.F. Telfer Admission Bursary for Women",
+    "amount": "$5,000",
+    "deadline": "2027-03-31",
+    "audience": "Women with financial need entering the Telfer School of Management at the University of Ottawa",
+    "url": "https://uottawa.syntosolution.com/docrepo/721200107461_1_ENG.html",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply in Online Scholarships and Bursaries through uoZone by March 31. Include the Financial Questionnaire.",
+    "active": true,
+    "description": "A $5,000 University of Ottawa bursary for a woman starting a business degree at Telfer.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Ottawa"
+      ],
+      "fields": [
+        "Business"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": "female",
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2364,
+    "title": "uOttawa Social Accountability Pre-Med Bursary",
+    "amount": "$5,000 to $35,000",
+    "deadline": "2027-03-31",
+    "audience": "Grade 12 students from families earning $60,000 or less with an 85% average who plan to study medicine at the University of Ottawa",
+    "url": "https://uottawa.syntosolution.com/docrepo/721100105282_1_ENG.html",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply in Online Scholarships and Bursaries through uoZone by March 31. Send three reference letters, a 500-word essay on why you want to be a doctor, a transcript and your parents' tax returns. Family income must have been $60,000 or less in Grade 11 and 12. It pays up to $10,000 a year.",
+    "active": true,
+    "description": "Four University of Ottawa bursaries for students from low-income families on the path to its MD program.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Ottawa"
+      ],
+      "fields": [
+        "Medicine"
+      ],
+      "minAverage": 85,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": 60000,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2365,
+    "title": "uOttawa Indigenous Leadership Scholarship",
+    "amount": "$6,500 a year, $26,000 in all",
+    "deadline": "2027-03-31",
+    "audience": "First Nations, Inuit and Metis Grade 12 students with an 85% average and leadership entering the University of Ottawa",
+    "url": "https://uottawa.syntosolution.com/docrepo/721130102721_1_ENG.html",
+    "category": "Indigenous",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply in Online Scholarships and Bursaries through uoZone by March 31. Send documented proof of Indigenous identity. It is open in Arts, Engineering, Health Sciences, Science, Social Sciences, Telfer and Civil Law.",
+    "active": true,
+    "description": "A renewable University of Ottawa admission scholarship for an Indigenous student who leads in school and activities.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Ottawa"
+      ],
+      "fields": [],
+      "minAverage": 85,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership"
+      ]
+    }
+  },
+  {
+    "id": 2366,
+    "title": "uOttawa Jean Chretien Scholarships",
+    "amount": "$5,000 or more",
+    "deadline": "2027-03-31",
+    "audience": "Canadian Grade 12 students with a 92% average entering Political Science or Public Administration at the University of Ottawa",
+    "url": "https://uottawa.syntosolution.com/docrepo/721200101685_1_ENG.pdf",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply in Online Scholarships and Bursaries through uoZone by March 31. Send your transcript, resume and a letter of recommendation about your leadership and involvement.",
+    "active": true,
+    "description": "Up to five University of Ottawa scholarships named for Jean Chretien for future political science and public administration students.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Ottawa"
+      ],
+      "fields": [
+        "Political Science",
+        "Public Administration"
+      ],
+      "minAverage": 92,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership"
+      ]
+    }
+  },
+  {
+    "id": 2367,
+    "title": "uOttawa Admission Scholarships",
+    "amount": "$1,000 to $3,000",
+    "deadline": null,
+    "audience": "Canadian Grade 12 students with an 85% average entering a direct-entry faculty at the University of Ottawa",
+    "url": "https://uottawa.syntosolution.com/docrepo/721230102778_9_ENG.pdf",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "No application. An 85 to 89.9% average earns $1,000, 90 to 94.9% earns $2,000 and 95% or higher earns $3,000. The offer is withdrawn if your average drops below 85%.",
+    "active": true,
+    "description": "Automatic University of Ottawa admission scholarships sized by your admission average.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Ottawa"
+      ],
+      "fields": [],
+      "minAverage": 85,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2368,
+    "title": "Queen's Admission Bursaries",
+    "amount": "Up to $9,000",
+    "deadline": "2027-02-15",
+    "audience": "Grade 12 students with financial need applying to Queen's University",
+    "url": "https://www.queensu.ca/registrar/financial-aid/application-required/future-students",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Complete one Financial Aid and Awards profile in SOLUS by February 15 to be considered for every Queen's need-based admission bursary.",
+    "active": true,
+    "description": "Queen's University need-based admission bursaries that you do not pay back.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Queen's University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2369,
+    "title": "Queen's Robert and Eva Cole Canadian Bursary",
+    "amount": "$32,000 to $60,000 over four years",
+    "deadline": "2027-02-15",
+    "audience": "Grade 12 students with financial need and activities entering Arts and Science or Engineering at Queen's University",
+    "url": "https://www.queensu.ca/registrar/financial-aid/application-required/future-students/admission-bursaries",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "You are considered through the Queen's admission bursary profile, due February 15. Need and extracurricular involvement decide it.",
+    "active": true,
+    "description": "A large renewable Queen's University bursary for a student in need entering Arts and Science or Engineering.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Queen's University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2370,
+    "title": "Queen's Wasmund Family Indigenous Awards",
+    "amount": "$10,000 a year, $40,000 in all",
+    "deadline": "2027-02-15",
+    "audience": "Indigenous Grade 12 students with financial need entering Queen's University, especially Engineering",
+    "url": "https://www.queensu.ca/registrar/financial-aid/application-required/future-students/admission-bursaries/faculty-specific",
+    "category": "Indigenous",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply on the Queen's admission bursary profile by February 15. The Wasmund Family Indigenous Engineering Scholars award goes to two students entering Applied Science, and the Wasmund Family Indigenous Scholars Award is open to any first-entry program. Both renew with continued need.",
+    "active": true,
+    "description": "Renewable Queen's University awards for Indigenous students who need financial help, with a focus on engineering.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Queen's University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2371,
+    "title": "Queen's Principal's Scholarship",
+    "amount": "$7,000",
+    "deadline": null,
+    "audience": "Grade 12 students in the top 3% of admission averages for their program at Queen's University",
+    "url": "https://www.queensu.ca/registrar/financial-aid/no-application-required/future-students/automatic-awards",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "No application. The cutoff changes by program and by year. Students offered more than one automatic award usually get the largest one.",
+    "active": true,
+    "description": "Automatic Queen's University scholarships for the top admission averages in each program.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Queen's University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2372,
+    "title": "Queen's Commitment Scholars Award",
+    "amount": "$12,000 a year, $48,000 in all",
+    "deadline": "2027-02-15",
+    "audience": "Grade 12 students who lead racial justice, social justice or diversity work, entering Queen's University",
+    "url": "https://www.queensu.ca/registrar/financial-aid/application-required/future-students/individual-awards",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply by February 15. The award adds academic and career support to the money.",
+    "active": true,
+    "description": "Renewable Queen's University awards for students who have led on racial justice, social justice or diversity.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Queen's University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership",
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2373,
+    "title": "Queen's Major Access Award",
+    "amount": "$40,000 to $72,000 over four years",
+    "deadline": "2027-02-15",
+    "audience": "Grade 12 students with the highest financial need admitted to Queen's University",
+    "url": "https://www.queensu.ca/registrar/financial-aid/application-required/future-students/admission-bursaries/major-access",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply through the Queen's admission bursary profile by February 15. Recipients get $10,000 to $18,000 a year depending on program.",
+    "active": true,
+    "description": "Up to 100 Queen's University awards for the applicants with the greatest need, so cost does not stop them from accepting.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Queen's University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2374,
+    "title": "Canadian Armed Forces Regular Officer Training Plan",
+    "amount": "Full tuition, books and a salary",
+    "deadline": "2027-01-31",
+    "audience": "Grade 12 students with a 75% average who want to study at Royal Military College and serve as Canadian Armed Forces officers",
+    "url": "https://www.rmc-cmr.ca/en/registrars-office/regular-officer-training-plan-rotp",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply through the Canadian Armed Forces as early as you can in Grade 12. You need 75% overall and in the prerequisites, and students with 85% or more can get early conditional offers. In return you serve as an officer after you graduate.",
+    "active": true,
+    "description": "The Government of Canada pays tuition, books and a salary for officer cadets earning a degree at Royal Military College.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Royal Military College of Canada"
+      ],
+      "fields": [],
+      "minAverage": 75,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2375,
+    "title": "TMU President's Entrance Scholarship",
+    "amount": "$10,000 a year, $40,000 in all",
+    "deadline": "2027-02-16",
+    "audience": "Grade 12 students with a 90% average, leadership and creative ability applying to Toronto Metropolitan University",
+    "url": "https://www.torontomu.ca/admissions/scholarships-awards/",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply in AwardSpring between November 2 and February 16 with a creative essay or project summary of up to 500 words, two references and your leadership roles from the last two years of high school. You can apply before you get an offer. Winners are offered a residence room.",
+    "active": true,
+    "description": "Twelve renewable Toronto Metropolitan University scholarships for students with top marks, leadership and original thinking.",
+    "openDate": "2026-11-02",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Toronto Metropolitan University"
+      ],
+      "fields": [],
+      "minAverage": 90,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership"
+      ]
+    }
+  },
+  {
+    "id": 2376,
+    "title": "TMU Terence Grier Entrance Scholarship",
+    "amount": "Full first-year tuition",
+    "deadline": "2027-02-16",
+    "audience": "Canadian Grade 12 students with an 85% average and a strong aptitude for their field applying to Toronto Metropolitan University",
+    "url": "https://www.torontomu.ca/admissions/scholarships-awards/",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply in AwardSpring between November 2 and February 16 with a personal statement and two references, one academic and one about your aptitude in your chosen field.",
+    "active": true,
+    "description": "One Toronto Metropolitan University scholarship covering first-year tuition.",
+    "openDate": "2026-11-02",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Toronto Metropolitan University"
+      ],
+      "fields": [],
+      "minAverage": 85,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2377,
+    "title": "TMU Engineering Entrance Scholarships",
+    "amount": "Up to $10,000",
+    "deadline": null,
+    "audience": "Grade 12 students with an 85% average entering engineering at Toronto Metropolitan University",
+    "url": "https://www.torontomu.ca/engineering-architectural-science/admissions/apply-to-undergraduate-programs/entrance-scholarships/",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Check the Faculty of Engineering and Architectural Science page for the application. A final admission average of 85% is the minimum.",
+    "active": true,
+    "description": "Toronto Metropolitan University engineering scholarships for students with records of academic excellence.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Toronto Metropolitan University"
+      ],
+      "fields": [
+        "Engineering"
+      ],
+      "minAverage": 85,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2378,
+    "title": "McCall MacBain Community Health Awards at TMU",
+    "amount": "$8,500 a year",
+    "deadline": null,
+    "audience": "Canadian Grade 12 students with financial need and an 86% average entering Nursing, Midwifery, Social Work, Public Health or Nutrition at TMU",
+    "url": "https://www.torontomu.ca/current-students/scholarships-awards/external/",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "You need a final admission average of 86%, full-time enrolment and financial need as assessed by the university.",
+    "active": true,
+    "description": "Sixteen renewable McCall MacBain awards at Toronto Metropolitan University for community health students from lower-income backgrounds.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Toronto Metropolitan University"
+      ],
+      "fields": [
+        "Nursing",
+        "Social Work",
+        "Nutrition"
+      ],
+      "minAverage": 86,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2379,
+    "title": "University of Toronto Awards Profile",
+    "amount": "$2,500 to $20,000",
+    "deadline": "2027-02-01",
+    "deadlineEstimated": true,
+    "audience": "Canadian Grade 12 students applying to the University of Toronto, with awards for need, leadership, activities and background",
+    "url": "https://future.utoronto.ca/finances/awards/awards-profile/",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Submit the Awards Profile in the Join U of T portal after you apply. The deadline is usually in early February, so this date is an estimate. One profile covers the $20,000 C. David Naylor scholarships for 95% averages, the $6,000 a year Fairfax Financial Award and the $7,000 Winkelman scholarships for Black students.",
+    "active": true,
+    "description": "One University of Toronto form that puts you in line for admission awards beyond the automatic ones for marks.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Toronto"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership",
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2380,
+    "title": "Waterloo President's Scholarship of Distinction",
+    "amount": "$2,000",
+    "deadline": null,
+    "audience": "Grade 12 students with an average over 95% entering any program at the University of Waterloo",
+    "url": "https://uwaterloo.ca/future-students/financing/scholarships#presidents",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "No application. After a first year with at least 80% you can also claim a $1,500 International Experience Award, a $1,500 Research Award, or both.",
+    "active": true,
+    "description": "Automatic University of Waterloo entrance scholarships for students who arrive with 95% or more.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Waterloo"
+      ],
+      "fields": [],
+      "minAverage": 95,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2381,
+    "title": "Waterloo Software Engineering Scholarships",
+    "amount": "$1,000 to $20,000",
+    "deadline": null,
+    "audience": "Grade 12 students admitted to Software Engineering at the University of Waterloo",
+    "url": "https://uwaterloo.ca/future-students/financing/scholarships#faculty",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "No application. About 30 are given on your marks and admission profile, and a few renew.",
+    "active": true,
+    "description": "University of Waterloo scholarships for incoming software engineering students.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Waterloo"
+      ],
+      "fields": [
+        "Engineering",
+        "Computer Science"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2382,
+    "title": "Conrad Grebel Jean Caya Music Award",
+    "amount": "$2,500",
+    "deadline": null,
+    "audience": "Grade 12 students who plan to major in Music at Conrad Grebel University College at the University of Waterloo",
+    "url": "https://uwaterloo.ca/grebel-financial-aid/jean-caya-music-award",
+    "category": "Arts",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Contact the UW Music Office to book an audition, usually in February or March, and say you want to be considered. Music majors and students taking Grebel music courses come first.",
+    "active": true,
+    "description": "Two Conrad Grebel entrance awards for students with musical and academic ability.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Waterloo"
+      ],
+      "fields": [
+        "Music"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "music"
+      ]
+    }
+  },
+  {
+    "id": 2383,
+    "title": "Conrad Grebel Rempel Music Award",
+    "amount": "$2,000",
+    "deadline": null,
+    "audience": "Grade 12 students who plan to major in Music at Conrad Grebel University College at the University of Waterloo",
+    "url": "https://uwaterloo.ca/grebel-financial-aid/rudolph-hedwig-rempel-music-award",
+    "category": "Arts",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Book an audition with the UW Music Office. A quarter of the award is paid in each of four years. Students living at Grebel with a 75% average get preference.",
+    "active": true,
+    "description": "The Rudolph and Hedwig Rempel award for gifted musicians starting at Conrad Grebel.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Waterloo"
+      ],
+      "fields": [
+        "Music"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "music"
+      ]
+    }
+  },
+  {
+    "id": 2384,
+    "title": "St. Jerome's Dietrich Memorial Scholarship",
+    "amount": "$10,000",
+    "deadline": "2027-03-31",
+    "audience": "Grade 12 students starting full-time first year at St. Jerome's University at the University of Waterloo",
+    "url": "https://uwaterloo.ca/st-jeromes/scholarships",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply by March 31. Show how you live out Catholic Social Thought, including respect for every person, social justice and the common good, and explain how the money helps your long-term goals.",
+    "active": true,
+    "description": "The Roslyn and Hubert Dietrich scholarship for new St. Jerome's students committed to social justice.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Waterloo"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2385,
+    "title": "Western Excellence Scholarship for Black Students",
+    "amount": "$26,000",
+    "deadline": "2027-06-30",
+    "audience": "Black Grade 12 students with top admission averages entering Western University",
+    "url": "https://www.registrar.uwo.ca/student_finances/scholarships_awards/admission/westerns_admission_scholarship_for_black_and_indigenous_students.html",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "No essay or form. Self-identify as Black by June 30 and the top averages are chosen. It pays $6,000 a year for four years plus $2,000 for an optional study abroad term.",
+    "active": true,
+    "description": "Twenty renewable Western University admission scholarships for Black students.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Western University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": true,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2386,
+    "title": "Western Indigenous Students Excellence Scholarship",
+    "amount": "$26,000",
+    "deadline": null,
+    "audience": "Indigenous Grade 12 students with top admission averages entering Western University",
+    "url": "https://www.registrar.uwo.ca/student_finances/scholarships_awards/admission/westerns_admission_scholarship_for_black_and_indigenous_students.html",
+    "category": "Indigenous",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "No essay or form. Self-identify as Indigenous on your OUAC application. It pays $6,000 a year for four years plus $2,000 for an optional study abroad term.",
+    "active": true,
+    "description": "Thirty renewable Western University admission scholarships for Indigenous students.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Western University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2387,
+    "title": "Huron Hellmuth Scholarship",
+    "amount": "Full tuition for four years",
+    "deadline": "2027-02-01",
+    "audience": "Canadian Grade 12 students with a 90% mid-year average and strong student life involvement entering Huron at Western",
+    "url": "https://huronu.ca/student-life/money-matters/scholarships-bursaries-grants/",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply by February 1. Leadership, volunteering, the arts and athletics all count.",
+    "active": true,
+    "description": "Up to ten full-tuition scholarships at Huron University College for top students who shape student life.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Huron University College"
+      ],
+      "fields": [],
+      "minAverage": 90,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership",
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2388,
+    "title": "Huron Wes Hall Scholarship",
+    "amount": "$25,000 first year, $55,000 in all",
+    "deadline": "2027-02-01",
+    "audience": "BIPOC, first-generation Canadian and newcomer Grade 12 students entering Huron University College at Western",
+    "url": "https://huronu.ca/student-life/money-matters/scholarships-bursaries-grants/",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply by February 1 with a recommendation letter and a statement of purpose of up to 1,000 words. After $25,000 in first year it pays $10,000 a year.",
+    "active": true,
+    "description": "Two Huron University College scholarships for racialized, first-generation and newcomer students.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Huron University College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2389,
+    "title": "Huron Nation Builder Scholarship",
+    "amount": "Full tuition and fees",
+    "deadline": "2027-02-01",
+    "audience": "Grade 12 students with a 90% average and strong activities entering Huron University College at Western",
+    "url": "https://huronu.ca/student-life/money-matters/scholarships-bursaries-grants/",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply by February 1 with a school recommendation, your activities and achievements, and a statement of purpose of up to 1,000 words. The winner joins the Nation Builder program.",
+    "active": true,
+    "description": "Huron University College's full tuition and fees scholarship with a place in its Nation Builder leadership program.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Huron University College"
+      ],
+      "fields": [],
+      "minAverage": 90,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership"
+      ]
+    }
+  },
+  {
+    "id": 2390,
+    "title": "Huron Lerners CEO Scholarship",
+    "amount": "$1,000 a year, $2,000 in all",
+    "deadline": "2027-02-01",
+    "audience": "Female Grade 12 students with an 80% average and leadership entering Management and Organizational Studies at Huron",
+    "url": "https://huronu.ca/student-life/money-matters/scholarships-bursaries-grants/",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply by February 1. It renews for one more year.",
+    "active": true,
+    "description": "The Lerners LLP and Yola S. Ventresca Creating Equal Opportunities scholarship for a woman starting business studies at Huron.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Huron University College"
+      ],
+      "fields": [
+        "Business"
+      ],
+      "minAverage": 80,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": "female",
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership"
+      ]
+    }
+  },
+  {
+    "id": 2391,
+    "title": "King's Social Justice and Peace Scholarship",
+    "amount": "$3,500",
+    "deadline": "2027-04-30",
+    "audience": "Canadian Grade 12 students with an 80% average who are active in social justice or peace work, entering King's at Western",
+    "url": "https://www.kings.uwo.ca/admissions-finance/finances/scholarships-entrance/",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply by April 30 with three references, a portfolio of your social justice or peace activities and a 750-word essay on a cause and your vision for change. It cannot be held with a King's Entrance Scholarship.",
+    "active": true,
+    "description": "Two King's University College scholarships for students committed to community or global justice.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "King's University College"
+      ],
+      "fields": [],
+      "minAverage": 80,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2392,
+    "title": "King's Academic Athletic Scholarship",
+    "amount": "$3,000",
+    "deadline": "2027-08-31",
+    "audience": "Grade 12 students with an 80% average who will play on a Western varsity team while studying at King's",
+    "url": "https://www.kings.uwo.ca/admissions-finance/finances/scholarships-entrance/",
+    "category": "Sports",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply by August 31. It renews with a 75% average and continued varsity play, and winners are picked in October. Athletic awards are capped at $4,500 a year under OUA rules.",
+    "active": true,
+    "description": "Six renewable King's University College scholarships for Western varsity athletes.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "King's University College"
+      ],
+      "fields": [],
+      "minAverage": 80,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "sports"
+      ]
+    }
+  },
+  {
+    "id": 2393,
+    "title": "King's Joy and Hope Indigenous Entrance Award",
+    "amount": "$1,000",
+    "deadline": "2027-04-30",
+    "audience": "First Nations, Inuit and Metis Grade 12 students entering full-time or part-time study at King's at Western",
+    "url": "https://www.kings.uwo.ca/admissions-finance/finances/scholarships-entrance/",
+    "category": "Indigenous",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply by April 30. You can hold it with other awards.",
+    "active": true,
+    "description": "The Joy and Hope (Gaudium et Spes) entrance award at King's University College for an Indigenous student.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "King's University College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2394,
+    "title": "York University Awards of Distinction",
+    "amount": "$8,000 a year plus residence, $32,000 in all",
+    "deadline": "2027-02-15",
+    "audience": "Canadian Grade 12 students with a 90% average and achievements in service, leadership, the arts or sports entering York University",
+    "url": "https://sfs.yorku.ca/scholarships/award-search?awardID=1078",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply by February 15 by picking the award in the online application and filling in your activities, community service and a personal statement. Three recommendation letters are due by mail by the same date. Winners also get a first-year residence room, and it renews with an 8.0 GPA.",
+    "active": true,
+    "description": "York University's top entrance awards, including the Alumni Award of Distinction and the Bankes and John Proctor awards.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "York University"
+      ],
+      "fields": [],
+      "minAverage": 90,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership",
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2395,
+    "title": "Harry Arthurs Alumni Families Scholarship",
+    "amount": "$6,000 a year, $24,000 in all",
+    "deadline": "2027-02-15",
+    "audience": "Grade 12 students with a 90% average and student life leadership whose parent, sibling or grandparent graduated from York University",
+    "url": "https://www.glendon.yorku.ca/futurestudents/fees-and-funding/scholarships-and-bursaries/",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply by February 15 with your activities, community service and personal statement, then mail your recommendation letters and a letter on your York alumni relative. It renews with an 8.0 GPA.",
+    "active": true,
+    "description": "A renewable York University entrance scholarship for students from York alumni families.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "York University"
+      ],
+      "fields": [],
+      "minAverage": 90,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership"
+      ]
+    }
+  },
+  {
+    "id": 2396,
+    "title": "Glendon Ethel Harris Entrance Scholarship",
+    "amount": "$10,000",
+    "deadline": "2027-03-17",
+    "audience": "Grade 12 students from outside Ontario, including Alberta, with a 90% average entering Glendon College at York University",
+    "url": "https://www.glendon.yorku.ca/futurestudents/fees-and-funding/scholarships-and-bursaries/",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply by March 17. Students with financial need get preference.",
+    "active": true,
+    "description": "Six $10,000 scholarships for top students who come to York's bilingual Glendon campus from other provinces.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "York University"
+      ],
+      "fields": [],
+      "minAverage": 90,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2397,
+    "title": "Glendon Pearson Alumni Entrance Scholarship",
+    "amount": "$1,000",
+    "deadline": "2027-04-01",
+    "audience": "Grade 12 students from Alberta or another province west of Ontario with high marks entering Glendon College",
+    "url": "https://sfs.yorku.ca/scholarships/award-search?awardID=0271",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "No separate application. It goes to a first-year Glendon student with high academic standing from a province west of Ontario, and it renews.",
+    "active": true,
+    "description": "Two renewable Glendon awards from Pearson alumni for western Canadian students.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "York University"
+      ],
+      "fields": [],
+      "minAverage": 90,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2398,
+    "title": "Glendon Escott Reid Entrance Scholarship",
+    "amount": "$1,000",
+    "deadline": "2027-03-17",
+    "audience": "Grade 12 students with a 90% average and international involvement entering Glendon College at York University",
+    "url": "https://sfs.yorku.ca/scholarships/award-search?awardID=0272",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply by March 17. Show international activity through school, volunteering or work. It renews.",
+    "active": true,
+    "description": "A renewable Glendon scholarship for an incoming student engaged in international affairs.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "York University"
+      ],
+      "fields": [],
+      "minAverage": 90,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2399,
+    "title": "Glendon Roseann Runte Scholarship",
+    "amount": "$1,000",
+    "deadline": "2027-03-17",
+    "audience": "Grade 12 students with a 90% average, leadership and a commitment to bilingualism entering Glendon College",
+    "url": "https://sfs.yorku.ca/scholarships/award-search?awardID=0606",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply by March 17. You need high marks, leadership and a record of promoting English and French bilingualism at a national or international level.",
+    "active": true,
+    "description": "A renewable Glendon scholarship for a new student who champions bilingualism.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "York University"
+      ],
+      "fields": [
+        "French"
+      ],
+      "minAverage": 90,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership"
+      ]
+    }
+  },
+  {
+    "id": 2400,
+    "title": "Glendon Rainsberger Home-Schooled Student Bursary",
+    "amount": "$1,000",
+    "deadline": "2027-03-17",
+    "audience": "Home-schooled students with financial need entering Glendon College at York University",
+    "url": "https://sfs.yorku.ca/scholarships/award-search?awardID=3061",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply by March 17. You must have been home schooled and show financial need. It renews.",
+    "active": true,
+    "description": "The Sarah and Joe Rainsberger entrance bursary at Glendon for students who learned at home.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "York University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2401,
+    "title": "York Renewable Entrance Athletic Scholarship",
+    "amount": "$4,500 a year, $22,500 in all",
+    "deadline": "2027-04-01",
+    "audience": "Canadian Grade 12 athletes with an 80% average entering full-time study at York University",
+    "url": "https://www.glendon.yorku.ca/futurestudents/fees-and-funding/scholarships-and-bursaries/",
+    "category": "Sports",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply on myFile by April 1. It renews with a 6.0 GPA on 18 credits. If you also qualify for the regular renewable entrance scholarship, it is folded into this award.",
+    "active": true,
+    "description": "Twenty-five renewable York University scholarships for incoming varsity athletes.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "York University"
+      ],
+      "fields": [],
+      "minAverage": 80,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "sports"
+      ]
+    }
+  },
+  {
+    "id": 2402,
+    "title": "York Bobby Orr Entrance Award",
+    "amount": "$2,100",
+    "deadline": "2027-04-15",
+    "audience": "Grade 12 students with strong marks and activities entering Kinesiology and Health Science at York University",
+    "url": "https://futurestudents.yorku.ca/financialsupport",
+    "category": "Sports",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply by April 15 with your activities, community service and a personal statement on why you want to study kinesiology.",
+    "active": true,
+    "description": "A York University entrance award named for Bobby Orr for a new kinesiology student.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "York University"
+      ],
+      "fields": [
+        "Kinesiology"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "sports",
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2403,
+    "title": "Schulich BBA Entrance Scholarships",
+    "amount": "$5,000",
+    "deadline": null,
+    "audience": "Grade 12 students with top marks and leadership entering the BBA or iBBA at the Schulich School of Business",
+    "url": "https://sfs.yorku.ca/scholarships/award-search?awardID=1818",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "No application. The Seymour Schulich and Tanna H. Schulich BBA entrance scholarships go to incoming students with academic excellence and community leadership, and they renew.",
+    "active": true,
+    "description": "Two renewable $5,000 scholarships for new students at York's Schulich School of Business.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "York University"
+      ],
+      "fields": [
+        "Business"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership"
+      ]
+    }
+  },
+  {
+    "id": 2404,
+    "title": "York Automatic Entrance Scholarship",
+    "amount": "$1,000 to $3,500 a year, $14,000 at most",
+    "deadline": null,
+    "audience": "Canadian Grade 12 students with an 80% average entering a direct-entry program at York University",
+    "url": "https://www.glendon.yorku.ca/futurestudents/fees-and-funding/scholarships-and-bursaries/",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "No application. An 80 to 84.9% average earns $1,000 a year, 85 to 89.9% earns $1,500, 90 to 94.9% earns $2,000 and 95% or higher earns $3,500. Each renews for three more years with an 8.0 GPA on 24 credits.",
+    "active": true,
+    "description": "Automatic renewable York University entrance scholarships sized by your final average.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "York University"
+      ],
+      "fields": [],
+      "minAverage": 80,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2405,
+    "title": "York University President's Scholarships",
+    "amount": "$5,400 a year, $21,600 in all",
+    "deadline": null,
+    "audience": "Canadian Grade 12 students with the highest admission average in their faculty at York University",
+    "url": "https://www.glendon.yorku.ca/futurestudents/fees-and-funding/scholarships-and-bursaries/",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "No application. It replaces the renewable entrance scholarship and renews with an 8.0 GPA on 18 credits.",
+    "active": true,
+    "description": "Eighteen automatic York University scholarships for the top new student in each faculty.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "York University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
   }
 ]

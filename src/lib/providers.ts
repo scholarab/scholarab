@@ -72,6 +72,10 @@ export const PROVIDERS: Provider[] = [
   { slug: 'mta', name: 'Mount Allison University', match: ['mta.ca'] },
   { slug: 'smu', name: "Saint Mary's University", match: ['smu.ca'] },
   { slug: 'guelph', name: 'University of Guelph', match: ['uoguelph.ca'] },
+  { slug: 'wlu', name: 'Wilfrid Laurier University', match: ['wlu.ca'] },
+  { slug: 'yorku', name: 'York University', match: ['yorku.ca'] },
+  { slug: 'queensu', name: "Queen's University", match: ['queensu.ca'] },
+  { slug: 'lakehead', name: 'Lakehead University', match: ['lakeheadu.ca'] },
   { slug: 'fort-mcmurray-public', name: 'Fort McMurray Public Schools', match: ['fmpsdschools.ca'], logo: false },
 ];
 
