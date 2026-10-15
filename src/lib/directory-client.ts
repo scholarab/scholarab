@@ -750,6 +750,11 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
       const token = ++loadToken;
       const here = root;
       pending = true;
+      // Not before the first screen is painted: the copy is 500 KB on the
+      // wire, and starting it at once held a slow phone's first paint behind
+      // it (mobile Lighthouse 70, LCP 6.1 s, 2026-10-14).
+      await new Promise(r => requestAnimationFrame(() => setTimeout(r)));
+      if (token !== loadToken || root !== here || !here.isConnected) return;
       await appendRest(rest, rest.dataset.dirRest!);
       if (token !== loadToken || root !== here || !here.isConnected) return;
       pending = false;
