@@ -97561,5 +97561,1522 @@
       "apprenticeship": false,
       "extracurriculars": []
     }
+  },
+  {
+    "id": 2586,
+    "title": "2nd Century Faculty and Staff Award (SAIT)",
+    "amount": "$1,000",
+    "deadline": "2027-08-15",
+    "audience": "Grade 12 students with financial need entering any SAIT program",
+    "url": "https://www.sait.ca/tuition-and-financial-aid/student-awards/scholarships-bursaries-and-awards-directory",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You need strong marks in your prerequisite subjects and a short piece on why you chose SAIT and your program. Winter starters apply by December 15 and spring starters by April 15. Apply through the FYG-Entrance application in mySAIT.",
+    "active": true,
+    "description": "SAIT faculty and staff fund five $1,000 awards for new students in any certificate, diploma or degree.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "SAIT"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2587,
+    "title": "Alberta Advanced Education Award (SAIT)",
+    "amount": "$5,000",
+    "deadline": "2027-08-15",
+    "audience": "Grade 12 students entering SAIT software, IT, GIS or electrical and electronics technology",
+    "url": "https://www.sait.ca/tuition-and-financial-aid/student-awards/scholarships-bursaries-and-awards-directory",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Selection weighs your marks and leadership through community involvement, with financial need as a tiebreaker. Winter starters apply by December 15 and spring starters by April 15. Apply through the FYG-Entrance application in mySAIT.",
+    "active": true,
+    "description": "Five $5,000 awards for new SAIT students in software, IT, geographic information systems and electrical or electronics engineering technology.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "SAIT"
+      ],
+      "fields": [
+        "Computer Science",
+        "Engineering Technology",
+        "Information Technology"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteering"
+      ]
+    }
+  },
+  {
+    "id": 2588,
+    "title": "Alberta Blue Cross Entrance Award (SAIT)",
+    "amount": "$1,250",
+    "deadline": "2027-08-15",
+    "audience": "Alberta Grade 12 students with financial need entering a SAIT diploma",
+    "url": "https://www.sait.ca/tuition-and-financial-aid/student-awards/scholarships-bursaries-and-awards-directory",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must be an Alberta resident with good marks, have taken your last year of high school in Alberta and hold no earlier post-secondary credential. Apply through the FYG-Entrance application in mySAIT.",
+    "active": true,
+    "description": "Alberta Blue Cross funds a $1,250 award for a new SAIT diploma student who finished high school in Alberta.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "SAIT"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2589,
+    "title": "Alberta Blue Cross Away from Home Award (SAIT)",
+    "amount": "$1,250",
+    "deadline": null,
+    "audience": "Alberta Grade 12 students moving more than 100 km to start a SAIT diploma",
+    "url": "https://www.sait.ca/tuition-and-financial-aid/student-awards/scholarships-bursaries-and-awards-directory",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must be an Alberta resident who finished high school in Alberta, show financial need and good marks, and hold no earlier post-secondary credential. SAIT lists a December 15 deadline for fall starters. Apply through the FYG-Entrance application in mySAIT.",
+    "active": true,
+    "description": "A $1,250 Alberta Blue Cross award for a new SAIT diploma student who moves more than 100 km from home to attend.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "SAIT"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2590,
+    "title": "Alberta Blue Cross Barrier-Free Award (SAIT)",
+    "amount": "$1,250",
+    "deadline": "2027-08-15",
+    "audience": "Alberta Grade 12 students with a documented disability entering a SAIT diploma",
+    "url": "https://www.sait.ca/tuition-and-financial-aid/student-awards/scholarships-bursaries-and-awards-directory",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must be an Alberta resident who finished high school in Alberta, show financial need and have your disability on file with SAIT Accessibility Services. Apply through the FYG-Entrance application in mySAIT.",
+    "active": true,
+    "description": "A $1,250 Alberta Blue Cross award that covers disability costs government funding misses for a new SAIT diploma student.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "SAIT"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2591,
+    "title": "Alberta Blue Cross Computer Technology Award (SAIT)",
+    "amount": "$1,250",
+    "deadline": "2027-08-15",
+    "audience": "Alberta Grade 12 students entering SAIT digital technology, film or journalism programs",
+    "url": "https://www.sait.ca/tuition-and-financial-aid/student-awards/scholarships-bursaries-and-awards-directory",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must be an Alberta resident who finished high school in Alberta, show financial need and good marks, and hold no earlier post-secondary credential. Software, IT, security, interactive design, film, journalism and broadcast programs all count. Apply through the FYG-Entrance application in mySAIT.",
+    "active": true,
+    "description": "A $1,250 Alberta Blue Cross award for a new student in the SAIT School for Advanced Digital Technology.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "SAIT"
+      ],
+      "fields": [
+        "Computer Science",
+        "Information Technology",
+        "Journalism",
+        "Film"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2592,
+    "title": "Alberta Blue Cross Health Sciences Award (SAIT)",
+    "amount": "$1,250",
+    "deadline": "2027-08-15",
+    "audience": "Alberta Grade 12 students entering a SAIT health sciences program",
+    "url": "https://www.sait.ca/tuition-and-financial-aid/student-awards/scholarships-bursaries-and-awards-directory",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must be an Alberta resident who finished high school in Alberta, show financial need and good marks, and hold no earlier post-secondary credential. Apply through the FYG-Entrance application in mySAIT.",
+    "active": true,
+    "description": "A $1,250 Alberta Blue Cross award for a new student in SAIT health programs such as paramedic, sonography, respiratory therapy and lab technology.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "SAIT"
+      ],
+      "fields": [
+        "Health"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2593,
+    "title": "Barb Higgins Inspiration Award (SAIT)",
+    "amount": "$1,200",
+    "deadline": "2027-08-15",
+    "audience": "Grade 12 students entering SAIT film, journalism or broadcast news",
+    "url": "https://www.sait.ca/tuition-and-financial-aid/student-awards/scholarships-bursaries-and-awards-directory",
+    "category": "Arts",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must show financial need and activities in school or community. Female students and single parents get preference. Apply through the FYG-Entrance application in mySAIT.",
+    "active": true,
+    "description": "Named for Calgary broadcaster Barb Higgins, this $1,200 award backs a new SAIT film, journalism or broadcasting student.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "SAIT"
+      ],
+      "fields": [
+        "Journalism",
+        "Film",
+        "Broadcasting"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteering"
+      ]
+    }
+  },
+  {
+    "id": 2594,
+    "title": "Calgary Construction Association Award (SAIT)",
+    "amount": "$1,900",
+    "deadline": "2027-08-15",
+    "audience": "Grade 12 students entering SAIT architecture, civil, geomatics or construction management programs",
+    "url": "https://www.sait.ca/tuition-and-financial-aid/student-awards/scholarships-bursaries-and-awards-directory",
+    "category": "Trades",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must be a Canadian citizen or permanent resident with financial need, good prerequisite marks, leadership and volunteering. Alberta residents get preference. Apply through the FYG-Entrance application in mySAIT.",
+    "active": true,
+    "description": "Two $1,900 awards for new SAIT construction students, one of them for a female student.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "SAIT"
+      ],
+      "fields": [
+        "Construction",
+        "Architecture",
+        "Engineering Technology"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteering"
+      ]
+    }
+  },
+  {
+    "id": 2595,
+    "title": "Cando Spirit Scholarship (SAIT)",
+    "amount": "$1,000",
+    "deadline": "2027-08-15",
+    "audience": "Grade 12 students entering the SAIT Railway Conductor program",
+    "url": "https://www.sait.ca/tuition-and-financial-aid/student-awards/scholarships-bursaries-and-awards-directory",
+    "category": "Trades",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Selection weighs your marks and community involvement. Winter starters apply by December 15. Apply through the FYG-Entrance application in mySAIT.",
+    "active": true,
+    "description": "Cando Rail funds two $1,000 scholarships for new Railway Conductor students, one for each fall and winter intake.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "SAIT"
+      ],
+      "fields": [
+        "Railway"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteering"
+      ]
+    }
+  },
+  {
+    "id": 2596,
+    "title": "Canerector Award (SAIT)",
+    "amount": "$2,000",
+    "deadline": "2027-08-15",
+    "audience": "Grade 12 students entering SAIT automotive, machining, heavy equipment or welding programs",
+    "url": "https://www.sait.ca/tuition-and-financial-aid/student-awards/scholarships-bursaries-and-awards-directory",
+    "category": "Trades",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must be a Canadian citizen, permanent resident or refugee with good marks and volunteering. It renews with a 2.0 GPA and one program activity a term. Winter starters apply by December 15. Apply through the FYG-Entrance application in mySAIT.",
+    "active": true,
+    "description": "Canerector funds twenty $2,000 awards for new SAIT trades technology students, renewable each semester.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "SAIT"
+      ],
+      "fields": [
+        "Automotive",
+        "Welding",
+        "Heavy equipment",
+        "Manufacturing"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteering"
+      ]
+    }
+  },
+  {
+    "id": 2597,
+    "title": "Carthy Foundation Award (SAIT)",
+    "amount": "$5,000",
+    "deadline": "2027-08-15",
+    "audience": "Grade 12 students with financial need entering SAIT business, hospitality, health or media programs",
+    "url": "https://www.sait.ca/tuition-and-financial-aid/student-awards/scholarships-bursaries-and-awards-directory",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must show financial need, good high school marks, community service and volunteering. Winter starters apply by December 15 and spring starters by April 15. Apply through the FYG-Entrance application in mySAIT.",
+    "active": true,
+    "description": "The Carthy Foundation funds five $5,000 awards across 16 SAIT programs, from culinary arts and business to respiratory therapy and journalism.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "SAIT"
+      ],
+      "fields": [
+        "Business",
+        "Culinary",
+        "Health",
+        "Journalism"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteering"
+      ]
+    }
+  },
+  {
+    "id": 2598,
+    "title": "Coca Cola Award (SAIT)",
+    "amount": "$1,400",
+    "deadline": "2027-08-15",
+    "audience": "Grade 12 students with financial need entering any SAIT program",
+    "url": "https://www.sait.ca/tuition-and-financial-aid/student-awards/scholarships-bursaries-and-awards-directory",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must show financial need, good high school marks and volunteering. Winter starters apply by December 15 and spring starters by April 15. Apply through the FYG-Entrance application in mySAIT.",
+    "active": true,
+    "description": "Coca Cola funds four $1,400 awards for new SAIT students in any certificate, diploma or degree.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "SAIT"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteering"
+      ]
+    }
+  },
+  {
+    "id": 2599,
+    "title": "Dale Landry Memorial Award (SAIT)",
+    "amount": "Varies",
+    "deadline": "2027-08-15",
+    "audience": "Grade 12 students in serious financial hardship entering SAIT",
+    "url": "https://www.sait.ca/tuition-and-financial-aid/student-awards/scholarships-bursaries-and-awards-directory",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "It is meant for students with extenuating financial circumstances. SAIT lists the certificate award at about $3,500 to $4,000 and the diploma or degree award at about $5,300 to $6,000. Apply through the FYG-Entrance application in mySAIT.",
+    "active": true,
+    "description": "Two memorial awards for new SAIT students who could not attend without help, one for a certificate and a larger one for a diploma or degree.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "SAIT"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2600,
+    "title": "David Oughton Legacy Fund Award (SAIT)",
+    "amount": "$2,500",
+    "deadline": "2027-08-15",
+    "audience": "Calgary Grade 12 students entering SAIT architecture, civil, geomatics or construction management programs",
+    "url": "https://www.sait.ca/tuition-and-financial-aid/student-awards/scholarships-bursaries-and-awards-directory",
+    "category": "Trades",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must be a Canadian citizen living in Calgary with financial need and good high school marks, and confirm you have read David Oughton's biography. Apply through the FYG-Entrance application in mySAIT.",
+    "active": true,
+    "description": "Two $2,500 construction awards for Calgarians starting at SAIT, renewable in second year.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "SAIT"
+      ],
+      "fields": [
+        "Construction",
+        "Architecture",
+        "Engineering Technology"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2601,
+    "title": "Fairfax Financial Holdings Entrance Award (SAIT)",
+    "amount": "$4,000",
+    "deadline": "2027-08-15",
+    "audience": "Grade 12 students with financial need and 75% prerequisites entering SAIT",
+    "url": "https://www.sait.ca/tuition-and-financial-aid/student-awards/scholarships-bursaries-and-awards-directory",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must be a Canadian citizen or permanent resident, start SAIT within 18 months of graduating, show financial need and community involvement, and hold 75% in your prerequisites. Apply through the FYG-Entrance application in mySAIT.",
+    "active": true,
+    "description": "Fairfax Financial funds a $4,000 entrance award for a recent high school graduate starting a SAIT certificate, diploma or applied degree.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "SAIT"
+      ],
+      "fields": [],
+      "minAverage": 75,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteering"
+      ]
+    }
+  },
+  {
+    "id": 2602,
+    "title": "SAIT First Choice Scholarship (Bank of Montreal)",
+    "amount": "$5,000",
+    "deadline": "2027-08-15",
+    "audience": "Canadian Grade 12 students entering a SAIT diploma",
+    "url": "https://www.sait.ca/tuition-and-financial-aid/student-awards/scholarships-bursaries-and-awards-directory",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must be a Canadian citizen with financial need, good marks, and activities and community involvement to describe. Apply through the FYG-Entrance application in mySAIT.",
+    "active": true,
+    "description": "The Bank of Montreal funds a $5,000 First Choice scholarship for a new SAIT diploma student.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "SAIT"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteering"
+      ]
+    }
+  },
+  {
+    "id": 2603,
+    "title": "SAIT First Choice Scholarship (Scotiabank)",
+    "amount": "$5,000",
+    "deadline": "2027-08-15",
+    "audience": "Canadian Grade 12 students entering a SAIT diploma",
+    "url": "https://www.sait.ca/tuition-and-financial-aid/student-awards/scholarships-bursaries-and-awards-directory",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must be a Canadian citizen. Prerequisite marks and your activities and community involvement decide it. Winter starters apply by December 15. Apply through the FYG-Entrance application in mySAIT.",
+    "active": true,
+    "description": "Scotiabank funds two $5,000 First Choice scholarships for new SAIT diploma students.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "SAIT"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteering"
+      ]
+    }
+  },
+  {
+    "id": 2604,
+    "title": "Gene Haas Foundation Award (SAIT)",
+    "amount": "$2,500",
+    "deadline": "2027-08-15",
+    "audience": "Grade 12 students with financial need entering SAIT mechanical or welding engineering technology",
+    "url": "https://www.sait.ca/tuition-and-financial-aid/student-awards/scholarships-bursaries-and-awards-directory",
+    "category": "Trades",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Financial need decides it. Apply through the FYG-Entrance application in mySAIT.",
+    "active": true,
+    "description": "The Gene Haas Foundation funds five $2,500 awards for new mechanical and welding engineering technology students.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "SAIT"
+      ],
+      "fields": [
+        "Engineering Technology",
+        "Welding",
+        "Manufacturing"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2605,
+    "title": "Global News Scholars Award (SAIT)",
+    "amount": "$3,500",
+    "deadline": "2027-08-15",
+    "audience": "Black Grade 12 students entering SAIT Journalism",
+    "url": "https://www.sait.ca/tuition-and-financial-aid/student-awards/scholarships-bursaries-and-awards-directory",
+    "category": "Arts",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must be a Canadian citizen or permanent resident who identifies as Black, with financial need, community involvement and good high school marks. First-time post-secondary students and students with a documented disability get preference. Apply through the FYG-Entrance application in mySAIT.",
+    "active": true,
+    "description": "Global News funds a $3,500 award that removes cost barriers for a Black student starting SAIT Journalism.",
+    "metaDetail": "First-time students get preference.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "SAIT"
+      ],
+      "fields": [
+        "Journalism"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": true,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2606,
+    "title": "Gordon and Kathy Laing Memorial Award (SAIT)",
+    "amount": "$1,400",
+    "deadline": "2027-08-15",
+    "audience": "Grade 12 students entering the SAIT Aircraft Structures Technician program",
+    "url": "https://www.sait.ca/tuition-and-financial-aid/student-awards/scholarships-bursaries-and-awards-directory",
+    "category": "Trades",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must show financial need and good marks. Indigenous students and female students get preference. Apply through the FYG-Entrance application in mySAIT.",
+    "active": true,
+    "description": "A $1,400 memorial award for a new Aircraft Structures Technician student.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "SAIT"
+      ],
+      "fields": [
+        "Aviation"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2607,
+    "title": "Heather Culbert Women in Technology Award",
+    "amount": "$6,000",
+    "deadline": null,
+    "audience": "Grade 12 students starting a SAIT digital technology program",
+    "url": "https://www.sait.ca/tuition-and-financial-aid/student-awards/scholarships-bursaries-and-awards-directory",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Selection weighs your marks and leadership shown through community service, and female students get preference. SAIT lists an April 15 deadline, so check whether it falls in your first year. Apply through the FYG-Entrance application in mySAIT.",
+    "active": true,
+    "description": "A $6,000 award for a first-year student in the SAIT School for Advanced Digital Technology who leads in the community.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "SAIT"
+      ],
+      "fields": [
+        "Computer Science",
+        "Information Technology"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteering"
+      ]
+    }
+  },
+  {
+    "id": 2608,
+    "title": "IPEIA Award (SAIT)",
+    "amount": "$1,000",
+    "deadline": "2027-08-15",
+    "audience": "Grade 12 students entering SAIT mechanical, power or welding engineering technology",
+    "url": "https://www.sait.ca/tuition-and-financial-aid/student-awards/scholarships-bursaries-and-awards-directory",
+    "category": "Trades",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must be a Canadian citizen or permanent resident with financial need and write about your involvement in the field or in pressure equipment safety. Winter starters apply by December 15. Apply through the FYG-Entrance application in mySAIT.",
+    "active": true,
+    "description": "The International Pressure Equipment Integrity Association funds two $1,000 awards for new SAIT engineering technology students.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "SAIT"
+      ],
+      "fields": [
+        "Engineering Technology",
+        "Power Engineering",
+        "Welding"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2609,
+    "title": "ISL Engineering and Land Services Award (SAIT)",
+    "amount": "$2,000",
+    "deadline": "2027-08-15",
+    "audience": "Grade 12 students entering SAIT civil engineering technology or construction project management",
+    "url": "https://www.sait.ca/tuition-and-financial-aid/student-awards/scholarships-bursaries-and-awards-directory",
+    "category": "Trades",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must show financial need and community involvement. Students who face barriers to attending SAIT get preference. Apply through the FYG-Entrance application in mySAIT.",
+    "active": true,
+    "description": "ISL Engineering funds two $2,000 awards for new civil and construction management students.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "SAIT"
+      ],
+      "fields": [
+        "Engineering Technology",
+        "Construction"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteering"
+      ]
+    }
+  },
+  {
+    "id": 2610,
+    "title": "Mark L. Egger Indigenous Culinary Bursary",
+    "amount": "$1,750",
+    "deadline": "2027-08-15",
+    "audience": "Indigenous Grade 12 students entering SAIT Culinary Arts or Baking and Pastry Arts",
+    "url": "https://www.sait.ca/tuition-and-financial-aid/student-awards/scholarships-bursaries-and-awards-directory",
+    "category": "Indigenous",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must show financial need, a positive attitude, leadership and good high school marks. Apply through the FYG-Entrance application in mySAIT.",
+    "active": true,
+    "description": "A $1,750 bursary for a First Nations, Métis or Inuit student starting culinary or baking at SAIT, renewable in year two.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "SAIT"
+      ],
+      "fields": [
+        "Culinary",
+        "Baking and Pastry Arts"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2611,
+    "title": "Princess Auto Foundation Award (SAIT)",
+    "amount": "$5,000",
+    "deadline": "2027-08-15",
+    "audience": "Grade 12 students entering SAIT trades, aircraft or engineering technology programs",
+    "url": "https://www.sait.ca/tuition-and-financial-aid/student-awards/scholarships-bursaries-and-awards-directory",
+    "category": "Trades",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must show financial need and write about your career goals. The technology awards also weigh leadership and high school marks. Pre-employment awards close December 15 and April 15. Apply through the FYG-Entrance application in mySAIT.",
+    "active": true,
+    "description": "The Princess Auto Foundation funds eight $5,000 SAIT awards, four for technology programs and four for trades pre-employment programs.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "SAIT"
+      ],
+      "fields": [
+        "Trades",
+        "Automotive",
+        "Welding",
+        "Aviation",
+        "Engineering Technology"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2612,
+    "title": "Riley-Rankin Bursary (SAIT)",
+    "amount": "$5,000",
+    "deadline": "2027-08-15",
+    "audience": "Alberta Grade 12 students with financial need entering a SAIT certificate or degree",
+    "url": "https://www.sait.ca/tuition-and-financial-aid/student-awards/scholarships-bursaries-and-awards-directory",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must be an Alberta resident with financial need and explain why you chose SAIT and your program. A second round closes December 15. Apply through the FYG-Entrance application in mySAIT.",
+    "active": true,
+    "description": "Two $5,000 bursaries for Alberta students starting a SAIT certificate, degree or applied degree.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "SAIT"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2613,
+    "title": "Robert Spence Memorial Award (SAIT)",
+    "amount": "$5,000",
+    "deadline": "2027-08-15",
+    "audience": "Bilingual or French immersion Grade 12 students entering SAIT",
+    "url": "https://www.sait.ca/tuition-and-financial-aid/student-awards/scholarships-bursaries-and-awards-directory",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must be a Canadian citizen with financial need and 70% in your prerequisites, and be bilingual in French and English or come from French or French immersion schooling. It renews while you study without a gap. Winter starters apply by December 15 and spring starters by May 15. Apply through the FYG-Entrance application in mySAIT.",
+    "active": true,
+    "description": "Four renewable $5,000 awards for new SAIT students with French language schooling.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "SAIT"
+      ],
+      "fields": [
+        "French"
+      ],
+      "minAverage": 70,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2614,
+    "title": "Safana Bharwani School of Business Award (SAIT)",
+    "amount": "$750",
+    "deadline": "2027-08-15",
+    "audience": "Grade 12 students entering the SAIT Bachelor of Business Administration",
+    "url": "https://www.sait.ca/tuition-and-financial-aid/student-awards/scholarships-bursaries-and-awards-directory",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "For the community award you need financial need, good marks and community involvement, and nonprofit work gets preference. Apply through the FYG-Entrance application in mySAIT.",
+    "active": true,
+    "description": "The Bharwani family funds two $750 awards for new SAIT business degree students, one for community involvement and one for mature students.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "SAIT"
+      ],
+      "fields": [
+        "Business"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteering"
+      ]
+    }
+  },
+  {
+    "id": 2615,
+    "title": "Esmail Bharwani Health Entrance Award (SAIT)",
+    "amount": "$750",
+    "deadline": "2027-08-15",
+    "audience": "Grade 12 students entering a SAIT health and public safety program",
+    "url": "https://www.sait.ca/tuition-and-financial-aid/student-awards/scholarships-bursaries-and-awards-directory",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "For the community award you need financial need, good marks and community involvement, and nonprofit work gets preference. Apply through the FYG-Entrance application in mySAIT.",
+    "active": true,
+    "description": "The Bharwani family funds two $750 awards in the SAIT School of Health and Public Safety, one for community involvement and one for mature students.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "SAIT"
+      ],
+      "fields": [
+        "Health"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteering"
+      ]
+    }
+  },
+  {
+    "id": 2616,
+    "title": "SAIT Access Award",
+    "amount": "$2,000",
+    "deadline": "2027-08-15",
+    "audience": "Grade 12 students with financial need entering any SAIT program",
+    "url": "https://www.sait.ca/tuition-and-financial-aid/student-awards/scholarships-bursaries-and-awards-directory",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Financial need decides it. Apprentices apply by June 15. Apply through the FYG-Entrance application in mySAIT.",
+    "active": true,
+    "description": "Three $2,000 awards for new SAIT students or apprentices who need the money.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "SAIT"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2617,
+    "title": "SAIT Entrance Award",
+    "amount": "$2,000",
+    "deadline": "2027-08-15",
+    "audience": "Grade 12 students with financial need entering a SAIT certificate or diploma straight from high school",
+    "url": "https://www.sait.ca/tuition-and-financial-aid/student-awards/scholarships-bursaries-and-awards-directory",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must show financial need and good marks in your admission prerequisites. Apply through the FYG-Entrance application in mySAIT.",
+    "active": true,
+    "description": "Eight $2,000 awards, one in each SAIT academic school, for students coming straight from high school.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "SAIT"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2618,
+    "title": "SAIT Family Campaign Peer Recognition Award",
+    "amount": "$1,000",
+    "deadline": "2027-08-15",
+    "audience": "Grade 12 students with financial need entering SAIT",
+    "url": "https://www.sait.ca/tuition-and-financial-aid/student-awards/scholarships-bursaries-and-awards-directory",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must show financial need and good prerequisite marks. Children of SAIT staff get preference. Winter starters apply by December 15 and spring starters by April 15. Apply through the FYG-Entrance application in mySAIT.",
+    "active": true,
+    "description": "SAIT staff fund three $1,000 entrance awards through their family campaign.",
+    "metaDetail": "Children of SAIT staff get preference.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "SAIT"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2619,
+    "title": "Scott Thon Award (SAIT)",
+    "amount": "$3,000",
+    "deadline": "2027-08-15",
+    "audience": "Grade 12 students entering SAIT Electrical Engineering Technology",
+    "url": "https://www.sait.ca/tuition-and-financial-aid/student-awards/scholarships-bursaries-and-awards-directory",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must show financial need and explain why you chose SAIT and the program. Winter starters apply by December 15. Apply through the FYG-Entrance application in mySAIT.",
+    "active": true,
+    "description": "A $3,000 award for a new Electrical Engineering Technology student in the MacPhail School of Energy, renewable in second year.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "SAIT"
+      ],
+      "fields": [
+        "Engineering Technology"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2620,
+    "title": "TD Bank Group Centennial Award (SAIT)",
+    "amount": "$3,000",
+    "deadline": "2027-08-15",
+    "audience": "Grade 12 students with 75% entering the SAIT Bachelor of Business Administration",
+    "url": "https://www.sait.ca/tuition-and-financial-aid/student-awards/scholarships-bursaries-and-awards-directory",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must show financial need, at least 75% in your high school courses and community involvement. Apply through the FYG-Entrance application in mySAIT.",
+    "active": true,
+    "description": "TD Bank Group funds a $3,000 centennial award for a new SAIT business degree student.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "SAIT"
+      ],
+      "fields": [
+        "Business"
+      ],
+      "minAverage": 75,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteering"
+      ]
+    }
+  },
+  {
+    "id": 2621,
+    "title": "Ted Gordyko Entrance Bursary (SAIT)",
+    "amount": "$3,500",
+    "deadline": "2027-08-15",
+    "audience": "Grade 12 students with financial need entering SAIT digital technology, film or journalism",
+    "url": "https://www.sait.ca/tuition-and-financial-aid/student-awards/scholarships-bursaries-and-awards-directory",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Financial need decides it. Canadian citizens and graduates of southern Alberta high schools get preference. Apply through the FYG-Entrance application in mySAIT.",
+    "active": true,
+    "description": "Two $3,500 bursaries for new students in SAIT software, IT, design, film, journalism and broadcast programs.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "SAIT"
+      ],
+      "fields": [
+        "Computer Science",
+        "Information Technology",
+        "Journalism",
+        "Film"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2622,
+    "title": "Beth Diamond Memorial Bursary (SAIT)",
+    "amount": "$2,300",
+    "deadline": "2027-08-15",
+    "audience": "Grade 12 students with financial need entering SAIT Journalism",
+    "url": "https://www.sait.ca/tuition-and-financial-aid/student-awards/scholarships-bursaries-and-awards-directory",
+    "category": "Arts",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must show financial need and good marks. Apply through the FYG-Entrance application in mySAIT.",
+    "active": true,
+    "description": "A $2,300 memorial bursary for a new SAIT Journalism student.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "SAIT"
+      ],
+      "fields": [
+        "Journalism"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
   }
 ]

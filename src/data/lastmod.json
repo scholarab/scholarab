@@ -1107,6 +1107,10 @@
     "hash": "5e933f7228ffe9ef",
     "date": "2026-10-08"
   },
+  "/scholarships/2nd-century-faculty-and-staff-award-sait/": {
+    "hash": "2b271140200f8c21",
+    "date": "2026-10-14"
+  },
   "/scholarships/4-h-alberta-provincial-scholarships/": {
     "hash": "5e8766231a4a6998",
     "date": "2026-10-08"
@@ -1291,6 +1295,10 @@
     "hash": "83782eec7d616f4b",
     "date": "2026-10-08"
   },
+  "/scholarships/alberta-advanced-education-award-sait/": {
+    "hash": "6ccf73dac12af8ad",
+    "date": "2026-10-14"
+  },
   "/scholarships/alberta-apprenticeship-and-industry-training-board-scholarship/": {
     "hash": "507c33059129d08c",
     "date": "2026-10-08"
@@ -1323,6 +1331,10 @@
     "hash": "059fe093a9eca38a",
     "date": "2026-10-01"
   },
+  "/scholarships/alberta-blue-cross-away-from-home-award-sait/": {
+    "hash": "44859222b41a2e45",
+    "date": "2026-10-14"
+  },
   "/scholarships/alberta-blue-cross-away-from-home-award-university-of-lethbridge/": {
     "hash": "4b8283aa1cf3ab53",
     "date": "2026-10-14"
@@ -1347,6 +1359,10 @@
     "hash": "c626e92fce046952",
     "date": "2026-10-08"
   },
+  "/scholarships/alberta-blue-cross-barrier-free-award-sait/": {
+    "hash": "5bd67e8b974fcfa0",
+    "date": "2026-10-14"
+  },
   "/scholarships/alberta-blue-cross-barrier-free-bursary-macewan/": {
     "hash": "8a25ccca4879dd67",
     "date": "2026-10-14"
@@ -1367,9 +1383,17 @@
     "hash": "c842e69be6e368d4",
     "date": "2026-10-14"
   },
+  "/scholarships/alberta-blue-cross-computer-technology-award-sait/": {
+    "hash": "35d314f9789ab76e",
+    "date": "2026-10-14"
+  },
   "/scholarships/alberta-blue-cross-entrance-award-northwestern-polytechnic/": {
     "hash": "99c7f58abc2a42f7",
     "date": "2026-10-08"
+  },
+  "/scholarships/alberta-blue-cross-entrance-award-sait/": {
+    "hash": "0fefb13121b8fb6a",
+    "date": "2026-10-14"
   },
   "/scholarships/alberta-blue-cross-entrance-award-university-of-lethbridge/": {
     "hash": "1b0296fb474c29f0",
@@ -1390,6 +1414,10 @@
   "/scholarships/alberta-blue-cross-entrance-scholarship/": {
     "hash": "0fbd9862c8a1d28b",
     "date": "2026-10-08"
+  },
+  "/scholarships/alberta-blue-cross-health-sciences-award-sait/": {
+    "hash": "f1e9e04f0cced7da",
+    "date": "2026-10-14"
   },
   "/scholarships/alberta-blue-cross-indigenous-scholarship/": {
     "hash": "757bee006154e487",
@@ -1935,6 +1963,10 @@
     "hash": "f47b54da3d8b8275",
     "date": "2026-10-14"
   },
+  "/scholarships/barb-higgins-inspiration-award-sait/": {
+    "hash": "c2f2cac836cbc565",
+    "date": "2026-10-14"
+  },
   "/scholarships/bare-wire-recycling-inc-student-award/": {
     "hash": "2b60d79f35ad7914",
     "date": "2026-10-08"
@@ -2078,6 +2110,10 @@
   "/scholarships/beta-sigma-phi-scholarship/": {
     "hash": "a8d38e41d89aaed0",
     "date": "2026-10-08"
+  },
+  "/scholarships/beth-diamond-memorial-bursary-sait/": {
+    "hash": "7488ec66d156cc39",
+    "date": "2026-10-14"
   },
   "/scholarships/bethany-care-foundation-scholarships/": {
     "hash": "254b6abad5831fdb",
@@ -2755,6 +2791,10 @@
     "hash": "36e51070be2ef77d",
     "date": "2026-10-08"
   },
+  "/scholarships/calgary-construction-association-award-sait/": {
+    "hash": "4c99145e94e825cd",
+    "date": "2026-10-14"
+  },
   "/scholarships/calgary-flames-foundation-community-involvement-scholarship/": {
     "hash": "d6599daffc980886",
     "date": "2026-10-05"
@@ -2943,6 +2983,14 @@
     "hash": "992e2f0694037637",
     "date": "2026-10-08"
   },
+  "/scholarships/cando-spirit-scholarship-sait/": {
+    "hash": "72f5f57abebd06eb",
+    "date": "2026-10-14"
+  },
+  "/scholarships/canerector-award-sait/": {
+    "hash": "7e292ed2815da0e7",
+    "date": "2026-10-14"
+  },
   "/scholarships/canmore-collegiate-high-school-scholarships-and-awards/": {
     "hash": "32bd3ea3fcab2caa",
     "date": "2026-10-08"
@@ -3062,6 +3110,10 @@
   "/scholarships/carstairs-elks-trades-bursaries/": {
     "hash": "bb91306876709a6f",
     "date": "2026-10-08"
+  },
+  "/scholarships/carthy-foundation-award-sait/": {
+    "hash": "b2b85deb05598648",
+    "date": "2026-10-14"
   },
   "/scholarships/cashion-legal-at-work-scholarship/": {
     "hash": "29d61e5dd29ced5c",
@@ -3431,6 +3483,10 @@
     "hash": "6f601aae9ade5991",
     "date": "2026-10-08"
   },
+  "/scholarships/coca-cola-award-sait/": {
+    "hash": "4903a50e35cc206f",
+    "date": "2026-10-14"
+  },
   "/scholarships/cochrane-activettes-bursary/": {
     "hash": "2b4d4c254917d430",
     "date": "2026-10-08"
@@ -3699,6 +3755,10 @@
     "hash": "ff2369a1ff23c092",
     "date": "2026-10-08"
   },
+  "/scholarships/dale-landry-memorial-award-sait/": {
+    "hash": "d2fd83493447fba0",
+    "date": "2026-10-14"
+  },
   "/scholarships/dale-macmillan-memorial-scholarship-for-community-leadership/": {
     "hash": "f3d13d5cf5da65e9",
     "date": "2026-10-08"
@@ -3790,6 +3850,10 @@
   "/scholarships/david-m-bayne-legacy-bursary/": {
     "hash": "ff365b8d7228fe4c",
     "date": "2026-10-08"
+  },
+  "/scholarships/david-oughton-legacy-fund-award-sait/": {
+    "hash": "8f501a40354049a5",
+    "date": "2026-10-14"
   },
   "/scholarships/davis-auto-group-community-service-award/": {
     "hash": "13f11435cb823640",
@@ -4351,6 +4415,10 @@
     "hash": "08978bc5c49e1800",
     "date": "2026-10-08"
   },
+  "/scholarships/esmail-bharwani-health-entrance-award-sait/": {
+    "hash": "289ed624b85a1971",
+    "date": "2026-10-14"
+  },
   "/scholarships/esther-and-peter-cunliffe-scholarship/": {
     "hash": "8aa8937dc51756a4",
     "date": "2026-10-08"
@@ -4405,6 +4473,10 @@
   },
   "/scholarships/faculty-of-science-entrance-scholarship-university-of-alberta/": {
     "hash": "085f443a354ef12f",
+    "date": "2026-10-14"
+  },
+  "/scholarships/fairfax-financial-holdings-entrance-award-sait/": {
+    "hash": "d124135e80627cbb",
     "date": "2026-10-14"
   },
   "/scholarships/fairfax-financial-holdings-limited-entrance-bursary-university-of-calgary/": {
@@ -4783,6 +4855,10 @@
     "hash": "e128ee22c723d429",
     "date": "2026-10-14"
   },
+  "/scholarships/gene-haas-foundation-award-sait/": {
+    "hash": "322f9f46618104fd",
+    "date": "2026-10-14"
+  },
   "/scholarships/george-b-cuff-leadership-award/": {
     "hash": "d32a8d12c178cb2b",
     "date": "2026-10-08"
@@ -4907,6 +4983,10 @@
     "hash": "8f1fa2ba8f44b22d",
     "date": "2026-10-14"
   },
+  "/scholarships/global-news-scholars-award-sait/": {
+    "hash": "77f9d4e2d95cb42d",
+    "date": "2026-10-14"
+  },
   "/scholarships/global-television-network-bursary/": {
     "hash": "b7a6120377bd2bc6",
     "date": "2026-10-14"
@@ -4925,6 +5005,10 @@
   },
   "/scholarships/goodwill-industries-of-alberta-scholarship-for-good/": {
     "hash": "574ea776392d9237",
+    "date": "2026-10-14"
+  },
+  "/scholarships/gordon-and-kathy-laing-memorial-award-sait/": {
+    "hash": "61f2b511fe80e480",
     "date": "2026-10-14"
   },
   "/scholarships/gordon-edward-wright-scholarship/": {
@@ -5207,6 +5291,10 @@
     "hash": "5f2641808d9fb547",
     "date": "2026-10-08"
   },
+  "/scholarships/heather-culbert-women-in-technology-award/": {
+    "hash": "c5ddd9ff0537ea52",
+    "date": "2026-10-14"
+  },
   "/scholarships/hec-gervais-academic-and-curling-scholarship/": {
     "hash": "5ce9de3341f02afe",
     "date": "2026-10-08"
@@ -5439,6 +5527,10 @@
     "hash": "1753c40fa95d8962",
     "date": "2026-10-08"
   },
+  "/scholarships/ipeia-award-sait/": {
+    "hash": "f91b7968af6a7ff1",
+    "date": "2026-10-14"
+  },
   "/scholarships/ippc-indigenous-pharmacy-scholarship/": {
     "hash": "93f90879fdf2f1bc",
     "date": "2026-10-08"
@@ -5454,6 +5546,10 @@
   "/scholarships/isabella-allen-memorial-award/": {
     "hash": "7217eddd2dba66b0",
     "date": "2026-10-08"
+  },
+  "/scholarships/isl-engineering-and-land-services-award-sait/": {
+    "hash": "0821417c709aa39d",
+    "date": "2026-10-14"
   },
   "/scholarships/isobel-secord-memorial-deans-entrance-citation-in-nursing/": {
     "hash": "f0bbae0d7c366094",
@@ -6839,6 +6935,10 @@
     "hash": "c3e6484b314c1990",
     "date": "2026-10-14"
   },
+  "/scholarships/mark-l-egger-indigenous-culinary-bursary/": {
+    "hash": "727ae24dae1874a6",
+    "date": "2026-10-14"
+  },
   "/scholarships/mark-ward-indigenous-award/": {
     "hash": "5fc309b914d7f096",
     "date": "2026-10-08"
@@ -7979,6 +8079,10 @@
     "hash": "9ff7d9281912facb",
     "date": "2026-10-08"
   },
+  "/scholarships/princess-auto-foundation-award-sait/": {
+    "hash": "4ad08f9edcf75b4b",
+    "date": "2026-10-14"
+  },
   "/scholarships/prix-de-lambassadeur-du-conseil-scolaire-centre-nord/": {
     "hash": "036baf5a9f6421db",
     "date": "2026-10-08"
@@ -8287,6 +8391,10 @@
     "hash": "fec1c5acc2262983",
     "date": "2026-10-14"
   },
+  "/scholarships/riley-rankin-bursary-sait/": {
+    "hash": "f35dc0ecc8dff85b",
+    "date": "2026-10-14"
+  },
   "/scholarships/ringette-alberta-scholarship/": {
     "hash": "b73d13da36ee8dab",
     "date": "2026-10-08"
@@ -8346,6 +8454,10 @@
   "/scholarships/robert-spence-foundation-bursaries-st-marys-university/": {
     "hash": "3c6218260cd1d3dd",
     "date": "2026-10-09"
+  },
+  "/scholarships/robert-spence-memorial-award-sait/": {
+    "hash": "d9be047545fd16ca",
+    "date": "2026-10-14"
   },
   "/scholarships/robert-stollery-award-in-social-entrepreneurship/": {
     "hash": "a30a1f71b0d3c8ea",
@@ -8639,6 +8751,10 @@
     "hash": "e745de748b68c785",
     "date": "2026-10-08"
   },
+  "/scholarships/safana-bharwani-school-of-business-award-sait/": {
+    "hash": "490a81d6954f2cf9",
+    "date": "2026-10-14"
+  },
   "/scholarships/saint-marys-presidential-scholarship/": {
     "hash": "7fc8390c0b707b83",
     "date": "2026-10-14"
@@ -8655,17 +8771,37 @@
     "hash": "db3f63fca302ec25",
     "date": "2026-10-14"
   },
+  "/scholarships/sait-access-award/": {
+    "hash": "9dcc562d777709fc",
+    "date": "2026-10-14"
+  },
   "/scholarships/sait-bissett-bursary-program/": {
     "hash": "2ab5098cf1c35135",
     "date": "2026-10-09"
+  },
+  "/scholarships/sait-entrance-award/": {
+    "hash": "db89b7637fde1154",
+    "date": "2026-10-14"
   },
   "/scholarships/sait-entrance-awards-application/": {
     "hash": "a67ce90bbbc2838a",
     "date": "2026-10-09"
   },
+  "/scholarships/sait-family-campaign-peer-recognition-award/": {
+    "hash": "0e7752c13860a3d6",
+    "date": "2026-10-14"
+  },
   "/scholarships/sait-first-choice---sait-board-of-governors/": {
     "hash": "1878ecbf64651608",
     "date": "2026-10-09"
+  },
+  "/scholarships/sait-first-choice-scholarship-bank-of-montreal/": {
+    "hash": "affbfe8ff10d0720",
+    "date": "2026-10-14"
+  },
+  "/scholarships/sait-first-choice-scholarship-scotiabank/": {
+    "hash": "5cd7b453d140d536",
+    "date": "2026-10-14"
   },
   "/scholarships/salers-association-of-canada-scholarship/": {
     "hash": "95b0a3ad7ff14df2",
@@ -8774,6 +8910,10 @@
   "/scholarships/scott-sullivan-endowment-award/": {
     "hash": "7d0c74d18931477e",
     "date": "2026-10-08"
+  },
+  "/scholarships/scott-thon-award-sait/": {
+    "hash": "422b83e7fe3d246c",
+    "date": "2026-10-14"
   },
   "/scholarships/scouts-canada-scholarship-program/": {
     "hash": "6ebcee8fccfc1298",
@@ -9295,6 +9435,10 @@
     "hash": "11bf7e3a50b46c01",
     "date": "2026-09-09"
   },
+  "/scholarships/td-bank-group-centennial-award-sait/": {
+    "hash": "aadca36dcf732fb8",
+    "date": "2026-10-14"
+  },
   "/scholarships/td-canada-trust-lchs-agriculture-scholarship/": {
     "hash": "65722b8f25fd2032",
     "date": "2026-10-08"
@@ -9317,6 +9461,10 @@
   },
   "/scholarships/ted-eddy-alumni-entrance-scholarship/": {
     "hash": "75627a964d4e0d15",
+    "date": "2026-10-14"
+  },
+  "/scholarships/ted-gordyko-entrance-bursary-sait/": {
+    "hash": "5e99a9463dd7bcff",
     "date": "2026-10-14"
   },
   "/scholarships/ted-rogers-legacy-scholarship/": {
