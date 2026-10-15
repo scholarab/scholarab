@@ -90396,5 +90396,4056 @@
       "apprenticeship": false,
       "extracurriculars": []
     }
+  },
+  {
+    "id": 2406,
+    "title": "Betty Brook Ferdyn Bursary",
+    "amount": "Up to $1,600",
+    "deadline": "2027-03-01",
+    "audience": "Canadian Grade 12 students with financial need entering any faculty at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/betty-brook-ferdyn-bursary",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15. One bursary is given each year.",
+    "active": true,
+    "description": "An entrance bursary of up to $1,600 for a first-year student in any faculty, based on marks and financial need.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2407,
+    "title": "Evelyn Mitchell Emerson Entrance Bursary",
+    "amount": "Up to $3,500",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students with financial need entering any faculty at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/evelyn-mitchell-emerson-entrance-bursary",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15. Two bursaries are given each year and any citizenship qualifies.",
+    "active": true,
+    "description": "Two entrance bursaries of up to $3,500 for first-year students in any faculty, based on marks and financial need.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2408,
+    "title": "Hire a Student Chamber of Commerce Bursary",
+    "amount": "Up to $750",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students with financial need entering any faculty at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/hire-studentchamber-commerce-bursary",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15. One bursary is given each year.",
+    "active": true,
+    "description": "A small entrance bursary of up to $750 for a first-year student in any faculty, based on marks and financial need.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2409,
+    "title": "John Tsafalas Memorial Bursary",
+    "amount": "Up to $1,200",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students with financial need entering any faculty at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/john-tsafalas-memorial-bursary",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15. One bursary is given each year.",
+    "active": true,
+    "description": "A memorial entrance bursary of up to $1,200 for a first-year student in any faculty, based on marks and financial need.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2410,
+    "title": "McCaig Family Entrance Bursary",
+    "amount": "Up to $2,200",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students with financial need entering any faculty at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/mccaig-family-entrance-bursary",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15. One bursary is given each year.",
+    "active": true,
+    "description": "A family-funded entrance bursary of up to $2,200 for a first-year student in any faculty, based on marks and financial need.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2411,
+    "title": "The Reading Foundation Entrance Award",
+    "amount": "$2,000",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students with financial need entering any faculty at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/reading-foundation-entrance-award",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15. One award is given each year.",
+    "active": true,
+    "description": "A $2,000 entrance award for a first-year student in any faculty, based on financial need and marks.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2412,
+    "title": "Chung and Teo Memorial Bursary",
+    "amount": "Up to $1,800",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students with financial need entering any faculty at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/yew-teck-audrey-chung-and-eng-theng-teo-memorial-bursary",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15. The full name is the Yew-Teck (Audrey) Chung and Eng-Theng Teo Memorial Bursary.",
+    "active": true,
+    "description": "Two memorial entrance bursaries of up to $1,800 each for first-year students in any faculty, based on marks and need.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2413,
+    "title": "John D. Petrie Memorial Entrance Bursary",
+    "amount": "Up to $6,000 a year, renewable",
+    "deadline": "2027-03-01",
+    "audience": "Alberta Grade 12 students who are Canadian citizens or permanent residents with financial need, entering any faculty at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/john-d-petrie-memorial-entrance-bursary",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15. It renews for three more years with a 2.00 GPA on 24 units each fall and winter.",
+    "active": true,
+    "description": "Five renewable entrance bursaries of up to $6,000 a year for Alberta students with financial need and solid marks.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2414,
+    "title": "Margaret and Ted Newall Bursary",
+    "amount": "Up to $5,700",
+    "deadline": "2027-03-01",
+    "audience": "Canadian Grade 12 students with financial need whose home is outside the greater Calgary area, entering the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/margaret-and-ted-newall-bursary",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15. Your permanent home address must be outside the greater Calgary area. Twenty are given each year.",
+    "active": true,
+    "description": "Twenty entrance bursaries of up to $5,700 each for students moving to Calgary from elsewhere, based on marks and financial need.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2415,
+    "title": "Vernon V. Van Sant Jr. Memorial Entrance Bursary",
+    "amount": "Up to $3,900",
+    "deadline": "2027-03-01",
+    "audience": "Canadian Grade 12 students at an Alberta high school with financial need, entering any faculty at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/vernon-v-van-sant-jr-memorial-entrance-bursary",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15. You must finish Grade 12 at an Alberta high school.",
+    "active": true,
+    "description": "An entrance bursary of up to $3,900 for an Alberta high school graduate in any faculty, based on marks and financial need.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2416,
+    "title": "Indo-Chinese Buddhist Association Entrance Award",
+    "amount": "Up to $2,500",
+    "deadline": "2027-03-01",
+    "audience": "Canadian Grade 12 students at an Alberta high school with financial need and volunteer work, entering the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/indo-chinese-buddhist-association-alberta-entrance-award",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15. Show your community service and volunteering in the application.",
+    "active": true,
+    "description": "Two entrance awards of up to $2,500 for Alberta graduates who volunteer in their community, based on marks and financial need.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2417,
+    "title": "Mandeep Singh Shahid Entrance Bursary",
+    "amount": "Up to $4,000",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students who identify as a visible or racialized minority, with financial need, entering the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/mandeep-munny-singh-shahid-entrance-bursary",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15. You must identify as a visible or racialized minority.",
+    "active": true,
+    "description": "An entrance bursary of up to $4,000 for a racialized student in any faculty, based on financial need and marks.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": true,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2418,
+    "title": "Gary A.S. Owen Bursary",
+    "amount": "Up to $2,800",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students from a rural high school with financial need, entering any faculty at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/gary-owen-bursary",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15. You must finish high school in a rural community.",
+    "active": true,
+    "description": "An entrance bursary of up to $2,800 for a rural high school graduate in any faculty, based on financial need and marks.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2419,
+    "title": "William Keyte Memorial Bursary",
+    "amount": "Up to $6,000 a year, renewable",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students from rural Alberta with financial need, entering any faculty at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/william-keyte-memorial-bursary",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15. Students from the Special Areas, including Hanna, Youngstown, Oyen and Cereal, get preference. It renews with a 2.00 GPA on 18 units.",
+    "active": true,
+    "description": "Five renewable entrance bursaries of up to $6,000 a year for students from rural Alberta, based on financial need and marks.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2420,
+    "title": "Bob Grainger Entrance Bursary for the Bow Valley",
+    "amount": "Up to $5,500",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students with financial need entering the University of Calgary, with preference for Bow Valley graduates",
+    "url": "https://www.ucalgary.ca/registrar/awards/william-robert-bob-grainger-entrance-bursary-bow-valley-area",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15. Graduates of high schools in the Bow Valley west of Calgary get preference.",
+    "active": true,
+    "description": "An entrance bursary of up to $5,500 that favours graduates of a Bow Valley high school west of Calgary.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2421,
+    "title": "Bob Grainger Entrance Bursary for Canmore",
+    "amount": "Up to $5,500",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students with financial need entering the University of Calgary, with preference for Canmore graduates",
+    "url": "https://www.ucalgary.ca/registrar/awards/william-robert-bob-grainger-entrance-bursary-canmore",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15. Graduates of a high school in Canmore get preference.",
+    "active": true,
+    "description": "An entrance bursary of up to $5,500 that favours a graduate of a Canmore high school.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2422,
+    "title": "Mortimer Entrance Bursary",
+    "amount": "Up to $1,725",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students from the Calgary judicial district outside the city, with financial need, entering the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/gerald-roberts-mortimer-and-victor-emanuel-mortimer-entrance-bursary",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15. You must attend high school in the Judicial District of Calgary, outside the City of Calgary, for at least two years in a row. A matching Mortimer Entrance Scholarship of up to $1,800 goes to four more students on marks alone through the same form. The full name is the Gerald Roberts Mortimer and Victor Emanuel Mortimer Entrance Bursary.",
+    "active": true,
+    "description": "Four entrance bursaries of up to $1,725 for students from towns around Calgary, based on marks and financial need.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2423,
+    "title": "Senator H.A. Olson Scholarship",
+    "amount": "Up to $2,800",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students from southern Alberta outside Calgary entering the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/senator-honourable-ha-olson-scholarship",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15. You must live in Alberta south of latitude 50, not in Calgary. Graduates from the old Medicine Hat federal riding get preference.",
+    "active": true,
+    "description": "An entrance scholarship of up to $2,800 for a strong student from Alberta south of the 50th parallel.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2424,
+    "title": "Joyce Foundation Perraton and Marshall Bursary",
+    "amount": "Up to $5,000 a year, renewable",
+    "deadline": "2027-03-01",
+    "audience": "Canadian Grade 12 students who have worked with a staff or peer mentor, entering any faculty at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/joyce-foundation-jack-perraton-and-ed-lois-marshall-bursary",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15. Your activity record should show programs where you worked with a staff or peer mentor. It renews with a 2.00 GPA on 24 units.",
+    "active": true,
+    "description": "Renewable entrance bursaries of up to $5,000 a year for students whose high school years included a staff or peer mentor.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2425,
+    "title": "UCalgary First-Generation Scholars Award",
+    "amount": "Varies",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students who will be the first in their family to go to university, entering a first degree at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/first-generation-scholars-award",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15. You must enter a first-entry degree full time and hold no earlier post-secondary credential.",
+    "active": true,
+    "description": "An entrance award for high school students who are the first in their family to attend university.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2426,
+    "title": "Building on the Vision Scholarship",
+    "amount": "Up to $7,000",
+    "deadline": "2027-03-01",
+    "audience": "Canadian Grade 12 students with strong marks and school or community involvement entering the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/building-vision-scholarship",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15. Marks across all of high school count, along with school and community life.",
+    "active": true,
+    "description": "An entrance scholarship of up to $7,000 for a student with a strong high school record and community involvement.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2427,
+    "title": "Copp Family Scholarship",
+    "amount": "Up to $3,400",
+    "deadline": "2027-03-01",
+    "audience": "Canadian Grade 12 students with strong marks and school or community involvement entering the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/copp-family-scholarship",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15. Fifteen are given each year.",
+    "active": true,
+    "description": "Fifteen entrance scholarships of up to $3,400 for students who pair good marks with school and community involvement.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2428,
+    "title": "Gordon Edward Wright Scholarship",
+    "amount": "Up to $3,200",
+    "deadline": "2027-03-01",
+    "audience": "Canadian Grade 12 students with strong marks and school or community involvement entering the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/gordon-edward-wright-scholarship",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15. Four are given each year.",
+    "active": true,
+    "description": "Four entrance scholarships of up to $3,200 for students with good marks and a record of school or community involvement.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2429,
+    "title": "Joyce Margaret Wright Scholarship",
+    "amount": "Up to $3,500",
+    "deadline": "2027-03-01",
+    "audience": "Canadian Grade 12 students with strong marks and school or community involvement entering the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/joyce-margaret-wright-scholarship",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15. Four are given each year.",
+    "active": true,
+    "description": "Four entrance scholarships of up to $3,500 for students with good marks and a record of school or community involvement.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2430,
+    "title": "UCalgary Alumni Jean Owen Scholarship",
+    "amount": "Up to $3,500",
+    "deadline": "2027-03-01",
+    "audience": "Canadian Grade 12 students with strong marks and school or community involvement entering the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/university-calgary-alumni-association-jean-owen-scholarship",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15. Five are given each year.",
+    "active": true,
+    "description": "Five alumni-funded entrance scholarships of up to $3,500 for students with good marks and community involvement.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2431,
+    "title": "UCalgary Alumni Association Scholarship",
+    "amount": "Up to $5,000",
+    "deadline": "2027-03-01",
+    "audience": "Canadian Grade 12 students with strong marks and school or community involvement entering the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/university-calgary-alumni-association-scholarship",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15. Five are given each year.",
+    "active": true,
+    "description": "Five alumni-funded entrance scholarships of up to $5,000 for students with good marks and community involvement.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2432,
+    "title": "Vivian Stevenson Scholarship",
+    "amount": "Up to $3,500",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students with high marks entering any faculty at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/vivian-stevenson-scholarship",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15. Six are given each year and any citizenship qualifies.",
+    "active": true,
+    "description": "Six entrance scholarships of up to $3,500 for first-year students in any faculty, chosen on marks.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2433,
+    "title": "John and Sarra Fabbro Scholarship",
+    "amount": "Up to $2,400",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students from an Alberta Catholic school with a 75% average and Italian 20, entering the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/john-and-sarra-fabbro-scholarship",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15. You must come from an Alberta separate school system, hold a 75% scholarship average and have passed Italian 20.",
+    "active": true,
+    "description": "Two entrance scholarships of up to $2,400 for Catholic school graduates who took Italian.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [],
+      "minAverage": 75,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2434,
+    "title": "Douglas Tims Memorial Bursary",
+    "amount": "Up to $1,400",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students with financial need and community involvement entering the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/douglas-yeung-tims-memorial-bursary",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15. Students who attended the Calgary Chinese School get preference.",
+    "active": true,
+    "description": "An entrance bursary of up to $1,400 for a student who gives back to the community, based on marks and need.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2435,
+    "title": "Catherine Morrish Memorial Scholarship",
+    "amount": "Up to $1,400",
+    "deadline": "2027-03-01",
+    "audience": "Female Grade 12 students at a Calgary high school entering the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/catherine-morrish-memorial-scholarship",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15. You must complete Grade 12 at a Calgary high school.",
+    "active": true,
+    "description": "An entrance scholarship of up to $1,400 for a young woman who finished Grade 12 in Calgary, chosen on marks.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": "female",
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2436,
+    "title": "Chi-Yung Lee Memorial Bursary",
+    "amount": "Up to $600",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students at a Calgary high school with financial need and athletics or school involvement, entering the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/chi-yung-lee-memorial-bursary",
+    "category": "Sports",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15. You must graduate from a high school in the City of Calgary.",
+    "active": true,
+    "description": "Two small entrance bursaries for Calgary graduates active in sports or school life, one for a male and one for a female student.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "sports"
+      ]
+    }
+  },
+  {
+    "id": 2437,
+    "title": "Ted Eddy Alumni Entrance Scholarship",
+    "amount": "Up to $2,100",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students at a Calgary high school entering any faculty at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/ec-ted-eddy-alumni-entrance-scholarship",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15. The full name is the E.C. \"Ted\" Eddy Alumni Entrance Scholarship.",
+    "active": true,
+    "description": "Five entrance scholarships of up to $2,100 for Calgary high school graduates, chosen on marks.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2438,
+    "title": "Richard T Clark Award",
+    "amount": "$2,500",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students at a Calgary high school with financial need and community involvement, entering the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/richard-t-clark-award",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15. You must graduate from a Calgary high school.",
+    "active": true,
+    "description": "A $2,500 entrance award for a Calgary graduate involved in the community, based on need and marks.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2439,
+    "title": "Graydon and Dorothy Morrison Fine Arts Award",
+    "amount": "$2,500",
+    "deadline": "2027-03-01",
+    "audience": "Canadian Grade 12 students at a Calgary high school entering dance, drama, music or visual studies at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/graydon-and-dorothy-morrison-fine-arts-award",
+    "category": "Arts",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15. You must graduate from a Calgary high school and show community involvement.",
+    "active": true,
+    "description": "Four $2,500 entrance awards for Calgary graduates starting dance, drama, music or visual studies.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [
+        "Fine Arts"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2440,
+    "title": "Graydon and Dorothy Morrison Kinesiology Award",
+    "amount": "$2,500",
+    "deadline": "2027-03-01",
+    "audience": "Canadian Grade 12 students at a Calgary high school entering Kinesiology at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/graydon-and-dorothy-morrison-kinesiology-award",
+    "category": "Sports",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15. You must graduate from a Calgary high school and show community involvement.",
+    "active": true,
+    "description": "Three $2,500 entrance awards for Calgary graduates starting a kinesiology degree.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [
+        "Kinesiology"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2441,
+    "title": "Viscount Bennett Entrance Scholarship",
+    "amount": "$1,000",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students who have lived five years in or near Calgary or in Banff National Park, entering the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/viscount-bennett-entrance-scholarship",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15. You must have lived for five years in a row in Calgary, within 32 km of it, or in Banff National Park.",
+    "active": true,
+    "description": "Several $1,000 entrance scholarships for long-time Calgary area residents, chosen on marks and character.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2442,
+    "title": "La bourse Lebel",
+    "amount": "Up to $1,500",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students in a Calgary French immersion or francophone program entering the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/la-bourse-lebel",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15. You must finish high school in a French immersion or francophone program in Calgary.",
+    "active": true,
+    "description": "An entrance bursary of up to $1,500 for a graduate of French immersion or francophone schooling in Calgary.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2443,
+    "title": "Don Henderson Memorial Ringette Scholarship",
+    "amount": "Up to $1,900",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 Ringette Calgary players entering the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/don-henderson-memorial-ringette-scholarship",
+    "category": "Sports",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15. You must be a Ringette Calgary member who has played for the past two years and plans to keep playing.",
+    "active": true,
+    "description": "An entrance scholarship of up to $1,900 for a Ringette Calgary player with good marks.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "sports"
+      ]
+    }
+  },
+  {
+    "id": 2444,
+    "title": "Dr. A. Downey Memorial Award",
+    "amount": "Up to $1,400",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students who played minor hockey, entering any faculty at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/dr-downey-memorial-award",
+    "category": "Sports",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15. Students planning a career in dentistry get some preference.",
+    "active": true,
+    "description": "An entrance award of up to $1,400 for a former minor hockey player with above average marks.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "sports"
+      ]
+    }
+  },
+  {
+    "id": 2445,
+    "title": "Aldea Family Entrance Award in Business and Economics",
+    "amount": "$5,000",
+    "deadline": "2027-03-01",
+    "audience": "Canadian Grade 12 students with financial need entering Haskayne or Economics at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/aldea-family-entrance-award-business-and-economics",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15.",
+    "active": true,
+    "description": "A $5,000 entrance award for a student starting business or economics, based on financial need and marks.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [
+        "Business",
+        "Economics"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2446,
+    "title": "Frank Speakman Entrance Bursary in English",
+    "amount": "Up to $3,000",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students with financial need entering English at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/frank-speakman-memorial-entrance-bursary-english",
+    "category": "Arts",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15.",
+    "active": true,
+    "description": "An entrance bursary of up to $3,000 for a first-year English major, based on marks and financial need.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [
+        "English"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2447,
+    "title": "Janet Simonton Memorial Bursary",
+    "amount": "$2,000",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students with financial need entering English at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/janet-simonton-memorial-bursary",
+    "category": "Arts",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15.",
+    "active": true,
+    "description": "A $2,000 entrance bursary for a first-year English major, based on marks and financial need.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [
+        "English"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2448,
+    "title": "Janet Mitchell Bursary",
+    "amount": "Up to $1,375",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students with financial need entering Visual Studies at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/janet-mitchell-bursary",
+    "category": "Arts",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15.",
+    "active": true,
+    "description": "Four entrance bursaries of up to $1,375 for first-year visual studies majors, based on marks and financial need.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [
+        "Visual Arts"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2449,
+    "title": "Jane S. Jamison Bursary in Fine Arts",
+    "amount": "Up to $8,500",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students with financial need entering music at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/jane-s-jamison-bursary-fine-arts",
+    "category": "Arts",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15. You need to be starting a Bachelor of Music or a BA in Music. Alberta high school graduates get preference.",
+    "active": true,
+    "description": "An entrance bursary of up to $8,500 for a first-year music student, based on marks and financial need.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [
+        "Music"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2450,
+    "title": "Gertrude and W.J. Thompson Entrance Bursary",
+    "amount": "Up to $2,500",
+    "deadline": "2027-03-01",
+    "audience": "Canadian Grade 12 students with financial need and leadership entering Arts at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/gertrude-and-wj-thompson-memorial-entrance-bursary",
+    "category": "Arts",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15. Activities and leadership count along with marks and need.",
+    "active": true,
+    "description": "An entrance bursary of up to $2,500 for a first-year Arts student who leads in school or community.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership"
+      ]
+    }
+  },
+  {
+    "id": 2451,
+    "title": "UCalgary Arts Entrance Scholarship in Humanities",
+    "amount": "Up to $3,200",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students with an 85% average entering English, philosophy, languages or other humanities at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/faculty-arts-entrance-scholarship-studies-humanities",
+    "category": "Arts",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15. You need a scholarship average of 85% or higher. Eligible majors include English, Philosophy, French, Spanish, German, Russian, Italian and East Asian studies.",
+    "active": true,
+    "description": "Entrance scholarships of up to $3,200 for top students starting a humanities major such as English, philosophy or a language.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [
+        "Humanities"
+      ],
+      "minAverage": 85,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2452,
+    "title": "Matt Suelzle Bursary in Communication and Culture",
+    "amount": "Up to $4,800",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students with financial need entering communication, media or film at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/matt-suelzle-bursary-communication-culture",
+    "category": "Arts",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15. Graduates of Lord Beaverbrook High School and students who play football or rugby get preference.",
+    "active": true,
+    "description": "An entrance bursary of up to $4,800 for a first-year communication, media or film student.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [
+        "Communications",
+        "Film"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2453,
+    "title": "Boparai Memorial Award",
+    "amount": "Up to $2,100",
+    "deadline": "2027-03-01",
+    "audience": "Alberta Grade 12 students with an 80% average and financial need entering Arts or Science at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/pritpal-kaur-and-jhanda-singh-boparai-memorial-award",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15. You need an 80% admission average and Alberta residency. The full name is the Pritpal Kaur and Jhanda Singh Boparai Memorial Award.",
+    "active": true,
+    "description": "An entrance award of up to $2,100 for an Arts or Science student, with preference for the first in their family at university.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [],
+      "minAverage": 80,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2454,
+    "title": "Polyna Savridi Memorial Entrance Scholarship",
+    "amount": "Up to $900",
+    "deadline": null,
+    "audience": "Grade 12 singers entering the Bachelor of Music at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/polyna-savridi-memorial-entrance-scholarship",
+    "category": "Arts",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "There is no separate application. The faculty picks recipients from entering students. The Division of Music picks recipients from the entrance audition.",
+    "active": true,
+    "description": "An entrance scholarship of up to $900 for a voice student starting the Bachelor of Music.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [
+        "Music"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2455,
+    "title": "Kirby Memorial Scholarship",
+    "amount": "Up to $1,500",
+    "deadline": null,
+    "audience": "Grade 12 students entering the Bachelor of Music at the University of Calgary, with preference for voice",
+    "url": "https://www.ucalgary.ca/registrar/awards/kirby-memorial-scholarship",
+    "category": "Arts",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "There is no separate application. The faculty picks recipients from entering students. The Division of Music picks recipients from the entrance audition.",
+    "active": true,
+    "description": "An entrance scholarship of up to $1,500 for a Bachelor of Music student, with voice students preferred.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [
+        "Music"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2456,
+    "title": "Myrtle Cochran Paget Memorial Award",
+    "amount": "Up to $1,500",
+    "deadline": null,
+    "audience": "Grade 12 string players entering the Bachelor of Music at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/myrtle-cochran-paget-memorial-award",
+    "category": "Arts",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "There is no separate application. The faculty picks recipients from entering students. The Division of Music picks recipients from the entrance audition.",
+    "active": true,
+    "description": "An award of up to $1,500 for a strings major in the Bachelor of Music, with first-year students preferred.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [
+        "Music"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2457,
+    "title": "Norman J. Kennedy Scholarship for Strings",
+    "amount": "Up to $2,500",
+    "deadline": null,
+    "audience": "Grade 12 violin, viola, cello or bass players entering the Bachelor of Music at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/norman-j-kennedy-memorial-scholarship-string-instruments",
+    "category": "Arts",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "There is no separate application. The faculty picks recipients from entering students. The Division of Music picks recipients from the entrance audition.",
+    "active": true,
+    "description": "A scholarship of up to $2,500 for a violin, viola, cello or bass player in the Bachelor of Music.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [
+        "Music"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2458,
+    "title": "UCalgary Music Entrance Award",
+    "amount": "Up to $1,250",
+    "deadline": null,
+    "audience": "Grade 12 students entering the Bachelor of Music at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/school-creative-and-performing-arts-music-entrance-award",
+    "category": "Arts",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "There is no separate application. The faculty picks recipients from entering students. The Division of Music picks recipients from the entrance audition.",
+    "active": true,
+    "description": "Two entrance awards of up to $1,250 for new Bachelor of Music students, based on musical ability.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [
+        "Music"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2459,
+    "title": "Bothner Entrance Bursary in Science",
+    "amount": "Up to $1,600",
+    "deadline": "2027-03-01",
+    "audience": "Canadian Grade 12 students with financial need entering Science at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/alvin-and-kathleen-bothner-entrance-bursary-science",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15. Graduates of rural high schools in Alberta or Saskatchewan get preference.",
+    "active": true,
+    "description": "An entrance bursary of up to $1,600 for a first-year Science student, based on marks and financial need.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [
+        "Science"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2460,
+    "title": "Brian and Elaine Russell Award",
+    "amount": "$5,000",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students with financial need entering Science at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/brian-elaine-russell-award",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15.",
+    "active": true,
+    "description": "Two $5,000 entrance awards for first-year Science students, based on financial need and marks.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [
+        "Science"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2461,
+    "title": "UCalgary Diversity in Science Award",
+    "amount": "$10,000",
+    "deadline": "2027-03-01",
+    "audience": "Black, Indigenous and racialized Grade 12 students entering Science at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/diversity-science-award",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15. One award is given each year, chosen on marks.",
+    "active": true,
+    "description": "A $10,000 entrance award for a Black, Indigenous or racialized student starting a Science degree.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [
+        "Science"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": true,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2462,
+    "title": "MacTavish Memorial Science Entrance Bursary",
+    "amount": "Up to $9,000",
+    "deadline": "2027-03-01",
+    "audience": "Alberta Grade 12 students who are Canadian citizens or permanent residents with financial need, entering Science at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/james-calvin-mactavish-memorial-science-entrance-bursary",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15. The full name is the James Calvin MacTavish Memorial Science Entrance Bursary.",
+    "active": true,
+    "description": "Three entrance bursaries of up to $9,000 for Alberta students starting Science, based on marks and financial need.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [
+        "Science"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2463,
+    "title": "Joy Taylor Entrance Scholarship in Astrophysics",
+    "amount": "Up to $2,600",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students entering Astrophysics at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/joy-taylor-memorial-entrance-scholarship-astrophysics",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15.",
+    "active": true,
+    "description": "An entrance scholarship of up to $2,600 for a first-year astrophysics major, chosen on marks.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [
+        "Physics",
+        "Astronomy"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2464,
+    "title": "Roy Lindseth Award in Diversity",
+    "amount": "Up to $2,000",
+    "deadline": "2027-03-01",
+    "audience": "Black, Indigenous and racialized Grade 12 students entering Geology or Geophysics at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/roy-oliver-lindseth-undergraduate-award-diversity",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15.",
+    "active": true,
+    "description": "An entrance award of up to $2,000 for a Black, Indigenous or racialized student majoring in geology or geophysics.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [
+        "Geology"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": true,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2465,
+    "title": "Soong Family Memorial Bursary",
+    "amount": "Up to $9,000 a year, renewable",
+    "deadline": "2027-03-01",
+    "audience": "Canadian Grade 12 students with an 80% average and financial need entering Science or Engineering at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/soong-family-memorial-bursary",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15. You need an 80% admission average. It renews with a 3.00 GPA on 30 units.",
+    "active": true,
+    "description": "A renewable entrance bursary of up to $9,000 a year for a Science or Engineering student with financial need.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [
+        "Science",
+        "Engineering"
+      ],
+      "minAverage": 80,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2466,
+    "title": "Alex R. Cummings Bursary",
+    "amount": "Up to $3,000",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students with financial need entering Engineering at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/alex-r-cummings-bursary",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15.",
+    "active": true,
+    "description": "An entrance bursary of up to $3,000 for a first-year Schulich engineering student, based on marks and need.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [
+        "Engineering"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2467,
+    "title": "Norm Glover Engineering Entrance Award",
+    "amount": "Up to $1,000",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students with financial need and activities entering Engineering at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/christopher-norm-glover-engineering-entrance-award",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15.",
+    "active": true,
+    "description": "An entrance award of up to $1,000 for a first-year engineering student, based on marks, need and activities.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [
+        "Engineering"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2468,
+    "title": "Class of 1972 Engineering Entrance Bursary",
+    "amount": "Up to $5,000",
+    "deadline": "2027-03-01",
+    "audience": "Alberta Grade 12 students with financial need and volunteer work entering Engineering at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/class-1972-engineering-entrance-bursary",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15. You must attend high school in Alberta. Children of Schulich alumni get first preference.",
+    "active": true,
+    "description": "An entrance bursary of up to $5,000 for an Alberta student starting engineering, based on marks, need and volunteering.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [
+        "Engineering"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2469,
+    "title": "Class of 1973 Engineering Bursary",
+    "amount": "Up to $2,700",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students from a rural western Canadian high school with financial need, entering Engineering at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/class-1973-engineering-bursary",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15. You must finish high school in a rural area of British Columbia, Alberta, Saskatchewan or Manitoba.",
+    "active": true,
+    "description": "Two entrance bursaries of up to $2,700 for rural students starting engineering, based on marks, need and leadership.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [
+        "Engineering"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2470,
+    "title": "Maier Wirasinghe Entrance Award",
+    "amount": "Up to $8,000 a year, renewable",
+    "deadline": "2027-03-01",
+    "audience": "Canadian Grade 12 students with strong marks and involvement entering Engineering at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/gerald-j-maierdean-wirasinghe-entrance-award",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15. It renews in second and third year with a 3.00 GPA on 30 units. The full name is the Gerald J. Maier/Dean Wirasinghe Entrance Award.",
+    "active": true,
+    "description": "Four renewable entrance awards of up to $8,000 a year for engineering students with strong marks and community involvement.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [
+        "Engineering"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2471,
+    "title": "Hans M. Nielsen Memorial Entrance Bursary",
+    "amount": "Up to $3,500",
+    "deadline": "2027-03-01",
+    "audience": "Alberta Grade 12 students who are Canadian citizens or permanent residents with financial need, entering Engineering at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/hans-m-nielsen-memorial-entrance-bursary",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15.",
+    "active": true,
+    "description": "Three entrance bursaries of up to $3,500 for Alberta students starting engineering, based on marks and need.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [
+        "Engineering"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2472,
+    "title": "Janet Lee Phillips Scholarship",
+    "amount": "Up to $4,500 a year, renewable",
+    "deadline": "2027-03-01",
+    "audience": "Canadian Grade 12 students with high marks entering Engineering at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/janet-lee-phillips-scholarship",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15. It renews with a 3.20 GPA on 24 units.",
+    "active": true,
+    "description": "A renewable entrance scholarship of up to $4,500 a year for a strong student starting engineering.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [
+        "Engineering"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2473,
+    "title": "Jarrett Family Bursary in Engineering",
+    "amount": "Up to $1,500",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students with financial need entering Engineering at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/jarrett-family-bursary-engineering",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15.",
+    "active": true,
+    "description": "An entrance bursary of up to $1,500 for a first-year engineering student, based on marks and financial need.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [
+        "Engineering"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2474,
+    "title": "Mani Engineering Entrance Bursary",
+    "amount": "Up to $9,000",
+    "deadline": "2027-03-01",
+    "audience": "Alberta Grade 12 students who are Canadian citizens or permanent residents with financial need, entering Engineering at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/norman-and-ruth-mactavish-mani-engineering-entrance-bursary",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15. The full name is the Norman and Ruth (MacTavish) Mani Engineering Entrance Bursary.",
+    "active": true,
+    "description": "Three entrance bursaries of up to $9,000 for Alberta students starting engineering, based on marks and financial need.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [
+        "Engineering"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2475,
+    "title": "Parallax Energy Student Award in Engineering",
+    "amount": "$2,500",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students with financial need entering Engineering at the University of Calgary, with preference for central Alberta",
+    "url": "https://www.ucalgary.ca/registrar/awards/parallax-energy-student-award-engineering",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15. Graduates of community high schools in Lacombe, Sylvan Lake, Blackfalds and Red Deer get preference.",
+    "active": true,
+    "description": "Two $2,500 entrance awards for engineering students, favouring graduates from Lacombe, Sylvan Lake, Blackfalds and Red Deer.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [
+        "Engineering"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2476,
+    "title": "Schulich Engineering Dean's Entrance Scholarship",
+    "amount": "$8,400",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students with exceptional marks entering Engineering at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/schulich-school-engineering-deans-entrance-scholarship",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15. Awards are split by region and equally between men and women, with one preferred for an Indigenous student.",
+    "active": true,
+    "description": "Entrance scholarships of $8,400 for top students starting engineering, shared out across Canadian regions.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [
+        "Engineering"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2477,
+    "title": "Schulich School of Engineering Scholarship",
+    "amount": "$5,000",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students with high marks entering Engineering at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/schulich-school-engineering-scholarship",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15. Seven are given each year.",
+    "active": true,
+    "description": "Seven $5,000 entrance scholarships for first-year Schulich engineering students, chosen on marks.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [
+        "Engineering"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2478,
+    "title": "UCalgary Engineering Alumni Scholarship",
+    "amount": "Up to $9,000",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students with high marks entering Engineering at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/university-calgary-engineering-alumni-scholarship",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15.",
+    "active": true,
+    "description": "Two alumni-funded entrance scholarships of up to $9,000 for first-year engineering students, chosen on marks.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [
+        "Engineering"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2479,
+    "title": "Bill Howard Memorial Foundation Entrance Scholarship",
+    "amount": "Up to $2,000",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students who lead in clubs and the community, entering Engineering at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/wg-bill-howard-memorial-foundation-entrance-scholarship",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15.",
+    "active": true,
+    "description": "An entrance scholarship of up to $2,000 for an engineering student who led clubs or community groups in high school.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [
+        "Engineering"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership"
+      ]
+    }
+  },
+  {
+    "id": 2480,
+    "title": "Diversity Champions in Engineering Award",
+    "amount": "$4,000",
+    "deadline": null,
+    "audience": "Grade 12 students who support diversity in engineering, entering Engineering at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/diversity-champions-engineering-award",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "There is no separate application. The faculty picks recipients from entering students. Canadian citizens and permanent residents get preference.",
+    "active": true,
+    "description": "Several $4,000 entrance awards for engineering students with a record of supporting diversity in the field.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [
+        "Engineering"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2481,
+    "title": "Engineering Pathways Entrance Award",
+    "amount": "$4,000",
+    "deadline": null,
+    "audience": "Indigenous Grade 12 students entering Engineering Pathways at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/engineering-pathways-entrance-award",
+    "category": "Indigenous",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "There is no separate application. The faculty picks recipients from entering students. You must enter through the Indigenous admissions process.",
+    "active": true,
+    "description": "A $4,000 award for Indigenous students who enter the Engineering Pathways program.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [
+        "Engineering"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2482,
+    "title": "Byler Family Leaders in Business Award",
+    "amount": "Up to $10,000 a year, renewable",
+    "deadline": "2027-03-01",
+    "audience": "Canadian Grade 12 students with financial need and leadership entering the Haskayne BComm at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/byler-family-leaders-business-award",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15. Finance students get preference. It renews with a 2.00 GPA on 24 units. Two more one-year Byler awards of up to $10,000 go out through the same form.",
+    "active": true,
+    "description": "Two renewable entrance awards of up to $10,000 a year for Haskayne students who lead and have financial need.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [
+        "Business"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership"
+      ]
+    }
+  },
+  {
+    "id": 2483,
+    "title": "Fletcher Family Award in Business",
+    "amount": "$5,000",
+    "deadline": "2027-03-01",
+    "audience": "Alberta or Saskatchewan Grade 12 students with financial need entering the Haskayne BComm at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/fletcher-family-award-business",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15. You must graduate from a high school in Alberta or Saskatchewan.",
+    "active": true,
+    "description": "A $5,000 entrance award for a Haskayne student from Alberta or Saskatchewan, based on need and marks.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [
+        "Business"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2484,
+    "title": "Gerard Rostoker Entrance Scholarship",
+    "amount": "Up to $3,500",
+    "deadline": "2027-03-01",
+    "audience": "Canadian Grade 12 students with high marks entering the Haskayne School of Business at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/gerard-rostoker-entrance-scholarship",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15.",
+    "active": true,
+    "description": "An entrance scholarship of up to $3,500 for a strong student starting at Haskayne.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [
+        "Business"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2485,
+    "title": "James M. Stanford Entrance Award in Business",
+    "amount": "Up to $5,000",
+    "deadline": "2027-03-01",
+    "audience": "Female Canadian Grade 12 students with financial need entering the Haskayne BComm at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/james-m-stanford-entrance-award-business",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15.",
+    "active": true,
+    "description": "An entrance award of up to $5,000 for a young woman starting business at Haskayne, based on need and marks.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [
+        "Business"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": "female",
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2486,
+    "title": "La Due Ladies Business Scholarship",
+    "amount": "$2,500",
+    "deadline": "2027-03-01",
+    "audience": "Female Alberta Grade 12 students with entrepreneurship or leadership experience entering Haskayne at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/la-due-ladies-business-scholarship",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15. You must graduate from an Alberta high school and show entrepreneurship or leadership.",
+    "active": true,
+    "description": "A $2,500 entrance scholarship for a young woman from Alberta with entrepreneurial or leadership experience.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [
+        "Business"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": "female",
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership"
+      ]
+    }
+  },
+  {
+    "id": 2487,
+    "title": "Melcor Developments Bursary",
+    "amount": "$1,250",
+    "deadline": "2027-03-01",
+    "audience": "Alberta Grade 12 students with financial need entering Haskayne at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/melcor-developments-ltd-bursary",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15.",
+    "active": true,
+    "description": "A $1,250 entrance bursary for an Alberta graduate starting business, based on marks and financial need.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [
+        "Business"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2488,
+    "title": "Mervin Nelson Memorial Bursary",
+    "amount": "Up to $2,900",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students with financial need entering Haskayne at the University of Calgary, with preference for rural 4-H members",
+    "url": "https://www.ucalgary.ca/registrar/awards/mervin-nelson-memorial-bursary",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15. Graduates of rural high schools in Alberta, Saskatchewan or Manitoba with 4-H involvement get preference.",
+    "active": true,
+    "description": "An entrance bursary of up to $2,900 for a Haskayne student, favouring rural prairie graduates with 4-H experience.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [
+        "Business"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2489,
+    "title": "Poelzer Family Foundation Entrance Bursary",
+    "amount": "Up to $2,900",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students with financial need entering the Haskayne BComm at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/poelzer-family-foundation-entrance-bursary",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15.",
+    "active": true,
+    "description": "An entrance bursary of up to $2,900 for a first-year commerce student, based on marks and financial need.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [
+        "Business"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2490,
+    "title": "Rusk Family Opportunity Bursary",
+    "amount": "Up to $4,500 a year, renewable",
+    "deadline": "2027-03-01",
+    "audience": "Canadian Grade 12 students with financial need entering Haskayne at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/rusk-family-opportunity-bursary",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15. It renews with a 3.00 GPA on 27 units.",
+    "active": true,
+    "description": "A renewable entrance bursary of up to $4,500 a year for a Haskayne student with financial need.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [
+        "Business"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2491,
+    "title": "TC Energy Award",
+    "amount": "Up to $1,500",
+    "deadline": "2027-03-01",
+    "audience": "Canadian Grade 12 students entering Engineering, Business, Computer Science or Environmental Science at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/tc-energy-award",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15. Indigenous students get first preference, then female students.",
+    "active": true,
+    "description": "An entrance award of up to $1,500 for a student starting engineering, business, computer science or environmental science.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [
+        "Engineering",
+        "Business",
+        "Computer Science"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2492,
+    "title": "ASC Capital Markets Award for Indigenous Students",
+    "amount": "$7,500 a year, renewable",
+    "deadline": "2027-03-01",
+    "audience": "Indigenous Grade 12 students entering the Haskayne BComm at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/asc-capital-markets-award-indigenous-students",
+    "category": "Indigenous",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15. It renews with a 2.60 GPA on 24 units.",
+    "active": true,
+    "description": "A renewable $7,500 a year award for an Indigenous student starting commerce, with finance students preferred.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [
+        "Business"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2493,
+    "title": "EY Diversity Award in Business",
+    "amount": "$2,500",
+    "deadline": "2027-03-01",
+    "audience": "Indigenous, Black and disabled Canadian Grade 12 students with financial need entering Haskayne at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/ey-diversity-award-business",
+    "category": "Indigenous",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15.",
+    "active": true,
+    "description": "Two $2,500 entrance awards for Haskayne students, first for Indigenous students, then Black students, then students with a disability.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [
+        "Business"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2494,
+    "title": "John and Elizabeth Veres Indigenous Award",
+    "amount": "Up to $8,900",
+    "deadline": "2027-03-01",
+    "audience": "Indigenous Grade 12 students entering Accounting at Haskayne, University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/john-and-elizabeth-veres-indigenous-award",
+    "category": "Indigenous",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15. Alberta residents get preference.",
+    "active": true,
+    "description": "An entrance award of up to $8,900 for an Indigenous student majoring in accounting at Haskayne.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [
+        "Accounting"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2495,
+    "title": "Ptarmigan Indigenous Achievement Scholarship",
+    "amount": "Up to $5,000 a year, renewable",
+    "deadline": "2027-03-01",
+    "audience": "Indigenous Grade 12 students entering any faculty at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/ptarmigan-foundation-indigenous-achievement-scholarship",
+    "category": "Indigenous",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15. It renews with a 3.20 GPA on 30 units.",
+    "active": true,
+    "description": "Two renewable entrance scholarships of up to $5,000 a year for Indigenous students with strong marks.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2496,
+    "title": "Raven Langlet Indigenous Undergraduate Award",
+    "amount": "$2,000 a year, renewable",
+    "deadline": "2027-03-01",
+    "audience": "First Nations and Inuit Grade 12 students with financial need entering the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/raven-langlet-indigenous-undergraduate-award",
+    "category": "Indigenous",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15. It renews with a 2.00 GPA on 30 units.",
+    "active": true,
+    "description": "A renewable $2,000 a year award for a First Nations or Inuit student coming straight from high school.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2497,
+    "title": "Alberta Blue Cross Bursary in Nursing",
+    "amount": "$1,500",
+    "deadline": "2027-03-01",
+    "audience": "Alberta Grade 12 students with financial need entering Nursing at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/alberta-blue-cross-bursary-nursing",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15.",
+    "active": true,
+    "description": "A $1,500 entrance bursary for an Alberta graduate starting nursing, based on marks and financial need.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [
+        "Nursing"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2498,
+    "title": "UCalgary Entrance Bursary in Nursing",
+    "amount": "Up to $3,000",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students from a rural Alberta high school with financial need entering Nursing at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/entrance-bursary-nursing",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15. You must graduate from a rural Alberta high school.",
+    "active": true,
+    "description": "Three entrance bursaries of up to $3,000 for rural Alberta graduates starting nursing.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [
+        "Nursing"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2499,
+    "title": "Kay Kirby Pullen Entrance Bursary",
+    "amount": "Up to $2,500",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 volunteers with financial need entering Nursing at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/kay-kirby-pullen-entrance-bursary",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15. Graduates of rural Alberta high schools get preference.",
+    "active": true,
+    "description": "An entrance bursary of up to $2,500 for a nursing student who volunteers, based on marks and need.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [
+        "Nursing"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2500,
+    "title": "Newbert Entrance Bursary in Nursing",
+    "amount": "Up to $1,900",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students with financial need entering Nursing at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/kurt-and-lilian-newbert-entrance-bursary-nursing",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15.",
+    "active": true,
+    "description": "Two entrance bursaries of up to $1,900 for first-year nursing students, based on marks and financial need.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [
+        "Nursing"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2501,
+    "title": "Wilma F. Dobson Entrance Scholarship in Nursing",
+    "amount": "Up to $9,000",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students with strong marks and activities entering Nursing at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/wilma-f-dobson-entrance-scholarship-nursing",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15.",
+    "active": true,
+    "description": "An entrance scholarship of up to $9,000 for a first-year nursing student, chosen on marks and activities.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [
+        "Nursing"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2502,
+    "title": "Proudfoot Entrance Bursary in Kinesiology",
+    "amount": "Up to $3,000",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students with financial need entering Kinesiology at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/darryl-and-peggy-proudfoot-entrance-bursary-kinesiology",
+    "category": "Sports",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15.",
+    "active": true,
+    "description": "An entrance bursary of up to $3,000 for a first-year kinesiology student, based on need and marks.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [
+        "Kinesiology"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2503,
+    "title": "Bill and Mae Parker Health Sciences Bursary",
+    "amount": "Up to $2,500",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students with financial need entering the Bachelor of Health Sciences at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/bill-and-mae-parker-health-sciences-bursary",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through High School Awards in My UCalgary by March 1, 2027, after you apply for admission. Supporting documents are due March 15.",
+    "active": true,
+    "description": "Two entrance bursaries of up to $2,500 for students starting the Bachelor of Health Sciences.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [
+        "Health Sciences"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2504,
+    "title": "O'Brien Health Sciences Admission Excellence Award",
+    "amount": "$7,000",
+    "deadline": null,
+    "audience": "Grade 12 students with exceptional marks entering the Bachelor of Health Sciences at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/obrien-health-sciences-admission-excellence-award",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "There is no separate application. The faculty picks recipients from entering students. Community service, athletics or work experience count too.",
+    "active": true,
+    "description": "Several $7,000 awards for top students entering the Bachelor of Health Sciences, depending on the final admission average.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [
+        "Health Sciences"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2505,
+    "title": "O'Brien BHSc Admission Award",
+    "amount": "$1,500",
+    "deadline": null,
+    "audience": "Grade 12 students entering the Bachelor of Health Sciences at the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/obrien-bhsc-admission-award",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "There is no separate application. The faculty picks recipients from entering students. Community service, athletics or work experience count too.",
+    "active": true,
+    "description": "Several $1,500 admission awards for students entering Biomedical Sciences, Bioinformatics or Health and Society.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [
+        "Health Sciences"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2506,
+    "title": "Grant and Paula Smith Chancellor's Scholarship",
+    "amount": "$15,000 a year, $60,000 in all",
+    "deadline": "2026-12-01",
+    "audience": "Canadian Grade 12 students with top marks and leadership entering the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/grant-and-paula-smith-chancellors-scholarship",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through the High School Prestige Awards form in My UCalgary by December 1, 2026, after you apply for admission. It renews for three more years with a 3.60 GPA on 30 units and continued activity outside class.",
+    "active": true,
+    "description": "A Chancellor's Scholarship worth $15,000 a year for four years for an outstanding student in any faculty.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2507,
+    "title": "Cuthbertson and Fischer Chancellor's Scholarship",
+    "amount": "$15,000 a year, $60,000 in all",
+    "deadline": "2026-12-01",
+    "audience": "Canadian Grade 12 students with top marks and leadership entering the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/joanne-cuthbertson-charlie-fischer-chancellors-scholarship",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through the High School Prestige Awards form in My UCalgary by December 1, 2026, after you apply for admission. It renews for three more years with a 3.60 GPA on 30 units and continued activity outside class.",
+    "active": true,
+    "description": "A Chancellor's Scholarship worth $15,000 a year for four years, funded by Joanne Cuthbertson and Charlie Fischer.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2508,
+    "title": "Richard and Beverly Dunn Chancellor's Scholarship",
+    "amount": "$15,000 a year, $60,000 in all",
+    "deadline": "2026-12-01",
+    "audience": "Canadian Grade 12 students with top marks and leadership entering the University of Calgary",
+    "url": "https://www.ucalgary.ca/registrar/awards/richard-beverly-dunn-chancellors-scholarship",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply through the High School Prestige Awards form in My UCalgary by December 1, 2026, after you apply for admission. It renews for three more years with a 3.60 GPA on 30 units and continued activity outside class.",
+    "active": true,
+    "description": "One Chancellor's Scholarship worth $15,000 a year for four years for an outstanding entering student.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
   }
 ]
