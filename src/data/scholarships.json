@@ -24209,7 +24209,14 @@
   },
   {
     "id": 615,
-    "region": "Camrose",
+    "region": "Alberta",
+    "localArea": "students who attended a Camrose city or county high school",
+    "areaHubs": [
+      "central-alberta"
+    ],
+    "alsoOpenTo": [
+      "Camrose"
+    ],
     "lastVerified": "2026-10",
     "active": true,
     "title": "Robyn Gray Memorial Scholarship",
@@ -24248,7 +24255,14 @@
   },
   {
     "id": 616,
-    "region": "Camrose",
+    "region": "Alberta",
+    "localArea": "families of Battle River Power Coop members",
+    "areaHubs": [
+      "central-alberta"
+    ],
+    "alsoOpenTo": [
+      "Camrose"
+    ],
     "lastVerified": "2026-10",
     "active": true,
     "title": "Battle River Power Coop Scholarship",
@@ -24286,17 +24300,24 @@
   },
   {
     "id": 617,
-    "region": "Camrose",
+    "region": "Alberta",
+    "localArea": "students at the 12 Camrose, Flagstaff and Beaver County schools on the Legion's list",
+    "areaHubs": [
+      "central-alberta"
+    ],
+    "alsoOpenTo": [
+      "Camrose"
+    ],
     "lastVerified": "2026-10",
     "active": true,
     "title": "Camrose Legion Branch #57 Ladies Auxiliary Bursaries",
     "amount": "Varies",
     "category": "Community",
-    "audience": "Graduating Camrose city and county students at Camrose Composite",
+    "audience": "Graduates of 12 named Camrose, Flagstaff and Beaver County schools",
     "url": "https://cchs.brsd.ab.ca/students/student-services/awards",
     "applyViaGuidance": true,
     "notes": "Pick up the registration package at the Royal Canadian Legion, 6002 50 Avenue in Camrose; the linked poster gives August 31, 2026 as the previous deadline. Include a letter explaining why financial support is needed.",
-    "description": "Bursaries from the Ladies Auxiliary of Royal Canadian Legion Branch #57 for graduating county and city students of Camrose Composite. The school lists them without a value or a deadline, and the form exists only on paper at the Legion hall.",
+    "description": "Bursaries from the Ladies Auxiliary of Royal Canadian Legion Branch #57 for graduates of the 12 Camrose, Flagstaff and Beaver County schools named on the Legion poster. The school lists them without a value or a deadline, and the form exists only on paper at the Legion hall.",
     "metaDetail": "The form exists only on paper, at the Legion hall.",
     "eligibility": {
       "grades": [
@@ -24410,7 +24431,14 @@
   },
   {
     "id": 620,
-    "region": "Camrose",
+    "region": "Alberta",
+    "localArea": "Battle River School Division graduates",
+    "areaHubs": [
+      "central-alberta"
+    ],
+    "alsoOpenTo": [
+      "Camrose"
+    ],
     "lastVerified": "2026-10",
     "active": true,
     "title": "Linton and Debbie Falk Scholarship",
@@ -51696,7 +51724,11 @@
     "url": "https://bawlf.brsd.ab.ca/download/508861",
     "category": "Community",
     "lastVerified": "2026-10",
-    "region": "Camrose",
+    "region": "Alberta",
+    "localArea": "Bawlf School area graduates and Rosalind Agricultural Society families",
+    "areaHubs": [
+      "central-alberta"
+    ],
     "notes": "The courses have to be full term and not subsidized. You send transcripts and references, and there may be an interview.",
     "active": true,
     "description": "A $1,000 scholarship for a Bawlf School graduate, a graduate from its attendance area, or the child of a current Rosalind Agricultural Society member, entering first or second year of college or university.",
@@ -51735,7 +51767,11 @@
     "url": "https://bawlf.brsd.ab.ca/download/560405",
     "category": "Community",
     "lastVerified": "2026-09",
-    "region": "Camrose",
+    "region": "Alberta",
+    "localArea": "Bawlf School students",
+    "areaHubs": [
+      "central-alberta"
+    ],
     "notes": "You need three years at Bawlf School, which do not have to be consecutive, and you have one year after graduating to register somewhere in Canada. Two references are required.",
     "active": true,
     "description": "The Bawlf and District Lions give $500 a year to a graduate who has shown a strong work ethic in their studies and in the community.",
@@ -54762,7 +54798,14 @@
     "url": "https://www.atabattleriverlocal32.com/_files/ugd/f1f58c_b2274954b5444dd7a74093de8ececa53.pdf",
     "category": "Academic",
     "lastVerified": "2026-10",
-    "region": "Camrose",
+    "region": "Alberta",
+    "localArea": "families of ATA Battle River Local 32 teachers",
+    "areaHubs": [
+      "central-alberta"
+    ],
+    "alsoOpenTo": [
+      "Camrose"
+    ],
     "notes": "Part-time teaching parents count, and so do retired ones and those on leave who keep paying the ATA leave fee. You have 18 months after Grade 12 to use it, and you apply before your program starts.",
     "active": true,
     "description": "A teachers' local award for the child of a current, retired or on-leave Battle River teacher who is starting post-secondary study.",
@@ -55438,7 +55481,11 @@
     "url": "https://forestburg.brsd.ab.ca/download/517343",
     "category": "Trades",
     "lastVerified": "2026-10",
-    "region": "Camrose",
+    "region": "Alberta",
+    "localArea": "Forestburg School students",
+    "areaHubs": [
+      "central-alberta"
+    ],
     "notes": "Applications are due by 3:30 pm on the last instructional day of classes, which is earlier in June than most awards. Local work and volunteering count in the decision.",
     "active": true,
     "description": "An award for a graduating Forestburg School student continuing their education, with preference for trades, science, engineering, technology or mining.",
@@ -55476,7 +55523,11 @@
     "url": "https://forestburg.brsd.ab.ca/download/267095",
     "category": "Arts",
     "lastVerified": "2026-10",
-    "region": "Camrose",
+    "region": "Alberta",
+    "localArea": "Forestburg School students",
+    "areaHubs": [
+      "central-alberta"
+    ],
     "notes": "Conditional post-secondary acceptance is enough, so you do not need a final offer in hand. Applications close at 3:30 pm on the last instructional day. Applicants must show dedication and positive participation in the school band and continuing interest in music.",
     "active": true,
     "description": "An award for a Forestburg School graduate who has contributed to the band program, intends to continue with music and plans to give back to the community.",
@@ -55516,7 +55567,11 @@
     "url": "https://forestburg.brsd.ab.ca/download/267122",
     "category": "Community",
     "lastVerified": "2026-09",
-    "region": "Camrose",
+    "region": "Alberta",
+    "localArea": "Forestburg School students",
+    "areaHubs": [
+      "central-alberta"
+    ],
     "notes": "The Masons make the selection rather than the school, and an essay is required. Applications close at 3:30 pm on the last instructional day of classes.",
     "active": true,
     "description": "A Masonic memorial award for a Forestburg School graduate with conditional post-secondary acceptance, selected on academics together with school and community service.",
@@ -55556,7 +55611,11 @@
     "url": "https://forestburg.brsd.ab.ca/download/267101",
     "category": "Community",
     "lastVerified": "2026-09",
-    "region": "Camrose",
+    "region": "Alberta",
+    "localArea": "Forestburg School students",
+    "areaHubs": [
+      "central-alberta"
+    ],
     "notes": "An essay is required and volunteering carries real weight next to marks. Applications close at 3:30 pm on the last instructional day of classes.",
     "active": true,
     "description": "An award for a Forestburg School graduate with strong academics and a record of community volunteer service, holding conditional post-secondary acceptance.",
@@ -55596,7 +55655,11 @@
     "url": "https://forestburg.brsd.ab.ca/download/267104",
     "category": "Community",
     "lastVerified": "2026-10",
-    "region": "Camrose",
+    "region": "Alberta",
+    "localArea": "Forestburg School students",
+    "areaHubs": [
+      "central-alberta"
+    ],
     "notes": "The family's income source is the qualifying fact, not your intended program, so any field of study is open. An essay is required and applications close at 3:30 pm on the last instructional day. The applicant’s family must earn its primary livelihood from farming or ranching.",
     "active": true,
     "description": "A memorial award for a Forestburg School graduate whose family earns its livelihood primarily from farming or ranching, with conditional post-secondary acceptance.",
@@ -55634,7 +55697,11 @@
     "url": "https://forestburg.brsd.ab.ca/download/267116",
     "category": "Trades",
     "lastVerified": "2026-09",
-    "region": "Camrose",
+    "region": "Alberta",
+    "localArea": "Forestburg School students",
+    "areaHubs": [
+      "central-alberta"
+    ],
     "notes": "Conditional acceptance is enough. Applications close at 3:30 pm on the last instructional day of classes, so sort your apprenticeship paperwork before the final week of school.",
     "active": true,
     "description": "A memorial award for a Forestburg School graduate entering an apprenticeship at NAIT, SAIT or another technical institution on a path to journeyman status.",
@@ -55672,7 +55739,11 @@
     "url": "https://forestburg.brsd.ab.ca/download/267125",
     "category": "Sports",
     "lastVerified": "2026-09",
-    "region": "Camrose",
+    "region": "Alberta",
+    "localArea": "Forestburg School students",
+    "areaHubs": [
+      "central-alberta"
+    ],
     "notes": "Average grades are enough here. An essay is required and applications close at 3:30 pm on the last instructional day.",
     "active": true,
     "description": "A memorial award for a Forestburg School graduate who loves sport, earns average or better grades and improves student life at the school.",
@@ -55712,7 +55783,11 @@
     "url": "https://forestburg.brsd.ab.ca/download/267119",
     "category": "STEM",
     "lastVerified": "2026-10",
-    "region": "Camrose",
+    "region": "Alberta",
+    "localArea": "Forestburg School students",
+    "areaHubs": [
+      "central-alberta"
+    ],
     "notes": "You need a school reference and an essay, and applications close at 3:30 pm on the last instructional day of classes. Program requirements: Engineering used in the mining industry; narrower than all STEM.",
     "active": true,
     "description": "An award for a Forestburg School graduate with strong academics entering university, college or vocational study in engineering relevant to mining.",
@@ -55752,7 +55827,11 @@
     "url": "https://forestburg.brsd.ab.ca/download/561754",
     "category": "Community",
     "lastVerified": "2026-10",
-    "region": "Camrose",
+    "region": "Alberta",
+    "localArea": "Forestburg School students",
+    "areaHubs": [
+      "central-alberta"
+    ],
     "notes": "Priority rather than a hard requirement, so a graduate with no fire hall connection can still apply. Applications close at 3:30 pm on the last scheduled day of classes. Applicants must explain how emergency services positively affected them; institutional acceptance is required when eligibility is based on the study criterion.",
     "active": true,
     "description": "A memorial award for a Forestburg School graduate, with priority for active local firefighters, children of emergency services members and students entering emergency services study.",
@@ -55832,7 +55911,11 @@
     "url": "https://www.forestburg.ca/town/education/kirschman-bursary",
     "category": "Academic",
     "lastVerified": "2026-10",
-    "region": "Camrose",
+    "region": "Alberta",
+    "localArea": "Forestburg School students",
+    "areaHubs": [
+      "central-alberta"
+    ],
     "notes": "The amount depends on years of attendance at Forestburg School; confirm the current payment with the school. You have to graduate from Forestburg to collect, and the money goes to the institution, not to you. Eligible study: Alberta-designated institution eligible for student loans; not necessarily geographically in Alberta.",
     "active": true,
     "description": "A bursary that accrues $1,000 for every year a student attends Forestburg School from Grade 1 through Grade 12, to a maximum of $12,000, paid out to an Alberta designated post-secondary institution.",
@@ -61738,7 +61821,11 @@
     "url": "https://bawlf.brsd.ab.ca/download/560410",
     "category": "Community",
     "lastVerified": "2026-10",
-    "region": "Camrose",
+    "region": "Alberta",
+    "localArea": "Rosalind area graduates and Rosalind Elks families",
+    "areaHubs": [
+      "central-alberta"
+    ],
     "notes": "Submit the form by June 1 and your full high school transcript before the interview; the committee may ask you to interview in person. The form is a scanned document.",
     "active": true,
     "description": "Two scholarships of $1,000 each, paid in two instalments on September 1 and February 1, for graduates from the Rosalind School attendance area or sons and daughters of current Rosalind Elks Lodge members who have been accepted into full-term, non-subsidized post-secondary courses.",
@@ -62155,7 +62242,11 @@
     "url": "https://daysland.brsd.ab.ca/students/scholarship-information",
     "category": "Academic",
     "lastVerified": "2026-10",
-    "region": "Camrose",
+    "region": "Alberta",
+    "localArea": "Daysland School students",
+    "areaHubs": [
+      "central-alberta"
+    ],
     "notes": "The awards list comes from the school's 2018-2019 program guide, the latest the school has posted, so ask the school which are still given. Most are chosen by the school at spring exercises. For the Bill Campbell award, send a letter, proof of acceptance into education and financial need information to the principal or awards committee before September 10 of the year after you graduate.",
     "active": true,
     "description": "Daysland School awards Grade 12 subject scholarships in English, Math, Biology, Chemistry, Physics, Social Studies and French, the Top Grade 12 Academic Scholarship and the Robert Zwack Memorial Grade 12 Scholarship, the Lloyd Sather art and physical education scholarships, leadership, CTS, Green Certificate and athletics awards, and honours in every grade. Separately, the $500 W.E. Bill Campbell Scholarship goes to a Daysland graduate with financial need entering education at any University of Alberta campus.",
@@ -62545,7 +62636,11 @@
     "url": "https://forestburg.brsd.ab.ca/download/560780",
     "category": "General",
     "lastVerified": "2026-09",
-    "region": "Camrose",
+    "region": "Alberta",
+    "localArea": "Forestburg School students",
+    "areaHubs": [
+      "central-alberta"
+    ],
     "notes": "Applications go to the Forestburg School office by 3:30 pm on the last instructional day of high school classes. You then have 12 months from the awards ceremony to show an acceptance letter and claim the money from Twice Nice in Killam.",
     "active": true,
     "description": "A $2,000 award from Twice Nice in Killam for a Forestburg School graduate going on to post-secondary, including a trade ticket, diploma or degree, who shows consistent effort and good character and has the greatest financial need. You write a typed essay of one to one and a half pages that speaks to your maturity and financial need.",
@@ -62583,7 +62678,11 @@
     "url": "https://forestburg.brsd.ab.ca/download/267092",
     "category": "STEM",
     "lastVerified": "2026-10",
-    "region": "Camrose",
+    "region": "Alberta",
+    "localArea": "Forestburg School students",
+    "areaHubs": [
+      "central-alberta"
+    ],
     "notes": "Applications go to the Forestburg School office by 3:30 pm on the last instructional day of high school classes, with a typed essay of one to one and a half pages. Health and STEM programs receive preference, but any deserving post-secondary student may qualify.",
     "active": true,
     "description": "A $500 award from the Forestburg Community Enhancement Fund for a Forestburg School graduate who has applied to or been accepted at a post-secondary school. Preference runs in order: biomedical engineering technology, electronics engineering technology, diagnostic imaging, a career in medicine or medical research such as nursing or physiotherapy, a Bachelor of Science, and then any deserving student.",
@@ -62621,7 +62720,11 @@
     "url": "https://forestburg.brsd.ab.ca/download/517381",
     "category": "Community",
     "lastVerified": "2026-10",
-    "region": "Camrose",
+    "region": "Alberta",
+    "localArea": "Forestburg School students",
+    "areaHubs": [
+      "central-alberta"
+    ],
     "notes": "Essays are due before the last day of school in June, and the award is paid within a year once you enrol. Marks are not the deciding factor. Priority also includes children of active or retired Forestburg Fire Department firefighters.",
     "active": true,
     "description": "A $500 award from J&L Hays Welding in memory of Cody Neufeld, for Forestburg School graduates going into any post-secondary program; more than one may be given each year. You write an essay on your impact on your community and school, and preference goes to members of the volunteer Forestburg Fire Department.",
@@ -62661,7 +62764,11 @@
     "url": "https://forestburg.brsd.ab.ca/students/scholarships",
     "category": "Community",
     "lastVerified": "2026-10",
-    "region": "Camrose",
+    "region": "Alberta",
+    "localArea": "Forestburg School students",
+    "areaHubs": [
+      "central-alberta"
+    ],
     "notes": "Each award has its own form on the school's site, due at the office by 3:30 pm on the last instructional day of high school classes, usually with a typed essay and proof of conditional acceptance. The link here is the Curtain Call form; the others are on the same school awards page.",
     "active": true,
     "description": "Forestburg School's smaller community awards, with values that change each year: the Curtain Call Community Theatre Award for fine arts, the Donna Bish Oberg Award for education students, the Galahad Lions and Galahad Agricultural Society Award for agriculture programs, the Hastings Coulee 4H Beef Club Award for 4-H members, the Jim Lorrain Memorial Award for one student in each of Grades 10 to 12 with a 70% average, community involvement, and participation in sports, school arts or clubs, and the staff's Falcon Excellence Award.",
@@ -62701,7 +62808,11 @@
     "url": "https://bawlf.brsd.ab.ca/download/170631",
     "category": "Community",
     "lastVerified": "2026-09",
-    "region": "Camrose",
+    "region": "Alberta",
+    "localArea": "Bawlf School students",
+    "areaHubs": [
+      "central-alberta"
+    ],
     "notes": "Postmarked by July 31 each year, mailed to the family contact in Bawlf named on the form. You can apply in each of your three high school years.",
     "active": true,
     "description": "A $500 award given each year for volunteering, open to any Bawlf School student in Grades 10, 11 or 12. You write 500 to 750 words on what volunteering means to you, how it helps the people you serve and what you have done, with two references, at least one of whom can confirm your volunteer work.",
@@ -77025,7 +77136,14 @@
     "url": "https://brcf.ca/grants-scholarships/donna-and-fred-vanouck-nursing-education-fund/",
     "category": "Community",
     "lastVerified": "2026-10",
-    "region": "Camrose",
+    "region": "Alberta",
+    "localArea": "graduates of Camrose, Flagstaff or Beaver County high schools",
+    "areaHubs": [
+      "central-alberta"
+    ],
+    "alsoOpenTo": [
+      "Camrose"
+    ],
     "notes": "Apply to the Battle River Community Foundation once you are enrolled full-time. LPN, RN, BScN, psychiatric nursing and advanced nursing programs anywhere in Canada all count.",
     "active": false,
     "description": "The Battle River Community Foundation gives up to $2,100 a year to a nursing student who graduated from a public or Catholic high school in Camrose, Flagstaff or Beaver County.",

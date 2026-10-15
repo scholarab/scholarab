@@ -2486,3 +2486,13 @@ Outcome: a student who has built a combo, on My combo or the Build my combo resu
 - Repair record: the designated-reminder test's fixture lacked the new `unsettled` field and its guard still looked for `DISTINCT ON`, so it failed once, then both were updated. Lint rejected the quiz box's focus ref until it was renamed to end in `Ref`. Neither repeated.
 - Checks, in a clean worktree of HEAD plus only this change: `npm run ci` passed (lint, 1,389 Vitest tests, build, both type checks, 0 errors), `npm run test:e2e` 188 passed and 22 skipped, including the two new /saved and /match specs on desktop and phone, `npm run ship-check -- origin/main` passed the detail-page URL check.
 - Add-back fraction: 0 of 5.
+
+## 2026-10-14: awards for Forestburg, Bawlf and Daysland students leave the Camrose city listing
+
+Outcome: a student at Forestburg, Bawlf or Daysland School who answers "Other Alberta" in /match is offered their school's awards, and a Camrose city student is no longer offered awards for those schools. Camrose students keep every award they can apply for.
+
+- Audit: all 74 region "Camrose" listings, read against their audience, schools and notes. 25 are tied to places outside the city and now use the 82c7b8f scheme (region "Alberta", a `localArea`, `areaHubs` central-alberta). 14 Forestburg School, 2 Bawlf School and 1 Daysland School awards, plus 1424 (Bawlf attendance area, checked on its poster) and 1674 (Rosalind area), do not list Camrose. 615, 616, 617, 620, 1499 and 2049 cover the city and the counties around it, so they also keep "Camrose" in `alsoOpenTo`. 619 stays because it requires Camrose Composite. The county-resident awards at Camrose Composite and Augustana (592, 623) stay, since those students pick Camrose in the quiz.
+- 617 (Legion Branch #57 Ladies Auxiliary): the audience and description said Camrose Composite only, but the Legion poster names 12 schools in Camrose, Flagstaff and Beaver counties, matching its `specificSchools`. Both lines now say so.
+- Measured with the matcher on the JSON (local): a Forestburg School student on "Other Alberta" went from 0 to 9 of the 11 sampled awards, a Daysland School student 0 to 9, and a Camrose Composite student 8 to 6 (the two Rosalind-area awards left). The Central Alberta combos for Forestburg, Bawlf and Daysland School are unchanged in membership.
+- Removed: nothing. No new field or rule, only data.
+- Add-back fraction: 0 of 0.
