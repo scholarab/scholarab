@@ -68,23 +68,31 @@ function assign<S, T>(
   const canReceive = targets.map(t => o.canReceive(t));
 
   const picks: number[][] = [];
+  type Cand = { j: number; sc: number; q: number };
+  const before = (a: Cand, b: Cand) =>
+    b.q - a.q ||
+    b.sc - a.sc ||
+    inbound[a.j]! - inbound[b.j]! ||
+    o.prefer(targets[a.j]!, targets[b.j]!) ||
+    a.j - b.j;
   for (let i = 0; i < nS; i++) {
     const self = sources[i]!;
-    const cands: { j: number; sc: number; q: number }[] = [];
+    // Only the first `slots` of the full order are kept, so insert into a
+    // short sorted list instead of sorting every candidate. The comparator
+    // ends on index, a total order, so the picks match a full sort exactly.
+    // Sorting all of them made this n^2 log n, about 12s at 2,500 listings.
+    const best: Cand[] = [];
     for (let j = 0; j < nT; j++) {
       if (!canReceive[j] || o.excludes(i, j)) continue;
       const sc = o.score(self, targets[j]!);
-      cands.push({ j, sc, q: o.qualifies(sc, targets[j]!) ? 1 : 0 });
+      const c = { j, sc, q: o.qualifies(sc, targets[j]!) ? 1 : 0 };
+      if (best.length === o.slots && before(c, best[best.length - 1]!) >= 0) continue;
+      let k = best.length;
+      while (k > 0 && before(c, best[k - 1]!) < 0) k--;
+      best.splice(k, 0, c);
+      if (best.length > o.slots) best.pop();
     }
-    cands.sort(
-      (a, b) =>
-        b.q - a.q ||
-        b.sc - a.sc ||
-        inbound[a.j]! - inbound[b.j]! ||
-        o.prefer(targets[a.j]!, targets[b.j]!) ||
-        a.j - b.j,
-    );
-    const chosen = cands.slice(0, o.slots).map(c => c.j);
+    const chosen = best.map(c => c.j);
     for (const j of chosen) inbound[j]!++;
     picks.push(chosen);
   }

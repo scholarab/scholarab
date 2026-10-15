@@ -81,7 +81,7 @@ describe('the real corpus', () => {
   const scholarships = scholarshipData as Item[];
   const programs = programData as Item[];
 
-  // Whole-corpus and superlinear in it: ~1.5s locally at 1072 listings and
+  // Whole-corpus and quadratic in it: ~1.5s locally at 1072 listings and
   // 5052ms on a CI runner, which timed out against vitest's 5s default while
   // nothing was actually wrong. An explicit ceiling, so the next few hundred
   // listings fail this test for a real reason or not at all.

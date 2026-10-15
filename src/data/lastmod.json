@@ -1331,6 +1331,10 @@
     "hash": "059fe093a9eca38a",
     "date": "2026-10-01"
   },
+  "/scholarships/alberta-blue-cross-award-norquest/": {
+    "hash": "2f22280892daf12f",
+    "date": "2026-10-14"
+  },
   "/scholarships/alberta-blue-cross-away-from-home-award-sait/": {
     "hash": "44859222b41a2e45",
     "date": "2026-10-14"
@@ -1387,9 +1391,17 @@
     "hash": "35d314f9789ab76e",
     "date": "2026-10-14"
   },
+  "/scholarships/alberta-blue-cross-entrance-award-lakeland-college/": {
+    "hash": "1a9305cb03d6a0f6",
+    "date": "2026-10-14"
+  },
   "/scholarships/alberta-blue-cross-entrance-award-northwestern-polytechnic/": {
     "hash": "99c7f58abc2a42f7",
     "date": "2026-10-08"
+  },
+  "/scholarships/alberta-blue-cross-entrance-award-olds-college/": {
+    "hash": "5cb2edd79a8c28c2",
+    "date": "2026-10-14"
   },
   "/scholarships/alberta-blue-cross-entrance-award-sait/": {
     "hash": "0fefb13121b8fb6a",
@@ -1729,6 +1741,10 @@
   },
   "/scholarships/archdeacon-cecil-swanson-award/": {
     "hash": "1686a246fdc49447",
+    "date": "2026-10-14"
+  },
+  "/scholarships/archer-entrance-awards-olds-college/": {
+    "hash": "b021d46bd4218520",
     "date": "2026-10-14"
   },
   "/scholarships/archie-macphail-memorial-scholarship/": {
@@ -2215,6 +2231,10 @@
     "hash": "cc28dcb7ea70ba6a",
     "date": "2026-10-14"
   },
+  "/scholarships/bill-kondro-entrance-scholarship-for-excellence-lakeland-college/": {
+    "hash": "d42f878993b43e4c",
+    "date": "2026-10-14"
+  },
   "/scholarships/bill-procyk-memorial-scholarship/": {
     "hash": "7b328926ab14fccd",
     "date": "2026-10-08"
@@ -2289,6 +2309,10 @@
   },
   "/scholarships/bmo-financial-group-entrance-scholarship-mount-royal/": {
     "hash": "94943b7e9ba88409",
+    "date": "2026-10-14"
+  },
+  "/scholarships/board-of-governors-entrance-award-olds-college/": {
+    "hash": "9fb3752b7345a306",
     "date": "2026-10-14"
   },
   "/scholarships/bob-grainger-entrance-bursary-for-canmore/": {
@@ -2731,6 +2755,10 @@
     "hash": "b30cfe43b523df9e",
     "date": "2026-10-08"
   },
+  "/scholarships/business-management-entrance-award-olds-college/": {
+    "hash": "ebb1ef9a21dec23f",
+    "date": "2026-10-14"
+  },
   "/scholarships/byler-family-leaders-in-business-award/": {
     "hash": "3f3643eb9af46338",
     "date": "2026-10-14"
@@ -2859,6 +2887,10 @@
     "hash": "7368c5aae344dc0f",
     "date": "2026-10-08"
   },
+  "/scholarships/camrose-horticultural-society-award-olds-college/": {
+    "hash": "7b71f918a656c157",
+    "date": "2026-10-14"
+  },
   "/scholarships/camrose-legion-branch-57-ladies-auxiliary-bursaries/": {
     "hash": "3ba02a43ae90ba46",
     "date": "2026-10-08"
@@ -2974,6 +3006,10 @@
   "/scholarships/canadian-women-in-stem-award/": {
     "hash": "15a3ea1c4f067e6d",
     "date": "2026-10-08"
+  },
+  "/scholarships/canative-housing-corporation-award-norquest/": {
+    "hash": "55462bbe2b02f32b",
+    "date": "2026-10-14"
   },
   "/scholarships/cando-award/": {
     "hash": "02416753c63f61ea",
@@ -3451,6 +3487,10 @@
     "hash": "44e16703d3f383ca",
     "date": "2026-10-08"
   },
+  "/scholarships/cm-wolters-entrance-award-lakeland-college/": {
+    "hash": "03c5bec3162e7128",
+    "date": "2026-10-14"
+  },
   "/scholarships/cnfs-bilingual-nursing-entrance-award/": {
     "hash": "ddd88631a75e4112",
     "date": "2026-10-14"
@@ -3515,6 +3555,10 @@
     "hash": "a3826887f6addd54",
     "date": "2026-10-08"
   },
+  "/scholarships/colchester-and-district-agricultural-society-entrance-scholarship-lakeland-college/": {
+    "hash": "5603d6f3383d3112",
+    "date": "2026-10-14"
+  },
   "/scholarships/cold-lake-medical-development-fund-society-healthcare-education-grant/": {
     "hash": "7b301bb50abe5a7a",
     "date": "2026-10-08"
@@ -3542,6 +3586,10 @@
   "/scholarships/community-scholarship-trust-society-scholarship/": {
     "hash": "7bc6dd331efac570",
     "date": "2026-10-08"
+  },
+  "/scholarships/compass-group-canada-career-program-award-norquest/": {
+    "hash": "dee67a24e95dab5d",
+    "date": "2026-10-14"
   },
   "/scholarships/concordia-university-of-edmonton-bursary-application-for-first-year-domestic-students/": {
     "hash": "1fbbecc7609a2d6e",
@@ -3762,6 +3810,10 @@
   "/scholarships/dale-macmillan-memorial-scholarship-for-community-leadership/": {
     "hash": "f3d13d5cf5da65e9",
     "date": "2026-10-08"
+  },
+  "/scholarships/dale-wesley-memorial-endowment-award-olds-college/": {
+    "hash": "3f5f66a59bcecdcc",
+    "date": "2026-10-14"
   },
   "/scholarships/dalhousie-computer-science-entrance-scholarships/": {
     "hash": "1f4706c8a8b98365",
@@ -4003,6 +4055,10 @@
     "hash": "10933145b4475d2a",
     "date": "2026-10-08"
   },
+  "/scholarships/douglas-and-lynn-faulder-award-norquest/": {
+    "hash": "962a8f3e1c25167d",
+    "date": "2026-10-14"
+  },
   "/scholarships/douglas-tims-memorial-bursary/": {
     "hash": "88ef26a69446415d",
     "date": "2026-10-14"
@@ -4074,6 +4130,10 @@
   "/scholarships/dr-malcolm-gray-memorial-scholarship/": {
     "hash": "5bb6292c7d62ab93",
     "date": "2026-10-08"
+  },
+  "/scholarships/dr-margaret-marmie-hess-award-olds-college/": {
+    "hash": "7ed3631923bcebca",
+    "date": "2026-10-14"
   },
   "/scholarships/dr-marguerite-lambert-leng-wisest-rising-star-scholarship/": {
     "hash": "190ebd028d6a9c63",
@@ -4191,6 +4251,10 @@
     "hash": "f66c12d26b6ca5b5",
     "date": "2026-10-14"
   },
+  "/scholarships/ed-jenson-and-family-entrance-scholarship-lakeland-college/": {
+    "hash": "d5f816799a1038c6",
+    "date": "2026-10-14"
+  },
   "/scholarships/ed-stelmach-community-foundation-scholarship/": {
     "hash": "a4387f0c55d6ff1b",
     "date": "2026-09-11"
@@ -4227,6 +4291,10 @@
     "hash": "2f9a0864eb930e79",
     "date": "2026-10-08"
   },
+  "/scholarships/edmonton-kubota-award-olds-college/": {
+    "hash": "4f5db9a07546c30f",
+    "date": "2026-10-14"
+  },
   "/scholarships/edmonton-music-and-speech-arts-festival-scholarships/": {
     "hash": "e14979c17a63205a",
     "date": "2026-10-05"
@@ -4246,6 +4314,10 @@
   "/scholarships/edmonton-strathcona-youth-leadership-award/": {
     "hash": "f2bf51235ea121ae",
     "date": "2026-10-08"
+  },
+  "/scholarships/edon-management-indigenous-award-norquest/": {
+    "hash": "d26878312479db24",
+    "date": "2026-10-14"
   },
   "/scholarships/education-foundation-servant-leader-scholarship/": {
     "hash": "761cb2ca8617a937",
@@ -4278,6 +4350,10 @@
   "/scholarships/electronic-recycling-association-scholarship/": {
     "hash": "2648c74e094c6b17",
     "date": "2026-10-08"
+  },
+  "/scholarships/element-environmental-studies-award-olds-college/": {
+    "hash": "4e16b52f494b8c64",
+    "date": "2026-10-14"
   },
   "/scholarships/elizabeth-donald-deans-entrance-citation-in-human-nutrition/": {
     "hash": "81c086f4a4874279",
@@ -4411,6 +4487,10 @@
     "hash": "40c3d5a8cd6ff58b",
     "date": "2026-10-09"
   },
+  "/scholarships/ernest-anton-gisler-endowed-awards-olds-college/": {
+    "hash": "d299d50c2eae0af3",
+    "date": "2026-10-14"
+  },
   "/scholarships/errol-moen-memorial-award/": {
     "hash": "08978bc5c49e1800",
     "date": "2026-10-08"
@@ -4446,6 +4526,10 @@
   "/scholarships/everett-oberg-masonic-memorial-award/": {
     "hash": "d09aa7fcf07633b7",
     "date": "2026-10-04"
+  },
+  "/scholarships/everett-trempner-memorial-awards-olds-college/": {
+    "hash": "097a772297a8ce9d",
+    "date": "2026-10-14"
   },
   "/scholarships/evergreen-co-op-scholarship-program/": {
     "hash": "47944d6495df8eed",
@@ -4791,6 +4875,10 @@
     "hash": "bc89835f3298745a",
     "date": "2026-10-14"
   },
+  "/scholarships/fund-for-the-future-scholarship-lakeland-college/": {
+    "hash": "4d5362b24f7965bb",
+    "date": "2026-10-14"
+  },
   "/scholarships/future-generations-foundation-individual-funding/": {
     "hash": "fbb3188878f96161",
     "date": "2026-10-08"
@@ -4874,6 +4962,10 @@
   "/scholarships/george-morley-memorial-scholarship/": {
     "hash": "eeb6ed412c9c7d18",
     "date": "2026-10-05"
+  },
+  "/scholarships/george-neil-wilson-and-ethel-sloan-wilson-memorial-entrance-scholarship-lakeland-college/": {
+    "hash": "111771a731947386",
+    "date": "2026-10-14"
   },
   "/scholarships/georgia-belknap-endowment-early-learning-and-child-care-entrance-scholarship/": {
     "hash": "56af1d5daf770e26",
@@ -5003,6 +5095,14 @@
     "hash": "5797b47ece858835",
     "date": "2026-10-08"
   },
+  "/scholarships/go-auto-child-care-bursary-norquest/": {
+    "hash": "a9ab1b8729578a2e",
+    "date": "2026-10-14"
+  },
+  "/scholarships/godwin-family-entrance-award-olds-college/": {
+    "hash": "6c7bc11978d8901a",
+    "date": "2026-10-14"
+  },
   "/scholarships/goodwill-industries-of-alberta-scholarship-for-good/": {
     "hash": "574ea776392d9237",
     "date": "2026-10-14"
@@ -5023,6 +5123,10 @@
     "hash": "0e97139616fa4359",
     "date": "2026-10-08"
   },
+  "/scholarships/gouin-family-award-of-excellence-norquest/": {
+    "hash": "43ea365358f1a3ce",
+    "date": "2026-10-14"
+  },
   "/scholarships/gpm-lynda-oberg-community-involvement-award/": {
     "hash": "f2dca89af4927211",
     "date": "2026-10-08"
@@ -5038,6 +5142,10 @@
   "/scholarships/gppsd-indigenous-scholarship/": {
     "hash": "3498b4bfdd1fe018",
     "date": "2026-10-02"
+  },
+  "/scholarships/grace-and-arnold-rumbold-award-olds-college/": {
+    "hash": "fba435371174737a",
+    "date": "2026-10-14"
   },
   "/scholarships/grace-elaine-campbell-scholarship/": {
     "hash": "3838d0d116471082",
@@ -5106,6 +5214,10 @@
   "/scholarships/green-leaf-fuel-excellence-in-community-service-scholarship/": {
     "hash": "db440c7a1aa30de9",
     "date": "2026-09-27"
+  },
+  "/scholarships/greengate-garden-centres-award-olds-college/": {
+    "hash": "ae07e34aa59e6235",
+    "date": "2026-10-14"
   },
   "/scholarships/greenview-post-secondary-scholarship/": {
     "hash": "aebb5348c9e26ec5",
@@ -5315,6 +5427,10 @@
     "hash": "e08777a69885b62b",
     "date": "2026-10-14"
   },
+  "/scholarships/helmer-family-entrance-awards-olds-college/": {
+    "hash": "18c5b6bd9378d454",
+    "date": "2026-10-14"
+  },
   "/scholarships/hendrickson-black-llp-post-secondary-scholarship/": {
     "hash": "0709e299442dd150",
     "date": "2026-10-14"
@@ -5334,6 +5450,10 @@
   "/scholarships/herbert-h-mumby-memorial-scholarship/": {
     "hash": "b6411e302b36ec77",
     "date": "2026-10-08"
+  },
+  "/scholarships/herman-huber-entrance-award-lakeland-college/": {
+    "hash": "64a856fdf5ee7e44",
+    "date": "2026-10-14"
   },
   "/scholarships/hershita-sainbhee-memorial-scholarship/": {
     "hash": "7e7802d292ccbb07",
@@ -5415,6 +5535,10 @@
     "hash": "fab4f9d9aba3437e",
     "date": "2026-10-08"
   },
+  "/scholarships/hotchkiss-student-award-olds-college/": {
+    "hash": "476f293ec71820c5",
+    "date": "2026-10-14"
+  },
   "/scholarships/hpad-student-award/": {
     "hash": "26bbeaf41332d94f",
     "date": "2026-10-05"
@@ -5470,6 +5594,10 @@
   "/scholarships/independent-order-of-oddfellows-scholarship/": {
     "hash": "09b59c09c4c54dd8",
     "date": "2026-10-05"
+  },
+  "/scholarships/indigenous-careers-award-norquest/": {
+    "hash": "877fed8864282bc7",
+    "date": "2026-10-14"
   },
   "/scholarships/indo-chinese-buddhist-association-entrance-award/": {
     "hash": "c975a0319a29a410",
@@ -5607,6 +5735,10 @@
     "hash": "e3d18e17e37a34b4",
     "date": "2026-10-05"
   },
+  "/scholarships/james-hargrave-entrance-scholarship-lakeland-college/": {
+    "hash": "c11fe15e47475031",
+    "date": "2026-10-14"
+  },
   "/scholarships/james-m-stanford-bursary/": {
     "hash": "8ee35d8354f39cf6",
     "date": "2026-10-14"
@@ -5719,9 +5851,17 @@
     "hash": "deea1cd0b50c2939",
     "date": "2026-10-08"
   },
+  "/scholarships/jim-carter-indigenous-student-award-norquest/": {
+    "hash": "5c795cbd50e9c398",
+    "date": "2026-10-14"
+  },
   "/scholarships/jim-cellars-memorial-welding-scholarship/": {
     "hash": "a7cf2b49162d01ea",
     "date": "2026-10-08"
+  },
+  "/scholarships/jim-mcdaniel-memorial-educational-bursary-norquest/": {
+    "hash": "7b071c0c0a0dd5f9",
+    "date": "2026-10-14"
   },
   "/scholarships/jimmy-bonora-memorial-trades-award/": {
     "hash": "c725323ab8b816a5",
@@ -5787,6 +5927,10 @@
     "hash": "6d227d8e781c0c4f",
     "date": "2026-10-14"
   },
+  "/scholarships/john-dahmer-community-involvement-entrance-scholarship-lakeland-college/": {
+    "hash": "50b24778fda465c1",
+    "date": "2026-10-14"
+  },
   "/scholarships/john-deere-canada-4-h-scholarship/": {
     "hash": "0961676e7121d33d",
     "date": "2026-10-08"
@@ -5803,12 +5947,20 @@
     "hash": "5f35f7d850746753",
     "date": "2026-10-08"
   },
+  "/scholarships/john-nicol-entrance-scholarship-lakeland-college/": {
+    "hash": "37fad79a66a099bf",
+    "date": "2026-10-14"
+  },
   "/scholarships/john-reid-memorial-scholarship/": {
     "hash": "343c154c5a0e2c37",
     "date": "2026-10-05"
   },
   "/scholarships/john-tsafalas-memorial-bursary/": {
     "hash": "faea23ec5f06ce15",
+    "date": "2026-10-14"
+  },
+  "/scholarships/john-warren-klancher-endowment-olds-college/": {
+    "hash": "277484cd1e616bea",
     "date": "2026-10-14"
   },
   "/scholarships/john-wass-smidstrup-scholarship/": {
@@ -6283,6 +6435,10 @@
     "hash": "f87ede499bfe7da8",
     "date": "2026-10-09"
   },
+  "/scholarships/lakeland-college-entrance-scholarship-for-excellence/": {
+    "hash": "b8ef0969f37dd644",
+    "date": "2026-10-14"
+  },
   "/scholarships/lakeland-credit-union-post-secondary-scholarship/": {
     "hash": "14cf2f673fa2e566",
     "date": "2026-10-08"
@@ -6293,6 +6449,10 @@
   },
   "/scholarships/lakeland-power-co-op-scholarship/": {
     "hash": "574b48bd2764b08e",
+    "date": "2026-10-14"
+  },
+  "/scholarships/lakeland-region-entrance-scholarship/": {
+    "hash": "3568650356a7e2e4",
     "date": "2026-10-14"
   },
   "/scholarships/lamont-county-centennial-scholarship/": {
@@ -7035,6 +7195,10 @@
     "hash": "fe12259acc8915a1",
     "date": "2026-10-05"
   },
+  "/scholarships/mc-brownlee-award-olds-college/": {
+    "hash": "d1915d99d9800d2a",
+    "date": "2026-10-14"
+  },
   "/scholarships/mc-college-excellence-in-cosmetology-scholarship/": {
     "hash": "4c1f56921e56c8ad",
     "date": "2026-10-08"
@@ -7045,6 +7209,10 @@
   },
   "/scholarships/mccall-macbain-community-health-awards-at-tmu/": {
     "hash": "75fd4ef37a0f67b4",
+    "date": "2026-10-14"
+  },
+  "/scholarships/mcdonald-family-entrance-award-lakeland-college/": {
+    "hash": "f93512dab275315b",
     "date": "2026-10-14"
   },
   "/scholarships/mcdonalds-canada-future-of-agriculture-4-h-scholarship/": {
@@ -7359,6 +7527,10 @@
     "hash": "004a8814927b5e6b",
     "date": "2026-10-05"
   },
+  "/scholarships/muriel-stanley-venne-resilience-award-norquest/": {
+    "hash": "8d2e987d045a3ce8",
+    "date": "2026-10-14"
+  },
   "/scholarships/murray-family-career-opportunity-award/": {
     "hash": "b666f516dd819bf3",
     "date": "2026-10-08"
@@ -7506,6 +7678,14 @@
   "/scholarships/norquest-college-1000women4stem-award---diploma/": {
     "hash": "a0b839b1fed8fe2e",
     "date": "2026-10-09"
+  },
+  "/scholarships/norquest-college-students-with-disabilities-award/": {
+    "hash": "3c9646c0dd3dba95",
+    "date": "2026-10-14"
+  },
+  "/scholarships/norquest-indigenous-education-bursary/": {
+    "hash": "d653856430286709",
+    "date": "2026-10-14"
   },
   "/scholarships/norris-bowen-scholarship/": {
     "hash": "0f1f0823f4338164",
@@ -7726,6 +7906,10 @@
   "/scholarships/old-red-brick-fort-high-school-reunion-award/": {
     "hash": "b0114f324ec3b677",
     "date": "2026-10-08"
+  },
+  "/scholarships/olds-college-business-entrance-award/": {
+    "hash": "bb0987307e43ce23",
+    "date": "2026-10-14"
   },
   "/scholarships/olds-college-entrance-awards-application/": {
     "hash": "37f0a217f640f2ea",
@@ -7975,6 +8159,14 @@
     "hash": "08639670d9f77cdd",
     "date": "2026-10-14"
   },
+  "/scholarships/peter-j-gulak-entrance-scholarship-lakeland-college/": {
+    "hash": "4d961dbebf3f3ed5",
+    "date": "2026-10-14"
+  },
+  "/scholarships/peter-schmidt-memorial-award-olds-college/": {
+    "hash": "d1b2e15000546b47",
+    "date": "2026-10-14"
+  },
   "/scholarships/peter-trynchy-scholarship/": {
     "hash": "36b90676841b4f6f",
     "date": "2026-10-14"
@@ -8103,6 +8295,10 @@
     "hash": "9805afcc8213716d",
     "date": "2026-10-14"
   },
+  "/scholarships/ptarmigan-charitable-foundation-bursary-norquest/": {
+    "hash": "371f158ce1d2e5c7",
+    "date": "2026-10-14"
+  },
   "/scholarships/ptarmigan-indigenous-achievement-scholarship/": {
     "hash": "d792b4e50d8423e6",
     "date": "2026-10-14"
@@ -8199,6 +8395,10 @@
     "hash": "efcf456ff17c5af4",
     "date": "2026-10-08"
   },
+  "/scholarships/ralph-and-colleen-klein-indigenous-award-norquest/": {
+    "hash": "ccfec5e6fd733e97",
+    "date": "2026-10-14"
+  },
   "/scholarships/ramzi-halabi-memorial-scholarship/": {
     "hash": "e58bdd2161a62b74",
     "date": "2026-09-19"
@@ -8242,6 +8442,10 @@
   "/scholarships/red-deer-advocate-adult-re-entry-bursary/": {
     "hash": "6ed3610a000e7c99",
     "date": "2026-10-08"
+  },
+  "/scholarships/red-deer-agri-trade-entrance-award-olds-college/": {
+    "hash": "e8e8b6d2442a008f",
+    "date": "2026-10-14"
   },
   "/scholarships/red-deer-arts-council-canada-centennial-secondary-scholarship/": {
     "hash": "492e8354c4389665",
@@ -8439,6 +8643,10 @@
     "hash": "14dafec8740c4ab3",
     "date": "2026-10-14"
   },
+  "/scholarships/robert-huff-agriculture-entrance-award-lakeland-college/": {
+    "hash": "d59e0c27feff27ba",
+    "date": "2026-10-14"
+  },
   "/scholarships/robert-orr-lawson-microbiology-scholarship/": {
     "hash": "64875f1e972b8db1",
     "date": "2026-10-14"
@@ -8489,6 +8697,10 @@
   },
   "/scholarships/rocky-gas-co-op-scholarships/": {
     "hash": "d43a4982e22c21b1",
+    "date": "2026-10-14"
+  },
+  "/scholarships/rocky-mountain-house-ag-society-awards-olds-college/": {
+    "hash": "96cbe76f9d9ed890",
     "date": "2026-10-14"
   },
   "/scholarships/rocky-view-agricultural-award/": {
@@ -8811,9 +9023,17 @@
     "hash": "b0209b82c1965a01",
     "date": "2026-10-08"
   },
+  "/scholarships/salma-lakhani-1000women-award-norquest/": {
+    "hash": "f6cd720c5a024057",
+    "date": "2026-10-14"
+  },
   "/scholarships/sam-bull-memorial-scholarship/": {
     "hash": "0560e034e1fcd10d",
     "date": "2026-10-08"
+  },
+  "/scholarships/sam-dixon-entrance-award-olds-college/": {
+    "hash": "950ad2662393009d",
+    "date": "2026-10-14"
   },
   "/scholarships/samaritan-club-scholarship-for-discovering-choices/": {
     "hash": "6088a8f9c5636498",
@@ -8834,6 +9054,10 @@
   "/scholarships/sandy-and-carl-krenning-culinary-fund/": {
     "hash": "977e907fed79ec88",
     "date": "2026-10-08"
+  },
+  "/scholarships/saoc-entrance-award-olds-college/": {
+    "hash": "e903ef1848cf31a1",
+    "date": "2026-10-14"
   },
   "/scholarships/sarah-gaulin-memorial-scholarship/": {
     "hash": "cb8bfe1c315518b9",
@@ -9003,6 +9227,14 @@
     "hash": "f0094b6c1e66e427",
     "date": "2026-10-08"
   },
+  "/scholarships/shaw-family-foundation-career-bursary-norquest/": {
+    "hash": "6a5180fedf604b2b",
+    "date": "2026-10-14"
+  },
+  "/scholarships/shaw-indigenous-opportunity-award-lakeland-college/": {
+    "hash": "c08e4479c73a1298",
+    "date": "2026-10-14"
+  },
   "/scholarships/shayne-h-page-memorial-scholarship/": {
     "hash": "b795fdfaf62a4669",
     "date": "2026-10-05"
@@ -9026,6 +9258,10 @@
   "/scholarships/sherwood-park-rotary-club-scholarship/": {
     "hash": "53d422bed30f7d59",
     "date": "2026-10-08"
+  },
+  "/scholarships/shillington-community-leadership-award-norquest/": {
+    "hash": "b00e0d3e9ec1032d",
+    "date": "2026-10-14"
   },
   "/scholarships/shiloh-chiropractic-clinic-sports-medicine-award/": {
     "hash": "dd4da4b63d4284e9",
@@ -9247,6 +9483,10 @@
     "hash": "19de00f342b550c4",
     "date": "2026-10-08"
   },
+  "/scholarships/stan-d-davies-awards-olds-college/": {
+    "hash": "7d312783a43209c8",
+    "date": "2026-10-14"
+  },
   "/scholarships/stanley-dennis-we-believe-in-you-award/": {
     "hash": "c8239acddd7e966c",
     "date": "2026-10-08"
@@ -9282,6 +9522,10 @@
   "/scholarships/stewart-art-scholarship/": {
     "hash": "d16787bbeeab74c0",
     "date": "2026-10-08"
+  },
+  "/scholarships/stony-plain-horticulture-society-award-olds-college/": {
+    "hash": "e518055eb2ab71cd",
+    "date": "2026-10-14"
   },
   "/scholarships/stony-plain-lions-award-for-improvement/": {
     "hash": "b3df9045eacd10a6",
@@ -9331,6 +9575,10 @@
     "hash": "73cb4875aa25457a",
     "date": "2026-10-08"
   },
+  "/scholarships/strouckel-family-agriculture-award-olds-college/": {
+    "hash": "20f45f410de57df4",
+    "date": "2026-10-14"
+  },
   "/scholarships/stuart-olson-science-rising-star-entrance-scholarship/": {
     "hash": "6ccf5d5271d29f59",
     "date": "2026-10-14"
@@ -9366,6 +9614,10 @@
   "/scholarships/suncor-energy-rick-george-leadership-award/": {
     "hash": "bf9eee874838de88",
     "date": "2026-10-08"
+  },
+  "/scholarships/sundre-forest-products-entrance-award-olds-college/": {
+    "hash": "72e68b28ed104e6d",
+    "date": "2026-10-14"
   },
   "/scholarships/sunny-94-scholarship/": {
     "hash": "8af2bcc79deefa6e",
@@ -9425,6 +9677,10 @@
   },
   "/scholarships/tc-energy-award/": {
     "hash": "34a2b5dfddbf7b4c",
+    "date": "2026-10-14"
+  },
+  "/scholarships/tc-energy-indigenous-entrance-award-lakeland-college/": {
+    "hash": "d03ff08c5188a873",
     "date": "2026-10-14"
   },
   "/scholarships/tc-energy-stem-trades-scholarships/": {
@@ -10267,6 +10523,18 @@
     "hash": "8243ada7351759a8",
     "date": "2026-10-08"
   },
+  "/scholarships/wa-ranches-award-olds-college/": {
+    "hash": "f3f99885067c5104",
+    "date": "2026-10-14"
+  },
+  "/scholarships/wainwright-on-wellness-entrance-award-lakeland-college/": {
+    "hash": "6773786e338b280f",
+    "date": "2026-10-14"
+  },
+  "/scholarships/wainwright-youth-entrance-award-lakeland-college/": {
+    "hash": "a71391b687294339",
+    "date": "2026-10-14"
+  },
   "/scholarships/walter-hayduk-memorial-scholarship/": {
     "hash": "ce509d6a95a3128b",
     "date": "2026-10-08"
@@ -10515,6 +10783,14 @@
     "hash": "8e37b9ef6b889bb0",
     "date": "2026-10-08"
   },
+  "/scholarships/winterburn-community-league-entrance-scholarship-lakeland-college/": {
+    "hash": "f4182ad174ed8e96",
+    "date": "2026-10-14"
+  },
+  "/scholarships/winton-memorial-award-olds-college/": {
+    "hash": "09109e5923056a82",
+    "date": "2026-10-14"
+  },
   "/scholarships/wolf-creek-ata-scholarship/": {
     "hash": "d2c901ecc3bafe37",
     "date": "2026-10-02"
@@ -10534,6 +10810,10 @@
   "/scholarships/wolf-scholars-program/": {
     "hash": "336f55ed5d49f384",
     "date": "2026-10-08"
+  },
+  "/scholarships/wolfe-pack-warriors-foundation-stem-award-norquest/": {
+    "hash": "1147a683e870a3f2",
+    "date": "2026-10-14"
   },
   "/scholarships/wolves-minor-basketball-fund/": {
     "hash": "566306049c7097a3",

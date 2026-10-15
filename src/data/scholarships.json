@@ -99078,5 +99078,2893 @@
       "apprenticeship": false,
       "extracurriculars": []
     }
+  },
+  {
+    "id": 2623,
+    "title": "Alberta Blue Cross Entrance Award (Lakeland College)",
+    "amount": "$750",
+    "deadline": "2027-05-01",
+    "deadlineEstimated": true,
+    "audience": "Alberta Grade 12 students with financial need entering a two-year Lakeland College program",
+    "url": "https://lakelandcollege.academicworks.ca/opportunities/3472",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Selection weighs your high school marks and financial need. Students with earlier post-secondary study, or more than $3,500 in other awards that year, cannot receive it. Accepted students get the entrance awards application by email in early March. The deadline is estimated from 2026.",
+    "active": true,
+    "description": "Alberta Blue Cross gives $750 to a new Lakeland College student starting a degree or diploma of two years or more.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Lakeland College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2624,
+    "title": "McDonald Family Entrance Award (Lakeland College)",
+    "amount": "Varies",
+    "deadline": "2027-05-01",
+    "deadlineEstimated": true,
+    "audience": "Grade 12 students entering any full-time Lakeland College program, with 4-H members preferred",
+    "url": "https://lakelandcollege.academicworks.ca/opportunities/3474",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Selection weighs commitment to your marks and school or community involvement. Students with 4-H involvement get preference. Accepted students get the entrance awards application by email in early March. The deadline is estimated from 2026.",
+    "active": true,
+    "description": "A family-funded award for a student starting full-time at any Lakeland College campus.",
+    "metaDetail": "4-H members get preference.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Lakeland College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "4-H",
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2625,
+    "title": "Wainwright on Wellness Entrance Award (Lakeland College)",
+    "amount": "Varies",
+    "deadline": "2027-05-01",
+    "deadlineEstimated": true,
+    "audience": "Buffalo Trail Public Schools graduates entering a helping-profession program at Lakeland College",
+    "url": "https://lakelandcollege.academicworks.ca/opportunities/3503",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must have graduated from a Buffalo Trail high school within 20 months of starting, hold good marks, study full-time and be active in your school and community. Accepted students get the entrance awards application by email in early March. The deadline is estimated from 2026.",
+    "active": true,
+    "description": "An award honouring the Wainwright On Wellness mental health project, for a Buffalo Trail graduate heading into a helping profession.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Lakeland College"
+      ],
+      "fields": [
+        "Social Work",
+        "Health"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2626,
+    "title": "Wainwright Youth Entrance Award (Lakeland College)",
+    "amount": "Varies",
+    "deadline": "2027-05-01",
+    "deadlineEstimated": true,
+    "audience": "Wainwright high school graduates aged 21 or younger entering any Lakeland College program",
+    "url": "https://lakelandcollege.academicworks.ca/opportunities/3510",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must be an Alberta resident aged 21 or younger with good marks and community involvement. Accepted students get the entrance awards application by email in early March. The deadline is estimated from 2026.",
+    "active": true,
+    "description": "Dr. Jason and Heather Dewling fund an award for a Wainwright high school graduate starting any Lakeland College program.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Lakeland College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": 21,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2627,
+    "title": "Robert Huff Agriculture Entrance Award (Lakeland College)",
+    "amount": "Varies",
+    "deadline": "2027-05-01",
+    "deadlineEstimated": true,
+    "audience": "Grade 12 students entering a Lakeland College agricultural sciences program",
+    "url": "https://lakelandcollege.academicworks.ca/opportunities/3580",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Selection weighs high school marks, leadership in school and community, and support for your peers. Accepted students get the entrance awards application by email in early March. The deadline is estimated from 2026.",
+    "active": true,
+    "description": "An entrance award for a student starting any Lakeland College agricultural sciences program, with Agribusiness preferred.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Lakeland College"
+      ],
+      "fields": [
+        "Agriculture"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership"
+      ]
+    }
+  },
+  {
+    "id": 2628,
+    "title": "TC Energy Indigenous Entrance Award (Lakeland College)",
+    "amount": "Varies",
+    "deadline": "2027-05-01",
+    "deadlineEstimated": true,
+    "audience": "First Nations, Métis and Inuit Grade 12 students entering energy-related Lakeland College programs",
+    "url": "https://lakelandcollege.academicworks.ca/opportunities/3596",
+    "category": "Indigenous",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Programs include University Transfer, power engineering, Business Administration and the environmental sciences. You need promising marks, financial need, a full course load and school or community leadership. Accepted students get the entrance awards application by email in early March. The deadline is estimated from 2026.",
+    "active": true,
+    "description": "TC Energy funds an award for an Indigenous student entering a Lakeland College program tied to the oil and gas industry.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Lakeland College"
+      ],
+      "fields": [
+        "Power Engineering",
+        "Business",
+        "Environmental Science",
+        "University Studies"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership"
+      ]
+    }
+  },
+  {
+    "id": 2629,
+    "title": "Fund for the Future Scholarship (Lakeland College)",
+    "amount": "$500",
+    "deadline": "2027-05-01",
+    "deadlineEstimated": true,
+    "audience": "Grade 12 students entering any full-time Lakeland College program",
+    "url": "https://lakelandcollege.academicworks.ca/opportunities/3613",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Winners balance strong high school marks with leadership in school and community activities. Accepted students get the entrance awards application by email in early March. The deadline is estimated from 2026.",
+    "active": true,
+    "description": "A $500 scholarship for a new full-time student at any Lakeland College campus.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Lakeland College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership"
+      ]
+    }
+  },
+  {
+    "id": 2630,
+    "title": "Bill Kondro Entrance Scholarship for Excellence (Lakeland College)",
+    "amount": "Varies",
+    "deadline": "2027-05-01",
+    "deadlineEstimated": true,
+    "audience": "Grade 12 students entering Lakeland College, with Lloydminster-area students preferred",
+    "url": "https://lakelandcollege.academicworks.ca/opportunities/3634",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Winners show leadership and balance strong marks with school, community and extracurricular involvement. Accepted students get the entrance awards application by email in early March. The deadline is estimated from 2026.",
+    "active": true,
+    "description": "The R.J. Nelson Family Foundation funds a scholarship for a new Lakeland College student with a full course load.",
+    "metaDetail": "Lloydminster-area students get preference.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Lakeland College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership"
+      ]
+    }
+  },
+  {
+    "id": 2631,
+    "title": "James Hargrave Entrance Scholarship (Lakeland College)",
+    "amount": "Varies",
+    "deadline": "2027-05-01",
+    "deadlineEstimated": true,
+    "audience": "Grade 12 students entering full-time studies at the Lakeland College Vermilion campus",
+    "url": "https://lakelandcollege.academicworks.ca/opportunities/3920",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Selection weighs outstanding high school marks, community volunteering and classroom leadership. Accepted students get the entrance awards application by email in early March. The deadline is estimated from 2026.",
+    "active": true,
+    "description": "Cypress County funds a scholarship for a new full-time student at the Vermilion campus.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Lakeland College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer",
+        "Leadership"
+      ]
+    }
+  },
+  {
+    "id": 2632,
+    "title": "CM Wolters Entrance Award (Lakeland College)",
+    "amount": "Varies",
+    "deadline": "2027-05-01",
+    "deadlineEstimated": true,
+    "audience": "Grade 12 students entering University Transfer at the Lakeland College Lloydminster campus",
+    "url": "https://lakelandcollege.academicworks.ca/opportunities/3923",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Selection is based on high school marks. Graduates of Buffalo Trail Public Schools or East Central Catholic Schools get preference. Accepted students get the entrance awards application by email in early March. The deadline is estimated from 2026.",
+    "active": true,
+    "description": "Cathy Wolters funds an award for a new full-time University Transfer student in Lloydminster.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Lakeland College"
+      ],
+      "fields": [
+        "University Studies"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2633,
+    "title": "Ed Jenson and Family Entrance Scholarship (Lakeland College)",
+    "amount": "Varies",
+    "deadline": "2027-05-01",
+    "deadlineEstimated": true,
+    "audience": "Grade 12 students entering University Transfer at the Lakeland College Lloydminster campus",
+    "url": "https://lakelandcollege.academicworks.ca/opportunities/3943",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Selection weighs high school marks, school and community leadership and a positive attitude. Musical interest and talent can count too. Accepted students get the entrance awards application by email in early March. The deadline is estimated from 2026.",
+    "active": true,
+    "description": "A family scholarship for a new full-time University Transfer student in Lloydminster.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Lakeland College"
+      ],
+      "fields": [
+        "University Studies"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership",
+        "music"
+      ]
+    }
+  },
+  {
+    "id": 2634,
+    "title": "John Dahmer Community Involvement Entrance Scholarship (Lakeland College)",
+    "amount": "Varies",
+    "deadline": "2027-05-01",
+    "deadlineEstimated": true,
+    "audience": "Alberta Grade 12 students entering any full-time Lakeland College program",
+    "url": "https://lakelandcollege.academicworks.ca/opportunities/3944",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must be an Alberta resident committed to your marks, entering a full-time program at any campus. Accepted students get the entrance awards application by email in early March. The deadline is estimated from 2026.",
+    "active": true,
+    "description": "An entrance scholarship for an Alberta student who has given back to their school or community.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Lakeland College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2635,
+    "title": "Colchester and District Agricultural Society Entrance Scholarship (Lakeland College)",
+    "amount": "Varies",
+    "deadline": "2027-05-01",
+    "deadlineEstimated": true,
+    "audience": "Grade 12 students entering a Lakeland College agriculture program, with Strathcona County preferred",
+    "url": "https://lakelandcollege.academicworks.ca/opportunities/3961",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You write a short autobiographical essay about your school or community contributions. Strathcona County residents get preference. Accepted students get the entrance awards application by email in early March. The deadline is estimated from 2026.",
+    "active": true,
+    "description": "The Colchester and District Agricultural Society funds a scholarship for a new full-time agriculture student.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Lakeland College"
+      ],
+      "fields": [
+        "Agriculture"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2636,
+    "title": "John Nicol Entrance Scholarship (Lakeland College)",
+    "amount": "Varies",
+    "deadline": "2027-05-01",
+    "deadlineEstimated": true,
+    "audience": "Grade 12 students entering a full-time program at the Lakeland College Vermilion or Lloydminster campus",
+    "url": "https://lakelandcollege.academicworks.ca/opportunities/3972",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Selection weighs high school marks and leadership through school or community activities. You need a full course load. Accepted students get the entrance awards application by email in early March. The deadline is estimated from 2026.",
+    "active": true,
+    "description": "A scholarship for a student new to Lakeland College at the Vermilion or Lloydminster campus.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Lakeland College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership"
+      ]
+    }
+  },
+  {
+    "id": 2637,
+    "title": "Winterburn Community League Entrance Scholarship (Lakeland College)",
+    "amount": "Varies",
+    "deadline": "2027-05-01",
+    "deadlineEstimated": true,
+    "audience": "Alberta Grade 12 students entering agricultural sciences at the Lakeland College Vermilion campus",
+    "url": "https://lakelandcollege.academicworks.ca/opportunities/4058",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "It goes to the applicant with the highest high school marks. You must be an Alberta resident studying full-time. Accepted students get the entrance awards application by email in early March. The deadline is estimated from 2026.",
+    "active": true,
+    "description": "The Winterburn Community League funds a scholarship for a new agricultural sciences student in Vermilion.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Lakeland College"
+      ],
+      "fields": [
+        "Agriculture"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2638,
+    "title": "Herman Huber Entrance Award (Lakeland College)",
+    "amount": "Varies",
+    "deadline": "2027-05-01",
+    "deadlineEstimated": true,
+    "audience": "Alberta Grade 12 students entering a full-time program at the Lakeland College Vermilion campus",
+    "url": "https://lakelandcollege.academicworks.ca/opportunities/4059",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must be committed to your marks and write a short autobiographical essay about your school or community contributions. Accepted students get the entrance awards application by email in early March. The deadline is estimated from 2026.",
+    "active": true,
+    "description": "An entrance award for an Alberta student starting full-time at the Vermilion campus.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Lakeland College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2639,
+    "title": "Peter J. Gulak Entrance Scholarship (Lakeland College)",
+    "amount": "Varies",
+    "deadline": "2027-05-01",
+    "deadlineEstimated": true,
+    "audience": "Grade 12 students entering business or accounting diplomas at the Lakeland College Lloydminster campus",
+    "url": "https://lakelandcollege.academicworks.ca/opportunities/4063",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Selection weighs high school marks, school or community contributions and academic promise. It can renew for a second year. Accepted students get the entrance awards application by email in early March. The deadline is estimated from 2026.",
+    "active": true,
+    "description": "Servus Credit Union funds a scholarship for a new General Business or Accounting diploma student in Lloydminster.",
+    "metaDetail": "It can renew for a second year.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Lakeland College"
+      ],
+      "fields": [
+        "Business",
+        "Accounting"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2640,
+    "title": "Lakeland College Entrance Scholarship for Excellence",
+    "amount": "$2,500",
+    "deadline": "2027-05-01",
+    "deadlineEstimated": true,
+    "audience": "Grade 12 students entering any full-time Lakeland College program in the fall",
+    "url": "https://lakelandcollege.academicworks.ca/opportunities/4068",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Selection weighs academic excellence, school or community contributions and academic promise. Accepted students get the entrance awards application by email in early March. The deadline is estimated from 2026.",
+    "active": true,
+    "description": "A $2,500 scholarship for a new full-time student starting at any Lakeland College campus in the fall.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Lakeland College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2641,
+    "title": "George Neil Wilson and Ethel (Sloan) Wilson Memorial Entrance Scholarship (Lakeland College)",
+    "amount": "Varies",
+    "deadline": "2027-05-01",
+    "deadlineEstimated": true,
+    "audience": "Grade 12 students entering first year full-time at Lakeland College",
+    "url": "https://lakelandcollege.academicworks.ca/opportunities/4069",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Selection weighs high school marks, extracurricular involvement, conduct and effort. Accepted students get the entrance awards application by email in early March. The deadline is estimated from 2026.",
+    "active": true,
+    "description": "A memorial scholarship for a Canadian citizen or permanent resident starting full-time studies.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Lakeland College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2642,
+    "title": "Lakeland Region Entrance Scholarship",
+    "amount": "$1,500 minimum",
+    "deadline": "2027-05-01",
+    "deadlineEstimated": true,
+    "audience": "Grade 12 students from Lakeland region school divisions entering any full-time Lakeland College program",
+    "url": "https://lakelandcollege.academicworks.ca/opportunities/4070",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Eligible divisions are Battle River, Buffalo Trail, East Central Catholic, Elk Island, Lloydminster Catholic, Lloydminster Public, Northwest, St. Paul and Indigenous divisions in the region. Awards are spread across campuses and programs. Accepted students get the entrance awards application by email in early March. The deadline is estimated from 2026.",
+    "active": true,
+    "description": "At least $1,500 for a high-achieving first-year student from the Lakeland region of Alberta and Saskatchewan.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Lakeland College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2643,
+    "title": "Shaw Indigenous Opportunity Award (Lakeland College)",
+    "amount": "$500",
+    "deadline": "2027-05-01",
+    "deadlineEstimated": true,
+    "audience": "First Nations, Métis and Inuit Grade 12 students entering Lakeland College in Vermilion or Lloydminster",
+    "url": "https://lakelandcollege.academicworks.ca/opportunities/4077",
+    "category": "Indigenous",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Selection weighs high school marks, community involvement and leadership. Accepted students get the entrance awards application by email in early March. The deadline is estimated from 2026.",
+    "active": true,
+    "description": "Don Shaw funds a $500 award for an Indigenous student enrolling full-time at the Vermilion or Lloydminster campus.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Lakeland College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer",
+        "Leadership"
+      ]
+    }
+  },
+  {
+    "id": 2644,
+    "title": "Red Deer Agri-Trade Entrance Award (Olds College)",
+    "amount": "$1,500",
+    "deadline": "2027-10-15",
+    "deadlineEstimated": true,
+    "audience": "Alberta Grade 12 students with financial need entering the Olds College Agricultural and Heavy Equipment Diploma",
+    "url": "https://oldscollege.academicworks.ca/opportunities/7556",
+    "category": "Trades",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must have finished high school, live in Alberta and be a Canadian citizen or permanent resident. Complete the general awards application in the Olds College portal once enrolled. The deadline is estimated from 2026.",
+    "active": true,
+    "description": "Red Deer Agri-Trade funds two $1,500 awards for first-year Agricultural and Heavy Equipment Diploma students.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Olds College"
+      ],
+      "fields": [
+        "Agriculture",
+        "Heavy equipment"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2645,
+    "title": "Strouckel Family Agriculture Award (Olds College)",
+    "amount": "$6,000",
+    "deadline": "2027-10-31",
+    "deadlineEstimated": true,
+    "audience": "Alberta female Grade 12 students heading back to the family farm after Olds College agriculture",
+    "url": "https://oldscollege.academicworks.ca/opportunities/7599",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must say how you will use your Olds College education to return to the family farm. Alberta residents only, with preference within 100 km of Rosebud. Complete the general awards application in the Olds College portal once enrolled. The deadline is estimated from 2026.",
+    "active": true,
+    "description": "A $6,000 award for a first-year female agriculture student with financial need who plans to farm.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Olds College"
+      ],
+      "fields": [
+        "Agriculture"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": "female",
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2646,
+    "title": "Helmer Family Entrance Awards (Olds College)",
+    "amount": "$2,500",
+    "deadline": "2027-10-31",
+    "deadlineEstimated": true,
+    "audience": "Grade 12 students with financial need entering Olds College agriculture, heavy equipment or veterinary technology",
+    "url": "https://oldscollege.academicworks.ca/opportunities/7602",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You need financial need that would otherwise keep you from Olds College, a 3.0 GPA or equivalent and extracurricular involvement. Family farm or small agribusiness backgrounds get preference. The portal lists four Helmer funds, one per program, so they are grouped here. Complete the general awards application in the Olds College portal once enrolled. The deadline is estimated from 2026.",
+    "active": true,
+    "description": "The Helmer family funds $2,500 bursaries for students in Agricultural Management, Agricultural and Heavy Equipment, Veterinary Technology or the Agribusiness degree.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Olds College"
+      ],
+      "fields": [
+        "Agriculture",
+        "Heavy equipment",
+        "Animal Health",
+        "Agribusiness"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2647,
+    "title": "Archer Entrance Awards (Olds College)",
+    "amount": "$1,250",
+    "deadline": "2027-10-31",
+    "deadlineEstimated": true,
+    "audience": "Canadian Grade 12 students from farms entering Olds College agricultural production or veterinary technology",
+    "url": "https://oldscollege.academicworks.ca/opportunities/7639",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must be a Canadian citizen with financial need. Dedicated, conscientious students get preference. Complete the general awards application in the Olds College portal once enrolled. The deadline is estimated from 2026.",
+    "active": true,
+    "description": "Two $1,250 Archer family awards, one for Agricultural Management Production majors and one for Veterinary Technology students, from farming backgrounds.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Olds College"
+      ],
+      "fields": [
+        "Agriculture",
+        "Animal Health"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2648,
+    "title": "Sam Dixon Entrance Award (Olds College)",
+    "amount": "$500",
+    "deadline": "2027-10-31",
+    "deadlineEstimated": true,
+    "audience": "Grade 12 students entering the Olds College Agricultural and Heavy Equipment Diploma",
+    "url": "https://oldscollege.academicworks.ca/opportunities/7660",
+    "category": "Trades",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "It goes to a student with academic excellence in high school. Complete the general awards application in the Olds College portal once enrolled. The deadline is estimated from 2026.",
+    "active": true,
+    "description": "A $500 award for a first-year Agricultural and Heavy Equipment Diploma student.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Olds College"
+      ],
+      "fields": [
+        "Agriculture",
+        "Heavy equipment"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2649,
+    "title": "Element Environmental Studies Award (Olds College)",
+    "amount": "$1,000",
+    "deadline": "2027-10-31",
+    "deadlineEstimated": true,
+    "audience": "Grade 12 students with financial need entering Olds College Environmental Science and Technology",
+    "url": "https://oldscollege.academicworks.ca/opportunities/7665",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You need financial need and a satisfactory GPA. Complete the general awards application in the Olds College portal once enrolled. The deadline is estimated from 2026.",
+    "active": true,
+    "description": "Element funds two $1,000 awards for first-year Environmental Science and Technology students.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Olds College"
+      ],
+      "fields": [
+        "Environmental Science"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2650,
+    "title": "Winton Memorial Award (Olds College)",
+    "amount": "$650",
+    "deadline": "2028-01-31",
+    "deadlineEstimated": true,
+    "audience": "Grade 12 students entering any Olds College agriculture program full-time",
+    "url": "https://oldscollege.academicworks.ca/opportunities/7669",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "It rewards academic excellence. Complete the general awards application in the Olds College portal once enrolled. The deadline is estimated from 2026.",
+    "active": true,
+    "description": "A $650 award in memory of Robert and Elizabeth Winton for a first-year agriculture student.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Olds College"
+      ],
+      "fields": [
+        "Agriculture"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2651,
+    "title": "Ernest Anton Gisler Endowed Awards (Olds College)",
+    "amount": "$2,000",
+    "deadline": "2028-01-31",
+    "deadlineEstimated": true,
+    "audience": "Grade 12 students planning to farm who enter Olds College agriculture, heavy equipment or veterinary technology",
+    "url": "https://oldscollege.academicworks.ca/opportunities/7686",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Students pursuing a career in agriculture with an emphasis on farming are selected. The portal lists one fund per program, so they are grouped here. Complete the general awards application in the Olds College portal once enrolled. The deadline is estimated from 2026.",
+    "active": true,
+    "description": "Three $2,000 awards for first-year students headed for a farming career, one each in Veterinary Technology, Agricultural Management Production and Agricultural and Heavy Equipment.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Olds College"
+      ],
+      "fields": [
+        "Agriculture",
+        "Heavy equipment",
+        "Animal Health"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2652,
+    "title": "M.C. Brownlee Award (Olds College)",
+    "amount": "$1,000",
+    "deadline": "2028-01-31",
+    "deadlineEstimated": true,
+    "audience": "Alberta Grade 12 students from farms entering an Olds College agriculture program",
+    "url": "https://oldscollege.academicworks.ca/opportunities/7722",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must be an Alberta resident with financial need. Complete the general awards application in the Olds College portal once enrolled. The deadline is estimated from 2026.",
+    "active": true,
+    "description": "Two $1,000 awards for first-year agriculture students who come from a farm and plan to return.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Olds College"
+      ],
+      "fields": [
+        "Agriculture"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2653,
+    "title": "Peter Schmidt Memorial Award (Olds College)",
+    "amount": "$1,000",
+    "deadline": "2028-01-31",
+    "deadlineEstimated": true,
+    "audience": "Grade 12 students entering the Olds College Agricultural and Heavy Equipment Diploma or Certificate",
+    "url": "https://oldscollege.academicworks.ca/opportunities/7733",
+    "category": "Trades",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "It goes to a student in good academic standing. Complete the general awards application in the Olds College portal once enrolled. The deadline is estimated from 2026.",
+    "active": true,
+    "description": "A $1,000 memorial award for a first-year Agricultural and Heavy Equipment student.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Olds College"
+      ],
+      "fields": [
+        "Agriculture",
+        "Heavy equipment"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2654,
+    "title": "W.A. Ranches Award (Olds College)",
+    "amount": "$5,000",
+    "deadline": "2027-10-31",
+    "deadlineEstimated": true,
+    "audience": "Canadian Grade 12 students with financial need entering Olds College Agricultural Management, Production major",
+    "url": "https://oldscollege.academicworks.ca/opportunities/7746",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must be a Canadian citizen with financial need, studying full-time. Complete the general awards application in the Olds College portal once enrolled. The deadline is estimated from 2026.",
+    "active": true,
+    "description": "Wynne Chisholm and Jack Anderson of W.A. Ranches fund a $5,000 award for a first-year Production major.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Olds College"
+      ],
+      "fields": [
+        "Agriculture"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2655,
+    "title": "Business Management Entrance Award (Olds College)",
+    "amount": "$1,000",
+    "deadline": "2027-10-31",
+    "deadlineEstimated": true,
+    "audience": "Canadian Grade 12 students with financial need entering Olds College business or hospitality programs",
+    "url": "https://oldscollege.academicworks.ca/opportunities/7759",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must be a Canadian citizen with satisfactory marks and financial need. Selection looks for initiative, persistence, leadership and good character. Complete the general awards application in the Olds College portal once enrolled. The deadline is estimated from 2026.",
+    "active": true,
+    "description": "A $1,000 award for a student entering Business Management or Hospitality and Tourism Management.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Olds College"
+      ],
+      "fields": [
+        "Business"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership"
+      ]
+    }
+  },
+  {
+    "id": 2656,
+    "title": "Hotchkiss Student Award (Olds College)",
+    "amount": "$1,000",
+    "deadline": "2028-01-31",
+    "deadlineEstimated": true,
+    "audience": "Grade 12 students with financial need entering an Olds College horticulture program",
+    "url": "https://oldscollege.academicworks.ca/opportunities/7763",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Financial need decides it. Complete the general awards application in the Olds College portal once enrolled. The deadline is estimated from 2026.",
+    "active": true,
+    "description": "Three $1,000 awards for first-year horticulture students.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Olds College"
+      ],
+      "fields": [
+        "Horticulture"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2657,
+    "title": "Godwin Family Entrance Award (Olds College)",
+    "amount": "$1,000",
+    "deadline": "2028-01-31",
+    "deadlineEstimated": true,
+    "audience": "Grade 12 students with financial need entering the Olds College Horticulture Technologist program",
+    "url": "https://oldscollege.academicworks.ca/opportunities/7773",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You need financial need, active class participation and involvement at Olds College or in your community. Complete the general awards application in the Olds College portal once enrolled. The deadline is estimated from 2026.",
+    "active": true,
+    "description": "A $1,000 award for a first-year Horticulture Technologist student.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Olds College"
+      ],
+      "fields": [
+        "Horticulture"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2658,
+    "title": "Dr. Margaret (Marmie) Hess Award (Olds College)",
+    "amount": "$750",
+    "deadline": "2028-01-31",
+    "deadlineEstimated": true,
+    "audience": "Grade 12 students entering Olds College Environmental Science and Technology or horticulture",
+    "url": "https://oldscollege.academicworks.ca/opportunities/7809",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Selection weighs high school marks, environmental interest and community involvement. Complete the general awards application in the Olds College portal once enrolled. The deadline is estimated from 2026.",
+    "active": true,
+    "description": "A $750 entrance scholarship for a first-year environmental science or horticulture student.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Olds College"
+      ],
+      "fields": [
+        "Environmental Science",
+        "Horticulture"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2659,
+    "title": "Camrose Horticultural Society Award (Olds College)",
+    "amount": "$500",
+    "deadline": "2028-01-31",
+    "deadlineEstimated": true,
+    "audience": "Grade 12 students entering the Olds College Horticulture Technologist Diploma, with Camrose preferred",
+    "url": "https://oldscollege.academicworks.ca/opportunities/7813",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Residents of the City of Camrose or Camrose County get preference. Complete the general awards application in the Olds College portal once enrolled. The deadline is estimated from 2026.",
+    "active": true,
+    "description": "A $500 award for a first-year Horticulture Technologist student who plans to finish the diploma at Olds College.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Olds College"
+      ],
+      "fields": [
+        "Horticulture"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2660,
+    "title": "Sundre Forest Products Entrance Award (Olds College)",
+    "amount": "$1,000",
+    "deadline": "2027-10-31",
+    "deadlineEstimated": true,
+    "audience": "Grade 12 students with financial need entering the Olds College Agricultural and Heavy Equipment Diploma",
+    "url": "https://oldscollege.academicworks.ca/opportunities/7842",
+    "category": "Trades",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Financial need decides it. Complete the general awards application in the Olds College portal once enrolled. The deadline is estimated from 2026.",
+    "active": true,
+    "description": "Sundre Forest Products funds four $1,000 awards for first-year Agricultural and Heavy Equipment Diploma students.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Olds College"
+      ],
+      "fields": [
+        "Agriculture",
+        "Heavy equipment"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2661,
+    "title": "Grace and Arnold Rumbold Award (Olds College)",
+    "amount": "$2,000",
+    "deadline": "2027-10-31",
+    "deadlineEstimated": true,
+    "audience": "Grade 12 students with financial need entering the Olds College Bachelor of Digital Agriculture",
+    "url": "https://oldscollege.academicworks.ca/opportunities/7852",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Financial need decides it. Complete the general awards application in the Olds College portal once enrolled. The deadline is estimated from 2026.",
+    "active": true,
+    "description": "A $2,000 award for a first-year student in the Bachelor of Digital Agriculture.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Olds College"
+      ],
+      "fields": [
+        "Agriculture"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2662,
+    "title": "John Warren Klancher Endowment (Olds College)",
+    "amount": "$1,000",
+    "deadline": "2028-01-31",
+    "deadlineEstimated": true,
+    "audience": "Grade 12 students entering any Olds College agriculture program, with Alberta-born students preferred",
+    "url": "https://oldscollege.academicworks.ca/opportunities/7864",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Students born in Alberta get first preference. Complete the general awards application in the Olds College portal once enrolled. The deadline is estimated from 2026.",
+    "active": true,
+    "description": "A $1,000 entrance bursary for a first-year student in any agriculture program.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Olds College"
+      ],
+      "fields": [
+        "Agriculture"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2663,
+    "title": "Alberta Blue Cross Entrance Award (Olds College)",
+    "amount": "$750",
+    "deadline": "2027-10-31",
+    "deadlineEstimated": true,
+    "audience": "Alberta Grade 12 students with an 80% average entering a two-year Olds College program",
+    "url": "https://oldscollege.academicworks.ca/opportunities/7907",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You need at least 80% at graduation, Alberta residency and no earlier post-secondary study. Students receiving more than $3,500 in other awards that year cannot receive it. Complete the general awards application in the Olds College portal once enrolled. The deadline is estimated from 2026.",
+    "active": true,
+    "description": "Alberta Blue Cross gives $750 to a new full-time student in a program of two years or more.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Olds College"
+      ],
+      "fields": [],
+      "minAverage": 80,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2664,
+    "title": "Edmonton Kubota Award (Olds College)",
+    "amount": "$750",
+    "deadline": "2028-01-31",
+    "deadlineEstimated": true,
+    "audience": "Grade 12 students entering Olds College Agricultural and Heavy Equipment or the Agricommerce major",
+    "url": "https://oldscollege.academicworks.ca/opportunities/7939",
+    "category": "Trades",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You need a GPA of 3.0 or better and financial need. Complete the general awards application in the Olds College portal once enrolled. The deadline is estimated from 2026.",
+    "active": true,
+    "description": "Edmonton Kubota funds a $750 award for a first-year Agricultural and Heavy Equipment or Agricommerce student.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Olds College"
+      ],
+      "fields": [
+        "Agriculture",
+        "Heavy equipment"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2665,
+    "title": "Dale Wesley Memorial Endowment Award (Olds College)",
+    "amount": "$1,300",
+    "deadline": "2028-01-31",
+    "deadlineEstimated": true,
+    "audience": "Grade 12 students entering Olds College Environmental Science and Technology",
+    "url": "https://oldscollege.academicworks.ca/opportunities/7940",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "It goes to a student with satisfactory marks. Complete the general awards application in the Olds College portal once enrolled. The deadline is estimated from 2026.",
+    "active": true,
+    "description": "A $1,300 memorial award for a first-year Environmental Science and Technology student.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Olds College"
+      ],
+      "fields": [
+        "Environmental Science"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2666,
+    "title": "Everett Trempner Memorial Awards (Olds College)",
+    "amount": "$750",
+    "deadline": "2027-10-31",
+    "deadlineEstimated": true,
+    "audience": "Grade 12 students entering Olds College Agricultural and Heavy Equipment or the Agricommerce major",
+    "url": "https://oldscollege.academicworks.ca/opportunities/7943",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You need financial need, leadership and active community involvement. The portal lists the two funds separately, so they are grouped here. Complete the general awards application in the Olds College portal once enrolled. The deadline is estimated from 2026.",
+    "active": true,
+    "description": "Two $750 memorial awards, one for Agricultural and Heavy Equipment and one for Agricultural Management Agricommerce first-years.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Olds College"
+      ],
+      "fields": [
+        "Agriculture",
+        "Heavy equipment"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer",
+        "Leadership"
+      ]
+    }
+  },
+  {
+    "id": 2667,
+    "title": "Olds College Business Entrance Award",
+    "amount": "$1,000",
+    "deadline": "2027-10-31",
+    "deadlineEstimated": true,
+    "audience": "Alberta Grade 12 students with financial need entering Olds College Business Management",
+    "url": "https://oldscollege.academicworks.ca/opportunities/7948",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must be an Alberta resident with financial need. Complete the general awards application in the Olds College portal once enrolled. The deadline is estimated from 2026.",
+    "active": true,
+    "description": "Eight $1,000 awards for first or second-year Business Management students.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Olds College"
+      ],
+      "fields": [
+        "Business"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2668,
+    "title": "SAOC Entrance Award (Olds College)",
+    "amount": "$500",
+    "deadline": "2027-10-31",
+    "deadlineEstimated": true,
+    "audience": "Grade 12 students with financial need entering any full-time Olds College program",
+    "url": "https://oldscollege.academicworks.ca/opportunities/7950",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Financial need decides it. Complete the general awards application in the Olds College portal once enrolled. The deadline is estimated from 2026.",
+    "active": true,
+    "description": "The Students’ Association of Olds College funds two $500 awards for new full-time students in any program.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Olds College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2669,
+    "title": "Stan D. Davies Awards (Olds College)",
+    "amount": "$2,000",
+    "deadline": "2027-10-31",
+    "deadlineEstimated": true,
+    "audience": "Alberta Grade 12 students from farms entering Olds College Agricultural Management or Agricultural and Heavy Equipment",
+    "url": "https://oldscollege.academicworks.ca/opportunities/7953",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must be an Alberta resident with financial need and satisfactory marks who comes from an agricultural background and plans to return to the farm. The portal lists one fund per program, so they are grouped here. Complete the general awards application in the Olds College portal once enrolled. The deadline is estimated from 2026.",
+    "active": true,
+    "description": "Five $2,000 awards for first-year farm kids in Agricultural Management or Agricultural and Heavy Equipment.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Olds College"
+      ],
+      "fields": [
+        "Agriculture",
+        "Heavy equipment"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2670,
+    "title": "Board of Governors Entrance Award (Olds College)",
+    "amount": "$1,000",
+    "deadline": "2027-10-31",
+    "deadlineEstimated": true,
+    "audience": "Grade 12 students entering any full-time Olds College program",
+    "url": "https://oldscollege.academicworks.ca/opportunities/8058",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You need a high school diploma, Canadian citizenship or permanent residency and satisfactory marks in your first term. Complete the general awards application in the Olds College portal once enrolled. The deadline is estimated from 2026.",
+    "active": true,
+    "description": "The Olds College Board of Governors funds a $1,000 award for a new full-time student.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Olds College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2671,
+    "title": "Stony Plain Horticulture Society Award (Olds College)",
+    "amount": "$750",
+    "deadline": "2027-10-31",
+    "deadlineEstimated": true,
+    "audience": "Grade 12 students with financial need entering Olds College horticulture",
+    "url": "https://oldscollege.academicworks.ca/opportunities/8101",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Financial need decides it. Complete the general awards application in the Olds College portal once enrolled. The deadline is estimated from 2026.",
+    "active": true,
+    "description": "A $750 award for a first-year horticulture student.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Olds College"
+      ],
+      "fields": [
+        "Horticulture"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2672,
+    "title": "Rocky Mountain House Ag Society Awards (Olds College)",
+    "amount": "$500",
+    "deadline": "2028-01-31",
+    "deadlineEstimated": true,
+    "audience": "Clearwater County Grade 12 students with financial need entering any Olds College program",
+    "url": "https://oldscollege.academicworks.ca/opportunities/8103",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must be a Canadian citizen and Alberta resident with financial need. One fund requires Clearwater County residence and the other prefers it, so they are grouped here. Complete the general awards application in the Olds College portal once enrolled. The deadline is estimated from 2026.",
+    "active": true,
+    "description": "Two $500 awards for first or second-year full-time students from Clearwater County in any program.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Olds College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2673,
+    "title": "Greengate Garden Centres Award (Olds College)",
+    "amount": "$900",
+    "deadline": "2028-01-31",
+    "deadlineEstimated": true,
+    "audience": "Grade 12 students with financial need entering an Olds College horticulture diploma or certificate",
+    "url": "https://oldscollege.academicworks.ca/opportunities/7975",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You need financial need, active class participation and involvement in activities related to your program. Complete the general awards application in the Olds College portal once enrolled. The deadline is estimated from 2026.",
+    "active": true,
+    "description": "Greengate Garden Centres funds a $900 award for a first-year horticulture diploma or certificate student.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Olds College"
+      ],
+      "fields": [
+        "Horticulture"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2674,
+    "title": "Muriel Stanley Venne Resilience Award (NorQuest)",
+    "amount": "$1,000",
+    "deadline": "2028-03-01",
+    "deadlineEstimated": true,
+    "audience": "First Nations, Métis and Inuit students entering any full-time NorQuest credit program",
+    "url": "https://norquest.academicworks.ca/opportunities/5537",
+    "category": "Indigenous",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply in the NorQuest awards portal once enrolled. Selection weighs community contributions and volunteering in or outside the college. Female students get preference. The deadline is estimated from 2026.",
+    "active": true,
+    "description": "A $1,000 award honouring Muriel Stanley Venne for an Indigenous NorQuest student who gives back to their community.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "NorQuest College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2675,
+    "title": "Shillington Community Leadership Award (NorQuest)",
+    "amount": "$500",
+    "deadline": "2028-03-01",
+    "deadlineEstimated": true,
+    "audience": "Full-time NorQuest credit students with an 85% average and a record of community leadership",
+    "url": "https://norquest.academicworks.ca/opportunities/5562",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply in the NorQuest awards portal with a personal letter on your education and career goals. You need an 85% average. The deadline is estimated from 2026.",
+    "active": true,
+    "description": "A $500 award for a full-time NorQuest student who leads through volunteering and citizenship.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "NorQuest College"
+      ],
+      "fields": [],
+      "minAverage": 85,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer",
+        "Leadership"
+      ]
+    }
+  },
+  {
+    "id": 2676,
+    "title": "Douglas and Lynn Faulder Award (NorQuest)",
+    "amount": "$1,000",
+    "deadline": "2027-11-01",
+    "deadlineEstimated": true,
+    "audience": "Grade 12 students with financial need entering NorQuest Health Care Aide or Practical Nurse",
+    "url": "https://norquest.academicworks.ca/opportunities/5577",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply in the NorQuest awards portal with a personal letter on your education and career goals. The letter also covers your commitment to the program. The deadline is estimated from 2026.",
+    "active": true,
+    "description": "A $1,000 award for a first-year Health Care Aide or Practical Nurse student who needs the money.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "NorQuest College"
+      ],
+      "fields": [
+        "Nursing",
+        "Health"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2677,
+    "title": "Edon Management Indigenous Award (NorQuest)",
+    "amount": "$1,500",
+    "deadline": "2027-11-01",
+    "deadlineEstimated": true,
+    "audience": "First Nations, Métis and Inuit Canadian citizens in any NorQuest credit program with a 75% average",
+    "url": "https://norquest.academicworks.ca/opportunities/5582",
+    "category": "Indigenous",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply in the NorQuest awards portal with a personal letter on your education and career goals. You must be a Canadian citizen with a 75% average. The deadline is estimated from 2026.",
+    "active": true,
+    "description": "Edon Management funds a $1,500 award for an Indigenous NorQuest student in any credit program.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "NorQuest College"
+      ],
+      "fields": [],
+      "minAverage": 75,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2678,
+    "title": "Ptarmigan Charitable Foundation Bursary (NorQuest)",
+    "amount": "$2,000",
+    "deadline": "2027-11-01",
+    "deadlineEstimated": true,
+    "audience": "First Nations, Métis and Inuit students with financial need in a career program at the NorQuest Wetaskiwin campus",
+    "url": "https://norquest.academicworks.ca/opportunities/5611",
+    "category": "Indigenous",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply in the NorQuest awards portal with a personal letter on your education and career goals. Financial need is required. The deadline is estimated from 2026.",
+    "active": true,
+    "description": "A $2,000 bursary for an Indigenous career program student at the NorQuest Wetaskiwin campus.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "NorQuest College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2679,
+    "title": "Ralph and Colleen Klein Indigenous Award (NorQuest)",
+    "amount": "$500",
+    "deadline": "2027-11-01",
+    "deadlineEstimated": true,
+    "audience": "Female First Nations, Métis and Inuit students with financial need in any full-time NorQuest credit program",
+    "url": "https://norquest.academicworks.ca/opportunities/5697",
+    "category": "Indigenous",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply in the NorQuest awards portal once enrolled. Financial need is required. The deadline is estimated from 2026.",
+    "active": true,
+    "description": "A $500 award for a female Indigenous NorQuest student who needs the money.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "NorQuest College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": "female",
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2680,
+    "title": "Jim McDaniel Memorial Educational Bursary (NorQuest)",
+    "amount": "$1,000",
+    "deadline": "2027-11-01",
+    "deadlineEstimated": true,
+    "audience": "Deaf or hard of hearing Alberta students with financial need in any NorQuest credit program",
+    "url": "https://norquest.academicworks.ca/opportunities/5709",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply in the NorQuest awards portal once enrolled. You must be an Alberta resident and a Canadian citizen or permanent resident with financial need and at least 64%. The deadline is estimated from 2026.",
+    "active": true,
+    "description": "A $1,000 memorial bursary for a deaf or hard of hearing student in any NorQuest credit program.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "NorQuest College"
+      ],
+      "fields": [],
+      "minAverage": 64,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2681,
+    "title": "Wolfe Pack Warriors Foundation STEM Award (NorQuest)",
+    "amount": "$2,500",
+    "deadline": "2027-11-01",
+    "deadlineEstimated": true,
+    "audience": "Grade 12 students with financial need entering a NorQuest STEM diploma",
+    "url": "https://norquest.academicworks.ca/opportunities/5716",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply in the NorQuest awards portal with a personal letter on your education and career goals. You cannot also hold the 1000Women4STEM Award. Women get preference. The deadline is estimated from 2026.",
+    "active": true,
+    "description": "A $2,500 award for a student in the Environmental Technician, Energy Management or Machine Learning Analyst diploma.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "NorQuest College"
+      ],
+      "fields": [
+        "Environmental Technology",
+        "Computer Science",
+        "STEM"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2682,
+    "title": "Salma Lakhani 1000Women Award (NorQuest)",
+    "amount": "$5,000",
+    "deadline": "2027-11-01",
+    "deadlineEstimated": true,
+    "audience": "Grade 12 students with financial need entering a NorQuest STEM diploma, with women preferred",
+    "url": "https://norquest.academicworks.ca/opportunities/5777",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply in the NorQuest awards portal with a personal letter on your education and career goals. You cannot also hold the 1000Women4STEM Award. The deadline is estimated from 2026.",
+    "active": true,
+    "description": "A $5,000 award named for Salma Lakhani for a student in the Environmental Technician, Energy Management or Machine Learning Analyst diploma.",
+    "metaDetail": "Women get preference.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "NorQuest College"
+      ],
+      "fields": [
+        "Environmental Technology",
+        "Computer Science",
+        "STEM"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2683,
+    "title": "Compass Group Canada Career Program Award (NorQuest)",
+    "amount": "$1,500",
+    "deadline": "2028-03-01",
+    "deadlineEstimated": true,
+    "audience": "Full-time NorQuest career program students with a 75% average and financial need",
+    "url": "https://norquest.academicworks.ca/opportunities/5730",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply in the NorQuest awards portal with a personal letter on your education and career goals. You need a 75% average and financial need. The deadline is estimated from 2026.",
+    "active": true,
+    "description": "Compass Group Canada funds a $1,500 award for a full-time student in any NorQuest career program.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "NorQuest College"
+      ],
+      "fields": [],
+      "minAverage": 75,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2684,
+    "title": "Jim Carter Indigenous Student Award (NorQuest)",
+    "amount": "$750",
+    "deadline": "2027-11-01",
+    "deadlineEstimated": true,
+    "audience": "First Nations, Métis and Inuit students with a 75% average and financial need in any NorQuest credit program",
+    "url": "https://norquest.academicworks.ca/opportunities/5755",
+    "category": "Indigenous",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply in the NorQuest awards portal once enrolled. Include a statement of marks showing at least 75%. Students from the Regional Municipality of Wood Buffalo get preference. The deadline is estimated from 2026.",
+    "active": true,
+    "description": "A $750 award for a full-time Indigenous student in any NorQuest credit program.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "NorQuest College"
+      ],
+      "fields": [],
+      "minAverage": 75,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2685,
+    "title": "Canative Housing Corporation Award (NorQuest)",
+    "amount": "$600",
+    "deadline": "2027-11-01",
+    "deadlineEstimated": true,
+    "audience": "Métis Grade 12 students with financial need starting any NorQuest career program",
+    "url": "https://norquest.academicworks.ca/opportunities/5771",
+    "category": "Indigenous",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply in the NorQuest awards portal once enrolled. Financial need is required, and only first-term students qualify. The deadline is estimated from 2026.",
+    "active": true,
+    "description": "Canative Housing Corporation funds a $600 award for a Métis student in the first term of a NorQuest career program.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "NorQuest College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2686,
+    "title": "NorQuest College Students with Disabilities Award",
+    "amount": "$1,500",
+    "deadline": "2027-11-01",
+    "deadlineEstimated": true,
+    "audience": "NorQuest credit students who use Accessibility Services learning supports and have financial need",
+    "url": "https://norquest.academicworks.ca/opportunities/5774",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply in the NorQuest awards portal once enrolled. You need financial need and at least 64%. It can be received once per academic year. The deadline is estimated from 2026.",
+    "active": true,
+    "description": "A $1,500 award for a NorQuest student receiving disability learning supports from Accessibility Services.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "NorQuest College"
+      ],
+      "fields": [],
+      "minAverage": 64,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2687,
+    "title": "NorQuest Indigenous Education Bursary",
+    "amount": "$500",
+    "deadline": "2027-11-01",
+    "deadlineEstimated": true,
+    "audience": "First Nations, Métis and Inuit Grade 12 students with financial need starting a NorQuest career program",
+    "url": "https://norquest.academicworks.ca/opportunities/5775",
+    "category": "Indigenous",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply in the NorQuest awards portal with a personal letter on your education and career goals. Financial need is required. The deadline is estimated from 2026.",
+    "active": true,
+    "description": "A $500 bursary for an Indigenous student in the first term of a full-time NorQuest career program.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "NorQuest College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2688,
+    "title": "Go Auto Child Care Bursary (NorQuest)",
+    "amount": "$2,500",
+    "deadline": "2027-11-01",
+    "deadlineEstimated": true,
+    "audience": "Grade 12 students with financial need entering the NorQuest Early Learning and Child Care Diploma",
+    "url": "https://norquest.academicworks.ca/opportunities/5843",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply in the NorQuest awards portal once enrolled. You need financial need and at least 64%. The deadline is estimated from 2026.",
+    "active": true,
+    "description": "Go Auto funds a $2,500 bursary for a full-time Early Learning and Child Care Diploma student.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "NorQuest College"
+      ],
+      "fields": [
+        "Education"
+      ],
+      "minAverage": 64,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2689,
+    "title": "Indigenous Careers Award (NorQuest)",
+    "amount": "$2,000 to $4,000",
+    "deadline": "2027-11-01",
+    "deadlineEstimated": true,
+    "audience": "First Nations, Métis and Inuit Alberta students in a NorQuest career program of 17 weeks or more",
+    "url": "https://norquest.academicworks.ca/opportunities/5852",
+    "category": "Indigenous",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply in the NorQuest awards portal once enrolled. You need proof of Indigenous ancestry, Canadian citizenship or permanent residency, Alberta residency and satisfactory marks. Students with financial need get preference. The deadline is estimated from 2026.",
+    "active": true,
+    "description": "An Indigenous NorQuest career program student receives $2,000 for one full-time semester or $4,000 for two.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "NorQuest College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2690,
+    "title": "Alberta Blue Cross Award (NorQuest)",
+    "amount": "$1,000",
+    "deadline": "2028-03-01",
+    "deadlineEstimated": true,
+    "audience": "Grade 12 students with financial need entering a NorQuest health studies career program",
+    "url": "https://norquest.academicworks.ca/opportunities/5720",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply in the NorQuest awards portal once enrolled. You need financial need and at least 64%. Single parents get preference. The deadline is estimated from 2026.",
+    "active": true,
+    "description": "Alberta Blue Cross funds a $1,000 award for a first-year student in a NorQuest Faculty of Health Studies career program.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "NorQuest College"
+      ],
+      "fields": [
+        "Health"
+      ],
+      "minAverage": 64,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2691,
+    "title": "Shaw Family Foundation Career Bursary (NorQuest)",
+    "amount": "$500",
+    "deadline": "2028-03-01",
+    "deadlineEstimated": true,
+    "audience": "Students with financial need in any career program at the NorQuest Wetaskiwin campus",
+    "url": "https://norquest.academicworks.ca/opportunities/5657",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply in the NorQuest awards portal with a personal letter on your education and career goals. Financial need is required. The deadline is estimated from 2026.",
+    "active": true,
+    "description": "The Shaw Family Foundation funds a $500 bursary for a career program student at the Wetaskiwin campus.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "NorQuest College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2692,
+    "title": "Gouin Family Award of Excellence (NorQuest)",
+    "amount": "$1,000",
+    "deadline": "2028-03-01",
+    "deadlineEstimated": true,
+    "audience": "Full-time NorQuest career program students with a 75% average and financial need after their first term",
+    "url": "https://norquest.academicworks.ca/opportunities/5635",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Apply in the NorQuest awards portal with a personal letter on your education and career goals. You need a 75% average and financial need. The deadline is estimated from 2026.",
+    "active": true,
+    "description": "The Gouin family funds a $1,000 award for a full-time NorQuest career program student who has finished a term.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "NorQuest College"
+      ],
+      "fields": [],
+      "minAverage": 75,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
   }
 ]
