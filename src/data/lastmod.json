@@ -2823,6 +2823,26 @@
     "hash": "a24dcba9e205bf2c",
     "date": "2026-10-04"
   },
+  "/scholarships/carleton-garay-family-indigenous-science-award/": {
+    "hash": "bd8c9362a8545bdf",
+    "date": "2026-10-14"
+  },
+  "/scholarships/carleton-gordon-robertson-national-inuit-scholarship/": {
+    "hash": "91db1844a26e476b",
+    "date": "2026-10-14"
+  },
+  "/scholarships/carleton-humphrey-law-indigenous-business-bursary/": {
+    "hash": "91ade55257230ae3",
+    "date": "2026-10-14"
+  },
+  "/scholarships/carleton-joyce-foundation-indigenous-bursary/": {
+    "hash": "f37c15b981b673a2",
+    "date": "2026-10-14"
+  },
+  "/scholarships/carleton-university-prestige-scholarships/": {
+    "hash": "45b9cbda857a5da3",
+    "date": "2026-10-14"
+  },
   "/scholarships/carmangay-lions-club-legacy-scholarship/": {
     "hash": "03ea281cd0bc3c2d",
     "date": "2026-09-27"
@@ -3458,6 +3478,26 @@
   "/scholarships/dale-macmillan-memorial-scholarship-for-community-leadership/": {
     "hash": "f3d13d5cf5da65e9",
     "date": "2026-10-08"
+  },
+  "/scholarships/dalhousie-computer-science-entrance-scholarships/": {
+    "hash": "1f4706c8a8b98365",
+    "date": "2026-10-14"
+  },
+  "/scholarships/dalhousie-fountain-school-performing-arts-award/": {
+    "hash": "80afe1eec7768a59",
+    "date": "2026-10-14"
+  },
+  "/scholarships/dalhousie-general-entrance-award-program/": {
+    "hash": "a308264f2ea82820",
+    "date": "2026-10-14"
+  },
+  "/scholarships/dalhousie-harrison-mccain-scholarship/": {
+    "hash": "a665e0730f8ef176",
+    "date": "2026-10-14"
+  },
+  "/scholarships/dalhousie-leacross-women-in-technology-award/": {
+    "hash": "b63ad1fd794eb83c",
+    "date": "2026-10-14"
   },
   "/scholarships/dana-morimoto-memorial-entrance-leadership-scholarship/": {
     "hash": "86d6bcad56da915a",
@@ -4625,6 +4665,38 @@
   },
   "/scholarships/gsacs-education-foundation-grade-12-scholarship/": {
     "hash": "1f82900b1ece524a",
+    "date": "2026-10-14"
+  },
+  "/scholarships/guelph-ada-lovelace-computer-science-scholarship/": {
+    "hash": "dc039d962ba00a25",
+    "date": "2026-10-14"
+  },
+  "/scholarships/guelph-agro-4-h-scholarship/": {
+    "hash": "ef3a531eade366ab",
+    "date": "2026-10-14"
+  },
+  "/scholarships/guelph-cibc-business-leader-scholarship/": {
+    "hash": "9fd7ad6a7ca43ad5",
+    "date": "2026-10-14"
+  },
+  "/scholarships/guelph-improve-life-first-generation-bursary/": {
+    "hash": "48eeba3ac984ee8d",
+    "date": "2026-10-14"
+  },
+  "/scholarships/guelph-jennifer-heard-memorial-scholarship/": {
+    "hash": "151ea588b292803d",
+    "date": "2026-10-14"
+  },
+  "/scholarships/guelph-linamar-engineering-entrance-scholarship/": {
+    "hash": "d8f99fbcb8b76c77",
+    "date": "2026-10-14"
+  },
+  "/scholarships/guelph-lincoln-alexander-chancellors-scholarship/": {
+    "hash": "4ea167def3054e2f",
+    "date": "2026-10-14"
+  },
+  "/scholarships/guelph-shad-alumni-entrance-scholarship/": {
+    "hash": "eed71bcfbec2a5f4",
     "date": "2026-10-14"
   },
   "/scholarships/guy-and-dawn-turcotte-rural-assistance-entrance-award-nait/": {
@@ -6151,6 +6223,14 @@
     "hash": "da2f677f6c6a01ea",
     "date": "2026-10-05"
   },
+  "/scholarships/mcmaster-undergraduate-entrance-bursary/": {
+    "hash": "0be82c59f1e94046",
+    "date": "2026-10-14"
+  },
+  "/scholarships/mcmaster-university-entrance-awards-by-application/": {
+    "hash": "34a3f026a3858e35",
+    "date": "2026-10-14"
+  },
   "/scholarships/mcsnet-scholarship-program/": {
     "hash": "294e90845b1cebab",
     "date": "2026-09-11"
@@ -6322,6 +6402,42 @@
   "/scholarships/moore-shilleto-social-studies-essay-award/": {
     "hash": "41d671386a5d40df",
     "date": "2026-10-08"
+  },
+  "/scholarships/mount-allison-class-of-1968-entrance-award/": {
+    "hash": "a16da1667581a793",
+    "date": "2026-10-14"
+  },
+  "/scholarships/mount-allison-enid-f-webber-fine-arts-scholarship/": {
+    "hash": "93dc62edfada088c",
+    "date": "2026-10-14"
+  },
+  "/scholarships/mount-allison-enid-f-webber-memorial-scholarship/": {
+    "hash": "c062f0bb834b8b24",
+    "date": "2026-10-14"
+  },
+  "/scholarships/mount-allison-entrance-scholarships/": {
+    "hash": "92b9b947abb21340",
+    "date": "2026-10-14"
+  },
+  "/scholarships/mount-allison-jr-shaw-entrance-scholarship/": {
+    "hash": "aa0e5cf07ad842b5",
+    "date": "2026-10-14"
+  },
+  "/scholarships/mount-allison-lockhart-memorial-scholarship/": {
+    "hash": "53b94f9c63101df9",
+    "date": "2026-10-14"
+  },
+  "/scholarships/mount-allison-marjorie-young-bell-scholarship/": {
+    "hash": "38d3c5a2ee2956af",
+    "date": "2026-10-14"
+  },
+  "/scholarships/mount-allison-mckenna-ppe-scholarship/": {
+    "hash": "ff7c5800cc9e158b",
+    "date": "2026-10-14"
+  },
+  "/scholarships/mount-allison-pamela-and-richard-joho-scholarship/": {
+    "hash": "e5cbfb0d12bfa1c4",
+    "date": "2026-10-14"
   },
   "/scholarships/mount-royal-board-of-governors-entrance-scholarship/": {
     "hash": "3c755206c0410e53",
@@ -7607,6 +7723,22 @@
     "hash": "e745de748b68c785",
     "date": "2026-10-08"
   },
+  "/scholarships/saint-marys-presidential-scholarship/": {
+    "hash": "7fc8390c0b707b83",
+    "date": "2026-10-14"
+  },
+  "/scholarships/saint-marys-sobey-national-innovator-award/": {
+    "hash": "a27a6534d5409e57",
+    "date": "2026-10-14"
+  },
+  "/scholarships/saint-marys-university-entrance-awards-program/": {
+    "hash": "b29c7839173f9548",
+    "date": "2026-10-14"
+  },
+  "/scholarships/saint-marys-university-harrison-mccain-scholarship/": {
+    "hash": "db3f63fca302ec25",
+    "date": "2026-10-14"
+  },
   "/scholarships/sait-bissett-bursary-program/": {
     "hash": "2ab5098cf1c35135",
     "date": "2026-10-09"
@@ -7770,6 +7902,22 @@
   "/scholarships/seymour-schulich-community-serviceentrepreneurial-entrance-award-for-students-outside-the-calgary-area/": {
     "hash": "8eabd47f8c9afbfe",
     "date": "2026-10-08"
+  },
+  "/scholarships/sfu-entrance-awards-for-volunteers-and-need/": {
+    "hash": "753edf3d2b7539e2",
+    "date": "2026-10-14"
+  },
+  "/scholarships/sfu-rajan-family-computing-science-scholarship/": {
+    "hash": "0ddf6841c970f4a2",
+    "date": "2026-10-14"
+  },
+  "/scholarships/sfu-stolte-family-energy-engineering-scholarship/": {
+    "hash": "57476cb41481ccd7",
+    "date": "2026-10-14"
+  },
+  "/scholarships/sfu-undergraduate-scholars-entrance-award/": {
+    "hash": "ea4530e61b216049",
+    "date": "2026-10-14"
   },
   "/scholarships/sharon-saunders-memorial-award/": {
     "hash": "f0094b6c1e66e427",
@@ -8351,6 +8499,14 @@
     "hash": "98b54e49fe31b090",
     "date": "2026-10-09"
   },
+  "/scholarships/trent-canada-wide-science-fair-scholarship/": {
+    "hash": "612252e9c2803d78",
+    "date": "2026-10-14"
+  },
+  "/scholarships/trent-university-prestigious-scholarships/": {
+    "hash": "8a0f6575e929e1e6",
+    "date": "2026-10-14"
+  },
   "/scholarships/trevor-h-shirtliff-difference-maker-scholarship/": {
     "hash": "89ad0dfb56dff78a",
     "date": "2026-10-08"
@@ -8411,9 +8567,45 @@
     "hash": "adf051636d199216",
     "date": "2026-10-08"
   },
+  "/scholarships/umanitoba-alumni-association-entrance-scholarship/": {
+    "hash": "8653b616b3056e39",
+    "date": "2026-10-14"
+  },
+  "/scholarships/umanitoba-asper-foundation-entrance-bursary/": {
+    "hash": "f606443c80988c05",
+    "date": "2026-10-14"
+  },
+  "/scholarships/umanitoba-bmo-indigenous-leader-of-tomorrow-award/": {
+    "hash": "eb78ad48698fd513",
+    "date": "2026-10-14"
+  },
+  "/scholarships/umanitoba-bmo-leader-of-tomorrow-scholarship/": {
+    "hash": "074879acf2b90fb1",
+    "date": "2026-10-14"
+  },
+  "/scholarships/umanitoba-fairfax-financial-entrance-bursary/": {
+    "hash": "602f26ec7cbe3815",
+    "date": "2026-10-14"
+  },
   "/scholarships/una-nursing-education-scholarship/": {
     "hash": "5eab3c1e080f6115",
     "date": "2026-10-08"
+  },
+  "/scholarships/unb-dr-salem-and-laila-masry-scholarship/": {
+    "hash": "6d1406ab65406eb2",
+    "date": "2026-10-14"
+  },
+  "/scholarships/unb-entrance-scholarship-application/": {
+    "hash": "bbc322d8ef1080df",
+    "date": "2026-10-14"
+  },
+  "/scholarships/unb-h-harrison-mccain-scholarship/": {
+    "hash": "5faafb22556da2c9",
+    "date": "2026-10-14"
+  },
+  "/scholarships/unb-ted-rogers-legacy-scholarship/": {
+    "hash": "cefe20134038f6a8",
+    "date": "2026-10-14"
   },
   "/scholarships/unifor-national-and-regional-council-scholarships/": {
     "hash": "48d933fc24b6c533",
@@ -8459,6 +8651,22 @@
     "hash": "612d1c0e6b685409",
     "date": "2026-10-09"
   },
+  "/scholarships/university-of-guelph-accessibility-bursaries/": {
+    "hash": "341eca92615ee1bf",
+    "date": "2026-10-14"
+  },
+  "/scholarships/university-of-guelph-lang-entrance-scholarship/": {
+    "hash": "20c7027d9a477ee8",
+    "date": "2026-10-14"
+  },
+  "/scholarships/university-of-guelph-presidents-scholarship/": {
+    "hash": "be26b97ea92a921f",
+    "date": "2026-10-14"
+  },
+  "/scholarships/university-of-guelph-registrars-entrance-bursaries/": {
+    "hash": "35981be2122dfeff",
+    "date": "2026-10-14"
+  },
   "/scholarships/university-of-lethbridge-board-of-governors-award/": {
     "hash": "652d2f3b01570314",
     "date": "2026-10-08"
@@ -8479,6 +8687,10 @@
     "hash": "0a366f4c4aae300f",
     "date": "2026-10-05"
   },
+  "/scholarships/university-of-regina-chancellors-scholarship/": {
+    "hash": "aca008198d055504",
+    "date": "2026-10-14"
+  },
   "/scholarships/university-of-toronto-arbor-scholarship/": {
     "hash": "444e2096a612a7af",
     "date": "2026-10-08"
@@ -8486,6 +8698,22 @@
   "/scholarships/university-of-toronto-national-scholarship/": {
     "hash": "2f42a4ee53c5489d",
     "date": "2026-10-08"
+  },
+  "/scholarships/upei-andrew-scholarship-in-nursing-for-calgary/": {
+    "hash": "17578abb18e3d3a4",
+    "date": "2026-10-14"
+  },
+  "/scholarships/upei-friends-of-upei-calgary-scholarships/": {
+    "hash": "cdf8e4984b0963d5",
+    "date": "2026-10-14"
+  },
+  "/scholarships/upei-maceachern-business-scholarship-for-calgary/": {
+    "hash": "7bd5d4e5024884fa",
+    "date": "2026-10-14"
+  },
+  "/scholarships/uregina-out-of-province-entrance-scholarship/": {
+    "hash": "6ec0df03ee3cbfda",
+    "date": "2026-10-14"
   },
   "/scholarships/usask-apegs-entrance-bursary/": {
     "hash": "dd37959fc9f4969e",
@@ -8496,15 +8724,15 @@
     "date": "2026-10-14"
   },
   "/scholarships/usask-best-and-brightest-entrance-scholarship/": {
-    "hash": "61addaafaeb5e244",
+    "hash": "7f6759c95c93ea58",
     "date": "2026-10-14"
   },
   "/scholarships/usask-bmo-financial-group-scholarship/": {
-    "hash": "11f790a8f9c1b9db",
+    "hash": "9c6fc05269d6bb2b",
     "date": "2026-10-14"
   },
   "/scholarships/usask-bonnie-and-art-dumont-scholarship/": {
-    "hash": "41fa58ec2fd37f17",
+    "hash": "2ac74e16ec4dfa13",
     "date": "2026-10-14"
   },
   "/scholarships/usask-canada-wide-science-fair-2002-scholarship/": {
@@ -8516,7 +8744,7 @@
     "date": "2026-10-14"
   },
   "/scholarships/usask-chancellors-scholarship/": {
-    "hash": "6d4a0f127df6e851",
+    "hash": "37a85dd00ac88a3d",
     "date": "2026-10-14"
   },
   "/scholarships/usask-chase-memorial-scholarship/": {
@@ -8528,7 +8756,7 @@
     "date": "2026-10-14"
   },
   "/scholarships/usask-college-of-agriculture-and-bioresources-renewable-entrance-scholarship-for-indigenous-students/": {
-    "hash": "ee57d4ea70720409",
+    "hash": "bc295acca743088d",
     "date": "2026-10-14"
   },
   "/scholarships/usask-community-leadership-award-in-business/": {
@@ -8540,7 +8768,7 @@
     "date": "2026-10-14"
   },
   "/scholarships/usask-daniel-and-nicole-halyk-edwards-school-of-business-entrance-bursary/": {
-    "hash": "5ec6ffb4ea400411",
+    "hash": "e3f8b0066e13ecd1",
     "date": "2026-10-14"
   },
   "/scholarships/usask-douglas-christie-ferguson-fund-scholarship/": {
@@ -8556,7 +8784,7 @@
     "date": "2026-10-14"
   },
   "/scholarships/usask-edwards-undergraduate-scholarship/": {
-    "hash": "2396524ead72a507",
+    "hash": "097806144b43b6f7",
     "date": "2026-10-14"
   },
   "/scholarships/usask-garth-thomas-scholarship-in-arts-and-science/": {
@@ -8564,7 +8792,7 @@
     "date": "2026-10-14"
   },
   "/scholarships/usask-george-and-marsha-ivany-presidents-first-and-best-scholarship/": {
-    "hash": "f3715297338ce038",
+    "hash": "740c007dcb2b3bb0",
     "date": "2026-10-14"
   },
   "/scholarships/usask-harold-ross-saddington-memorial-award-in-math/": {
@@ -8612,7 +8840,7 @@
     "date": "2026-10-14"
   },
   "/scholarships/usask-rob-jaspar-aboriginal-award/": {
-    "hash": "5d7c97ce92e9a2cf",
+    "hash": "00573678a38f0b93",
     "date": "2026-10-14"
   },
   "/scholarships/usask-selby-porter-indigenous-award/": {
@@ -8624,11 +8852,11 @@
     "date": "2026-10-14"
   },
   "/scholarships/usask-torvald-and-margaret-tollefson-renewable-entrance-scholarship/": {
-    "hash": "c8ce1b825a5422f5",
+    "hash": "151da2a02a6a2c31",
     "date": "2026-10-14"
   },
   "/scholarships/usask-wally-and-mavis-pieczonka-bursary/": {
-    "hash": "6ceea4a08d81fd89",
+    "hash": "f4a8af528f29fa21",
     "date": "2026-10-14"
   },
   "/scholarships/usask-william-a-willison-scholarship-in-honour-of-forbes-william-cavanagh/": {
@@ -8652,11 +8880,11 @@
     "date": "2026-10-14"
   },
   "/scholarships/uvic-30-by-30-women-in-engineering-award/": {
-    "hash": "c9239a84931d3fa3",
+    "hash": "ce0c8f0e51686e97",
     "date": "2026-10-14"
   },
   "/scholarships/uvic-ailsa-and-roger-bishop-entrance-scholarship-in-theatre/": {
-    "hash": "ec9e128f691c5dd8",
+    "hash": "235c971d088d1e14",
     "date": "2026-10-14"
   },
   "/scholarships/uvic-alexander-and-mary-mackenzie-entrance-scholarship/": {
@@ -8668,15 +8896,15 @@
     "date": "2026-10-14"
   },
   "/scholarships/uvic-cfuw-saanich-peninsula-myrna-holden-scholarship/": {
-    "hash": "3333491fe70d0c98",
+    "hash": "976aa1cb7aad2702",
     "date": "2026-10-14"
   },
   "/scholarships/uvic-david-h-turpin-national-entrance-scholarship/": {
-    "hash": "1f96b0e2a9406bd9",
+    "hash": "2c8d095cec880cc5",
     "date": "2026-10-14"
   },
   "/scholarships/uvic-deanna-carter-biochemistry-scholarship/": {
-    "hash": "b21c937a3be81867",
+    "hash": "30179ce0723a5093",
     "date": "2026-10-14"
   },
   "/scholarships/uvic-excellence-in-math-scholarship/": {
@@ -8688,7 +8916,7 @@
     "date": "2026-10-14"
   },
   "/scholarships/uvic-john-locke-malkin-entrance-scholarship/": {
-    "hash": "30c17a7dff6870b4",
+    "hash": "4cad9acf0029a22c",
     "date": "2026-10-14"
   },
   "/scholarships/uvic-kedar-shrikhande-memorial-scholarship-for-students-with-a-disability/": {
@@ -8696,7 +8924,7 @@
     "date": "2026-10-14"
   },
   "/scholarships/uvic-national-entrance-scholarship/": {
-    "hash": "9a5c00657dc9ddb0",
+    "hash": "71cc67381826f40f",
     "date": "2026-10-14"
   },
   "/scholarships/uvic-new-canadian-and-immigrant-entrance-scholarship/": {

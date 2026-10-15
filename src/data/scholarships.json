@@ -82049,7 +82049,7 @@
   {
     "id": 2193,
     "title": "UVic National Entrance Scholarship",
-    "amount": "Up to $20,000 ($5,000 a year for four years)",
+    "amount": "Up to $20,000 over four years",
     "deadline": "2027-04-30",
     "audience": "Grade 12 students anywhere in Canada entering a University of Victoria degree",
     "url": "https://www.uvic.ca/safa/scholarships/entrance-scholarships/national-entrance-scholarship.php",
@@ -82090,7 +82090,7 @@
   {
     "id": 2194,
     "title": "UVic David H. Turpin National Entrance Scholarship",
-    "amount": "$20,000 ($5,000 a year for four years)",
+    "amount": "$5,000 a year, $20,000 in all",
     "deadline": "2027-04-30",
     "audience": "Grade 12 students at a Canadian high school entering a University of Victoria degree",
     "url": "https://www.uvic.ca/safa/scholarships/entrance-scholarships/david-h-turpin-national-entrance-scholarship.php",
@@ -82131,7 +82131,7 @@
   {
     "id": 2195,
     "title": "UVic John Locke Malkin Entrance Scholarship",
-    "amount": "At least $4,000 a year for up to five years",
+    "amount": "$4,000+ a year",
     "deadline": "2027-04-30",
     "audience": "Grade 12 students at a Canadian high school with exceptional marks, entering the University of Victoria",
     "url": "https://www.uvic.ca/safa/scholarships/entrance-scholarships/john-locke-malkin-entrance-scholarship.php",
@@ -82209,7 +82209,7 @@
   {
     "id": 2197,
     "title": "UVic 30 by 30 Women in Engineering Award",
-    "amount": "At least $1,000",
+    "amount": "$1,000 or more",
     "deadline": "2027-04-30",
     "audience": "Women in Grade 12 entering an engineering program at the University of Victoria",
     "url": "https://www.uvic.ca/safa/scholarships/entrance-scholarships/30-by-30-women-in-engineering-award.php",
@@ -82249,7 +82249,7 @@
   {
     "id": 2198,
     "title": "UVic CFUW Saanich Peninsula Myrna Holden Scholarship",
-    "amount": "At least $6,000, up to full winter tuition and fees",
+    "amount": "$6,000 or more",
     "deadline": "2027-04-30",
     "audience": "Women in Grade 12 with high marks and financial need entering Engineering and Computer Science at the University of Victoria",
     "url": "https://www.uvic.ca/safa/scholarships/entrance-scholarships/cfuw-saanich-peninsula-myrna-holden-scholarship.php",
@@ -82290,7 +82290,7 @@
   {
     "id": 2199,
     "title": "UVic Deanna Carter Biochemistry Scholarship",
-    "amount": "At least $1,000",
+    "amount": "$1,000 or more",
     "deadline": "2027-04-30",
     "audience": "Women in Grade 12 at a Canadian high school entering the Faculty of Science at the University of Victoria",
     "url": "https://www.uvic.ca/safa/scholarships/entrance-scholarships/deanna-carter-biochemistry-scholarship.php",
@@ -82412,7 +82412,7 @@
   {
     "id": 2202,
     "title": "UVic Ailsa and Roger Bishop Entrance Scholarship in Theatre",
-    "amount": "At least $4,000 a year for up to four years",
+    "amount": "$4,000+ a year",
     "deadline": "2027-04-30",
     "audience": "Grade 12 students with high marks entering the Department of Theatre at the University of Victoria",
     "url": "https://www.uvic.ca/safa/scholarships/entrance-scholarships/ailsa-roger-bishop-entrance-scholarship-theatre.php",
@@ -82653,7 +82653,7 @@
   {
     "id": 2208,
     "title": "USask George and Marsha Ivany President's First and Best Scholarship",
-    "amount": "$40,000 ($10,000 a year for four years)",
+    "amount": "$10,000 a year, $40,000 in all",
     "deadline": "2026-12-15",
     "audience": "Grade 12 students at a Canadian high school with a 95% average going straight to the University of Saskatchewan",
     "url": "https://admissions.usask.ca/money/search-awards.php?award=300098ES02",
@@ -82693,7 +82693,7 @@
   {
     "id": 2209,
     "title": "USask Chancellors' Scholarship",
-    "amount": "$30,000 ($7,500 a year for four years)",
+    "amount": "$7,500 a year, $30,000 in all",
     "deadline": "2026-12-15",
     "audience": "Grade 12 students at a Canadian high school entering the University of Saskatchewan",
     "url": "https://admissions.usask.ca/money/search-awards.php?award=300098ES01",
@@ -82730,7 +82730,7 @@
   {
     "id": 2210,
     "title": "USask Best and Brightest Entrance Scholarship",
-    "amount": "$30,000 ($7,500 a year for four years)",
+    "amount": "$7,500 a year, $30,000 in all",
     "deadline": "2026-12-15",
     "audience": "Grade 12 students at a Canadian high school with a 95% average going straight to the University of Saskatchewan",
     "url": "https://admissions.usask.ca/money/search-awards.php?award=301375ES01",
@@ -82770,7 +82770,7 @@
   {
     "id": 2211,
     "title": "USask Edwards Undergraduate Scholarship",
-    "amount": "$36,000 ($9,000 a year for four years)",
+    "amount": "$9,000 a year, $36,000 in all",
     "deadline": "2026-12-15",
     "audience": "Grade 12 students entering the Bachelor of Commerce at USask's Edwards School of Business",
     "url": "https://admissions.usask.ca/money/search-awards.php?award=301494ES01",
@@ -82810,7 +82810,7 @@
   {
     "id": 2212,
     "title": "USask Torvald and Margaret Tollefson Renewable Entrance Scholarship",
-    "amount": "$24,000 ($6,000 a year for four years)",
+    "amount": "$6,000 a year, $24,000 in all",
     "deadline": "2026-12-15",
     "audience": "Grade 12 students entering the Bachelor of Science in Agriculture at the University of Saskatchewan",
     "url": "https://admissions.usask.ca/money/search-awards.php?award=301434ES03",
@@ -82849,7 +82849,7 @@
   {
     "id": 2213,
     "title": "USask College of Agriculture and Bioresources Renewable Entrance Scholarship for Indigenous Students",
-    "amount": "$24,000 ($6,000 a year for four years)",
+    "amount": "$6,000 a year, $24,000 in all",
     "deadline": "2026-12-15",
     "audience": "Indigenous Grade 12 students entering a degree in USask's College of Agriculture and Bioresources",
     "url": "https://admissions.usask.ca/money/search-awards.php?award=301434ES05",
@@ -82888,7 +82888,7 @@
   {
     "id": 2214,
     "title": "USask BMO Financial Group Scholarship",
-    "amount": "$16,000 ($4,000 a year for four years)",
+    "amount": "$4,000 a year, $16,000 in all",
     "deadline": "2027-03-01",
     "audience": "Grade 12 students with an 85% average and financial need going straight to the University of Saskatchewan",
     "url": "https://admissions.usask.ca/money/search-awards.php?award=301345EB01",
@@ -82925,7 +82925,7 @@
   {
     "id": 2215,
     "title": "USask Bonnie and Art Dumont Scholarship",
-    "amount": "$20,000 ($5,000 a year for four years)",
+    "amount": "$5,000 a year, $20,000 in all",
     "deadline": "2027-03-01",
     "audience": "Grade 12 students at a Canadian high school entering first year at the University of Saskatchewan",
     "url": "https://admissions.usask.ca/money/search-awards.php?award=301274ES01",
@@ -82962,7 +82962,7 @@
   {
     "id": 2216,
     "title": "USask Wally and Mavis Pieczonka Bursary",
-    "amount": "$40,000 ($10,000 a year for four years)",
+    "amount": "$10,000 a year, $40,000 in all",
     "deadline": "2027-03-01",
     "audience": "First Nations, Metis and Inuit Grade 12 students with a 70% average and financial need entering the University of Saskatchewan",
     "url": "https://admissions.usask.ca/money/search-awards.php?award=300550EB01",
@@ -82999,7 +82999,7 @@
   {
     "id": 2217,
     "title": "USask Rob Jaspar Aboriginal Award",
-    "amount": "$20,000 ($5,000 a year for four years)",
+    "amount": "$5,000 a year, $20,000 in all",
     "deadline": "2027-03-01",
     "audience": "Indigenous Grade 12 students with a 75% average and financial need entering Commerce at USask's Edwards School of Business",
     "url": "https://admissions.usask.ca/money/search-awards.php?award=301291EB01",
@@ -83315,7 +83315,7 @@
   {
     "id": 2225,
     "title": "USask Daniel and Nicole Halyk Edwards School of Business Entrance Bursary",
-    "amount": "At least $4,000",
+    "amount": "$4,000 or more",
     "deadline": "2027-03-01",
     "audience": "Canadian Grade 12 students with financial need entering Commerce at USask's Edwards School of Business",
     "url": "https://admissions.usask.ca/money/search-awards.php?award=302085EB01",
@@ -84081,6 +84081,2272 @@
       "citizenship": "any",
       "apprenticeship": false,
       "extracurriculars": []
+    }
+  },
+  {
+    "id": 2245,
+    "title": "UManitoba BMO Leader of Tomorrow Scholarship",
+    "amount": "$16,000 over four years",
+    "deadline": "2026-12-01",
+    "audience": "Canadian Grade 12 students with a 90% average and strong leadership, including three awards for students outside Manitoba, entering the University of Manitoba",
+    "url": "https://umanitoba.ca/financial-aid-and-awards/entrance-awards/bmo-leaders-scholarships",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply for admission to a University of Manitoba direct-entry program and pay the fee, then submit the BMO application with three recommendations, one each from your principal, a teacher or counsellor, and a community member. Everything is due December 1. You must be a Canadian citizen or permanent resident.",
+    "active": true,
+    "description": "Nine $16,000 University of Manitoba entrance scholarships for students with top marks, leadership and community involvement. Three are set aside for graduates of Canadian high schools outside Manitoba.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Manitoba"
+      ],
+      "fields": [],
+      "minAverage": 90,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership",
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2246,
+    "title": "UManitoba BMO Indigenous Leader of Tomorrow Award",
+    "amount": "$16,000 over four years",
+    "deadline": "2026-12-01",
+    "audience": "Status, Non-Status, Metis and Inuit Grade 12 students across Canada with a 90% average entering the University of Manitoba",
+    "url": "https://umanitoba.ca/financial-aid-and-awards/entrance-awards/bmo-indigenous-leaders-scholarships",
+    "category": "Indigenous",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply for admission to a direct-entry program and pay the fee, then submit the scholarship application with three recommendations, one each from your principal, a teacher or counsellor, and a community member, all by December 1.",
+    "active": true,
+    "description": "Three $16,000 University of Manitoba entrance scholarships for Indigenous students from anywhere in Canada with top marks, leadership and community involvement.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Manitoba"
+      ],
+      "fields": [],
+      "minAverage": 90,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership",
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2247,
+    "title": "UManitoba Fairfax Financial Entrance Bursary",
+    "amount": "$6,000 a year, up to $24,000 over four years",
+    "deadline": "2027-07-15",
+    "audience": "Canadian Grade 12 students with an 80% average and financial need entering University 1 or a direct-entry program at the University of Manitoba",
+    "url": "https://umanitoba.ca/financial-aid-and-awards/entrance-awards",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Submit the UM Entrance Bursary Application in Aurora by July 15 with your final provincial student loan assessment, so apply for Alberta student aid first. It renews with a 3.5 GPA, full-time study and continued need. You must be a Canadian citizen or permanent resident.",
+    "active": true,
+    "description": "Three renewable $6,000 University of Manitoba entrance bursaries for students with strong marks and financial need.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Manitoba"
+      ],
+      "fields": [],
+      "minAverage": 80,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2248,
+    "title": "UManitoba Asper Foundation Entrance Bursary",
+    "amount": "$1,000 a year, up to $4,000 over four years",
+    "deadline": "2027-07-15",
+    "audience": "Grade 12 students with a 70% average and high financial need starting first year at the University of Manitoba",
+    "url": "https://umanitoba.ca/financial-aid-and-awards/entrance-awards",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Submit the UM Entrance Bursary Application in Aurora by July 15. Up to five awards are kept for students registered with Student Accessibility Services who have a permanent physical disability. It renews with a 2.5 GPA and continued need.",
+    "active": true,
+    "description": "Renewable $1,000 University of Manitoba entrance bursaries for first-year students with high financial need.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Manitoba"
+      ],
+      "fields": [],
+      "minAverage": 70,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2249,
+    "title": "UManitoba Alumni Association Entrance Scholarship",
+    "amount": "$1,000 or more",
+    "deadline": "2027-08-01",
+    "audience": "Grade 12 students admitted to a direct-entry program at the University of Manitoba",
+    "url": "https://umanitoba.ca/financial-aid-and-awards/entrance-awards",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply through the Financial Aid and Awards card in Aurora by August 1 with an essay on what becoming a University of Manitoba alum means to you. You need a full-time load in first year.",
+    "active": true,
+    "description": "University of Manitoba entrance scholarships of at least $1,000 chosen on an essay about becoming a future alumnus.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Manitoba"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "writing"
+      ]
+    }
+  },
+  {
+    "id": 2250,
+    "title": "University of Regina Chancellor's Scholarship",
+    "amount": "$10,000 a year for four years plus first-year residence (over $46,000)",
+    "deadline": "2026-12-15",
+    "audience": "Canadian Grade 12 students entering the University of Regina straight from high school, with a 90% average for out-of-province applicants",
+    "url": "https://www.uregina.ca/cost-aid/funding/undergraduate-scholarships/entrance-awards/chancellors-scholarship.html",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply for admission and the award in the Student Awards Management System (SAMS) and upload an activity summary and the Chancellor's Scholarship Supplementary Information Form. A teacher, principal or counsellor emails the Academic Reference Form to safa@uregina.ca, and your transcript must reach admissions by December 15. Out-of-province students need 90%, Saskatchewan students 95%. It renews with an 80% average on 18 credit hours.",
+    "active": true,
+    "description": "Fourteen University of Regina entrance scholarships worth $10,000 a year plus a free first year in residence. Some are set aside for out-of-province and Indigenous applicants.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Regina"
+      ],
+      "fields": [],
+      "minAverage": 90,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2251,
+    "title": "URegina Out of Province Entrance Scholarship",
+    "amount": "$1,500",
+    "deadline": "2027-03-15",
+    "audience": "Grade 12 students finishing high school outside Saskatchewan with an 85 to 94.99% average, entering a University of Regina degree",
+    "url": "https://uregina.ca/cost-aid/funding/undergraduate-scholarships/entrance-awards/automatic-entrance.html",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "There is no separate form. Apply for early admission by March 15 and you are considered on your early admission average. You must be a Canadian citizen, permanent resident or protected person and stay registered in at least 9 credit hours through the fall term. Students at 95% or higher get the $3,000 U of R Entrance Scholarship instead.",
+    "active": true,
+    "description": "An automatic $1,500 University of Regina entrance scholarship for students coming from high schools outside Saskatchewan, including Alberta.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Regina"
+      ],
+      "fields": [],
+      "minAverage": 85,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2252,
+    "title": "SFU Undergraduate Scholars Entrance Award",
+    "amount": "$40,000 to $60,000 over four years",
+    "deadline": "2026-12-15",
+    "audience": "Canadian Grade 12 students with a 90% average and strong activities outside class, entering Simon Fraser University",
+    "url": "https://sfu.ca/students/financial-aid/entrance/highschool/uses.html",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply to SFU first to get a student number, then submit the USES application by December 15 with up to five activities, a 500-word essay and two referees, one academic and one who supervised an activity. References and your admission To-Do List are due January 31. Winners are named from mid-March to May. The same application covers the $60,000 Darcy and Karina Biagioni Family Entrance Scholarship.",
+    "active": true,
+    "description": "Simon Fraser University's top entrance scholarships, paid in eight term instalments, for students who excel in school and in activities. Some winners with financial need also get an $8,000 a term living allowance.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Simon Fraser University"
+      ],
+      "fields": [],
+      "minAverage": 90,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership",
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2253,
+    "title": "SFU Rajan Family Computing Science Scholarship",
+    "amount": "$5,000 a term, $40,000 in all",
+    "deadline": "2026-12-15",
+    "audience": "Canadian Grade 12 students with a 90% average entering Computing Science at Simon Fraser University",
+    "url": "https://sfu.ca/students/financial-aid/entrance/highschool/uses.html",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "You are considered through the SFU Undergraduate Scholars Entrance Scholarship application, due December 15, with references and admission documents due January 31. Computing Science must be your primary program.",
+    "active": true,
+    "description": "A $40,000 Simon Fraser University entrance scholarship for a student starting Computing Science with top marks and strong activities.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Simon Fraser University"
+      ],
+      "fields": [
+        "Computer Science"
+      ],
+      "minAverage": 90,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2254,
+    "title": "SFU Stolte Family Energy Engineering Scholarship",
+    "amount": "$6,250 a term, $50,000 in all",
+    "deadline": "2026-12-15",
+    "audience": "Canadian Grade 12 students with a 90% average entering Sustainable Energy Engineering at Simon Fraser University",
+    "url": "https://sfu.ca/students/financial-aid/entrance/highschool/uses.html",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "You are considered through the SFU Undergraduate Scholars Entrance Scholarship application, due December 15, with references and admission documents due January 31. Sustainable Energy Engineering must be your primary program.",
+    "active": true,
+    "description": "A $50,000 Simon Fraser University entrance scholarship for a student starting the Sustainable Energy Engineering degree.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Simon Fraser University"
+      ],
+      "fields": [
+        "Engineering",
+        "Environment"
+      ],
+      "minAverage": 90,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2255,
+    "title": "SFU Entrance Awards for Volunteers and Need",
+    "amount": "$5,000",
+    "deadline": "2027-03-31",
+    "audience": "Canadian Grade 12 students with an 80% average and volunteer commitment or financial need, entering Simon Fraser University",
+    "url": "https://www.sfu.ca/students/financial-aid/entrance/highschool/awards.html",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "One fillable PDF application, open November 1 to March 31, with a summary of your achievements and activities of up to 500 words and one community reference letter. It covers the H.Y. Louie, Lohn Foundation, Jack and Sadie Diamond and Y.P. Heung entrance awards and also puts you in line for SFU Entrance Bursaries. Winners are told between April and June.",
+    "active": true,
+    "description": "Four $5,000 Simon Fraser University entrance awards for students who volunteer, need the money, or both.",
+    "openDate": "2026-11-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Simon Fraser University"
+      ],
+      "fields": [],
+      "minAverage": 80,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2256,
+    "title": "Dalhousie General Entrance Award Program",
+    "amount": "$1,000 to $80,000 over four years",
+    "deadline": "2027-02-15",
+    "audience": "Grade 12 students with an 80% average applying to start at Dalhousie University in the fall",
+    "url": "https://www.dal.ca/admissions/scholarships-financial-aid/scholarships/future-undergraduate-student-awards.html",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply for admission, pay the $70 fee, then fill in the General Entrance Award application in your Dalhousie application portal by February 15. Your school must email your official first-semester Grade 12 transcript to admissions.documents@dal.ca. Reference letters are not accepted. Winners hear in the spring.",
+    "active": true,
+    "description": "One application puts you in line for hundreds of Dalhousie University entrance scholarships and bursaries, chosen on marks, leadership, activities, community service, financial need and cultural identity.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Dalhousie University"
+      ],
+      "fields": [],
+      "minAverage": 80,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership",
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2257,
+    "title": "Dalhousie Harrison McCain Scholarship",
+    "amount": "$16,000",
+    "deadline": "2027-03-01",
+    "audience": "Canadian Grade 12 students with financial need and strong leadership entering an undergraduate program at Dalhousie University",
+    "url": "https://www.dal.ca/admissions/scholarships-financial-aid/scholarships/future-undergraduate-student-awards.html",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Submit the online application on Dalhousie's future undergraduate awards page and email the required documents to awards@dal.ca by March 1. You must be a Canadian citizen or permanent resident. Students heading into veterinary studies are not eligible.",
+    "active": true,
+    "description": "A $16,000 Dalhousie University entrance scholarship for students who need the money, have worked to fund their own education and show leadership.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Dalhousie University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership",
+        "work"
+      ]
+    }
+  },
+  {
+    "id": 2258,
+    "title": "Dalhousie Fountain School Performing Arts Award",
+    "amount": "$6,000 a year, $24,000 in all",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students entering Music or planning to major in Theatre at Dalhousie University",
+    "url": "https://www.dal.ca/faculty/arts/school-of-performing-arts/about/scholarships-and-awards.html",
+    "category": "Arts",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply through the Fountain School of Performing Arts by March 1, separately from the General Entrance Award application.",
+    "active": true,
+    "description": "Renewable $6,000 a year Dalhousie University scholarships for students coming straight from high school into music or theatre.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Dalhousie University"
+      ],
+      "fields": [
+        "Music",
+        "Drama",
+        "Performing Arts"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "music",
+        "drama"
+      ]
+    }
+  },
+  {
+    "id": 2259,
+    "title": "Dalhousie Computer Science Entrance Scholarships",
+    "amount": "Up to $5,000",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students entering the Bachelor of Computer Science or Bachelor of Applied Computer Science at Dalhousie University",
+    "url": "https://www.dal.ca/faculty/computerscience/about/study_here/entrance_scholarships.html",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply through the Faculty of Computer Science by March 1. This is separate from the General Entrance Award application, so do both.",
+    "active": true,
+    "description": "Dalhousie University Faculty of Computer Science entrance scholarships of up to $5,000 for students coming straight from high school.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Dalhousie University"
+      ],
+      "fields": [
+        "Computer Science"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2260,
+    "title": "Dalhousie Leacross Women in Technology Award",
+    "amount": "$10,000 over two years",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students, with preference for women, entering Computer Science or Applied Computer Science at Dalhousie University",
+    "url": "https://www.dal.ca/faculty/computerscience/about/study_here/entrance_scholarships/womenintech_scholarship.html",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply through the Faculty of Computer Science by March 1. Applicants who identify as female get preference.",
+    "active": true,
+    "description": "A $10,000 Dalhousie University entrance scholarship that supports women starting a computer science degree.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Dalhousie University"
+      ],
+      "fields": [
+        "Computer Science"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2261,
+    "title": "Carleton University Prestige Scholarships",
+    "amount": "$20,000 to $32,000 over four years, or full tuition",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students with a 90% admission average and leadership in activities through high school, entering Carleton University straight from high school",
+    "url": "https://carleton.ca/awards/scholarships/entrance-scholarships-for-new-students/prestige/",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "One fillable form covers the Chancellor's, Richard Lewar, Scholarship of Excellence, SHAD, Jay Woo and CAA, and Riordon scholarships. Fill it in with Adobe, then email it with a signed reference letter and your Carleton student number to awards@carleton.ca by March 1. The 2027 form opens in October 2026. They renew with a 10.0 GPA.",
+    "active": true,
+    "description": "Carleton University's top entrance scholarships, led by ten $32,000 Chancellor's Scholarships and one full-tuition Riordon Scholarship, for students with top marks and strong activities.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Carleton University"
+      ],
+      "fields": [],
+      "minAverage": 90,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership",
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2262,
+    "title": "Carleton Joyce Foundation Indigenous Bursary",
+    "amount": "$5,000 a year, up to $20,000 over four years",
+    "deadline": "2027-10-31",
+    "audience": "First Nations, Metis and Inuit students with financial need who have been offered admission to a Carleton University degree",
+    "url": "https://carleton.ca/awards/awards/awards-for-indigenous-students/",
+    "category": "Indigenous",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Email the 2027-2028 PDF application with one reference letter to awards@carleton.ca by October 31 of your first year. You must start university within three years of finishing high school and confirm Indigenous identity under Carleton's policy. Winners join a first-year mentorship program.",
+    "active": true,
+    "description": "Renewable $5,000 Carleton University bursaries for Indigenous students facing real financial barriers who show community involvement and resilience.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Carleton University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2263,
+    "title": "Carleton Garay Family Indigenous Science Award",
+    "amount": "$4,000 a year, up to $16,000 over four years",
+    "deadline": "2027-10-31",
+    "audience": "First Nations, Metis and Inuit students with financial need entering a Science degree at Carleton University",
+    "url": "https://carleton.ca/awards/awards/awards-for-indigenous-students/",
+    "category": "Indigenous",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Email the 2027-2028 PDF application to awards@carleton.ca by October 31 of your first year. It renews while you stay in good standing and still need the money. Proof of Indigenous identity is required.",
+    "active": true,
+    "description": "A renewable $4,000 Carleton University award for an outstanding Indigenous student with financial need starting a science degree.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Carleton University"
+      ],
+      "fields": [
+        "Science"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2264,
+    "title": "Carleton Humphrey Law Indigenous Business Bursary",
+    "amount": "$5,000 a year, up to $20,000 over four years",
+    "deadline": "2027-10-31",
+    "audience": "First Nations, Metis and Inuit students with financial need entering the Sprott School of Business at Carleton University",
+    "url": "https://carleton.ca/awards/awards/awards-for-indigenous-students/",
+    "category": "Indigenous",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Email the 2027-2028 PDF application to awards@carleton.ca by October 31 of your first year. It renews while you stay in good standing and still need the money. Proof of Indigenous identity is required.",
+    "active": true,
+    "description": "A renewable $5,000 Carleton University bursary for an Indigenous student with financial need starting a business degree at Sprott.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Carleton University"
+      ],
+      "fields": [
+        "Business"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2265,
+    "title": "Carleton Gordon Robertson National Inuit Scholarship",
+    "amount": "Varies",
+    "deadline": "2027-02-01",
+    "audience": "Inuit students from anywhere in Canada entering full-time study at Carleton University",
+    "url": "https://carleton.ca/awards/awards/awards-for-indigenous-students/",
+    "category": "Indigenous",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "The application opens in October 2026 and closes February 1. One or two scholarships are given each year to entering or continuing Inuit students, and proof of Inuit identity is required.",
+    "active": true,
+    "description": "A Carleton University scholarship created by former Chancellor Gordon Robertson to help more Inuit students finish a degree.",
+    "openDate": "2026-10-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Carleton University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2266,
+    "title": "McMaster University Entrance Awards by Application",
+    "amount": "$5,000",
+    "deadline": "2027-02-19",
+    "audience": "Grade 12 students applying to start a first degree at McMaster University",
+    "url": "https://www.ouinfo.ca/scholarships/mcmaster/application-based-entrance-awards",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Activate your MacID after you apply through OUAC, fill in the General Application in AwardSpring, then complete the entrance awards follow-up with a short essay on the accomplishments you are proudest of and one reference letter by February 19. School, work, community service, family care and activities all count. You do not need an offer of admission to apply.",
+    "active": true,
+    "description": "Up to 30 McMaster University entrance awards of $5,000, including the Ashbaugh, George and Nora Elwin and A.G. Reilly scholarships, chosen on what you have achieved in and out of school.",
+    "openDate": "2026-11-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "McMaster University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer",
+        "work",
+        "Leadership"
+      ]
+    }
+  },
+  {
+    "id": 2267,
+    "title": "McMaster Undergraduate Entrance Bursary",
+    "amount": "$1,000 to $5,000",
+    "deadline": "2027-02-19",
+    "audience": "Canadian citizens and permanent residents with financial need starting a first degree at McMaster University",
+    "url": "https://registrar.mcmaster.ca/entrance-awards/",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply in AwardSpring by February 19 after you activate your MacID. Apply for Alberta student aid by June 30 too, since McMaster uses it to confirm your need before September. Refugees are also eligible.",
+    "active": true,
+    "description": "McMaster University entrance bursaries for first-year students who need help paying for university.",
+    "openDate": "2026-11-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "McMaster University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2268,
+    "title": "University of Guelph President's Scholarship",
+    "amount": "$8,250 a year plus a $9,500 summer research job, $42,500 in all",
+    "deadline": "2027-01-22",
+    "audience": "Canadian Grade 12 students with a 90% average and real leadership in school or the community, entering the University of Guelph",
+    "url": "https://www.uoguelph.ca/registrar/finances-fees/top-scholarships/",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "The Fall 2027 application opens by December 1 and is due January 22 at 4 p.m. Eastern. Reference letters are due January 29. You must be a Canadian citizen or permanent resident who has never attended post-secondary. Short-listed applicants who are not chosen can still be picked for the Kenneth O. Hammill-Blount Canada Scholarship.",
+    "active": true,
+    "description": "Seven University of Guelph scholarships worth $42,500 each, including a paid summer research assistantship, for top students who have led and innovated at school or in their community.",
+    "openDate": "2026-12-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Guelph"
+      ],
+      "fields": [],
+      "minAverage": 90,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership",
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2269,
+    "title": "Guelph Lincoln Alexander Chancellor's Scholarship",
+    "amount": "$8,250 a year plus a $9,500 summer research job, $42,500 in all",
+    "deadline": "2027-01-22",
+    "audience": "Indigenous, racialized or disabled Canadian Grade 12 students with a 90% average and strong leadership, entering the University of Guelph",
+    "url": "https://www.uoguelph.ca/registrar/studentfinance/apps/awards?id=E0689",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply on the same top scholarships application as the President's Scholarship, open by December 1 and due January 22, with reference letters due January 29. You must be First Nations, Inuit or Metis, a person of colour, or a person with a disability.",
+    "active": true,
+    "description": "Two University of Guelph scholarships worth $42,500 each, named for Lincoln Alexander, for leaders from Indigenous, racialized and disabled communities.",
+    "openDate": "2026-12-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Guelph"
+      ],
+      "fields": [],
+      "minAverage": 90,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership",
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2270,
+    "title": "University of Guelph Registrar's Entrance Bursaries",
+    "amount": "$4,000",
+    "deadline": "2027-04-15",
+    "audience": "Canadian Grade 12 students with financial need entering any degree at the University of Guelph",
+    "url": "https://www.uoguelph.ca/registrar/studentfinance/apps/awards?id=E0384",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Fill in the Entrance Financial Need Assessment Form once by April 15, after you get your 7-digit student number in the admission acknowledgement email. You do not need an offer of admission yet. Have your parents' tax return and your savings and expected summer earnings handy. Offers go out by email in late May.",
+    "active": true,
+    "description": "Around 550 University of Guelph entrance bursaries of $4,000 for first-year students who need the money. The same form also puts you in line for the other need-based Guelph entrance awards.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Guelph"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2271,
+    "title": "University of Guelph Accessibility Bursaries",
+    "amount": "$14,000 over four years plus work-study",
+    "deadline": "2027-04-15",
+    "audience": "Canadian Grade 12 students with financial need entering any degree at the University of Guelph",
+    "url": "https://www.uoguelph.ca/registrar/studentfinance/apps/awards?id=E3038",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply with the Entrance Financial Need Assessment Form by April 15. Winners get $5,000 in first year and $3,000 in each of the next three years, plus approval for a campus work-study job. These are about access to university for students with need, not disability.",
+    "active": true,
+    "description": "About 200 renewable University of Guelph bursaries for entering students whose families cannot cover the cost of university.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Guelph"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2272,
+    "title": "Guelph Agro 4-H Scholarship",
+    "amount": "$10,000 over four years",
+    "deadline": "2027-04-15",
+    "audience": "Grade 12 4-H members who have finished at least 10 4-H projects and have a 75% average, entering the University of Guelph",
+    "url": "https://www.uoguelph.ca/registrar/studentfinance/apps/awards?id=E0520",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Submit the online scholarship form linked from the award page by April 15. Any program counts, and 4-H projects from Alberta clubs count. Up to 10 awards are given.",
+    "active": true,
+    "description": "Ten University of Guelph entrance scholarships of $10,000 for students with a long record in 4-H.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Guelph"
+      ],
+      "fields": [],
+      "minAverage": 75,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "4-H",
+        "agriculture"
+      ]
+    }
+  },
+  {
+    "id": 2273,
+    "title": "University of Guelph Lang Entrance Scholarship",
+    "amount": "$5,000",
+    "deadline": "2027-04-15",
+    "audience": "Grade 12 students with an 80% average and community leadership entering the Lang School of Business and Economics at the University of Guelph",
+    "url": "https://www.uoguelph.ca/registrar/studentfinance/apps/awards?id=E1169",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Submit the online form linked from the award page by April 15 and show ethical leadership through community roles and leadership positions you have held. Nine awards are given.",
+    "active": true,
+    "description": "Nine $5,000 University of Guelph entrance scholarships for business students who lead in their communities.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Guelph"
+      ],
+      "fields": [
+        "Business",
+        "Economics"
+      ],
+      "minAverage": 80,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership",
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2274,
+    "title": "Guelph CIBC Business Leader Scholarship",
+    "amount": "$2,000 a year, $8,000 in all",
+    "deadline": "2027-04-15",
+    "audience": "Black, Indigenous and racialized Grade 12 students with an 80% average entering the Lang School of Business and Economics at the University of Guelph",
+    "url": "https://www.uoguelph.ca/registrar/studentfinance/apps/awards?id=E1350",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Submit the online form linked from the award page by April 15 and describe activities where you used business or service as a force for good. Several awards are given.",
+    "active": true,
+    "description": "Renewable University of Guelph business scholarships for Black, Indigenous and racialized students who have done good in their communities.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Guelph"
+      ],
+      "fields": [
+        "Business"
+      ],
+      "minAverage": 80,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership",
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2275,
+    "title": "Guelph Linamar Engineering Entrance Scholarship",
+    "amount": "$4,000",
+    "deadline": "2027-04-15",
+    "audience": "Grade 12 students entering any Bachelor of Engineering major at the University of Guelph",
+    "url": "https://www.uoguelph.ca/registrar/studentfinance/apps/awards?id=E0783",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Submit the online form linked from the award page by April 15. Ten awards are given, with at least two set aside for Linamar employees' families if they apply.",
+    "active": true,
+    "description": "Ten $4,000 University of Guelph entrance scholarships for students starting engineering.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Guelph"
+      ],
+      "fields": [
+        "Engineering"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2276,
+    "title": "Guelph Jennifer Heard Memorial Scholarship",
+    "amount": "$5,000",
+    "deadline": "2027-04-15",
+    "audience": "Children of first or second generation immigrants with financial need entering the University of Guelph",
+    "url": "https://www.uoguelph.ca/registrar/studentfinance/apps/awards?id=E1351",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply with the Entrance Financial Need Assessment Form and the award's own form, both linked from the award page, by April 15. One award is given.",
+    "active": true,
+    "description": "A $5,000 University of Guelph entrance scholarship for a student from an immigrant family who needs the money.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Guelph"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2277,
+    "title": "Guelph Improve Life First-Generation Bursary",
+    "amount": "$2,000",
+    "deadline": "2027-04-15",
+    "audience": "Grade 12 students with financial need entering any University of Guelph program, with first-generation students preferred",
+    "url": "https://www.uoguelph.ca/registrar/studentfinance/apps/awards?id=E3154",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply with the Entrance Financial Need Assessment Form and the award's own form, both linked from the award page, by April 15. Students whose parents never went to college or university get preference. Four awards are given.",
+    "active": true,
+    "description": "Four $2,000 University of Guelph entrance bursaries from the Classes of 2020 and 2021, aimed at students who are first in their family to go to post-secondary.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Guelph"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2278,
+    "title": "Guelph Ada Lovelace Computer Science Scholarship",
+    "amount": "$1,000",
+    "deadline": "2027-04-15",
+    "audience": "Women with an 80% average and financial need entering the School of Computer Science at the University of Guelph",
+    "url": "https://www.uoguelph.ca/registrar/studentfinance/apps/awards?id=E1088",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply with the Entrance Financial Need Assessment Form by April 15. Three awards are given.",
+    "active": true,
+    "description": "Three $1,000 University of Guelph entrance scholarships for women starting computer science who need financial help.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Guelph"
+      ],
+      "fields": [
+        "Computer Science"
+      ],
+      "minAverage": 80,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": "female",
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2279,
+    "title": "Guelph Shad Alumni Entrance Scholarship",
+    "amount": "$2,500",
+    "deadline": "2027-04-15",
+    "audience": "Shad alumni entering the College of Computational, Mathematical and Physical Sciences at the University of Guelph",
+    "url": "https://www.uoguelph.ca/registrar/studentfinance/apps/awards?id=E1482",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Submit the online form linked from the award page by April 15. You must have completed the Shad program. Two awards are given.",
+    "active": true,
+    "description": "Two $2,500 University of Guelph entrance scholarships for Shad alumni starting math, physics, chemistry or computing.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Guelph"
+      ],
+      "fields": [
+        "Mathematics",
+        "Physics",
+        "Computer Science",
+        "Chemistry"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Shad"
+      ]
+    }
+  },
+  {
+    "id": 2280,
+    "title": "Mount Allison Marjorie Young Bell Scholarship",
+    "amount": "$17,500 a year plus an optional paid internship, $70,000 in all",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students with top marks, leadership, volunteer work and activities, entering Mount Allison University",
+    "url": "https://mta.ca/scholarships",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Submit the Mount Allison application for admission and scholarships by March 1. Once it is in, you get an essay question by email to answer in your MtA application account, and one referee emails a reference letter to admissions@mta.ca by the same date. Finalists who are not chosen are offered the $20,000 President's Scholarship. It renews with a 3.5 GPA and a yearly activities report.",
+    "active": true,
+    "description": "Up to eight of Canada's largest undergraduate awards, given by Mount Allison University in Sackville, New Brunswick, to outstanding all-round students.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Mount Allison University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership",
+        "volunteer",
+        "work"
+      ]
+    }
+  },
+  {
+    "id": 2281,
+    "title": "Mount Allison Entrance Scholarships",
+    "amount": "$4,000 to $20,000 over four years",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students with an 80% admission average entering Mount Allison University",
+    "url": "https://mta.ca/scholarships",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "There is no separate form. Submit the application for admission and scholarships by March 1 and fill in the activities, leadership, work and service sections carefully, since those are scored. Later applications are considered case by case. They renew with a 3.7 GPA on 30 credits.",
+    "active": true,
+    "description": "Mount Allison University entrance scholarships of $1,000 to $5,000 a year for students with strong marks, activities, leadership, work experience and community service.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Mount Allison University"
+      ],
+      "fields": [],
+      "minAverage": 80,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership",
+        "volunteer",
+        "work"
+      ]
+    }
+  },
+  {
+    "id": 2282,
+    "title": "Mount Allison JR Shaw Entrance Scholarship",
+    "amount": "About $6,000",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students from Alberta entering the Ron Joyce Centre for Business Studies at Mount Allison University",
+    "url": "https://mta.ca/scholarships",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Submit the Mount Allison application for admission and scholarships by March 1. No extra documents are needed. Albertans get first preference, then students from elsewhere in Western Canada.",
+    "active": true,
+    "description": "A Mount Allison University business entrance scholarship named for Shaw Communications founder JR Shaw, with Alberta students first in line.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Mount Allison University"
+      ],
+      "fields": [
+        "Business",
+        "Commerce"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2283,
+    "title": "Mount Allison Enid F. Webber Memorial Scholarship",
+    "amount": "$9,000 a year, $36,000 in all",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students with strong marks and financial need entering any program at Mount Allison University",
+    "url": "https://mta.ca/scholarships",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Submit the Mount Allison application for admission and scholarships by March 1. No separate documents are needed. It renews with a 3.5 GPA on 30 credits.",
+    "active": true,
+    "description": "A renewable $36,000 Mount Allison University scholarship chosen on both academic merit and financial need.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Mount Allison University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2284,
+    "title": "Mount Allison Enid F. Webber Fine Arts Scholarship",
+    "amount": "$9,000 a year, $36,000 in all",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students with strong marks and financial need entering the Fine Arts program at Mount Allison University",
+    "url": "https://mta.ca/scholarships",
+    "category": "Arts",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply for general admission and to the Fine Arts program, including the portfolio, by March 1. It renews with a 3.5 GPA on 30 credits.",
+    "active": true,
+    "description": "A renewable $36,000 Mount Allison University scholarship for a Fine Arts student, chosen on merit and financial need.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Mount Allison University"
+      ],
+      "fields": [
+        "Fine Arts",
+        "Art"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "art"
+      ]
+    }
+  },
+  {
+    "id": 2285,
+    "title": "Mount Allison Lockhart Memorial Scholarship",
+    "amount": "$6,000 a year, $24,000 in all",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students, with preference for women, entering any program at Mount Allison University",
+    "url": "https://mta.ca/scholarships",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Submit the Mount Allison application for admission and scholarships by March 1. No separate documents are needed. It renews with a 3.7 GPA on 30 credits.",
+    "active": true,
+    "description": "A renewable Mount Allison University scholarship named for Grace Annie Lockhart, the first woman in the British Empire to earn a bachelor's degree, at Mount Allison in 1875.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Mount Allison University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2286,
+    "title": "Mount Allison McKenna PPE Scholarship",
+    "amount": "$10,000 in year one, then $5,000 a year, $25,000 in all",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students planning to major in Philosophy, Politics and Economics at Mount Allison University",
+    "url": "https://mta.ca/scholarships",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Submit the Mount Allison application for admission and scholarships by March 1 and declare your intent to major in PPE. It renews with a 3.5 GPA while you stay in a PPE department.",
+    "active": true,
+    "description": "A $25,000 Mount Allison University scholarship for a student entering the McKenna School's Philosophy, Politics and Economics program.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Mount Allison University"
+      ],
+      "fields": [
+        "Political Science",
+        "Economics",
+        "Philosophy"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2287,
+    "title": "Mount Allison Pamela and Richard Joho Scholarship",
+    "amount": "At least $5,000 a year, $20,000 in all",
+    "deadline": "2027-03-01",
+    "audience": "Canadian students with strong marks and activities entering Arts, Fine Arts or Music at Mount Allison University",
+    "url": "https://mta.ca/scholarships",
+    "category": "Arts",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Submit the Mount Allison application for admission and scholarships by March 1. Athletics, community service and student leadership all count. You must be a Canadian citizen or permanent resident. It renews with a 3.5 GPA.",
+    "active": true,
+    "description": "A renewable Mount Allison University scholarship for arts, fine arts and music students who are involved outside the classroom.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Mount Allison University"
+      ],
+      "fields": [
+        "Arts",
+        "Fine Arts",
+        "Music"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "sports",
+        "volunteer",
+        "Leadership"
+      ]
+    }
+  },
+  {
+    "id": 2288,
+    "title": "Mount Allison Class of 1968 Entrance Award",
+    "amount": "Full first-year tuition",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students with strong marks and leadership in community service and activities, entering Mount Allison University",
+    "url": "https://mta.ca/scholarships",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Submit the Mount Allison application for admission and scholarships by March 1. It covers first year only, but a 3.7 GPA on 30 credits can earn you an in-course scholarship after that.",
+    "active": true,
+    "description": "A Mount Allison University award that covers a full year of tuition for a student who leads in community service.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Mount Allison University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership",
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2289,
+    "title": "UNB Entrance Scholarship Application",
+    "amount": "Hundreds of awards, most $1,000 to $10,000",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students, with preference for an 80% scholarship average, entering the University of New Brunswick",
+    "url": "https://www.unb.ca/moneymatters/scholarships/highschool.html",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply for admission, then sign in to your UNB application account and submit the entrance scholarship application by March 1. Send your updated transcript to Admissions in February. Early offers go out from October and the rest by April 30. Accepting your admission offer also accepts the scholarship.",
+    "active": true,
+    "description": "One University of New Brunswick application covers most of its entrance scholarships, chosen mainly on grades with some donor conditions like need or activities.",
+    "openDate": "2026-09-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of New Brunswick"
+      ],
+      "fields": [],
+      "minAverage": 80,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2290,
+    "title": "UNB Ted Rogers Legacy Scholarship",
+    "amount": "$100,000",
+    "deadline": "2027-03-01",
+    "audience": "Canadian Grade 12 students entering Computer Science or Software Engineering at the University of New Brunswick",
+    "url": "https://www.unb.ca/moneymatters/scholarships/highschool.html",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "You are considered when you submit the UNB entrance scholarship application by March 1 and enrol in the Bachelor of Computer Science, BSc in Computer Science or BSc in Software Engineering.",
+    "active": true,
+    "description": "At least one $100,000 University of New Brunswick scholarship for a Canadian student starting computer science or software engineering.",
+    "openDate": "2026-09-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of New Brunswick"
+      ],
+      "fields": [
+        "Computer Science",
+        "Engineering"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2291,
+    "title": "UNB Dr. Salem and Laila Masry Scholarship",
+    "amount": "$80,000",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students with strong marks, financial need and community involvement entering Engineering at UNB Fredericton",
+    "url": "https://www.unb.ca/moneymatters/scholarships/highschool.html",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "You are considered when you submit the UNB entrance scholarship application by March 1 and enrol in the Bachelor of Science in Engineering on the Fredericton campus. One award is given.",
+    "active": true,
+    "description": "An $80,000 University of New Brunswick engineering scholarship for a student who combines strong marks, community involvement and financial need.",
+    "openDate": "2026-09-01",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of New Brunswick"
+      ],
+      "fields": [
+        "Engineering"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2292,
+    "title": "UNB H. Harrison McCain Scholarship",
+    "amount": "$16,000",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students from across Canada with strong marks, leadership and financial need who help pay their own way, entering the University of New Brunswick",
+    "url": "https://www.unb.ca/moneymatters/scholarships/highschool.html",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Complete the separate Harrison McCain application linked from UNB's high school scholarships page by March 1, along with the entrance scholarship application.",
+    "active": true,
+    "description": "University of New Brunswick scholarships worth $16,000 for students who show leadership, need, and initiative in funding their own education.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of New Brunswick"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership",
+        "work"
+      ]
+    }
+  },
+  {
+    "id": 2293,
+    "title": "UPEI Andrew Scholarship in Nursing for Calgary",
+    "amount": "$5,000 in first year, then $2,000 a year",
+    "deadline": "2027-05-01",
+    "audience": "Alberta Grade 12 students entering first-year Nursing at the University of Prince Edward Island, with preference for the Calgary area",
+    "url": "https://www.upei.ca/scholarships-and-awards/display?awardid=644",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Download the PDF application form from the award page and send it to UPEI Scholarships and Awards at scholarships@upei.ca by May 1. It renews at $2,000 a year for years two to four with a full course load and good marks.",
+    "active": true,
+    "description": "A University of Prince Edward Island nursing scholarship funded by a Calgary alumni group for an Alberta student heading east to study nursing.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Prince Edward Island"
+      ],
+      "fields": [
+        "Nursing"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2294,
+    "title": "UPEI MacEachern Business Scholarship for Calgary",
+    "amount": "$5,000 in first year, then $2,000 a year",
+    "deadline": "2027-05-01",
+    "audience": "Alberta Grade 12 students entering first-year Business at the University of Prince Edward Island, with preference for the Calgary area",
+    "url": "https://www.upei.ca/scholarships-and-awards/display?awardid=645",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Download the PDF application form from the award page and send it to UPEI Scholarships and Awards at scholarships@upei.ca by May 1. It renews at $2,000 a year for years two to four with a full course load and good marks.",
+    "active": true,
+    "description": "A University of Prince Edward Island business scholarship named for Calgary businessman Lou MacEachern, for an Alberta student starting business at UPEI.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Prince Edward Island"
+      ],
+      "fields": [
+        "Business"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2295,
+    "title": "UPEI Friends of UPEI Calgary Scholarships",
+    "amount": "Up to $1,500",
+    "deadline": "2027-05-01",
+    "audience": "Alberta students entering full-time undergraduate studies at the University of Prince Edward Island, with preference for the Calgary area",
+    "url": "https://www.upei.ca/scholarships-and-awards/display?awardid=420",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Download the PDF application form from the award page and send it to UPEI Scholarships and Awards at scholarships@upei.ca by May 1. Students already at UPEI can apply too.",
+    "active": true,
+    "description": "University of Prince Edward Island scholarships paid from a fund that Calgary supporters built through an annual dinner and auction since 1998, for Alberta students in any program.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Prince Edward Island"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2296,
+    "title": "Trent University Prestigious Scholarships",
+    "amount": "$18,000 to $30,000 over four years",
+    "deadline": "2027-03-02",
+    "audience": "Canadian Grade 12 students with an 80% average entering a full-time degree at Trent University",
+    "url": "https://www.trentu.ca/futurestudents/scholarships-tuition/prestigious-scholarships",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Fill in the single Prestigious Scholarship application under the Finances tab of your myTrent applicant portal by March 2. It covers the two $30,000 Champlain Scholarships, the $30,000 Board of Governors' Leadership Scholarship and ten $18,000 Special Admission Scholarships. They renew with an 80% average on a full course load.",
+    "active": true,
+    "description": "Trent University's top entrance scholarships in Peterborough and Durham, Ontario, for students with outstanding marks, leadership and activities.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Trent University"
+      ],
+      "fields": [],
+      "minAverage": 80,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership",
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2297,
+    "title": "Trent Canada-Wide Science Fair Scholarship",
+    "amount": "$4,500 a year, $18,000 in all",
+    "deadline": "2027-03-02",
+    "audience": "Grade 12 students who won a medal or honourable mention for a senior project at the Canada-Wide Science Fair in the past two years, entering Trent University",
+    "url": "https://www.trentu.ca/futurestudents/scholarships-tuition/prestigious-scholarships",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Apply on the Prestigious Scholarship application in your myTrent applicant portal by March 2 and list your Canada-Wide Science Fair result. You need an 80% average. It renews with an 80% average each year.",
+    "active": true,
+    "description": "A renewable Trent University scholarship for a student who earned a medal or honourable mention at the Canada-Wide Science Fair.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Trent University"
+      ],
+      "fields": [],
+      "minAverage": 80,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "science fair"
+      ]
+    }
+  },
+  {
+    "id": 2298,
+    "title": "Saint Mary's University Entrance Awards Program",
+    "amount": "Varies, many awards",
+    "deadline": "2027-02-15",
+    "audience": "Grade 12 students accepted or admissible to Saint Mary's University in Halifax by February 15",
+    "url": "https://www.smu.ca/future-students/moneymatters/scholarshipsawards/",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Finish your undergraduate application, then submit the Entrance Awards Program application between October 15 and February 15, just before midnight Atlantic time. Part 1 is required. Part 2 adds a statement of financial need for need-based awards, and Part 3 is for the major renewable scholarships.",
+    "active": true,
+    "description": "One Saint Mary's University application covers its donor entrance awards, chosen on marks, financial need, community involvement and activities.",
+    "openDate": "2026-10-15",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Saint Mary's University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2299,
+    "title": "Saint Mary's Presidential Scholarship",
+    "amount": "$50,000 over four years",
+    "deadline": "2027-02-15",
+    "audience": "Canadian Grade 12 students with a 93% average entering Science, Engineering, Arts or Environmental Studies at Saint Mary's University",
+    "url": "https://www.smu.ca/future-students/moneymatters/scholarshipsawards/",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Complete Part 3 of the Entrance Awards Program application by February 15 with a 750-word essay on your leadership, community involvement and contribution to school life, plus why you chose your program and your goals. You must be a citizen or permanent resident. It renews with a 3.70 GPA.",
+    "active": true,
+    "description": "Saint Mary's University's top $50,000 scholarships for students from across Canada with a record of leadership or community service.",
+    "openDate": "2026-10-15",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Saint Mary's University"
+      ],
+      "fields": [],
+      "minAverage": 93,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership",
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 2300,
+    "title": "Saint Mary's Sobey National Innovator Award",
+    "amount": "$50,000 over four years",
+    "deadline": "2027-02-15",
+    "audience": "Canadian Grade 12 students with a 93% average entering the Sobey School of Business at Saint Mary's University",
+    "url": "https://www.smu.ca/future-students/moneymatters/scholarshipsawards/",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Complete Part 3 of the Entrance Awards Program application by February 15 with a 750-word essay on your leadership, community involvement, work or business ventures and your goals. You must be a citizen or permanent resident. It renews with a 3.70 GPA.",
+    "active": true,
+    "description": "$50,000 Saint Mary's University scholarships for business students with a record of leadership, service or entrepreneurship.",
+    "openDate": "2026-10-15",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Saint Mary's University"
+      ],
+      "fields": [
+        "Business"
+      ],
+      "minAverage": 93,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership",
+        "volunteer",
+        "entrepreneurship"
+      ]
+    }
+  },
+  {
+    "id": 2301,
+    "title": "Saint Mary's University Harrison McCain Scholarship",
+    "amount": "Varies",
+    "deadline": "2027-03-01",
+    "audience": "Grade 12 students in Canada with an 85% average, financial need and leadership who help fund their own education, entering Saint Mary's University",
+    "url": "https://www.smu.ca/future-students/moneymatters/scholarshipsawards/",
+    "category": "General",
+    "lastVerified": "2026-10",
+    "region": "National",
+    "notes": "Email the application form, your transcript, a one-page letter on what the award would mean to you and a two-page essay on your activities, leadership, need, work and career plans to financial.aid@smu.ca by March 1.",
+    "active": true,
+    "description": "A Saint Mary's University scholarship and bursary for students who show leadership, need and initiative in paying for their own education.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Saint Mary's University"
+      ],
+      "fields": [],
+      "minAverage": 85,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership",
+        "work"
+      ]
     }
   }
 ]

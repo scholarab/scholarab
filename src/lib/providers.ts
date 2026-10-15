@@ -64,6 +64,14 @@ export const PROVIDERS: Provider[] = [
   { slug: 'burns-fund', name: 'Burns Memorial Fund', match: ['burnsfund.com'] },
   { slug: 'horatio-alger', name: 'Horatio Alger Association of Canada', match: ['horatioalger.ca'] },
   { slug: 'ulethbridge', name: 'University of Lethbridge', match: ['ulethbridge.ca'] },
+  { slug: 'usask', name: 'University of Saskatchewan', match: ['usask.ca'] },
+  { slug: 'umanitoba', name: 'University of Manitoba', match: ['umanitoba.ca'] },
+  { slug: 'sfu', name: 'Simon Fraser University', match: ['sfu.ca'] },
+  { slug: 'dal', name: 'Dalhousie University', match: ['dal.ca'] },
+  { slug: 'carleton', name: 'Carleton University', match: ['carleton.ca'] },
+  { slug: 'mta', name: 'Mount Allison University', match: ['mta.ca'] },
+  { slug: 'smu', name: "Saint Mary's University", match: ['smu.ca'] },
+  { slug: 'guelph', name: 'University of Guelph', match: ['uoguelph.ca'] },
   { slug: 'fort-mcmurray-public', name: 'Fort McMurray Public Schools', match: ['fmpsdschools.ca'], logo: false },
 ];
 
