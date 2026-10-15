@@ -3603,7 +3603,7 @@
   {
     "id": 110,
     "title": "Grant MacEwan United World College Scholarship",
-    "amount": "Varies",
+    "amount": "Tuition, room and board and a trip home each year",
     "deadline": "2026-11-04",
     "openDate": "2026-07-01",
     "audience": "Alberta residents completing Grade 11, aged 16 to 17.5, applying to United World College",
@@ -4832,14 +4832,14 @@
   {
     "id": 140,
     "title": "AHSRA Scholarships",
-    "amount": "Varies",
+    "amount": "$250 to $2,000",
     "deadline": "2027-04-01",
     "openDate": "2026-10-15",
     "audience": "Grade 12 Alberta students; AHSRA members and volunteers are weighted, but non-participants may apply",
     "category": "Community",
     "region": "Alberta",
     "active": false,
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-10",
     "applyViaGuidance": false,
     "notes": "Submit by mail to the AHSRA Scholarship Coordinator.",
     "url": "https://albertahsrodeo.ca/scholarships/",
@@ -35926,7 +35926,7 @@
   {
     "id": 905,
     "title": "Okotoks Royal Canadian Legion Branch 291 Scholarship",
-    "amount": "Varies",
+    "amount": "$500",
     "deadline": null,
     "openDate": null,
     "audience": "Graduates of Foothills Composite or Holy Trinity Academy entering post-secondary",
@@ -35934,7 +35934,7 @@
     "category": "Community",
     "lastVerified": "2026-10",
     "region": "Okotoks",
-    "notes": "The handbook lists the number of awards but not their value, so ask the branch or student services what it has paid recently. Academic achievement, extracurricular involvement, community involvement, work experience and citizenship are all weighed together. Unless an award states otherwise, applicants must be Canadian citizens and have lived in Alberta for at least one year.",
+    "notes": "The branch's application form sets each scholarship at $500. Academic achievement, extracurricular involvement, community involvement, work experience and citizenship are all weighed together. Unless an award states otherwise, applicants must be Canadian citizens and have lived in Alberta for at least one year.",
     "applyViaGuidance": true,
     "applyRoute": "school",
     "active": true,
@@ -51797,12 +51797,12 @@
   {
     "id": 1437,
     "title": "Freehorse Family Wellness Society Post-Secondary Funding Program",
-    "amount": "Varies",
+    "amount": "Tuition, books and a monthly living allowance",
     "deadline": "2027-06-15",
     "audience": "First Nations students without band funding",
     "url": "https://www.freehorse.org/",
     "category": "Indigenous",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "Alberta",
     "notes": "There are three intakes: June 15 for fall and winter, October 15 for the winter term and March 15 for spring and summer. You need 12 months of Canadian residency, and NWT registrants must be ineligible for territorial funding.",
     "active": true,
@@ -52815,12 +52815,12 @@
   {
     "id": 1463,
     "title": "ACFN Education Grant",
-    "amount": "Varies",
+    "amount": "Tuition and books",
     "deadline": "2027-07-31",
     "audience": "Athabasca Chipewyan First Nation members in post-secondary",
     "url": "https://acfn.com/wp-content/uploads/2024/03/Education-Grant-Feb-21-24-Protected.pdf",
     "category": "Indigenous",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "Fort McMurray",
     "notes": "You have to apply to Athabasca Tribal Council post-secondary funding first. Full-time students are preferred, continuing students come first and recent high school graduates next. Intakes close July 31, November 30 and March 31.",
     "active": true,
@@ -53083,12 +53083,12 @@
   {
     "id": 1470,
     "title": "NAIT Student Awards",
-    "amount": "Varies",
+    "amount": "$250 to $15,000",
     "deadline": "2026-10-15",
     "audience": "NAIT students in any program",
     "url": "https://nait.academicworks.ca/",
     "category": "Trades",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "Edmonton",
     "notes": "Most of them close October 15 and most are judged on financial need plus satisfactory grades. Many are tied to a specific program and year, so the list you see depends on what you are enrolled in. A few are reserved for Indigenous students, student athletes or students with disabilities.",
     "active": true,
@@ -58318,7 +58318,7 @@
   {
     "id": 1605,
     "title": "University of Calgary Undergraduate Awards",
-    "amount": "Varies",
+    "amount": "$50 to $20,000",
     "deadline": null,
     "audience": "University of Calgary undergraduates in any faculty",
     "url": "https://ucalgary.ca/registrar/finances/awards",
@@ -58327,7 +58327,7 @@
     "region": "Calgary",
     "notes": "Many are handed out on nomination with no application at all, so talk to your department adviser. Others need the university's own award application. Search the registrar's list by your faculty and year rather than reading it end to end. The general continuing competition requires GPA 2.00 and nine academic units in each previous fall and winter term, subject to exceptions and higher award-specific requirements.",
     "active": true,
-    "description": "The University of Calgary funds hundreds of continuing awards for students already enrolled, ranging from a few hundred dollars to several thousand, most of them tied to a faculty, a major or a specific course and awarded for academic achievement, financial need or both.",
+    "description": "The University of Calgary funds hundreds of continuing awards for students already enrolled, ranging from $50 to $20,000, most of them tied to a faculty, a major or a specific course and awarded for academic achievement, financial need or both.",
     "metaDetail": "Many are awarded by nomination, with no application.",
     "eligibility": {
       "grades": [
@@ -61566,7 +61566,7 @@
   {
     "id": 1687,
     "title": "Delia School Awards and Scholarships",
-    "amount": "Varies",
+    "amount": "$200 to $1,500",
     "deadline": "2027-06-15",
     "deadlineEstimated": true,
     "audience": "Delia School students and graduates",
@@ -62928,7 +62928,7 @@
   {
     "id": 1721,
     "title": "The King's University Returning Student Awards",
-    "amount": "Varies",
+    "amount": "$300 to $4,000",
     "deadline": "2027-03-26",
     "openDate": "2027-02-01",
     "audience": "Students already enrolled at The King's University",
@@ -63334,7 +63334,7 @@
   {
     "id": 1731,
     "title": "Northwestern Polytechnic Awards",
-    "amount": "Varies",
+    "amount": "$150 to $8,600",
     "deadline": null,
     "audience": "Students entering or attending Northwestern Polytechnic in Grande Prairie",
     "url": "https://www.nwpolytech.ca/financial-aid/awards-listing",
@@ -63343,7 +63343,7 @@
     "region": "University & college",
     "notes": "The awards listing filters by type (bursaries, entrance, Indigenous, leadership, fine arts, year-end) and by program, and each award says whether you apply or are selected. Several NWP awards also have their own listings here. Unless the award states otherwise, applicants must be Canadian citizens or permanent residents; international students may apply in their second full-time year at NWP. Unless an award states otherwise, applicants must complete two full-time semesters in the application year, and bursary applicants must also have financial need and a first-semester GPA of at least 1.7. The Alberta Blue Cross entrance award requires Alberta residence and progression directly from high school, while individual Blue Cross awards have additional relocation and other-funding limits.",
     "active": true,
-    "description": "Northwestern Polytechnic's awards listing holds about 350 awards, with more than $350,000 a year in scholarships and bursaries: entrance awards such as the Alberta Blue Cross awards for students with 80% in English 30 and four other 30-level courses, bursaries for financial need, and program awards for power engineering, automotive, millwright, animal health technology, education and athletics, from a few hundred dollars to $2,000.",
+    "description": "Northwestern Polytechnic's awards listing holds about 350 awards, with more than $350,000 a year in scholarships and bursaries: entrance awards such as the Alberta Blue Cross awards for students with 80% in English 30 and four other 30-level courses, bursaries for financial need, and program awards for power engineering, automotive, millwright, animal health technology, education and athletics, from $150 to $8,600.",
     "metaDetail": "About 350 awards in one searchable list.",
     "eligibility": {
       "grades": [
@@ -66411,7 +66411,7 @@
   {
     "id": 1810,
     "title": "University of Alberta Entrance Awards Application",
-    "amount": "Varies",
+    "amount": "$1,500 to $30,000",
     "deadline": "2027-01-10",
     "openDate": "2026-10-01",
     "audience": "Grade 12 students entering first year at University of Alberta",
@@ -66528,7 +66528,7 @@
   {
     "id": 1813,
     "title": "University of Calgary Undergraduate Entrance Awards Application",
-    "amount": "Varies",
+    "amount": "$500 to $30,400",
     "deadline": "2026-12-01",
     "openDate": "2026-10-01",
     "audience": "Grade 12 students entering first year at University of Calgary",
@@ -67080,7 +67080,7 @@
   {
     "id": 1827,
     "title": "NAIT Entrance Awards Application",
-    "amount": "Varies",
+    "amount": "$500 to $1,500",
     "deadline": null,
     "openDate": null,
     "audience": "Grade 12 students entering first year at Northern Alberta Institute of Technology",
@@ -68122,7 +68122,7 @@
   {
     "id": 1853,
     "title": "Olds College Entrance Awards Application",
-    "amount": "Varies",
+    "amount": "$100 to $6,000",
     "deadline": "2027-10-31",
     "openDate": null,
     "audience": "Grade 12 students entering first year at Olds College",
@@ -68377,7 +68377,7 @@
   {
     "id": 1859,
     "title": "Bow Valley College Entrance Awards Application",
-    "amount": "Varies",
+    "amount": "$1,000 to $20,000",
     "deadline": "2027-08-01",
     "openDate": "2027-05-01",
     "audience": "Grade 12 students entering first year at Bow Valley College",
@@ -68536,7 +68536,7 @@
   {
     "id": 1863,
     "title": "Portage College General Entrance Awards Application",
-    "amount": "Varies",
+    "amount": "$400 to $1,000",
     "deadline": "2027-09-25",
     "openDate": null,
     "audience": "Grade 12 students entering first year at Portage College",
@@ -68692,7 +68692,7 @@
   {
     "id": 1867,
     "title": "St. Mary's University High School Awards Application",
-    "amount": "Varies",
+    "amount": "$650 to $36,000",
     "deadline": null,
     "openDate": null,
     "audience": "Grade 12 students entering first year at St. Mary's University",
@@ -70448,7 +70448,7 @@
   {
     "id": 1910,
     "title": "Fort Vermilion School Division Grow Our Own Education Bursary",
-    "amount": "Varies",
+    "amount": "Bachelor of Education tuition for four years",
     "deadline": "2027-06-26",
     "deadlineEstimated": true,
     "audience": "Northern Alberta residents entering the four-year Bachelor of Education at Northwestern Polytechnic",
@@ -72254,7 +72254,7 @@
   {
     "id": 1955,
     "title": "Rebecca Kelln Métis Bursary Fund",
-    "amount": "Varies",
+    "amount": "Up to $1,000",
     "deadline": "2027-04-30",
     "audience": "Métis students from Alberta in their first or second year of post-secondary",
     "url": "https://apeetogosan.com/bursary/",
