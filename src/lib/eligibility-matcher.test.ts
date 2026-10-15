@@ -1041,7 +1041,9 @@ describe('the corpus the quiz matches against', () => {
       return true
     })
     expect(dead.map(s => s.title)).toEqual([])
-  })
+    // About 1.2 s alone, but it walks the whole catalogue and passed the 5 s
+    // default under a parallel `npm run ci` once the catalogue passed 2,300.
+  }, 20_000)
 })
 
 describe('the results cap', () => {

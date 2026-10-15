@@ -1223,6 +1223,10 @@
     "hash": "a198a7805e86c877",
     "date": "2026-10-05"
   },
+  "/scholarships/agriculture-class-of-1950-bar-none-award/": {
+    "hash": "395b19d73b10b726",
+    "date": "2026-10-14"
+  },
   "/scholarships/ahsfa-society-grade-10-and-11-summer-camp-bursaries/": {
     "hash": "3018e734eb2f2197",
     "date": "2026-10-08"
@@ -1467,6 +1471,10 @@
     "hash": "d8439ac56351ee60",
     "date": "2026-10-14"
   },
+  "/scholarships/alberta-school-of-business-inspiring-leadership-award/": {
+    "hash": "ffb20bb1f684feb8",
+    "date": "2026-10-14"
+  },
   "/scholarships/alberta-teachers-association-gold-medal-in-education/": {
     "hash": "3a8b574235d6e8eb",
     "date": "2026-10-08"
@@ -1493,6 +1501,10 @@
   },
   "/scholarships/aldea-family-entrance-award-in-business-and-economics/": {
     "hash": "21edfaf7d230f4bc",
+    "date": "2026-10-14"
+  },
+  "/scholarships/ales-entrance-award-university-of-alberta/": {
+    "hash": "d68108b0abb57607",
     "date": "2026-10-14"
   },
   "/scholarships/alex-decoteau-award-of-honour/": {
@@ -1579,6 +1591,10 @@
     "hash": "ac13d673bd9d1186",
     "date": "2026-10-14"
   },
+  "/scholarships/alma-mater-entrance-scholarships/": {
+    "hash": "2fcbda6663d31fa9",
+    "date": "2026-10-14"
+  },
   "/scholarships/altalink-centennial-scholarship/": {
     "hash": "bbfaed77cf46f012",
     "date": "2026-10-08"
@@ -1626,6 +1642,10 @@
   "/scholarships/andrew-hyslop-and-barbara-zinter-award-for-lifeguarding/": {
     "hash": "68862cbd443d038c",
     "date": "2026-10-08"
+  },
+  "/scholarships/andrew-starzyk-memorial-leadership-scholarship/": {
+    "hash": "26e804229edf3659",
+    "date": "2026-10-14"
   },
   "/scholarships/andy-polanski-leader-of-tomorrow-memorial-scholarship/": {
     "hash": "91e631a611e30d37",
@@ -1835,6 +1855,14 @@
     "hash": "550b00c46ad44417",
     "date": "2026-10-08"
   },
+  "/scholarships/augustana-deans-entrance-citations/": {
+    "hash": "84e818d91b035458",
+    "date": "2026-10-14"
+  },
+  "/scholarships/augustana-experience-award/": {
+    "hash": "1e3011cf918c7ba4",
+    "date": "2026-10-14"
+  },
   "/scholarships/augustana-faculty-education-award/": {
     "hash": "397c92bf9dfd6bca",
     "date": "2026-10-14"
@@ -2043,6 +2071,10 @@
     "hash": "3c280025008ff2dc",
     "date": "2026-10-08"
   },
+  "/scholarships/bert-church-bar-none-entrance-award/": {
+    "hash": "35702803cd0f82b0",
+    "date": "2026-10-14"
+  },
   "/scholarships/beta-sigma-phi-scholarship/": {
     "hash": "a8d38e41d89aaed0",
     "date": "2026-10-08"
@@ -2131,6 +2163,10 @@
     "hash": "f462f879720c931e",
     "date": "2026-10-05"
   },
+  "/scholarships/bill-and-berdie-fowler-entrance-award/": {
+    "hash": "6efbb4e460b62033",
+    "date": "2026-10-14"
+  },
   "/scholarships/bill-and-mae-parker-health-sciences-bursary/": {
     "hash": "c4d3b4695393e7f8",
     "date": "2026-10-14"
@@ -2170,6 +2206,10 @@
   "/scholarships/bissett-family-scholars-entrance-bursary-bow-valley-college/": {
     "hash": "7dbd943a5c97f83d",
     "date": "2026-10-09"
+  },
+  "/scholarships/bl-montgomery-scholarship-in-engineering/": {
+    "hash": "17ce200206f59323",
+    "date": "2026-10-14"
   },
   "/scholarships/black-knight-inn-university-transfer-scholarship/": {
     "hash": "4a31fcb4567d75a3",
@@ -3319,6 +3359,10 @@
     "hash": "211865542d7fb609",
     "date": "2026-10-08"
   },
+  "/scholarships/class-of-1958-science-entrance-scholarship/": {
+    "hash": "e0ed6eea2db551ef",
+    "date": "2026-10-14"
+  },
   "/scholarships/class-of-1972-engineering-entrance-bursary/": {
     "hash": "5dca9438e45c00d9",
     "date": "2026-10-14"
@@ -3498,6 +3542,10 @@
   "/scholarships/copa-neil-j-armstrong-ab-initio-scholarship/": {
     "hash": "67c43419f559f750",
     "date": "2026-10-08"
+  },
+  "/scholarships/copp-family-leadership-scholarships/": {
+    "hash": "95ef02c2be55bb7d",
+    "date": "2026-10-14"
   },
   "/scholarships/copp-family-scholarship/": {
     "hash": "38805f85d6d1b064",
@@ -3755,6 +3803,30 @@
     "hash": "0d4118de4b105b63",
     "date": "2026-10-08"
   },
+  "/scholarships/deans-entrance-citation-in-arts-university-of-alberta/": {
+    "hash": "940053db1e6e89fc",
+    "date": "2026-10-14"
+  },
+  "/scholarships/deans-entrance-citation-in-business-university-of-alberta/": {
+    "hash": "a03004ef5f715382",
+    "date": "2026-10-14"
+  },
+  "/scholarships/deans-entrance-citation-in-education-university-of-alberta/": {
+    "hash": "517e19515707722e",
+    "date": "2026-10-14"
+  },
+  "/scholarships/deans-entrance-citation-in-engineering-university-of-alberta/": {
+    "hash": "354435a657e1442b",
+    "date": "2026-10-14"
+  },
+  "/scholarships/deans-entrance-citation-in-kinesiology-sport-and-recreation/": {
+    "hash": "1145b7716962f71a",
+    "date": "2026-10-14"
+  },
+  "/scholarships/deans-entrance-citations-in-agricultural-life-and-environmental-sciences/": {
+    "hash": "febdee814d6fba3c",
+    "date": "2026-10-14"
+  },
   "/scholarships/decker-award/": {
     "hash": "fa72b7ac352948b7",
     "date": "2026-10-08"
@@ -3983,6 +4055,10 @@
     "hash": "0c0e18107d002ae5",
     "date": "2026-09-19"
   },
+  "/scholarships/dr-william-winspear-deans-citation-in-business/": {
+    "hash": "60ce086088c96b77",
+    "date": "2026-10-14"
+  },
   "/scholarships/drs-alan-and-suna-smith-memorial-scholarship-in-science/": {
     "hash": "c04ada1c34c39531",
     "date": "2026-10-08"
@@ -4045,6 +4121,10 @@
   },
   "/scholarships/ecotourism-and-outdoor-leadership-scholarship-for-entrance-students/": {
     "hash": "2ea4a79b389f7100",
+    "date": "2026-10-14"
+  },
+  "/scholarships/ed-and-alice-peterson-entrance-scholarship/": {
+    "hash": "f66c12d26b6ca5b5",
     "date": "2026-10-14"
   },
   "/scholarships/ed-stelmach-community-foundation-scholarship/": {
@@ -4311,6 +4391,22 @@
     "hash": "7b047c8a11225c7d",
     "date": "2026-10-14"
   },
+  "/scholarships/faculty-of-arts-academic-excellence-scholarships/": {
+    "hash": "2cdbe8f613a7f885",
+    "date": "2026-10-14"
+  },
+  "/scholarships/faculty-of-engineering-inspiring-leadership-award/": {
+    "hash": "f76aa2b8d60cd751",
+    "date": "2026-10-14"
+  },
+  "/scholarships/faculty-of-engineering-platinum-entrance-award/": {
+    "hash": "f7c287bc369d0f75",
+    "date": "2026-10-14"
+  },
+  "/scholarships/faculty-of-science-entrance-scholarship-university-of-alberta/": {
+    "hash": "085f443a354ef12f",
+    "date": "2026-10-14"
+  },
   "/scholarships/fairfax-financial-holdings-limited-entrance-bursary-university-of-calgary/": {
     "hash": "c8bef160cd236117",
     "date": "2026-10-09"
@@ -4515,6 +4611,10 @@
     "hash": "3f64825077571daf",
     "date": "2026-10-09"
   },
+  "/scholarships/frank-foulds-bar-none-entrance-leadership-award/": {
+    "hash": "64405c14f292584d",
+    "date": "2026-10-14"
+  },
   "/scholarships/frank-freeman-educational-scholarship/": {
     "hash": "c32785d7b2a8037e",
     "date": "2026-10-02"
@@ -4602,6 +4702,10 @@
   "/scholarships/friends-of-the-performing-arts-scholarship/": {
     "hash": "7edcd6db8623a666",
     "date": "2026-10-08"
+  },
+  "/scholarships/friends-of-the-university-entrance-scholarships/": {
+    "hash": "d159950e8ec8da9f",
+    "date": "2026-10-14"
   },
   "/scholarships/friesen-yearbook-scholarship/": {
     "hash": "8fa8594897b3f08b",
@@ -5047,6 +5151,10 @@
     "hash": "09121c537c8b1256",
     "date": "2026-10-14"
   },
+  "/scholarships/harold-b-banister-deans-citation-in-business/": {
+    "hash": "b1f01417a3a41ec6",
+    "date": "2026-10-14"
+  },
   "/scholarships/harry-arthurs-alumni-families-scholarship/": {
     "hash": "e94dabc5b0e0252a",
     "date": "2026-10-14"
@@ -5065,6 +5173,10 @@
   },
   "/scholarships/harvard-broadcasting-entrance-award-in-music/": {
     "hash": "9b4c4cb756b74cb4",
+    "date": "2026-10-14"
+  },
+  "/scholarships/harvey-anderson-centennial-bar-none-award/": {
+    "hash": "270dced45c9774d3",
     "date": "2026-10-14"
   },
   "/scholarships/harvey-northcott-memorial-scholarship/": {
@@ -5343,6 +5455,10 @@
     "hash": "7217eddd2dba66b0",
     "date": "2026-10-08"
   },
+  "/scholarships/isobel-secord-memorial-deans-entrance-citation-in-nursing/": {
+    "hash": "f0bbae0d7c366094",
+    "date": "2026-10-14"
+  },
   "/scholarships/iuoe-canadian-conference-bursary/": {
     "hash": "ec7e60cf136dd794",
     "date": "2026-10-08"
@@ -5374,6 +5490,10 @@
   "/scholarships/jackie-heitzman-rose-bowl-award/": {
     "hash": "204547e6de990dbf",
     "date": "2026-10-08"
+  },
+  "/scholarships/jake-and-marilyn-ens-family-bar-none-award/": {
+    "hash": "6481cdf1f46ed77e",
+    "date": "2026-10-14"
   },
   "/scholarships/jake-and-ruth-superstein-leadership-scholarship/": {
     "hash": "20cfdce609698a01",
@@ -6799,6 +6919,10 @@
     "hash": "9414c6d99297870a",
     "date": "2026-10-08"
   },
+  "/scholarships/max-wyman-memorial-entrance-leadership-scholarships/": {
+    "hash": "deb4726b9b00a18c",
+    "date": "2026-10-14"
+  },
   "/scholarships/maxwell-li-memorial-award/": {
     "hash": "17466d5cde1ae165",
     "date": "2026-10-14"
@@ -6905,6 +7029,10 @@
   },
   "/scholarships/melcor-developments-bursary/": {
     "hash": "3b28ec7264a07bfb",
+    "date": "2026-10-14"
+  },
+  "/scholarships/mellemstrand-family-bar-none-entrance-award/": {
+    "hash": "524de332af239b45",
     "date": "2026-10-14"
   },
   "/scholarships/mellissa-austrom-endowment-fund/": {
@@ -7223,6 +7351,10 @@
     "hash": "e9d088e9a72e2bbc",
     "date": "2026-10-08"
   },
+  "/scholarships/newbert-construction-entrance-awards-in-engineering/": {
+    "hash": "3a8d8dcea94a03b7",
+    "date": "2026-10-14"
+  },
   "/scholarships/newbert-entrance-bursary-in-nursing/": {
     "hash": "59b9852a51ce2f9f",
     "date": "2026-10-14"
@@ -7366,6 +7498,10 @@
   "/scholarships/northlands-empowerment-award/": {
     "hash": "306bcdd35fd8c4ec",
     "date": "2026-10-08"
+  },
+  "/scholarships/northlands-entrance-scholarship/": {
+    "hash": "4a8cd65efe265967",
+    "date": "2026-10-14"
   },
   "/scholarships/northstar-ford-lincoln-marty-and-dennine-giles-award-a/": {
     "hash": "5cadb3f3ac846ff6",
@@ -7663,6 +7799,10 @@
     "hash": "c7548e6f4f851bf4",
     "date": "2026-10-04"
   },
+  "/scholarships/paul-sills-memorial-entrance-award-in-drama/": {
+    "hash": "3b997d6d3b716518",
+    "date": "2026-10-14"
+  },
   "/scholarships/pcl-and-local-488-welding-flame-to-fame-scholarship/": {
     "hash": "1432a0e4f554dd51",
     "date": "2026-10-08"
@@ -7861,6 +8001,10 @@
   },
   "/scholarships/ptarmigan-indigenous-achievement-scholarship/": {
     "hash": "d792b4e50d8423e6",
+    "date": "2026-10-14"
+  },
+  "/scholarships/purvis-scholarship-in-engineering/": {
+    "hash": "d363015619dd4299",
     "date": "2026-10-14"
   },
   "/scholarships/pvma-vegetation-management-scholarship/": {
@@ -8139,6 +8283,10 @@
     "hash": "02a65df40d656d59",
     "date": "2026-10-08"
   },
+  "/scholarships/right-honourable-don-mazankowski-entrance-citation/": {
+    "hash": "fec1c5acc2262983",
+    "date": "2026-10-14"
+  },
   "/scholarships/ringette-alberta-scholarship/": {
     "hash": "b73d13da36ee8dab",
     "date": "2026-10-08"
@@ -8159,9 +8307,17 @@
     "hash": "5b6b39d4110996df",
     "date": "2026-10-08"
   },
+  "/scholarships/rob-saik-bar-none-award-in-agriculture/": {
+    "hash": "f0ccda5a0b1db583",
+    "date": "2026-10-14"
+  },
   "/scholarships/robert-allan-memorial-scholarship/": {
     "hash": "17a319c565838408",
     "date": "2026-10-08"
+  },
+  "/scholarships/robert-and-shirley-stollery-entrance-awards-in-engineering/": {
+    "hash": "cb228796d0f9fecb",
+    "date": "2026-10-14"
   },
   "/scholarships/robert-chamney-memorial-scholarship/": {
     "hash": "926e6b221b5a64b9",
@@ -8195,6 +8351,10 @@
     "hash": "a30a1f71b0d3c8ea",
     "date": "2026-10-14"
   },
+  "/scholarships/robert-stollery-scholarship-in-engineering/": {
+    "hash": "e1153f6ef8e4718f",
+    "date": "2026-10-14"
+  },
   "/scholarships/robert-tegler-entrance-scholarships/": {
     "hash": "2eb7f1e7b2102128",
     "date": "2026-10-14"
@@ -8209,6 +8369,10 @@
   },
   "/scholarships/rocky-credit-union-member-scholarships/": {
     "hash": "3b46dccb4d481532",
+    "date": "2026-10-14"
+  },
+  "/scholarships/rocky-forest-leadership-scholarship/": {
+    "hash": "0c535c5093cd078d",
     "date": "2026-10-14"
   },
   "/scholarships/rocky-gas-co-op-scholarships/": {
@@ -8555,6 +8719,10 @@
     "hash": "c636c134e0d7b8fb",
     "date": "2026-10-05"
   },
+  "/scholarships/scholastic-distinction-scholarship-university-of-alberta/": {
+    "hash": "5fbb96d80af47221",
+    "date": "2026-10-14"
+  },
   "/scholarships/school-of-communication-studies-scholarship/": {
     "hash": "b2b29015fbf23248",
     "date": "2026-10-14"
@@ -8581,6 +8749,10 @@
   },
   "/scholarships/schulich-school-of-engineering-scholarship/": {
     "hash": "a4ce22f03561502f",
+    "date": "2026-10-14"
+  },
+  "/scholarships/scotiabank-deans-entrance-citation-in-arts/": {
+    "hash": "1e592499b01112ba",
     "date": "2026-10-14"
   },
   "/scholarships/scotiabank-indigenous-education-awards/": {
@@ -9019,6 +9191,10 @@
     "hash": "73cb4875aa25457a",
     "date": "2026-10-08"
   },
+  "/scholarships/stuart-olson-science-rising-star-entrance-scholarship/": {
+    "hash": "6ccf5d5271d29f59",
+    "date": "2026-10-14"
+  },
   "/scholarships/stuck-at-prom-scholarship/": {
     "hash": "66d9894dcf904ac0",
     "date": "2026-10-08"
@@ -9041,6 +9217,10 @@
   },
   "/scholarships/sun-life-workplace-readiness-program-scholarship/": {
     "hash": "ba4eedb19075232a",
+    "date": "2026-10-14"
+  },
+  "/scholarships/suncor-energy-emerging-leaders-deans-citation-in-business/": {
+    "hash": "64800e4db2ff232e",
     "date": "2026-10-14"
   },
   "/scholarships/suncor-energy-rick-george-leadership-award/": {
@@ -9474,6 +9654,10 @@
   "/scholarships/university-of-alberta-opportunities-awards/": {
     "hash": "78567b11baffada4",
     "date": "2026-10-08"
+  },
+  "/scholarships/university-of-alberta-presidents-and-chancellors-entrance-citations/": {
+    "hash": "42f9dd0539f8b2cc",
+    "date": "2026-10-14"
   },
   "/scholarships/university-of-alberta-rural-scholars-entrance-award/": {
     "hash": "859da528255d121b",
@@ -10142,6 +10326,10 @@
   "/scholarships/william-aberhart-alumni-scholarship/": {
     "hash": "b021427482be30ff",
     "date": "2026-10-08"
+  },
+  "/scholarships/william-and-mary-hawrysh-memorial-leadership-scholarships/": {
+    "hash": "a15d7dacc501daf1",
+    "date": "2026-10-14"
   },
   "/scholarships/william-arthur-bower-memorial-scholarship/": {
     "hash": "eeb4a1c682d765c3",

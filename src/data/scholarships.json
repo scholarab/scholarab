@@ -95609,5 +95609,1957 @@
       "apprenticeship": false,
       "extracurriculars": []
     }
+  },
+  {
+    "id": 2539,
+    "title": "University of Alberta President's and Chancellor's Entrance Citations",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "audience": "Grade 12 students with averages near 95% entering any faculty at the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27228",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Admission average decides them, around 95% or higher. Each renews for second, third and fourth year with a 3.5 GPA on 24 credits.",
+    "active": true,
+    "description": "Three renewable university-wide citations, the President's, the President's Centenary and the Chancellor's, for top high school entrants.",
+    "openDate": "2026-10-01",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [],
+      "minAverage": 95,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2540,
+    "title": "Scholastic Distinction Scholarship (University of Alberta)",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "audience": "Grade 12 students with averages of 95% or higher entering the University of Alberta",
+    "url": "https://www.ualberta.ca/en/admissions/tuition-and-scholarships/entrance-scholarships/index.html",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You need an admission average of 95% or higher. The written application carries real weight, so treat it like an essay.",
+    "active": true,
+    "description": "The University of Alberta's most prestigious entrance scholarships go to applicants with 95%+ averages and an outstanding application.",
+    "metaDetail": "For 95%+ averages.",
+    "openDate": "2026-10-01",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [],
+      "minAverage": 95,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2541,
+    "title": "Alma Mater Entrance Scholarships",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "audience": "Grade 12 students with top marks and financial need entering the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27293",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Admission average picks recipients, and you must also show financial need.",
+    "active": true,
+    "description": "University of Alberta alumni fund these entrance scholarships for strong students who need the money.",
+    "openDate": "2026-10-01",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2542,
+    "title": "Friends of the University Entrance Scholarships",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "audience": "Grade 12 students with top marks entering the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/26886",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Admission average picks recipients, and students with financial need get preference.",
+    "active": true,
+    "description": "The Friends of the University of Alberta fund these first-year scholarships.",
+    "metaDetail": "Need gets preference.",
+    "openDate": "2026-10-01",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2543,
+    "title": "Northlands Entrance Scholarship",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "audience": "Alberta residents with top marks entering the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/26891",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must be an Alberta resident. Admission average picks the recipient.",
+    "active": true,
+    "description": "Northlands, the Edmonton exhibition association, funds this entrance scholarship for an Alberta student.",
+    "metaDetail": "For Alberta residents.",
+    "openDate": "2026-10-01",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2544,
+    "title": "William and Mary Hawrysh Memorial Leadership Scholarships",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "audience": "Alberta high school graduates with top marks and leadership entering the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27047",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must graduate from an Alberta high school. Selection weighs leadership in activities and community along with your admission average.",
+    "active": true,
+    "description": "The Hawrysh family remembers William and Mary Hawrysh with these first-year leadership scholarships.",
+    "openDate": "2026-10-01",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteering"
+      ]
+    }
+  },
+  {
+    "id": 2545,
+    "title": "Andrew Starzyk Memorial Leadership Scholarship",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "audience": "Grade 12 students with top marks and leadership entering the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27097",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Selection weighs leadership in extracurricular and community activities along with your admission average.",
+    "active": true,
+    "description": "This memorial scholarship rewards a first-year University of Alberta student who leads in school and community.",
+    "openDate": "2026-10-01",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteering"
+      ]
+    }
+  },
+  {
+    "id": 2546,
+    "title": "Copp Family Leadership Scholarships",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "audience": "Grade 12 students with top marks and leadership entering the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27070",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Selection weighs leadership in activities and community along with your admission average.",
+    "active": true,
+    "description": "The Copp family funds yearly leadership scholarships for students starting at the University of Alberta.",
+    "openDate": "2026-10-01",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteering"
+      ]
+    }
+  },
+  {
+    "id": 2547,
+    "title": "Max Wyman Memorial Entrance Leadership Scholarships",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "audience": "Grade 12 students with top marks and leadership entering the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27072",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Selection weighs leadership in activities and community along with your admission average.",
+    "active": true,
+    "description": "Named for former University of Alberta president Max Wyman, these scholarships go to entering students who lead.",
+    "openDate": "2026-10-01",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteering"
+      ]
+    }
+  },
+  {
+    "id": 2548,
+    "title": "Rocky Forest Leadership Scholarship",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "audience": "Grade 12 students with top marks and leadership entering the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27093",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Selection weighs your admission average and leadership, community work, volunteering or activities.",
+    "active": true,
+    "description": "A first-year University of Alberta scholarship for a student with high marks and a record of leadership.",
+    "openDate": "2026-10-01",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteering"
+      ]
+    }
+  },
+  {
+    "id": 2549,
+    "title": "Dean's Entrance Citations in Agricultural, Life and Environmental Sciences",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "audience": "Grade 12 students with averages near 95% entering ALES at the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27237",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You need an admission average around 95%. It renews for three more years if you keep a 3.5 GPA on 24 credits in the faculty.",
+    "active": true,
+    "description": "Renewable citations for the top high school entrants to the agriculture, life and environmental sciences faculty.",
+    "openDate": "2026-10-01",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Agriculture",
+        "Environment"
+      ],
+      "minAverage": 95,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2550,
+    "title": "ALES Entrance Award (University of Alberta)",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "audience": "Grade 12 students entering Agricultural, Life and Environmental Sciences at the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27367",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Satisfactory marks qualify you. First Nations, Inuit and Métis students, rural students and first-generation students get preference.",
+    "active": true,
+    "description": "A first-year award in the agriculture, life and environmental sciences faculty that favours students who are new to university life.",
+    "openDate": "2026-10-01",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Agriculture",
+        "Environment"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2551,
+    "title": "Agriculture Class of 1950 Bar None Award",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "audience": "Grade 12 students with leadership entering Agriculture or Animal Health at the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27136",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Selection rests on leadership in activities and community, and students with financial need get preference. You can hold only one Bar None award a year.",
+    "active": true,
+    "description": "The agriculture class of 1950 funds this yearly Bar None award for a student coming straight from high school.",
+    "openDate": "2026-10-01",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Agriculture",
+        "Animal Health"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "4-H",
+        "volunteering"
+      ]
+    }
+  },
+  {
+    "id": 2552,
+    "title": "Bert Church Bar None Entrance Award",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "audience": "Grade 12 students from Alberta or Saskatchewan entering Agricultural, Life and Environmental Sciences at the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27195",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must be from Alberta or Saskatchewan. Selection weighs leadership through volunteer, community, sports or political activities.",
+    "active": true,
+    "description": "Named for rancher Bert Church, this award backs first-year students from the Prairies in the agriculture faculty.",
+    "openDate": "2026-10-01",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Agriculture"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteering"
+      ]
+    }
+  },
+  {
+    "id": 2553,
+    "title": "Frank Foulds Bar None Entrance Leadership Award",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "audience": "Grade 12 students entering Agriculture, Animal Health or Nutrition and Food Science at the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27132",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Selection weighs leadership, community work and volunteering, and financial need gets preference.",
+    "active": true,
+    "description": "Frank Foulds is remembered with this leadership award for high school entrants in the agriculture faculty.",
+    "openDate": "2026-10-01",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Agriculture",
+        "Animal Health",
+        "Nutrition"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteering"
+      ]
+    }
+  },
+  {
+    "id": 2554,
+    "title": "Harvey Anderson Centennial Bar None Award",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "audience": "Rural Grade 12 students entering Agriculture, Animal Health or Nutrition and Food Science at the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27186",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Selection weighs community leadership and activities, and a student from a rural community gets preference.",
+    "active": true,
+    "description": "A centennial Bar None award for first-year agriculture students that favours those who grew up rural.",
+    "openDate": "2026-10-01",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Agriculture",
+        "Animal Health",
+        "Nutrition"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "4-H",
+        "volunteering"
+      ]
+    }
+  },
+  {
+    "id": 2555,
+    "title": "Jake and Marilyn Ens Family Bar None Award",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "audience": "Grade 12 students entering Agriculture or Animal Health at the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27157",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Selection weighs leadership in activities and community, and financial need gets preference.",
+    "active": true,
+    "description": "The Ens family funds this Bar None leadership award for a first-year agriculture or animal health student.",
+    "metaDetail": "Need gets preference.",
+    "openDate": "2026-10-01",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Agriculture",
+        "Animal Health"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "4-H",
+        "volunteering"
+      ]
+    }
+  },
+  {
+    "id": 2556,
+    "title": "Mellemstrand Family Bar None Entrance Award",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "audience": "Grade 12 students entering a BSc in Agricultural, Life and Environmental Sciences at the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27193",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Selection weighs leadership in activities and community along with your marks.",
+    "active": true,
+    "description": "The Mellemstrand family funds this Bar None award for students starting a science degree in the agriculture faculty.",
+    "openDate": "2026-10-01",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Agriculture",
+        "Environment"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteering"
+      ]
+    }
+  },
+  {
+    "id": 2557,
+    "title": "Rob Saik Bar None Award in Agriculture",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "audience": "Grade 12 students entering Agriculture, Agribusiness or Animal Health at the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27196",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Selection weighs leadership through volunteer, community, sports or political activities.",
+    "active": true,
+    "description": "Agrologist Rob Saik funds this Bar None award for first-year agriculture, agribusiness and animal health students.",
+    "openDate": "2026-10-01",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Agriculture",
+        "Animal Health",
+        "Business"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteering"
+      ]
+    }
+  },
+  {
+    "id": 2558,
+    "title": "Dean's Entrance Citation in Arts (University of Alberta)",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "audience": "Grade 12 students with averages near 95% entering Arts at the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27239",
+    "category": "Arts",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You need an admission average around 95%. It renews for three more years if you keep a 3.5 GPA on 24 credits in Arts.",
+    "active": true,
+    "description": "Renewable citations for the top high school entrants to the Faculty of Arts.",
+    "openDate": "2026-10-01",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Arts"
+      ],
+      "minAverage": 95,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2559,
+    "title": "Scotiabank Dean's Entrance Citation in Arts",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "audience": "Grade 12 students with averages near 90% entering Arts at the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27250",
+    "category": "Arts",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You need an admission average around 90%. It renews for three more years with a 3.5 GPA on 24 credits in Arts.",
+    "active": true,
+    "description": "Scotiabank funds this renewable Faculty of Arts citation for high school entrants.",
+    "openDate": "2026-10-01",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Arts"
+      ],
+      "minAverage": 90,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2560,
+    "title": "Faculty of Arts Academic Excellence Scholarships",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "audience": "Grade 12 students with top marks entering Arts at the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27042",
+    "category": "Arts",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Admission average picks recipients.",
+    "active": true,
+    "description": "Yearly scholarships for the strongest students entering the Faculty of Arts.",
+    "metaDetail": "For Arts entrants.",
+    "openDate": "2026-10-01",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Arts"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2561,
+    "title": "Dean's Entrance Citation in Business (University of Alberta)",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "audience": "Grade 12 students with averages near 95% entering Commerce at the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27241",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You need an admission average around 95%. It renews for three more years if you keep a 3.5 GPA on 24 credits in the School of Business.",
+    "active": true,
+    "description": "Renewable citations for the top high school entrants to the Bachelor of Commerce.",
+    "openDate": "2026-10-01",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Business"
+      ],
+      "minAverage": 95,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2562,
+    "title": "Alberta School of Business Inspiring Leadership Award",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "audience": "Grade 12 students with top marks and leadership entering Business at the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27324",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Selection weighs your marks and leadership, community work, volunteering or activities.",
+    "active": true,
+    "description": "A first-year Alberta School of Business award for students who lead as well as score.",
+    "openDate": "2026-10-01",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Business"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteering"
+      ]
+    }
+  },
+  {
+    "id": 2563,
+    "title": "Dr. William Winspear Dean's Citation in Business",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "audience": "Grade 12 students with top marks entering Commerce at the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27079",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Marks decide it. It renews for second and third year if you keep superior grades on 24 credits.",
+    "active": true,
+    "description": "Named for business school benefactor William Winspear, this citation backs a top Bachelor of Commerce entrant.",
+    "metaDetail": "Renewable.",
+    "openDate": "2026-10-01",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Business"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2564,
+    "title": "Harold B Banister Dean's Citation in Business",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "audience": "Grade 12 students with top marks entering Business at the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27050",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Marks decide it, and Alberta residents get preference. It renews with a 3.5 GPA on 24 credits.",
+    "active": true,
+    "description": "Harold Banister endowed this renewable citation for a top first-year business student.",
+    "metaDetail": "Alberta preference.",
+    "openDate": "2026-10-01",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Business"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2565,
+    "title": "Suncor Energy Emerging Leaders Dean's Citation in Business",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "audience": "Grade 12 students with top marks entering Business at the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27083",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Marks decide it. It renews for second and third year with a 3.5 GPA on 24 credits in Business.",
+    "active": true,
+    "description": "Suncor Energy funds this renewable citation for first-year Alberta School of Business students.",
+    "metaDetail": "Renewable.",
+    "openDate": "2026-10-01",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Business"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2566,
+    "title": "Dean's Entrance Citation in Education (University of Alberta)",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "audience": "Grade 12 students with averages near 95% entering Education at the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27248",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You need an admission average around 95%. It renews for three more years if you keep a 3.5 GPA on 24 credits in Education.",
+    "active": true,
+    "description": "Renewable citations for the top high school entrants to the Bachelor of Education.",
+    "openDate": "2026-10-01",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Education"
+      ],
+      "minAverage": 95,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2567,
+    "title": "Dean's Entrance Citation in Engineering (University of Alberta)",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "audience": "Grade 12 students with averages near 95% entering Engineering at the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27232",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You need an admission average around 95%. It renews for three more years if you keep a 3.5 GPA on 24 credits in Engineering.",
+    "active": true,
+    "description": "Renewable citations for the top high school entrants to the Faculty of Engineering.",
+    "openDate": "2026-10-01",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Engineering"
+      ],
+      "minAverage": 95,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2568,
+    "title": "BL Montgomery Scholarship in Engineering",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "audience": "Grade 12 students with top marks entering Engineering at the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27225",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Selection weighs your marks and maturity shown through activities, work or community involvement. It renews with a 3.5 GPA on 24 credits.",
+    "active": true,
+    "description": "A renewable engineering scholarship that looks for maturity as well as marks.",
+    "openDate": "2026-10-01",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Engineering"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2569,
+    "title": "Purvis Scholarship in Engineering",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "audience": "Grade 12 students with top marks entering Engineering at the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27289",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Admission average decides it. It renews each year you keep superior grades on 24 credits in Engineering.",
+    "active": true,
+    "description": "The Purvis fund pays for a renewable scholarship for a top first-year engineering student.",
+    "openDate": "2026-10-01",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Engineering"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2570,
+    "title": "Robert Stollery Scholarship in Engineering",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "audience": "Grade 12 students with top Grade 12 marks entering Engineering at the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27005",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Your Grade 12 final marks decide it.",
+    "active": true,
+    "description": "Builder Robert Stollery endowed this scholarship for top students starting engineering.",
+    "openDate": "2026-10-01",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Engineering"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2571,
+    "title": "Robert and Shirley Stollery Entrance Awards in Engineering",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "audience": "Grade 12 students with financial need entering Engineering at the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/26920",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must show financial need. Students with a disability get preference.",
+    "active": true,
+    "description": "The Stollerys fund need-based engineering awards that favour students with disabilities.",
+    "openDate": "2026-10-01",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Engineering"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2572,
+    "title": "Newbert Construction Entrance Awards in Engineering",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "audience": "Grade 12 students with financial need entering Engineering at the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/26925",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must show financial need, and satisfactory marks qualify you.",
+    "active": true,
+    "description": "Newbert Construction and Engineering funds need-based awards for engineering students.",
+    "openDate": "2026-10-01",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Engineering"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2573,
+    "title": "Faculty of Engineering Inspiring Leadership Award",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "audience": "Grade 12 students with top marks and leadership entering Engineering at the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27202",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Selection weighs your marks and leadership, community work, volunteering or activities.",
+    "active": true,
+    "description": "A first-year engineering award for students who lead in school and community.",
+    "openDate": "2026-10-01",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Engineering"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteering"
+      ]
+    }
+  },
+  {
+    "id": 2574,
+    "title": "Faculty of Engineering Platinum Entrance Award",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "audience": "Grade 12 students with financial need entering Engineering at the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27369",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must show financial need. Students from underrepresented groups get preference.",
+    "active": true,
+    "description": "A need-based first-year engineering award that widens who can afford the program.",
+    "openDate": "2026-10-01",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Engineering"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2575,
+    "title": "Dean's Entrance Citation in Kinesiology, Sport and Recreation",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "audience": "Grade 12 students with averages near 95% entering Kinesiology at the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27246",
+    "category": "Sports",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You need an admission average around 95%. It renews for three more years if you keep a 3.5 GPA on 24 credits in the faculty.",
+    "active": true,
+    "description": "Renewable citations for the top high school entrants to kinesiology, sport and recreation.",
+    "openDate": "2026-10-01",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Kinesiology"
+      ],
+      "minAverage": 95,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2576,
+    "title": "Isobel Secord Memorial Dean's Entrance Citation in Nursing",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "audience": "Grade 12 students with averages near 95% entering Nursing at the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27249",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You need an admission average around 95%. It renews for three more years if you keep a 3.5 GPA on 24 credits in Nursing.",
+    "active": true,
+    "description": "A renewable memorial citation for a top entrant to the Faculty of Nursing.",
+    "openDate": "2026-10-01",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Nursing"
+      ],
+      "minAverage": 95,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2577,
+    "title": "Faculty of Science Entrance Scholarship (University of Alberta)",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "audience": "Grade 12 students with top marks entering Science at the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27197",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Your marks decide it.",
+    "active": true,
+    "description": "Scholarships for the strongest first-year students in the Faculty of Science.",
+    "metaDetail": "For Science entrants.",
+    "openDate": "2026-10-01",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Science"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2578,
+    "title": "Class of 1958 Science Entrance Scholarship",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "audience": "Alberta residents with top marks entering Science at the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27023",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You must be an Alberta resident. Admission average decides it.",
+    "active": true,
+    "description": "The science class of 1958 funds this scholarship for an Alberta student starting a science degree.",
+    "metaDetail": "For Alberta residents.",
+    "openDate": "2026-10-01",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Science"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2579,
+    "title": "Stuart Olson Science Rising Star Entrance Scholarship",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "audience": "Grade 12 students with top marks entering Science at the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/27010",
+    "category": "STEM",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Admission average picks recipients, and financial need gets preference.",
+    "active": true,
+    "description": "Stuart Olson funds this scholarship for first-year science students.",
+    "metaDetail": "Need gets preference.",
+    "openDate": "2026-10-01",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Science"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2580,
+    "title": "Augustana Dean's Entrance Citations",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "audience": "Grade 12 students with averages near 95% entering Augustana Faculty in Camrose",
+    "url": "https://alberta.academicworks.ca/opportunities/27236",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You need an admission average around 95%. They renew with a 3.5 GPA on 24 credits, with at least 9 credits a term at Augustana.",
+    "active": true,
+    "description": "Two renewable citations, the Betsy Ness Scott and the Gunvor and Erik Mygind, for the top high school entrants to the University of Alberta's Camrose campus.",
+    "openDate": "2026-10-01",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [],
+      "minAverage": 95,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2581,
+    "title": "Right Honourable Don Mazankowski Entrance Citation",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "audience": "Rural Alberta Grade 12 students with averages near 95% entering Augustana Faculty in Camrose",
+    "url": "https://alberta.academicworks.ca/opportunities/27262",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "You need an admission average around 95%, and students from rural Alberta get preference. It renews with a 3.5 GPA at Augustana.",
+    "active": true,
+    "description": "Named for the former deputy prime minister, this renewable citation backs a top Augustana entrant.",
+    "openDate": "2026-10-01",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [],
+      "minAverage": 95,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2582,
+    "title": "Augustana Experience Award",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "audience": "Grade 12 students entering Augustana Faculty in Camrose",
+    "url": "https://alberta.academicworks.ca/opportunities/27344",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Admission average picks recipients, and satisfactory marks qualify you.",
+    "active": true,
+    "description": "First-year awards for students who choose the University of Alberta's small Camrose campus.",
+    "metaDetail": "For Augustana entrants.",
+    "openDate": "2026-10-01",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2583,
+    "title": "Ed and Alice Peterson Entrance Scholarship",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "audience": "Grade 12 students with top marks entering Augustana Faculty in Camrose",
+    "url": "https://alberta.academicworks.ca/opportunities/27191",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Admission average decides it. It renews with a 3.5 GPA on 24 credits at Augustana.",
+    "active": true,
+    "description": "The Petersons fund a renewable scholarship for a strong Augustana entrant.",
+    "openDate": "2026-10-01",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2584,
+    "title": "Bill and Berdie Fowler Entrance Award",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "audience": "Grade 12 students entering Augustana Faculty in Camrose",
+    "url": "https://alberta.academicworks.ca/opportunities/27168",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Your Grade 11 or Grade 12 final marks decide it. It renews while you stay at Augustana in good standing.",
+    "active": true,
+    "description": "The Fowlers fund a renewable first-year award at Augustana.",
+    "metaDetail": "Renewable for four years.",
+    "openDate": "2026-10-01",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2585,
+    "title": "Paul Sills Memorial Entrance Award in Drama",
+    "amount": "Varies",
+    "deadline": "2027-01-10",
+    "audience": "Grade 12 students entering the Drama major at Augustana Faculty in Camrose",
+    "url": "https://alberta.academicworks.ca/opportunities/26883",
+    "category": "Arts",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Your Grade 11 or Grade 12 final marks decide it. It renews while you stay in good standing at Augustana.",
+    "active": true,
+    "description": "A renewable memorial award for a student starting a drama major at Augustana.",
+    "openDate": "2026-10-01",
+    "oneForm": "ualberta",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "Drama"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
   }
 ]
