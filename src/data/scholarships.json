@@ -4862,7 +4862,7 @@
     "audience": "Grade 12 Alberta students; AHSRA members and volunteers are weighted, but non-participants may apply",
     "category": "Community",
     "region": "Alberta",
-    "active": false,
+    "active": true,
     "lastVerified": "2026-10",
     "applyViaGuidance": false,
     "notes": "Submit by mail to the AHSRA Scholarship Coordinator.",
