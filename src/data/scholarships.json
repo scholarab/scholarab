@@ -2561,7 +2561,7 @@
     "category": "Community",
     "lastVerified": "2026-10",
     "region": "Edmonton",
-    "notes": "The 2026 round closed April 17. Applications go to Gene Mah at mahsocietyedmonton@gmail.com.",
+    "notes": "Applications go to Gene Mah at mahsocietyedmonton@gmail.com.",
     "active": false,
     "description": "The Mah Society of Edmonton awards scholarships to members in Grades 10, 11 and 12 with a Mah/Ma surname or a mother whose maiden name is Mah/Ma. Applicants must be Canadian citizens or permanent residents and earn at least 80% in each of four core courses. The posted application lists three $100 awards for Grade 10, three $300 awards for Grade 11 and four $500 awards for Grade 12.",
     "eligibility": {
@@ -2801,7 +2801,7 @@
     "category": "Community",
     "lastVerified": "2026-10",
     "region": "Alberta",
-    "notes": "The 2026 round opened January 26 and closed at midnight April 17. The dates shown are those, so check ladueladieslunch.ca in January.",
+    "notes": "The dates shown are those, so check ladueladieslunch.ca in January.",
     "active": false,
     "description": "The LaDue Ladies Lunch Scholarship supports female-identifying Grade 12 students in Alberta who are entering post-secondary education. This $4,000 award recognizes and encourages young women pursuing their educational goals at the post-secondary level.",
     "eligibility": {
@@ -4516,7 +4516,7 @@
     "category": "Sports",
     "lastVerified": "2026-09",
     "region": "Alberta",
-    "notes": "There are five awards a year totalling $10,000, one each for Northern Alberta, Edmonton, Central Alberta, Calgary and Southern Alberta. A region needs at least five applicants to award its scholarship: thin regions are pooled with the next smallest, and a vacant zone goes to the region with the most applicants. Your high school program must be a paid Football Alberta member in the year you apply, you must have played within School Sport Alberta, and the post-secondary program must run at least two years. Applications and reference letters go by email to Football Alberta. The 2026 cycle closed June 15 at 4pm.",
+    "notes": "There are five awards a year totalling $10,000, one each for Northern Alberta, Edmonton, Central Alberta, Calgary and Southern Alberta. A region needs at least five applicants to award its scholarship, so thin regions are pooled with the next smallest and a vacant zone goes to the region with the most applicants. Your high school program must be a paid Football Alberta member in the year you apply, you must have played within School Sport Alberta, and the post-secondary program must run at least two years. Applications and reference letters go by email to Football Alberta.",
     "applyViaGuidance": false,
     "active": false,
     "description": "Five $2,000 scholarships a year, one for each Football Alberta region, for graduating Grade 12 tackle football players continuing to play at an accredited Alberta post-secondary institution at the USport, CJFL or WWCFL level.",
@@ -11195,7 +11195,6 @@
     "title": "Ben Sauvé Artstrek Bursary",
     "amount": "Cost of Artstrek tuition",
     "deadline": null,
-    "deadlineEstimated": true,
     "audience": "Edmonton Public Schools drama students attending Theatre Alberta Artstrek",
     "url": "https://www.epsb.ca/schools/goingtoschool/awards/communityawards/bensauve/",
     "category": "Arts",
@@ -11242,7 +11241,6 @@
     "title": "French Bilingual Awards",
     "amount": "$100 in Grade 6; $200 in Grade 9; $250 in Grade 12",
     "deadline": null,
-    "deadlineEstimated": true,
     "audience": "Edmonton Public Schools Grade 12 students in French programming",
     "url": "https://www.epsb.ca/schools/goingtoschool/awards/communityawards/frenchbilingual/",
     "category": "Academic",
@@ -11287,7 +11285,6 @@
     "title": "Garth Worthington Memorial Scholarship",
     "amount": "$600",
     "deadline": null,
-    "deadlineEstimated": true,
     "audience": "Edmonton Public Schools senior high vocal music students",
     "url": "https://www.epsb.ca/schools/goingtoschool/awards/communityawards/garthworthington/",
     "category": "Arts",
@@ -11334,7 +11331,6 @@
     "title": "Kinsey Verbeek Memorial Award",
     "amount": "$750",
     "deadline": null,
-    "deadlineEstimated": true,
     "audience": "Edmonton Public Schools Grade 11 students who have overcome personal barriers",
     "url": "https://www.epsb.ca/schools/goingtoschool/awards/communityawards/kinseyverbeek/",
     "category": "Community",
@@ -11374,7 +11370,6 @@
     "title": "Maxwell Li Memorial Award",
     "amount": "$500",
     "deadline": null,
-    "deadlineEstimated": true,
     "audience": "Edmonton Public Schools Grade 11 and 12 student leaders and volunteers",
     "url": "https://www.epsb.ca/schools/goingtoschool/awards/communityawards/maxwellli/",
     "category": "Community",
@@ -20544,7 +20539,7 @@
     "category": "General",
     "lastVerified": "2026-10",
     "region": "Fort Saskatchewan",
-    "notes": "The store publishes a dated cutoff each year; the 2026 round closed June 14, and the date shown here assumes the same day repeats, so confirm it on their site. Applications must be one combined PDF emailed in, with letters of reference on letterhead, a conditional acceptance letter and a transcript. Recipients attend the March annual general meeting to report back, and anyone who withdraws within 30 days of a term start has to repay. Applicants may graduate from a Fort Saskatchewan high school, or live within the Fort Saskatchewan High School attendance boundaries and attend an approved outside program, home school or outreach program.",
+    "notes": "The store publishes a dated cutoff each year and the date shown here assumes the same day repeats, so confirm it on their site. Applications must be one combined PDF emailed in, with letters of reference on letterhead, a conditional acceptance letter and a transcript. Recipients attend the March annual general meeting to report back, and anyone who withdraws within 30 days of a term start has to repay. Applicants may graduate from a Fort Saskatchewan high school, or live within the Fort Saskatchewan High School attendance boundaries and attend an approved outside program, home school or outreach program.",
     "applyViaGuidance": true,
     "applyRoute": "sponsor",
     "active": true,
@@ -25281,7 +25276,7 @@
     "category": "General",
     "audience": "Graduating students whose family holds a Lakeland Co-op membership",
     "url": "https://www.lakelandco-op.crs/sites/lakeland/local/detail/lakeland-co-op-scholarship-program",
-    "notes": "Applications open January 25, nearly four months before they close, and the membership must have been held for at least a year before you apply, so this is one to check at home early.",
+    "notes": "Applications are accepted from March 15 to May 15, and the membership must have been held for at least a year before you apply, so this is one to check at home early.",
     "description": "Three awards of $1,000: two for students entering an accredited post-secondary institution and one reserved for a student entering a trades program. Your parent or guardian must be a current Lakeland Co-op member of at least a year, and you must hold a valid diploma from a school in the Co-op trading area. The package is a personal essay, a resume and two letters of recommendation.",
     "metaDetail": "One of three is for trades.",
     "eligibility": {
@@ -25308,7 +25303,8 @@
         "Volunteering"
       ]
     },
-    "deadlineEstimated": true
+    "deadlineEstimated": true,
+    "openDate": "2027-03-15"
   },
   {
     "id": 644,
@@ -43234,7 +43230,7 @@
     "category": "General",
     "region": "National",
     "description": "A single ACC64 form puts air cadets in the running for the Air Cadet League of Canada's slate of national education scholarships, including engineering and aviation-specific awards.",
-    "notes": "One online form, the ACC64, covers the national slate. The named awards include the Alex Venables Scholarship in Engineering, the Birchall Scholarship, the CAE Limited Scholarships, the Dr. William Weston Scholarship, the KC Lett Scholarships, the Legion National Foundation Scholarship, the Thomas Colfer Scholarship and up to five Royal Canadian Air Force Association Trust awards of $2,500. You must be an air cadet, and the form routes through your Commanding Officer and Squadron Sponsoring Committee Chair, so start with your squadron, not the website. The League does not publish a per-award amount table, so no single figure is claimed here. The 2026 deadline was April 1, 2026 and April 1 has been the recurring date; confirm with awards@aircadetleague.com before counting on it.",
+    "notes": "One online form, the ACC64, covers the national slate. The named awards include the Alex Venables Scholarship in Engineering, the Birchall Scholarship, the CAE Limited Scholarships, the Dr. William Weston Scholarship, the KC Lett Scholarships, the Legion National Foundation Scholarship, the Thomas Colfer Scholarship and up to five Royal Canadian Air Force Association Trust awards of $2,500. You must be an air cadet, and the form routes through your Commanding Officer and Squadron Sponsoring Committee Chair, so start with your squadron, not the website. The League does not publish a per-award amount table, so no single figure is claimed here. April 1 has been the recurring date, so confirm with awards@aircadetleague.com before counting on it.",
     "metaDetail": "One ACC64 form covers the whole national slate.",
     "eligibility": {
       "grades": [
@@ -43487,7 +43483,7 @@
     "category": "General",
     "region": "National",
     "description": "Twenty-four scholarships from the Public Service Alliance of Canada, fourteen of them reserved for dependent children of members, awarded on a written or creative submission, not on grades.",
-    "notes": "Twenty-four awards in four buckets: 14 for dependent children of members heading to full-time study, 3 for members in full-time study, 2 for members part-time, and 5 for members or dependents who self-identify as a woman, Indigenous, a person with a disability or racialized. You must be a member, or the dependent child under 26 of a member, in good standing as of March 31 of the application year. Judged on the merit of a 750 to 850 word essay OR a creative submission: a video, infographic or song, up to five minutes, answering that year's set question. Not limited to first-year students, and past winners cannot win twice. Award values range from $1,000 to $4,000 by category, including $3,000 equity awards. The 2026 round closed June 22, 2026 and PSAC says the 2027 program opens in April. Dependent children must be under 26; the member awards do not state that age limit.",
+    "notes": "Twenty-four awards in four buckets: 14 for dependent children of members heading to full-time study, 3 for members in full-time study, 2 for members part-time, and 5 for members or dependents who self-identify as a woman, Indigenous, a person with a disability or racialized. You must be a member, or the dependent child under 26 of a member, in good standing as of March 31 of the application year. Judged on the merit of a 750 to 850 word essay OR a creative submission: a video, infographic or song, up to five minutes, answering that year's set question. Not limited to first-year students, and past winners cannot win twice. Award values range from $1,000 to $4,000 by category, including $3,000 equity awards. PSAC says the 2027 program opens in April. Dependent children must be under 26; the member awards do not state that age limit.",
     "metaDetail": "A song or video counts as a submission, not just an essay.",
     "eligibility": {
       "grades": [
@@ -46433,7 +46429,7 @@
     "region": "National",
     "active": true,
     "description": "TD and AFOA Canada give 25 Indigenous students a year up to $60,000 over four years: up to $10,000 a year toward tuition plus $5,000 a year for living costs.",
-    "notes": "Applications open in fall 2026 through AFOA Canada, for funding that starts in September 2027, so this round is the one for current Grade 12 students. You must be a member or citizen of a First Nation, Métis or Inuit community, a citizen or permanent resident, and have applied to a full-time program of at least two years. Winners must complete a paid four-month term at TD each year. The 2025 round ran October 1 to November 5 and no 2026 dates are posted yet; AFOA answers questions at td-scholarships@afoa.ca. Applications for September 2027 study close on October 31, 2026 at 11:59 p.m. Eastern Time. Applications open on October 1, 2026 at noon Eastern Time. TD employees and their children cannot apply, another bank award of at least $20,000 requires permission, and paid internship and background-check conditions apply.",
+    "notes": "Applications open in fall 2026 through AFOA Canada, for funding that starts in September 2027, so this round is the one for current Grade 12 students. You must be a member or citizen of a First Nation, Métis or Inuit community, a citizen or permanent resident, and have applied to a full-time program of at least two years. Winners must complete a paid four-month term at TD each year. AFOA answers questions at td-scholarships@afoa.ca. Applications for September 2027 study close on October 31, 2026 at 11:59 p.m. Eastern Time. Applications open on October 1, 2026 at noon Eastern Time. TD employees and their children cannot apply, another bank award of at least $20,000 requires permission, and paid internship and background-check conditions apply.",
     "lastVerified": "2026-10",
     "eligibility": {
       "grades": [
@@ -49235,7 +49231,7 @@
     "localArea": "Big Lakes County residents",
     "notes": "The county boundary is the only geographic test, so students from Kinuso, Faust, Joussard and High Prairie all qualify.",
     "active": true,
-    "description": "The Lesser Slave Watershed Council gives $1,000 to a Big Lakes County student studying biology, earth sciences or anything water focused.",
+    "description": "The Lesser Slave Watershed Council gives two $1,500 bursaries a year to Big Lakes County students studying biology, earth sciences or anything water focused.",
     "metaDetail": "Open across Big Lakes County.",
     "eligibility": {
       "grades": [
@@ -51846,7 +51842,7 @@
     "category": "Indigenous",
     "lastVerified": "2026-09",
     "region": "Alberta",
-    "notes": "There is no age limit and past recipients can apply again. Selection weighs your commitment to learning and what you give back to your community. The 2026 round ran April 1 to June 16 and has closed.",
+    "notes": "There is no age limit and past recipients can apply again. Selection weighs your commitment to learning and what you give back to your community.",
     "active": true,
     "description": "Strathcona Resources awards ten $5,000 scholarships to Indigenous students from communities near its operations in Alberta and Saskatchewan, for post-secondary study or skilled trades training.",
     "metaDetail": "Ten awards, and no age limit.",
@@ -59763,7 +59759,7 @@
     "category": "Community",
     "lastVerified": "2026-09",
     "region": "Alberta",
-    "notes": "The 2026 deadline was March 31, 2026. Apply by mail, email or hand delivery to the GCAA at the German Cultural Club, and include signed, dated time sheets for your volunteer hours.",
+    "notes": "Apply by mail, email or hand delivery to the GCAA at the German Cultural Club, and include signed, dated time sheets for your volunteer hours.",
     "active": true,
     "description": "Up to six $250 awards a year from the German Canadian Association of Alberta for Alberta high school students aged 14 or older who have volunteered at least 15 hours with a German club in good standing with the association, or at a major event promoting German language and culture such as Heritage Days, German Days or Oktoberfest. The money is for curricular or extracurricular activities.",
     "metaDetail": "Fifteen volunteer hours at a German event.",
@@ -59805,7 +59801,7 @@
     "category": "Community",
     "lastVerified": "2026-09",
     "region": "Alberta",
-    "notes": "The 2026 deadline was March 31, 2026. Apply by mail, email or hand delivery to the GCAA at the German Cultural Club, and include signed, dated time sheets for your volunteer hours.",
+    "notes": "Apply by mail, email or hand delivery to the GCAA at the German Cultural Club, and include signed, dated time sheets for your volunteer hours.",
     "active": true,
     "description": "Up to two $2,500 scholarships a year for Alberta residents who are Canadian citizens or permanent residents, entering the first or second year of full-time studies at a public university, college or technical institute in Alberta, with at least 25 hours of volunteering for a German organization or event and a history of volunteer work. Academic excellence is the main consideration; you need a non-family reference, transcripts and proof of enrolment.",
     "metaDetail": "Twenty-five volunteer hours required.",
@@ -60005,7 +60001,7 @@
     "category": "STEM",
     "lastVerified": "2026-10",
     "region": "Cochrane",
-    "notes": "The 2026 deadline was June 15, 2026; check the committee's blog in the spring. Applicants must live in the Cochrane area or attend Cochrane High School, Bow Valley High School, St. Timothy High School or the RVS Community Learning Centre Cochrane Campus. Applicants must enter the first year of an environmental diploma or bachelor’s degree lasting at least two years. Applicants and their immediate family must not serve on the scholarship review or selection committee.",
+    "notes": "Check the committee's blog in the spring. Applicants must live in the Cochrane area or attend Cochrane High School, Bow Valley High School, St. Timothy High School or the RVS Community Learning Centre Cochrane Campus. Applicants must enter the first year of an environmental diploma or bachelor’s degree lasting at least two years. Applicants and their immediate family must not serve on the scholarship review or selection committee.",
     "active": true,
     "description": "The Cochrane Environmental Action Committee gives two $1,500 scholarships every year to students living in the Cochrane area or attending an eligible Cochrane school who are entering environmental studies.",
     "metaDetail": "Two awards a year.",
@@ -60044,7 +60040,7 @@
     "category": "Arts",
     "lastVerified": "2026-10",
     "region": "Edmonton",
-    "notes": "The 2026 deadline was May 18. Essays go by email to programs@icaedmonton.com as a Word or PDF file with your name, age, school and contact details. The association does not publish prize amounts.",
+    "notes": "Essays go by email to programs@icaedmonton.com as a Word or PDF file with your name, age, school and contact details. The association does not publish prize amounts.",
     "active": true,
     "description": "The Igbo Cultural Association of Edmonton's essay competition, held with its Biafra Heroes Memorial Celebration, asks for 500 to 1,000 words on a topic set by level; in 2026 high school students wrote on the role of youth in preserving cultural memory in the diaspora. Winners are recognized at the celebration and receive educational awards from the Biafra Heroes Memorial Scholarship Fund.",
     "metaDetail": "An essay of 500 to 1,000 words.",
@@ -60631,7 +60627,7 @@
     "category": "Trades",
     "lastVerified": "2026-09",
     "region": "Alberta",
-    "notes": "Your employer applies for you, by mail or email, with a letter of recommendation and your apprenticeship transcript. The 2026 intake closed May 15, 2026.",
+    "notes": "Your employer applies for you, by mail or email, with a letter of recommendation and your apprenticeship transcript.",
     "active": true,
     "description": "The Sheet Metal Contractors Association of Alberta awarded eight $1,000 scholarships in 2026 to sheet metal apprentices of any year who work for a member company in good standing, have passed all provincial requirements in their Alberta apprenticeship training, and attended an intake in the past year.",
     "metaDetail": "Eight awards; your employer applies.",
@@ -60746,7 +60742,7 @@
     "category": "Community",
     "lastVerified": "2026-09",
     "region": "Airdrie",
-    "notes": "The 2026 form was due June 30, 2026 by email to crossfieldagsociety@gmail.com with the subject line \"2026 Education Bursary\". The form does not give an amount.",
+    "notes": "The form goes by email to crossfieldagsociety@gmail.com with the year and \"Education Bursary\" as the subject line. The form does not give an amount.",
     "active": true,
     "description": "The Crossfield Agricultural Society's bursary for that year's high school graduates heading to post-secondary in the fall. You write at least 150 words on yourself, your education, why you chose your field and what you hope to achieve, and highlight volunteering, clubs, community activities and any barriers you face in the move to post-secondary. The form asks about 4-H membership, and proof of acceptance and registration is required.",
     "metaDetail": "A 150-word essay and proof of acceptance.",
@@ -61094,7 +61090,7 @@
     "lastVerified": "2026-09",
     "region": "Alberta",
     "localArea": "Town of Didsbury residents",
-    "notes": "The 2026 deadline was April 27 at 3:30 p.m., at the Didsbury High School office or by email. Letters from relatives, school staff or classmates are not accepted, and you have until September 2028 to show full-time enrolment and claim the money.",
+    "notes": "Applications go to the Didsbury High School office or by email by 3:30 p.m. Letters from relatives, school staff or classmates are not accepted, and you have until September 2028 to show full-time enrolment and claim the money.",
     "active": true,
     "description": "A $2,000 award from the Town of Didsbury for residents in their final year of high school who are in good academic standing and show community and school spirit, extracurricular involvement, leadership and a record of volunteering in Didsbury. You submit a letter of up to two pages covering financial need, involvement and achievements, and two sealed letters of recommendation.",
     "metaDetail": "Two sealed references from outside school.",
@@ -61570,7 +61566,7 @@
   {
     "id": 1687,
     "title": "Delia School Awards and Scholarships",
-    "amount": "Varies; linked list includes $1,500 Gaye Ross nursing scholarship",
+    "amount": "Varies",
     "deadline": "2027-06-15",
     "deadlineEstimated": true,
     "audience": "Delia School students and graduates",
@@ -62068,7 +62064,7 @@
     "lastVerified": "2026-09",
     "region": "Alberta",
     "localArea": "Didsbury High School graduates",
-    "notes": "The 2026 form was due Monday, April 27 at 3:30 pm at the school office, with no late applications; the 2027 date is an estimate. Letters from relatives, school staff or classmates are not accepted, and you have two years to show enrolment and claim the money.",
+    "notes": "Forms go to the school office by 3:30 pm, with no late applications, and the date shown here is an estimate. Letters from relatives, school staff or classmates are not accepted, and you have two years to show enrolment and claim the money.",
     "active": true,
     "description": "One Didsbury High School application puts you in front of a selection committee for the school's scholarship funds. You need a 65% average on the listed Grade 11 and 12 courses, a personal letter of up to two pages on financial need, school and community involvement, marks and citizenship, two sealed letters of recommendation and the division's direct deposit form.",
     "metaDetail": "Needs a 65% average and two sealed letters.",
@@ -63864,7 +63860,7 @@
   {
     "id": 1744,
     "title": "Westlock County Scholarship Grant",
-    "amount": "$500",
+    "amount": "Varies",
     "deadline": "2027-08-31",
     "deadlineEstimated": false,
     "audience": "Westlock County students entering Alberta post-secondary",
@@ -63948,7 +63944,7 @@
     "deadline": "2027-05-30",
     "deadlineEstimated": false,
     "audience": "Magrath Ag Society members 25 or younger going to post-secondary",
-    "url": "https://magrathagsociety.com/",
+    "url": "https://magrathagsociety.com/#scholarships",
     "category": "Community",
     "lastVerified": "2026-10",
     "region": "Alberta",
@@ -63989,7 +63985,7 @@
     "deadline": "2027-05-30",
     "deadlineEstimated": false,
     "audience": "Magrath Ag Society members 25 or younger studying agriculture",
-    "url": "https://magrathagsociety.com/",
+    "url": "https://magrathagsociety.com/#scholarships",
     "category": "STEM",
     "lastVerified": "2026-10",
     "region": "Alberta",
@@ -70746,7 +70742,7 @@
   {
     "id": 1917,
     "title": "Lac La Biche Gas Co-op Scholarship",
-    "amount": "Varies",
+    "amount": "$500",
     "deadline": "2027-05-31",
     "deadlineEstimated": true,
     "audience": "Children of Lac La Biche Gas Co-op members going to or continuing post-secondary",
@@ -73106,7 +73102,8 @@
       "citizenship": "any",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "openDate": "2027-04-15"
   },
   {
     "id": 1977,
