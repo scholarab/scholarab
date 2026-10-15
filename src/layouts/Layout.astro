@@ -25,7 +25,9 @@ const {
   ogUrl,
   canonical,
   robots,
-  ogImage = 'https://www.scholarab.ca/og-image.png',
+  // ?v=2: the image changed 2026-10-14, and Facebook and other link previews
+  // cache an image by its URL.
+  ogImage = 'https://www.scholarab.ca/og-image.png?v=2',
   ogType = 'website',
 } = Astro.props;
 ---
