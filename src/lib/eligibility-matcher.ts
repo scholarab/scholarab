@@ -154,10 +154,11 @@ export function matchScholarship(
     reasons.push(`Only for students in ${region}`)
     return { match: false, confidence: 0, reasons, signals: [], checks: [] }
   }
-  // A local award tagged province-wide. None of the 184 is in one of the
-  // quiz's named cities (those have their own region), so a student who
-  // picked one is not in the area; "Other Alberta" might be, and keeps it
-  // with a check unless their school below confirms it.
+  // A local award: region "Alberta", limited to one town, county or school.
+  // A student who picked a named city is outside it unless `alsoOpenTo`
+  // lists that city (St. Albert, for a Greater St. Albert Catholic award);
+  // "Other Alberta" might be inside, and keeps it with a check unless their
+  // school below confirms it.
   if (localArea && profile.city !== 'Other Alberta' && !scholarship.alsoOpenTo?.includes(profile.city)) {
     reasons.push(`${LOCAL_CHECK}${localArea}`)
     return { match: false, confidence: 0, reasons, signals: [], checks: [] }

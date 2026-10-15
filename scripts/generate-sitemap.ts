@@ -28,6 +28,10 @@ interface Scholarship {
   region?: string | null;
   /** Extra region hubs, beyond `region`. See Scholarship.alsoOpenTo in data-loader.ts. */
   alsoOpenTo?: string[] | null;
+  /** Keeps a local award off the province-wide hub. See data-loader.ts. */
+  localArea?: string | null;
+  /** The area hubs a local award sits on. See data-loader.ts. */
+  areaHubs?: string[] | null;
   category?: string | null;
   // region/category are declared even though the index signature would cover
   // them, because it would cover them as `unknown` -- and `unknown` is not

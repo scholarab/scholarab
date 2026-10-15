@@ -174,36 +174,27 @@ export const CITY_COMBOS: CityCombos[] = [
     h1: 'Northern Alberta scholarship combos',
     title: 'Northern Alberta Scholarship Combos',
     description:
-      'Northern Alberta scholarships grouped by who can apply: the award lists Lloydminster Comprehensive (LCHS) and Cold Lake High School run for their students.',
+      'Northern Alberta scholarships grouped by who can apply, from the LCHS and Cold Lake High award lists to Boyle, Bonnyville Centralized and Hines Creek.',
     intro:
-      'Most awards here belong to one high school, so the combo you are in is the school you go to. If the first line of a combo describes you, every award in it is open to you; the conditions on each award still apply.',
+      'Most awards here belong to one high school, so the combo you are in is the school you go to. If the first line of a combo describes you, every award in it is open to you. The conditions on each award still apply.',
   },
   {
     city: 'central-alberta',
     h1: 'Central Alberta scholarship combos',
     title: 'Central Alberta Scholarship Combos',
     description:
-      'Central Alberta scholarships grouped by who can apply: Augustana students and the award lists of Wetaskiwin Composite, Forestburg, Alix-MAC and Iron Ridge.',
+      'Central Alberta scholarships grouped by who can apply, from Augustana and Burman students to the Camrose, Lacombe, Consort and Delia school lists.',
     intro:
-      "Camrose awards gather around the University of Alberta's Augustana campus, and most of the rest belong to one high school each. If the first line of a combo describes you, every award in it is open to you; the conditions on each award still apply.",
+      "Camrose awards gather around the University of Alberta's Augustana campus, and most of the rest belong to one high school each. If the first line of a combo describes you, every award in it is open to you. The conditions on each award still apply.",
   },
   {
     city: 'southern-alberta',
     h1: 'Southern Alberta scholarship combos',
     title: 'Southern Alberta Scholarship Combos',
     description:
-      "Southern Alberta scholarships grouped by who can apply: Bassano School's own graduation awards, open to the students in the building and no one else.",
+      'Southern Alberta scholarships grouped by who can apply, from the Brooks Composite and Bassano lists to County Central in Vulcan and Willow Creek.',
     intro:
-      'Bassano School runs its own list of graduation awards, several of them for students going into one field. If the first line of a combo describes you, every award in it is open to you; the conditions on each award still apply.',
-  },
-  {
-    city: 'alberta',
-    h1: 'Small-town Alberta scholarship combos',
-    title: 'Small-Town Alberta Scholarship Combos',
-    description:
-      "Scholarship combos for Alberta's small towns: the award lists of County Central, Boyle, Willow Creek, Bonnyville and other rural high schools.",
-    intro:
-      'Rural schools often run their own award lists, and the students who can apply to them are the ones in the building. If the first line of a combo describes you, every award in it is open to you; the conditions on each award still apply.',
+      'Brooks Composite, Bassano School, County Central in Vulcan and Willow Creek in Claresholm each run their own award list. If the first line of a combo describes you, every award in it is open to you. The conditions on each award still apply.',
   },
 ];
 
@@ -305,15 +296,20 @@ function generatedCombos(city: string, pool: ComboTarget[]): Combo[] {
   const boards: Combo[] = count(boardWide).filter(code => BOARDS[code]).map(code => ({
     slug: `board-${slugify(code)}`, city, name: BOARDS[code]!.name, who: BOARDS[code]!.who,
     includes: s => boardWide(s).includes(code),
-    addOn: s => narrower(s) || college(s),
+    addOn: s => narrower(s) || college(s) || !!s.localArea,
     matchOn: { board: code },
   }));
   const colleges: Combo[] = count(s => (s.eligibility?.targetInstitutions ?? []).filter(t => t !== 'any')).map(inst => ({
     slug: `going-to-${slugify(inst)}`, city, name: `Going to ${inst}`, who: `you are starting at ${inst} after Grade 12`,
     includes: s => has(s.eligibility?.targetInstitutions, inst),
-    addOn: s => narrower(s) || schooled(s),
+    addOn: s => narrower(s) || schooled(s) || !!s.localArea,
     matchOn: { institution: inst },
   }));
+  // A local award (`localArea`) is a side in a board or college combo: its
+  // town or county is narrower than the board's or the college's rule, and on
+  // an area page the core would otherwise pair a Smoky Lake award with a Peace
+  // Country one that no single student can both apply to. A school's own list
+  // is narrower than any place, so its combo keeps them.
   // A school's combo needs one award that is that school's alone. Without it
   // the set is awards several schools share, and naming it after whichever
   // school sorted first told the others' students it was not for them.
@@ -394,14 +390,16 @@ export function comboIndex<T extends ComboTarget>(items: T[], today: Date): Comb
   const cities = QUIZ_QUESTIONS.find(q => q.key === 'city')?.opts.map(o => o.value) ?? [];
   return CITY_COMBOS.flatMap(({ city }) => {
     const facet = SCHOLARSHIP_FACETS.find(f => f.slug === city);
-    // An area page (facets.ts `members`) spans several quiz towns. A combo is
-    // named to a town only when its core reaches that town, so a Calgary
-    // board's set is never offered to an Airdrie student.
-    const towns = city === 'alberta'
-      ? ['Other Alberta']
-      : [facet?.value, ...(facet?.members ?? [])].filter((c): c is string => !!c && cities.includes(c));
-    const reaches = (town: string, core: T[]) => towns.length === 1
-      || core.filter(s => s.region === town || s.alsoOpenTo?.includes(town)).length >= MIN_COMBO_CORE;
+    // An area page (facets.ts `members`) spans several quiz towns, and its
+    // local awards (`areaHubs`) belong to the students who answer "Other
+    // Alberta". A combo is named to a town only when its core reaches that
+    // town, so a Calgary board's set is never offered to an Airdrie student
+    // and a Vulcan school's never to Brooks.
+    const towns = [facet?.value, ...(facet?.members ?? []), ...(facet?.members ? ['Other Alberta'] : [])]
+      .filter((c): c is string => !!c && cities.includes(c));
+    const reaches = (town: string, core: T[]) => core.filter(s => town === 'Other Alberta'
+      ? !!s.localArea
+      : s.region === town || s.alsoOpenTo?.includes(town)).length >= MIN_COMBO_CORE;
     return combosForCity(city, items, today).flatMap(({ combo, core }) => combo.matchOn
       ? towns.filter(town => reaches(town, core)).map(quizCity =>
         ({ quizCity, page: city, slug: combo.slug, name: combo.name, who: combo.who, on: combo.matchOn!, core: core.map(s => s.id) }))

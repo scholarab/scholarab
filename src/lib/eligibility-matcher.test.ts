@@ -667,8 +667,17 @@ describe('local awards tagged province-wide', () => {
     expect(matchScholarship({ ...baseProfile, city: 'Other Alberta', town: 'Hanna' }, vulcan).checks).toContain('Only for Vulcan County residents')
   })
 
-  it('no real Calgary match is a tagged local award', () => {
-    const local = new Set((scholarshipsJson as Array<{ id: number; localArea?: string }>).filter(s => s.localArea).map(s => s.id))
+  it('is in for a named city its alsoOpenTo lists, with the check', () => {
+    const catholic = { ...sch({}, 'Alberta'), localArea: 'Greater St. Albert Catholic Schools graduates', alsoOpenTo: ['St. Albert'] }
+    const r = matchScholarship({ ...baseProfile, city: 'St. Albert' }, catholic)
+    expect(r.match).toBe(true)
+    expect(r.checks).toContain('Only for Greater St. Albert Catholic Schools graduates')
+    expect(matchScholarship({ ...baseProfile, city: 'Edmonton' }, catholic).match).toBe(false)
+  })
+
+  it('no real Calgary match is a local award Calgary is not in', () => {
+    const local = new Set((scholarshipsJson as Array<{ id: number; localArea?: string; alsoOpenTo?: string[] }>)
+      .filter(s => s.localArea && !s.alsoOpenTo?.includes('Calgary')).map(s => s.id))
     expect(local.size).toBeGreaterThan(100)
     const ids = matchAll({ ...baseProfile, city: 'Calgary' }, scholarshipsJson as never).map(m => m.id)
     expect(ids.filter(id => local.has(id))).toEqual([])

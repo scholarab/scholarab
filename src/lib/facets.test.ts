@@ -20,7 +20,7 @@ import { readFileSync } from 'node:fs';
 
 const INTRO_LENGTH = 72;
 
-type Listing = { title?: string; name?: string; region?: string | null; category?: string | null; format?: string | null; alsoOpenTo?: string[]; active?: boolean };
+type Listing = { title?: string; name?: string; region?: string | null; category?: string | null; format?: string | null; alsoOpenTo?: string[]; localArea?: string | null; areaHubs?: string[]; active?: boolean };
 
 const allScholarships = scholarships as Listing[];
 const listedPrograms = (programs as Listing[]).filter(p => p.active !== false);
@@ -113,11 +113,30 @@ describe('facet registry', () => {
     const items = facetItems(calgary, allScholarships);
     expect(items.length).toBe(
       allScholarships.filter(
-        s => towns.includes(s.region ?? '') || (s.alsoOpenTo ?? []).some(t => towns.includes(t)),
+        s => towns.includes(s.region ?? '') || (s.alsoOpenTo ?? []).some(t => towns.includes(t))
+          || (s.areaHubs ?? []).includes('calgary'),
       ).length,
     );
     expect(items.some(s => s.region === 'Airdrie')).toBe(true);
     expect(items.some(s => !towns.includes(s.region ?? ''))).toBe(true);
+  });
+
+  it('keeps a local award off the province-wide hub and on its area hubs', () => {
+    // The province-wide page lists only what every Alberta student can apply
+    // to (Ilia, 2026-10-14). A Vulcan County award moves to Southern Alberta,
+    // and being placed there is not a crumb: its own region is still Alberta.
+    const alberta = SCHOLARSHIP_FACETS.find(f => f.slug === 'alberta')!;
+    const southern = SCHOLARSHIP_FACETS.find(f => f.slug === 'southern-alberta')!;
+    const vulcan = { region: 'Alberta', category: 'Academic', localArea: 'Vulcan County students', areaHubs: ['southern-alberta'] };
+    expect(facetMatches(alberta, vulcan)).toBe(false);
+    expect(facetMatches(southern, vulcan)).toBe(true);
+    expect(facetMatches(southern, vulcan, { primaryOnly: true })).toBe(false);
+    expect(facetMatches(alberta, { region: 'Alberta', category: 'Academic' })).toBe(true);
+    expect(facetItems(alberta, allScholarships).filter(s => s.localArea)).toEqual([]);
+    // Off the province-wide page is never off every page.
+    const regions = SCHOLARSHIP_FACETS.filter(f => f.kind === 'region');
+    const orphans = allScholarships.filter(s => s.localArea && !regions.some(f => facetMatches(f, s)));
+    expect(orphans.map(s => s.title)).toEqual([]);
   });
 
   it('keeps a broad scope out of a listing breadcrumb but still gives it a hub', () => {

@@ -218,9 +218,9 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     h1: 'Northern Alberta scholarships',
     title: 'Northern Alberta Scholarships',
     description:
-      'Scholarships for Cold Lake and Lloydminster students: the 4 Wing military award, Lakeland credit union money, division bursaries and service clubs.',
+      'Scholarships for northern Alberta students, from Cold Lake, Lloydminster and Bonnyville to Boyle, Whitecourt, St. Paul and the Peace Country.',
     intro:
-      "Cold Lake's $5,000 Billion Barrel award is due June 1, the largest here.",
+      'Most of these are for one town, county or school, and each row names it.',
   },
   {
     slug: 'central-alberta',
@@ -232,7 +232,7 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     h1: 'Central Alberta scholarships',
     title: 'Central Alberta Scholarships',
     description:
-      'Scholarships for Lacombe, Camrose and Wetaskiwin students: Wolf Creek and Battle River division awards, Legion and service club money, and county bursaries.',
+      'Scholarships for central Alberta students, from Lacombe, Camrose and Wetaskiwin to Drayton Valley, Rocky Mountain House, Olds and Vegreville.',
     intro:
       'Most belong to one town, so check the town on each row before you apply.',
   },
@@ -246,9 +246,9 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     h1: 'Southern Alberta scholarships',
     title: 'Southern Alberta Scholarships',
     description:
-      'Scholarships for Brooks and County of Newell students: Grasslands division awards, service club money, trades scholarships and health bursaries.',
+      'Scholarships for southern Alberta students, from Brooks and Bassano to Vulcan, Claresholm, Cardston, Fort Macleod and the Crowsnest Pass.',
     intro:
-      'Most print no closing date, so ask your school which one applies to you.',
+      'Most belong to one high school, town or county, so check each row first.',
   },
   {
     slug: 'alberta',
@@ -260,7 +260,7 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     backdrop: 'alberta',
     title: 'Province-Wide Scholarships in Alberta',
     description:
-      'Alberta scholarships open across the province: the Rutherford, provincial arts and trades awards, credit union and energy money, open anywhere in the province.',
+      'Scholarships open to Alberta students wherever they live, from the Rutherford and provincial arts awards to trades, apprenticeship and 4-H money.',
     intro:
       'Open across Alberta, and the Advancing Futures Bursary is up to $40,000.',
   },
@@ -646,13 +646,15 @@ export const PROGRAM_FACET_BY_SLUG = new Map(PROGRAM_FACETS.map(f => [f.slug, f]
 export const RESERVED_SCHOLARSHIP_SLUGS = new Set(SCHOLARSHIP_FACETS.map(f => f.slug));
 export const RESERVED_PROGRAM_SLUGS = new Set(ALL_PROGRAM_FACETS.map(f => f.slug));
 
-/** What a facet is matched against. `alsoOpenTo` is scholarships-only and optional. */
+/** What a facet is matched against. The last three are scholarships-only and optional. */
 export interface FacetTarget {
   region?: string | null;
   category?: string | null;
   /** Programs only: the slug of the format facet this program belongs to. */
   format?: string | null;
   alsoOpenTo?: string[] | null;
+  localArea?: string | null;
+  areaHubs?: string[] | null;
 }
 
 /**
@@ -666,6 +668,11 @@ export interface FacetTarget {
  * `primaryOnly` to ignore that and ask only where the listing itself lives,
  * which is what breadcrumbs want: a Calgary award surfaced on the Airdrie hub
  * is still a Calgary award.
+ *
+ * A local award (`localArea`) is filed under region "Alberta" but is never on
+ * a broad hub: the province-wide page lists only awards every Alberta student
+ * can apply to (Ilia, 2026-10-14). It sits on the area pages its `areaHubs`
+ * names, which places it there without opening it to the area's towns.
  */
 export function facetMatches(
   facet: Facet,
@@ -674,10 +681,13 @@ export function facetMatches(
 ): boolean {
   if (facet.kind === 'format') return item.format === facet.value;
   if (facet.kind !== 'region') return item.category === facet.value;
+  if (facet.broad && item.localArea) return false;
   if (item.region === facet.value) return true;
   if (facet.extraValues?.includes(item.region ?? '')) return true;
   if (facet.members?.includes(item.region ?? '')) return true;
-  return !primaryOnly && (item.alsoOpenTo?.some(t => t === facet.value || facet.members?.includes(t)) ?? false);
+  if (primaryOnly) return false;
+  return (item.alsoOpenTo?.some(t => t === facet.value || facet.members?.includes(t)) ?? false)
+    || (item.areaHubs?.includes(facet.slug) ?? false);
 }
 
 export function facetItems<T extends FacetTarget>(facet: Facet, items: T[]): T[] {

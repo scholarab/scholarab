@@ -38,6 +38,8 @@ interface Scholarship {
   alsoOpenTo?: string[] | null;
   /** See Scholarship.localArea in data-loader.ts. */
   localArea?: string | null;
+  /** See Scholarship.areaHubs in data-loader.ts. */
+  areaHubs?: string[] | null;
   category?: string | null;
   // region/category are declared even though the index signature would cover
   // them, because it would cover them as `unknown` -- and `unknown` is not
@@ -112,6 +114,23 @@ for (const s of scholarships) {
   if (s.localArea == null) continue;
   if (typeof s.localArea !== 'string' || !s.localArea.trim() || s.region !== 'Alberta') {
     console.error(`Scholarship ${s.id} "${s.title}": localArea needs a non-empty string on a region "Alberta" listing`);
+    failed = true;
+  }
+}
+
+// ── A local award is off the province-wide page, so it needs another ────────
+// areaHubs names area pages (the facets with `members`) and only places a
+// localArea award; alsoOpenTo reaches a town or school page on its own.
+const AREA_HUBS = new Set(SCHOLARSHIP_FACETS.filter(f => f.members).map(f => f.slug));
+for (const s of scholarships) {
+  const hubs = s.areaHubs ?? [];
+  const bad = hubs.filter((h, i) => !AREA_HUBS.has(h) || hubs.indexOf(h) !== i);
+  if (bad.length || (s.areaHubs != null && (!hubs.length || s.localArea == null))) {
+    console.error(`Scholarship ${s.id} "${s.title}": areaHubs needs a localArea and distinct area slugs (${[...AREA_HUBS].join(', ')}), got ${JSON.stringify(s.areaHubs)}`);
+    failed = true;
+  }
+  if (s.localArea != null && !hubs.length && !s.alsoOpenTo?.length) {
+    console.error(`Scholarship ${s.id} "${s.title}": localArea "${s.localArea}" is on no page, so give it areaHubs or alsoOpenTo`);
     failed = true;
   }
 }

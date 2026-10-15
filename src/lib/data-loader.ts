@@ -70,8 +70,19 @@ export type Scholarship = {
    * place without a hub, so before this field 184 local awards read as open to
    * every Albertan and a Calgary student's quiz led with a Woodlands County
    * bursary (critique 2026-09-27). Phrased to follow "Only for". JSON-only.
+   * A listing with one is not on the province-wide page (facets.ts).
    */
   localArea?: string | null
+  /**
+   * The area pages that list a `localArea` award, by facet slug
+   * ('northern-alberta', 'calgary'). Placement only: who can apply is still
+   * `region`, `alsoOpenTo` and `localArea`, so a Boyle School award sits on
+   * Northern Alberta without the quiz offering it to Cold Lake. The line:
+   * Calgary is the Calgary Metropolitan Region Board plus the Bow Valley,
+   * Edmonton the Edmonton Metropolitan Region Board, and every other place
+   * its Alberta Health Services zone (North, Central, South). JSON-only.
+   */
+  areaHubs?: string[] | null
   /** What applying takes, from the provider's page. JSON-only. See lib/to-apply.ts. */
   toApply?: ToApply | null
   /** Who takes the application, on the 175 school-route listings. JSON-only. See lib/apply-method.ts. */
