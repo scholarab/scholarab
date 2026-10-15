@@ -1,22 +1,17 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 
-const { mockUpdate, mockWhere, mockHitRateLimit } = vi.hoisted(() => {
+const { mockUpdate, mockWhere } = vi.hoisted(() => {
   const mockWhere = vi.fn((_cond: unknown) => Promise.resolve())
   const mockSet = vi.fn((_values: unknown) => ({ where: mockWhere }))
   return {
     mockWhere,
     mockUpdate: vi.fn((_table: unknown) => ({ set: mockSet })),
-    mockHitRateLimit: vi.fn(() => Promise.resolve(false)),
   }
 })
 
 vi.mock('../../lib/db/client', () => ({ db: { update: (t: unknown) => mockUpdate(t) } }))
 vi.mock('../../lib/db/schema', () => ({
   subscribers: { __table: 'subscribers', token: 'token', confirmedAt: 'confirmed_at' },
-}))
-vi.mock('../../lib/rate-limit', () => ({
-  getClientIp: () => '1.2.3.4',
-  hitRateLimit: mockHitRateLimit,
 }))
 vi.mock('drizzle-orm', () => ({
   eq: (a: unknown, b: unknown) => ({ eq: [a, b] }),
@@ -66,14 +61,6 @@ describe('GET /api/confirm', () => {
     const html = await res.text()
     expect(html).toContain('Open the full link in your ScholarAB email')
     expect(html).toContain('href="/"')
-    expect(mockUpdate).not.toHaveBeenCalled()
-  })
-
-  it('refuses when rate limited', async () => {
-    mockHitRateLimit.mockResolvedValueOnce(true)
-    const res = await get('http://localhost/api/confirm?token=abc')
-    expect(res.status).toBe(429)
-    expect(await res.text()).toContain('Wait 15 minutes')
     expect(mockUpdate).not.toHaveBeenCalled()
   })
 })

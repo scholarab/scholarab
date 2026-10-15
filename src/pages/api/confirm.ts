@@ -4,7 +4,6 @@ import type { APIRoute } from 'astro'
 import { db } from '../../lib/db/client'
 import { subscribers } from '../../lib/db/schema'
 import { eq, and, isNull, sql } from 'drizzle-orm'
-import { getClientIp, hitRateLimit } from '../../lib/rate-limit'
 import { reminderPage as page, reminderBackLink as backLink, reminderError, escapeAttr } from '../../lib/reminder-page'
 
 // The confirm half of double opt-in. Two steps, for the same reason
@@ -17,19 +16,11 @@ import { reminderPage as page, reminderBackLink as backLink, reminderError, esca
 // The token is the only credential, and it is the same token the unsubscribe
 // link already carries; one secret per subscription, not two.
 
-async function limited(request: Request): Promise<boolean> {
-  const ip = getClientIp(request)
-  try {
-    if (await hitRateLimit(`confirm:${ip}`, 10, 15 * 60 * 1000)) return true
-  } catch (e) {
-    console.error('[rate-limit] confirm check failed, allowing request:', e)
-  }
-  return false
-}
+// No per-IP cap. The 48-character random token cannot be guessed, so a cap
+// guarded nothing, and it refused a class confirming from one school address
+// (each link counts twice, page then button: 5 students per 15 minutes).
 
 export const GET: APIRoute = async ({ request }) => {
-  if (await limited(request)) return reminderError('rate-limit')
-
   const token = new URL(request.url).searchParams.get('token')
   if (!token) return reminderError('missing-token')
 
@@ -47,8 +38,6 @@ export const GET: APIRoute = async ({ request }) => {
 }
 
 export const POST: APIRoute = async ({ request }) => {
-  if (await limited(request)) return reminderError('rate-limit')
-
   let form: FormData
   try { form = await request.formData() } catch { return reminderError('invalid-form') }
   const token = form.get('token')

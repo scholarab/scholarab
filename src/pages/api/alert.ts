@@ -19,10 +19,10 @@ import { EMAIL_RE } from '../../lib/utils'
 export const POST: APIRoute = async ({ request, locals }) => {
   const ip = getClientIp(request)
   try {
-    // Counts this request as it checks, in one statement. The old pair
-    // checked here and recorded after the response, so concurrent callers all
-    // read the same pre-hit count and all sailed through.
-    if (await hitRateLimit(`alert:${ip}`, 20, 15 * 60 * 1000))
+    // Counts this request as it checks, in one statement. The cap stops one
+    // script mailing confirmations to strangers; it is sized for a school,
+    // where every student shares one address (20 refused a class, 2026-10-14).
+    if (await hitRateLimit(`alert:${ip}`, 200, 15 * 60 * 1000))
       return jsonError('Too many requests. Try again later', 429)
   } catch (e) {
     // Fail open if the rate_limit table isn't migrated yet, but say so, or

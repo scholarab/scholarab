@@ -32,11 +32,7 @@ export function reminderPage(title: string, body: string, status = 200): Respons
   )
 }
 
-export function reminderError(reason: 'missing-token' | 'invalid-form' | 'rate-limit'): Response {
-  if (reason === 'rate-limit') {
-    return reminderPage('Try again later',
-      `<h1>Too many requests</h1><p>Wait 15 minutes, then reopen the link in your ScholarAB email.</p>${reminderBackLink}`, 429)
-  }
+export function reminderError(reason: 'missing-token' | 'invalid-form'): Response {
   return reminderPage('Open your email link',
     `<h1>${reason === 'missing-token' ? 'This link is incomplete' : 'The form could not be read'}</h1>
      <p>Open the full link in your ScholarAB email and try again.</p>${reminderBackLink}`, 400)

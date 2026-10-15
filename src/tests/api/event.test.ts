@@ -424,13 +424,6 @@ describe('POST /api/event', () => {
     expect((await call({ event: 'tour_cta', meta: '5' })).status).toBe(400)
   })
 
-  it('returns 429 when rate limited', async () => {
-    mockHitRateLimit.mockResolvedValue(true)
-    const res = await call({ event: 'quiz_complete' })
-    expect(res.status).toBe(429)
-    expect(mockInsert).not.toHaveBeenCalled()
-  })
-
   it('fails open when the rate limiter throws', async () => {
     mockHitRateLimit.mockRejectedValue(new Error('no table'))
     const res = await call({ event: 'quiz_complete' })

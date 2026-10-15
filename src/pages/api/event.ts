@@ -4,7 +4,6 @@ import type { APIRoute } from 'astro'
 import { db } from '../../lib/db/client'
 import { events } from '../../lib/db/schema'
 import { jsonError } from '../../lib/api-response'
-import { getClientIp, hitRateLimit } from '../../lib/rate-limit'
 import { deviceClass } from '../../lib/device-class'
 
 // Client-sendable events only. alert_subscribe is recorded server-side in /api/alert.
@@ -87,18 +86,9 @@ export const POST: APIRoute = async ({ request }) => {
     } catch { return accepted() }
   }
 
-  const ip = getClientIp(request)
-  try {
-    // Generous limit: school computer labs share one NAT IP, and a classroom
-    // burst is exactly the traffic we most want to measure
-    if (await hitRateLimit(`event:${ip}`, 300, 15 * 60 * 1000))
-      return jsonError('Too many requests; try again later', 429)
-  } catch (e) {
-    // Fail open if the rate_limit table isn't migrated yet, but say so, or
-    // the limiter can stop working here and nothing anywhere reports it.
-    console.error('[rate-limit] event check failed, allowing request:', e)
-  }
-
+  // No per-IP cap. A school shares one address, and a classroom burst is
+  // exactly the traffic worth measuring; a 300 cap undercounted it. The bot,
+  // datacenter and origin checks above are the spam guard.
   let body: unknown
   try { body = await request.json() } catch { return jsonError('Invalid JSON', 400) }
 

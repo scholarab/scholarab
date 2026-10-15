@@ -5,7 +5,6 @@ import { db } from '../../lib/db/client'
 import { confirmationRecipients, events, subscribers } from '../../lib/db/schema'
 import { eq } from 'drizzle-orm'
 import { recipientKey } from '../../lib/mail-delivery'
-import { getClientIp, hitRateLimit } from '../../lib/rate-limit'
 import { reminderPage as page, reminderBackLink as backLink, reminderError, escapeAttr } from '../../lib/reminder-page'
 
 // Unsubscribing is a two-step flow on purpose. The link in the email is a GET,
@@ -16,17 +15,9 @@ import { reminderPage as page, reminderBackLink as backLink, reminderError, esca
 // The token stays the only credential: no Origin check here, because a blocked
 // unsubscribe is worse than a forged one.
 
-async function limited(request: Request): Promise<boolean> {
-  const ip = getClientIp(request)
-  try {
-    if (await hitRateLimit(`unsub:${ip}`, 10, 15 * 60 * 1000)) return true
-  } catch (e) {
-    // Fail open if the rate_limit table isn't migrated yet, but say so, or
-    // the limiter can stop working here and nothing anywhere reports it.
-    console.error('[rate-limit] unsubscribe check failed, allowing request:', e)
-  }
-  return false
-}
+// No per-IP cap. The 48-character random token cannot be guessed, so a cap
+// guarded nothing, and it refused a class confirming from one school address
+// (each link counts twice, page then button: 5 students per 15 minutes).
 
 // An anonymous count of who leaves, written here because the deleted row
 // leaves nothing behind to count. No address, token or id: only how they left
@@ -41,8 +32,6 @@ async function countUnsubscribe(how: 'button' | 'oneclick' | 'all', item?: { ite
 }
 
 export const GET: APIRoute = async ({ request }) => {
-  if (await limited(request)) return reminderError('rate-limit')
-
   const token = new URL(request.url).searchParams.get('token')
   if (!token) return reminderError('missing-token')
 
@@ -68,8 +57,6 @@ export const GET: APIRoute = async ({ request }) => {
 }
 
 export const POST: APIRoute = async ({ request }) => {
-  if (await limited(request)) return reminderError('rate-limit')
-
   // The button posts a form; Gmail's and Yahoo's one-click unsubscribe posts
   // `List-Unsubscribe=One-Click` and no fields at all, so the token has to be
   // readable from the query string too. That does not reopen the prefetch hole

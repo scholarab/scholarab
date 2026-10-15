@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { recipientKey } from '../../lib/mail-delivery'
 
-const { mockDeleteWhere, mockDelete, mockSelectWhere, mockHitRateLimit, mockInsertValues, selectRows, deletedRows } = vi.hoisted(() => {
+const { mockDeleteWhere, mockDelete, mockSelectWhere, mockInsertValues, selectRows, deletedRows } = vi.hoisted(() => {
   const selectRows: { email: string }[] = []
   const deletedRows: { itemType: string; itemId: number }[] = []
   const mockDeleteWhere = vi.fn((_cond: unknown) => Object.assign(Promise.resolve(), { returning: () => Promise.resolve(deletedRows) }))
@@ -13,7 +13,6 @@ const { mockDeleteWhere, mockDelete, mockSelectWhere, mockHitRateLimit, mockInse
     mockDeleteWhere,
     mockSelectWhere,
     mockDelete: vi.fn((_table: unknown) => ({ where: mockDeleteWhere })),
-    mockHitRateLimit: vi.fn(() => Promise.resolve(false)),
   }
 })
 
@@ -28,10 +27,6 @@ vi.mock('../../lib/db/schema', () => ({
   subscribers: { __table: 'subscribers', token: 'token', email: 'email' },
   confirmationRecipients: { __table: 'confirmation_recipients', key: 'key' },
   events: { __table: 'events' },
-}))
-vi.mock('../../lib/rate-limit', () => ({
-  getClientIp: () => '1.2.3.4',
-  hitRateLimit: mockHitRateLimit,
 }))
 vi.mock('drizzle-orm', () => ({
   eq: (a: unknown, b: unknown) => ({ eq: [a, b] }),
@@ -83,14 +78,6 @@ describe('GET /api/unsubscribe', () => {
     const html = await res.text()
     expect(html).toContain('Open the full link in your ScholarAB email')
     expect(html).toContain('href="/"')
-    expect(mockDelete).not.toHaveBeenCalled()
-  })
-
-  it('refuses when rate limited', async () => {
-    mockHitRateLimit.mockResolvedValueOnce(true)
-    const res = await get('http://localhost/api/unsubscribe?token=abc')
-    expect(res.status).toBe(429)
-    expect(await res.text()).toContain('Wait 15 minutes')
     expect(mockDelete).not.toHaveBeenCalled()
   })
 })
