@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import {
+  ALIASES,
   buildSearchBlob,
   correctQuery,
   searchRows,
@@ -11,6 +12,8 @@ import {
   searchTokens,
   tokenIndexMayMatch,
 } from './search-text'
+import scholarshipData from '../data/scholarships.json'
+import programData from '../data/research-programs.json'
 
 describe('normalizeSearchText', () => {
   it('closes up apostrophes so a student can skip them', () => {
@@ -211,5 +214,114 @@ describe('searchSuggestions', () => {
 
   it('stops at n', () => {
     expect(searchSuggestions(rows, r => r, ['Nursing', 'Award'], 1, 1)).toEqual(['Nursing'])
+  })
+})
+
+describe('aliases', () => {
+  const rows = [
+    'striving for nursing excellence\nstudents in licensed practical nursing',
+    'timber dental scholarship\nentering a dental hygiene program',
+    'ippc indigenous pharmacy scholarship',
+    'massage therapy entrance scholarship',
+    'health sciences award\nprograms such as paramedic sonography',
+    'camis diagnostic imaging entrance scholarship',
+    'capital plumbing and heating\nplumbing refrigeration sheet metal',
+    'turtle spirit award\nentering the university of alberta',
+    'presidents admission\nentering ucalgary',
+    'deans entrance citation in business university of alberta',
+    'ahsra scholarships\nthe alberta high school rodeo association',
+    'inspiring immigrant award',
+    'new canadians award\nfor a newcomer',
+    'inter pipeline discovery awards program',
+    'fort mckay trades scholarship\nplumbing electrical millwright',
+    'bachelor of science in kinesiology',
+    'chief jack beaton bursary in criminal justice studies',
+    'sait trades aircraft or engineering technology programs',
+    'smart photography scholarship',
+    'rocky view teachers scholarship',
+    'someone who worked at a pharmacy counter of a store',
+  ]
+  const find = (q: string) => searchRows(rows, r => r, normalizeSearchQuery(q)).map(r => rows.indexOf(r))
+
+  // Each query below returned nothing on 2026-10-14 (or earlier in the log).
+  it('reads career words as the field the listings name', () => {
+    expect(find('LPN')).toEqual([0])
+    expect(find('hygienist')).toEqual([1])
+    expect(find('dental hygienist')).toEqual([1])
+    expect(find('pharmacist')).toEqual([2, 20])
+    expect(find('therapist')).toEqual([3])
+    expect(find('ultrasonography')).toEqual([4, 5])
+    expect(find('HVAC')).toEqual([6])
+    expect(find('criminology')).toEqual([16])
+    expect(find('aircraft maintenance engineer')).toEqual([17])
+    expect(find('camera')).toEqual([18])
+  })
+
+  it('reads school shorthand as the school', () => {
+    expect(find('uofa')).toEqual([7, 9])
+    expect(find('UofC')).toEqual([8])
+    expect(find('uoc')).toEqual([8])
+    expect(find('ualberta')).toEqual([7, 9])
+    expect(find('rvs')).toEqual([19])
+  })
+
+  it('splits a shorthand glued to the word before it', () => {
+    expect(normalizeSearchQuery('businessuofa')).toBe('business uofa')
+    expect(find('businessuofa')).toEqual([9])
+    // Only a school shorthand splits off; an ordinary word is left whole
+    expect(normalizeSearchQuery('volunteering')).toBe('volunteering')
+  })
+
+  it('finds the listings for an interest by the word they use', () => {
+    expect(find('barrel racing')).toEqual([10])
+    expect(find('immigration')).toEqual([11, 12])
+  })
+
+  it('reads a half-typed last word as the alias it begins', () => {
+    expect(find('ultrasonogra')).toEqual([4, 5])
+    expect(find('interpip')).toEqual([13])
+    expect(find('milwr')).toEqual([14])
+    expect(find('kinie')).toEqual([15])
+  })
+
+  it('reads the logged misspellings', () => {
+    expect(find('dental higene')).toEqual([1])
+    expect(find('bachh')).toEqual([15])
+    expect(normalizeSearchQuery('indeginious')).toBe('indigenous')
+  })
+
+  it('matches an alias only from the start of a word', () => {
+    // "u of a" must not match inside "menu of all"
+    expect(searchRows(['the menu of all dishes'], r => r, 'uofa')).toEqual([])
+  })
+
+  it('keeps a word that matches as typed off the prefix rule', () => {
+    // "ultra" is not read as "ultrasonography" while a row says it
+    expect(searchRows(['ultra marathon fund', 'paramedic sonography'], r => r, 'ultra')).toEqual(['ultra marathon fund'])
+  })
+
+  it('leaves terms with no listings behind them empty', () => {
+    expect(find('piercing')).toEqual([])
+    expect(find('dietary aid')).toEqual([])
+  })
+
+  it('lets the cross-directory index see an alias hit', () => {
+    const tokens = searchTokens('striving practical nursing university of alberta')
+    expect(tokenIndexMayMatch(tokens, 'lpn')).toBe(true)
+    expect(tokenIndexMayMatch(tokens, 'uofa')).toBe(true)
+    expect(tokenIndexMayMatch(tokens, 'piercing')).toBe(false)
+  })
+
+  it('points every alternative at listings the catalogue really has', () => {
+    // Never invent coverage: an alias with nothing behind it would hide a
+    // real content gap from the empty-search log.
+    const blobs = [
+      ...(scholarshipData as Parameters<typeof scholarshipSearchBlob>[0][]).map(scholarshipSearchBlob),
+      ...(programData as Parameters<typeof programSearchBlob>[0][]).map(programSearchBlob),
+    ].map(b => ' ' + b.replace(/\n/g, ' '))
+    const dead = Object.entries(ALIASES)
+      .filter(([, alts]) => !alts.some(a => blobs.some(b => b.includes(' ' + a))))
+      .map(([key]) => key)
+    expect(dead).toEqual([])
   })
 })
