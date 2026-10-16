@@ -30,8 +30,26 @@ What to do when that day comes, in order:
 3. Re-read the consent trail. Express consent is already on file for every
    confirmed subscriber (`confirmed_at`), which is the hard part, and it
    carries over. What changes is identification, not consent.
-4. Update the privacy policy: the "no business model here that would want it"
-   line in *What we don't collect* becomes false the moment there is one.
+4. Re-read the privacy policy. Since 2026-10-15 it no longer says there is
+   no business model, so a sponsor does not make it false. It still promises
+   that no sponsor or partner is given any personal data, and the About page
+   promises no listing is bought, removed or moved for money and that a
+   sponsor is named as one. Keep both true or change them in the same commit.
+
+## If the site changes hands
+
+The privacy policy's *If ScholarAB changes hands* section (2026-10-15) lets the
+reminder list move with the site in a sale, merger or handover, and only under
+the same policy. Before it existed the policy promised to share nothing with
+anyone, so a buyer could not have taken the list without breaking that.
+
+PIPEDA s. 7.2 already allows personal information to move in a business
+transaction without fresh consent, provided the new party uses it only for the
+original purposes and people are told. The clause is stricter on purpose:
+everyone on the list is emailed before anything moves, with a link to delete
+their data, and nothing moves until 30 days after that email. It was added
+while the list held about 40 people, so the change of terms reached almost no
+one who signed up under the old wording.
 
 ## CASL
 

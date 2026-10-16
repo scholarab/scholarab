@@ -26,6 +26,7 @@
     "index-status": "TZ=America/Edmonton tsx scripts/index-status.ts",
     "gsc-months": "TZ=America/Edmonton tsx scripts/gsc-months.ts",
     "gsc-ctr": "TZ=America/Edmonton tsx scripts/gsc-ctr.ts",
+    "traffic-months": "TZ=America/Edmonton tsx --env-file-if-exists=.env.local scripts/traffic-months.ts",
     "pagespeed": "tsx scripts/pagespeed.ts",
     "predev": "tsx scripts/generate-catalogue-payloads.ts",
     "pretype-check": "tsx scripts/generate-catalogue-payloads.ts",

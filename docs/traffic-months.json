@@ -1,0 +1,96 @@
+{
+  "generated": "2026-10-15",
+  "notes": [
+    "events: first-party counts from the events table, per tab session, not raw hits. The table starts 2026-07-17. September 2026 is short by about 798 rows a since-removed prune step deleted (most on 2026-10-01).",
+    "ga4: consent-gated, so it sees roughly one arrival in six. Use it for engagement and trends, never as a total.",
+    "cloudflare: cookieless page loads across the account (one site), from adaptive sampling, so totals are estimates rounded to tens. Starts 2026-09-13. Page views before 2026-09-14 are inflated by scroll-position history updates (fixed in c280c59).",
+    "Search Console clicks and impressions are in src/data/search-months.json."
+  ],
+  "months": [
+    {
+      "month": "2026-07",
+      "events": {
+        "alert_subscribe": 1,
+        "apply_click": 106,
+        "detail_view": 166,
+        "quiz_complete": 10,
+        "quiz_start": 10,
+        "search_empty": 1
+      },
+      "eventsRecorded": "2026-10-15"
+    },
+    {
+      "month": "2026-08",
+      "events": {
+        "app_step": 1,
+        "apply_click": 387,
+        "detail_view": 543,
+        "quiz_complete": 31,
+        "quiz_start": 32,
+        "save": 88,
+        "search_empty": 10
+      },
+      "eventsRecorded": "2026-10-15"
+    },
+    {
+      "month": "2026-09",
+      "events": {
+        "alert_subscribe": 25,
+        "apply_click": 957,
+        "detail_view": 2124,
+        "quiz_complete": 161,
+        "quiz_start": 180,
+        "save": 207,
+        "search_empty": 28,
+        "tour_close": 10,
+        "tour_cta": 9,
+        "tour_finish": 13,
+        "tour_open": 71,
+        "tour_step": 36
+      },
+      "eventsRecorded": "2026-10-15",
+      "ga4": {
+        "users": 343,
+        "sessions": 502,
+        "views": 2370
+      },
+      "cloudflare": {
+        "visits": 4890,
+        "pageViews": 12570
+      }
+    },
+    {
+      "month": "2026-10",
+      "events": {
+        "alert_subscribe": 145,
+        "app_status": 14,
+        "apply_click": 1138,
+        "combo_open": 6,
+        "detail_view": 4737,
+        "filter_use": 322,
+        "list_more": 477,
+        "list_view": 1872,
+        "quiz_complete": 105,
+        "quiz_start": 113,
+        "save": 955,
+        "search_empty": 80,
+        "source_visit": 79,
+        "tour_close": 23,
+        "tour_cta": 14,
+        "tour_finish": 23,
+        "tour_open": 38,
+        "tour_step": 55
+      },
+      "eventsRecorded": "2026-10-15",
+      "ga4": {
+        "users": 1108,
+        "sessions": 1369,
+        "views": 6216
+      },
+      "cloudflare": {
+        "visits": 15190,
+        "pageViews": 39440
+      }
+    }
+  ]
+}

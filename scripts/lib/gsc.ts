@@ -73,6 +73,10 @@ export function dropToken(): void {
 
 /**
  * Signed JWT -> access token, the two-legged OAuth flow for service accounts.
+// The same service account reads GA4 for scripts/traffic-months.ts, so one
+// token covers both rather than a second credential.
+const GA_SCOPE = 'https://www.googleapis.com/auth/analytics.readonly';
+
  * Done with node's crypto rather than googleapis because that dependency is
  * ~40MB of client for one POST, and this is the only Google API the repo calls.
  */
@@ -81,7 +85,7 @@ async function mint(): Promise<{ token: string; expires: number }> {
   const now = Math.floor(Date.now() / 1000);
   const claims = {
     iss: sa.client_email,
-    scope: SCOPE,
+    scope: `${SCOPE} ${GA_SCOPE}`,
     aud: TOKEN_URL,
     iat: now,
     // An hour is the maximum Google accepts; accessToken() renews before it.

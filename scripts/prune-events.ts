@@ -42,6 +42,26 @@ const pruneSql=(parts:TemplateStringsArray,...values:unknown[])=>execute(parts.r
 const scholarshipIds = scholarships.map(s => s.id)
 const programIds = programs.map(p => p.id)
 
+// Retention erases whole months of history. docs/traffic-months.json keeps
+// their totals (npm run traffic-months), and a month counts as kept once its
+// record was taken after the month ended. Two weeks before the sweep reaches a
+// month with no such record, this job goes red. It still prunes: the 180 days
+// on /privacy outrank the record.
+const recorded = new Map<string, string>()
+try {
+  const file = JSON.parse(readFileSync(join(__dirname, '../docs/traffic-months.json'), 'utf8')) as { months: { month: string; eventsRecorded?: string }[] }
+  for (const m of file.months) if (m.eventsRecorded) recorded.set(m.month, m.eventsRecorded)
+} catch { /* no file yet: every month below is unrecorded */ }
+const dueMonths = await sql`
+  select distinct to_char(ts at time zone 'UTC' at time zone 'America/Edmonton', 'YYYY-MM') as month
+  from events where ts < now() - interval '165 days' order by 1
+` as { month: string }[]
+const unrecorded = dueMonths.map(r => r.month).filter(m => (recorded.get(m) ?? '').slice(0, 7) <= m)
+if (unrecorded.length) {
+  console.error(`[prune] ${unrecorded.join(', ')} will be pruned within two weeks with no complete record. Run npm run traffic-months and commit docs/traffic-months.json.`)
+  process.exitCode = 1
+}
+
 const [retention] = await pruneSql`
   with del as (delete from events where ts < now() - interval '179 days' returning 1)
   select count(*)::int as n from del

@@ -2603,3 +2603,14 @@ Outcome: a student sees every control, arrow, error and focus ring on every page
 - Guard: two tests in `src/lib/design-tokens.test.ts`. One allows the ink chevron and the error red literal once, in the root tokens. The other checks the mint ring rule and the tray's ink ring. Both failed on the old CSS.
 - Not covered: Firefox and WebKit were not re-run for this pass (the earlier debug pass covered them in dark), and the phone focus scan was cut for time since the ring rules do not change with width.
 - Add-back fraction: 0 of 0.
+
+## 2026-10-15: sponsor-ready wording and a monthly traffic record
+
+Outcome: ScholarAB can take a sponsor or change hands without breaking a promise to students, and the month-by-month history a sponsor or buyer will ask for outlives the 180-day events retention.
+
+- Removed: the privacy page line "There is no business model here that would want it", the one public sentence that ruled a sponsor out. "No ads" stays on every page that says it. Added in its place: no sponsor or partner is ever given personal data (privacy), no one can pay to add, remove or move a listing and a sponsor is named as one (About), and an *If ScholarAB changes hands* section with an email, a delete link and 30 days before any address moves.
+- Added: `npm run traffic-months` writes `docs/traffic-months.json` with monthly event counts, GA4 users, sessions and views, and Cloudflare visits and page loads. It merges, so a month a source has since pruned keeps its stored value. Search Console is not repeated, since `src/data/search-months.json` already holds it. The GA4 read reuses the Search Console service account (one extra scope in `scripts/lib/gsc.ts`), not a new credential.
+- Guard: `scripts/prune-events.ts` fails its daily job two weeks before retention reaches a month with no record taken after that month ended, and still prunes, because /privacy's 180 days outrank the record. Checked with a dry run (silent today, the oldest event is 90 days old).
+- Rejected: a workflow that runs the export and commits from CI. It needs the GA4 and Cloudflare credentials as new GitHub secrets and a bot commit every month, while the only data at real risk is the events table, which the guard covers with no new secret.
+- Work avoided: the first run captured July 2026 (294 events) three months before the sweep would have erased it. Data cannot be collected afterwards, so there was no other way to get it back.
+- Add-back fraction: 0 of 1.
