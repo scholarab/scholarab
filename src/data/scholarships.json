@@ -102819,5 +102819,91 @@
       "apprenticeship": false,
       "extracurriculars": []
     }
+  },
+  {
+    "id": 2693,
+    "title": "Okotoks Royal Canadian Legion Branch 291 Bursary",
+    "amount": "Up to $1,500",
+    "deadline": null,
+    "openDate": null,
+    "audience": "Children, grandchildren and great-grandchildren of veterans who live in the Okotoks Legion branch area",
+    "url": "https://okotokslegion.ca/youth/",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "Okotoks",
+    "notes": "Two sources give different figures. The school's May 2026 handbook offers 2 bursaries of $500 to $1,000, paid once you show you finished your first year of post-secondary. The branch's 2026 application form sets up to $1,000 for college, vocational or trade school and up to $1,500 for university, as guidelines the branch can adjust. Foothills Composite and Alberta High School of Fine Arts graduates hand the form to the school, where the handbook's general deadline is the last week of June. Students at other schools in the area send it straight to the branch. The branch form itself asks for sections 1 and 2 by September 1. You also book an interview with a branch executive and bring the veteran's service record and a letter on your goals. Only one Legion bursary per student per year, across all branches.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "The Okotoks branch of the Royal Canadian Legion pays bursaries from its Poppy Trust Fund to descendants of veterans who need help with post-secondary costs. Need, family military service, marks, activities, community involvement and related work all count, and the branch also funds students already part way through a program.",
+    "metaDetail": "For veterans' families in financial need.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2694,
+    "title": "Kindred Roots Therapy Scholarship",
+    "amount": "$1,500",
+    "deadline": "2027-06-30",
+    "openDate": null,
+    "audience": "A graduating Foothills Composite student heading into a helping career",
+    "url": "https://media.foothillsschooldivision.ca/media/Default/fgg/awards-scholarship-handbook-may-2026.4e4d7f27778.pdf",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "Okotoks",
+    "notes": "Write a 400 to 800 word essay on three prompts, what made you want to help others, where you want your career to be in five or ten years, and how you plan to get there. Email it to admin@kindredroots.ca by June 30. That date comes from the May 2026 handbook. The 2027 date shown here assumes the same day next year and is not confirmed yet. Kindred Roots staff judge your passion for helping others, the quality of the essay and how well you fit the practice's values. Unless an award states otherwise, applicants must be Canadian citizens and have lived in Alberta for at least one year.",
+    "applyViaGuidance": true,
+    "applyRoute": "sponsor",
+    "active": false,
+    "deadlineEstimated": true,
+    "description": "Kindred Roots Therapy, a counselling practice in Okotoks, gives $1,500 to a graduating student who plans to train for a helping role such as psychology, social work, counselling, support work, first response, nursing or medical technician work.",
+    "metaDetail": "One essay, for students going into helping work.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "École Foothills Composite High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [
+        "Psychology",
+        "Social Work",
+        "Nursing",
+        "Health"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
   }
 ]
