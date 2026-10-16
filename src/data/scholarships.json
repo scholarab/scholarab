@@ -35403,20 +35403,20 @@
   },
   {
     "id": 890,
-    "title": "Town of Okotoks Annual Academic Award",
-    "amount": "$800",
+    "title": "Town of Okotoks Annual Award",
+    "amount": "$1,000",
     "deadline": null,
     "openDate": null,
-    "audience": "The second highest academic averages at Foothills Composite",
+    "audience": "A graduating Foothills Composite student who leads through volunteering or citizenship",
     "url": "https://media.foothillsschooldivision.ca/media/Default/fgg/awards-scholarship-handbook-may-2026.4e4d7f27778.pdf",
-    "category": "Academic",
+    "category": "Community",
     "lastVerified": "2026-10",
     "region": "Okotoks",
-    "notes": "It is written for the runner up, not the top student. A letter of acceptance must reach the scholarship committee before it is presented.",
+    "notes": "You apply with the school's general application form, due at the main office in the last week of June. Earlier handbooks listed a Town of Okotoks academic award for the runner up. The current one rewards volunteering and citizenship instead, and marks are not part of the criteria. Unless an award states otherwise, applicants must be Canadian citizens and have lived in Alberta for at least one year.",
     "applyViaGuidance": true,
     "active": true,
-    "description": "The Town of Okotoks funds two awards of $800, one to a male and one to a female student, for the second highest blended average across Math 30-1 or 30-2, English 30-1, Social Studies 30-1 or 30-2, Chemistry 30, Biology 30, Physics 30 and optionally Science 30.",
-    "metaDetail": "Deliberately aimed at second place, not first.",
+    "description": "The Town of Okotoks gives $1,000 to a graduating student who shows ambition in leadership through volunteer activities, or who models excellent citizenship at school or in the community.",
+    "metaDetail": "Volunteering and citizenship decide it, not marks.",
     "eligibility": {
       "grades": [
         "12"
@@ -35438,12 +35438,14 @@
       "fosterCare": false,
       "citizenship": "canadian",
       "apprenticeship": false,
-      "extracurriculars": []
+      "extracurriculars": [
+        "volunteer"
+      ]
     }
   },
   {
     "id": 891,
-    "title": "Okotoks Eyecare Health Sciences Scholarship",
+    "title": "FYidoctors Health Sciences Scholarship",
     "amount": "$750",
     "deadline": null,
     "openDate": null,
@@ -35452,10 +35454,10 @@
     "category": "STEM",
     "lastVerified": "2026-10",
     "region": "Okotoks",
-    "notes": "There is no application. The scholarship committee selects the winner. You have to have taken all three sciences to compete, which removes most of the graduating class. If two students tie, the Math 30-1 mark decides it. Unless an award states otherwise, applicants must be Canadian citizens and have lived in Alberta for at least one year.",
+    "notes": "There is no application. The scholarship committee selects the winner. You have to have taken all three sciences to compete, which removes most of the graduating class. If two students tie, the Math 30-1 mark decides it. Earlier handbooks listed it under Okotoks Eyecare. Unless an award states otherwise, applicants must be Canadian citizens and have lived in Alberta for at least one year.",
     "applyViaGuidance": true,
     "active": true,
-    "description": "Okotoks Eyecare pays $750 to the student with the highest overall average across Biology 30, Chemistry 30 and Physics 30, on proof of acceptance into a post-secondary program.",
+    "description": "FYidoctors pays $750 to the student with the highest overall average across Biology 30, Chemistry 30 and Physics 30, on proof of acceptance into a post-secondary program.",
     "metaDetail": "Math 30-1 breaks a tie.",
     "eligibility": {
       "grades": [
@@ -35537,46 +35539,6 @@
     "active": true,
     "description": "The Okotoks and District Senior Club awards $500 to the top Construction 30 student who demonstrates strong marks, skill, effort and talent and attends post-secondary immediately after graduation.",
     "metaDetail": "Third place is the target, and it pays fast.",
-    "eligibility": {
-      "grades": [
-        "12"
-      ],
-      "schoolBoards": [],
-      "specificSchools": [
-        "École Foothills Composite High School"
-      ],
-      "targetInstitutions": [],
-      "fields": [],
-      "minAverage": null,
-      "minAge": null,
-      "maxAge": null,
-      "genderRequired": null,
-      "indigenousRequired": false,
-      "bipocRequired": false,
-      "financialNeed": false,
-      "maxFamilyIncome": null,
-      "fosterCare": false,
-      "citizenship": "canadian",
-      "apprenticeship": false,
-      "extracurriculars": []
-    }
-  },
-  {
-    "id": 894,
-    "title": "Mary Gillard Scholarship",
-    "amount": "$500",
-    "deadline": null,
-    "openDate": null,
-    "audience": "A Foothills Composite graduate averaging over 80 per cent in three named subjects",
-    "url": "https://media.foothillsschooldivision.ca/media/Default/fgg/awards-scholarship-handbook-may-2026.4e4d7f27778.pdf",
-    "category": "Academic",
-    "lastVerified": "2026-10",
-    "region": "Okotoks",
-    "notes": "The subject choices are wide enough that most academic students already qualify on paper, so the 80 per cent floor and the 28 credit load are what decide it.",
-    "applyViaGuidance": true,
-    "active": true,
-    "description": "For the graduate with the highest average across English 30-1, one of Social Studies 30-1, Social Studies 30-2 or French 30, and one of Biology 30, Chemistry 30, Physics 30 or Science 30, with an average above 80 per cent and at least 28 credits in the graduating year.",
-    "metaDetail": "A three-subject average, with some choice.",
     "eligibility": {
       "grades": [
         "12"
@@ -36283,46 +36245,6 @@
     }
   },
   {
-    "id": 911,
-    "title": "Zutz Family Scholarship",
-    "amount": "$500",
-    "deadline": null,
-    "openDate": null,
-    "audience": "A graduating Foothills Composite student who has shown compassion and kindness",
-    "url": "https://media.foothillsschooldivision.ca/media/Default/fgg/awards-scholarship-handbook-may-2026.4e4d7f27778.pdf",
-    "category": "Community",
-    "lastVerified": "2026-10",
-    "region": "Okotoks",
-    "notes": "This is the shortest set of criteria in the handbook and says nothing about grades, programme, activities or post-secondary plans. A student whose transcript would rule them out everywhere else is fully eligible here.",
-    "applyViaGuidance": true,
-    "active": true,
-    "description": "The Zutz family funds a $500 award with just two conditions: that the recipient is graduating in the current year and has displayed compassion and kindness.",
-    "metaDetail": "Two criteria, and neither one mentions marks.",
-    "eligibility": {
-      "grades": [
-        "12"
-      ],
-      "schoolBoards": [],
-      "specificSchools": [
-        "École Foothills Composite High School"
-      ],
-      "targetInstitutions": [],
-      "fields": [],
-      "minAverage": null,
-      "minAge": null,
-      "maxAge": null,
-      "genderRequired": null,
-      "indigenousRequired": false,
-      "bipocRequired": false,
-      "financialNeed": false,
-      "maxFamilyIncome": null,
-      "fosterCare": false,
-      "citizenship": "canadian",
-      "apprenticeship": false,
-      "extracurriculars": []
-    }
-  },
-  {
     "id": 912,
     "title": "Magnussen Family Scholarship",
     "amount": "$500",
@@ -36660,48 +36582,6 @@
     }
   },
   {
-    "id": 920,
-    "title": "Open Circle Construction Technology Award",
-    "amount": "$300",
-    "deadline": null,
-    "openDate": null,
-    "audience": "The top grade 12 construction student at Foothills Composite",
-    "url": "https://media.foothillsschooldivision.ca/media/Default/fgg/awards-scholarship-handbook-may-2026.4e4d7f27778.pdf",
-    "category": "Trades",
-    "lastVerified": "2026-10",
-    "region": "Okotoks",
-    "notes": "Both the cheque and the certificate come from Open Circle directly. Leadership and co-operation are weighed alongside the mark, so the strongest builder in the room does not win it automatically.",
-    "applyViaGuidance": true,
-    "active": true,
-    "description": "Open Circle gives $300 and a certificate to a graduating student with top standing in a grade 12 construction related class who shows high interest in the CTS course, leadership in the classroom and a co-operative approach with students and teachers.",
-    "metaDetail": "Classroom leadership counts alongside top standing.",
-    "eligibility": {
-      "grades": [
-        "12"
-      ],
-      "schoolBoards": [],
-      "specificSchools": [
-        "École Foothills Composite High School"
-      ],
-      "targetInstitutions": [],
-      "fields": [
-        "Trades"
-      ],
-      "minAverage": null,
-      "minAge": null,
-      "maxAge": null,
-      "genderRequired": null,
-      "indigenousRequired": false,
-      "bipocRequired": false,
-      "financialNeed": false,
-      "maxFamilyIncome": null,
-      "fosterCare": false,
-      "citizenship": "canadian",
-      "apprenticeship": false,
-      "extracurriculars": []
-    }
-  },
-  {
     "id": 921,
     "title": "LeDuc Developments Senior Welding Annual Award",
     "amount": "$500",
@@ -36717,92 +36597,6 @@
     "active": true,
     "description": "LeDuc Developments pays $500 to a student with 100 high school credits who is entering an apprenticeship or a related institutional programme such as Welding Technology at SAIT, and who shows good attendance, cooperation, diligence and the ability to work alone and with others.",
     "metaDetail": "Requires 100 credits and a trade place.",
-    "eligibility": {
-      "grades": [
-        "12"
-      ],
-      "schoolBoards": [],
-      "specificSchools": [
-        "École Foothills Composite High School"
-      ],
-      "targetInstitutions": [],
-      "fields": [
-        "Trades"
-      ],
-      "minAverage": null,
-      "minAge": null,
-      "maxAge": null,
-      "genderRequired": null,
-      "indigenousRequired": false,
-      "bipocRequired": false,
-      "financialNeed": false,
-      "maxFamilyIncome": null,
-      "fosterCare": false,
-      "citizenship": "canadian",
-      "apprenticeship": false,
-      "extracurriculars": []
-    }
-  },
-  {
-    "id": 922,
-    "title": "High River Rotary Club Fabrication Studies Service Above Self Award",
-    "amount": "$500",
-    "deadline": null,
-    "openDate": null,
-    "audience": "A Foothills Composite fabrication student going into the mechanical trades",
-    "url": "https://media.foothillsschooldivision.ca/media/Default/fgg/awards-scholarship-handbook-may-2026.4e4d7f27778.pdf",
-    "category": "Trades",
-    "lastVerified": "2026-10",
-    "region": "Okotoks",
-    "notes": "It has a sibling award at the same value judged on work ethic instead, and nothing stops you being considered for both, so a fabrication student should make the case on both grounds.",
-    "applyViaGuidance": true,
-    "active": true,
-    "description": "The High River Rotary Club pays $500 to a graduating student with first class standing in Fabrication Studies who is heading into the mechanical trades and has shown involvement in shop based community projects and in the community itself, in the Rotary spirit of service above self.",
-    "metaDetail": "Community projects out of the shop decide it.",
-    "eligibility": {
-      "grades": [
-        "12"
-      ],
-      "schoolBoards": [],
-      "specificSchools": [
-        "École Foothills Composite High School"
-      ],
-      "targetInstitutions": [],
-      "fields": [
-        "Trades"
-      ],
-      "minAverage": null,
-      "minAge": null,
-      "maxAge": null,
-      "genderRequired": null,
-      "indigenousRequired": false,
-      "bipocRequired": false,
-      "financialNeed": false,
-      "maxFamilyIncome": null,
-      "fosterCare": false,
-      "citizenship": "canadian",
-      "apprenticeship": false,
-      "extracurriculars": [
-        "volunteer"
-      ]
-    }
-  },
-  {
-    "id": 923,
-    "title": "High River Rotary Club Fabrication Studies Work Ethic Award",
-    "amount": "$500",
-    "deadline": null,
-    "openDate": null,
-    "audience": "A Foothills Composite fabrication student with an exemplary work ethic",
-    "url": "https://media.foothillsschooldivision.ca/media/Default/fgg/awards-scholarship-handbook-may-2026.4e4d7f27778.pdf",
-    "category": "Trades",
-    "lastVerified": "2026-10",
-    "region": "Okotoks",
-    "notes": "Where its sibling looks at community involvement, this one looks purely at how you work, so a student who is heads down in the shop and not on any committee is the intended recipient.",
-    "applyViaGuidance": true,
-    "active": true,
-    "description": "The second of the High River Rotary Club's two Fabrication Studies awards, worth $500, for a graduating student with first class standing who has an intrinsic desire to do their best, outstanding attendance and participation, and who is honest, dependable and productive.",
-    "metaDetail": "The twin of the service award, judged on effort.",
     "eligibility": {
       "grades": [
         "12"
@@ -36958,90 +36752,6 @@
     }
   },
   {
-    "id": 927,
-    "title": "Okotoks and District Chamber of Commerce Business Award",
-    "amount": "$150",
-    "deadline": null,
-    "openDate": null,
-    "audience": "A Foothills Composite student showing initiative in Information Processing",
-    "url": "https://media.foothillsschooldivision.ca/media/Default/fgg/awards-scholarship-handbook-may-2026.4e4d7f27778.pdf",
-    "category": "Academic",
-    "lastVerified": "2026-10",
-    "region": "Okotoks",
-    "notes": "The criteria read as a reference letter from an employer rather than a transcript, and five of the six are about conduct. Information Processing 3 is the only course named.",
-    "applyViaGuidance": true,
-    "active": true,
-    "description": "The Okotoks and District Chamber of Commerce gives $150 and a plaque for initiative, dependability, adaptability, an enthusiastic attitude, punctuality and excellent attendance, along with above average achievement in Information Processing 3.",
-    "metaDetail": "Six workplace traits, plus one named course.",
-    "eligibility": {
-      "grades": [
-        "12"
-      ],
-      "schoolBoards": [],
-      "specificSchools": [
-        "École Foothills Composite High School"
-      ],
-      "targetInstitutions": [],
-      "fields": [
-        "Business"
-      ],
-      "minAverage": null,
-      "minAge": null,
-      "maxAge": null,
-      "genderRequired": null,
-      "indigenousRequired": false,
-      "bipocRequired": false,
-      "financialNeed": false,
-      "maxFamilyIncome": null,
-      "fosterCare": false,
-      "citizenship": "canadian",
-      "apprenticeship": false,
-      "extracurriculars": []
-    }
-  },
-  {
-    "id": 928,
-    "title": "Foothills Chartered Accountants Centennial Scholarship",
-    "amount": "$1,500",
-    "deadline": null,
-    "openDate": null,
-    "audience": "A Foothills School Division graduate heading for an accounting degree",
-    "url": "https://media.foothillsschooldivision.ca/media/Default/fgg/awards-scholarship-handbook-may-2026.4e4d7f27778.pdf",
-    "category": "Academic",
-    "lastVerified": "2026-10",
-    "region": "Okotoks",
-    "notes": "The money is held by the school division and paid out only when you produce a receipt for tuition in a qualifying business degree, so it cannot be spent on anything else. Open across the division, not to one school.",
-    "applyViaGuidance": true,
-    "applyRoute": "board",
-    "active": true,
-    "description": "Up to $1,500 a year, paid until the fund is exhausted, for a graduating Foothills School Division student with consistent superior academic achievement and a record of service to their school or the Foothills region, who is entering a university business degree majoring in accounting with the aim of a Chartered Accountant designation.",
-    "metaDetail": "Held in trust and released against a tuition receipt.",
-    "eligibility": {
-      "grades": [
-        "12"
-      ],
-      "schoolBoards": [],
-      "specificSchools": [],
-      "targetInstitutions": [],
-      "fields": [
-        "Business",
-        "Accounting"
-      ],
-      "minAverage": null,
-      "minAge": null,
-      "maxAge": null,
-      "genderRequired": null,
-      "indigenousRequired": false,
-      "bipocRequired": false,
-      "financialNeed": false,
-      "maxFamilyIncome": null,
-      "fosterCare": false,
-      "citizenship": "canadian",
-      "apprenticeship": false,
-      "extracurriculars": []
-    }
-  },
-  {
     "id": 929,
     "title": "Western Wheel Visual Communications Technology Scholarship",
     "amount": "$250",
@@ -37124,50 +36834,8 @@
     }
   },
   {
-    "id": 931,
-    "title": "Friesen Yearbook Scholarship",
-    "amount": "$1,500",
-    "deadline": null,
-    "openDate": null,
-    "audience": "A member of the Foothills Composite yearbook committee, in any grade",
-    "url": "https://media.foothillsschooldivision.ca/media/Default/fgg/awards-scholarship-handbook-may-2026.4e4d7f27778.pdf",
-    "category": "Arts",
-    "lastVerified": "2026-10",
-    "region": "Okotoks",
-    "notes": "This is the largest award in the handbook open to a grade 10 student, and the qualifying pool is whoever joined the yearbook committee that year. It can be divided, so a strong year may see it shared.",
-    "applyViaGuidance": true,
-    "active": true,
-    "description": "Friesens fund a $1,500 scholarship for a member of the yearbook committee. It may be given at any grade level, and may be split between more than one applicant.",
-    "metaDetail": "Any grade can win; joining the committee is the gate.",
-    "eligibility": {
-      "grades": [
-        "10",
-        "11",
-        "12"
-      ],
-      "schoolBoards": [],
-      "specificSchools": [
-        "École Foothills Composite High School"
-      ],
-      "targetInstitutions": [],
-      "fields": [],
-      "minAverage": null,
-      "minAge": null,
-      "maxAge": null,
-      "genderRequired": null,
-      "indigenousRequired": false,
-      "bipocRequired": false,
-      "financialNeed": false,
-      "maxFamilyIncome": null,
-      "fosterCare": false,
-      "citizenship": "canadian",
-      "apprenticeship": false,
-      "extracurriculars": []
-    }
-  },
-  {
     "id": 932,
-    "title": "CTS and Fine Arts Appreciation Award",
+    "title": "Wilkie Brothers CTS and Fine Arts Appreciation Award",
     "amount": "$300",
     "deadline": null,
     "openDate": null,
@@ -37176,10 +36844,10 @@
     "category": "Arts",
     "lastVerified": "2026-10",
     "region": "Okotoks",
-    "notes": "Need and work ethic are both weighed in the decision. Because it wants involvement in two different areas at once, the eligible group is smaller than either subject alone. Unless an award states otherwise, applicants must be Canadian citizens and have lived in Alberta for at least one year. Selection considers financial need and work ethic.",
+    "notes": "You apply with the school's general application form. The handbook lists it as the Wilkie Brothers Award. Need and work ethic are both weighed in the decision. Because it wants involvement in two different areas at once, the eligible group is smaller than either subject alone. Unless an award states otherwise, applicants must be Canadian citizens and have lived in Alberta for at least one year. Selection considers financial need and work ethic.",
     "applyViaGuidance": true,
     "active": true,
-    "description": "A $300 award for a student in good standing who is graduating, intends to attend a post-secondary institution, and is involved in both a CTS and a fine arts program or course.",
+    "description": "The Wilkie family gives $300 to a student in good standing who is graduating, intends to attend a post-secondary institution, and is involved in both a CTS and a fine arts program or course.",
     "metaDetail": "Requires a foot in both CTS and fine arts.",
     "eligibility": {
       "grades": [

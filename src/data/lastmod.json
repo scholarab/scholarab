@@ -3743,10 +3743,6 @@
     "hash": "6364bf6a2e7de267",
     "date": "2026-10-05"
   },
-  "/scholarships/cts-and-fine-arts-appreciation-award/": {
-    "hash": "b444b7edc1a038e0",
-    "date": "2026-10-08"
-  },
   "/scholarships/culinary-arts-instructors-award/": {
     "hash": "0eaabb10afcb3079",
     "date": "2026-10-15"
@@ -4639,10 +4635,6 @@
     "hash": "a87a36fe187cd10b",
     "date": "2026-10-14"
   },
-  "/scholarships/foothills-chartered-accountants-centennial-scholarship/": {
-    "hash": "52ea71319e3689bc",
-    "date": "2026-10-08"
-  },
   "/scholarships/foothills-county-agricultural-scholarship/": {
     "hash": "ea1e8c8fc3ff81b8",
     "date": "2026-10-08"
@@ -4863,10 +4855,6 @@
     "hash": "d159950e8ec8da9f",
     "date": "2026-10-14"
   },
-  "/scholarships/friesen-yearbook-scholarship/": {
-    "hash": "8fa8594897b3f08b",
-    "date": "2026-10-08"
-  },
   "/scholarships/friesens-yearbook-award/": {
     "hash": "5fa22c5e2b07597d",
     "date": "2026-10-08"
@@ -4890,6 +4878,10 @@
   "/scholarships/future-masterfeeder-scholarship/": {
     "hash": "c4c62b2f49119abe",
     "date": "2026-10-05"
+  },
+  "/scholarships/fyidoctors-health-sciences-scholarship/": {
+    "hash": "b24578e3f6757818",
+    "date": "2026-10-15"
   },
   "/scholarships/g3-grow-beyond-scholarship/": {
     "hash": "83c640624e818ac7",
@@ -5462,14 +5454,6 @@
   "/scholarships/high-river-legion-bursary/": {
     "hash": "0a74a4b5ab825918",
     "date": "2026-10-14"
-  },
-  "/scholarships/high-river-rotary-club-fabrication-studies-service-above-self-award/": {
-    "hash": "a977931ff094435e",
-    "date": "2026-10-08"
-  },
-  "/scholarships/high-river-rotary-club-fabrication-studies-work-ethic-award/": {
-    "hash": "4726323f3041bb68",
-    "date": "2026-10-08"
   },
   "/scholarships/high-school-apprenticeship-scholarship-bright-futures/": {
     "hash": "a2d15dbba5a381b6",
@@ -7131,10 +7115,6 @@
     "hash": "38a123369127a327",
     "date": "2026-10-14"
   },
-  "/scholarships/mary-gillard-scholarship/": {
-    "hash": "ae76435a989a8701",
-    "date": "2026-10-08"
-  },
   "/scholarships/mary-h-corns-and-sons-memorial-scholarship-in-nursing/": {
     "hash": "629e4038296fb6fd",
     "date": "2026-10-14"
@@ -7867,10 +7847,6 @@
     "hash": "1451cf168331583d",
     "date": "2026-10-14"
   },
-  "/scholarships/okotoks-and-district-chamber-of-commerce-business-award/": {
-    "hash": "8a02a5bf52af84c6",
-    "date": "2026-10-08"
-  },
   "/scholarships/okotoks-and-district-historical-society-annual-scholarship/": {
     "hash": "7e31cb02f363b7d3",
     "date": "2026-10-15"
@@ -7886,10 +7862,6 @@
   "/scholarships/okotoks-elks-lodge-grade-12-scholarship/": {
     "hash": "17ad2db0a68b12bd",
     "date": "2026-10-08"
-  },
-  "/scholarships/okotoks-eyecare-health-sciences-scholarship/": {
-    "hash": "bf69e73840b1d329",
-    "date": "2026-10-15"
   },
   "/scholarships/okotoks-rotary-career-opportunity-awards/": {
     "hash": "96b094c5e36ced8e",
@@ -7954,10 +7926,6 @@
   "/scholarships/opa-kers-legacy-fund-unsung-hero-award/": {
     "hash": "94d925076129aba8",
     "date": "2026-10-14"
-  },
-  "/scholarships/open-circle-construction-technology-award/": {
-    "hash": "d7321076080e28e1",
-    "date": "2026-10-08"
   },
   "/scholarships/open-door-bursary/": {
     "hash": "44d781f8a28f52f3",
@@ -9871,9 +9839,9 @@
     "hash": "d07bd7df53210492",
     "date": "2026-10-14"
   },
-  "/scholarships/town-of-okotoks-annual-academic-award/": {
-    "hash": "6054c7a1d96b582a",
-    "date": "2026-10-08"
+  "/scholarships/town-of-okotoks-annual-award/": {
+    "hash": "8c6e5131c9d0965a",
+    "date": "2026-10-15"
   },
   "/scholarships/town-of-whitecourt-tuition-assistance-bursary/": {
     "hash": "4333ddfbd16338f0",
@@ -10739,6 +10707,10 @@
     "hash": "d108670064b12777",
     "date": "2026-10-14"
   },
+  "/scholarships/wilkie-brothers-cts-and-fine-arts-appreciation-award/": {
+    "hash": "8fda59c616e40f99",
+    "date": "2026-10-15"
+  },
   "/scholarships/william-aberhart-alumni-scholarship/": {
     "hash": "b021427482be30ff",
     "date": "2026-10-08"
@@ -10901,10 +10873,6 @@
   },
   "/scholarships/youth-climate-activist-prize/": {
     "hash": "8bc3da65139f2be4",
-    "date": "2026-10-08"
-  },
-  "/scholarships/zutz-family-scholarship/": {
-    "hash": "c0ab290dd2801288",
     "date": "2026-10-08"
   },
   "/templates/reference-letter/": {
