@@ -1,6 +1,5 @@
 ---
 export const prerender = false
-import LoginForm from '../../components/admin/LoginForm'
 import AdminLayout from '../../layouts/AdminLayout.astro'
 
 // Block mobile access; redirect to home
@@ -11,5 +10,13 @@ if (isMobile) {
 }
 ---
 <AdminLayout title="Sign in">
-  <LoginForm client:load next={(() => { const v = Astro.url.searchParams.get('next') ?? ''; return v.startsWith('/admin') && !v.includes('://') ? v : '/admin/analytics'; })()} />
+  <div data-admin-login={(() => { const v = Astro.url.searchParams.get('next') ?? ''; return v.startsWith('/admin') && !v.includes('://') ? v : '/admin/analytics'; })()}></div>
+  <script>
+    // Rendered in the browser only: the Worker carries no UI library.
+    import { h, render } from 'preact';
+    import LoginForm from '../../components/admin/LoginForm';
+
+    const host = document.querySelector<HTMLElement>('[data-admin-login]');
+    if (host) render(h(LoginForm, { next: host.dataset.adminLogin! }), host);
+  </script>
 </AdminLayout>

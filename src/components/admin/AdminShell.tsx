@@ -1,19 +1,14 @@
-import { useEffect } from 'react';
+/** @jsxImportSource preact */
+import { useEffect } from 'preact/hooks';
 import AnalyticsPanel, { type AnalyticsData } from './AnalyticsPanel';
 import { optOutOfEvents } from '../../lib/events';
 
-interface User {
-  id: string;
-  email: string;
-  name?: string | null;
-}
-
 interface Props {
-  user: User;
-  data: string;
+  email: string;
+  data: AnalyticsData;
 }
 
-export default function AdminShell({ user, data }: Props) {
+export default function AdminShell({ email, data }: Props) {
   // Anyone using the admin panel is the owner - stop counting their browsing
   useEffect(() => {
     optOutOfEvents();
@@ -24,13 +19,6 @@ export default function AdminShell({ user, data }: Props) {
     window.location.href = '/admin/login';
   };
 
-  let parsedData: unknown;
-  try {
-    parsedData = JSON.parse(data);
-  } catch {
-    parsedData = { error: true };
-  }
-
   return (
     <div className="adm">
       <header className="adm-bar">
@@ -39,12 +27,12 @@ export default function AdminShell({ user, data }: Props) {
           <span>Admin</span>
         </a>
         <div className="adm-bar-end">
-          <button type="button" className="adm-link" onClick={handleLogout} title={user.email}>Sign out</button>
+          <button type="button" className="adm-link" onClick={handleLogout} title={email}>Sign out</button>
         </div>
       </header>
 
       <main className="adm-main">
-        <AnalyticsPanel data={parsedData as AnalyticsData} />
+        <AnalyticsPanel data={data} />
       </main>
     </div>
   );

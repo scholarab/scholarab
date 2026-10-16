@@ -1,4 +1,5 @@
-import { useMemo, useState } from 'react'
+/** @jsxImportSource preact */
+import { useMemo, useState } from 'preact/hooks'
 import { Scoreboard, type ScoreCell } from './primitives'
 
 export interface AnalyticsData {
@@ -596,7 +597,7 @@ export default function AnalyticsPanel({ data }: Props) {
         <Scoreboard title={month === ALL ? 'All time' : monthLabel(month)} sub={month === ALL ? 'Since Jul 17 2026' : 'Alberta time'} cells={cells} />
       </div>
 
-      <div className="adm-head" style={{ marginTop: 36 }}>
+      <div className="adm-head" style={{ marginTop: '36px' }}>
         <div>
           <h1 className="adm-title">Analytics</h1>
           <p className="adm-sub">Anonymous counts by Alberta month. One count per item per tab session, with no cookies, IPs or user ids.</p>
@@ -675,7 +676,7 @@ export default function AnalyticsPanel({ data }: Props) {
       </section>
 
       <section className="adm-block">
-        <div className="adm-head" style={{ marginBottom: 12, alignItems: 'center' }}>
+        <div className="adm-head" style={{ marginBottom: '12px', alignItems: 'center' }}>
           <h2 className="adm-h2" style={{ margin: 0 }}>By listing <small>{periodLabel}</small></h2>
           <div className="adm-actions">
             <div className="adm-periods" role="group" aria-label="Listing type">
@@ -689,10 +690,10 @@ export default function AnalyticsPanel({ data }: Props) {
               type="search"
               aria-label="Filter by name"
               value={query}
-              onChange={e => setQuery(e.target.value)}
+              onInput={e => setQuery(e.currentTarget.value)}
               placeholder="Filter by name"
               className="adm-input"
-              style={{ width: 220, height: 36 }}
+              style={{ width: '220px', height: '36px' }}
             />
           </div>
         </div>
@@ -733,7 +734,7 @@ export default function AnalyticsPanel({ data }: Props) {
             </tbody>
           </table>
         </div>
-        <div className="adm-pager" style={{ alignItems: 'flex-start', gap: 24 }}>
+        <div className="adm-pager" style={{ alignItems: 'flex-start', gap: '24px' }}>
           <p className="adm-note" style={{ margin: 0 }}>
             Applies include clicks from list rows, which skip the detail page, so rates above 100% are possible.
             On list counts reminders signed up in this period and still active.
@@ -855,12 +856,12 @@ export default function AnalyticsPanel({ data }: Props) {
                   <tr>
                     <td>Opened</td>
                     <td data-num>{tour.opens}</td>
-                    <td style={{ width: 64 }}></td>
+                    <td style={{ width: '64px' }}></td>
                   </tr>
                   <tr>
                     <td>Went on to the quiz</td>
                     <td data-num>{tour.cta}</td>
-                    <td data-num data-dim style={{ width: 64 }}>{tour.pct}</td>
+                    <td data-num data-dim style={{ width: '64px' }}>{tour.pct}</td>
                   </tr>
                 </tbody>
               </table>
@@ -884,7 +885,7 @@ function ShareTable({ title, sub, rows, total, attr }: { title: string; sub: str
               <tr key={r.key}>
                 <td>{r.label}</td>
                 <td data-num>{r.n.toLocaleString('en-CA')}</td>
-                <td data-num data-dim style={{ width: 64 }}>{total > 0 ? `${Math.round((r.n / total) * 100)}%` : ''}</td>
+                <td data-num data-dim style={{ width: '64px' }}>{total > 0 ? `${Math.round((r.n / total) * 100)}%` : ''}</td>
               </tr>
             ))}
           </tbody>

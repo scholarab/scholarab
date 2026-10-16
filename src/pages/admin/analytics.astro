@@ -3,7 +3,6 @@ export const prerender = false
 import { db } from '../../lib/db/client'
 import { events, subscribers } from '../../lib/db/schema'
 import { sql, and, eq, desc, count, isNotNull } from 'drizzle-orm'
-import AdminShell from '../../components/admin/AdminShell'
 import type { AnalyticsData } from '../../components/admin/AnalyticsPanel'
 import catalogue from '../../data/runtime-catalogue.json'
 import searchMonths from '../../data/search-months.json'
@@ -170,9 +169,18 @@ try {
 }
 ---
 <AdminLayout title="Analytics">
-  <AdminShell
-    client:load
-    user={user}
-    data={JSON.stringify(data)}
-  />
+  <div data-admin-email={user.email} data-admin-analytics={JSON.stringify(data)}></div>
+  <script>
+    // Rendered in the browser only: the Worker carries no UI library.
+    import { h, render } from 'preact';
+    import AdminShell from '../../components/admin/AdminShell';
+    import type { AnalyticsData } from '../../components/admin/AnalyticsPanel';
+
+    const host = document.querySelector<HTMLElement>('[data-admin-analytics]');
+    if (host) {
+      let data: AnalyticsData;
+      try { data = JSON.parse(host.dataset.adminAnalytics!); } catch { data = { error: true } as AnalyticsData; }
+      render(h(AdminShell, { email: host.dataset.adminEmail!, data }), host);
+    }
+  </script>
 </AdminLayout>

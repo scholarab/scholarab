@@ -1,9 +1,16 @@
+/** @jsxImportSource preact */
 import { describe, it, expect, afterEach } from 'vitest'
-import { render, screen, fireEvent, cleanup, within } from '@testing-library/react'
+import { screen, within, fireEvent as dispatch } from '@testing-library/dom'
+import { render as mount, type VNode } from 'preact'
+import { act } from 'preact/test-utils'
 import AnalyticsPanel from '../components/admin/AnalyticsPanel'
 import type { AnalyticsData } from '../components/admin/AnalyticsPanel'
 
-afterEach(cleanup)
+const host = document.createElement('div')
+document.body.append(host)
+function render(node: VNode) { act(() => mount(node, host)) }
+const fireEvent = { click: (element: Element) => act(() => { dispatch.click(element) }) }
+afterEach(() => act(() => mount(null, host)))
 
 // July and September have activity, August has none; the gap is the point:
 // a skipped month would read as "no data collected" rather than "a quiet month".

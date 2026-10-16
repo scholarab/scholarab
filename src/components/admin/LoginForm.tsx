@@ -1,11 +1,15 @@
-import { useState } from 'react'
+/** @jsxImportSource preact */
+import { useEffect, useRef, useState } from 'preact/hooks'
 
 export default function LoginForm({ next }: { next: string }) {
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
+  const input = useRef<HTMLInputElement>(null)
+  // React focused an autoFocus input on mount; Preact only sets the attribute.
+  useEffect(() => { input.current?.focus() }, [])
 
-  const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: SubmitEvent) => {
     e.preventDefault()
     setLoading(true)
     setError('')
@@ -33,17 +37,17 @@ export default function LoginForm({ next }: { next: string }) {
       <form onSubmit={handleSubmit}>
         <img src="/brand/scholarab-logo-on-dark.svg" alt="ScholarAB" width="160" height="36" />
         <h1>Admin</h1>
-        <p>Sign in to edit listings and publish.</p>
+        <p>Sign in to see site analytics.</p>
         <div className="adm-field">
           <label htmlFor="admin-login-password">Password</label>
           <input id="admin-login-password"
+            ref={input}
             type="password"
             className="adm-input"
             aria-describedby={error ? 'admin-login-error' : undefined}
             value={password}
-            onChange={e => setPassword(e.target.value)}
+            onInput={e => setPassword(e.currentTarget.value)}
             required
-            autoFocus
           />
         </div>
         {error && <p id="admin-login-error" role="alert" className="adm-alert">{error}</p>}

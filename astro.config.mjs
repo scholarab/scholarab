@@ -1,4 +1,3 @@
-import react from '@astrojs/react';
 import { defineConfig, envField } from 'astro/config';
 import cloudflare from '@astrojs/cloudflare';
 // https://astro.build/config
@@ -24,7 +23,6 @@ export default defineConfig({
     // Node honours the pinned timezone.
     prerenderEnvironment: 'node',
   }),
-  integrations: [react()],
   env: {
     schema: {
       SESSION_SECRET: envField.string({ context: 'server', access: 'secret', optional: true }),

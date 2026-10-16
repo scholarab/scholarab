@@ -1,7 +1,10 @@
 {
   "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
-    "noUncheckedIndexedAccess": true
+    "noUncheckedIndexedAccess": true,
+    // Preact is the only JSX runtime. Vite reads these for tests and the build.
+    "jsx": "react-jsx",
+    "jsxImportSource": "preact"
   },
   "exclude": [
     "scripts",

@@ -1,5 +1,35 @@
 # ScholarAB simplification record
 
+## Admin moved from React to Preact: October 15, 2026
+
+**Outcome kept.** Ilia signs in and reads the same analytics page, with the same look, controls and numbers. Students see no change: `/match` already ran on Preact.
+
+| Candidate | Outcome |
+|---|---|
+| `react` and `react-dom` | Removed. The four admin components use `preact` and `preact/hooks`, like the quiz. |
+| `@astrojs/react` (and the `@vitejs/plugin-react` it brought) | Removed. `tsconfig.json` sets the Preact JSX runtime once for the build and the tests. |
+| `@types/react`, `@types/react-dom` | Removed |
+| `@testing-library/react` | Removed. The analytics test mounts with Preact and queries with `@testing-library/dom`, as the quiz test does. |
+| Rendering the admin in the Worker, then hydrating it | Removed. Each admin page holds its data in a `data-*` attribute and one page script renders it, as `QuizLoader.astro` does. The sign-in form now appears once a 6 KB script runs. |
+| Passing the whole user record and a JSON string prop | Removed. The shell gets the email (for the Sign out title) and parsed data. |
+| `eslint-plugin-react-hooks` | **Kept.** Its hook rules apply to Preact hooks. |
+
+Add-back: 1 of 7 candidates kept, so 14%.
+
+**Measured** (local builds of origin/main and this change, same machine):
+
+| | Before | After |
+|---|---|---|
+| Worker code (`dist/server`, all `.mjs`) | 2,277,095 bytes | 1,672,050 bytes (down 27%) |
+| `/admin/analytics` JavaScript, all chunks | 252,239 bytes, 79,904 gzip | 42,881 bytes, 16,455 gzip (down 79% gzip) |
+| `/admin/login` JavaScript, all chunks | 222,789 bytes, 69,822 gzip | 15,045 bytes, 6,477 gzip (down 91% gzip) |
+| `/match` JavaScript, all chunks | 86,498 bytes, 33,113 gzip, 9 files | 86,553 bytes, 33,237 gzip, 10 files |
+| `package-lock.json` | | 145 lines removed, 6 direct dependencies gone |
+
+`/match` grew by 124 gzip bytes and one file because Preact is now a chunk shared with the admin. Hosted load times and Worker start time are not measured.
+
+**Found on the way.** Preact 11 sets a numeric style value as written, with no `px`. The admin's numeric styles are now strings. The quiz's empty state has had `style={{ marginTop: 32 }}` since its Preact port, so that margin is not applied on `/match`; it is left as is here.
+
 ## Admin editor and publisher retired: October 15, 2026
 
 **Outcome kept.** Students see a catalogue that was validated, built and deployed from git. Ilia still reads site analytics at `/admin`.
@@ -24,7 +54,7 @@ Add-back: 2 of 11 candidates kept (the catalogue hash and the validation it depe
 
 **Measured.** 57 files, 3,530 lines deleted and 71 added before this entry (`git diff --stat`). One scheduled workflow, one CI step that wrote to the database, two npm scripts, one dependency and two Worker secrets no longer read (`PUBLICATION_SIGNING_KEY`, `ANTHROPIC_API_KEY`). Hosted minutes saved are not measured.
 
-**Not done.** React stays for the analytics panel; porting it to Preact would remove `react`, `react-dom` and `@astrojs/react`. The two secrets are still bound in Cloudflare and GitHub and should be deleted there by hand.
+**Not done.** React stayed for the analytics panel (ported to Preact the same day, entry above). The two secrets are still bound in Cloudflare and GitHub and should be deleted there by hand.
 
 ## Critique third pass: September 23, 2026
 

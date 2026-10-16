@@ -1,6 +1,7 @@
+/** @jsxImportSource preact */
 // Shared pieces for the admin analytics page. Styles are the .adm-* rules in
 // styles/admin.css.
-import type { ReactNode } from 'react'
+import type { ComponentChildren } from 'preact'
 
 /** One figure in the admin scoreboard strip. */
 export interface ScoreCell {
@@ -20,10 +21,10 @@ export function Scoreboard({ title, sub, cells, children }: {
   title: string
   sub?: string
   cells: ScoreCell[]
-  children?: ReactNode
+  children?: ComponentChildren
 }) {
   return (
-    <section className="adm-score" aria-label="Scoreboard" style={{ ['--adm-score-n' as string]: cells.length }}>
+    <section className="adm-score" aria-label="Scoreboard" style={{ '--adm-score-n': cells.length }}>
       <div className="adm-score-head">
         <h2>{title}</h2>
         {sub && <p>{sub}</p>}

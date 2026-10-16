@@ -76,9 +76,9 @@ No ads, no account, no paywall, no email required to browse.
   match; a failed publication keeps its drafts. See
   `docs/publication-and-operations.md`. Verify rendered changes against the
   build in `dist/`.
-- React runs only on /match and /admin. Everything else is server-rendered HTML
-  with small vanilla controllers; new work extends those rather than adding
-  islands.
+- Preact runs only on /match and /admin, mounted by a plain page script with
+  no Astro integration. Everything else is server-rendered HTML with small
+  vanilla controllers; new work extends those rather than adding islands.
 - One fixed light palette. There is no theme system and must not be one.
 - Google Analytics loads only after explicit consent and uses a browser
   identifier; do not describe it as anonymous or zero-PII. Cloudflare Web

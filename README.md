@@ -12,7 +12,7 @@ National scholarship databases are overwhelming and heavily gated. ScholarAB is 
 
 ## 🛠️ Tech Stack
 - **Framework:** [Astro](https://astro.build)
-- **UI:** React & Tailwind CSS
+- **UI:** Preact & Tailwind CSS
 - **Published data:** Versioned JSON, edited through git; Neon Postgres stores reminders and anonymous counters.
 
 Publishing, migrations, and recovery: [operational guide](docs/publication-and-operations.md).
