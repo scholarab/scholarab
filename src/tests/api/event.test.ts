@@ -152,7 +152,7 @@ describe('POST /api/event', () => {
   })
 
   it('silently drops requests from datacenter networks', async () => {
-    for (const org of ['AMAZON-02', 'GOOGLE-CLOUD-PLATFORM', 'Hetzner Online GmbH', 'DIGITALOCEAN-ASN', 'MICROSOFT-CORP-MSN-AS-BLOCK']) {
+    for (const org of ['AMAZON-02', 'GOOGLE-CLOUD-PLATFORM', 'Hetzner Online GmbH', 'DIGITALOCEAN-ASN', 'MICROSOFT-CORP-MSN-AS-BLOCK', 'Akamai Connected Cloud']) {
       const res = await POST({
         request: Object.assign(makeRequest({ event: 'quiz_complete' }), { cf: { asOrganization: org } }),
       } as unknown as Parameters<typeof POST>[0])
@@ -167,6 +167,17 @@ describe('POST /api/event', () => {
     } as unknown as Parameters<typeof POST>[0])
     expect(res.status).toBe(204)
     expect(mockInsert).toHaveBeenCalled()
+  })
+
+  it('accepts iCloud Private Relay, which exits through Akamai', async () => {
+    for (const org of ['Akamai Technologies, Inc.', 'AKAMAI-AS']) {
+      mockInsert.mockClear()
+      const res = await POST({
+        request: Object.assign(makeRequest({ event: 'quiz_complete' }), { cf: { asOrganization: org } }),
+      } as unknown as Parameters<typeof POST>[0])
+      expect(res.status).toBe(204)
+      expect(mockInsert).toHaveBeenCalled()
+    }
   })
 
   it('accepts quiz_start', async () => {

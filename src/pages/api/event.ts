@@ -59,7 +59,9 @@ const EMAIL_LIKE = /\S+@\S+\.\S+/
 
 // Students browse from residential/school networks, never from cloud hosts.
 // Catches JS-executing bots with flawless browser UAs. Checked, never stored.
-const DATACENTER_ORG = /amazon|aws|google[- ]cloud|azure|microsoft[- ]corp|hetzner|digital[- ]?ocean|ovh|linode|akamai|vultr|alibaba|tencent|oracle|leaseweb|contabo|m247|datacamp|choopa|fly\.io|huawei[- ]cloud|scaleway/i
+// Plain "Akamai" is not a datacenter here: iCloud Private Relay sends iPhone
+// Safari users out through Akamai, so only its Linode cloud is matched.
+const DATACENTER_ORG = /amazon|aws|google[- ]cloud|azure|microsoft[- ]corp|hetzner|digital[- ]?ocean|ovh|linode|akamai[- ]connected[- ]cloud|vultr|alibaba|tencent|oracle|leaseweb|contabo|m247|datacamp|choopa|fly\.io|huawei[- ]cloud|scaleway/i
 
 type CfRequest = { cf?: { asOrganization?: string } }
 
