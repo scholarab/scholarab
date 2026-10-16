@@ -2631,3 +2631,15 @@ Outcome: every page in the sitemap is checked against the 95+ bar, mobile and de
 - Measured, local, this Mac: one page went from 15s to about 4.6s per worker. A full mobile pass of the 2,796 sitemap pages took 53.3 min with 4 workers, every page 100 in all four categories, 0 errors. 
 - Not measured: the live engine. Google answers 403 until the PageSpeed Insights API is enabled on the service account's Cloud project, which only Ilia can do. Its 24-in-flight, one-start-per-300ms pacing is a projection from the published 400 per 100 seconds quota, about 28 minutes for both strategies on every page (5,592 runs at one start per 300ms).
 - Add-back fraction: 0 of 4 removals (plugin, devDependency, scratch runner, provided throttling).
+
+## 2026-10-16: the no-result searches and missing pages in the admin log
+
+Outcome: a student who types the word they know (xray, hairdresser, cardiac surgery, pcp) lands on the listings the catalogue already has under its own word, and a typed or shared URL that never existed reaches the page it meant.
+
+- Replayed all 133 logged no-result queries through `searchRows`, `tokenIndexMayMatch` and `correctQuery` against the JSON: 49 already find listings (earlier alias work), 84 did not. After this change 55 do not.
+- Added to `search-text.ts`: 27 aliases and 13 misspellings, each from the log, each pointing at listings the JSON has (the existing test fails an alias with nothing behind it). Medical specialties read as the medical degree, never "medicine", which starts "Medicine Hat".
+- Removed before shipping: `machinist` to "machining". The stemmer cuts "machining" to "machin", which found machine learning programs.
+- Added to `_redirects`: three 301s from the not-found log, both slash forms, each to a built page (the Tebo award by its real slug, the ornithology workshop under /programs/, /scholarships/closing-soon/ to /deadlines/).
+- Rejected: indexing `eligibility.specificSchools` for school-name searches (one logged query would gain), a town-to-county alias for Bruderheim and Falun (whether a county award takes town residents is unverified), and fuzzy matching (the reason SPELLING is a fixed list).
+- Left as real content gaps, not hidden: trades, sports and communities with no listing (lgbtq, muslim, latino, south asian, wrestling, figure skating, jewelry, forklift, motorcycle, non destructive testing, phlebotomy, paleontology, urban planning, dietary aid, piercing), towns with none (Hinton, Grovedale, Bruderheim, Falun), and Kenn Borek Air.
+- Add-back fraction: 0 of 1.

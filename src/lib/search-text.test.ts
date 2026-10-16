@@ -240,6 +240,11 @@ describe('aliases', () => {
     'smart photography scholarship',
     'rocky view teachers scholarship',
     'someone who worked at a pharmacy counter of a store',
+    'fort high health sciences\nx ray technology or nursing',
+    'northern alberta rural physicians fund',
+    'medicine hat college student awards',
+    'sandy and carl krenning culinary fund',
+    'mc college excellence in cosmetology scholarship',
   ]
   const find = (q: string) => searchRows(rows, r => r, normalizeSearchQuery(q)).map(r => rows.indexOf(r))
 
@@ -255,6 +260,24 @@ describe('aliases', () => {
     expect(find('criminology')).toEqual([16])
     expect(find('aircraft maintenance engineer')).toEqual([17])
     expect(find('camera')).toEqual([18])
+  })
+
+  // Each returned nothing in the 2026-10-16 log.
+  it('reads the 2026-10-16 career words as the field the listings name', () => {
+    expect(find('xray')).toEqual([5, 21])
+    expect(find('radiology')).toEqual([5, 21])
+    expect(find('radiogra')).toEqual([5, 21])
+    expect(find('radiograpy')).toEqual([5, 21])
+    expect(find('bakery')).toEqual([24])
+    expect(find('hairdresser')).toEqual([25])
+    expect(find('nails')).toEqual([25])
+  })
+
+  it('reads a medical specialty as the medical degree, never Medicine Hat', () => {
+    expect(find('cardiac surgery')).toEqual([22])
+    expect(find('cardiac sugery')).toEqual([22])
+    expect(find('opthalmology')).toEqual([22])
+    expect(find('anesthesiologist')).toEqual([22])
   })
 
   it('reads school shorthand as the school', () => {
@@ -288,6 +311,10 @@ describe('aliases', () => {
     expect(find('dental higene')).toEqual([1])
     expect(find('bachh')).toEqual([15])
     expect(normalizeSearchQuery('indeginious')).toBe('indigenous')
+    expect(normalizeSearchQuery('dental hygein')).toBe('dental hygiene')
+    expect(normalizeSearchQuery('ingineering')).toBe('engineering')
+    expect(normalizeSearchQuery('veteranian')).toBe('veterinarian')
+    expect(find('aircraft maintenance engineet')).toEqual([17])
   })
 
   it('matches an alias only from the start of a word', () => {

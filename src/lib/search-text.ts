@@ -62,6 +62,13 @@ const SPELLING: Record<string, string> = {
   reveled: 'revealed', reveiled: 'revealed', reviled: 'revealed', revieled: 'revealed',
   // From the 2026-10-14 log.
   higene: 'hygiene', indeginious: 'indigenous', bachh: 'bachelor',
+  // From the 2026-10-16 log. Each starts with the wrong letter or sits too
+  // far from the word for correctQuery to reach it.
+  hygein: 'hygiene', hygeine: 'hygiene', hygine: 'hygiene',
+  ingineering: 'engineering', engneering: 'engineering', engineet: 'engineer',
+  megatronics: 'mechatronics', tobotics: 'robotics', radiograpy: 'radiography',
+  veteranian: 'veterinarian', vetrinarian: 'veterinarian',
+  opthalmology: 'ophthalmology', sugery: 'surgery',
 }
 
 /**
@@ -76,6 +83,12 @@ const SCHOOLS: string[][] = [
 
 /** A school shorthand glued to the word before it: "businessuofa". */
 const GLUED = new RegExp(`^(\\p{L}{3,})(${SCHOOLS.flat().filter(s => !s.includes(' ')).join('|')})$`, 'u');
+
+/** What the listings call X-ray and ultrasound training. */
+const IMAGING = ['x ray', 'diagnostic imaging', 'medical imaging'];
+
+/** Listings for the medical degree. Never "medicine": it starts "Medicine Hat". */
+const PHYSICIAN = ['physician', 'medical school', 'medical student', 'pre med'];
 
 /**
  * Other words the listings use for what a student typed.
@@ -104,6 +117,29 @@ export const ALIASES: Record<string, string[]> = {
   'barrel racing': ['rodeo'],
   rvs: ['rocky view'],
   interpipeline: ['inter pipeline'],
+  // From the 2026-10-16 log.
+  xray: IMAGING, radiology: IMAGING, radiography: IMAGING, radiographer: IMAGING, radiologist: IMAGING,
+  // A medical specialty is a medical degree first; no listing names one.
+  surgery: PHYSICIAN, surgeon: PHYSICIAN, cardiac: PHYSICIAN, anesthesiologist: PHYSICIAN,
+  ophthalmology: PHYSICIAN, pediatric: PHYSICIAN, pediatrician: PHYSICIAN,
+  psychologist: ['psycholog'],
+  pulmonary: ['respiratory'],
+  pcp: ['primary care paramedic', 'paramedic'],
+  veterinarian: ['veterinar'],
+  mechatronics: ['robotic'],
+  bakery: ['culinary', 'baking', 'pastry'],
+  baker: ['culinary', 'baking', 'pastry'],
+  botany: ['plant science', 'horticultur'],
+  hairdresser: ['hairstyl', 'cosmetolog'],
+  hairdressing: ['hairstyl', 'cosmetolog'],
+  nail: ['esthetic', 'cosmetolog'],
+  nails: ['esthetic', 'cosmetolog'],
+  disaster: ['emergency management'],
+  governance: ['politic', 'public administration'],
+  euphonium: ['brass', 'music'],
+  ethiopian: ['black student', 'black canad'],
+  ukrainian: ['ukrain'],
+  bible: ['christian'],
   // Misspellings long enough that a student pauses halfway through them.
   // The prefix rule below then reads "milwr" and "kinie" as these.
   milwright: ['millwright'],
