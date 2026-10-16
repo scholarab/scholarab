@@ -2,7 +2,7 @@
 import { readFileSync } from 'fs'
 import { dirname, join } from 'path'
 import { fileURLToPath } from 'url'
-import { Agent } from 'undici'
+import { Agent, fetch } from 'undici'
 import { execFile } from 'node:child_process'
 import { promisify } from 'node:util'
 import { groupLinkTargets, forEachHost, reviewedLinkFailure, requestLink, type LinkException } from './link-targets.ts'
@@ -67,6 +67,11 @@ const sleep = (ms: number) => new Promise<void>(r => setTimeout(r, ms))
  *
  * 20s, with the request signal moved above it so the socket layer is what
  * gives up first and the error still names the phase that failed.
+ *
+ * fetch comes from the same undici package as this Agent. Node's global fetch
+ * bundles its own undici, and once the package moved to v8 every request
+ * failed with "invalid onRequestStart method", so the whole corpus quietly
+ * fell through to curl (issue #40).
  */
 const dispatcher = new Agent({
   connect: { timeout: 20_000 },
@@ -82,7 +87,7 @@ async function fetchStatus(url: string): Promise<{ status?: number; error?: stri
       redirect: 'follow',
       headers: BROWSER_HEADERS,
       dispatcher,
-    } as RequestInit & { dispatcher: Agent })
+    })
     await res.body?.cancel()
     return { status: res.status }
   } catch (e: unknown) {

@@ -220,5 +220,59 @@
     "error": "HTTP 403",
     "reviewUntil": "2026-10-30",
     "reason": "Reviewed 2026-09-30: native browser loads Wharton competition overview and 2026-27 dates; hosted run 36685893407 and local Node requests return 403. Only this refusal is excepted; later errors remain reportable."
+  },
+  {
+    "url": "https://www.bayer.com/en-ca/canada/media/news/2026/bayer-crop-science-2026-opportunity-scholarship-program",
+    "error": "HTTP 403",
+    "reviewUntil": "2026-11-15",
+    "reason": "Verified page content in the built-in browser on 2026-10-15. Automated requests get HTTP 403 (issue #40). Match only this response on this URL; review again by 2026-11-15."
+  },
+  {
+    "url": "https://flagstaff.ca/county/administration/funding-grants/",
+    "error": "HTTP 403",
+    "reviewUntil": "2026-11-15",
+    "reason": "Verified page content in the built-in browser on 2026-10-15. Automated requests get HTTP 403 (issue #40). Match only this response on this URL; review again by 2026-11-15."
+  },
+  {
+    "url": "https://makamicollege.com/student-awards/",
+    "error": "HTTP 403",
+    "reviewUntil": "2026-11-15",
+    "reason": "Verified page content in the built-in browser on 2026-10-15. Automated requests get HTTP 403 (issue #40). Match only this response on this URL; review again by 2026-11-15."
+  },
+  {
+    "url": "https://ei.jhu.edu/programs/eei/",
+    "error": "HTTP 403",
+    "reviewUntil": "2026-11-15",
+    "reason": "Verified page content in the built-in browser on 2026-10-15. Automated requests get HTTP 403 (issue #40). Match only this response on this URL; review again by 2026-11-15."
+  },
+  {
+    "url": "https://www.energyjobshop.com/scholarship/",
+    "error": "HTTP 403",
+    "reviewUntil": "2026-11-15",
+    "reason": "Verified page content in the built-in browser on 2026-10-15. Automated requests get HTTP 403 (issue #40). Match only this response on this URL; review again by 2026-11-15."
+  },
+  {
+    "url": "https://afoa.ca/awards/youth/",
+    "error": "HTTP 403",
+    "reviewUntil": "2026-11-15",
+    "reason": "Verified page content in the built-in browser on 2026-10-15. Automated requests get HTTP 403 (issue #40). Match only this response on this URL; review again by 2026-11-15."
+  },
+  {
+    "url": "https://discover.brocku.ca/awards/",
+    "error": "HTTP 403",
+    "reviewUntil": "2026-11-15",
+    "reason": "Verified page content in the built-in browser on 2026-10-15. Automated requests get HTTP 403 (issue #40). Match only this response on this URL; review again by 2026-11-15."
+  },
+  {
+    "url": "https://calgaryhacks2026.devpost.com/",
+    "error": "HTTP 403",
+    "reviewUntil": "2026-11-15",
+    "reason": "Verified page content in the built-in browser on 2026-10-15. Automated requests get HTTP 403 (issue #40). Match only this response on this URL; review again by 2026-11-15."
+  },
+  {
+    "url": "https://www.retailcouncil.org/resources/education/retail-education-scholarship-program/",
+    "error": "HTTP 403",
+    "reviewUntil": "2026-11-15",
+    "reason": "Cloudflare shows an interactive human check to every automated client and to the built-in browser, so the page itself could not be browser-verified on 2026-10-15. The program is live per RCC's 2026 guidelines PDF (loads normally) and its May 6, 2026 recipients announcement. Open this URL in a normal browser before 2026-11-15 and extend or remove this entry."
   }
 ]
