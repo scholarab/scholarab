@@ -95,10 +95,31 @@ const LENS = '<svg viewBox="0 0 16 16" width="16" height="16" fill="none" aria-h
       let from = 0;
       try { from = Number(sessionStorage.getItem('sa_tabs_x')) || 0; sessionStorage.removeItem('sa_tabs_x'); } catch { /* storage blocked */ }
       track.scrollLeft = from;
-      const box = lit.getBoundingClientRect(), line = track.getBoundingClientRect();
-      const to = track.scrollLeft + box.left - line.left - (track.clientWidth - box.width) / 2;
-      const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
-      track.scrollTo({ left: to, behavior: still || Math.abs(to - from) < 2 ? 'instant' : 'smooth' });
+      // page-load fires while the page fade still runs, and phone Safari
+      // drops a smooth scroll begun under it, leaving the line where the
+      // last page left it. So glide once the fade is over, and if the glide
+      // still falls short, set the line there (unless a finger took it).
+      let touched = false;
+      for (const e of ['pointerdown', 'wheel']) track.parentElement?.addEventListener(e, () => { touched = true; }, { once: true, passive: true });
+      const target = () => {
+        const box = lit.getBoundingClientRect(), line = track.getBoundingClientRect();
+        const x = track.scrollLeft + box.left - line.left - (track.clientWidth - box.width) / 2;
+        return Math.round(Math.max(0, Math.min(track.scrollWidth - track.clientWidth, x)));
+      };
+      const glide = () => {
+        if (touched || !lit.isConnected) return;
+        if (Math.abs(track.scrollLeft - from) > 2) track.scrollLeft = from;
+        const to = target();
+        const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+        track.scrollTo({ left: to, behavior: still || Math.abs(to - from) < 2 ? 'instant' : 'smooth' });
+        setTimeout(() => {
+          if (!touched && lit.isConnected && Math.abs(track.scrollLeft - target()) > 2) track.scrollTo({ left: target(), behavior: 'instant' });
+        }, 700);
+      };
+      const html = document.documentElement, began = performance.now();
+      const wait = () => html.hasAttribute('data-astro-transition') && performance.now() - began < 1500
+        ? requestAnimationFrame(wait) : requestAnimationFrame(glide);
+      wait();
     }
     sync();
   });
