@@ -21,8 +21,9 @@
  * Live auth is the Search Console service account (scripts/lib/gsc.ts). The
  * keyless API shares one anonymous quota with the world and answers 429. The
  * PageSpeed Insights API must be enabled once on the account's Cloud project;
- * see docs/seo-index-status.md. Quota is 25,000 runs/day and 400 per 100s, so
- * a full live pass (2 runs per page) fits about four times a day.
+ * see docs/seo-index-status.md. Quota is 25,000 runs/day, so a full live pass
+ * (2 runs per page) fits about four times a day. The per-minute limit is lower
+ * than published; the pace below adapts to it.
  *
  * Usage:
  *   npm run pagespeed                          # every live page, both strategies
@@ -51,10 +52,12 @@ import { accessToken, root, SITE_URL } from './lib/gsc.ts';
 const BAR = 95;
 const LIGHTHOUSE = 'lighthouse@13.5.0';
 const PSI_URL = 'https://www.googleapis.com/pagespeedonline/v5/runPagespeed';
-// 400 runs per 100 seconds is the per-project ceiling; one start every 300ms
-// stays under it with room for retries. A run takes 10 to 30s on Google's side,
-// so 24 in flight is what keeps that rate busy.
+// The published 400 per 100 seconds is not what the project gets: one start
+// every 300ms with 24 in flight drew 2,624 HTTP 429s and 2,071 HTML error pages
+// in 5,592 runs on 2026-10-15. The live pace starts at PSI_INTERVAL_MS and
+// stretches on each refusal, so a pass settles under whatever the limit is.
 const PSI_INTERVAL_MS = 300;
+const PSI_MAX_INTERVAL_MS = 10_000;
 const PSI_CONCURRENCY = 24;
 const MAX_ATTEMPTS = 3;
 
@@ -124,10 +127,19 @@ function toRow(path: string, strategy: Strategy, lh: LhResult): Row {
 
 // ── live engine ──────────────────────────────────────────────────────────────
 let nextStart = 0;
+let interval = PSI_INTERVAL_MS;
 async function slot(): Promise<void> {
   const wait = Math.max(0, nextStart - Date.now());
-  nextStart = Math.max(Date.now(), nextStart) + PSI_INTERVAL_MS;
+  nextStart = Math.max(Date.now(), nextStart) + interval;
   if (wait) await new Promise(r => setTimeout(r, wait));
+}
+// A refusal means the pace is over the limit: stretch it for the rest of the
+// pass and hold every start for a minute so the per-minute window drains.
+function backOff(): void {
+  const before = interval;
+  interval = Math.min(PSI_MAX_INTERVAL_MS, Math.round(interval * 1.5));
+  nextStart = Math.max(nextStart, Date.now() + 60_000);
+  if (interval !== before) console.log(`  refused, now one start every ${(interval / 1000).toFixed(1)}s`);
 }
 
 async function runLive(path: string, strategy: Strategy): Promise<Row> {
@@ -135,20 +147,30 @@ async function runLive(path: string, strategy: Strategy): Promise<Row> {
   url.searchParams.set('url', new URL(path, SITE_URL).href);
   url.searchParams.set('strategy', strategy);
   for (const c of ['PERFORMANCE', 'ACCESSIBILITY', 'BEST_PRACTICES', 'SEO']) url.searchParams.append('category', c);
-  await slot();
-  const res = await fetch(url, { headers: { Authorization: `Bearer ${await accessToken()}` } });
-  const body = (await res.json()) as { lighthouseResult?: LhResult; error?: { status?: string; message?: string } };
-  if (!res.ok || !body.lighthouseResult) {
-    const message = `HTTP ${res.status} ${body.error?.status ?? ''} ${body.error?.message ?? ''}`.trim();
+  let message = '';
+  for (let tries = 0; tries < 5; tries++) {
+    await slot();
+    const res = await fetch(url, { headers: { Authorization: `Bearer ${await accessToken()}` } });
+    const text = await res.text();
+    let body: { lighthouseResult?: LhResult; error?: { status?: string; message?: string } } = {};
+    try {
+      body = JSON.parse(text);
+    } catch {
+      // Google's front end answers some refusals with an HTML page, not JSON.
+      message = `HTTP ${res.status} non-JSON ${text.match(/<title>([^<]*)/)?.[1] ?? ''}`.trim();
+    }
+    if (res.ok && body.lighthouseResult) return toRow(path, strategy, body.lighthouseResult);
+    if (body.error) message = `HTTP ${res.status} ${body.error.status ?? ''} ${body.error.message ?? ''}`.trim();
     // Not enabled, or no access: every other run would say the same, so stop
     // here instead of spending a few thousand requests on the same refusal.
     if (res.status === 403) {
       console.error(message);
       process.exit(1);
     }
-    return { path, strategy, scores: {}, losses: {}, error: message.slice(0, 200) };
+    if (res.status !== 429 && res.status < 500) break;
+    backOff();
   }
-  return toRow(path, strategy, body.lighthouseResult);
+  return { path, strategy, scores: {}, losses: {}, error: message.slice(0, 200) };
 }
 
 // ── local engine ─────────────────────────────────────────────────────────────
@@ -377,13 +399,16 @@ async function main(): Promise<void> {
     if (++done % 100 === 0) console.log(`  ${done}/${todo.length}`);
   });
   // A failed run is usually the runner, not the page: load flakes cleared on a
-  // one-at-a-time rerun every time on 2026-10-14. Retry errors serially, up to
-  // MAX_ATTEMPTS in total, and report what still fails.
+  // one-at-a-time rerun every time on 2026-10-14. Retry errors, serially for
+  // the local engine and at the paced rate for the live one, up to MAX_ATTEMPTS
+  // in total, and report what still fails.
   for (let pass = 2; pass <= MAX_ATTEMPTS; pass++) {
     const failed = rows.filter(r => r.error);
     if (!failed.length) break;
     console.log(`  retrying ${failed.length} errored run(s), attempt ${pass}`);
-    for (const row of failed) Object.assign(row, await attempt(row));
+    await pool(failed, local ? 1 : concurrency, async row => {
+      Object.assign(row, await attempt(row));
+    });
   }
   cleanup();
 
