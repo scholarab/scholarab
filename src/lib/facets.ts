@@ -121,7 +121,7 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     backdrop: 'medicine-hat',
     title: 'Medicine Hat High School Scholarships',
     description:
-      "Every scholarship a Medicine Hat high school student can apply for: Catholic board awards, Redcliff scholarships, county bursaries, service clubs and employers.",
+      "Every scholarship a Medicine Hat high school student can apply for, including Catholic board, Redcliff, county, service club and employer awards.",
     intro:
       'The three Redcliff awards pay up to $6,000, the largest in Medicine Hat.',
     guide: 'scholarships-for-medicine-hat-students',
@@ -150,7 +150,7 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     backdrop: 'calgary',
     title: 'Calgary Area High School Scholarships',
     description:
-      "Scholarships for Calgary, Airdrie, Cochrane, Okotoks and Chestermere students: EducationMatters, Calgary Foundation, service club and school awards.",
+      "Scholarships for Calgary, Airdrie, Cochrane, Okotoks and Chestermere students, including EducationMatters, Calgary Foundation, service club and school awards.",
     intro:
       'Half of these close in May, most through a single EducationMatters form.',
   },
@@ -164,7 +164,7 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     backdrop: 'red-deer',
     title: 'Red Deer Scholarships for High School Students',
     description:
-      "Scholarships for Red Deer and central Alberta high school students: public and Catholic division awards, memorial funds, arts and community scholarships.",
+      "Scholarships for Red Deer and central Alberta students, including public and Catholic division awards, memorial funds, arts and community scholarships.",
     intro:
       'Most of these close in May, among them the $10,000 Rising Futures Award.',
   },
@@ -178,7 +178,7 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     backdrop: 'lethbridge',
     title: 'Lethbridge High School Scholarships',
     description:
-      "Scholarships for Lethbridge and southern Alberta students: school division awards, county scholarships, Coaldale community money and arts awards.",
+      "Scholarships for Lethbridge and southern Alberta students, including school division awards, county scholarships, Coaldale community money and arts awards.",
     intro:
       'The largest is the $10,000 Lethbridge East Rotary award, due December 1.',
   },
@@ -191,7 +191,7 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     backdrop: 'grande-prairie',
     title: 'Grande Prairie Scholarships',
     description:
-      "Scholarships for Grande Prairie and the Peace Region: Northwestern Alberta Foundation funds, Grande Prairie Public awards and the city and county money.",
+      "Scholarships for Grande Prairie and the Peace Region, including Northwestern Alberta Foundation funds, Grande Prairie Public awards and city and county money.",
     intro:
       'One Northwestern Alberta Foundation form reaches most, open to August 9.',
   },
@@ -204,7 +204,7 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     backdrop: 'fort-mcmurray',
     title: 'Fort McMurray Scholarships',
     description:
-      "Scholarships for Fort McMurray and Wood Buffalo students: public district awards, First Nation education funding, local clubs and the municipality.",
+      "Scholarships for Fort McMurray and Wood Buffalo students, including public district awards, First Nation education funding, local clubs and the municipality.",
     intro:
       'The largest fixed award is $3,000, and three First Nations fund members.',
   },
@@ -315,7 +315,7 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     h1: 'Trades and RAP awards',
     title: 'Trades & Apprenticeship Scholarships in Alberta',
     description:
-      'Scholarships for Alberta students heading into the trades: RAP apprenticeship awards, Skills Canada scholarships, and industry-funded money.',
+      'Scholarships for Alberta students heading into the trades, including RAP apprenticeship awards, Skills Canada scholarships and industry-funded money.',
     intro:
       'Many are for apprentices, and one from Skills Canada pays up to $20,000.',
     guide: 'trades-scholarships-rap-alberta',
@@ -459,7 +459,7 @@ export const PROGRAM_FACETS: Facet[] = [
     h1: 'Trades and tech programs',
     title: 'Trades & Tech Programs for Alberta Students',
     description:
-      'Apprenticeships, dual credit, and paid internships for Alberta high school students: RAP, SAIT and Olds College credentials, Skills Canada.',
+      'Apprenticeships, dual credit and paid internships for Alberta high school students, from RAP and Skills Canada to SAIT and Olds College credentials.',
     intro:
       'RAP, dual credit, and the paid internships that pay you while you train.',
   },
@@ -514,7 +514,7 @@ export const PROGRAM_FORMATS: Facet[] = [
     h1: 'Competitions and challenges',
     title: 'Competitions for Alberta High School Students',
     description:
-      'Team competitions for Alberta high school students: robotics, hackathons, cyber defence, innovation challenges and the Skills Canada trades events.',
+      'Team competitions for Alberta high school students in robotics, hackathons, cyber defence, innovation challenges and the Skills Canada trades events.',
     intro:
       'Robotics, hackathons and cyber defence, mostly entered as a school team.',
   },
@@ -528,7 +528,7 @@ export const PROGRAM_FORMATS: Facet[] = [
     h1: 'Olympiads and contests',
     title: 'Olympiads and Contests for Alberta Students',
     description:
-      'Written contests and olympiad qualifiers Alberta students sit at their own school: Euclid, the CAP physics exam, and the biology and chemistry olympiads.',
+      'Written contests and olympiad qualifiers Alberta students sit at their own school, such as Euclid, the CAP physics exam and the biology and chemistry olympiads.',
     intro:
       'Written at your own school on a fixed date, once your teacher registers.',
   },
@@ -541,7 +541,7 @@ export const PROGRAM_FORMATS: Facet[] = [
     h1: 'Science fairs',
     title: 'Science Fairs in Alberta',
     description:
-      'Every regional science fair in Alberta and what lies past them: winning your own region is the only route to the Canada-Wide Science Fair.',
+      'Every regional science fair in Alberta and what lies past them. Winning your own region is the only route to the Canada-Wide Science Fair.',
     intro:
       'Regional fairs run February to April, each the door to the national one.',
   },
@@ -554,7 +554,7 @@ export const PROGRAM_FORMATS: Facet[] = [
     h1: 'Research and mentorship',
     title: 'Research Programs for Alberta Students',
     description:
-      'Year-round research and mentorship programs for Alberta high school students: one-to-one mentors, virtual cohorts and university placements.',
+      'Year-round research and mentorship programs for Alberta high school students, from one-to-one mentors and virtual cohorts to university placements.',
     intro:
       'Mentorships, team experiments and journals that end in your own project.',
   },
@@ -567,7 +567,7 @@ export const PROGRAM_FORMATS: Facet[] = [
     h1: 'Dual credit and work experience',
     title: 'Dual Credit and RAP in Alberta',
     description:
-      'Dual credit courses, apprenticeships and paid internships for Alberta students: RAP, SAIT and Olds College credentials, and CAREERS placements.',
+      'Dual credit courses, apprenticeships and paid internships for Alberta students, including RAP, SAIT and Olds College credentials and CAREERS placements.',
     intro:
       'Paid, for credit or both, and nearly all set up through your own school.',
   },
@@ -593,7 +593,7 @@ export const PROGRAM_FORMATS: Facet[] = [
     h1: 'Conferences and workshops',
     title: 'Conferences and Workshops for Students',
     description:
-      'Short conferences, campus days and workshops for Alberta high school students: Forum for Young Canadians, Discovery Days and the regional summits.',
+      'Short conferences, campus days and workshops for Alberta high school students, such as Forum for Young Canadians, Discovery Days and the regional summits.',
     intro:
       'A few days on a campus, in Ottawa or overseas, some with travel covered.',
   },

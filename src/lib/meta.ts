@@ -84,7 +84,7 @@ export function amountFragment(amount: string | null | undefined): string | null
   const t = amount?.trim();
   if (!t || !/\$\s*\d/.test(t)) return null;
   // Lowercased so it reads as a continuation of the title rather than the
-  // start of a new sentence: "Award: up to $6,000", not "Award: Up to $6,000".
+  // start of a new sentence: "Award (up to $6,000)", not "Award (Up to $6,000)".
   const verbatim = t.replace(/^Up to /, 'up to ');
   if (verbatim.length <= AMOUNT_MAX) return verbatim;
   const figures = t.match(/\$[\d,]+/g);
@@ -121,12 +121,9 @@ export function listingTitle(name: string, amount?: string | null): string {
   const trimmed = name.trim();
   const fragment = amountFragment(amount);
   if (!fragment) return brandedTitle(trimmed);
-  // Two award names already contain a colon ("Keyera Energy: Peter J. Renton
-  // Memorial Scholarship"). A second one reads as a fault, so those take the
-  // figure as a parenthetical instead.
-  const joined = trimmed.includes(':')
-    ? `${trimmed} (${fragment})`
-    : `${trimmed}: ${fragment}`;
+  // The figure goes in parentheses. Site copy carries no colons (2026-10-10),
+  // and a few award names already contain one of their own.
+  const joined = `${trimmed} (${fragment})`;
   for (const candidate of [`${joined}${BRAND_SUFFIX}`, joined]) {
     if (candidate.length <= TITLE_MAX) return candidate;
   }
@@ -561,8 +558,7 @@ export function scholarshipMetas(
   return base.map((d, i) => {
     if ((seen.get(d) ?? 0) < 2) return d;
     const name = list[i]!.title;
-    // Lowercased so the name reads as the subject of the sentence that follows
-    // rather than as two sentences jammed together.
-    return clampMeta(`${name}: ${d.charAt(0).toLowerCase()}${d.slice(1)}`);
+    // The name leads as its own short sentence. Site copy carries no colons.
+    return clampMeta(`${name}. ${d}`);
   });
 }

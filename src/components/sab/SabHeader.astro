@@ -151,7 +151,7 @@ const exploreDesk: MenuLink[] = [
 const MENUS: Record<string, { label: string; tiles: Tile[]; links: MenuLink[]; desk: MenuLink[] }> = {
   '/scholarships/': { label: 'Scholarships by location and topic', tiles: scopeTiles, links: topicLinks, desk: scholarshipDesk },
   '/programs/': { label: 'Programs by format and field', tiles: formatTiles, links: programLinks, desk: programDesk },
-  '/match/': { label: 'Explore: the quiz, deadlines, guides and more', tiles: [], links: exploreLinks, desk: exploreDesk },
+  '/match/': { label: 'Explore the quiz, deadlines, guides and more', tiles: [], links: exploreLinks, desk: exploreDesk },
 };
 for (const m of Object.values(MENUS)) m.desk = m.desk.slice(0, DESK_MAX);
 

@@ -422,7 +422,7 @@ const carousels = [
               </div>
               {c.credit && needsCredit(c.credit) && (
                 <a class="sab-scope-credit" href={c.credit.sourceUrl} target="_blank" rel="noopener noreferrer">
-                  Photo: {c.credit.author}, {c.credit.license}
+                  Photo by {c.credit.author}, {c.credit.license}
                 </a>
               )}
             </article>
@@ -1031,12 +1031,6 @@ const carousels = [
     color: #0B140E; background: #4AA873;
   }
   .sab-hero-search-btn:hover { background: #66B987; }
-  /* The field had outline none and no other cue, so keyboard focus vanished
-     into it; the ring goes round the whole plate, mint on the film. The
-     button's ring falls on the plate, where mint was 2.6:1, so it turns
-     deep green there (2026-10-15). */
-  .sab-hero-search:has(.sab-hero-search-input:focus-visible) { outline: 2px solid #4AA873; outline-offset: 2px; }
-  .sab-hero-search-btn { --focus-ring: #0A5632; }
   /* Chrome's clear button is a blue cross; this one is the bar's ink. */
   .sab-hero-search-input::-webkit-search-cancel-button {
     -webkit-appearance: none; width: 14px; height: 14px; cursor: pointer;

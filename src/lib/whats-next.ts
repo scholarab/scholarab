@@ -9,7 +9,7 @@
 // Not balanced across the corpus like "More like this" (lib/related.ts):
 // that rail exists to give every page inbound links, and its picks are loose
 // on purpose. Here the best match is the point, and a reason the student can
-// read ("Also Calgary", "Same work: essay") is what makes it a next step
+// read ("Also Calgary", "Same essay") is what makes it a next step
 // rather than a list. No data-loader import, so it stays testable alone.
 
 import type { ApplyKind, ToApply } from './to-apply';
@@ -94,8 +94,9 @@ export function workKey(t: ToApply | null | undefined): string | null {
   return kinds.length ? kinds.join('+') : null;
 }
 
-/** "Also no application", "Same work: essay, reference letter". */
+/** "Also no application", "Same essay and reference letter". */
 export function workLabel(key: string): string {
   if (key === 'none') return 'Also no application';
-  return `Same work: ${key.split('+').map(k => WORK_WORD[k as ApplyKind] ?? k).join(', ')}`;
+  const words = key.split('+').map(k => WORK_WORD[k as ApplyKind] ?? k);
+  return `Same ${words.length > 1 ? `${words.slice(0, -1).join(', ')} and ${words[words.length - 1]}` : words[0]}`;
 }

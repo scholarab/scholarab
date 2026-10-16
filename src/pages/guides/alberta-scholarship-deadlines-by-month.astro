@@ -46,7 +46,7 @@ const faqJson = {
       'name': 'What scholarships close in September and October in Alberta?',
       'acceptedAnswer': {
         '@type': 'Answer',
-        'text': `September holds ${m(9)} dated deadlines, including the Charmaine Letourneau Scholarship, the UFCW Local 401 Scholarships and the Cypress County Agricultural Service Board Bursary on September 30. October holds ${m(10)}, and they are the most valuable of the year: the Loran Award closes October 15 at roughly $150,000, and the Alex Decoteau Award of Honour and Keyera Peter J. Renton Memorial both close October 31.`,
+        'text': `September holds ${m(9)} dated deadlines, including the Charmaine Letourneau Scholarship, the UFCW Local 401 Scholarships and the Cypress County Agricultural Service Board Bursary on September 30. October holds ${m(10)}, and they are the most valuable of the year. The Loran Award closes October 15 at roughly $150,000, and the Alex Decoteau Award of Honour and Keyera Peter J. Renton Memorial both close October 31.`,
       },
     },
     {
@@ -62,7 +62,7 @@ const faqJson = {
       'name': 'Which single day has the most Alberta scholarship deadlines?',
       'acceptedAnswer': {
         '@type': 'Answer',
-        'text': `${dayName(top[0]!.mmdd)}, with ${top[0]!.count} awards closing on it, followed by ${dayName(top[1]!.mmdd)} with ${top[1]!.count} and ${dayName(top[2]!.mmdd)} with ${top[2]!.count}. These are not coincidences. Each spike is an administrator booking a whole portfolio on one date: ${st.onDayFrom('05-31', 'rdpolytech.academicworks.ca')} of the May 31 awards belong to Red Deer Polytechnic, ${st.onDayFor('12-18', 'Keyano College')} of the December 18 awards to Keyano College, and ${st.onDayFrom('05-30', 'educationmatters.ca')} of the May 30 awards are administered by EducationMatters, the Calgary Board of Education foundation.`,
+        'text': `${dayName(top[0]!.mmdd)}, with ${top[0]!.count} awards closing on it, followed by ${dayName(top[1]!.mmdd)} with ${top[1]!.count} and ${dayName(top[2]!.mmdd)} with ${top[2]!.count}. These are not coincidences. Each spike is an administrator booking a whole portfolio on one date. ${st.onDayFrom('05-31', 'rdpolytech.academicworks.ca')} of the May 31 awards belong to Red Deer Polytechnic, ${st.onDayFor('12-18', 'Keyano College')} of the December 18 awards to Keyano College, and ${st.onDayFrom('05-30', 'educationmatters.ca')} of the May 30 awards are administered by EducationMatters, the Calgary Board of Education foundation.`,
       },
     },
     {
@@ -70,7 +70,7 @@ const faqJson = {
       'name': 'Are January and February good months to look for Alberta scholarships?',
       'acceptedAnswer': {
         '@type': 'Answer',
-        'text': `They are two of the quietest months in the calendar, with ${m(1)} and ${m(2)} dated deadlines. But the winter awards are heavily nominated ones: Schulich Leader Scholarships at $100,000 closes January 27 and requires a school nomination, and the Terry Fox Humanitarian Award at $28,000 closes February 1. The internal school deadline for a nominated award is always earlier than the published one.`,
+        'text': `They are two of the quietest months in the calendar, with ${m(1)} and ${m(2)} dated deadlines. But the winter awards are heavily nominated ones. Schulich Leader Scholarships at $100,000 closes January 27 and requires a school nomination, and the Terry Fox Humanitarian Award at $28,000 closes February 1. The internal school deadline for a nominated award is always earlier than the published one.`,
       },
     },
     {
@@ -102,7 +102,7 @@ const faqJson = {
 
   <h2>The shape of the year in one table</h2>
   <p>
-    Every dated scholarship deadline in the directory, counted by the month it falls in:
+    Every dated scholarship deadline in the directory, counted by the month it falls in.
   </p>
   <table>
     <thead>
@@ -129,12 +129,12 @@ const faqJson = {
     {m(5)} of {st.total} deadlines fall in May. April, May and June together hold {spring}, which is {spring / st.total >= 0.6 ? 'roughly two out of every three' : 'more than half of all the'} dated awards in the year.
   </p>
   <p>
-    By May you probably have an acceptance letter and diploma exams to study for, so these are easy to let slide. The awards still open are smaller, usually $500 to $2,000, and local, which <a href="/guides/local-scholarships-better-odds/">is why they are worth the evening</a>: a May award draws from one city or one school, a national award from the whole country.
+    By May you probably have an acceptance letter and diploma exams to study for, so these are easy to let slide. The awards still open are smaller, usually $500 to $2,000, and local, which <a href="/guides/local-scholarships-better-odds/">is why they are worth the evening</a>. A May award draws from one city or one school, and a national award from the whole country.
   </p>
 
   <h2>The largest awards close in the fall</h2>
   <p>
-    October and November hold {st.sum(10, 11)} deadlines between them, the two thinnest months of the school year. They also hold almost every large award on the site: the <a href="/guides/loran-award-guide/">Loran Award</a> at roughly $150,000 on October 15, and the Wolf Scholars Program, fully funded, on November 2.
+    October and November hold {st.sum(10, 11)} deadlines between them, the two thinnest months of the school year. They also hold almost every large award on the site, with the <a href="/guides/loran-award-guide/">Loran Award</a> at roughly $150,000 on October 15 and the Wolf Scholars Program, fully funded, on November 2.
   </p>
   <p>
     So the fall asks for the most work in the first ten weeks of Grade 12, for the awards with the most applicants. Loran is still worth five weeks for its finalist awards alone. Plan the fall as a few expensive applications and the spring as many cheap ones.
@@ -142,7 +142,7 @@ const faqJson = {
 
   <h2>{spikeWord} dates with dozens of awards each</h2>
   <p>
-    {spikeWord} single days carry more awards than most whole months:
+    {spikeWord} single days carry more awards than most whole months.
   </p>
   <ul>
     {spikeDays.map(d => <li><strong>{dayName(d)}, {st.onDay(d)} awards.</strong> {SPIKES[d]}</li>)}
@@ -153,30 +153,30 @@ const faqJson = {
 
   <h2>Month by month, and what to do in each</h2>
 
-  <h3>September and October: the largest awards</h3>
+  <h3>September and October, the largest awards</h3>
   <p>
     September holds {m(9)} deadlines, among them the Charmaine Letourneau Scholarship, the UFCW Canada Begg's-Dowling-Mathieu Scholarship and the Cypress County Agricultural Service Board Bursary, all closing September 30. October holds {m(10)} and is the most valuable month of the year. If you are reading this in September of Grade 12, the Loran application is the thing to start this week, and the <a href="/guides/reference-letters-for-scholarships/">reference letters</a> are the thing to ask for before the November crush.
   </p>
 
-  <h3>November and December: leadership awards, then the institutions</h3>
+  <h3>November and December, leadership awards and then the institutions</h3>
   <p>
     November has only {m(11)} deadlines and the largest amounts. November 1 alone carries the First Nations, Metis and Inuit Bursary, the Cenovus Energy Indigenous Scholarship and the ATB Financial Bursary. December then jumps to {m(12)}, almost entirely because institutional portfolios land in it, and it holds the UCalgary Pathways to Medicine Scholarship at up to $20,000 on December 1 and the University of Lethbridge early admission date on December 15 that carries its Board of Governors Award with it.
   </p>
 
-  <h3>January to March: the nominated round</h3>
+  <h3>January to March, the nominated round</h3>
   <p>
-    {st.sum(1, 2, 3)} deadlines across three months, the quietest stretch in the year. What is here is disproportionately nominated or institutional: Schulich Leader Scholarships at $100,000 on January 27 needs a school nomination, and the Terry Fox Humanitarian Award at $28,000 closes February 1. For anything nominated, the date that binds you is your school's internal one, which is always earlier than the published one and is sometimes six weeks earlier. Ask your counsellor in January which awards your school can nominate for.
+    {st.sum(1, 2, 3)} deadlines across three months, the quietest stretch in the year. What is here is disproportionately nominated or institutional. Schulich Leader Scholarships at $100,000 on January 27 needs a school nomination, and the Terry Fox Humanitarian Award at $28,000 closes February 1. For anything nominated, the date that binds you is your school's internal one, which is always earlier than the published one and is sometimes six weeks earlier. Ask your counsellor in January which awards your school can nominate for.
   </p>
   <p>
-    March picks up to {m(3)} as the Edmonton foundations open: the Winspear Fund classical music scholarships, the Ranald and Vera Shean Memorial Scholarships and the Belcourt Brosseau Metis Awards all close March 31.
-  </p>
-
-  <h3>April to June: where most of the awards are</h3>
-  <p>
-    {spring} deadlines. This is the part of the year worth planning properly, and the plan is boring: one strong essay, one reference package, and apply to everything you plausibly qualify for. April 10 and April 1 both carry clusters, May 1 and May 30 are the two biggest days on the calendar, and June 1 carries {st.onDay('06-01')} more. Filter the directory to your own region and work down it.
+    March picks up to {m(3)} as the Edmonton foundations open. The Winspear Fund classical music scholarships, the Ranald and Vera Shean Memorial Scholarships and the Belcourt Brosseau Metis Awards all close March 31.
   </p>
 
-  <h3>July and August: after graduation</h3>
+  <h3>April to June, where most of the awards are</h3>
+  <p>
+    {spring} deadlines. This is the part of the year worth planning properly, and the plan is boring. Write one strong essay and one reference package, and apply to everything you plausibly qualify for. April 10 and April 1 both carry clusters, May 1 and May 30 are the two biggest days on the calendar, and June 1 carries {st.onDay('06-01')} more. Filter the directory to your own region and work down it.
+  </p>
+
+  <h3>July and August, after graduation</h3>
   <p>
     {st.sum(7, 8)} deadlines across the summer. August is mostly institutional entrance bursaries, and July holds union and community awards including the NUPGE Tommy Douglas and Terry Fox Memorial scholarships on July 15. If you graduated in June, check these before you stop looking.
   </p>

@@ -64,16 +64,16 @@ export const PHOTO_CREDITS: Record<string, PhotoCredit> = {
  * they ship only the tile crop and name their place here for /credits/.
  */
 export const EXPLORE_PHOTOS: Record<string, string> = {
-  'explore-quiz': 'Explore: Build my combo',
-  'explore-closing': 'Explore: Closing soon',
-  'explore-deadlines': 'Explore: Deadlines',
-  'explore-guides': 'Explore: Guides',
-  'explore-reference': 'Explore: Reference letter',
-  'explore-rutherford': 'Explore: Rutherford guide',
-  'explore-essays': 'Explore: Scholarship essays',
-  'explore-grade-11': 'Explore: Grade 11 timeline',
-  'explore-educators': 'Explore: For educators',
-  'explore-updates': 'Explore: What changed',
+  'explore-quiz': 'Build my combo, in the Explore menu',
+  'explore-closing': 'Closing soon, in the Explore menu',
+  'explore-deadlines': 'Deadlines, in the Explore menu',
+  'explore-guides': 'Guides, in the Explore menu',
+  'explore-reference': 'Reference letter, in the Explore menu',
+  'explore-rutherford': 'Rutherford guide, in the Explore menu',
+  'explore-essays': 'Scholarship essays, in the Explore menu',
+  'explore-grade-11': 'Grade 11 timeline, in the Explore menu',
+  'explore-educators': 'For educators, in the Explore menu',
+  'explore-updates': 'What changed, in the Explore menu',
 };
 
 /** CC BY and CC BY-SA require the author and license beside the photo. */

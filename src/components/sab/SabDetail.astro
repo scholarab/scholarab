@@ -191,13 +191,13 @@ const chip: { text: string; tone: Tone } =
       a 375px phone (critique 2026-09-27). Desktop followed on 2026-10-01, when
       What you'll need took the top of the left column. */}
   {eligibility && (
-    <p class="sabd-who"><span class="sabd-who-label">Who can apply:</span> <span set:html={emailOff(eligibility)} /></p>
+    <p class="sabd-who"><span class="sabd-who-label">Who can apply</span> <span set:html={emailOff(eligibility)} /></p>
   )}
   {/* The second question, "what does it take?", answered beside the first.
       It used to be one grey sentence under the amount, and it said "through
       your school" for clubs, nominations and campus offices alike. */}
   {howApply && (
-    <p class="sabd-who sabd-how"><span class="sabd-who-label">How you apply:</span> {howApply}</p>
+    <p class="sabd-who sabd-how"><span class="sabd-who-label">How you apply</span> {howApply}</p>
   )}
   </div>
   {/* Desktop only: the right of the title was empty white. The place the
@@ -548,7 +548,7 @@ const chip: { text: string; tone: Tone } =
   }
   .sabd-subline { font-size: 15px; color: var(--ink-soft); margin-top: 12px; }
   .sabd-who { font-size: 16px; line-height: 1.5; color: var(--text-primary); margin: 14px 0 0; max-width: 640px; }
-  .sabd-who-label { font-weight: 600; color: var(--green); }
+  .sabd-who-label { display: block; font-weight: 600; color: var(--green); }
   .sabd-how { margin-top: 6px; }
   .sabd-grid {
     padding: 44px var(--sab-gutter) 96px; box-sizing: border-box;

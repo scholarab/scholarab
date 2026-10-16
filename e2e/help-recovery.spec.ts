@@ -44,7 +44,7 @@ test('the reminder form names the problem next to the field, in a readable colou
 });
 
 test('hubs named by a jargon word define it above the results', async ({ page }) => {
-  for (const [path, term] of [['/programs/olympiads/', 'Olympiad:'], ['/programs/dual-credit/', 'Dual credit:']] as const) {
+  for (const [path, term] of [['/programs/olympiads/', 'Olympiad.'], ['/programs/dual-credit/', 'Dual credit.']] as const) {
     await page.goto(path);
     await expect(page.locator('.sabl-define')).toContainText(term);
   }

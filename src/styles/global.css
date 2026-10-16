@@ -147,7 +147,6 @@
   --green-shadow: #2E7A50;  /* the lighter green: fills and done quiz segments, never text */
   --paper:        #EEF1EC;  /* light text on ink */
   --rust:         #A0491A;  /* deadlines; above 5.5:1 on white */
-  --error:        #B42318;  /* form errors; 6.6:1 on white */
   --bg-panel:     #F3F5F2;  /* the filter panel: controls, not listings */
 
   /* Secondary text is the ink at one of three strengths, not fourteen
@@ -246,7 +245,6 @@ html[data-theme='dark'] {
   --bg-code: #1C251F;
   --bg-subtle: #121A15;
   --rust:         #EE945F;
-  --error:        #F97066;
   --focus-ring:   #5DB884;
   --select-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23E6EAE4' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
 }
@@ -286,6 +284,7 @@ html[data-theme='dark'] .sabf-footer { box-shadow: inset 0 1px 0 rgba(238, 241, 
      either theme. It takes the light ink tokens back for everything inside. */
   html[data-theme='dark'] .sabm-combo {
     --text-primary: #141915; --fg-rgb: 20, 25, 21; --fill-ink: #141915; --fill-ink-hover: #2B332D;
+    --focus-ring: #141915;
     color: #141915; border-color: rgba(238, 241, 236, 0.16);
   }
   html[data-theme='dark'] .sabm-combo .sabm-btn-accent { --focus-ring: #141915; }
@@ -344,14 +343,6 @@ body {
 .sab-hero,
 .sabf-footer,
 .sabe-cta { --focus-ring: var(--brand); }
-/* The home film, the map and the combo board stay ink in both themes, so
-   the light theme's deep green ring was 2:1 on them (2026-10-15). Mint for
-   the ring there, and the accent buttons on them take the brighter mint the
-   dark theme gives them, since an ink ring on ink is no ring at all. */
-#sab-home,
-#sab-map,
-.sabc-board { --focus-ring: var(--brand); }
-:is(#sab-home, .sabc-board) :is(.sab-btn-accent, .sabm-btn-accent) { --focus-ring: #66B987; }
 
 /* Accent-filled controls are themselves #4AA873, so they must opt back out of
    whatever surface they sit on; a mint ring on a mint pill is 1:1. */
@@ -539,8 +530,8 @@ html[data-sab-hidden] .sab-hero-band {
 .sabd-remind .sabd-remind-btn:disabled { opacity: 0.6; cursor: default; }
 .sabd-remind .sabd-remind-msg { margin-top: 8px; font-size: var(--fs-small); font-weight: 600; color: var(--green); }
 /* It was near-white on the white card, so a bad address showed nothing. */
-.sabd-remind .sabd-remind-msg.is-error { color: var(--error); }
-.sabd-remind .sabd-remind-input[aria-invalid="true"] { border-color: var(--error); }
+.sabd-remind .sabd-remind-msg.is-error { color: #B42318; }
+.sabd-remind .sabd-remind-input[aria-invalid="true"] { border-color: #B42318; }
 /* Collection notice, sits under the sign-up form. Deliberately quiet but
    always present: the address is the only personal data the site takes, and
    the moment to say what happens to it is the moment it is asked for. */
@@ -1862,8 +1853,6 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
   margin: 18px 0; padding: 20px 24px 22px;
   background: var(--brand); color: var(--text-primary);
   border: 3px solid var(--text-primary); border-radius: var(--radius);
-  /* Ink ring on the mint or mustard paper; deep green on mint was 3:1. */
-  --focus-ring: #141915;
 }
 /* A second combo takes the combo pages' next tone, as their menu does. */
 .sabm-combo-set + .sabm-combo-set .sabm-combo { background: #FFD84D; }
@@ -2036,7 +2025,7 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
   font: 700 13px/1 var(--font-body); color: var(--text-primary);
   min-height: 34px; padding: 8px 30px 8px 13px;
   border: 1.5px solid rgba(var(--fg-rgb), 0.3); border-radius: var(--radius);
-  background: var(--bg-page) var(--select-arrow) no-repeat right 12px center / 10px 6px;
+  background: var(--bg-page) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23141915' stroke-width='1.6'/%3E%3C/svg%3E") no-repeat right 12px center;
 }
 .sabs-status select:hover { border-color: var(--text-primary); }
 [data-status="working"] .sabs-status select { border-color: var(--text-primary); }

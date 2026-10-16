@@ -105,9 +105,9 @@ export const months: UpdateMonth[] = [
         width: 1010,
         height: 488,
         shape: 'wide',
-        alt: 'An early version of the site called Scholarhat, with scholarships in three columns: Active, Opening Soon and Closed.',
+        alt: 'An early version of the site called Scholarhat, with scholarships in three columns headed Active, Opening Soon and Closed.',
         caption:
-          'March 2, an hour in. The first working version: six scholarships under the original name, already split into open, opening soon and closed.',
+          'March 2, an hour in. The first working version had six scholarships under the original name, already split into open, opening soon and closed.',
       },
     ],
     items: [
@@ -121,11 +121,11 @@ export const months: UpdateMonth[] = [
       },
       {
         kind: 'new',
-        text: 'March 6: the four biggest Canadian scholarship sites were taken apart to see what to do differently. Four rules came out of it: no account, cards you can skim, the dollar total up front, and closing soonest first. No account and closing soonest first are still here; the cards became rows and the dollar total came off the page in September.',
+        text: 'On March 6 the four biggest Canadian scholarship sites were taken apart to see what to do differently. Four rules came out of it. No account, cards you can skim, the dollar total up front, and closing soonest first. No account and closing soonest first are still here. The cards became rows and the dollar total came off the page in September.',
       },
       {
         kind: 'under-hood',
-        text: 'The name changes that day: "ScholarHat" was already taken by a big training company. The next one used the 403 area code.',
+        text: 'The name changes that day, because "ScholarHat" was already taken by a big training company. The next one used the 403 area code.',
       },
       {
         kind: 'new',
@@ -141,7 +141,7 @@ export const months: UpdateMonth[] = [
       },
       {
         kind: 'new',
-        text: 'A filter on March 16: pick the university you are heading to, and the list narrows to what fits.',
+        text: 'A filter on March 16. Pick the university you are heading to, and the list narrows to what fits.',
       },
       {
         kind: 'new',
@@ -153,11 +153,11 @@ export const months: UpdateMonth[] = [
       },
       {
         kind: 'under-hood',
-        text: 'The robots get written: retiring closed scholarships, and checking every link.',
+        text: 'The robots get written, one to retire closed scholarships and one to check every link.',
       },
       {
         kind: 'better',
-        text: 'March 22, the night before launch: one plain typeface everywhere, and a home page that points you somewhere instead of dumping the whole list on you.',
+        text: 'March 22, the night before launch. One plain typeface everywhere, and a home page that points you somewhere instead of dumping the whole list on you.',
       },
       {
         kind: 'new',
@@ -165,7 +165,7 @@ export const months: UpdateMonth[] = [
       },
       {
         kind: 'new',
-        text: 'March 23: ScholarAB opens to the public with 115 scholarships and 17 research programs. Browse everything, save what you like. No account, no login.',
+        text: 'On March 23 ScholarAB opens to the public with 115 scholarships and 17 research programs. Browse everything, save what you like. No account, no login.',
       },
       {
         kind: 'new',
@@ -177,11 +177,11 @@ export const months: UpdateMonth[] = [
       },
       {
         kind: 'new',
-        text: 'The first guide: how to apply for scholarships in Alberta.',
+        text: 'The first guide, on how to apply for scholarships in Alberta.',
       },
       {
         kind: 'under-hood',
-        text: 'Two robots start on launch day: one retires closed scholarships, one hunts for dead links.',
+        text: 'Two robots start on launch day. One retires closed scholarships and one hunts for dead links.',
       },
     ],
   },
@@ -190,7 +190,7 @@ export const months: UpdateMonth[] = [
     label: 'April 2026',
     id: 'm-2026-04',
     start: '2026-04-01',
-    summary: 'The busiest month by far: the match quiz, the program library, faster hosting.',
+    summary: 'The busiest month by far, with the match quiz, the program library and faster hosting.',
     shots: [
       {
         src: '/history/2026-04-04-how-it-works.webp',
@@ -198,7 +198,7 @@ export const months: UpdateMonth[] = [
         width: 620,
         height: 1052,
         shape: 'tall',
-        alt: 'The site on a phone, in dark colours, listing three steps: Browse, Filter and Apply.',
+        alt: 'The site on a phone, in dark colours, listing three steps, Browse, Filter and Apply.',
         caption:
           'April 4. The site explained itself in three steps, and was dark until July.',
       },
@@ -210,7 +210,7 @@ export const months: UpdateMonth[] = [
         shape: 'tall',
         alt: "The home page on a phone, in dark colours, reading Alberta's student opportunity directory and $653,510+ open right now.",
         caption:
-          'April 25: 95 scholarships and 89 research programs. Nothing changed for the rest of the month.',
+          'By April 25 there were 95 scholarships and 89 research programs. Nothing changed for the rest of the month.',
       },
     ],
     items: [
@@ -228,7 +228,7 @@ export const months: UpdateMonth[] = [
       },
       {
         kind: 'listings',
-        text: 'Research programs went from 17 to 97: summer labs and student placements.',
+        text: 'Research programs went from 17 to 97, mostly summer labs and student placements.',
       },
       {
         kind: 'listings',
@@ -248,7 +248,7 @@ export const months: UpdateMonth[] = [
       },
       {
         kind: 'new',
-        text: 'An About page, and the rules: no ads, no sponsored listings, no personal data.',
+        text: 'An About page, and the rules. No ads, no sponsored listings, no personal data.',
       },
       {
         kind: 'better',
@@ -265,7 +265,7 @@ export const months: UpdateMonth[] = [
     label: 'May 2026',
     id: 'm-2026-05',
     start: '2026-05-01',
-    summary: 'A quieter month on accuracy: dead links, wrong counts, a broken scholarships page.',
+    summary: 'A quieter month on accuracy, fixing dead links, wrong counts and a broken scholarships page.',
     items: [
       {
         kind: 'fixed',
@@ -326,11 +326,11 @@ export const months: UpdateMonth[] = [
       },
       {
         kind: 'better',
-        text: 'Listings sort in a sensible order: open now, opening later, then closed.',
+        text: 'Listings sort in a sensible order, open now first, then opening later, then closed.',
       },
       {
         kind: 'better',
-        text: 'A visual refresh: cards glow on hover, amounts sit in their own pill, the quiz shows progress dots.',
+        text: 'A visual refresh. Cards glow on hover, amounts sit in their own pill, and the quiz shows progress dots.',
       },
       {
         kind: 'better',
@@ -367,7 +367,7 @@ export const months: UpdateMonth[] = [
     label: 'July 2026',
     id: 'm-2026-07',
     start: '2026-07-01',
-    summary: 'The biggest month since launch: a full redesign, the guides, a new logo, faster pages.',
+    summary: 'The biggest month since launch, with a full redesign, the guides, a new logo and faster pages.',
     items: [
       {
         kind: 'fixed',
@@ -391,7 +391,7 @@ export const months: UpdateMonth[] = [
       },
       {
         kind: 'new',
-        text: 'The Guides section: eight write-ups on Rutherford, essays, reference letters, Grade 11 and 12 timelines, local awards and trades funding.',
+        text: 'The Guides section opens with eight write-ups on Rutherford, essays, reference letters, Grade 11 and 12 timelines, local awards and trades funding.',
       },
       {
         kind: 'new',
@@ -469,7 +469,7 @@ export const months: UpdateMonth[] = [
       },
       {
         kind: 'listings',
-        text: '37 research and enrichment programs were added: trades and apprenticeship, math and physics contests, Model UN and youth parliament, Space Apps, Rise, Explore and the House of Commons Page Program.',
+        text: '37 research and enrichment programs were added, covering trades and apprenticeship, math and physics contests, Model UN and youth parliament, Space Apps, Rise, Explore and the House of Commons Page Program.',
       },
       {
         kind: 'listings',
@@ -489,7 +489,7 @@ export const months: UpdateMonth[] = [
       },
       {
         kind: 'new',
-        text: 'Three guides now cover the programs side: research placements that pay, how to get medical experience in high school, and which computing contests are free.',
+        text: 'Three guides now cover the programs side, from research placements that pay to medical experience in high school and the computing contests that are free.',
       },
       {
         kind: 'better',
@@ -529,11 +529,11 @@ export const months: UpdateMonth[] = [
       },
       {
         kind: 'under-hood',
-        text: 'The project was licensed: the code is open source, and the listing data can be reused with credit.',
+        text: 'The project was licensed. The code is open source, and the listing data can be reused with credit.',
       },
       {
         kind: 'under-hood',
-        text: 'A privacy pass: IP addresses are no longer stored, search text that is kept is now disclosed, and 695 educator email addresses were taken out of the public data.',
+        text: 'A privacy pass. IP addresses are no longer stored, search text that is kept is now disclosed, and 695 educator email addresses were taken out of the public data.',
       },
       {
         kind: 'under-hood',
@@ -545,7 +545,7 @@ export const months: UpdateMonth[] = [
       },
       {
         kind: 'listings',
-        text: 'The last week of the month more than doubled the site: 153 scholarships became 345. Almost all of the new ones are city awards, read one at a time against the organisation that funds them, across Calgary, Edmonton, Lethbridge, Red Deer, Medicine Hat, Grande Prairie and Airdrie.',
+        text: 'The last week of the month more than doubled the site, from 153 scholarships to 345. Almost all of the new ones are city awards, read one at a time against the organisation that funds them, across Calgary, Edmonton, Lethbridge, Red Deer, Medicine Hat, Grande Prairie and Airdrie.',
       },
       {
         kind: 'new',
@@ -662,7 +662,7 @@ export const months: UpdateMonth[] = [
       },
       {
         kind: 'new',
-        text: 'Three new guides: the Loran Award, chemistry competitions across Canada, and how volunteering hours work in Alberta high schools.',
+        text: 'Three new guides, on the Loran Award, chemistry competitions across Canada, and how volunteering hours work in Alberta high schools.',
       },
       {
         kind: 'new',

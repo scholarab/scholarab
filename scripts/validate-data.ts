@@ -664,8 +664,8 @@ if (deadDetails.length) {
 // It has been swept out of the repo twice; both times it came back through new
 // prose, so the rule is enforced here instead of remembered. The allowances
 // are `src/lib/meta.ts`, `scripts/check-copies.ts` and this file, which need
-// the literal character to strip, normalise and detect it. Use a period, comma, colon, semicolon
-// or parentheses instead.
+// the literal character to strip, normalise and detect it. Use a period, comma or parentheses
+// instead (scripts/check-prose-marks.ts rejects prose colons and semicolons).
 //
 // HTML entities count. Four `&mdash;` sat in .astro prose for months because
 // this check only looked for the literal character; they rendered as em dashes
@@ -717,7 +717,7 @@ const emDashHits = sourceFiles(EM_DASH_ROOTS)
   );
 if (emDashHits.length) {
   console.error(
-    `validate-data: ${emDashHits.length} em dash(es); use a period, comma, colon, semicolon or parentheses:\n  ${emDashHits
+    `validate-data: ${emDashHits.length} em dash(es); use a period, comma or parentheses:\n  ${emDashHits
       .map((h) => `${h.rel}:${h.line}`)
       .join('\n  ')}`,
   );

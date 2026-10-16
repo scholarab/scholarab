@@ -27,7 +27,7 @@ export const GLOSSARY = {
   },
   rap: {
     term: 'RAP',
-    line: 'The Registered Apprenticeship Program: you start a paid trade apprenticeship while still in high school, earning school credits and apprenticeship hours at once.',
+    line: 'The Registered Apprenticeship Program, where you start a paid trade apprenticeship while still in high school, earning school credits and apprenticeship hours at once.',
     short: 'A paid apprenticeship started in high school',
   },
   unconfirmed: {

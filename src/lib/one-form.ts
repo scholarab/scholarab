@@ -26,7 +26,7 @@ export const ONE_FORMS = {
   educationmatters: {
     form: 'EducationMatters application',
     prefix: 'www.educationmatters.ca/',
-    text: 'One EducationMatters application covers every CBE and Calgary Catholic award. It opens March 1, and most awards close May 30, a few May 1. Every one has three rules: you must be 20 or younger on September 1, not yet in post-secondary, and applying in your Grade 12 year. Once you leave high school you can no longer apply, so a gap year is fine only if you applied before you graduated.',
+    text: 'One EducationMatters application covers every CBE and Calgary Catholic award. It opens March 1, and most awards close May 30, a few May 1. Every one has the same three rules. You must be 20 or younger on September 1, not yet in post-secondary, and applying in your Grade 12 year. Once you leave high school you can no longer apply, so a gap year is fine only if you applied before you graduated.',
   },
   lpsd: {
     form: 'LPSD awards form',
@@ -58,7 +58,7 @@ export const ONE_FORMS = {
   bevfacey: {
     form: 'Bev Facey awards form',
     prefix: 'www.bevfacey.ca/',
-    text: 'Bev Facey runs one online form for every in-house award: you tick the ones you qualify for and attach a written or video submission saying why. A staff committee decides. The 2026 form opened March 16 and closed April 7, so watch for it in mid-March.',
+    text: 'Bev Facey runs one online form for every in-house award. You tick the ones you qualify for and attach a written or video submission saying why. A staff committee decides. The 2026 form opened March 16 and closed April 7, so watch for it in mid-March.',
   },
   forthigh: {
     form: 'Fort High awards form',

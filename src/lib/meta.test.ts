@@ -324,8 +324,8 @@ describe('scholarshipMetas', () => {
   it('names the award when the facts alone would not tell two listings apart', () => {
     const out = scholarshipMetas([eps('Betty Finch Scholarship'), eps('James P. Jones Scholarship')], active, fmt)
     expect(new Set(out).size).toBe(2)
-    expect(out[0]).toMatch(/^Betty Finch Scholarship: open/)
-    expect(out[1]).toMatch(/^James P\. Jones Scholarship: open/)
+    expect(out[0]).toMatch(/^Betty Finch Scholarship\. Open/)
+    expect(out[1]).toMatch(/^James P\. Jones Scholarship\. Open/)
   })
 
   it('leaves a listing that is already distinct alone', () => {
@@ -440,12 +440,12 @@ describe('amountFragment', () => {
 describe('listingTitle', () => {
   it('spends the leftover budget on the award value', () => {
     expect(listingTitle('Alexander Rutherford Scholarship', '$2,500'))
-      .toBe('Alexander Rutherford Scholarship: $2,500 | ScholarAB')
+      .toBe('Alexander Rutherford Scholarship ($2,500) | ScholarAB')
   })
 
   it('drops the brand before it drops the figure', () => {
     const out = listingTitle('Medicine Hat Exhibition & Stampede Scholarship', '$1,000')
-    expect(out).toBe('Medicine Hat Exhibition & Stampede Scholarship: $1,000')
+    expect(out).toBe('Medicine Hat Exhibition & Stampede Scholarship ($1,000)')
     expect(out.length).toBeLessThanOrEqual(TITLE_MAX)
   })
 
@@ -454,7 +454,7 @@ describe('listingTitle', () => {
     expect(listingTitle(name, '$3,000')).toBe(brandedTitle(name))
   })
 
-  it('avoids a second colon on a name that already has one', () => {
+  it('keeps the figure in parentheses on a name with its own colon', () => {
     expect(listingTitle('Keyera Energy: Peter J. Renton Memorial Scholarship', '$3,000'))
       .toBe('Keyera Energy: Peter J. Renton Memorial Scholarship ($3,000)')
   })

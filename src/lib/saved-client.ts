@@ -277,8 +277,8 @@ export function initSaved() {
     const lead = plan.querySelector<HTMLElement>('[data-sv-plan-lead]')!;
     const words = ['', 'one', 'two', 'three'];
     lead.textContent = first.length === 0 ? ''
-      : first.length === 1 ? 'Start with the numbered award: it is the next one still open.'
-      : `Start with the ${words[first.length]} numbered awards: they close soonest of the ones still open.`;
+      : first.length === 1 ? 'Start with the numbered award. It is the next one still open.'
+      : `Start with the ${words[first.length]} numbered awards. They close soonest of the ones still open.`;
     lead.hidden = first.length === 0;
     const list = plan.querySelector<HTMLElement>('[data-sv-plan-needs]')!;
     list.innerHTML = needs.map(d => `<li><span class="sabl-group-count">${d.n}</span><span class="sabs-need-long">${esc(d.label)}</span><span class="sabs-need-short" aria-hidden="true">${esc(d.short)}</span></li>`).join('');
@@ -289,7 +289,7 @@ export function initSaved() {
       const missing = todo - listed;
       parts.push(missing === 0
         ? `What your ${todo === 1 ? 'open award asks' : `${todo} open awards ask`} for, from the providers' own pages.`
-        : `Counted from ${listed} of your ${todo} open awards; ${missing === 1 ? "the other one doesn't say what it asks" : "the others don't say what they ask"} for yet.`);
+        : `Counted from ${listed} of your ${todo} open awards. ${missing === 1 ? "The other one doesn't say what it asks" : "The others don't say what they ask"} for yet.`);
       if (partial > 0) parts.push(`${partial === 1 ? 'One form' : `${partial} forms`} may ask for more than ${partial === 1 ? 'its page lists' : 'their pages list'}.`);
       if (needs.some(d => /reference/.test(d.label))) parts.push('Ask your referees once, for all of them.');
     }

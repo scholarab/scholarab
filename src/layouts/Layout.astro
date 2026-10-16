@@ -156,7 +156,7 @@ const {
       // deadline list is only as good as the day it came off the printer.
       addEventListener('beforeprint', function () {
         const day = new Date().toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' });
-        document.body.setAttribute('data-printed', 'Printed ' + day + ' from scholarab.ca. Check each listing there before you apply; dates can move.');
+        document.body.setAttribute('data-printed', 'Printed ' + day + ' from scholarab.ca. Dates can move, so check each listing there before you apply.');
       });
       document.addEventListener('pointerdown', function () { root.setAttribute('data-pointer', ''); }, true);
       document.addEventListener('click', function (e) {

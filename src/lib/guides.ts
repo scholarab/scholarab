@@ -67,7 +67,7 @@ export const guides: GuideMeta[] = [
     // research guide already owns.
     title: 'How to get medical experience in high school',
     description:
-      'AHS takes volunteers from age 15. Where else an Alberta student can get clinical exposure: Discovery Days, HOSA chapters and the biology competitions.',
+      'AHS takes volunteers from age 15. Discovery Days, HOSA chapters and biology competitions are the other ways an Alberta student gets clinical exposure.',
     minutes: 7,
     datePublished: '2026-08-23',
     dateModified: '2026-09-29',
@@ -125,7 +125,7 @@ export const guides: GuideMeta[] = [
     // CTR problem it does not have. Exclude this page before concluding
     // anything from a site-wide CTR number. Every other guide converts
     // normally (Medicine Hat 15.38%, Grade 12 6.06%) from the same positions.
-    title: 'Alexander Rutherford Scholarship: amounts and how to apply',
+    title: 'Alexander Rutherford Scholarship amounts and how to apply',
     description:
       'Applications open August 1 with no closing deadline. What each grade pays (up to $2,500 total), the 75% five-course average you need, and how to apply.',
     minutes: 9,
@@ -160,7 +160,7 @@ export const guides: GuideMeta[] = [
     // to write a listing for it found the CIC publishes no junior division at
     // all, so the honest answer is a pillar that says so and points a Grade 10
     // somewhere real, rather than a page for a competition that does not exist.
-    title: 'Chemistry competitions in Canada: the CCC and CCO',
+    title: 'Chemistry competitions in Canada, from the CCC to the CCO',
     description:
       'One entry point, one date. How the Canadian Chemistry Contest feeds the Olympiad, why there is no junior division, and when a teacher has to sign you up.',
     minutes: 6,
@@ -176,7 +176,7 @@ export const guides: GuideMeta[] = [
     // to write this found the listing understating the award by $50,000 and
     // carrying an open date five days early, which is the real argument for
     // pairing every big award with a guide: nobody re-checks a listing.
-    title: 'Loran Award: what it pays and how to apply',
+    title: 'What the Loran Award pays and how to apply',
     description:
       'Applications open September 9 and close October 15 at noon ET. What the award pays, the 88% average bar, and the $6,000 finalists get.',
     minutes: 7,
@@ -188,7 +188,7 @@ export const guides: GuideMeta[] = [
     slug: 'scholarships-for-grade-12-students-alberta',
     title: 'Grade 12 scholarship timeline for Alberta students',
     description:
-      'Loran closes October 15; most local awards close April to June. A month-by-month plan for Alberta Grade 12 students.',
+      'Loran closes October 15, and most local awards close April to June. A month-by-month plan for Alberta Grade 12 students.',
     minutes: 9,
     datePublished: '2026-07-19',
     dateModified: '2026-09-29',
@@ -299,7 +299,7 @@ export const guides: GuideMeta[] = [
     // /deadlines/ from a page that is all content.
     title: 'Alberta scholarship deadlines, month by month',
     description:
-      `When Alberta scholarships close: a year of ${DL.total} dated deadlines by month, why May carries ${DL.byMonth[4]} of them, and the single dates that hide dozens of awards.`,
+      `When Alberta scholarships close, with a year of ${DL.total} dated deadlines by month, why May carries ${DL.byMonth[4]} of them and the single dates that hide dozens of awards.`,
     minutes: 7,
     datePublished: '2026-09-07',
     dateModified: '2026-09-29',

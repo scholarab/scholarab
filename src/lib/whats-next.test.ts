@@ -78,6 +78,6 @@ describe('same work', () => {
 
   it('says it in words', () => {
     expect(workLabel('none')).toBe('Also no application')
-    expect(workLabel('essay+reference')).toBe('Same work: essay, reference letter')
+    expect(workLabel('essay+reference')).toBe('Same essay and reference letter')
   })
 })

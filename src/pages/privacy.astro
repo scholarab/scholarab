@@ -41,7 +41,7 @@ const collected = [
     what: 'A cookieless page-view count',
     when: 'On every page, through Cloudflare Web Analytics.',
     why: 'To know how many people reach the site at all, which the counts below cannot tell us, because they only fire once you interact with something.',
-    kept: 'By Cloudflare, on their retention schedule. It sets no cookie, stores no identifier, and does not follow you between sites; what it records is the page, the referrer, and rough timing and device information.',
+    kept: 'By Cloudflare, on their retention schedule. It sets no cookie, stores no identifier, and does not follow you between sites. What it records is the page, the referrer, and rough timing and device information.',
   },
   {
     what: 'A Google Analytics ID, but only if you allow it',
@@ -53,21 +53,21 @@ const collected = [
     what: 'The text of a search that finds nothing',
     when: 'Only when what you typed matches no listing anywhere in the directory, not on searches that find something, and not on anything you type into Build my combo.',
     why: 'An empty search is the clearest signal that the directory is missing an award someone is looking for. It is what tells us what to go add next.',
-    kept: '180 days, in the same table as the counts below and with the same nothing attached to it: no IP address, no cookie, no session. Anything email-shaped is discarded rather than stored, and only the first 120 characters are kept. Even so, please don’t type anything private into a search box, here or anywhere else.',
+    kept: '180 days, in the same table as the counts below and with the same nothing attached to it, so no IP address, no cookie and no session. Anything email-shaped is discarded rather than stored, and only the first 120 characters are kept. Even so, please don’t type anything private into a search box, here or anywhere else.',
   },
   {
     what: 'Anonymous counts of what gets used',
     when: 'When you open a listing, click through to apply, save something, mark a saved scholarship as started, submitted or won (which records the listing and that one word), run Build my combo, and once per visit if you arrived from one of our own tagged links, such as the one in an Instagram or TikTok bio or in a reminder email, which records only which of those it was. Opening a listing also records whether this browser first came here on an earlier day. Clicking through to apply also records where on the site you clicked and whether that listing was already in My combo. On a scholarship or program list, it records that you opened one, which filter you used but not what you picked in it, that you searched but not what you typed (that is only kept for searches that find nothing, as above), and whether you pressed Show more. If you land on a page that does not exist, it records that page’s address and whether the link to it was on this site, a search engine, another site or none of those, so the broken link can be fixed. When you ask for reminders, it records which listings they are for and, if you asked from My combo or Build my combo, which of the two, with no email address attached. When you unsubscribe, it records that someone did, which listing the reminder was for and whether you used the button, your mail app’s own unsubscribe or Delete all my data, with no email address attached. Every count also records whether it came from a phone, a tablet or a computer, worked out from what your browser says about itself. That one word is kept and the rest is not.',
-    why: 'To know which listings matter and which way of telling people about the site works, so the directory gets better. What was searched for is the row above; this row is counts.',
+    why: 'To know which listings matter and which way of telling people about the site works, so the directory gets better. What was searched for is the row above, and this row is counts.',
     kept: '180 days, including previously recorded walkthrough counts. These rows carry no IP address, no cookie, no account and no session. There is nothing in them that points back to a person, which also means they cannot be traced to you in order to delete them.',
   },
 ];
 
 const notCollected = [
   'No name, school, or grades. Every answer you give Build my combo, including the questions about family income, Indigenous or BIPOC identity, foster care and gender, stays in your browser and is never sent to us. We are told only that a quiz was started and that one was finished, and nothing whatsoever about what was in it.',
-  'No saved listings, and nothing about what you mark them as or which city’s list you last opened: those live in your browser’s local storage, on your device. Your browser also keeps a small note of which counts it has already sent, so one visit is not counted twice, and the date it first opened this site, so a count can say new or back. Both stay on your device and are never sent anywhere.',
+  'No saved listings, and nothing about what you mark them as or which city’s list you last opened. Those live in your browser’s local storage, on your device. Your browser also keeps a small note of which counts it has already sent, so one visit is not counted twice, and the date it first opened this site, so a count can say new or back. Both stay on your device and are never sent anywhere.',
   'No accounts, no passwords, no logins for students.',
-  'No advertising cookies, no tracking pixels, no data brokers. Nothing on this site is a data broker and nothing here advertises to you. Two counting scripts can run: Cloudflare’s, which is cookieless and identifier-free and needs no permission because it identifies nobody, and Google Analytics, which does set a cookie and does identify your browser, and therefore runs only if you press Allow. If you have not answered, or said no, Google Analytics is not on the page.',
+  'No advertising cookies, no tracking pixels, no data brokers. Nothing on this site is a data broker and nothing here advertises to you. Two counting scripts can run. One is Cloudflare’s, which is cookieless and identifier-free and needs no permission because it identifies nobody. The other is Google Analytics, which does set a cookie and does identify your browser, and therefore runs only if you press Allow. If you have not answered, or said no, Google Analytics is not on the page.',
   'Nothing is ever sold, rented, or shared for marketing. There is no business model here that would want it.',
 ];
 
@@ -76,7 +76,7 @@ const processors = [
   { name: 'Neon', role: 'Hosts the database holding reminder sign-ups.', where: 'United States' },
   { name: 'Resend', role: 'Delivers reminder and confirmation emails.', where: 'United States' },
   { name: 'GitHub', role: 'Runs the scheduled job that works out whose deadline is close and hands those reminders to Resend. Your address passes through it each time that job runs.', where: 'United States' },
-  { name: 'Google', role: 'Two separate things. Gmail carries email sent to our contact address, which is where questions, corrections and deletion requests arrive; if you write to us, Gmail holds that message. Google Analytics counts page visits, but only for people who pressed Allow on the banner.', where: 'United States' },
+  { name: 'Google', role: 'Two separate things. Gmail carries email sent to our contact address, which is where questions, corrections and deletion requests arrive, and if you write to us, Gmail holds that message. Google Analytics counts page visits, but only for people who pressed Allow on the banner.', where: 'United States' },
 ];
 
 const title = 'Privacy Policy | ScholarAB';
@@ -130,10 +130,10 @@ const ldJson = webPageJson({ name: 'Privacy Policy', description, path: '/privac
       <h2 class="sabpv-h2">Turning the counts off</h2>
       <p class="sabpv-p">
         The counts in the last two rows above carry nothing that points back to a person, so there is
-        nothing in them to identify you by. Even so, you can switch them off: visit any page on the site
+        nothing in them to identify you by. Even so, you can switch them off. Visit any page on the site
         with <code class="sabpv-code">?nt=1</code> on the end of the address, for example
         <code class="sabpv-code">www.scholarab.ca/?nt=1</code>, and this browser stops sending them.
-        The setting is a single note in your browser's own storage; it never reaches us, so it lasts
+        The setting is a single note in your browser's own storage. It never reaches us, so it lasts
         until you clear your site data, and it has to be set once per browser and device.
         <code class="sabpv-code">?nt=0</code> turns them back on.
       </p>
@@ -149,14 +149,14 @@ const ldJson = webPageJson({ name: 'Privacy Policy', description, path: '/privac
         <code class="sabpv-code">www.scholarab.ca/?ga=ask</code>, and the banner comes back so you can
         answer again. A browser you have switched the counts off on with
         <code class="sabpv-code">?nt=1</code> will not load Google Analytics either, whatever it answered
-        before: one switch, everything off.
+        before. One switch turns everything off.
       </p>
 
       <h2 class="sabpv-h2">Reminder emails</h2>
       <p class="sabpv-p">
         Reminders are double opt-in. Signing up creates a pending row and sends you one confirmation
-        email; nothing else is ever sent unless you click the confirm button in it. That is deliberate:
-        the sign-up form is a public endpoint, so anyone could type in a stranger's address, and this
+        email, and nothing else is ever sent unless you click the confirm button in it. That is deliberate.
+        The sign-up form is a public endpoint, so anyone could type in a stranger's address, and this
         makes sure only the person who can read the inbox can turn reminders on.
       </p>
       <p class="sabpv-p">
@@ -182,13 +182,13 @@ const ldJson = webPageJson({ name: 'Privacy Policy', description, path: '/privac
       <p class="sabpv-p">
         You can also email <!--email_off--><a href="mailto:contact.scholarab@gmail.com">contact.scholarab@gmail.com</a><!--/email_off--> to
         ask what we hold about an address, to correct it, or to have it deleted. Expect a reply within a
-        few days; the legal maximum is 30.
+        few days. The legal maximum is 30.
       </p>
 
       <h2 class="sabpv-h2">Where your data goes</h2>
       <p class="sabpv-p">
         ScholarAB runs on five services. Each one only ever sees what it needs to do its job. What each
-        may do with it is set by its own terms, not by us; where a service lets us limit that, we have,
+        may do with it is set by its own terms, not by us. Where a service lets us limit that, we have,
         which is why Google Analytics runs with ad personalisation and Google signals turned off.
         Because they are based in the United States,
         information stored with them may be subject to US law, including lawful access requests by US
@@ -209,9 +209,9 @@ const ldJson = webPageJson({ name: 'Privacy Policy', description, path: '/privac
       <h2 class="sabpv-h2">If you're under 18</h2>
       <p class="sabpv-p">
         Most people using ScholarAB are high school students, and that is who it was built for. We ask for
-        as little as it is possible to ask for: an email address, for a reminder you requested, deleted the
-        moment you say so. We don't build profiles, don't advertise, and never sell or trade what we hold;
-        the only outside companies that see any of it are the five services listed above.
+        as little as it is possible to ask for, an email address for a reminder you requested, deleted the
+        moment you say so. We don't build profiles, don't advertise, and never sell or trade what we hold.
+        The only outside companies that see any of it are the five services listed above.
         If you're under 13, please ask a parent or guardian before signing up for reminders. And if a
         parent or guardian wants a sign-up removed, email us and it's done, no questions asked.
       </p>

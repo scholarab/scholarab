@@ -2576,17 +2576,15 @@ Outcome: a Lethbridge or Fort McMurray student who opens their city's combo page
 - Copy: the My combo starter pack line lost its semicolon. Data fields still hold about 750 distinct semicolon lines (program schedules and amounts), a content task left out of this pass.
 - Add-back fraction: 0 of 3.
 
-## 2026-10-15: light and dark theme audit
+## 2026-10-15: prose colons and semicolons out of the rendered site
 
-Outcome: a student sees every control, arrow, error and focus ring on every page in whichever theme they picked, on desktop and phone.
+Outcome: a student reads listings, guides and policy pages in whole sentences, as the 2026-10-10 copy rule asked, and a new colon or semicolon in visitor-facing text fails the build instead of waiting for the next sweep.
 
-- Method, all local against the build (static server on dist/): computed text contrast on 94 pages (every page type, hubs, guides, combo pages, listings) at desktop and phone width in both themes, with a row count per page so a blank load could not pass; a cross-theme scan for elements that kept a light-only colour; about 45 opened states (menus, gear, phone sheet, consent band, search, filters, quiz results, /saved with statuses, calendar, tour, map, reminders, 404, offline); hover on every hover rule; and a pixel-sampled focus ring check on every focusable element of the 94 pages in both themes, comparing the ring colour with the pixels just outside it.
-- Fixed: the /saved status picker drew its own ink chevron, invisible on the dark page. It now uses the `--select-arrow` token every other select uses.
-- Fixed: the reminder error red was 2.8:1 on the dark page. A new `--error` token is #B42318 in light (6.6:1) and #F97066 in dark (6.7:1).
-- Fixed: the /saved loading skeletons were ink bars at 6 to 8% on the dark page, so the page looked empty while it loaded. They now read `--fg-rgb`.
-- Fixed: focus rings in the light theme on the surfaces that stay ink in both themes. The deep green ring measured 2.0:1 on the home film, the map filters and the combo board menus (61 controls across 13 combo pages), and the ink ring on their accent buttons 1.1:1. One rule hands those surfaces the mint ring. The combo tray ring is ink on mint in both themes (it was 3.0:1). The home search field had outline none and no other cue, so a mint ring now goes round its plate, and the search button's ring, which lands on the cream plate, is deep green (mint was 2.6:1). After the change the check found 0 rings under 3:1 in either theme.
-- Simplified: the combo tray's ring lives on the tray rule once instead of only in the dark block.
-- Left as is: the map pins draw their focus as a ring on the dot, and the map's town select signals focus with its border. Both are visible in both themes.
-- Guard: two tests in `src/lib/design-tokens.test.ts`. One allows the ink chevron and the error red literal once, in the root tokens. The other checks the mint ring rule and the tray's ink ring. Both failed on the old CSS.
-- Not covered: Firefox and WebKit were not re-run for this pass (the earlier debug pass covered them in dark), and the phone focus scan was cut for time since the ring rules do not change with width.
+- Measured on two local builds of the same 2,894 pages, with the new check run against both: HEAD had a prose colon or semicolon on 2,893 pages (15,267 text strings, 3,390 distinct). After, 0 outside the allowlist. Clock times, URLs and ratios never match, because the mark has to come before a space or the end of a text node.
+- Rewritten, not swapped: about 1,400 catalogue strings in scholarships.json and research-programs.json (eligibility, schedules, costs, descriptions and metas), every guide, the privacy, terms, educators, combos and reference-letter pages, the program hub definitions, the Loran timeline, the printed-page note and the listing title format, which now reads "Name ($750) | ScholarAB". Sentences were split or joined with a comma or "and". The template messages students copy keep their fill-in labels ("Deadline: [date]").
+- Allowlist: every listing title, program name and provider in the catalogue (16 official names carry a colon, such as "Keyera Energy: Peter J. Renton Memorial Scholarship") and two quoted contest themes. Nothing else.
+- Guard: `scripts/check-prose-marks.ts` runs last in `npm run build` over the title, description metas and body text of every built page, skipping scripts, styles, code and pre blocks. It failed the build with 34 strings on the first wired run, then passed. Unit test in `src/tests/prose-marks.test.ts`.
+- Repair record: the first full build failed validate-data, because splitting sentences made 8 notes repeat their description, 4 program metas end mid-clause and 8 metaDetail clauses stop fitting. Each was rewritten to fit, and validate-data is back to HEAD's 250 dead metaDetail clauses and 0 ragged programs. Three length tests (two facet intros, two guide metas, one listing snippet under 100) failed once and were trimmed. None repeated.
+- Removed: nothing. The em dash advice in validate-data no longer suggests a colon or semicolon.
+- Not covered: email subjects and bodies in lib/alerts.ts, client-only strings in /match and /saved that never reach static HTML (checked by hand, none found), and "e.g." in data.
 - Add-back fraction: 0 of 0.

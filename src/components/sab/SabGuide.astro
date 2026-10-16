@@ -128,7 +128,7 @@ const keepReading = [...others.slice(start), ...others.slice(0, start)].slice(0,
 
       {localRows.length > 0 && hubFacet && hubHref && (
         <aside class="sabg-local" aria-labelledby="sabg-local-h">
-          <h2 id="sabg-local-h" class="sabg-local-h">Open now: {hubFacet.label}</h2>
+          <h2 id="sabg-local-h" class="sabg-local-h">Open now in {hubFacet.label}</h2>
           <ul class="sabg-local-list">
             {localRows.map(r => (
               <li>

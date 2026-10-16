@@ -332,7 +332,7 @@ function generatedCombos(city: string, pool: ComboTarget[]): Combo[] {
  */
 const COMBO_FORMS = Object.values(ONE_FORMS as Record<string, OneForm>)
   .filter((f): f is OneForm & { prefix: string } => !!f.prefix)
-  .map(f => ({ prefix: f.prefix, text: `One ${f.form} covers these` }));
+  .map(f => ({ prefix: f.prefix, text: `One ${f.form} covers` }));
 
 /** The one form every core award goes through, or null when they differ. */
 export function oneForm(core: { url?: string | null }[]): string | null {
