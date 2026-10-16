@@ -274,5 +274,23 @@
     "error": "HTTP 403",
     "reviewUntil": "2026-11-15",
     "reason": "Cloudflare shows an interactive human check to every automated client and to the built-in browser, so the page itself could not be browser-verified on 2026-10-15. The program is live per RCC's 2026 guidelines PDF (loads normally) and its May 6, 2026 recipients announcement. Open this URL in a normal browser before 2026-11-15 and extend or remove this entry."
+  },
+  {
+    "url": "https://www.softballalberta.ca/awards/scholarships/",
+    "error": "HTTP 403",
+    "reviewUntil": "2026-11-15",
+    "reason": "Verified page content in the built-in browser on 2026-10-15. GitHub's runners get HTTP 403 (issue #40). Match only this response on this URL; review again by 2026-11-15."
+  },
+  {
+    "url": "https://awafoundation.org/Scholarships",
+    "error": "HTTP 403",
+    "reviewUntil": "2026-11-15",
+    "reason": "Verified page content in the built-in browser on 2026-10-15. GitHub's runners get HTTP 403 (issue #40). Match only this response on this URL; review again by 2026-11-15."
+  },
+  {
+    "url": "https://www.rbc.com/en/future-launch/resource-type/programs-services/rbc-summer-tech-labs/",
+    "error": "HTTP 403",
+    "reviewUntil": "2026-11-15",
+    "reason": "RBC shows a browser check that never clears for automated clients or the built-in browser, so the page could not be opened on 2026-10-15. Search engines index its current text (2026 round closed, check back spring 2027), which matches the inactive listing. Open this URL in a normal browser before 2026-11-15 and extend or remove this entry."
   }
 ]

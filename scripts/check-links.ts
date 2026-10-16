@@ -3,6 +3,8 @@ import { readFileSync } from 'fs'
 import { dirname, join } from 'path'
 import { fileURLToPath } from 'url'
 import { Agent, fetch } from 'undici'
+import { connect, rootCertificates } from 'node:tls'
+import { X509Certificate } from 'node:crypto'
 import { execFile } from 'node:child_process'
 import { promisify } from 'node:util'
 import { groupLinkTargets, forEachHost, reviewedLinkFailure, requestLink, type LinkException } from './link-targets.ts'
@@ -80,20 +82,82 @@ const dispatcher = new Agent({
 })
 
 async function fetchStatus(url: string): Promise<{ status?: number; error?: string }> {
+  const signal = AbortSignal.timeout(25_000)
+  let current = url
+  // Redirects are followed one hop at a time so each host can get its own completed chain.
+  for (let hop = 0; hop <= 10; hop++) {
+    const host = new URL(current).hostname
+    let result = await fetchHop(current, await issuerAgents.get(host) ?? dispatcher, signal)
+    if (result.error?.includes('unable to verify the first certificate')) {
+      const completed = await issuerDispatcher(host)
+      if (completed) result = await fetchHop(current, completed, signal)
+    }
+    if (!result.location) return result
+    current = new URL(result.location, current).href
+  }
+  return { error: 'Too many redirects' }
+}
+
+async function fetchHop(url: string, via: Agent, signal: AbortSignal): Promise<{ status?: number; error?: string; location?: string }> {
   try {
     const res = await fetch(url, {
       method: 'GET',
-      signal: AbortSignal.timeout(25_000),
-      redirect: 'follow',
+      signal,
+      redirect: 'manual',
       headers: BROWSER_HEADERS,
-      dispatcher,
+      dispatcher: via,
     })
     await res.body?.cancel()
-    return { status: res.status }
+    const location = res.status >= 300 && res.status < 400 ? res.headers.get('location') : null
+    return location ? { status: res.status, location } : { status: res.status }
   } catch (e: unknown) {
     const msg = e instanceof Error ? (e.cause instanceof Error ? `${e.message}: ${e.cause.message}` : e.message) : 'Unknown error'
     return { error: msg }
   }
+}
+
+/**
+ * Some servers send only their own certificate and leave out the intermediate
+ * that links it to a root. Browsers fetch that intermediate from the address
+ * the certificate names (Authority Information Access) and load the page, so a
+ * student never sees a problem, but Node does not, and York's award pages
+ * failed every hosted run this way because one of its two servers drops the
+ * intermediate (issue #40). Fetch it the same way a browser does and verify
+ * against Node's own roots plus that one certificate, so a chain that does not
+ * end at a trusted root still fails.
+ */
+const issuerAgents = new Map<string, Promise<Agent | undefined>>()
+
+function issuerDispatcher(host: string): Promise<Agent | undefined> {
+  let pending = issuerAgents.get(host)
+  if (!pending) {
+    pending = loadIssuer(host).then(pem => pem ? new Agent({
+      connect: { timeout: 20_000, ca: [...rootCertificates, pem] },
+      headersTimeout: 20_000,
+      bodyTimeout: 20_000,
+    }) : undefined, () => undefined)
+    issuerAgents.set(host, pending)
+  }
+  return pending
+}
+
+async function loadIssuer(host: string): Promise<string | undefined> {
+  const leaf = await new Promise<X509Certificate | undefined>(resolve => {
+    // Unverified on purpose: this socket only reads the certificate, it never sends a request.
+    const socket = connect({ host, port: 443, servername: host, rejectUnauthorized: false, timeout: 20_000 }, () => {
+      const raw = socket.getPeerCertificate().raw
+      socket.end()
+      resolve(raw ? new X509Certificate(raw) : undefined)
+    })
+    socket.on('error', () => resolve(undefined))
+    socket.on('timeout', () => { socket.destroy(); resolve(undefined) })
+  })
+  const issuerUrl = leaf?.infoAccess?.match(/CA Issuers - URI:(https?:\/\/\S+)/)?.[1]
+  if (!leaf || !issuerUrl) return undefined
+  const res = await fetch(issuerUrl, { signal: AbortSignal.timeout(20_000), dispatcher })
+  if (!res.ok) return undefined
+  const issuer = new X509Certificate(Buffer.from(await res.arrayBuffer()))
+  return leaf.checkIssued(issuer) ? issuer.toString() : undefined
 }
 
 type Verdict = { kind: 'ok' } | { kind: 'broken' | 'suspect'; error: string }
