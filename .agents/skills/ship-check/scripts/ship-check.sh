@@ -34,6 +34,10 @@ fi
 # ── code ─────────────────────────────────────────────────────────────────────
 has '^(src/|scripts/|public/|e2e/|\.github/workflows/|package(-lock)?\.json$|.*config\.[^/]+$|wrangler\.toml$)' && printf 'RUN npm run ci\n'
 has '^(src/(pages|components|layouts|styles|lib)/|src/data/|public/|e2e/|package(-lock)?\.json$|astro\.config\.|playwright\.config\.|wrangler\.toml$)' && printf 'RUN npm run test:e2e\n'
+# Every built page against the 95+ PageSpeed bar, after the ci build (about 50
+# minutes, so start it in the background). Performance and desktop are the live
+# pass, npm run pagespeed, once the deploy lands.
+has '^(src/(pages|components|layouts|styles)/|public/|astro\.config\.)' && printf 'RUN npm run pagespeed -- --local --strategy mobile\n'
 
 # ── things easy to forget ────────────────────────────────────────────────────
 has '^drizzle/.*\.sql$' && printf 'MANUAL review migration scope and rollback before any live database change\n'

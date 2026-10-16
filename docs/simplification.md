@@ -2614,3 +2614,20 @@ Outcome: ScholarAB can take a sponsor or change hands without breaking a promise
 - Rejected: a workflow that runs the export and commits from CI. It needs the GA4 and Cloudflare credentials as new GitHub secrets and a bot commit every month, while the only data at real risk is the events table, which the guard covers with no new secret.
 - Work avoided: the first run captured July 2026 (294 events) three months before the sweep would have erased it. Data cannot be collected afterwards, so there was no other way to get it back.
 - Add-back fraction: 0 of 1.
+
+## 2026-10-15: PageSpeed on every page from Claude Code (Ilia: "run it on every single page every time")
+
+Outcome: every page in the sitemap is checked against the 95+ bar, mobile and desktop, with one command, and the pages under the bar are named with the audits that cost them.
+
+- Kept: one script, `npm run pagespeed` (`scripts/pagespeed.ts`), with two engines. The default asks the PageSpeed Insights API about the live site, with the Search Console service account (its token now also carries the `openid` scope PSI accepts, so one token serves both). `--local` runs Lighthouse 13.5.0, the version PSI runs, against a snapshot of `dist/client`. A `pagespeed` skill in `.agents/skills/` tells Claude when to run which, and ship-check prints the local pass as a RUN line for page, component, layout, style and public changes.
+- Removed before it was added: a plugin. The two catalogue plugins (Perf Profiler, Web Vitals Auditor) audit one URL at a time and explain it; neither sweeps a sitemap or knows the exempt pages. A Lighthouse devDependency was also left out: CI never runs it, and npm ci would install it on every hosted check. The script loads the pinned copy from the npx cache.
+- Removed: the 2026-10-14 scratch runner on python http.server. Its connection flakes are gone with a built-in brotli server, which also matches what Cloudflare sends.
+- Repair record, local engine, against "every run errors or takes 15 seconds":
+  1. Lighthouse CLI per page with system Chrome 155. Every run lost its tab ("Session closed"), even serially. Replaced by Playwright's Chrome for Testing 153, the same major version PSI runs.
+  2. Other sessions' builds emptied dist/ mid-run (404s). The pass now reads a copy-on-write snapshot taken at the start.
+  3. Lighthouse's Node API with one Chrome per worker in one process. Concurrent runs broke each other ("performance mark has not been set"). Replaced by one child process per worker.
+  4. `throttlingMethod: 'provided'` forces 5.25s settle waits (11 of the 15 seconds a page took); overriding them in flags or config does nothing. Removed the setting: the default simulate, which PSI uses, waits 1s.
+  5. The first full pass, under load average 40+ from other sessions, printed nothing after 2,500 of 2,796 pages and left 4 Chromes running. Its rows file was written at the end but deleted by mistake before anyone read it, so its result is unknown. Rows are now appended as they land, `--resume` measures only what is missing, a dead worker fails its page at once, and a stopped worker closes its Chrome.
+- Measured, local, this Mac: one page went from 15s to about 4.6s per worker. A full mobile pass of the 2,796 sitemap pages took 53.3 min with 4 workers, every page 100 in all four categories, 0 errors. 
+- Not measured: the live engine. Google answers 403 until the PageSpeed Insights API is enabled on the service account's Cloud project, which only Ilia can do. Its 24-in-flight, one-start-per-300ms pacing is a projection from the published 400 per 100 seconds quota, about 28 minutes for both strategies on every page (5,592 runs at one start per 300ms).
+- Add-back fraction: 0 of 4 removals (plugin, devDependency, scratch runner, provided throttling).

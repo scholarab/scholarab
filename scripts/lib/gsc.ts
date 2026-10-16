@@ -17,7 +17,9 @@ export const root = join(dirname(fileURLToPath(import.meta.url)), '../..');
 // by the exact prefix including the trailing slash; a Domain property would be
 // "sc-domain:scholarab.ca" instead, and passing the wrong form 403s.
 export const SITE_URL = 'https://www.scholarab.ca/';
-const SCOPE = 'https://www.googleapis.com/auth/webmasters.readonly';
+// openid is what the PageSpeed Insights API accepts (scripts/pagespeed.ts);
+// asking for both keeps one token per run.
+const SCOPE = 'https://www.googleapis.com/auth/webmasters.readonly openid';
 const TOKEN_URL = 'https://oauth2.googleapis.com/token';
 
 interface ServiceAccount {
@@ -71,12 +73,12 @@ export function dropToken(): void {
   cached = null;
 }
 
-/**
- * Signed JWT -> access token, the two-legged OAuth flow for service accounts.
 // The same service account reads GA4 for scripts/traffic-months.ts, so one
 // token covers both rather than a second credential.
 const GA_SCOPE = 'https://www.googleapis.com/auth/analytics.readonly';
 
+/**
+ * Signed JWT -> access token, the two-legged OAuth flow for service accounts.
  * Done with node's crypto rather than googleapis because that dependency is
  * ~40MB of client for one POST, and this is the only Google API the repo calls.
  */

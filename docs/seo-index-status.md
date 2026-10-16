@@ -19,6 +19,8 @@ The API needs a Google Cloud service account that Search Console trusts.
 
 1. **Google Cloud console** -> create a project (any name).
 2. **APIs & Services -> Library** -> enable **Google Search Console API**.
+   Enable **PageSpeed Insights API** there too: `npm run pagespeed` uses the
+   same key, and the keyless API shares one anonymous quota that answers 429.
 3. **APIs & Services -> Credentials -> Create credentials -> Service account**.
    No roles are needed; project roles are not what grants Search Console access.
 4. On the new service account -> **Keys -> Add key -> Create new key -> JSON**.
