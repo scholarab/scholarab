@@ -28,6 +28,22 @@ describe('theme tokens', () => {
     expect(globalCss).toMatch(/html\[data-theme='dark'\] \{\s*color-scheme: dark;/)
   })
 
+  it('draws ink arrows and error red only through tokens that dark mode swaps', () => {
+    // The /saved status picker carried its own ink chevron and the reminder
+    // error its own red: in dark mode the arrow vanished and the error was
+    // 2.8:1 (2026-10-15). Each literal may appear once, in the :root token.
+    expect(globalCss.match(/stroke='%23141915'/g)).toHaveLength(1)
+    expect(globalCss.match(/#B42318/gi)).toHaveLength(1)
+    expect(globalCss).toMatch(/html\[data-theme='dark'\] \{[^}]*--error:/)
+  })
+
+  it('rings focus in mint on the surfaces that stay ink in the light theme', () => {
+    // The home film, the map and the combo board are ink in both themes; the
+    // light theme's deep green ring was 2:1 on them (2026-10-15).
+    expect(globalCss).toMatch(/#sab-home,\s*#sab-map,\s*\.sabc-board \{ --focus-ring: var\(--brand\); \}/)
+    expect(globalCss).toMatch(/\.sabm-combo \{[^}]*--focus-ring: #141915;/)
+  })
+
   it('keeps /admin declaring its own dark canvas, on selectors that win', () => {
     // :root now describes the cream public site, so the one dark surface has
     // to say so itself rather than inheriting it, and say it loudly enough.
