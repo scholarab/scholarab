@@ -46,7 +46,7 @@ const { h1, intro, menuLabel, items, burst } = Astro.props;
 
   /* ── The menu board ── */
   /* The board is ink in both themes; on the dark page a hairline frames it. */
-  :global(html[data-theme='dark']) .sabc-board { box-shadow: 0 0 0 1px rgba(238, 241, 236, 0.12); }
+  html[data-theme='dark'] .sabc-board { box-shadow: 0 0 0 1px rgba(238, 241, 236, 0.12); }
   .sabc-board {
     position: relative; background: var(--sabc-ink); color: #fff;
     border-radius: var(--radius); padding: 44px 48px 40px; overflow: hidden;
