@@ -43,6 +43,11 @@ self.addEventListener('fetch', (event) => {
   const { pathname } = new URL(event.request.url);
   // Never cache API or admin routes; auth state and data mutations must always be fresh
   if (pathname.startsWith('/api/') || pathname.startsWith('/admin/')) return;
+  // Hashed data files (the 2 MB quiz payload) stay with the HTTP cache, which
+  // keeps them immutable for a year. Through this worker, Chrome refused the
+  // page's <link rel=preload> as a "cross-world service worker resource
+  // mismatch", so every returning visitor downloaded the payload twice on /match.
+  if (pathname.startsWith('/_astro/') && pathname.endsWith('.json')) return;
 
   const isNavigation = event.request.mode === 'navigate';
 

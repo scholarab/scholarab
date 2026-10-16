@@ -194,7 +194,7 @@ export function initSaved() {
       countEl.textContent = empty
         ? 'Your shortlist is saved on this device.'
         : `${total} ${total === 1 ? 'item' : 'items'} saved. Your shortlist stays on this device.`
-          + (starter ? ' It starts with a starter pack of awards almost every Alberta Grade 12 can enter; remove any you do not want.' : '');
+          + (starter ? ' It starts with a starter pack of awards almost every Alberta Grade 12 can enter. Remove any you do not want.' : '');
     }
 
     const toggle = root.querySelector<HTMLElement>('[data-sv-toggle]');

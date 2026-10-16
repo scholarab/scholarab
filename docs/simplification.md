@@ -2507,3 +2507,15 @@ Outcome: a student sees their school once on a combo page and once in /match res
 - Guard: a test fails if any combo page or any quiz town in the combo index lists the same anchor twice. It failed on the old code.
 - Measured on the JSON (local): duplicate school combos 5 to 0 (four shared anchors plus LCHS), duplicate combo index keys 4 to 0.
 - Add-back fraction: 0 of 1.
+
+## 2026-10-15: whole-site debug, desktop and phone
+
+Outcome: a Lethbridge or Fort McMurray student who opens their city's combo page sees it instead of being sent back to the city list, and a returning student on /match downloads the quiz catalogue once instead of twice.
+
+- Method, all local against the build (`wrangler dev` on dist/, plus the static server for WebKit): a static pass over all 2,900 built pages (internal links and assets, fragments, duplicate ids, ARIA references, JSON-LD, titles, canonicals); a load crawl of 274 pages (every hub, guide, combo page, facet and 200 random listings) at 1440, 1024, 412, 375 and 320 px, in dark mode on desktop and phone, and with JavaScript off, recording console errors, failed requests and horizontal overflow; the same in Firefox and WebKit on 69 pages; axe WCAG 2.2 AA on 69 pages in four light, dark, desktop and phone profiles; a pass that clicked every visible control on 72 pages (780 clicks desktop, 463 phone); and all 2,802 production sitemap URLs. Zero JS errors, zero overflow at any width, zero axe violations. The existing e2e suite passed 188 before and after.
+- Removed: four `_redirects` rules (2026-10-01) for the Lethbridge and Fort McMurray combo pages. Both pages came back, and Cloudflare applies `_redirects` before assets, so production 301'd them away while /combos/, the city hubs and the sitemap still linked them. Measured on production before the fix: 2,800 of 2,802 sitemap URLs returned 200, and the two that did not were these.
+- Guard: `scripts/check-redirect-shadows.ts` runs after the build and fails it when a rule's source is a page the build made. validate-data already checks listings and hubs, but combo pages come and go with the date, so only the output can tell. It failed on the four rules above.
+- Removed: the service worker's handling of hashed `/_astro/*.json`. Chrome refused the page's preload of the 2 MB quiz payload ("cross-world service worker resource mismatch"), so every controlled visit fetched it twice. Measured locally with Playwright: 2 page requests and 2 worker requests per /match visit before, 1 page request after, first visit unchanged at 1. The HTTP cache already holds these files for a year, so offline is unchanged.
+- Work avoided: `tsconfig.json` now excludes the gitignored private/, outreach/, output/ and social-out/ folders. `astro check` was type-checking 376 files, 12 errors all in those folders, so `npm run ci` failed on this machine with a clean site. After, 267 files and 0 errors.
+- Copy: the My combo starter pack line lost its semicolon. Data fields still hold about 750 distinct semicolon lines (program schedules and amounts), a content task left out of this pass.
+- Add-back fraction: 0 of 3.

@@ -7,6 +7,12 @@
     "scripts",
     "dist",
     "coverage",
-    "test-results"
+    "test-results",
+    // Local, gitignored working folders: a hosted checkout never has them,
+    // and their one-off scripts failed `astro check` here.
+    "private",
+    "outreach",
+    "output",
+    "social-out"
   ]
 }

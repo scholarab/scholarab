@@ -129,6 +129,15 @@ describe('service worker offline behavior', () => {
     expect(await sw.caches.keys()).toEqual([])
   })
 
+  // Chrome refused /match's preload of the payload when this worker served it,
+  // so returning visitors downloaded 2 MB twice.
+  it('leaves hashed data files to the HTTP cache, so preloads are reused', async () => {
+    const sw = worker()
+    expect((await sw.request('/_astro/quiz-payload.DXn9gDWO.json', { mode: 'cors' })).intercepted).toBe(false)
+    expect((await sw.request('/_astro/client.Bx12.js', { mode: 'cors' })).intercepted).toBe(true)
+    expect((await sw.request('/saved-items.json', { mode: 'cors' })).intercepted).toBe(true)
+  })
+
   it('preserves existing v9 visited pages during an update and removes older cache versions', async () => {
     const sw = worker()
     await (await sw.caches.open('scholarab-v9')).put('/saved/', new Response('existing offline shortlist page'))
