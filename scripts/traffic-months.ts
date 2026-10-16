@@ -26,6 +26,7 @@
  * Run it in the first days of each month; prune-events.ts fails its job when a
  * month is about to be pruned without a complete record here.
  */
+import { execFileSync } from 'child_process';
 import { existsSync, readFileSync, writeFileSync } from 'fs';
 import { homedir } from 'os';
 import { join } from 'path';
@@ -133,7 +134,15 @@ async function ga4(): Promise<Map<string, NonNullable<Month['ga4']>>> {
 function cloudflareToken(): string {
   if (process.env.CLOUDFLARE_API_TOKEN) return process.env.CLOUDFLARE_API_TOKEN;
   const path = join(homedir(), 'Library/Preferences/.wrangler/config/default.toml');
-  const token = existsSync(path) ? readFileSync(path, 'utf8').match(/oauth_token\s*=\s*"([^"]+)"/)?.[1] : undefined;
+  const read = () => (existsSync(path) ? readFileSync(path, 'utf8') : '');
+  // Wrangler's OAuth token lasts an hour and only wrangler renews it. Any
+  // authenticated wrangler command does, so whoami runs (silently, it prints
+  // the account email) when the stored token is expired or about to be.
+  const expires = read().match(/expiration_time\s*=\s*"([^"]+)"/)?.[1];
+  if (!expires || Date.parse(expires) - Date.now() < 5 * 60 * 1000) {
+    execFileSync('npx', ['wrangler', 'whoami'], { cwd: root, stdio: 'ignore', timeout: 60_000 });
+  }
+  const token = read().match(/oauth_token\s*=\s*"([^"]+)"/)?.[1];
   if (!token) throw new Error('No Cloudflare token. Set CLOUDFLARE_API_TOKEN or run `npx wrangler login`.');
   return token;
 }
@@ -146,8 +155,8 @@ async function cloudflare(months: string[]): Promise<Map<string, NonNullable<Mon
     success: boolean; result?: { id: string }[];
   };
   const account = accounts.result?.[0]?.id;
-  // An expired wrangler token lands here; `npx wrangler whoami` refreshes it.
-  if (!accounts.success || !account) throw new Error('Cloudflare rejected the token. Run `npx wrangler whoami` to refresh it.');
+  // A refresh token wrangler could not renew lands here.
+  if (!accounts.success || !account) throw new Error('Cloudflare rejected the token. Run `npx wrangler login`.');
 
   const query = `query($a:String!,$s:Time!,$e:Time!){viewer{accounts(filter:{accountTag:$a}){
     rumPageloadEventsAdaptiveGroups(limit:1, filter:{datetime_geq:$s, datetime_lt:$e}){count sum{visits}}

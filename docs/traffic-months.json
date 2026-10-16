@@ -64,15 +64,15 @@
       "events": {
         "alert_subscribe": 145,
         "app_status": 14,
-        "apply_click": 1138,
+        "apply_click": 1153,
         "combo_open": 6,
-        "detail_view": 4737,
-        "filter_use": 322,
-        "list_more": 477,
-        "list_view": 1872,
-        "quiz_complete": 105,
-        "quiz_start": 113,
-        "save": 955,
+        "detail_view": 4794,
+        "filter_use": 326,
+        "list_more": 485,
+        "list_view": 1899,
+        "quiz_complete": 106,
+        "quiz_start": 114,
+        "save": 958,
         "search_empty": 80,
         "source_visit": 79,
         "tour_close": 23,
@@ -83,13 +83,13 @@
       },
       "eventsRecorded": "2026-10-15",
       "ga4": {
-        "users": 1108,
-        "sessions": 1369,
-        "views": 6216
+        "users": 1122,
+        "sessions": 1390,
+        "views": 6311
       },
       "cloudflare": {
-        "visits": 15190,
-        "pageViews": 39440
+        "visits": 15350,
+        "pageViews": 39820
       }
     }
   ]
