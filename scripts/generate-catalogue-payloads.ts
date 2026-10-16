@@ -33,10 +33,8 @@ writeFileSync('src/data/runtime-catalogue.json', JSON.stringify({
     ({ id, title, active, deadline, openDate: openDate ?? null, deadlineEstimated, concluded, rolling })),
   programs: programs.map(({ id, name, active, deadline, openDate }) => ({ id, name, active, deadline, openDate })),
 }));
-// The publisher checks this same small marker after deployment: the request ID
-// it committed, bound to all content in the build's JSON snapshot. Only the ID
-// is committed. The hash is recomputed here before anything reads it, so a
-// committed copy could only go stale, and did after every data commit that left
-// it out, the daily sync among them.
-const request = JSON.parse(readFileSync('src/data/publication-request.json', 'utf8'));
-writeFileSync('public/publication.json', JSON.stringify({ ...request, catalogueHash: await catalogueHash(snapshot) }) + '\n');
+// IndexNow checks this small marker after deployment (scripts/live-publication.ts):
+// a hash of all content in the build's JSON snapshot, so it only announces URLs
+// once the live site serves this exact catalogue. Computed here, never
+// committed, so it cannot go stale.
+writeFileSync('public/publication.json', JSON.stringify({ catalogueHash: await catalogueHash(snapshot) }) + '\n');

@@ -11,5 +11,5 @@ if (isMobile) {
 }
 ---
 <AdminLayout title="Sign in">
-  <LoginForm client:load next={(() => { const v = Astro.url.searchParams.get('next') ?? ''; return v.startsWith('/admin') && !v.includes('://') ? v : '/admin/scholarships'; })()} />
+  <LoginForm client:load next={(() => { const v = Astro.url.searchParams.get('next') ?? ''; return v.startsWith('/admin') && !v.includes('://') ? v : '/admin/analytics'; })()} />
 </AdminLayout>

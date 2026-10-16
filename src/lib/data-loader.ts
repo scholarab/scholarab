@@ -49,8 +49,7 @@ export type Scholarship = {
   eligibility: EligibilityCriteria | null
   /**
    * An authored clause appended to the derived SERP snippet. JSON-only, like
-   * Program.metaDescription: there is no column, so the DB path reports null
-   * and the dev server renders the snippet without it. See scholarshipMeta.
+   * Program.metaDescription. See scholarshipMeta.
    */
   metaDetail?: string | null
   /**
@@ -142,9 +141,7 @@ export type Program = {
   description: string | null
   /**
    * An authored SERP snippet that overrides the one derived from
-   * `description`. JSON-only: there is no column for it, so the DB path always
-   * reports null and the dev server renders the derived snippet while the
-   * build renders this. See programMeta in src/lib/meta.ts.
+   * `description`. JSON-only. See programMeta in src/lib/meta.ts.
    */
   metaDescription?: string | null
   lastVerified: string | null
@@ -153,8 +150,7 @@ export type Program = {
 
 export function loadScholarships(): Promise<Scholarship[]> { return loadScholarshipsFromJson() }
 
-/** Public data is the deployed JSON snapshot. Admin drafts are isolated in
- * catalogue_entries and never affect the public site before publication. */
+/** Public data is the committed JSON snapshot, in dev and in the build alike. */
 let scholarshipJson: Scholarship[] | undefined
 export async function loadScholarshipsFromJson(): Promise<Scholarship[]> {
   if (scholarshipJson) return scholarshipJson

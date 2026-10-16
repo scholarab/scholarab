@@ -48,7 +48,7 @@ It is **not** a purely static site, and the following surfaces do exist:
 
 - **Public API routes** (`src/pages/api/`) for deadline alert signup,
   unsubscribe, and first-party analytics events. These are rate limited.
-- **An authenticated admin area** (`/admin`) for editing listings, protected by
+- **An authenticated admin area** (`/admin`) for site analytics, protected by
   an HMAC-signed session cookie and enforced in `src/middleware.ts`. It is
   single-operator and not open to registration.
 - **A database** (Neon Postgres via Drizzle) backing alert subscriptions and

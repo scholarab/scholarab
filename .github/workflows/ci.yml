@@ -90,28 +90,9 @@ jobs:
           git add src/data/scholarships.json src/data/research-programs.json src/data/lastmod.json
           git diff --staged --quiet || { git commit -m "auto-sync scholarships [skip actions]" && git push; }
 
-      # Git is the published-data authority; the database mirrors its validated
-      # snapshot and preserves drafts. Recheck main immediately before writing:
-      # another publisher or CI trigger can advance it while this run validates.
-      # Do not mirror that older checkout over a newer published revision.
-      # Cloudflare deploys separately: until deployment succeeds, the public site
-      # can still serve the previous snapshot. A DB sync is not proof of a live
-      # deploy, and publisher acknowledgment checks the public manifest itself.
-      - name: Mirror latest validated JSON
-        if: github.event_name != 'pull_request'
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-        run: |
-          git fetch --no-tags origin main:refs/remotes/origin/main
-          if [ "$(git rev-parse HEAD)" != "$(git rev-parse origin/main)" ]; then
-            echo "::notice::Skipping database sync: main advanced beyond this validated checkout."
-            exit 0
-          fi
-          npx tsx scripts/sync-db.ts
-
       # Read-only. 0014 was applied by hand and missing from the ledger for
       # nineteen days (found 2026-09-29) because nothing ran this. After the
-      # mirror, so a ledger problem cannot hold up published data.
+      # data commit, so a ledger problem cannot hold up published data.
       - name: Check database schema
         if: github.event_name != 'pull_request'
         env:

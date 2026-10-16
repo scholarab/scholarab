@@ -21,7 +21,7 @@ it('preserves every public reminder identity, label, availability and deadline',
   )));
 });
 
-it('generates both payloads together, preserves publication identity, and rejects truncated inputs before writing', () => {
+it('generates both payloads and the deploy marker together, and rejects truncated inputs before writing', () => {
   const root = mkdtempSync(join(tmpdir(), 'scholarab-payloads-'));
   const runner = resolve('node_modules/.bin/tsx');
   const script = resolve('scripts/generate-catalogue-payloads.ts');
@@ -33,18 +33,14 @@ it('generates both payloads together, preserves publication identity, and reject
     write('src/data/scholarships.json', [{ id: 17, title: 'Award', url: 'https://example.org/award',
       active: false, eligibility: null, notes: 'Editorial-only notes', audience: 'An audience' }]);
     write('src/data/research-programs.json', [{ id: 29, name: 'Program', url: 'https://example.org/program', deadline: 'TBA' }]);
-    write('src/data/publication-request.json', { id: 'reviewed-request' });
     execFileSync(runner, [script], { cwd: root });
     const runtime = read('src/data/runtime-catalogue.json');
     expect(runtime).toEqual({ scholarships: [{ id: 17, title: 'Award', active: false, openDate: null }],
       programs: [{ id: 29, name: 'Program', active: true, deadline: 'TBA' }] });
     expect(read('src/data/quiz-payload.json').scholarships[0]).toMatchObject({ id: 17, audience: 'An audience' });
     const marker = read('public/publication.json');
-    expect(marker.id).toBe('reviewed-request');
+    expect(Object.keys(marker)).toEqual(['catalogueHash']);
     expect(marker.catalogueHash).toMatch(/^[a-f0-9]{64}$/);
-    // The committed request file is only read: a build that rewrote it would
-    // leave every checkout with a modified tracked file.
-    expect(read('src/data/publication-request.json')).toEqual({ id: 'reviewed-request' });
     write('src/data/research-programs.json', []);
     expect(spawnSync(runner, [script], { cwd: root }).status).toBe(1);
     expect(read('src/data/runtime-catalogue.json')).toEqual(runtime);

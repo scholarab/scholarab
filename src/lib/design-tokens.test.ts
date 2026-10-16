@@ -49,7 +49,7 @@ describe('theme tokens', () => {
     // A bare `html {` or `body {` setting the canvas is the losing form
     // coming back. The guard is about which selector paints.
     expect(stripComments(src)).not.toMatch(/^\s*(html|body) \{[^}]*(background-color|color-scheme|color):/m)
-    for (const page of ['scholarships', 'programs', 'analytics', 'login']) {
+    for (const page of ['analytics', 'login']) {
       expect(read(`src/pages/admin/${page}.astro`)).toContain("import AdminLayout from '../../layouts/AdminLayout.astro'")
     }
   })

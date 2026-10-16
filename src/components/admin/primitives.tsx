@@ -1,193 +1,21 @@
-// Shared pieces for the admin managers. Behaviour stays in the managers;
-// these only draw. Styles are the .adm-* rules in styles/admin.css.
-import { useEffect, useRef, type ReactNode } from 'react'
-import type { Scoreboard as ScoreboardData, ScoreCell } from '../../lib/admin-scoreboard'
+// Shared pieces for the admin analytics page. Styles are the .adm-* rules in
+// styles/admin.css.
+import type { ReactNode } from 'react'
 
-/** One stroke, one weight, drawn here rather than pulled in for four glyphs. */
-export function Icon({ name, size = 16 }: { name: 'search' | 'close' | 'chevron' | 'prev' | 'next'; size?: number }) {
-  const d = {
-    search: <><circle cx="7" cy="7" r="4.6" /><path d="M10.6 10.6 14 14" /></>,
-    close: <path d="M3.5 3.5l9 9M12.5 3.5l-9 9" />,
-    chevron: <path d="M6 3.5 10.5 8 6 12.5" />,
-    prev: <path d="M10 3.5 5.5 8 10 12.5" />,
-    next: <path d="M6 3.5 10.5 8 6 12.5" />,
-  }[name]
-  return (
-    <svg viewBox="0 0 16 16" width={size} height={size} fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      {d}
-    </svg>
-  )
-}
-
-export function AdminSearch({ label, value, onChange }: { label: string; value: string; onChange: (v: string) => void }) {
-  return (
-    <div className="adm-search">
-      <Icon name="search" />
-      <input
-        type="search"
-        aria-label={label}
-        placeholder={label}
-        value={value}
-        onChange={e => onChange(e.target.value)}
-        className="adm-input"
-      />
-    </div>
-  )
-}
-
-/** Region or category as one dropdown beside the search: 36 regions as
-    links took three rows (Ilia, 2026-10-12, "too complicated"). */
-export function AdminFacetSelect({ tabs, counts, active, onSelect, label, all }: {
-  /** The first option's words, like "All regions". */
-  all: string
-  tabs: string[]
-  counts: Record<string, number>
-  active: string
-  onSelect: (tab: string) => void
+/** One figure in the admin scoreboard strip. */
+export interface ScoreCell {
+  key: string
   label: string
-}) {
-  return (
-    <select className="adm-select adm-facet-select" aria-label={label} value={active} onChange={e => onSelect(e.target.value)}>
-      {tabs.map(t => (
-        <option key={t} value={t}>{t === 'All' ? all : t} ({(counts[t] ?? 0).toLocaleString('en-CA')})</option>
-      ))}
-    </select>
-  )
+  /** null when the source could not be read; the strip shows a dash, never a zero. */
+  value: number | null
+  /** One short line under the figure: the comparison, or where the number comes from. */
+  note: string
+  /** Up or down on the comparison, for the note's colour. null when there is no fair comparison. */
+  trend: 'up' | 'down' | null
 }
 
-export function AdminPagination({ page, totalPages, total, totalWord, onPage }: {
-  page: number
-  totalPages: number
-  total: number
-  /** The word after the count; 'results' (scholarships) or 'total' (programs). */
-  totalWord: string
-  onPage: (page: number) => void
-}) {
-  if (totalPages <= 1) return null
-  return (
-    <div className="adm-pager">
-      <span>Page {page + 1} of {totalPages}, {total.toLocaleString('en-CA')} {totalWord}</span>
-      <div>
-        <button type="button" className="adm-btn adm-btn-ghost" onClick={() => onPage(Math.max(0, page - 1))} disabled={page === 0}>
-          <Icon name="prev" />Previous
-        </button>
-        <button type="button" className="adm-btn adm-btn-ghost" onClick={() => onPage(Math.min(totalPages - 1, page + 1))} disabled={page >= totalPages - 1}>
-          Next<Icon name="next" />
-        </button>
-      </div>
-    </div>
-  )
-}
-
-/** Escape closes, focus moves in on open and back out on close. */
-function useDialog(onClose: () => void) {
-  const ref = useRef<HTMLDivElement>(null)
-  useEffect(() => {
-    const before = document.activeElement as HTMLElement | null
-    const first = ref.current?.querySelector<HTMLElement>('input, select, textarea, button:not([data-close])')
-    ;(first ?? ref.current)?.focus()
-    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose() }
-    document.addEventListener('keydown', onKey)
-    return () => { document.removeEventListener('keydown', onKey); before?.focus?.() }
-    // Only on open: re-running on every render would steal focus while typing.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-  return ref
-}
-
-/** The editor and the publish review: a sheet from the right, the list still in view. */
-export function AdminSheet({ id, title, sub, onClose, footer, children }: {
-  id: string
-  title: string
-  sub?: ReactNode
-  onClose: () => void
-  footer: ReactNode
-  children: ReactNode
-}) {
-  const ref = useDialog(onClose)
-  return (
-    <>
-      <div className="adm-scrim" onClick={onClose} />
-      <div ref={ref} role="dialog" aria-modal="true" aria-labelledby={`${id}-title`} className="adm-sheet" tabIndex={-1}>
-        <div className="adm-sheet-head">
-          <div>
-            <h2 id={`${id}-title`}>{title}</h2>
-            {sub && <p>{sub}</p>}
-          </div>
-          <button type="button" className="adm-x" onClick={onClose} aria-label="Close" data-close><Icon name="close" size={18} /></button>
-        </div>
-        <div className="adm-sheet-body">{children}</div>
-        <div className="adm-sheet-foot">{footer}</div>
-      </div>
-    </>
-  )
-}
-
-export function AdminDeleteModal({ idPrefix, entityLabel, itemName, saving, onCancel, onConfirm }: {
-  idPrefix: string
-  entityLabel: string
-  itemName: string | undefined
-  saving: boolean
-  onCancel: () => void
-  onConfirm: () => void
-}) {
-  const ref = useDialog(onCancel)
-  return (
-    <>
-      <div className="adm-scrim" onClick={onCancel} style={{ zIndex: 52 }} />
-      <div ref={ref} role="alertdialog" aria-modal="true" aria-labelledby={`${idPrefix}-delete-title`} className="adm-confirm" style={{ zIndex: 53 }}>
-        <h2 id={`${idPrefix}-delete-title`}>Delete this {entityLabel}?</h2>
-        <p>{itemName ? `${itemName} comes off the site` : 'It comes off the site'} at the next publication. Until then it stays in the drafts.</p>
-        <div>
-          <button type="button" className="adm-btn adm-btn-ghost" onClick={onCancel} disabled={saving}>Keep it</button>
-          <button type="button" className="adm-btn adm-btn-delete" onClick={onConfirm} disabled={saving}>{saving ? 'Deleting' : 'Delete'}</button>
-        </div>
-      </div>
-    </>
-  )
-}
-
-/** Collapsible group inside a sheet. */
-export function AdminSection({ title, open, onToggle, aside, children }: {
-  title: string
-  open: boolean
-  onToggle: () => void
-  aside?: ReactNode
-  children: ReactNode
-}) {
-  return (
-    <div className="adm-section">
-      <div className="adm-section-toggle">
-        <button type="button" onClick={onToggle} aria-expanded={open}>
-          <Icon name="chevron" />{title}
-        </button>
-        {aside}
-      </div>
-      {open && children}
-    </div>
-  )
-}
-
-/** "2026-10-09" as the big day and a short month line, like the public rows. */
-export function DeadlineFigure({ date, today }: { date?: string | null; today: string }) {
-  if (!date) return <div className="adm-when" data-none><b>&ndash;</b><span>No date</span></div>
-  const [y, m, d] = date.split('-').map(Number)
-  if (!y || !m || !d) return <div className="adm-when" data-none><b>&ndash;</b><span>{date}</span></div>
-  const month = new Date(Date.UTC(y, m - 1, d)).toLocaleDateString('en-CA', { month: 'short', timeZone: 'UTC' })
-  return (
-    <div className="adm-when" data-past={date < today ? '' : undefined} title={date < today ? 'Deadline has passed' : undefined}>
-      <b>{d}</b><span>{month} {y}</span>
-    </div>
-  )
-}
-
-/** Today in Alberta as YYYY-MM-DD, the timezone every deadline is written in. */
-export function albertaToday(): string {
-  return new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Edmonton', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date())
-}
-
-/** The strip of figures under the bar. The analytics page passes its own
-    period cells and controls; every other page shows this month so far. */
+/** The strip of figures under the bar, with the analytics page's period cells
+    and controls. */
 export function Scoreboard({ title, sub, cells, children }: {
   title: string
   sub?: string
@@ -213,5 +41,3 @@ export function Scoreboard({ title, sub, cells, children }: {
     </section>
   )
 }
-
-export type { ScoreboardData }

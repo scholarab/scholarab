@@ -1,62 +1,10 @@
 import { sql } from 'drizzle-orm'
-import type { Document, PublicationChange } from '../catalogue'
-import { pgTable, serial, integer, text, boolean, timestamp, jsonb, index, uniqueIndex, primaryKey } from 'drizzle-orm/pg-core'
+import { pgTable, serial, integer, text, timestamp, jsonb, index, uniqueIndex, primaryKey } from 'drizzle-orm/pg-core'
 
-export const scholarships = pgTable('scholarships', {
-  id: serial('id').primaryKey(),
-  publicId: integer('public_id'),
-  title: text('title').notNull(),
-  amount: text('amount').notNull(),
-  deadline: text('deadline'),
-  openDate: text('open_date'),
-  audience: text('audience'),
-  url: text('url').notNull(),
-  category: text('category'),
-  lastVerified: text('last_verified'),
-  region: text('region'),
-  notes: text('notes'),
-  applyViaGuidance: boolean('apply_via_guidance').default(false),
-  active: boolean('active').default(true),
-  eligibility: jsonb('eligibility'),
-  createdAt: timestamp('created_at').defaultNow(),
-  updatedAt: timestamp('updated_at').defaultNow(),
-}, t => [
-  uniqueIndex('scholarships_public_id_unique').on(t.publicId),
-  uniqueIndex('scholarships_title_unique').on(t.title),
-  index('scholarships_active_idx').on(t.active),
-  index('scholarships_region_idx').on(t.region),
-  index('scholarships_category_idx').on(t.category),
-])
-
-export const researchPrograms = pgTable('research_programs', {
-  id: serial('id').primaryKey(),
-  publicId: integer('public_id'),
-  name: text('name').notNull(),
-  emoji: text('emoji'),
-  category: text('category'),
-  provider: text('provider'),
-  grades: text('grades'),
-  duration: text('duration'),
-  paid: boolean('paid').default(false),
-  stipend: text('stipend'),
-  // free | fee | varies | unconfirmed. Defaults to unconfirmed so a row nobody
-  // has checked cannot present itself as free; see Program.cost in data-loader.
-  cost: text('cost').default('unconfirmed'),
-  costNote: text('cost_note'),
-  location: text('location'),
-  eligibility: text('eligibility'),
-  deadline: text('deadline'),
-  url: text('url').notNull(),
-  description: text('description'),
-  lastVerified: text('last_verified'),
-  active: boolean('active').default(true).notNull(),
-  createdAt: timestamp('created_at').defaultNow(),
-  updatedAt: timestamp('updated_at').defaultNow(),
-}, t => [
-  uniqueIndex('research_programs_public_id_unique').on(t.publicId),
-  index('research_programs_active_idx').on(t.active),
-  index('research_programs_category_idx').on(t.category),
-])
+// The retired admin editor's tables (catalogue_entries, publication_requests,
+// parse_log) and the legacy scholarships and research_programs tables still
+// exist in the database but nothing reads or writes them since 2026-10-15.
+// They stay until a migration drops them.
 
 export const subscribers = pgTable('subscribers', {
   id: serial('id').primaryKey(),
@@ -92,13 +40,6 @@ export const rateLimitCounter = pgTable('rate_limit_counter', {
   hits: integer('hits').default(0).notNull(),
 }, t => [primaryKey({ columns: [t.key, t.windowStart] }), index('rate_limit_counter_window_idx').on(t.windowStart)])
 
-export const parseLog = pgTable('parse_log', {
-  id: serial('id').primaryKey(),
-  userId: text('user_id').notNull(),
-  createdAt: timestamp('created_at').defaultNow().notNull(),
-}, t => [index('parse_log_userId_idx').on(t.userId)])
-
-
 // Anonymous event counters; no IP, no user id, no session. See /api/event.
 export const events = pgTable('events', {
   id: serial('id').primaryKey(),
@@ -110,31 +51,6 @@ export const events = pgTable('events', {
   /** phone, tablet or computer (src/lib/device-class.ts). Null before 2026-10-14. */
   device: text('device'),
 }, t => [index('events_event_ts_idx').on(t.event, t.ts)])
-
-export const catalogueEntries = pgTable('catalogue_entries', {
-  kind: text('kind').$type<'scholarship' | 'program'>().notNull(),
-  publicId: integer('public_id').notNull(),
-  published: jsonb('published').$type<Document>(),
-  draft: jsonb('draft').$type<Document>(),
-  draftBase: jsonb('draft_base').$type<Document>(),
-  deleted: boolean('deleted').notNull().default(false),
-  revision: integer('revision').notNull().default(1),
-  updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
-}, t => [primaryKey({ columns: [t.kind, t.publicId] }), index('catalogue_updated_idx').on(t.kind, t.updatedAt.desc(), t.publicId.desc()),
-  uniqueIndex('catalogue_name_unique').on(t.kind,sql`lower(btrim(coalesce(coalesce(${t.draft},${t.published})->>'title',coalesce(${t.draft},${t.published})->>'name')))` ).where(sql`not ${t.deleted} and coalesce(${t.draft},${t.published}) is not null`),
-])
-
-export const publicationRequests = pgTable('publication_requests', {
-  id: text('id').primaryKey(),
-  status: text('status').notNull().default('queued'),
-  changes: jsonb('changes').$type<PublicationChange[]>().notNull(),
-  message: text('message'),
-  commitSha: text('commit_sha'),
-  // See src/lib/publication-signature.ts and 0015_publication_signature.sql.
-  signature: text('signature'),
-  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
-  updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
-}, t => [uniqueIndex('publication_one_pending').on(sql`(true)`).where(sql`${t.status} in ('queued','processing','committed')`)])
 
 export const confirmationRecipients = pgTable('confirmation_recipients', {
   key:text('key').primaryKey(), claimedAt:timestamp('claimed_at',{withTimezone:true}).notNull(),

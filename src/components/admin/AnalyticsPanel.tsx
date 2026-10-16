@@ -1,6 +1,5 @@
 import { useMemo, useState } from 'react'
-import { Scoreboard } from './primitives'
-import type { ScoreCell } from '../../lib/admin-scoreboard'
+import { Scoreboard, type ScoreCell } from './primitives'
 
 export interface AnalyticsData {
   /** Every event, bucketed by Alberta calendar month. */

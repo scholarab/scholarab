@@ -1,16 +1,10 @@
 # Catalogue publishing and operational recovery
 
-Public pages, saved IDs, quiz matching and reminders use the committed JSON catalogue. Admin edits live separately in `catalogue_entries.draft`; `published` is the last mirrored JSON snapshot. `(kind, public_id)` is the shared public identity. Legacy catalogue primary keys are historical IDs; their nullable `public_id` columns provide an explicit mapping. Eight historical scholarship rows have no current public counterpart and remain archived in the legacy table, not exposed through admin or public loaders.
+Public pages, saved IDs, quiz matching and reminders use the committed JSON catalogue in `src/data/`. Git is the only way to edit it: change the JSON, run `npm run ci`, commit and push. Workers Builds deploys every push to main. `(kind, id)` is the public identity.
 
 ## Editing and publishing
 
-Admin search and pagination operate on the entire catalogue. Every update/delete requires the row revision. A conflict keeps the unsaved form visible. Edits (including deletions) remain drafts until **Review and publish**, followed by **Publish these changes**, queues their exact revisions. Later edits are not included in that request.
-
-The **Publish admin drafts** workflow is scheduled every 15 minutes, but GitHub throttles it to 4 to 7 runs a day (measured 2026-09-29), so a queued request usually waits a few hours. Start it sooner with **Run workflow** on its GitHub Actions page; the toast after queuing links there. Every request is signed by the admin API with `PUBLICATION_SIGNING_KEY` (a Worker secret and a GitHub Actions secret, never stored in the database), and the publisher rejects and marks failed any request whose signature does not verify, so database access alone cannot publish. Without the key the admin page refuses to queue and says so; drafts are kept. It merges independent JSON changes, rejects conflicting field edits, generates rename/deletion redirects, validates and builds, commits, and pushes without force. It then verifies the request ID in the live `/publication.json` artifact. A commit or accepted deploy hook alone is never shown as “published.” Failed requests retain their drafts; correct the reported problem and queue again.
-
-A publisher interrupted after push recovers by recognizing its request ID in the committed `src/data/publication-request.json`. Newer edits are retained during acknowledgement. The workflow's concurrency group prevents two publishers from running together; a concurrent regular main push rejects the publisher's push rather than being overwritten. The workflow uses the repository's existing `DATABASE_URL` secret and `GITHUB_TOKEN` with `contents: write`; no new provider credential is needed.
-
-The previous deployment-hook endpoint has been replaced by this publication queue. `DEPLOY_HOOK_URL` is no longer required for admin publication. Workers Builds (the Worker's git integration) remains responsible for deployments.
+The admin editor, its database drafts and the scheduled publisher were retired on 2026-10-15. Its one publication (2026-09-29) was the only one: from 2026-09-15 to 2026-10-15, 88 hand commits and 12 daily syncs changed the catalogue through git. `/admin` now shows analytics only. The tables it used (`catalogue_entries`, `publication_requests`, `parse_log`) and the legacy `scholarships` and `research_programs` tables are still in the database, unread, until a migration drops them. `PUBLICATION_SIGNING_KEY` and `ANTHROPIC_API_KEY` are no longer read by anything.
 
 ## Database setup and drift
 
@@ -18,16 +12,14 @@ On the existing database, run with DATABASE_URL loaded:
 
 ```sh
 npm run migrate-db
-npm run sync-db -- --dry-run
-npm run sync-db
 npm run migrate-db -- --check
 ```
 
 Use `npm run migrate-db -- --bootstrap` only for an empty database. The bootstrap is a current baseline; it intentionally does not replay the incomplete historical 0000–0012 chain. Versions 0013 onward are tracked by filename/checksum, applied transactionally, and cannot be changed after application. Current checks also verify subscriber timestamp types and required runtime indexes. Historical audit/deploy/mutation logs are retained, not dropped or treated as current application tables.
 
-`sync-db` validates both complete catalogue files before planning changes and updates published snapshots in one transaction. It preserves drafts and public-ID tombstones. `--prune` archives removed mirror snapshots, not drafts or legacy data. A large removal is rejected for separate review. `--dry-run --prune` performs reads only. `prune-events --dry-run` uses EXPLAIN without ANALYZE so even data-changing CTEs are planned but never executed; inputs are validated before any retention work.
+`prune-events --dry-run` uses EXPLAIN without ANALYZE so even data-changing CTEs are planned but never executed; inputs are validated before any retention work.
 
-Before deployment, a catalogue/schema backup was written outside the repository to `/Users/admin/.codex/backups/scholarab-2026-09-09/pre-audit-migration.json`. No subscriber email/token data was exported. The migration is additive; a code rollback leaves existing tables and IDs intact. To roll back the admin workflow, retain the new tables and queued requests until draft reconciliation; dropping them would lose unpublished work.
+Before deployment, a catalogue/schema backup was written outside the repository to `/Users/admin/.codex/backups/scholarab-2026-09-09/pre-audit-migration.json`. No subscriber email/token data was exported. The migration is additive; a code rollback leaves existing tables and IDs intact.
 
 ## Email delivery and recovery
 
@@ -41,9 +33,9 @@ An unresolved delivery older than 23 hours deliberately fails the sender job wit
 
 ## Build and performance
 
-`scripts/generate-catalogue-payloads.ts` validates the committed JSON and generates two transport shapes before build/dev/type-check/tests. The legacy quiz payload contains only matching/result fields and is emitted as a fingerprinted asset; answers remain entirely in the browser and the page retries loading on failure. The runtime catalogue contains only public IDs, labels, availability and deadlines for reminders and admin analytics. Both generated source files are ignored by git; neither is an independently edited catalogue or a source of admin drafts.
+`scripts/generate-catalogue-payloads.ts` validates the committed JSON and generates two transport shapes before build/dev/type-check/tests. The legacy quiz payload contains only matching/result fields and is emitted as a fingerprinted asset; answers remain entirely in the browser and the page retries loading on failure. The runtime catalogue contains only public IDs, labels, availability and deadlines for reminders and admin analytics. Both generated source files are ignored by git; neither is an independently edited catalogue.
 
-OG rendering caches a hash of the render tree, font bytes and dependency lockfile. Only changed/missing images render; the CI/publisher workflows restore the previous image cache. The full catalogue validation and sitemap generation still run every build. Directory filtering compares visible DOM order before moving cards, and the shared Alberta calendar clock caches its expensive timezone calculation without carrying yesterday across midnight.
+OG rendering caches a hash of the render tree, font bytes and dependency lockfile. Only changed/missing images render; the CI workflow restores the previous image cache. The full catalogue validation and sitemap generation still run every build. Directory filtering compares visible DOM order before moving cards, and the shared Alberta calendar clock caches its expensive timezone calculation without carrying yesterday across midnight.
 
 Analytics aggregates are sent in one database batch instead of nine sequential requests; obsolete internal-ID title lookups are removed. Counts distinguish confirmed subscriptions from those awaiting confirmation. At the current table size, full retained-history aggregates are inexpensive. Month-only APIs and new indexes were deferred until a query plan demonstrates a need.
 
@@ -53,4 +45,4 @@ Link checking retains eight concurrent hosts and serial requests with a 400 ms g
 
 ## Build verification
 
-The legacy quiz is the only quiz. Its payload generator verifies every source identity and writes `public/publication.json`, a build output that is not committed: the request ID from `src/data/publication-request.json` plus the complete JSON catalogue hash. The publisher requires both its request ID and that hash to match the live deployment before acknowledging publication. Browser tests reuse the validated build in CI.
+The legacy quiz is the only quiz. Its payload generator verifies every source identity and writes `public/publication.json`, a build output that is not committed: the complete JSON catalogue hash. IndexNow announces changed URLs only once the live deployment serves that hash. Browser tests reuse the validated build in CI.

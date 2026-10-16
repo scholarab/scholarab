@@ -13,9 +13,9 @@ National scholarship databases are overwhelming and heavily gated. ScholarAB is 
 ## 🛠️ Tech Stack
 - **Framework:** [Astro](https://astro.build)
 - **UI:** React & Tailwind CSS
-- **Published data:** Versioned JSON; Neon Postgres stores admin drafts, reminders, and anonymous counters.
+- **Published data:** Versioned JSON, edited through git; Neon Postgres stores reminders and anonymous counters.
 
-Admin publication, migrations, and recovery: [operational guide](docs/publication-and-operations.md).
+Publishing, migrations, and recovery: [operational guide](docs/publication-and-operations.md).
 
 ## 🤝 How to Contribute (Add a Scholarship)
 This project is open source! If you know of a local scholarship that isn't on the list, you can add it easily:

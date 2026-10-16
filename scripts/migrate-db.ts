@@ -55,9 +55,6 @@ const indexes = await sql`SELECT indexname FROM pg_indexes WHERE schemaname='pub
 for (const name of [
   'subscribers_item_idx',
   'subscribers_unconfirmed_idx',
-  'catalogue_updated_idx',
-  'catalogue_name_unique',
-  'publication_one_pending',
   'mail_deliveries_updated_idx',
 ])
   if (!indexes.some((r) => r.indexname === name)) throw new Error(`Missing index: ${name}`);

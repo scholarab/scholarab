@@ -1,6 +1,6 @@
 # ScholarAB change rules
 
-Keep public content, wording, design, layouts, fonts, and the legacy quiz intact unless the user explicitly changes that scope. JSON is the published catalogue authority; database drafts are separate. Never print, copy, or commit credentials. Preserve unrelated working-tree edits.
+Keep public content, wording, design, layouts, fonts, and the legacy quiz intact unless the user explicitly changes that scope. JSON is the published catalogue authority, edited only through git. Never print, copy, or commit credentials. Preserve unrelated working-tree edits.
 
 For each change, apply this order:
 
@@ -11,4 +11,4 @@ For each change, apply this order:
 5. Measure cycle time or work avoided before and after; distinguish local measurements, projections, and hosted results. Do not call whitespace removal a performance improvement.
 6. Automate only the process that survives these steps. Reuse `npm run ci` in local and hosted checks. Run `npm run ship-check -- origin/main` before shipping and complete its RUN instructions. Record evidence and limitations; do not claim a percentage reduction that was not measured.
 
-Use the existing Search Console scripts and read `docs/seo-index-status.md` before that work. Keep privacy retention, subscription consent, and publication reconciliation intact. No new connector is required for these operations.
+Use the existing Search Console scripts and read `docs/seo-index-status.md` before that work. Keep privacy retention and subscription consent intact. No new connector is required for these operations.

@@ -29,7 +29,6 @@ export default defineConfig({
     schema: {
       SESSION_SECRET: envField.string({ context: 'server', access: 'secret', optional: true }),
       DATABASE_URL: envField.string({ context: 'server', access: 'secret', optional: true }),
-      ANTHROPIC_API_KEY: envField.string({ context: 'server', access: 'secret', optional: true }),
       // Confirmation emails for double opt-in (/api/alert). Optional: without
       // it the Worker cannot mail the confirm link and the daily job sweeps
       // the sign-up instead; see scripts/send-alerts.ts. Declared here
@@ -44,10 +43,6 @@ export default defineConfig({
       // case: rate-limit.ts derives one from SESSION_SECRET, with domain
       // separation, so there is nothing extra to bind.
       RATE_LIMIT_SALT: envField.string({ context: 'server', access: 'secret', optional: true }),
-      // Signs admin publication requests so the publisher can tell them from a
-      // row written by anyone else with database access. Also a GitHub Actions
-      // secret; see src/lib/publication-signature.ts.
-      PUBLICATION_SIGNING_KEY: envField.string({ context: 'server', access: 'secret', optional: true }),
     },
   },
   vite: {

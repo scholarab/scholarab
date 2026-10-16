@@ -5,7 +5,6 @@ interface ImportMetaEnv {
   readonly DATABASE_URL: string
   readonly SESSION_SECRET: string
   readonly ADMIN_PASSWORD: string
-  readonly ANTHROPIC_API_KEY: string
   readonly RESEND_API_KEY: string
 }
 

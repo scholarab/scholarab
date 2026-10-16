@@ -95,5 +95,4 @@ if (programsChanged > 0) {
   console.log('No JSON programs to sync.');
 }
 
-// sync-db.ts mirrors this validated published snapshot. Never independently
-// reopen legacy DB rows or mutate drafts from an expiration job.
+// This job edits only the JSON working copy; CI validates and commits it.

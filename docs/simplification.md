@@ -1,5 +1,31 @@
 # ScholarAB simplification record
 
+## Admin editor and publisher retired: October 15, 2026
+
+**Outcome kept.** Students see a catalogue that was validated, built and deployed from git. Ilia still reads site analytics at `/admin`.
+
+**Why it went.** The admin draft editor and its signed publication queue published once (2026-09-29, the day the queue went live). From 2026-09-15 to 2026-10-15, 88 hand commits and 12 daily syncs changed `scholarships.json` through git, and Ilia is the only person who commits. Ilia approved the removal on 2026-10-15, and AGENTS.md no longer lists publication reconciliation as a retained requirement.
+
+| Candidate | Outcome |
+|---|---|
+| Draft editor pages, managers, eligibility editor and their 5 admin API routes | Removed |
+| Claude eligibility parser (`parse-eligibility`, `parse-message`, `ANTHROPIC_API_KEY`) | Removed |
+| Publication queue: `deploy` route, signing, `publish-drafts.ts`, `publication-pending.mjs`, `publish-drafts.yml` (cron every 15 minutes) | Removed |
+| Database mirror: `sync-db.ts`, `catalogue-sync.ts`, `catalogue-store.ts` and the CI "Mirror latest validated JSON" step | Removed |
+| `src/data/publication-request.json` and the request ID in `/publication.json` | Removed |
+| `/publication.json` catalogue hash | **Kept.** IndexNow waits for the live site to serve it before announcing URLs. |
+| `validateCatalogue` and `catalogueHash` in `lib/catalogue.ts` | **Kept**, used by the payload generator and prune-events. The three-way merge and draft views went. |
+| Monthly scoreboard strip on the editor pages (`admin-scoreboard.ts`) | Removed with those pages. The analytics page draws its own strip. |
+| `sonner` toasts | Removed; nothing else used them. |
+| Admin CSS for rows, sheets, forms, publish review | 44 of 80 `.adm-*` classes removed |
+| Drizzle definitions for `catalogue_entries`, `publication_requests`, `parse_log`, `scholarships`, `research_programs` | Removed from `schema.ts`. **The tables stay in the database** until Ilia approves a drop migration. |
+
+Add-back: 2 of 11 candidates kept (the catalogue hash and the validation it depends on), so 18%.
+
+**Measured.** 57 files, 3,530 lines deleted and 71 added before this entry (`git diff --stat`). One scheduled workflow, one CI step that wrote to the database, two npm scripts, one dependency and two Worker secrets no longer read (`PUBLICATION_SIGNING_KEY`, `ANTHROPIC_API_KEY`). Hosted minutes saved are not measured.
+
+**Not done.** React stays for the analytics panel; porting it to Preact would remove `react`, `react-dom` and `@astrojs/react`. The two secrets are still bound in Cloudflare and GitHub and should be deleted there by hand.
+
 ## Critique third pass: September 23, 2026
 
 From the re-run critique (27/40, `.impeccable/critique/2026-09-23T23-26-22Z__src-pages.md`):

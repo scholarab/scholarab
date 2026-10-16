@@ -1,9 +1,7 @@
 // @vitest-environment node
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { publicationPending } from '../../scripts/publication-pending.mjs';
 import { livePublicationMatches } from '../../scripts/live-publication';
 import { groupLinkTargets, forEachHost, reviewedLinkFailure, requestLink, type LinkException } from '../../scripts/link-targets';
-import { parseMessage } from '../lib/parse-message';
 import { execFileSync, spawnSync } from 'node:child_process';
 import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
@@ -32,34 +30,6 @@ it('requires a real permanent redirect for removed detail URLs and rejects an un
     expect(spawnSync(runner, [script, 'HEAD'], { cwd: fixture }).status).toBe(0);
     expect(spawnSync(runner, [script, 'missing-revision'], { cwd: fixture }).status).toBe(1);
   } finally { rmSync(fixture, { recursive: true, force: true }); }
-});
-
-describe('publication preflight', () => {
-  const connection = 'postgresql://test:private@ep-example-pooler.us-east-2.aws.neon.tech/db?sslmode=require';
-  it.each([['t', true], ['f', false]])('interprets an explicit %s queue result', async (value, expected) => {
-    const request = vi.fn().mockResolvedValue(Response.json({ rows: [[value]] }));
-    vi.stubGlobal('fetch', request);
-    expect(await publicationPending(connection)).toBe(expected);
-    expect(request.mock.calls[0]?.[0]).toBe('https://api.us-east-2.aws.neon.tech/sql');
-    const options = request.mock.calls[0]?.[1];
-    expect(options.redirect).toBe('error');
-    expect(JSON.parse(options.body).query).toContain("('queued', 'processing', 'committed')");
-    expect(options.headers['Neon-Connection-String']).toBe(connection);
-  });
-  it('does not treat malformed responses or outages as an empty queue; stops at three', async () => {
-    vi.useFakeTimers();
-    const request = vi.fn().mockImplementation(async () => Response.json({ rows: [] }));
-    vi.stubGlobal('fetch', request);
-    const result = expect(publicationPending(connection)).rejects.toThrow('three attempts');
-    await vi.runAllTimersAsync();
-    await result;
-    expect(request).toHaveBeenCalledTimes(3);
-  });
-  it('never sends credentials to an unsupported host', async () => {
-    const request = vi.fn(); vi.stubGlobal('fetch', request);
-    await expect(publicationPending('postgresql://test:private@example.com/db')).rejects.toThrow();
-    expect(request).not.toHaveBeenCalled();
-  });
 });
 
 describe('deployment readiness', () => {
@@ -170,38 +140,5 @@ describe('deduplicated link checks', () => {
     const targets = groupLinkTargets(items);
     expect(targets.size).toBe(2);
     expect(targets.get(items[0]!.url!)?.map(item => item.id)).toEqual([1, 2]);
-  });
-});
-
-describe('minimal eligibility API transport', () => {
-  it('preserves the API request and only returns text', async () => {
-    const request = vi.fn().mockResolvedValue(Response.json({ content: [{ type: 'text', text: ' {} ' }] }));
-    vi.stubGlobal('fetch', request);
-    expect(await parseMessage('test-key', 'unchanged prompt')).toBe('{}');
-    const [url, options] = request.mock.calls[0]!;
-    expect(url).toBe('https://api.anthropic.com/v1/messages');
-    expect(options.headers).toMatchObject({ 'x-api-key': 'test-key', 'anthropic-version': '2023-06-01' });
-    expect(JSON.parse(options.body)).toEqual({ model: 'claude-haiku-4-5-20251001', max_tokens: 1024,
-      messages: [{ role: 'user', content: 'unchanged prompt' }] });
-    expect(options.signal).toBeInstanceOf(AbortSignal);
-  });
-  it('recovers from a transient failure', async () => {
-    vi.useFakeTimers();
-    const request = vi.fn().mockRejectedValueOnce(new Error('connection reset'))
-      .mockResolvedValueOnce(Response.json({ content: [{ type: 'text', text: '{}' }] }));
-    vi.stubGlobal('fetch', request);
-    const result = parseMessage('key', 'prompt');
-    await vi.runAllTimersAsync();
-    expect(await result).toBe('{}');
-    expect(request).toHaveBeenCalledTimes(2);
-  });
-  it.each([401, 429, 503])('bounds HTTP %s failures and hides response details', async status => {
-    vi.useFakeTimers();
-    const request = vi.fn().mockImplementation(async () => new Response('private details', { status }));
-    vi.stubGlobal('fetch', request);
-    const result = expect(parseMessage('key', 'prompt')).rejects.toThrow('Eligibility service unavailable');
-    await vi.runAllTimersAsync();
-    await result;
-    expect(request).toHaveBeenCalledTimes(status === 401 ? 1 : 3);
   });
 });
