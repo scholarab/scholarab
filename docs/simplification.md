@@ -28,7 +28,7 @@ Add-back: 1 of 7 candidates kept, so 14%.
 
 `/match` grew by 124 gzip bytes and one file because Preact is now a chunk shared with the admin. Hosted load times and Worker start time are not measured.
 
-**Found on the way.** Preact 11 sets a numeric style value as written, with no `px`. The admin's numeric styles are now strings. The quiz's empty state has had `style={{ marginTop: 32 }}` since its Preact port, so that margin is not applied on `/match`; it is left as is here.
+**Found on the way.** Preact 11 sets a numeric style value as written, with no `px`. The admin's numeric styles are now strings. The quiz's empty state has had `style={{ marginTop: 32 }}` since its Preact port, so `/match` showed the stylesheet's 16px instead. Restored as `'32px'` in the next commit, with Ilia's approval.
 
 ## Admin editor and publisher retired: October 15, 2026
 

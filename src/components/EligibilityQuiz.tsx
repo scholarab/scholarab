@@ -898,7 +898,7 @@ export default function EligibilityQuiz({ scholarships, programs, combos = [] }:
         )}
 
         {!hasAnyResults && (
-          <div className="sabl-empty" style={{ marginTop: 32 }}>
+          <div className="sabl-empty" style={{ marginTop: '32px' }}>
             <div className="sabl-empty-title">No matches found for your profile.</div>
             <div className="sabl-empty-sub">Change your answers above or browse the directory.</div>
           </div>
