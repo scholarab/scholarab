@@ -102905,5 +102905,218 @@
       "apprenticeship": false,
       "extracurriculars": []
     }
+  },
+  {
+    "id": 2695,
+    "title": "Kenn Borek Air Scholarships",
+    "amount": "$5,000",
+    "deadline": "2027-03-31",
+    "openDate": null,
+    "audience": "Western and northern Canadian residents aged 18 to 30 accepted into a pilot or aircraft maintenance program",
+    "url": "https://borekair.com/wp-content/uploads/2026/02/2026-Kenn-Borek-Air-Scholarship-Information.pdf",
+    "category": "Trades",
+    "lastVerified": "2026-10",
+    "region": "Alberta",
+    "notes": "You must live in Alberta, British Columbia, Saskatchewan, Manitoba, Yukon, the Northwest Territories or Nunavut, be 18 to 30, and already be accepted into a post-secondary aviation program. Send transcripts from that program, two reference letters and a statement of interest by mail or by email to admin@borekair.com. The 2026 round closed March 31. The 2027 date shown here assumes the same day next year and is not confirmed yet.",
+    "applyViaGuidance": true,
+    "applyRoute": "sponsor",
+    "active": false,
+    "deadlineEstimated": true,
+    "description": "Kenn Borek Air, the Calgary airline, gives two $5,000 scholarships a year, one to a student training as a pilot and one to a student training in aircraft maintenance.",
+    "metaDetail": "Pilot or maintenance.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Aviation"
+      ],
+      "minAverage": null,
+      "minAge": 18,
+      "maxAge": 30,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2696,
+    "title": "Kenneth and Mable Solomon Family Youth Education Fund Bursary",
+    "amount": "Varies",
+    "deadline": "2027-07-31",
+    "openDate": "2027-07-01",
+    "audience": "Ukrainian Canadian students graduating in Alberta, Saskatchewan or Manitoba and entering a social services degree",
+    "url": "https://shevchenkofoundation.com/funding/scholarships-bursaries-awards/education/kenneth-and-mable-solomon-family-youth-education-fund-bursary/",
+    "category": "Community",
+    "lastVerified": "2026-10",
+    "region": "Alberta",
+    "notes": "You need an 80% graduating average, Canadian citizenship or permanent residency, and full-time registration in the first year of the degree. Send proof of registration, your transcript, two character references and a letter about your involvement in the Ukrainian Canadian community. Applications are taken from July 1 to July 31. The foundation says the bursary may not be given every year, so call 1-866-524-5314 to confirm before you apply.",
+    "active": true,
+    "description": "The Shevchenko Foundation runs this bursary for a Ukrainian Canadian student finishing high school on the Prairies and starting a first-year degree in social services.",
+    "metaDetail": "80 per cent average, July window.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Social Work"
+      ],
+      "minAverage": 80,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2697,
+    "title": "Town of Hinton Trans Mountain Bursary",
+    "amount": "$2,800",
+    "deadline": "2027-09-23",
+    "openDate": null,
+    "audience": "Hinton residents aged 18 to 35 in a full-time trades, technology or environmental program",
+    "url": "https://hinton.ca/1323/Trans-Mountain-Bursary-Program",
+    "category": "Trades",
+    "lastVerified": "2026-10",
+    "region": "Alberta",
+    "localArea": "Hinton residents",
+    "areaHubs": [
+      "northern-alberta"
+    ],
+    "notes": "You must live in Hinton, or you or your parents must own property there, and you must have lived in Hinton at some point in the last ten years. Upgrading does not count. The fund pays up to 18 bursaries between 2024 and 2028, or until the money runs out, and you can apply again for up to three years. Applications close September 23 each year. Send the application form, proof of enrolment, a financial needs assessment form, a third-party alignment document and a statement of 100 words or fewer to TransMountainBursary@hinton.ca, or mail them to the Town of Hinton.",
+    "active": false,
+    "description": "The Town of Hinton pays $2,800 bursaries from a $50,000 Trans Mountain fund to local students in full-time trades, technology or environmental programs connected to the pipeline industry.",
+    "metaDetail": "Up to 18 bursaries of $2,800.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Trades",
+        "Technology",
+        "Environmental Technology"
+      ],
+      "minAverage": null,
+      "minAge": 18,
+      "maxAge": 35,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2698,
+    "title": "APPI Student Education Scholarship",
+    "amount": "$2,000",
+    "deadline": "2027-02-25",
+    "openDate": null,
+    "audience": "Students entering or enrolled in a planning program in Alberta, the Northwest Territories or Nunavut",
+    "url": "https://www.albertaplanners.com/content/student-scholarships-and-awards",
+    "category": "Academic",
+    "lastVerified": "2026-10",
+    "region": "Alberta",
+    "notes": "The program has to be in Alberta, the Northwest Territories or Nunavut, and you do not need to be an APPI member. The institute issues its call for submissions early each year. The 2026 round closed February 26 at noon. The 2027 date shown here assumes about the same time next year and is not confirmed yet.",
+    "active": false,
+    "deadlineEstimated": true,
+    "description": "The Alberta Professional Planners Institute gives $2,000 scholarships to students entering or studying in an urban, rural or environmental planning program, from a diploma up to a PhD.",
+    "metaDetail": "Diploma to PhD, no membership needed.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Urban Planning",
+        "Environment"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 2699,
+    "title": "Friends of the World Cup of Wrestling Society and Wrestling Alumni Award",
+    "amount": "Varies",
+    "deadline": "2027-09-01",
+    "openDate": null,
+    "audience": "Golden Bears and Pandas wrestlers at the University of Alberta",
+    "url": "https://alberta.academicworks.ca/opportunities/21621",
+    "category": "Sports",
+    "lastVerified": "2026-10",
+    "region": "University & college",
+    "notes": "Selection weighs your level in wrestling, your potential to become a major contributor to the program, what you give the team on and off the mat, and your academic standing, which has to be satisfactory. The university publishes no amount. The 2026 deadline was September 1. The 2027 date shown here assumes the same day next year and is not confirmed yet.",
+    "active": false,
+    "deadlineEstimated": true,
+    "description": "Wrestling supporters and alumni fund this University of Alberta award for members of the Golden Bears and Pandas wrestling program who are entering, transferring or continuing in a degree.",
+    "metaDetail": "Entering, transferring or continuing students.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Wrestling"
+      ]
+    }
   }
 ]

@@ -245,6 +245,10 @@ describe('aliases', () => {
     'medicine hat college student awards',
     'sandy and carl krenning culinary fund',
     'mc college excellence in cosmetology scholarship',
+    'greenview post secondary scholarship\nmd of greenview residents',
+    'lamont lions scholarship',
+    'county of wetaskiwin agricultural bursary',
+    'grande yellowhead public school division graduates',
   ]
   const find = (q: string) => searchRows(rows, r => r, normalizeSearchQuery(q)).map(r => rows.indexOf(r))
 
@@ -278,6 +282,21 @@ describe('aliases', () => {
     expect(find('cardiac sugery')).toEqual([22])
     expect(find('opthalmology')).toEqual([22])
     expect(find('anesthesiologist')).toEqual([22])
+  })
+
+  // Each town returned nothing on 2026-10-16 while its county or division had awards.
+  it('reads a town as the county or division its awards name', () => {
+    expect(find('grovedale')).toEqual([26])
+    expect(find('bruderheim')).toEqual([27])
+    expect(find('falun')).toEqual([28])
+    expect(find('hinton')).toEqual([29])
+    expect(find('Hinton AB')).toEqual([29])
+  })
+
+  it('drops a trailing province code but keeps a lone ab', () => {
+    expect(normalizeSearchQuery('Calgary, AB')).toBe('calgary')
+    expect(normalizeSearchQuery('ab')).toBe('ab')
+    expect(normalizeSearchQuery('kenn boreck air')).toBe('kenn borek air')
   })
 
   it('reads school shorthand as the school', () => {

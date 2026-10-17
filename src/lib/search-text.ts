@@ -68,7 +68,7 @@ const SPELLING: Record<string, string> = {
   ingineering: 'engineering', engneering: 'engineering', engineet: 'engineer',
   megatronics: 'mechatronics', tobotics: 'robotics', radiograpy: 'radiography',
   veteranian: 'veterinarian', vetrinarian: 'veterinarian',
-  opthalmology: 'ophthalmology', sugery: 'surgery',
+  opthalmology: 'ophthalmology', sugery: 'surgery', boreck: 'borek',
 }
 
 /**
@@ -140,6 +140,13 @@ export const ALIASES: Record<string, string[]> = {
   ethiopian: ['black student', 'black canad'],
   ukrainian: ['ukrain'],
   bible: ['christian'],
+  // A town whose awards are named for its county or school division. Each
+  // town sits inside the area named (checked 2026-10-16), and its own name
+  // is on none of those listings.
+  bruderheim: ['lamont', 'elk island'],
+  falun: ['county of wetaskiwin'],
+  grovedale: ['greenview'],
+  hinton: ['grande yellowhead'],
   // Misspellings long enough that a student pauses halfway through them.
   // The prefix rule below then reads "milwr" and "kinie" as these.
   milwright: ['millwright'],
@@ -149,9 +156,14 @@ for (const group of SCHOOLS) {
   for (const m of group) if (!m.includes(' ')) ALIASES[m] = group.filter(g => g !== m);
 }
 
-/** What the search box produces: one line, no separators of its own. */
+/**
+ * What the search box produces: one line, no separators of its own. A
+ * trailing "ab" is the province code typed after a town ("hinton ab", 2026-10-16),
+ * which no listing spells out, so it is dropped.
+ */
 export function normalizeSearchQuery(input: string): string {
   return normalizeSearchText(input).split(SEARCH_SEP).join(' ').replace(/ +/g, ' ').trim()
+    .replace(/(.) ab$/, '$1')
     .split(' ').map(w => SPELLING[w] ?? w.replace(GLUED, '$1 $2')).join(' ');
 }
 

@@ -2643,3 +2643,16 @@ Outcome: a student who types the word they know (xray, hairdresser, cardiac surg
 - Rejected: indexing `eligibility.specificSchools` for school-name searches (one logged query would gain), a town-to-county alias for Bruderheim and Falun (whether a county award takes town residents is unverified), and fuzzy matching (the reason SPELLING is a fixed list).
 - Left as real content gaps, not hidden: trades, sports and communities with no listing (lgbtq, muslim, latino, south asian, wrestling, figure skating, jewelry, forklift, motorcycle, non destructive testing, phlebotomy, paleontology, urban planning, dietary aid, piercing), towns with none (Hinton, Grovedale, Bruderheim, Falun), and Kenn Borek Air.
 - Add-back fraction: 0 of 1.
+
+## 2026-10-16: listings for the real no-result search gaps
+
+Outcome: a student who searches a gap the log showed (wrestling, urban planning, Ukrainian, Hinton, Grovedale, Bruderheim, Falun, Kenn Borek Air) finds a real Alberta award from its provider's own page, and a term with no such award stays an honest empty result.
+
+- Added five listings, each from the provider page, dates copied or flagged `deadlineEstimated`: Kenn Borek Air Scholarships (2695), the Shevchenko Foundation's Solomon family bursary for Ukrainian Canadian students (2696), the Town of Hinton Trans Mountain Bursary (2697), the APPI Student Education Scholarship for planning students (2698), and the University of Alberta wrestling award (2699).
+- Removed before shipping: two verified awards (ATA Local 38 and a University of Lethbridge bursary) whose eligibility wording `RULE1_PATTERN` forbids. The build failed on them, which is the legal rule working, so that search stays empty on purpose.
+- Changed in `validate-data.ts`: the standalone "trans" lookahead now spares "Trans Mountain" as it spares "Trans Canada". Both are company names. Nothing else in the pattern moved.
+- Reversed from the morning entry: town aliases. Each town is now checked against the area its awards name. Grovedale is a hamlet of the MD of Greenview, Falun a hamlet of the County of Wetaskiwin, Bruderheim's designated junior and senior high is Lamont High in Elk Island Public Schools, and Harry Collinge in Hinton is a Grande Yellowhead school. The aliases add those areas to the search without rewording any listing.
+- A trailing "ab" after a town ("hinton ab") is dropped from the query, since no listing spells the province code.
+- Not added: the Paul Stenhouse Scholarship (one school, no published application) and anything not written for students. Searched and found no Alberta award for a high school student: Muslim, Latino, South Asian, figure skating, jewellery, motorcycle, non destructive testing, phlebotomy, paleontology, dietary aide.
+- Measured with `searchRows` against the JSON: 7 of the 20 gap terms in the morning entry now find listings (wrestling, urban planning, Hinton, Grovedale, Bruderheim, Falun, Kenn Borek Air), up from 0. 1 is blocked by law, 12 have no award.
+- Add-back fraction: 0 of 2 (editing the Grande Yellowhead description to name its towns, and a listing per school award, both skipped for an alias and the one-listing rule).

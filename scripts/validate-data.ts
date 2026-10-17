@@ -836,11 +836,12 @@ if (restatedEstimate.length) {
 // program data and three guides. Only src and public are scanned, because this
 // file has to spell the terms out. There are no exceptions (the single one,
 // allowed 2026-09-22, was withdrawn 2026-09-28). "Trans" on its own counts,
-// since a title can carry it with nothing else; the lookahead spares names
-// like the Trans Canada Energy Award (#782) and their trans-canada URL slugs.
+// since a title can carry it with nothing else; the lookahead spares the
+// company names Trans Canada (#782 Trans Canada Energy Award) and Trans
+// Mountain (the Town of Hinton pipeline bursary) and their URL slugs.
 // The words of a term may be joined by a space, a hyphen or nothing, because a
 // URL joins them with a hyphen: a title reading "Two Spirit" slugs to two-spirit.
-const RULE1_PATTERN = /non[- ]?binary|transgender|\btrans\b(?![- ]?canada)|gender[- ]?(?:diverse|diversity|identity|expression)|sexual[- ]?(?:diversity|orientation)|lgbt|queer|two[- ]?spirit|lesbian|bisexual|intersex|cisgender/i;
+const RULE1_PATTERN = /non[- ]?binary|transgender|\btrans\b(?![- ]?(?:canada|mountain))|gender[- ]?(?:diverse|diversity|identity|expression)|sexual[- ]?(?:diversity|orientation)|lgbt|queer|two[- ]?spirit|lesbian|bisexual|intersex|cisgender/i;
 const RULE1_EXT = /\.(json|astro|ts|tsx|md|xml|txt|html)$|\/_redirects$|\/_headers$/;
 const rule1Hits = [
   ...sourceFiles(['src', 'public'])
