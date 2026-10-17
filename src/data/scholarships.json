@@ -1446,7 +1446,7 @@
     "category": "Academic",
     "lastVerified": "2026-10",
     "region": "National",
-    "active": true,
+    "active": false,
     "openDate": "2026-09-09",
     "description": "Canada's largest undergraduate merit award, worth approximately $150,000 over four years. It pays a $12,000 annual stipend, a full tuition waiver at a partner university, and up to $14,000 for summer programs. Selection weighs character and service as heavily as marks, over online semi-finals and national interviews in Toronto.",
     "eligibility": {
@@ -19206,7 +19206,7 @@
     "notes": "Applications go by email to the society rather than through a school, and it says late or incomplete applications will not be considered. Note that the society's own page now says $1,000 each, and the $750 figure that appears on a school scholarship page and in older coverage is out of date.",
     "applyViaGuidance": true,
     "applyRoute": "sponsor",
-    "active": true,
+    "active": false,
     "description": "Two scholarships of $1,000 each from the Spruce Grove and District Agricultural Society, for students enrolled in an agriculture-related field of study at an accredited college, university or trade school. Two things make this wider than a typical graduation award. Any year of study qualifies, not just first year, and past applicants and recipients are allowed to apply again. You have to be a resident of the Tri-Region, meaning Parkland County, Spruce Grove or Stony Plain.",
     "metaDetail": "Past recipients may reapply.",
     "eligibility": {
@@ -29564,7 +29564,7 @@
     "id": 748,
     "region": "Wetaskiwin",
     "lastVerified": "2026-10",
-    "active": true,
+    "active": false,
     "url": "https://county.wetaskiwin.ab.ca/847/Agricultural-Bursary",
     "notes": "The three year residency window means a student who moved away for work or a first year of study still qualifies. County policy allows you to receive this bursary only once. Participation in 4-H or agricultural fairs is described as desirable, not required. Applications go to the Director of Agricultural Services and are reviewed by the Agricultural Service Board at its first meeting after the deadline.",
     "applyViaGuidance": false,
@@ -41583,7 +41583,7 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "active": true
+    "active": false
   },
   {
     "id": 1048,
@@ -41826,7 +41826,7 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "active": true
+    "active": false
   },
   {
     "id": 1054,
@@ -41866,7 +41866,7 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "active": true
+    "active": false
   },
   {
     "id": 1055,
@@ -42721,7 +42721,7 @@
       "extracurriculars": []
     },
     "lastVerified": "2026-10",
-    "active": true
+    "active": false
   },
   {
     "id": 1077,
@@ -46618,7 +46618,7 @@
     "areaHubs": [
       "northern-alberta"
     ],
-    "active": true,
+    "active": false,
     "description": "One $500 bursary a year from Woodlands County for a local student taking agriculture or environmental science at an Alberta post-secondary institution.",
     "notes": "You, or your parents, must live in Woodlands County or own property there. You need to be enrolled full time in an agriculture or environmental science program at an Alberta post-secondary institution, so a Grade 12 applies for the fall they are starting. Send the form with your high school transcript, proof of post-secondary enrolment and a cover letter making your case, to the county office in Fort Assiniboine by October 15.",
     "applyViaGuidance": false,
@@ -46662,7 +46662,7 @@
     "areaHubs": [
       "northern-alberta"
     ],
-    "active": true,
+    "active": false,
     "description": "Woodlands County pays $2,000 for a first year of post-secondary study and $1,000 for a second, $3,000 in total, to students from the county.",
     "notes": "You qualify as a resident, or if your parents own property in the county and you lived there within the past five years. You must be full time at a recognised accredited institution and pass at least three courses a semester to collect that portion. The useful part for a graduating student is the county policy, which says that taking up to three school years off before starting post-secondary does not cost you the bursary. Applications close October 15.",
     "applyViaGuidance": false,
@@ -51869,7 +51869,7 @@
     "lastVerified": "2026-09",
     "region": "Alberta",
     "notes": "You send transcripts, an essay of 300 to 500 words and two references.",
-    "active": true,
+    "active": false,
     "description": "Alberta Seed Processors funds two $1,000 scholarships a year for students in agriculture-related studies, weighing academic and non-academic accomplishments, volunteering and rural leadership.",
     "metaDetail": "Two awards each year.",
     "eligibility": {
@@ -53284,7 +53284,7 @@
     "lastVerified": "2026-10",
     "region": "Edmonton",
     "notes": "Most of them close October 15 and most are judged on financial need plus satisfactory grades. Many are tied to a specific program and year, so the list you see depends on what you are enrolled in. A few are reserved for Indigenous students, student athletes or students with disabilities.",
-    "active": true,
+    "active": false,
     "description": "NAIT runs hundreds of bursaries and awards through one portal, from trades and heavy equipment to culinary arts, paramedicine and business. One general application enters you for every award you qualify for.",
     "metaDetail": "One form covers every award you qualify for.",
     "eligibility": {
@@ -70708,7 +70708,7 @@
       "northern-alberta"
     ],
     "notes": "Email or mail the application to Chris LeMaistre at clemaistre@wm.com or 4668 25 Street SE, Calgary so it arrives by October 15. Attach a 500 word essay on an environmental topic that matters to you and what your community should do about it. Prove residency with a letter from the Thorhild County CAO, and include proof of fall tuition payment, plus a transcript if you are past first year. You must be in a full-time degree or diploma program at a Canadian university or college, and past winners can reapply a year later.",
-    "active": true,
+    "active": false,
     "description": "Waste Management of Canada gives up to seven $750 scholarships a year to Thorhild County residents heading into or continuing full-time college or university.",
     "metaDetail": "Up to seven awards with an essay.",
     "eligibility": {
@@ -72481,7 +72481,7 @@
     "lastVerified": "2026-10",
     "region": "Alberta",
     "notes": "Email the application form to the CAMIS address on the form by October 15. Include official proof of acceptance and enrollment in a recognized Canadian medical office assistant or nursing program and a letter of recommendation from an instructor or work contact in central Alberta. Answer three short essay questions in 150 words or less each, on why you chose healthcare, what you would contribute and who your hero is. Results come out by the end of October.",
-    "active": true,
+    "active": false,
     "description": "Central Alberta Medical Imaging Services gives two $500 entrance scholarships a year to students starting a medical office assistant or nursing program, favouring central Albertans.",
     "metaDetail": "Two $500 awards for MOA and nursing.",
     "eligibility": {
@@ -75292,7 +75292,7 @@
     "lastVerified": "2026-10",
     "region": "National",
     "notes": "Email a typed application to the Canadian Angus Foundation by October 15 with a cover sheet, a resume of your industry, community and school involvement, a 500 to 750 word essay on your livestock operation, how you market your cattle and your career plans, and three references. Winners show proof of enrolment in a second semester before the money is paid, and past winners cannot apply again.",
-    "active": true,
+    "active": false,
     "description": "The Canadian Angus Foundation gives two awards worth $5,000 in total each year to a young person committed to the livestock industry, presented at Canadian Western Agribition.",
     "metaDetail": "Grade 12 students can apply.",
     "eligibility": {
