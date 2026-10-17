@@ -138,7 +138,6 @@ export const ALIASES: Record<string, string[]> = {
   governance: ['politic', 'public administration'],
   euphonium: ['brass', 'music'],
   ethiopian: ['black student', 'black canad'],
-  ukrainian: ['ukrain'],
   bible: ['christian'],
   // A town whose awards are named for its county or school division. Each
   // town sits inside the area named (checked 2026-10-16), and its own name

@@ -2656,3 +2656,7 @@ Outcome: a student who searches a gap the log showed (wrestling, urban planning,
 - Not added: the Paul Stenhouse Scholarship (one school, no published application) and anything not written for students. Searched and found no Alberta award for a high school student: Muslim, Latino, South Asian, figure skating, jewellery, motorcycle, non destructive testing, phlebotomy, paleontology, dietary aide.
 - Measured with `searchRows` against the JSON: 7 of the 20 gap terms in the morning entry now find listings (wrestling, urban planning, Hinton, Grovedale, Bruderheim, Falun, Kenn Borek Air), up from 0. 1 is blocked by law, 12 have no award.
 - Add-back fraction: 0 of 2 (editing the Grande Yellowhead description to name its towns, and a listing per school award, both skipped for an alias and the one-listing rule).
+
+## 2026-10-16: Ukrainian listings removed (Ilia's request)
+
+Outcome: nothing Ukrainian on the site. Removed listings 2064 and 2696 and the `ukrainian` search alias, with 301s in both slash forms to /scholarships/university-college-awards/ and /scholarships/alberta/. A scan of `src/` and `public/` finds no other mention outside those two redirect source paths. Add-back fraction: 0 of 3.

@@ -77445,46 +77445,6 @@
     }
   },
   {
-    "id": 2064,
-    "title": "Spirit of Ukraine Award",
-    "amount": "Varies",
-    "deadline": "2027-01-10",
-    "openDate": "2026-10-01",
-    "audience": "Students with financial need entering the University of Alberta, refugees and protected persons first",
-    "url": "https://alberta.academicworks.ca/opportunities/27052",
-    "category": "General",
-    "lastVerified": "2026-10",
-    "region": "University & college",
-    "notes": "Satisfactory marks qualify you. Selection weighs financial need, and refugees and protected persons in Canada get preference.",
-    "active": true,
-    "description": "Named in honour of the people of Ukraine, this University of Alberta entrance award supports students who need the money, especially those who came to Canada as refugees.",
-    "metaDetail": "Refugees get preference.",
-    "oneForm": "ualberta",
-    "eligibility": {
-      "grades": [
-        "12"
-      ],
-      "schoolBoards": [],
-      "specificSchools": [],
-      "targetInstitutions": [
-        "University of Alberta"
-      ],
-      "fields": [],
-      "minAverage": null,
-      "minAge": null,
-      "maxAge": null,
-      "genderRequired": null,
-      "indigenousRequired": false,
-      "bipocRequired": false,
-      "financialNeed": true,
-      "maxFamilyIncome": null,
-      "fosterCare": false,
-      "citizenship": "any",
-      "apprenticeship": false,
-      "extracurriculars": []
-    }
-  },
-  {
     "id": 2065,
     "title": "Frederick KF Wong Memorial Entrance Scholarship in Science",
     "amount": "Varies",
@@ -102945,45 +102905,6 @@
       "maxFamilyIncome": null,
       "fosterCare": false,
       "citizenship": "any",
-      "apprenticeship": false,
-      "extracurriculars": []
-    }
-  },
-  {
-    "id": 2696,
-    "title": "Kenneth and Mable Solomon Family Youth Education Fund Bursary",
-    "amount": "Varies",
-    "deadline": "2027-07-31",
-    "openDate": "2027-07-01",
-    "audience": "Ukrainian Canadian students graduating in Alberta, Saskatchewan or Manitoba and entering a social services degree",
-    "url": "https://shevchenkofoundation.com/funding/scholarships-bursaries-awards/education/kenneth-and-mable-solomon-family-youth-education-fund-bursary/",
-    "category": "Community",
-    "lastVerified": "2026-10",
-    "region": "Alberta",
-    "notes": "You need an 80% graduating average, Canadian citizenship or permanent residency, and full-time registration in the first year of the degree. Send proof of registration, your transcript, two character references and a letter about your involvement in the Ukrainian Canadian community. Applications are taken from July 1 to July 31. The foundation says the bursary may not be given every year, so call 1-866-524-5314 to confirm before you apply.",
-    "active": true,
-    "description": "The Shevchenko Foundation runs this bursary for a Ukrainian Canadian student finishing high school on the Prairies and starting a first-year degree in social services.",
-    "metaDetail": "80 per cent average, July window.",
-    "eligibility": {
-      "grades": [
-        "12"
-      ],
-      "schoolBoards": [],
-      "specificSchools": [],
-      "targetInstitutions": [],
-      "fields": [
-        "Social Work"
-      ],
-      "minAverage": 80,
-      "minAge": null,
-      "maxAge": null,
-      "genderRequired": null,
-      "indigenousRequired": false,
-      "bipocRequired": false,
-      "financialNeed": false,
-      "maxFamilyIncome": null,
-      "fosterCare": false,
-      "citizenship": "permanent_resident",
       "apprenticeship": false,
       "extracurriculars": []
     }
